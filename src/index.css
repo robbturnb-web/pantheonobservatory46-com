@@ -139,6 +139,23 @@
 .cosmic-pulse { animation: cosmic-pulse 4s ease-in-out infinite; }
 .cosmic-glow-pulse { animation: cosmic-glow-pulse 3s ease-in-out infinite; }
 
+/* Neon glow effect */
+.neon-glow {
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.5), 0 0 20px rgba(57, 255, 20, 0.3);
+}
+
+.glass-neon {
+  background: rgba(15, 40, 10, 0.4);
+  backdrop-filter: blur(20px) saturate(1.5);
+  border: 1px solid rgba(57, 255, 20, 0.2);
+  box-shadow: var(--neon-glow);
+}
+
+.glass-neon:hover {
+  border-color: rgba(57, 255, 20, 0.4);
+  box-shadow: var(--neon-glow-strong);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--background); }
