@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { timelineEvents } from '../data/timeline';
+import { timelineEntries } from '../data/timeline';
 
 export function TimelinePage() {
   return (
