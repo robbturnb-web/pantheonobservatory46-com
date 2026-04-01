@@ -1,59 +1,283 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap } from 'lucide-react';
 
 const sections = [
-  { to: '/timeline', icon: Clock, title: 'Timeline', desc: 'Ancient to modern cosmic history' },
-  { to: '/uap', icon: FileSearch, title: 'UAP Files', desc: 'Documented encounters & disclosure' },
-  { to: '/gods', icon: Sparkles, title: 'Gods & Archetypes', desc: 'Mythological intelligence across pantheons' },
-  { to: '/consciousness', icon: Brain, title: 'Consciousness', desc: 'Stargate, Gateway Process & beyond' },
-  { to: '/signals', icon: Radio, title: 'Signal Watch', desc: 'Researcher credibility ratings' },
-  { to: '/origin', icon: Compass, title: 'Origin Chamber', desc: 'Discover your starseed archetype' },
-  { to: '/echo', icon: MessageCircle, title: 'Echo AI', desc: 'Ask the cosmic intelligence' },
+  { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
+  { to: '/uap', icon: FileSearch, title: 'UAP Case Files', desc: 'Military encounters, whistleblower testimony, and evidence-graded case studies.', color: '#3b82f6' },
+  { to: '/gods', icon: Sparkles, title: 'Gods & Archetypes', desc: '18 deities across 6 pantheons. Tap into mythological intelligence.', color: '#f59e0b' },
+  { to: '/consciousness', icon: Brain, title: 'Consciousness Lab', desc: 'Project Stargate, the CIA Gateway Process, NDEs, and the nature of mind.', color: '#10b981' },
+  { to: '/signals', icon: Radio, title: 'Signal Watch', desc: 'Credibility ratings for researchers and creators. Green, yellow, red.', color: '#f43f5e' },
+  { to: '/origin', icon: Compass, title: 'Origin Chamber', desc: 'A 7-question quiz to discover your starseed archetype lineage.', color: '#c084fc' },
+  { to: '/echo', icon: MessageCircle, title: 'Echo AI', desc: 'Ask the cosmic intelligence anything about UAPs, gods, or consciousness.', color: '#60a5fa' },
 ];
 
-export function HomePage() {
+const stats = [
+  { label: 'UAP Cases', value: 6, icon: Shield },
+  { label: 'Ancient Gods', value: 18, icon: Sparkles },
+  { label: 'Timeline Events', value: 11, icon: Clock },
+  { label: 'Research Topics', value: 6, icon: BookOpen },
+];
+
+function AnimatedCounter({ value, duration = 2000 }: { value: number; duration?: number }) {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting && !hasStarted) setHasStarted(true); },
+      { threshold: 0.5 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    let start = 0;
+    const step = Math.max(1, Math.floor(duration / value));
+    const timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start >= value) clearInterval(timer);
+    }, step);
+    return () => clearInterval(timer);
+  }, [hasStarted, value, duration]);
+
+  return <span ref={ref}>{count}</span>;
+}
+
+function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
+  const [displayed, setDisplayed] = useState('');
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setStarted(true), delay);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!started) return;
+    let i = 0;
+    const timer = setInterval(() => {
+      setDisplayed(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(timer);
+    }, 40);
+    return () => clearInterval(timer);
+  }, [started, text]);
+
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <span>
+      {displayed}
+      {displayed.length < text.length && <span className="animate-pulse text-primary">|</span>}
+    </span>
+  );
+}
+
+export function HomePage() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
+  return (
+    <div className="relative">
+      {/* HERO */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-20"
+        ref={heroRef}
+        style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
+        className="min-h-[90vh] flex flex-col items-center justify-center text-center px-4 relative"
       >
-        <div className="flex justify-center mb-6">
-          <Eye className="w-16 h-16 text-primary cosmic-float" />
-        </div>
-        <h1 className="text-5xl sm:text-7xl font-bold tracking-tight mb-6">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          className="mb-8 relative"
+        >
+          <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full" />
+          <Eye className="w-20 h-20 sm:w-28 sm:h-28 text-primary cosmic-float relative z-10" />
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter mb-4"
+        >
           <span className="text-foreground">PANTHEON</span>
-          <br />
-          <span className="text-primary">OBSERVATORY</span>
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          A knowledge platform exploring UAPs, ancient mysteries, consciousness research,
-          and the cosmic questions humanity has asked since the beginning.
-        </p>
+        </motion.h1>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="text-2xl sm:text-4xl lg:text-5xl font-bold text-primary mb-8"
+        >
+          <TypewriterText text="OBSERVATORY" delay={1200} />
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.2 }}
+          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+        >
+          The questions humanity was told to stop asking — about who we are, where we came from,
+          and what's been watching from above since the beginning.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.8 }}
+          className="flex flex-col sm:flex-row gap-4"
+        >
+          <Link
+            to="/timeline"
+            className="px-8 py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-colors flex items-center gap-2"
+          >
+            <Zap className="w-5 h-5" /> Begin the Descent
+          </Link>
+          <Link
+            to="/echo"
+            className="px-8 py-3 glass-cosmic rounded-xl font-semibold text-lg text-foreground hover:border-primary/40 transition-colors flex items-center gap-2"
+          >
+            <MessageCircle className="w-5 h-5" /> Ask Echo
+          </Link>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3.5 }}
+          className="absolute bottom-8"
+        >
+          <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
+        </motion.div>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sections.map((section, i) => (
+      {/* STATS */}
+      <section className="py-20 px-4">
+        <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="glass-cosmic rounded-xl p-6 text-center"
+            >
+              <stat.icon className="w-6 h-6 text-primary mx-auto mb-3" />
+              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-1">
+                <AnimatedCounter value={stat.value} />
+              </div>
+              <p className="text-sm text-muted-foreground">{stat.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION GRID */}
+      <section className="py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl font-bold text-center mb-4 text-foreground"
+          >
+            Explore the Observatory
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-muted-foreground text-center mb-12 max-w-xl mx-auto"
+          >
+            Seven chambers of knowledge. Each one pulls you deeper.
+          </motion.p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sections.map((section, i) => (
+              <motion.div
+                key={section.to}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+              >
+                <Link
+                  to={section.to}
+                  className="block glass-cosmic rounded-xl p-6 transition-all hover:scale-[1.03] group relative overflow-hidden h-full"
+                >
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: `radial-gradient(circle at 50% 100%, ${section.color}15, transparent 70%)` }}
+                  />
+                  <div className="relative z-10">
+                    <section.icon
+                      className="w-10 h-10 mb-4 transition-all duration-300 group-hover:scale-110"
+                      style={{ color: section.color }}
+                    />
+                    <h3 className="text-xl font-bold text-foreground mb-2">{section.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{section.desc}</p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MANIFESTO */}
+      <section className="py-24 px-4">
+        <div className="max-w-3xl mx-auto text-center">
           <motion.div
-            key={section.to}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-8">
+              The Manifesto
+            </h2>
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+              <p>
+                We don't believe in conspiracies. We believe in{' '}
+                <span className="text-foreground font-semibold">evidence, patterns, and questions</span>{' '}
+                that deserve answers.
+              </p>
+              <p>
+                Every culture on Earth tells the same story: beings came from the sky, gave knowledge,
+                and promised to return. The Pantheon Observatory collects, grades, and presents these
+                patterns without ideology.
+              </p>
+              <p className="text-primary font-semibold text-xl">
+                "The truth is not a destination — it is a practice."
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="mt-12"
           >
             <Link
-              to={section.to}
-              className="block glass-cosmic rounded-xl p-6 transition-all hover:scale-[1.02] group"
+              to="/origin"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-colors"
             >
-              <section.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-              <h2 className="text-lg font-bold text-foreground mb-2">{section.title}</h2>
-              <p className="text-sm text-muted-foreground">{section.desc}</p>
+              <Compass className="w-5 h-5" /> Discover Your Origin
             </Link>
           </motion.div>
-        ))}
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,34 +1,115 @@
-import { motion } from 'framer-motion';
-import { timelineEntries } from '../data/timeline';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { timelineEntries, type TimelineEntry } from '../data/timeline';
+
+const categories = [
+  { key: 'all', label: 'All Eras' },
+  { key: 'ancient', label: 'Ancient' },
+  { key: 'medieval', label: 'Medieval' },
+  { key: 'modern', label: 'Modern' },
+  { key: 'recent', label: 'Recent' },
+] as const;
+
+const significanceStyles: Record<string, string> = {
+  high: 'border-l-primary shadow-[inset_0_0_30px_rgba(139,92,246,0.08)]',
+  medium: 'border-l-accent-blue',
+  low: 'border-l-muted-foreground/30',
+};
 
 export function TimelinePage() {
+  const [filter, setFilter] = useState<string>('all');
+
+  const filtered = filter === 'all'
+    ? timelineEntries
+    : timelineEntries.filter((e) => e.category === filter);
+
+  // Group by category for era dividers
+  let lastCategory = '';
+
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
-        <h1 className="text-4xl font-bold text-foreground mb-4">Cosmic Timeline</h1>
-        <p className="text-muted-foreground">From ancient mysteries to modern disclosure.</p>
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+        <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Cosmic Timeline</h1>
+        <p className="text-muted-foreground text-lg">
+          {timelineEntries.length} events spanning 300,000 years of hidden history.
+        </p>
       </motion.div>
 
+      <div className="flex flex-wrap gap-2 mb-10">
+        {categories.map((cat) => (
+          <button
+            key={cat.key}
+            onClick={() => setFilter(cat.key)}
+            className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+              filter === cat.key
+                ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
+                : 'bg-secondary text-secondary-foreground hover:bg-accent'
+            }`}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
       <div className="relative">
-        <div className="absolute left-4 top-0 bottom-0 w-px bg-border" />
-        <div className="space-y-8">
-          {timelineEntries.map((event, i) => (
-            <motion.div
-              key={event.id}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.05 }}
-              className="relative pl-12"
-            >
-              <div className="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-primary cosmic-glow-pulse" />
-              <div className="glass-cosmic rounded-lg p-4">
-                <span className="text-xs font-mono text-primary">{event.era}</span>
-                <h3 className="text-sm font-bold text-foreground mt-1">{event.title}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{event.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Timeline line */}
+        <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gradient-to-b from-primary/60 via-primary/20 to-transparent" />
+
+        <AnimatePresence mode="popLayout">
+          <div className="space-y-6">
+            {filtered.map((event, i) => {
+              const showDivider = filter === 'all' && event.category !== lastCategory;
+              lastCategory = event.category;
+
+              return (
+                <div key={event.id}>
+                  {showDivider && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      className="pl-12 mb-4 mt-8 first:mt-0"
+                    >
+                      <span className="text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full">
+                        {event.category === 'ancient' ? '🏛️ Ancient Era' :
+                         event.category === 'medieval' ? '⚔️ Medieval Era' :
+                         event.category === 'modern' ? '🛸 Modern Era' :
+                         '📡 Recent Disclosure'}
+                      </span>
+                    </motion.div>
+                  )}
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3, delay: i * 0.04 }}
+                    className="relative pl-12"
+                  >
+                    {/* Timeline dot */}
+                    <div className={`absolute left-2 top-4 w-4 h-4 rounded-full border-2 border-primary bg-background ${
+                      event.significance === 'high' ? 'cosmic-glow-pulse' : ''
+                    }`} />
+
+                    <div className={`glass-cosmic rounded-xl p-5 border-l-4 ${significanceStyles[event.significance]}`}>
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">
+                          {event.era}
+                        </span>
+                        {event.significance === 'high' && (
+                          <span className="text-xs text-accent-foreground bg-accent px-2 py-0.5 rounded">
+                            Key Event
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-lg font-bold text-foreground mb-2">{event.title}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{event.description}</p>
+                    </div>
+                  </motion.div>
+                </div>
+              );
+            })}
+          </div>
+        </AnimatePresence>
       </div>
     </div>
   );
