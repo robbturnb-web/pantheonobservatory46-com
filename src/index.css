@@ -67,8 +67,7 @@
   --color-accent-blue: var(--accent-blue);
   --color-accent-emerald: var(--accent-emerald);
   --color-accent-purple: var(--accent-purple);
-
-  --radius-sm: calc(var(--radius) - 4px);
+  --color-accent-neon: var(--accent-neon);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
