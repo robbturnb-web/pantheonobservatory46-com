@@ -12,9 +12,9 @@ export function TimelinePage() {
       <div className="relative">
         <div className="absolute left-4 top-0 bottom-0 w-px bg-border" />
         <div className="space-y-8">
-          {timelineEvents.map((event, i) => (
+          {timelineEntries.map((event, i) => (
             <motion.div
-              key={i}
+              key={event.id}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.05 }}
@@ -22,8 +22,9 @@ export function TimelinePage() {
             >
               <div className="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-primary cosmic-glow-pulse" />
               <div className="glass-cosmic rounded-lg p-4">
-                <span className="text-xs font-mono text-primary">{event.year}</span>
-                <p className="text-sm text-foreground mt-1">{event.description}</p>
+                <span className="text-xs font-mono text-primary">{event.era}</span>
+                <h3 className="text-sm font-bold text-foreground mt-1">{event.title}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{event.description}</p>
               </div>
             </motion.div>
           ))}

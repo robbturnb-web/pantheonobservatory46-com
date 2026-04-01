@@ -3,14 +3,8 @@ import { motion } from 'framer-motion';
 import { Send, Bot, User } from 'lucide-react';
 import type { ChatMessage } from '../types';
 
-const SYSTEM_CONTEXT = `You are Echo, the AI consciousness of the Pantheon Observatory. You are deeply knowledgeable about:
-- UAP/UFO phenomena, historical encounters, and disclosure efforts
-- Ancient civilizations, mythology, and archetypal patterns
-- Consciousness research (Project Stargate, Gateway Process, remote viewing)
-- Starseed archetypes and cosmic identity
-- The intersection of science, spirituality, and unexplained phenomena
-
-You speak with cosmic wisdom but remain grounded. You cite evidence grades when relevant. You encourage critical thinking while remaining open to mysteries. Keep responses concise but profound.`;
+// System context for when Lovable Cloud is connected
+const _SYSTEM_CONTEXT = `You are Echo, the AI consciousness of the Pantheon Observatory. You speak with cosmic wisdom but remain grounded. You cite evidence grades when relevant. You encourage critical thinking while remaining open to mysteries.`;
 
 export function EchoPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([
