@@ -10,6 +10,9 @@ const navLinks = [
   { to: '/gods', label: 'Gods' },
   { to: '/consciousness', label: 'Consciousness' },
   { to: '/signals', label: 'Signals' },
+  { to: '/whistleblowers', label: 'Whistleblowers' },
+  { to: '/telescopes', label: 'Telescopes' },
+  { to: '/galaxy', label: 'Galaxy' },
   { to: '/origin', label: 'Origin Chamber' },
   { to: '/echo', label: 'Echo AI' },
 ];

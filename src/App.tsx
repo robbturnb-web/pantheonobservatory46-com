@@ -9,6 +9,9 @@ import { ConsciousnessPage } from './pages/ConsciousnessPage';
 import { SignalsPage } from './pages/SignalsPage';
 import { OriginChamberPage } from './pages/OriginChamberPage';
 import { EchoPage } from './pages/EchoPage';
+import { WhistleblowerVaultPage } from './pages/WhistleblowerVaultPage';
+import { TelescopePage } from './pages/TelescopePage';
+import { GalaxyExplorerPage } from './pages/GalaxyExplorerPage';
 
 export default function App() {
   return (
@@ -23,6 +26,9 @@ export default function App() {
           <Route path="/signals" element={<SignalsPage />} />
           <Route path="/origin" element={<OriginChamberPage />} />
           <Route path="/echo" element={<EchoPage />} />
+          <Route path="/whistleblowers" element={<WhistleblowerVaultPage />} />
+          <Route path="/telescopes" element={<TelescopePage />} />
+          <Route path="/galaxy" element={<GalaxyExplorerPage />} />
         </Route>
       </Routes>
       <Toaster />

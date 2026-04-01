@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap } from 'lucide-react';
+import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope } from 'lucide-react';
 
 const sections = [
   { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
@@ -9,6 +9,9 @@ const sections = [
   { to: '/gods', icon: Sparkles, title: 'Gods & Archetypes', desc: '18 deities across 6 pantheons. Tap into mythological intelligence.', color: '#f59e0b' },
   { to: '/consciousness', icon: Brain, title: 'Consciousness Lab', desc: 'Project Stargate, the CIA Gateway Process, NDEs, and the nature of mind.', color: '#10b981' },
   { to: '/signals', icon: Radio, title: 'Signal Watch', desc: 'Credibility ratings for researchers and creators. Green, yellow, red.', color: '#f43f5e' },
+  { to: '/whistleblowers', icon: Shield, title: 'Whistleblower Vault', desc: '8 evidence-graded profiles of those who risked everything for disclosure.', color: '#ef4444' },
+  { to: '/telescopes', icon: Telescope, title: 'Telescope Observatory', desc: 'Hubble to James Webb — every discovery, every anomaly, year by year.', color: '#06b6d4' },
+  { to: '/galaxy', icon: Globe, title: '3D Galaxy Explorer', desc: 'Fly through our solar system. Science, mythology, and mysteries at every stop.', color: '#a855f7' },
   { to: '/origin', icon: Compass, title: 'Origin Chamber', desc: 'A 7-question quiz to discover your starseed archetype lineage.', color: '#c084fc' },
   { to: '/echo', icon: MessageCircle, title: 'Echo AI', desc: 'Ask the cosmic intelligence anything about UAPs, gods, or consciousness.', color: '#60a5fa' },
 ];
@@ -16,8 +19,8 @@ const sections = [
 const stats = [
   { label: 'UAP Cases', value: 6, icon: Shield },
   { label: 'Ancient Gods', value: 18, icon: Sparkles },
-  { label: 'Timeline Events', value: 11, icon: Clock },
-  { label: 'Research Topics', value: 6, icon: BookOpen },
+  { label: 'Whistleblowers', value: 8, icon: Shield },
+  { label: 'Telescopes', value: 8, icon: Telescope },
 ];
 
 function AnimatedCounter({ value, duration = 2000 }: { value: number; duration?: number }) {
