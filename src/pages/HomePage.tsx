@@ -118,9 +118,9 @@ export function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-2xl sm:text-4xl lg:text-5xl font-bold text-primary mb-8"
+          className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-8"
         >
-          <TypewriterText text="OBSERVATORY" delay={1200} />
+          <span className="text-primary">OBSER</span><span className="text-accent-neon neon-glow">VATORY</span>
         </motion.div>
 
         <motion.p

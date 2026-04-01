@@ -25,11 +25,20 @@ function GodModal({ god, onClose }: { god: God; onClose: () => void }) {
         className="relative max-w-lg w-full rounded-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Atmospheric background */}
-        <div className="absolute inset-0" style={{ background: god.atmosphericBg }} />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+        {/* Image background */}
+        {god.image ? (
+          <div className="relative h-56 overflow-hidden">
+            <img src={god.image} alt={god.name} className="w-full h-full object-cover object-top" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-[#030014]/60 to-transparent" />
+          </div>
+        ) : (
+          <>
+            <div className="absolute inset-0" style={{ background: god.atmosphericBg }} />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+          </>
+        )}
 
-        <div className="relative z-10 p-8">
+        <div className={`relative z-10 ${god.image ? '-mt-16' : ''} p-8`}>
           <button
             onClick={onClose}
             className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center text-foreground hover:bg-black/60 transition-colors"
@@ -42,7 +51,7 @@ function GodModal({ god, onClose }: { god: God; onClose: () => void }) {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: 'spring', delay: 0.2 }}
-              className="text-6xl block mb-4"
+              className="text-5xl block mb-3"
             >
               {god.symbol}
             </motion.span>
@@ -139,21 +148,47 @@ export function GodsPage() {
               className="relative group cursor-pointer"
               onClick={() => setSelectedGod(god)}
             >
-              <div className="glass-cosmic rounded-xl p-5 h-full transition-all group-hover:scale-[1.02] overflow-hidden relative">
-                {/* Subtle atmospheric peek */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 rounded-xl"
-                  style={{ background: god.atmosphericBg }}
-                />
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-3xl">{god.symbol}</span>
-                    <div>
-                      <h2 className="font-bold text-foreground text-lg">{god.name}</h2>
-                      <span className="text-xs text-muted-foreground">{god.pantheon}</span>
+              <div className="glass-cosmic rounded-xl overflow-hidden h-full transition-all group-hover:scale-[1.02]">
+                {/* Portrait Image */}
+                {god.image ? (
+                  <div className="relative h-52 overflow-hidden">
+                    <img
+                      src={god.image}
+                      alt={god.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,10,40,0.95)] via-[rgba(15,10,40,0.3)] to-transparent" />
+                    {/* Name overlay on image */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">{god.symbol}</span>
+                        <div>
+                          <h2 className="font-bold text-foreground text-lg leading-tight">{god.name}</h2>
+                          <span className="text-xs text-muted-foreground">{god.pantheon}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-3">{god.archetypeRole}</p>
+                ) : (
+                  <div className="relative p-5">
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500 rounded-xl"
+                      style={{ background: god.atmosphericBg }}
+                    />
+                    <div className="relative z-10 flex items-center gap-3 mb-3">
+                      <span className="text-3xl">{god.symbol}</span>
+                      <div>
+                        <h2 className="font-bold text-foreground text-lg">{god.name}</h2>
+                        <span className="text-xs text-muted-foreground">{god.pantheon}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Info below image */}
+                <div className="p-4 pt-2">
+                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{god.archetypeRole}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {god.domains.slice(0, 3).map((d) => (
                       <span key={d} className="text-xs bg-secondary text-secondary-foreground px-2 py-0.5 rounded">
