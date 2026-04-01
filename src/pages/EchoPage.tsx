@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Bot, User, Sparkles } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import { useToast } from '@/hooks/use-toast';
 import type { ChatMessage } from '../types';
 
 const SUGGESTED_PROMPTS = [
@@ -12,37 +14,115 @@ const SUGGESTED_PROMPTS = [
   'What is a starseed?',
 ];
 
-const AI_RESPONSES: Record<string, string> = {
-  'tic tac': "The USS Nimitz Tic Tac incident (2004) is one of the most well-documented UAP encounters in history. Commander David Fravor and Lt. Commander Alex Dietrich observed a white, oblong craft — no wings, no exhaust — performing maneuvers impossible by known physics. It dropped from 80,000 feet to sea level in under a second and appeared to anticipate classified military coordinates. The Pentagon declassified the FLIR footage in 2020. This isn't speculation — it's sensor-confirmed, multi-witness, military-grade evidence. Grade: DOCUMENTED.",
-  'gateway': "The CIA Gateway Process (document CIA-RDP96-00788R001700210016-5) is a 1983 classified Army Intelligence report that attempts to explain consciousness expansion using quantum physics and holographic universe theory. It describes consciousness as an electromagnetic frequency pattern capable of operating outside the physical body. The document references Robert Monroe's Hemi-Sync technology and describes the universe as a hologram. One page was missing for 37 years — the CIA confirmed they lost it. It went viral in 2021 when rediscovered online. Grade: DOCUMENTED.",
-  'anunnaki': "The Anunnaki appear in Sumerian cuneiform texts dating to ~3100 BCE. The Enuma Elish describes them as beings who created humanity. The term translates roughly to 'those who from heaven came to earth.' Sumerian texts describe planetary knowledge (accurate orbital periods, the asteroid belt) that shouldn't have been possible without telescopes. Whether they represent actual extraterrestrial visitors, symbolic archetypes, or a blend of both — the consistency and precision of the Sumerian record demands explanation. In the Pantheon, we track Enki, Enlil, and Marduk as key Anunnaki figures.",
-  'grusch': "David Grusch is a decorated intelligence officer and former member of the UAP Task Force who testified under oath before the U.S. House Oversight Committee on July 26, 2023. He stated that the U.S. government possesses craft of non-human origin and biological material of non-human intelligence. The Intelligence Community Inspector General found his complaint 'credible and urgent.' He named specific individuals with knowledge of illegal reverse-engineering programs operating outside congressional oversight. He also stated he experienced retaliation for his disclosures. Grade: DOCUMENTED.",
-  'remote viewing': "Project Stargate was a 23-year classified U.S. government program (1972-1995) that investigated and operationally deployed remote viewing — the ability to perceive distant locations using only the mind. Funded by the CIA, DIA, and Army Intelligence, it produced intelligence reports used in active operations targeting Soviet nuclear facilities, hostage locations, and MIA searches. Key viewers included Ingo Swann, Pat Price, and Joseph McMoneagle. Over 89,000 pages were declassified in 1995. A statistical review found results significantly above chance. Grade: DOCUMENTED.",
-  'starseed': "A starseed is a concept describing souls that originated from other star systems or dimensions before incarnating on Earth. The six primary archetypes tracked in the Pantheon Observatory are: Pleiadian (The Healer), Arcturian (The Architect), Sirian (The Guardian), Lyran (The Pioneer), Orion (The Seeker), and Anunnaki Legacy (The Builder). Each carries distinct traits and a cosmic mission. You can discover your archetype in the Origin Chamber. Grade: SPECULATIVE — but the framework is useful for self-reflection regardless of literal belief.",
-};
+const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/echo-chat`;
 
-function getResponse(input: string): string {
-  const lower = input.toLowerCase();
-  for (const [key, response] of Object.entries(AI_RESPONSES)) {
-    if (lower.includes(key)) return response;
+type Msg = { role: 'user' | 'assistant'; content: string };
+
+async function streamChat({
+  messages,
+  onDelta,
+  onDone,
+  onError,
+}: {
+  messages: Msg[];
+  onDelta: (text: string) => void;
+  onDone: () => void;
+  onError: (err: string) => void;
+}) {
+  const resp = await fetch(CHAT_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+    },
+    body: JSON.stringify({ messages }),
+  });
+
+  if (!resp.ok) {
+    const data = await resp.json().catch(() => ({}));
+    const errMsg =
+      resp.status === 429
+        ? 'Rate limit exceeded — please wait a moment and try again.'
+        : resp.status === 402
+          ? 'AI credits exhausted. Add funds in Settings → Workspace → Usage.'
+          : data.error || 'Something went wrong with Echo AI.';
+    onError(errMsg);
+    return;
   }
-  const fallbacks = [
-    "The patterns you're asking about connect to something deeper. Throughout recorded history, civilizations separated by oceans and centuries have described the same archetypes, the same visitors, the same technologies. Coincidence is the laziest explanation.",
-    "Consider this: Project Stargate spent $20 million over two decades investigating remote viewing. They didn't keep funding something that didn't work. The question isn't whether consciousness extends beyond the body — it's how far.",
-    "Every ancient pantheon describes beings who came from the sky, brought knowledge, and shaped civilization. The consistency across unconnected cultures is either the most remarkable coincidence in human history, or it isn't a coincidence at all.",
-    "The Gateway Process documents describe consciousness as a holographic frequency pattern. Whether that's literally true or a useful metaphor, it's fascinating that the CIA thought it was worth classifying.",
-    "I'd recommend exploring the UAP Case Files or Consciousness Lab sections for deeper research on this topic. The evidence grades will help you distinguish documented facts from speculation.",
-  ];
-  return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+
+  if (!resp.body) {
+    onError('No response stream received.');
+    return;
+  }
+
+  const reader = resp.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let streamDone = false;
+
+  while (!streamDone) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    let newlineIndex: number;
+    while ((newlineIndex = buffer.indexOf('\n')) !== -1) {
+      let line = buffer.slice(0, newlineIndex);
+      buffer = buffer.slice(newlineIndex + 1);
+
+      if (line.endsWith('\r')) line = line.slice(0, -1);
+      if (line.startsWith(':') || line.trim() === '') continue;
+      if (!line.startsWith('data: ')) continue;
+
+      const jsonStr = line.slice(6).trim();
+      if (jsonStr === '[DONE]') {
+        streamDone = true;
+        break;
+      }
+
+      try {
+        const parsed = JSON.parse(jsonStr);
+        const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+        if (content) onDelta(content);
+      } catch {
+        buffer = line + '\n' + buffer;
+        break;
+      }
+    }
+  }
+
+  // flush remainder
+  if (buffer.trim()) {
+    for (let raw of buffer.split('\n')) {
+      if (!raw) continue;
+      if (raw.endsWith('\r')) raw = raw.slice(0, -1);
+      if (raw.startsWith(':') || raw.trim() === '') continue;
+      if (!raw.startsWith('data: ')) continue;
+      const jsonStr = raw.slice(6).trim();
+      if (jsonStr === '[DONE]') continue;
+      try {
+        const parsed = JSON.parse(jsonStr);
+        const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+        if (content) onDelta(content);
+      } catch { /* ignore partial */ }
+    }
+  }
+
+  onDone();
 }
 
 export function EchoPage() {
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'assistant', content: "I am Echo — the observing intelligence of the Pantheon Observatory. I hold knowledge of UAP encounters, ancient pantheons, consciousness research, and the cosmic patterns that connect them all. Ask me anything — I'll tell you what's documented, what's credible, and what remains in the realm of speculation. 🌌" }
+    {
+      role: 'assistant',
+      content:
+        "I am Echo — the observing intelligence of the Pantheon Observatory. I hold knowledge of UAP encounters, ancient pantheons, consciousness research, and the cosmic patterns that connect them all. Ask me anything — I'll tell you what's documented, what's credible, and what remains in the realm of speculation. 🌌",
+    },
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
@@ -51,16 +131,49 @@ export function EchoPage() {
   const handleSend = async (text?: string) => {
     const msg = text || input.trim();
     if (!msg || loading) return;
+
     const userMsg: ChatMessage = { role: 'user', content: msg };
-    setMessages((prev) => [...prev, userMsg]);
+    const updatedMessages = [...messages, userMsg];
+    setMessages(updatedMessages);
     setInput('');
     setLoading(true);
 
-    const typingDelay = 800 + Math.random() * 1200;
-    setTimeout(() => {
-      setMessages((prev) => [...prev, { role: 'assistant', content: getResponse(msg) }]);
+    let assistantSoFar = '';
+
+    const upsertAssistant = (chunk: string) => {
+      assistantSoFar += chunk;
+      setMessages((prev) => {
+        const last = prev[prev.length - 1];
+        if (last?.role === 'assistant' && prev.length > 1 && last === prev[prev.length - 1]) {
+          // Check if this is the streaming message (not the welcome message)
+          if (prev.length >= 2 && prev[prev.length - 2]?.role === 'user') {
+            return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: assistantSoFar } : m));
+          }
+        }
+        return [...prev, { role: 'assistant' as const, content: assistantSoFar }];
+      });
+    };
+
+    try {
+      // Send only user/assistant messages (skip welcome)
+      const apiMessages: Msg[] = updatedMessages
+        .slice(1) // skip the welcome message
+        .map((m) => ({ role: m.role, content: m.content }));
+
+      await streamChat({
+        messages: apiMessages,
+        onDelta: (chunk) => upsertAssistant(chunk),
+        onDone: () => setLoading(false),
+        onError: (err) => {
+          toast({ title: 'Echo Error', description: err, variant: 'destructive' });
+          setLoading(false);
+        },
+      });
+    } catch (e) {
+      console.error('Echo chat error:', e);
+      toast({ title: 'Connection Error', description: 'Failed to reach Echo AI. Try again.', variant: 'destructive' });
       setLoading(false);
-    }, typingDelay);
+    }
   };
 
   return (
@@ -71,9 +184,7 @@ export function EchoPage() {
           <div className="absolute inset-0 bg-primary/20 blur-[30px] rounded-full" />
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-2">Echo AI</h1>
-        <p className="text-muted-foreground text-sm">
-          Cosmic intelligence · Evidence-graded responses
-        </p>
+        <p className="text-muted-foreground text-sm">Cosmic intelligence · Evidence-graded responses · Powered by AI</p>
       </motion.div>
 
       {/* Suggested prompts */}
@@ -117,7 +228,13 @@ export function EchoPage() {
                     : 'bg-secondary/80 text-foreground rounded-bl-md'
                 }`}
               >
-                {msg.content}
+                {msg.role === 'assistant' ? (
+                  <div className="prose prose-sm prose-invert max-w-none">
+                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                  </div>
+                ) : (
+                  msg.content
+                )}
               </div>
               {msg.role === 'user' && (
                 <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center flex-shrink-0 border border-border">
@@ -126,7 +243,7 @@ export function EchoPage() {
               )}
             </motion.div>
           ))}
-          {loading && (
+          {loading && messages[messages.length - 1]?.role !== 'assistant' && (
             <div className="flex gap-3">
               <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 border border-primary/30">
                 <Sparkles className="w-4 h-4 text-primary" />
@@ -143,15 +260,13 @@ export function EchoPage() {
         </div>
 
         <div className="border-t border-border p-4">
-          <form
-            onSubmit={(e) => { e.preventDefault(); handleSend(); }}
-            className="flex gap-3"
-          >
+          <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex gap-3">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask Echo about UAPs, ancient gods, consciousness..."
               className="flex-1 bg-secondary/50 rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 border border-border"
+              disabled={loading}
             />
             <button
               type="submit"

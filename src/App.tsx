@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { HomePage } from './pages/HomePage';
+import { Toaster } from './components/ui/toaster';
 import { TimelinePage } from './pages/TimelinePage';
 import { UAPPage } from './pages/UAPPage';
 import { GodsPage } from './pages/GodsPage';
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/echo" element={<EchoPage />} />
         </Route>
       </Routes>
+      <Toaster />
     </BrowserRouter>
   );
 }
