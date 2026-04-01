@@ -1,88 +1,54 @@
 
-# Phase 2: Content Expansion & 3D Galaxy Explorer
 
-Three major builds in priority order. Each becomes a new route in the app.
+# Phase 2: Whistleblower Vault, Telescope Observatory & 3D Galaxy Explorer
+
+Three major new sections, each with its own route, data, and page.
 
 ---
 
 ## 1. Whistleblower Vault (`/whistleblowers`)
 
-**New files:**
-- `src/data/whistleblowers.ts` — Full profiles for 8+ whistleblowers with evidence grades
-- `src/pages/WhistleblowerVaultPage.tsx` — Main vault page with filterable card grid
+A filterable card-grid page with 8+ full whistleblower profiles:
 
-**Whistleblower profiles included:**
-- Bob Lazar (Area 51, Element 115, S-4)
-- Steven Greer (CE5, Disclosure Project, National Press Club 2001)
-- David Grusch (Congressional testimony 2023, "non-human biologics")
-- Phil Schneider (Dulce Base claims, murdered 1996)
-- Gary McKinnon (NASA hack, Solar Warden program)
-- Mark McCandlish (Alien Reproduction Vehicle, died 2021)
-- Bob Fish (DIA insider, email to John Podesta)
-- Lue Elizondo (AATIP director, Pentagon insider)
+**Bob Lazar** (Area 51, Element 115) · **Steven Greer** (CE5, Disclosure Project) · **David Grusch** (Congressional testimony 2023) · **Phil Schneider** (Dulce Base, murdered 1996) · **Gary McKinnon** (NASA hack, Solar Warden) · **Mark McCandlish** (ARV, died 2021) · **Bob Fish** (DIA insider) · **Lue Elizondo** (AATIP director)
 
-Each profile: name, role, key claims, evidence grade (DOCUMENTED/CREDIBLE/SPECULATIVE), timeline of events, sources, and a "status" field (alive, deceased, murdered, unknown).
+Each profile includes: key claims, evidence grade badge, event timeline, sources, and status (alive/deceased/murdered). Glass-cosmic cards with expand-to-detail, staggered framer-motion entrance.
 
-**UI:** Glass-cosmic cards with expand-to-detail view, evidence badges, timeline accordion, source links. Animated entrance with framer-motion stagger.
+**Files:** `src/data/whistleblowers.ts`, `src/pages/WhistleblowerVaultPage.tsx`, new `Whistleblower` type.
 
 ---
 
 ## 2. Telescope Observatory (`/telescopes`)
 
-**New files:**
-- `src/data/telescopes.ts` — Data for all major space telescopes and key discoveries
-- `src/pages/TelescopePage.tsx` — Timeline-style page showing telescope evolution
+A vertical timeline page covering every major space telescope and their discoveries year-by-year:
 
-**Telescopes covered:**
-- Hubble Space Telescope (1990–present) — Deep field, Pillars of Creation, exoplanet atmospheres
-- Spitzer Space Telescope (2003–2020) — Infrared universe, TRAPPIST-1 system
-- Kepler Space Telescope (2009–2018) — 2,700+ confirmed exoplanets, Tabby's Star
-- James Webb Space Telescope (2021–present) — Deep field, early galaxies, atmospheric analysis
-- Chandra X-ray Observatory (1999–present) — Black holes, supernovae
-- Ground observatories: Green Bank, Arecibo (collapsed 2020), ALMA
+**Hubble** (1990) · **Chandra** (1999) · **Spitzer** (2003) · **Kepler** (2009) · **James Webb** (2021) · plus ground observatories (Arecibo, ALMA, Green Bank)
 
-Each entry: launch year, key discoveries by year, notable images/findings, what it changed about our understanding, and connections to UAP/consciousness topics where relevant.
+Each telescope: launch year, key discoveries by year, what it changed, and connections to UAP/anomaly topics. JWST gets the deepest treatment — deep field images, early universe revelations, exoplanet atmospheres.
 
-**UI:** Vertical timeline layout showing telescope eras. Each telescope gets a hero card with key stats and expandable yearly discoveries. Evidence grades on controversial findings.
+**Files:** `src/data/telescopes.ts`, `src/pages/TelescopePage.tsx`, new `Telescope`/`TelescopeDiscovery` types.
 
 ---
 
 ## 3. 3D Galaxy Explorer (`/galaxy`)
 
-**New files:**
-- `src/pages/GalaxyExplorerPage.tsx` — Main 3D scene wrapper
-- `src/components/galaxy/SolarSystem.tsx` — Three.js solar system with orbiting planets
-- `src/components/galaxy/PlanetInfo.tsx` — Info panel when a planet is selected
-- `src/data/planets.ts` — Scientific + mythological data for each celestial body
+Interactive Three.js solar system using React Three Fiber (v8, React 18 compatible):
 
-**Tech:** React Three Fiber (`@react-three/fiber@^8.18`, `@react-three/drei@^9.122.0`, `three@^0.160`)
+- Sun at center with glow effect, orbiting planets Mercury through Pluto + Moon
+- Click any planet to smooth-zoom in and see an info panel with scientific facts AND mythological significance (Greek, Roman, Hindu names, theories)
+- Orbit animations, hover glow effects, starfield background
+- "Let Echo Guide You" button placeholder for future AI narration mode
 
-**Features:**
-- Orbiting planets with accurate relative sizes and distances (compressed for UX)
-- Click any planet to zoom in smoothly (camera lerp) and see an info panel
-- Each planet shows: scientific facts, mythological significance (Greek/Roman/Hindu names), theories, and discoveries
-- Sun at center with glow shader
-- Starfield background (reuse existing star system)
-- Planet data includes: Mercury through Pluto, plus the Moon, asteroid belt markers
-- Smooth orbit animations, glow effects on hover
-
-**Echo integration (future):** Placeholder for Echo "spaceship" navigation mode — a button that says "Let Echo guide you" which triggers the AI to narrate as you fly between planets. This hooks into the existing Echo chat system.
+**Files:** `src/pages/GalaxyExplorerPage.tsx`, `src/components/galaxy/SolarSystem.tsx`, `src/components/galaxy/PlanetInfo.tsx`, `src/data/planets.ts`, new `Planet` type.
 
 ---
 
-## 4. Navigation & Homepage Updates
+## 4. Wiring It Up
 
-- Add three new routes to `App.tsx`: `/whistleblowers`, `/telescopes`, `/galaxy`
+- Add 3 new routes to `App.tsx`
 - Add nav links to `Navbar.tsx`
-- Update `HomePage.tsx` sections array with the three new pages
-- Update stats counters (whistleblower count, telescope count, planets)
+- Update `HomePage.tsx` section grid with new pages
+- Update stat counters
 
----
+All data is static (no database needed). Reuses existing evidence badge system, glass-cosmic styling, and framer-motion patterns.
 
-## Technical Notes
-
-- All data files follow existing patterns (typed interfaces in `src/types/index.ts`)
-- New types: `Whistleblower`, `Telescope`, `TelescopeDiscovery`, `Planet`
-- Evidence badge system reused from UAP pages
-- Three.js packages pinned to React 18-compatible versions
-- No database needed — all static data for now
