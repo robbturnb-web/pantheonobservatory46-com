@@ -11,7 +11,9 @@ const sections = [
   { to: '/signals', icon: Radio, title: 'Signal Watch', desc: 'Credibility ratings for researchers and creators. Green, yellow, red.', color: '#f43f5e' },
   { to: '/whistleblowers', icon: Shield, title: 'Whistleblower Vault', desc: '8 evidence-graded profiles of those who risked everything for disclosure.', color: '#ef4444' },
   { to: '/telescopes', icon: Telescope, title: 'Telescope Observatory', desc: 'Hubble to James Webb — every discovery, every anomaly, year by year.', color: '#06b6d4' },
-  { to: '/galaxy', icon: Globe, title: '3D Galaxy Explorer', desc: 'Fly through our solar system. Science, mythology, and mysteries at every stop.', color: '#a855f7' },
+  { to: '/galaxy', icon: Globe, title: '3D Galaxy Explorer', desc: 'Fly through our solar system with moons, tour mode, and Echo narration.', color: '#a855f7' },
+  { to: '/pyramids', icon: Pyramid, title: 'Pyramid Explorer', desc: '6 ancient structures with stellar alignments, acoustic anomalies, and forbidden theories.', color: '#d4a574' },
+  { to: '/echoverse', icon: Users, title: 'Echoverse', desc: 'Real-time community hub. Chat with fellow starseeds across 5 channels.', color: '#39ff14' },
   { to: '/origin', icon: Compass, title: 'Origin Chamber', desc: 'A 7-question quiz to discover your starseed archetype lineage.', color: '#c084fc' },
   { to: '/echo', icon: MessageCircle, title: 'Echo AI', desc: 'Ask the cosmic intelligence anything about UAPs, gods, or consciousness.', color: '#60a5fa' },
 ];
