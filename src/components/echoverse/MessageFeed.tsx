@@ -78,6 +78,7 @@ export function MessageFeed({ channelId, channelName, userId, onAuthRequired }: 
     });
     setInput('');
     setSending(false);
+    addXp(5, 'Community message');
   };
 
   const formatTime = (iso: string) => {
