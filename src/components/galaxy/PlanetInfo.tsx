@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Sparkles, Info, FlaskConical, Moon as MoonIcon } from 'lucide-react';
-import type { Planet, Moon } from '../../data/planets';
+import { planets, type Planet, type Moon } from '../../data/planets';
 
 interface PlanetInfoProps {
   planet: Planet | null;
