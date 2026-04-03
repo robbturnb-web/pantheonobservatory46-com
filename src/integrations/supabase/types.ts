@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      echo_xp: {
+        Row: {
+          created_at: string
+          id: string
+          pages_visited: Json
+          rank: string
+          updated_at: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          pages_visited?: Json
+          rank?: string
+          updated_at?: string
+          user_id: string
+          xp?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          pages_visited?: Json
+          rank?: string
+          updated_at?: string
+          user_id?: string
+          xp?: number
+        }
+        Relationships: []
+      }
       echoverse_channels: {
         Row: {
           created_at: string

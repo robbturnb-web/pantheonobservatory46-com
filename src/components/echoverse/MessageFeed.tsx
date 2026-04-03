@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Input } from '@/components/ui/input';
+import { useEchoXp } from '@/hooks/use-echo-xp';
 
 interface Message {
   id: string;
@@ -24,6 +25,7 @@ export function MessageFeed({ channelId, channelName, userId, onAuthRequired }: 
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const { addXp } = useEchoXp();
 
   // Fetch messages
   useEffect(() => {
@@ -76,6 +78,7 @@ export function MessageFeed({ channelId, channelName, userId, onAuthRequired }: 
     });
     setInput('');
     setSending(false);
+    addXp(5, 'Community message');
   };
 
   const formatTime = (iso: string) => {

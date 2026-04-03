@@ -1,6 +1,7 @@
 import { useRef, useState, useMemo, forwardRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Stars, Html, Ring } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { planets, type Planet, type Moon } from '../../data/planets';
 
@@ -351,6 +352,9 @@ export const SolarSystem = forwardRef<SolarSystemHandle, SolarSystemProps>(funct
       ))}
       <Spaceship targetPosition={tourTargetPosition} />
       <CameraController targetPlanetId={tourPlanetId} tourActive={tourActive} />
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.3} luminanceSmoothing={0.9} intensity={1.5} />
+      </EffectComposer>
       <OrbitControls
         enablePan
         enableZoom

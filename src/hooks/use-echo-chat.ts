@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { streamChat, type Msg } from '@/lib/echo-stream';
 import type { ChatMessage } from '@/types';
 import { useToast } from '@/hooks/use-toast';
+import { useEchoXp } from '@/hooks/use-echo-xp';
 
 const STORAGE_KEY = 'echo-chat-history';
 const WELCOME_MESSAGE: ChatMessage = {
@@ -31,6 +32,7 @@ export function useEchoChat() {
   const [messages, setMessages] = useState<ChatMessage[]>(loadHistory);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { addXp } = useEchoXp();
 
   // Persist on change
   useEffect(() => {
@@ -66,7 +68,10 @@ export function useEchoChat() {
       await streamChat({
         messages: apiMessages,
         onDelta: (chunk) => upsertAssistant(chunk),
-        onDone: () => setLoading(false),
+        onDone: () => {
+          setLoading(false);
+          addXp(5, 'Echo AI question');
+        },
         onError: (err) => {
           toast({ title: 'Echo Error', description: err, variant: 'destructive' });
           setLoading(false);
