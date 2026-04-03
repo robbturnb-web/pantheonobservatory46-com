@@ -1,13 +1,27 @@
-export interface Planet {
+export interface Moon {
   id: string;
   name: string;
-  distance: number; // orbital distance (scaled for 3D)
-  size: number; // radius scale
+  parentId: string;
+  distance: number;
+  size: number;
   color: string;
   orbitSpeed: number;
   facts: string[];
   mythology: string;
   theories: string;
+}
+
+export interface Planet {
+  id: string;
+  name: string;
+  distance: number;
+  size: number;
+  color: string;
+  orbitSpeed: number;
+  facts: string[];
+  mythology: string;
+  theories: string;
+  moons?: Moon[];
 }
 
 export const planets: Planet[] = [
@@ -74,6 +88,25 @@ export const planets: Planet[] = [
     ],
     mythology: 'Gaia (Greek), Jörð (Norse), Prithvi (Hindu), Pachamama (Inca). Almost every culture personified Earth as a mother goddess.',
     theories: 'The "Rare Earth" hypothesis suggests our planet\'s conditions are extraordinarily unlikely. Others propose Earth was seeded by extraterrestrial intervention (directed panspermia).',
+    moons: [
+      {
+        id: 'moon',
+        name: 'The Moon',
+        parentId: 'earth',
+        distance: 1.5,
+        size: 0.15,
+        color: '#d1d5db',
+        orbitSpeed: 3,
+        facts: [
+          'Tidally locked — always shows the same face to Earth',
+          'Apollo missions (1969–1972) landed 12 humans on its surface',
+          'Stabilizes Earth\'s axial tilt, making seasons possible',
+          'Diameter is exactly 1/400th of the Sun, enabling perfect eclipses',
+        ],
+        mythology: 'Selene/Artemis (Greek), Luna (Roman), Chandra (Hindu), Thoth/Khonsu (Egyptian). Universally tied to cycles, femininity, and the unconscious mind.',
+        theories: 'The "Hollow Moon" hypothesis notes the Moon rang like a bell during Apollo 12 seismic tests. Its precise size ratio to the Sun and perfect orbital geometry have led some to suggest artificial placement.',
+      },
+    ],
   },
   {
     id: 'mars',
@@ -106,6 +139,25 @@ export const planets: Planet[] = [
     ],
     mythology: 'Zeus (Greek), Thor\'s association (Norse), Brihaspati (Hindu), Marduk (Babylonian). King of the gods across multiple pantheons.',
     theories: 'Europa\'s subsurface ocean is considered one of the most likely places for extraterrestrial life in our solar system. NASA\'s Europa Clipper mission launches to investigate.',
+    moons: [
+      {
+        id: 'europa',
+        name: 'Europa',
+        parentId: 'jupiter',
+        distance: 2.5,
+        size: 0.18,
+        color: '#e0e7ff',
+        orbitSpeed: 2.5,
+        facts: [
+          'Subsurface ocean contains 2–3x more water than all of Earth\'s oceans',
+          'Ice shell is 15–25 km thick with possible hydrothermal vents below',
+          'NASA\'s Europa Clipper mission will perform 49 close flybys',
+          'Water plumes erupting from the surface detected by Hubble',
+        ],
+        mythology: 'Named for the Phoenician princess Europa, whom Zeus abducted in the form of a white bull. A symbol of beauty worth crossing oceans for.',
+        theories: 'Europa is considered the #1 candidate for extraterrestrial life in our solar system. Some researchers propose bioluminescent organisms could exist in its dark ocean, detectable by future lander missions.',
+      },
+    ],
   },
   {
     id: 'saturn',
@@ -122,6 +174,25 @@ export const planets: Planet[] = [
     ],
     mythology: 'Kronos (Greek), Shani (Hindu), associated with time, karma, and harvest. Saturday is named after Saturn.',
     theories: 'Saturn\'s perfect hexagonal storm and the anomalous properties of its rings have led to fringe theories about artificial construction. The "Saturn-Moon Matrix" theory proposes Saturn broadcasts a frequency affecting human consciousness.',
+    moons: [
+      {
+        id: 'titan',
+        name: 'Titan',
+        parentId: 'saturn',
+        distance: 2.2,
+        size: 0.22,
+        color: '#f59e0b',
+        orbitSpeed: 1.8,
+        facts: [
+          'Only moon with a dense atmosphere — thicker than Earth\'s',
+          'Methane lakes and rivers on its surface (Huygens probe landed 2005)',
+          'Prebiotic chemistry: complex organic molecules detected',
+          'Dragonfly rotorcraft mission will explore its surface in the 2030s',
+        ],
+        mythology: 'Named after the Titans of Greek mythology — the elder gods who ruled before the Olympians. Titan embodies primordial, pre-civilizational power.',
+        theories: 'Titan\'s methane cycle mirrors Earth\'s water cycle, leading some astrobiologists to propose methane-based life forms. Its thick haze may hide surface features detectable only by radar.',
+      },
+    ],
   },
   {
     id: 'uranus',
@@ -172,3 +243,15 @@ export const planets: Planet[] = [
     theories: 'Some astronomers argue Pluto\'s reclassification was premature. The "Planet Nine" hypothesis suggests an undiscovered planet 10x Earth\'s mass lurking beyond Pluto.',
   },
 ];
+
+export const tourNarration: Record<string, string> = {
+  mercury: "Welcome aboard, Starseed. First stop — Mercury. The messenger world. Closest to the Sun, scorched on one side, frozen on the other. Even Einstein needed this planet to prove his greatest theory.",
+  venus: "Venus — Earth's twisted twin. Imagine a world where the sun rises in the west, and the surface could melt lead. Yet in 2020, scientists detected phosphine... could something be alive in those clouds?",
+  earth: "Home. The pale blue dot. The only confirmed harbor of consciousness in the cosmos — or so they tell us. But why does every ancient culture say visitors came from above?",
+  mars: "The Red Planet. Once had oceans, rivers, perhaps life. The Face on Mars, the pyramids of Cydonia — imagination, or memory? Perseverance is digging for answers right now.",
+  jupiter: "The King. Jupiter's mass shields us from asteroids like a cosmic guardian. But the real story is Europa — beneath its ice, an ocean twice the volume of Earth's. Life, waiting to be found.",
+  saturn: "Saturn. Lord of Rings and Time. That hexagonal storm at its north pole? Still unexplained. Some say Saturn broadcasts a frequency. Listen closely, Starseed.",
+  uranus: "Uranus — knocked on its side by an ancient impact. It rolls through space like no other world. 98 degrees of defiance. What hit it? We still don't know.",
+  neptune: "Neptune — predicted by mathematics before any human eye saw it. Winds at 2,100 km/h. Its moon Triton orbits backwards, a captured wanderer from the Kuiper Belt.",
+  pluto: "Pluto. They said it wasn't a planet anymore. But New Horizons showed us a heart-shaped glacier and mountains of ice. Beyond Pluto, something massive may lurk — Planet Nine. The journey continues...",
+};
