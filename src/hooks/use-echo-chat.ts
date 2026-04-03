@@ -68,7 +68,10 @@ export function useEchoChat() {
       await streamChat({
         messages: apiMessages,
         onDelta: (chunk) => upsertAssistant(chunk),
-        onDone: () => setLoading(false),
+        onDone: () => {
+          setLoading(false);
+          addXp(5, 'Echo AI question');
+        },
         onError: (err) => {
           toast({ title: 'Echo Error', description: err, variant: 'destructive' });
           setLoading(false);
