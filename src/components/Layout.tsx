@@ -22,12 +22,18 @@ const pageTransition = {
 
 export function Layout() {
   const location = useLocation();
+  const { trackPageVisit } = useEchoXp();
+
+  useEffect(() => {
+    trackPageVisit(location.pathname);
+  }, [location.pathname, trackPageVisit]);
 
   return (
     <div className="min-h-screen relative">
       <StarfieldCanvas />
       <CosmicCursorTrail />
       <Navbar />
+      <XPBar />
       <main className="pt-16 min-h-screen">
         <AnimatePresence mode="wait">
           <motion.div
