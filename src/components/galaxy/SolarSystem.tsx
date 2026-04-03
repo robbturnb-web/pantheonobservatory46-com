@@ -1,6 +1,7 @@
 import { useRef, useState, useMemo, forwardRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Stars, Html, Ring } from '@react-three/drei';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { planets, type Planet, type Moon } from '../../data/planets';
 
