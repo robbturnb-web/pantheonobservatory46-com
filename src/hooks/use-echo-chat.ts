@@ -32,6 +32,7 @@ export function useEchoChat() {
   const [messages, setMessages] = useState<ChatMessage[]>(loadHistory);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { addXp } = useEchoXp();
 
   // Persist on change
   useEffect(() => {
