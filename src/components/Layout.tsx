@@ -1,9 +1,12 @@
 import { Outlet, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from './Navbar';
 import { PantheonFooter } from './PantheonFooter';
 import { StarfieldCanvas } from './StarfieldCanvas';
 import { CosmicCursorTrail } from './CosmicCursorTrail';
+import { XPBar } from './XPBar';
+import { useEchoXp } from '@/hooks/use-echo-xp';
 
 const pageVariants = {
   initial: { opacity: 0, y: 20, filter: 'blur(8px)' },
