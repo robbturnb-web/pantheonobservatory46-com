@@ -13,6 +13,8 @@ const navLinks = [
   { to: '/whistleblowers', label: 'Whistleblowers' },
   { to: '/telescopes', label: 'Telescopes' },
   { to: '/galaxy', label: 'Galaxy' },
+  { to: '/pyramids', label: 'Pyramids' },
+  { to: '/echoverse', label: 'Echoverse' },
   { to: '/origin', label: 'Origin Chamber' },
   { to: '/echo', label: 'Echo AI' },
 ];
