@@ -140,6 +140,9 @@ export function PyramidScene({ selectedPyramid, onSelectPyramid }: PyramidSceneP
           onClick={() => onSelectPyramid(selectedPyramid?.id === pyramid.id ? null : pyramid)}
         />
       ))}
+      <EffectComposer>
+        <Bloom luminanceThreshold={0.5} luminanceSmoothing={0.9} intensity={0.8} />
+      </EffectComposer>
       <OrbitControls
         enablePan
         enableZoom
@@ -151,5 +154,3 @@ export function PyramidScene({ selectedPyramid, onSelectPyramid }: PyramidSceneP
         autoRotateSpeed={0.3}
       />
     </Canvas>
-  );
-}
