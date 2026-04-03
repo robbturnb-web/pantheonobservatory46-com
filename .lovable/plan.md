@@ -1,97 +1,105 @@
 
 
-# Phase 3-4: Moons, Spaceship Tour, Echoverse & Pyramid Explorer
+# Phase 5: Testing, Echo XP System & Cinematic Post-Processing
 
-Four major features built across existing and new pages.
-
----
-
-## 1. Galaxy Explorer — Moons & Echo Spaceship Tour
-
-### Moons
-Add a `Moon` interface to `src/data/planets.ts` with `moons` array on each planet. Three featured moons with full click-to-info:
-
-- **Earth's Moon** — distance 1.5 from Earth, grey, facts about tidal locking, Apollo missions, hollow moon theory
-- **Titan** (Saturn) — orange, methane lakes, Huygens probe, prebiotic chemistry
-- **Europa** (Jupiter) — icy white, subsurface ocean, Europa Clipper, possible life
-
-Each moon orbits its parent planet in `SolarSystem.tsx` using a `MoonMesh` component (smaller sphere, faster orbit, own Html label). Clicking a moon opens the same `PlanetInfo` panel (reused with moon data).
-
-### Echo Spaceship Tour
-Wire the existing "Let Echo Guide You" button in `GalaxyExplorerPage.tsx`:
-
-- **Tour mode** — cycles through planets in order (Mercury → Pluto) with 6-second pause on each
-- Animated camera transitions via OrbitControls target ref
-- Echo narration panel at bottom — short pre-written blurbs per planet (no AI call, keeps it instant)
-- Glowing spaceship mesh (simple cone + cylinder) that leads the camera between planets
-- Stop/skip controls overlay
-
-**Files:** `src/data/planets.ts`, `src/components/galaxy/SolarSystem.tsx`, `src/components/galaxy/PlanetInfo.tsx`, `src/pages/GalaxyExplorerPage.tsx`
+Six workstreams: browser testing of existing features, then building the Echo XP/rank system, adding cinematic post-processing, and a full review pass.
 
 ---
 
-## 2. Echoverse Community (`/echoverse`)
+## 1. Test Galaxy Tour & Moons (Browser)
 
-Discord-style real-time community platform using Lovable Cloud.
+Navigate to `/galaxy`, click "Let Echo Guide You", verify:
+- Spaceship mesh appears and moves between planets
+- Camera follows, narration panel cycles Mercury → Pluto
+- Stop/skip controls work
+- After tour: click Earth, Jupiter, Saturn — verify moon orbits render
+- Click Moon, Europa, Titan — verify info panel shows moon data
+- Check Saturn rings, Uranus tilt, asteroid belt
 
-### Database (migration)
-- `profiles` table — id (FK auth.users), username, avatar_url, created_at
-- `echoverse_channels` table — id, name, slug, description, icon, sort_order
-- `echoverse_messages` table — id, channel_id (FK), user_id (FK auth), content, created_at
-- Enable realtime on `echoverse_messages`
-- RLS: authenticated users can read all, insert own messages
-- Trigger to auto-create profile on signup
-- Seed 5 channels: #uap-sightings, #consciousness, #starseeds, #whistleblower-intel, #general
+Fix any issues found before proceeding.
 
-### Auth
-- Email/password signup + login modal (`AuthModal` component)
-- User picks display name on signup (stored in profiles)
+## 2. Test Echoverse Signup & Chat (Browser)
 
-### UI
-- Left sidebar: channel list with icons
-- Center: real-time message feed with auto-scroll and timestamp grouping
-- Bottom: message input (auth-gated)
-- Glass-cosmic styling, framer-motion message animations
+Navigate to `/echoverse`, verify:
+- Channel list loads (5 channels from DB)
+- "Sign In" button opens AuthModal
+- Signup flow works (email + password + username)
+- After auth: message input appears, can send a message
+- Message appears in real-time feed
+- Sign out works
 
-**Files:** `src/pages/EchoversePage.tsx`, `src/components/echoverse/ChannelList.tsx`, `src/components/echoverse/MessageFeed.tsx`, `src/components/echoverse/AuthModal.tsx`, migration SQL
+## 3. Test Pyramid Explorer (Browser)
 
----
+Navigate to `/pyramids`, verify:
+- 6 pyramids render in 3D scene
+- Click a pyramid → info panel slides in with facts, alignments, theories
+- Alignment lines visible (Orion/Sirius)
+- Orbit controls (drag/zoom) work
+- Close info panel works
 
-## 3. 3D Pyramid Explorer (`/pyramids`)
+## 4. Build Echo XP & Rank System
 
-Interactive 3D page with clickable ancient structures.
+A global progression system that tracks user exploration and rewards knowledge.
 
-### 6 Pyramids
-- **Great Pyramid of Giza** — Orion alignment, internal chambers, 2.3M blocks
-- **Pyramid of the Sun (Teotihuacan)** — Mesoamerican cosmology, mica chambers
-- **Bosnian Pyramid** — Visočica hill, energy beam claims
-- **Nubian Pyramids (Meroë)** — Kushite civilization, steeper angles
-- **Kukulcán (Chichén Itzá)** — equinox serpent shadow, acoustic anomalies
-- **Ziggurat of Ur** — Sumerian/Anunnaki connection
+**Database migration:**
+- `echo_xp` table: `id`, `user_id` (FK auth.users), `xp` (integer, default 0), `rank` (text, default 'Initiate'), `pages_visited` (jsonb, default '[]'), `created_at`, `updated_at`
+- RLS: users can read/update own row only
+- Trigger to auto-create row on signup (extend existing `handle_new_user` function)
 
-### 3D Scene
-- React Three Fiber canvas with 6 pyramids in circular layout
-- `ConeGeometry` (4 sides) with stone colors, glowing edges on hover
-- Click → side panel with facts, alignments, theories
-- Alignment lines drawn from pyramids to star positions (Orion, Sirius)
-- Starfield background, orbit controls
+**Rank tiers** (stored as constants in frontend):
+- 0 XP → Initiate
+- 100 XP → Seeker
+- 300 XP → Adept
+- 600 XP → Mystic
+- 1000 XP → Oracle
+- 2000 XP → Ascended
 
-**Files:** `src/data/pyramids.ts`, `src/pages/PyramidExplorerPage.tsx`, `src/components/pyramid/PyramidScene.tsx`, `src/components/pyramid/PyramidInfo.tsx`
+**XP sources:**
+- First visit to each page: +10 XP (tracked in `pages_visited` jsonb)
+- Sending a message in Echoverse: +5 XP
+- Asking Echo AI a question: +5 XP
+- Clicking a planet/pyramid/whistleblower for info: +2 XP
 
----
+**Frontend:**
+- `src/hooks/use-echo-xp.ts` — hook that reads/updates XP from DB, computes rank
+- `src/components/XPBar.tsx` — small floating widget (bottom-right or top-right) showing current rank, XP progress bar to next rank, with neon-green glow
+- XP toast notifications on gain ("✨ +10 XP — Seeker rank unlocked!")
+- Integrate XP calls into: page navigation (Layout), Echoverse message send, Echo AI send, planet/pyramid clicks
 
-## 4. Wiring
+**Files:** Migration SQL, `src/hooks/use-echo-xp.ts`, `src/components/XPBar.tsx`, edits to `Layout.tsx`, `MessageFeed.tsx`, `use-echo-chat.ts`, `SolarSystem.tsx`, `PyramidScene.tsx`
 
-- Add `/echoverse` and `/pyramids` routes to `App.tsx`
-- Add nav links to `Navbar.tsx`
-- Update `HomePage.tsx` grid and stats
+## 5. Cinematic Post-Processing Effects
+
+Add bloom and god-ray effects to the Galaxy Explorer and Pyramid Explorer using `@react-three/postprocessing`.
+
+**Galaxy Explorer (`SolarSystem.tsx`):**
+- Add `EffectComposer` with `Bloom` (luminanceThreshold: 0.3, intensity: 1.5)
+- Sun and planet atmospheres will naturally glow
+- Spaceship engine glow enhanced
+
+**Pyramid Explorer (`PyramidScene.tsx`):**
+- Add `EffectComposer` with `Bloom` (luminanceThreshold: 0.5, intensity: 0.8)
+- Alignment lines and pyramid edges glow dramatically
+- Star markers get halo effect
+
+**Package:** `@react-three/postprocessing@^2.16` + `postprocessing@^6.36`
+
+**Files:** `src/components/galaxy/SolarSystem.tsx`, `src/components/pyramid/PyramidScene.tsx`, `package.json`
+
+## 6. Full Review Pass
+
+After all builds, navigate every page in sequence and verify:
+- Home → Timeline → UAP → Gods → Consciousness → Signals → Whistleblowers → Telescopes → Galaxy → Pyramids → Echoverse → Origin Chamber → Echo AI
+- Check: page loads, no console errors, navigation works, cosmic cursor trail active, starfield background renders
+- Verify navbar links all work on mobile (384px viewport)
+- Report any broken pages or missing content
 
 ---
 
 ## Technical Notes
 
-- Echoverse requires a database migration + auth — email confirmation will be standard (not auto-confirmed)
-- Pyramid scene reuses same R3F + drei setup as Galaxy Explorer
-- Spaceship tour uses pre-written narration for instant responsiveness
-- All pages use existing glass-cosmic styling and framer-motion
+- XP system requires auth — anonymous users see the XP bar but with "Sign in to track progress" prompt
+- Post-processing uses selective bloom via `meshBasicMaterial` (emissive materials bloom, standard materials don't)
+- All testing done via browser tools before and after code changes
+- Existing `handle_new_user` trigger extended to also insert into `echo_xp`
 
