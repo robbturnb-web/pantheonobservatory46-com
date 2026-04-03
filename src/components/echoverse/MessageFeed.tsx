@@ -25,6 +25,7 @@ export function MessageFeed({ channelId, channelName, userId, onAuthRequired }: 
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const { addXp } = useEchoXp();
 
   // Fetch messages
   useEffect(() => {
