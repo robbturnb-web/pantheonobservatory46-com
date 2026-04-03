@@ -154,3 +154,5 @@ export function PyramidScene({ selectedPyramid, onSelectPyramid }: PyramidSceneP
         autoRotateSpeed={0.3}
       />
     </Canvas>
+  );
+}

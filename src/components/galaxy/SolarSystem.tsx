@@ -365,4 +365,5 @@ export const SolarSystem = forwardRef<SolarSystemHandle, SolarSystemProps>(funct
         autoRotateSpeed={0.2}
       />
     </Canvas>
+  );
 });
