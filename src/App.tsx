@@ -12,6 +12,8 @@ import { EchoPage } from './pages/EchoPage';
 import { WhistleblowerVaultPage } from './pages/WhistleblowerVaultPage';
 import { TelescopePage } from './pages/TelescopePage';
 import { GalaxyExplorerPage } from './pages/GalaxyExplorerPage';
+import { EchoversePage } from './pages/EchoversePage';
+import { PyramidExplorerPage } from './pages/PyramidExplorerPage';
 
 export default function App() {
   return (
@@ -29,6 +31,8 @@ export default function App() {
           <Route path="/whistleblowers" element={<WhistleblowerVaultPage />} />
           <Route path="/telescopes" element={<TelescopePage />} />
           <Route path="/galaxy" element={<GalaxyExplorerPage />} />
+          <Route path="/echoverse" element={<EchoversePage />} />
+          <Route path="/pyramids" element={<PyramidExplorerPage />} />
         </Route>
       </Routes>
       <Toaster />

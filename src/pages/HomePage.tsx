@@ -22,6 +22,7 @@ const stats = [
   { label: 'UAP Cases', value: 6, icon: Shield },
   { label: 'Ancient Gods', value: 18, icon: Sparkles },
   { label: 'Whistleblowers', value: 8, icon: Shield },
+  { label: 'Pyramids', value: 6, icon: Pyramid },
   { label: 'Telescopes', value: 8, icon: Telescope },
 ];
 
