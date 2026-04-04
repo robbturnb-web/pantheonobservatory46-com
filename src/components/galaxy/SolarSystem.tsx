@@ -352,9 +352,6 @@ export const SolarSystem = forwardRef<SolarSystemHandle, SolarSystemProps>(funct
       ))}
       <Spaceship targetPosition={tourTargetPosition} />
       <CameraController targetPlanetId={tourPlanetId} tourActive={tourActive} />
-      <EffectComposer>
-        <Bloom luminanceThreshold={0.3} luminanceSmoothing={0.9} intensity={1.5} />
-      </EffectComposer>
       <OrbitControls
         enablePan
         enableZoom
