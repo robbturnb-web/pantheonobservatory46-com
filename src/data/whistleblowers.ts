@@ -1,4 +1,6 @@
 import type { EvidenceGrade } from '../types';
+import type { Source } from '../components/SourceList';
+import type { VideoData } from '../components/VideoEmbed';
 
 export interface Whistleblower {
   id: string;
@@ -10,7 +12,8 @@ export interface Whistleblower {
   summary: string;
   keyClaims: string[];
   timeline: { year: string; event: string }[];
-  sources: string[];
+  sources: Source[];
+  videos: VideoData[];
   accentColor: string;
 }
 
@@ -36,7 +39,15 @@ export const whistleblowers: Whistleblower[] = [
       { year: '2003', event: 'Element 115 (Moscovium) synthesized, partially validating claims' },
       { year: '2018', event: 'Featured in Jeremy Corbell documentary' },
     ],
-    sources: ['KLAS-TV Interview (1989)', 'Bob Lazar: Area 51 & Flying Saucers (2018)'],
+    sources: [
+      { label: 'KLAS-TV Interview (1989)', url: 'https://www.youtube.com/watch?v=4UgBWzdjlBQ' },
+      { label: 'Joe Rogan Experience #1315', url: 'https://www.youtube.com/watch?v=BEWz4SXfyCQ' },
+      { label: 'Bob Lazar: Area 51 & Flying Saucers (2018)', url: 'https://www.imdb.com/title/tt9107368/' },
+      { label: 'Element 115 — Wikipedia', url: 'https://en.wikipedia.org/wiki/Moscovium' },
+    ],
+    videos: [
+      { platform: 'youtube', id: 'BEWz4SXfyCQ', title: 'Joe Rogan Experience #1315 — Bob Lazar' },
+    ],
     accentColor: '#3b82f6',
   },
   {
@@ -60,7 +71,16 @@ export const whistleblowers: Whistleblower[] = [
       { year: '2023 Jun', event: 'Story breaks via The Debrief' },
       { year: '2023 Jul', event: 'Testifies under oath before House Oversight Committee' },
     ],
-    sources: ['Congressional Testimony (July 26, 2023)', 'The Debrief (June 2023)', 'NewsNation Interview'],
+    sources: [
+      { label: 'Congressional Testimony (C-SPAN)', url: 'https://www.c-span.org/video/?529499-1/hearing-unidentified-anomalous-phenomena' },
+      { label: 'The Debrief — Original Publication', url: 'https://thedebrief.org/intelligence-officials-say-u-s-has-retrieved-non-human-craft/' },
+      { label: 'NewsNation Interview', url: 'https://www.youtube.com/watch?v=ZSj7QsHRxHQ' },
+      { label: 'IC IG Credibility Determination', url: 'https://www.congress.gov/bill/118th-congress/senate-bill/2226' },
+    ],
+    videos: [
+      { platform: 'youtube', id: 'ZSj7QsHRxHQ', title: 'David Grusch — NewsNation Exclusive Interview' },
+      { platform: 'youtube', id: 'KQ7Dw-739VY', title: 'Congressional UAP Hearing (Full) — C-SPAN' },
+    ],
     accentColor: '#10b981',
   },
   {
@@ -84,7 +104,14 @@ export const whistleblowers: Whistleblower[] = [
       { year: '2017 Dec', event: 'NYT publishes landmark UAP story with AATIP videos' },
       { year: '2021', event: 'Confirmed by Pentagon as former AATIP director' },
     ],
-    sources: ['New York Times (Dec 2017)', 'Pentagon Confirmation (2021)', '60 Minutes Interview'],
+    sources: [
+      { label: 'New York Times (Dec 2017)', url: 'https://www.nytimes.com/2017/12/16/us/politics/pentagon-program-ufo-harry-reid.html' },
+      { label: '60 Minutes Interview', url: 'https://www.youtube.com/watch?v=ZBtMbBPzqHY' },
+      { label: 'Pentagon Confirmation', url: 'https://www.defense.gov/News/Releases/' },
+    ],
+    videos: [
+      { platform: 'youtube', id: 'ZBtMbBPzqHY', title: '60 Minutes — UFOs: Lue Elizondo Interview' },
+    ],
     accentColor: '#8b5cf6',
   },
   {
@@ -108,7 +135,14 @@ export const whistleblowers: Whistleblower[] = [
       { year: '2013', event: 'Releases "Sirius" documentary' },
       { year: '2017', event: 'Releases "Unacknowledged" documentary' },
     ],
-    sources: ['Disclosure Project (2001)', 'Sirius Documentary (2013)', 'Unacknowledged (2017)'],
+    sources: [
+      { label: 'Disclosure Project Press Conference (2001)', url: 'https://www.youtube.com/watch?v=4DrcG7VGgQU' },
+      { label: 'Sirius Documentary', url: 'https://www.imdb.com/title/tt2658076/' },
+      { label: 'Unacknowledged (2017)', url: 'https://www.imdb.com/title/tt6400614/' },
+    ],
+    videos: [
+      { platform: 'youtube', id: '4DrcG7VGgQU', title: 'Disclosure Project — National Press Club (2001)' },
+    ],
     accentColor: '#f59e0b',
   },
   {
@@ -131,7 +165,13 @@ export const whistleblowers: Whistleblower[] = [
       { year: '1995', event: 'Begins giving public lectures about DUMBs' },
       { year: '1996 Jan', event: 'Found dead — ruled suicide, family disputes cause' },
     ],
-    sources: ['Phil Schneider Lecture Series (1995)', 'Cynthia Drayer Interviews'],
+    sources: [
+      { label: 'Phil Schneider Lecture Series (1995)', url: 'https://www.youtube.com/watch?v=xedmfAgx8eg' },
+      { label: 'Cynthia Drayer Interview', url: 'https://www.youtube.com/results?search_query=cynthia+drayer+phil+schneider' },
+    ],
+    videos: [
+      { platform: 'youtube', id: 'xedmfAgx8eg', title: 'Phil Schneider — Last Lecture Before Death' },
+    ],
     accentColor: '#ef4444',
   },
   {
@@ -155,7 +195,12 @@ export const whistleblowers: Whistleblower[] = [
       { year: '2006-2012', event: 'Fights extradition to the US' },
       { year: '2012', event: 'UK blocks extradition on human rights grounds' },
     ],
-    sources: ['BBC Interview (2006)', 'Wired Magazine', 'Guardian Coverage'],
+    sources: [
+      { label: 'BBC Interview (2006)', url: 'https://www.bbc.co.uk/news/technology-18630275' },
+      { label: 'Wired Magazine', url: 'https://www.wired.com/2006/06/ufo-hacker-tells-what-he-found/' },
+      { label: 'The Guardian', url: 'https://www.theguardian.com/world/gary-mckinnon' },
+    ],
+    videos: [],
     accentColor: '#06b6d4',
   },
   {
@@ -178,7 +223,11 @@ export const whistleblowers: Whistleblower[] = [
       { year: '2001', event: 'Testifies at Disclosure Project press conference' },
       { year: '2021 Apr', event: 'Found dead — ruled suicide by shotgun' },
     ],
-    sources: ['Disclosure Project Testimony (2001)', 'Zero Point Documentary'],
+    sources: [
+      { label: 'Disclosure Project Testimony (2001)', url: 'https://www.youtube.com/watch?v=4DrcG7VGgQU' },
+      { label: 'Zero Point Documentary', url: 'https://www.imdb.com/title/tt3908768/' },
+    ],
+    videos: [],
     accentColor: '#a855f7',
   },
   {
@@ -200,7 +249,11 @@ export const whistleblowers: Whistleblower[] = [
       { year: '2014-2015', event: 'Emails with John Podesta revealed via WikiLeaks' },
       { year: '2016', event: 'Podesta emails released publicly' },
     ],
-    sources: ['WikiLeaks Podesta Emails', 'The Black Vault Analysis'],
+    sources: [
+      { label: 'WikiLeaks — Podesta Emails', url: 'https://wikileaks.org/podesta-emails/' },
+      { label: 'The Black Vault Analysis', url: 'https://www.theblackvault.com/' },
+    ],
+    videos: [],
     accentColor: '#14b8a6',
   },
 ];

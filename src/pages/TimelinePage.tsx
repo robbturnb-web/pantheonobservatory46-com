@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { timelineEntries, type TimelineEntry } from '../data/timeline';
+import { ExternalLink } from 'lucide-react';
 
 const categories = [
   { key: 'all', label: 'All Eras' },
@@ -23,7 +24,6 @@ export function TimelinePage() {
     ? timelineEntries
     : timelineEntries.filter((e) => e.category === filter);
 
-  // Group by category for era dividers
   let lastCategory = '';
 
   return (
@@ -52,7 +52,6 @@ export function TimelinePage() {
       </div>
 
       <div className="relative">
-        {/* Timeline line */}
         <div className="absolute left-[19px] top-0 bottom-0 w-px bg-gradient-to-b from-primary/60 via-primary/20 to-transparent" />
 
         <AnimatePresence mode="popLayout">
@@ -85,7 +84,6 @@ export function TimelinePage() {
                     transition={{ duration: 0.3, delay: i * 0.04 }}
                     className="relative pl-12"
                   >
-                    {/* Timeline dot */}
                     <div className={`absolute left-2 top-4 w-4 h-4 rounded-full border-2 border-primary bg-background ${
                       event.significance === 'high' ? 'cosmic-glow-pulse' : ''
                     }`} />
@@ -103,6 +101,17 @@ export function TimelinePage() {
                       </div>
                       <h3 className="text-lg font-bold text-foreground mb-2">{event.title}</h3>
                       <p className="text-sm text-muted-foreground leading-relaxed">{event.description}</p>
+                      {event.sourceUrl && (
+                        <a
+                          href={event.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80 mt-2 transition-colors"
+                        >
+                          <ExternalLink className="w-3 h-3" />
+                          {event.sourceLabel || 'Source'}
+                        </a>
+                      )}
                     </div>
                   </motion.div>
                 </div>

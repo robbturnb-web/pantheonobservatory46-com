@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MapPin, Compass, FlaskConical, Info } from 'lucide-react';
+import { SourceList } from '../SourceList';
+import { VideoList } from '../VideoEmbed';
 import type { Pyramid } from '../../data/pyramids';
 
 interface PyramidInfoProps {
@@ -79,6 +81,14 @@ export function PyramidInfo({ pyramid, onClose }: PyramidInfoProps) {
               </h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{pyramid.theories}</p>
             </section>
+
+            {pyramid.sources && pyramid.sources.length > 0 && (
+              <SourceList sources={pyramid.sources} defaultOpen />
+            )}
+
+            {pyramid.videos && pyramid.videos.length > 0 && (
+              <VideoList videos={pyramid.videos} title="Documentaries" />
+            )}
           </div>
         </motion.div>
       )}

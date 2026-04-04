@@ -4,6 +4,7 @@ import { gods } from '../data/gods';
 import type { PantheonFilter } from '../types';
 import type { God } from '../types';
 import { X } from 'lucide-react';
+import { SourceList } from '../components/SourceList';
 
 const filters: PantheonFilter[] = ['All', 'Greek', 'Norse', 'Egyptian', 'Hindu', 'Anunnaki', 'Starseed'];
 
@@ -92,6 +93,10 @@ function GodModal({ god, onClose }: { god: God; onClose: () => void }) {
                 "{god.reflectionQuestion}"
               </p>
             </motion.div>
+
+            {god.sources && god.sources.length > 0 && (
+              <SourceList sources={god.sources} defaultOpen />
+            )}
           </div>
         </div>
       </motion.div>

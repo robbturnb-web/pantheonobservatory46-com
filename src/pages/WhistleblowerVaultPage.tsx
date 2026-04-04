@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { Shield, ChevronDown, ChevronUp } from 'lucide-react';
 import { EvidenceBadge } from '../components/EvidenceBadge';
+import { SourceList } from '../components/SourceList';
+import { VideoList } from '../components/VideoEmbed';
 import { whistleblowers, type Whistleblower } from '../data/whistleblowers';
 import type { EvidenceGrade } from '../types';
 
@@ -37,7 +39,6 @@ export function WhistleblowerVaultPage() {
           </p>
         </motion.div>
 
-        {/* Filters */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {gradeFilters.map(g => (
             <button
@@ -54,7 +55,6 @@ export function WhistleblowerVaultPage() {
           ))}
         </div>
 
-        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <AnimatePresence mode="popLayout">
             {filtered.map((w, i) => {
@@ -107,7 +107,6 @@ export function WhistleblowerVaultPage() {
                         className="overflow-hidden"
                       >
                         <div className="px-6 pb-6 space-y-5 border-t border-border pt-5">
-                          {/* Key Claims */}
                           <div>
                             <h4 className="text-sm font-semibold text-foreground mb-2">Key Claims</h4>
                             <ul className="space-y-1.5">
@@ -120,7 +119,6 @@ export function WhistleblowerVaultPage() {
                             </ul>
                           </div>
 
-                          {/* Timeline */}
                           <div>
                             <h4 className="text-sm font-semibold text-foreground mb-2">Timeline</h4>
                             <div className="space-y-2">
@@ -133,17 +131,11 @@ export function WhistleblowerVaultPage() {
                             </div>
                           </div>
 
-                          {/* Sources */}
-                          <div>
-                            <h4 className="text-sm font-semibold text-foreground mb-2">Sources</h4>
-                            <div className="flex flex-wrap gap-2">
-                              {w.sources.map((s, si) => (
-                                <span key={si} className="text-xs px-2 py-1 rounded-md bg-accent text-accent-foreground flex items-center gap-1">
-                                  <ExternalLink className="w-3 h-3" /> {s}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
+                          <SourceList sources={w.sources} />
+
+                          {w.videos && w.videos.length > 0 && (
+                            <VideoList videos={w.videos} title="Watch" />
+                          )}
                         </div>
                       </motion.div>
                     )}

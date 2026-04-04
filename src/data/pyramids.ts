@@ -1,3 +1,6 @@
+import type { Source } from '../components/SourceList';
+import type { VideoData } from '../components/VideoEmbed';
+
 export interface Pyramid {
   id: string;
   name: string;
@@ -11,6 +14,8 @@ export interface Pyramid {
   theories: string;
   position: [number, number, number];
   scale: number;
+  sources: Source[];
+  videos: VideoData[];
 }
 
 export const pyramids: Pyramid[] = [
@@ -38,6 +43,15 @@ export const pyramids: Pyramid[] = [
     theories: 'Robert Bauval\'s Orion Correlation Theory proposes the Giza complex is a terrestrial map of the Orion constellation. The precision of construction — within fractions of a degree — suggests knowledge beyond what mainstream archaeology attributes to Bronze Age Egyptians.',
     position: [0, 0, 0],
     scale: 1.8,
+    sources: [
+      { label: 'National Geographic — Giza', url: 'https://www.nationalgeographic.com/history/article/giza-pyramids' },
+      { label: 'Robert Bauval — Orion Correlation', url: 'https://en.wikipedia.org/wiki/Orion_correlation_theory' },
+      { label: 'Smithsonian — Great Pyramid', url: 'https://www.smithsonianmag.com/history/giza-pyramids-180981052/' },
+      { label: '2017 Muon Scan — Big Void Discovery', url: 'https://www.nature.com/articles/nature24647' },
+    ],
+    videos: [
+      { platform: 'youtube', id: 'sy_bJQaD3Uc', title: 'Inside the Great Pyramid — National Geographic' },
+    ],
   },
   {
     id: 'teotihuacan',
@@ -60,9 +74,17 @@ export const pyramids: Pyramid[] = [
       'Layout mirrors the solar system\'s inner planets',
       'Underground tunnels contain liquid mercury deposits',
     ],
-    theories: 'The mica chambers are thermally and electrically significant — mica is used in modern capacitors and insulation. The liquid mercury found underground may have been used as a reflective pool representing the underworld. Some researchers propose the entire complex was an energy generation facility.',
+    theories: 'The mica chambers are thermally and electrically significant — mica is used in modern capacitors and insulation. The liquid mercury found underground may have been used as a reflective pool representing the underworld.',
     position: [8, 0, -6],
     scale: 1.4,
+    sources: [
+      { label: 'INAH Mexico — Teotihuacan', url: 'https://www.inah.gob.mx/zonas/23-zona-arqueologica-de-teotihuacan' },
+      { label: 'Liquid Mercury Discovery (2015)', url: 'https://www.theguardian.com/world/2015/apr/24/liquid-mercury-found-at-teotihuacan-pyramid' },
+      { label: 'Mica Chambers Research', url: 'https://en.wikipedia.org/wiki/Teotihuacan' },
+    ],
+    videos: [
+      { platform: 'youtube', id: 'tZ8Jyq5Xzas', title: 'Teotihuacan — Lost City of the Gods' },
+    ],
   },
   {
     id: 'bosnian',
@@ -85,9 +107,14 @@ export const pyramids: Pyramid[] = [
       'Tunnel network contains negative ion concentrations 40x normal',
       'Geometry matches sacred proportions found in other ancient sites',
     ],
-    theories: 'Dr. Semir Osmanagić claims this is the oldest and largest pyramid on Earth, built by an advanced Ice Age civilization. Energy beam measurements at 28 kHz from the apex are documented but unexplained. Skeptics argue it\'s a natural hill — the debate remains unresolved.',
+    theories: 'Dr. Semir Osmanagić claims this is the oldest and largest pyramid on Earth, built by an advanced Ice Age civilization. Energy beam measurements at 28 kHz from the apex are documented but unexplained.',
     position: [-8, 0, -4],
     scale: 1.5,
+    sources: [
+      { label: 'Dr. Osmanagić Foundation', url: 'https://www.bosnianpyramid.org/' },
+      { label: 'European Archaeology Critique', url: 'https://en.wikipedia.org/wiki/Bosnian_pyramid_claims' },
+    ],
+    videos: [],
   },
   {
     id: 'nubian',
@@ -110,9 +137,14 @@ export const pyramids: Pyramid[] = [
       'Spacing patterns suggest astronomical calendar function',
       'Shadow casting creates precise time-marking at solstices',
     ],
-    theories: 'The Kushite civilization maintained pyramid-building traditions for 1,000 years after Egypt stopped. Their astronomical alignments suggest an unbroken lineage of sacred geometry knowledge passed from a common, possibly pre-Egyptian source.',
+    theories: 'The Kushite civilization maintained pyramid-building traditions for 1,000 years after Egypt stopped. Their astronomical alignments suggest an unbroken lineage of sacred geometry knowledge.',
     position: [6, 0, 8],
     scale: 1.0,
+    sources: [
+      { label: 'UNESCO — Meroë', url: 'https://whc.unesco.org/en/list/1336/' },
+      { label: 'National Geographic — Nubian Pyramids', url: 'https://www.nationalgeographic.com/history/article/sudan-nubian-pyramids' },
+    ],
+    videos: [],
   },
   {
     id: 'kukulcan',
@@ -135,9 +167,17 @@ export const pyramids: Pyramid[] = [
       'Acoustic properties produce bird-call echoes — intentional design',
       'Venus alignment tracked by the Maya with 99.99% accuracy',
     ],
-    theories: 'The acoustic properties of Kukulcán suggest the Maya engineered sound itself into stone. The equinox serpent requires such precise geometry that computer modeling shows the margin of error is less than 0.01°. This level of precision rivals modern architecture.',
+    theories: 'The acoustic properties of Kukulcán suggest the Maya engineered sound itself into stone. The equinox serpent requires such precise geometry that computer modeling shows the margin of error is less than 0.01°.',
     position: [-6, 0, 7],
     scale: 1.2,
+    sources: [
+      { label: 'INAH — Chichén Itzá', url: 'https://www.inah.gob.mx/zonas/12-zona-arqueologica-de-chichen-itza' },
+      { label: 'Acoustics Study — Lubman', url: 'https://acoustics.org/pressroom/httpdocs/131st/2paa2.html' },
+      { label: 'UNESCO — Chichén Itzá', url: 'https://whc.unesco.org/en/list/483/' },
+    ],
+    videos: [
+      { platform: 'youtube', id: 'b-HY1Kvjd1A', title: 'Equinox Serpent at Kukulcán — Chichén Itzá' },
+    ],
   },
   {
     id: 'ziggurat',
@@ -160,8 +200,13 @@ export const pyramids: Pyramid[] = [
       'Step design may represent the stairway between Earth and heaven',
       'Part of a sacred precinct with courts and ritual spaces',
     ],
-    theories: 'The Sumerians described the Anunnaki — beings who came from the sky and created humanity. Zecharia Sitchin proposed ziggurats were landing platforms. The Sumerian King List records rulers who reigned for tens of thousands of years — mythological, or pre-flood memory?',
+    theories: 'The Sumerians described the Anunnaki — beings who came from the sky and created humanity. Zecharia Sitchin proposed ziggurats were landing platforms.',
     position: [0, 0, -9],
     scale: 1.1,
+    sources: [
+      { label: 'British Museum — Ur', url: 'https://www.britishmuseum.org/collection/term/x32624' },
+      { label: 'Wikipedia — Ziggurat of Ur', url: 'https://en.wikipedia.org/wiki/Ziggurat_of_Ur' },
+    ],
+    videos: [],
   },
 ];
