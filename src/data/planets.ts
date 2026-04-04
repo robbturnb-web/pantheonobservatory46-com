@@ -231,7 +231,7 @@ export const planets: Planet[] = [
     name: 'Pluto',
     distance: 37,
     size: 0.2,
-    color: '#a78bfa',
+    color: '#c2b59b',
     orbitSpeed: 0.004,
     facts: [
       'Reclassified as dwarf planet in 2006',
