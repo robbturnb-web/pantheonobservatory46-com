@@ -215,7 +215,7 @@ export const planets: Planet[] = [
     name: 'Neptune',
     distance: 32,
     size: 0.75,
-    color: '#3b82f6',
+    color: '#3949ab',
     orbitSpeed: 0.006,
     facts: [
       'Fastest winds in the solar system: 2,100 km/h',
