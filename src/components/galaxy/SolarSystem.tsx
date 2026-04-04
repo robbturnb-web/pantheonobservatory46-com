@@ -326,35 +326,58 @@ function OrbitRing({ distance }: { distance: number }) {
   );
 }
 
+const ASTEROID_COUNT = 200;
+const asteroidDummy = new THREE.Object3D();
+
 function AsteroidBelt() {
-  const ref = useRef<THREE.Group>(null);
-  const positions = useMemo(() => {
-    const arr: { pos: [number, number, number]; scale: number }[] = [];
-    for (let i = 0; i < 350; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const dist = 14 + Math.random() * 2.5;
-      const y = (Math.random() - 0.5) * 0.8;
-      arr.push({
-        pos: [Math.cos(angle) * dist, y, Math.sin(angle) * dist],
-        scale: 0.02 + Math.random() * 0.06,
-      });
-    }
-    return arr;
+  const meshRef = useRef<THREE.InstancedMesh>(null);
+
+  useMemo(() => {
+    // Will be set in useFrame on first render
   }, []);
 
-  useFrame((_, delta) => {
-    if (ref.current) ref.current.rotation.y += delta * 0.005;
+  const scales = useMemo(() => {
+    const s: number[] = [];
+    for (let i = 0; i < ASTEROID_COUNT; i++) s.push(0.02 + Math.random() * 0.06);
+    return s;
+  }, []);
+
+  const angles = useMemo(() => {
+    const a: number[] = [];
+    for (let i = 0; i < ASTEROID_COUNT; i++) a.push(Math.random() * Math.PI * 2);
+    return a;
+  }, []);
+
+  const dists = useMemo(() => {
+    const d: number[] = [];
+    for (let i = 0; i < ASTEROID_COUNT; i++) d.push(14 + Math.random() * 2.5);
+    return d;
+  }, []);
+
+  const ys = useMemo(() => {
+    const y: number[] = [];
+    for (let i = 0; i < ASTEROID_COUNT; i++) y.push((Math.random() - 0.5) * 0.8);
+    return y;
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (!meshRef.current) return;
+    const t = clock.getElapsedTime() * 0.005;
+    for (let i = 0; i < ASTEROID_COUNT; i++) {
+      const a = angles[i] + t;
+      asteroidDummy.position.set(Math.cos(a) * dists[i], ys[i], Math.sin(a) * dists[i]);
+      asteroidDummy.scale.setScalar(scales[i]);
+      asteroidDummy.updateMatrix();
+      meshRef.current.setMatrixAt(i, asteroidDummy.matrix);
+    }
+    meshRef.current.instanceMatrix.needsUpdate = true;
   });
 
   return (
-    <group ref={ref}>
-      {positions.map((a, i) => (
-        <mesh key={i} position={a.pos}>
-          <dodecahedronGeometry args={[a.scale, 0]} />
-          <meshStandardMaterial color="#7a6e5d" roughness={1} metalness={0.1} emissive="#7a6e5d" emissiveIntensity={0.05} />
-        </mesh>
-      ))}
-    </group>
+    <instancedMesh ref={meshRef} args={[undefined, undefined, ASTEROID_COUNT]}>
+      <dodecahedronGeometry args={[1, 0]} />
+      <meshStandardMaterial color="#7a6e5d" roughness={1} metalness={0.1} />
+    </instancedMesh>
   );
 }
 
