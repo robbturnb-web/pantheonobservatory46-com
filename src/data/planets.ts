@@ -113,7 +113,7 @@ export const planets: Planet[] = [
     name: 'Mars',
     distance: 12,
     size: 0.4,
-    color: '#ef4444',
+    color: '#c1440e',
     orbitSpeed: 0.53,
     facts: [
       'Has the largest volcano (Olympus Mons) and canyon (Valles Marineris)',
