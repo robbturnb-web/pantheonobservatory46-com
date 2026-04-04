@@ -494,6 +494,63 @@ interface SolarSystemProps {
   tourTargetPosition: THREE.Vector3 | null;
 }
 
+/* Milky Way galactic plane */
+function MilkyWay() {
+  return (
+    <group rotation={[Math.PI * 0.1, 0, Math.PI * 0.15]}>
+      {/* Galactic disc */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[60, 140, 128]} />
+        <meshBasicMaterial color="#6d5ba3" transparent opacity={0.04} side={THREE.DoubleSide} />
+      </mesh>
+      <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[70, 120, 128]} />
+        <meshBasicMaterial color="#8b7fc7" transparent opacity={0.06} side={THREE.DoubleSide} />
+      </mesh>
+      {/* Galactic center glow */}
+      <mesh position={[0, -5, -80]}>
+        <sphereGeometry args={[12, 32, 32]} />
+        <meshBasicMaterial color="#c4b5fd" transparent opacity={0.08} />
+      </mesh>
+      <mesh position={[0, -5, -80]}>
+        <sphereGeometry args={[6, 16, 16]} />
+        <meshBasicMaterial color="#ddd6fe" transparent opacity={0.12} />
+      </mesh>
+    </group>
+  );
+}
+
+/* Constellation markers */
+function Constellations() {
+  const constellations = [
+    { name: 'Orion', position: [65, 20, -50] as [number, number, number], stars: [[0,0,0],[2,3,1],[-1,4,0],[3,6,-1],[1,8,0]] },
+    { name: 'Big Dipper', position: [-70, 30, -30] as [number, number, number], stars: [[0,0,0],[3,1,0],[6,0.5,0],[8,2,0],[10,1,1],[12,3,0],[14,2,0]] },
+    { name: 'Sirius', position: [50, -10, -60] as [number, number, number], stars: [[0,0,0]] },
+    { name: 'Pleiades', position: [-40, 35, -55] as [number, number, number], stars: [[0,0,0],[1.5,1,0],[-0.5,1.5,0],[1,2.5,0],[2.5,1.5,0],[-1,0.5,0],[0.5,-0.5,0]] },
+    { name: 'Cassiopeia', position: [30, 45, -40] as [number, number, number], stars: [[0,0,0],[3,3,0],[6,1,0],[9,4,0],[12,2,0]] },
+  ];
+
+  return (
+    <group>
+      {constellations.map((c) => (
+        <group key={c.name} position={c.position}>
+          {c.stars.map((s, i) => (
+            <mesh key={i} position={s as [number, number, number]}>
+              <sphereGeometry args={[0.15, 8, 8]} />
+              <meshBasicMaterial color={c.name === 'Sirius' ? '#a5f3fc' : '#e2e8f0'} />
+            </mesh>
+          ))}
+          <Html center position={[c.stars[0][0], c.stars[0][1] + 2.5, c.stars[0][2]]} distanceFactor={40} style={{ pointerEvents: 'none' }}>
+            <div className="text-[9px] text-muted-foreground/50 whitespace-nowrap font-medium tracking-widest uppercase">
+              {c.name}
+            </div>
+          </Html>
+        </group>
+      ))}
+    </group>
+  );
+}
+
 export const SolarSystem = forwardRef<SolarSystemHandle, SolarSystemProps>(function SolarSystem(
   { selectedPlanet, onSelectPlanet, selectedMoonId, onSelectMoon, tourActive, tourPlanetId, tourTargetPosition },
   _ref,
@@ -502,6 +559,8 @@ export const SolarSystem = forwardRef<SolarSystemHandle, SolarSystemProps>(funct
     <Canvas camera={{ position: [0, 25, 40], fov: 50 }} style={{ background: 'transparent' }}>
       <ambientLight intensity={0.12} />
       <Stars radius={120} depth={60} count={3000} factor={5} fade speed={0.8} />
+      <MilkyWay />
+      <Constellations />
       <Sun />
       <AsteroidBelt />
       <Comets />
