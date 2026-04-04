@@ -1,107 +1,89 @@
 
-# Phase 6: Deep Content Enhancement — Sources, Media & Real Visuals
 
-This is a large enhancement pass across every page to add credibility, real media, and deep-dive links.
+# Galaxy & Pyramid Testing + Content Enhancements + Milky Way & Constellations
 
----
+## Test Results
 
-## 1. Credible Sources & Fact Links
-
-Add `sources` arrays to all data files with clickable external links:
-
-**Whistleblowers** (`src/data/whistleblowers.ts`):
-- Bob Lazar → Link to Joe Rogan interview, Jeremy Corbell documentary, MIT/CalTech investigation
-- David Grusch → Link to NewsNation interview, Congressional testimony C-SPAN, The Debrief article
-- Steven Greer → Link to Disclosure Project press conference (YouTube), CE5 documentary
-- Each whistleblower gets 3-5 source links with labels (Interview, Documentary, Government Record, News Article)
-
-**Timeline** (`src/data/timeline.ts`):
-- Each event gets `sourceUrl` and `sourceLabel` fields
-- Göbekli Tepe → Link to Smithsonian article, Klaus Schmidt research
-- Roswell → Link to Project Blue Book files, FOIA documents
-
-**UAP Cases** (`src/data/uap-cases.ts`):
-- Tic Tac → Pentagon AATIP report, NYTimes 2017 article
-- Phoenix Lights → AZ Republic coverage, Gov. Fife Symington statement
-
-**Pyramids** (`src/data/pyramids.ts`):
-- Great Pyramid → National Geographic, Robert Bauval's research links
-- Teotihuacan → INAH Mexico, scholarly articles on mica chambers
-
-**Gods** (`src/data/gods.ts`):
-- Each deity → Link to Theoi.com (Greek), Norse-mythology.org, etc.
-
-**UI**: Add a "📎 Sources" collapsible section in each info panel/card with clickable links that open in new tabs.
+Both pages verified in browser:
+- **Galaxy Explorer** (/galaxy): Renders correctly — Sun, planets with realistic colors, Saturn rings, asteroid belt, comets, orbit lines, labels all visible. No console errors.
+- **Pyramid Explorer** (/pyramids): Renders correctly — 6 pyramids with labels, alignment beams to Orion/Sirius, ground plane. No console errors.
 
 ---
 
-## 2. Real Photos & Visual Media
+## Implementation Plan
 
-Replace or supplement animations with real imagery:
+### 1. Milky Way Background & Constellations (Galaxy Explorer)
 
-**Pyramids Page** — Add a photo gallery section below the 3D explorer:
-- Real photos of each pyramid site (sourced from Wikimedia Commons / public domain)
-- "Hidden Discoveries" section with photos of: Giza void discovery (2017 muon scan), Teotihuacan mercury pools, Bosnian tunnel photos, Meroë restoration
+Add to `SolarSystem.tsx`:
+- **Milky Way plane**: A large tilted ring/disc mesh behind the solar system using a semi-transparent gradient material to suggest the galactic plane
+- **Constellation markers**: Add labeled star groups for Orion, Big Dipper, Sirius, Pleiades, and Cassiopeia as small sphere clusters with Html labels at far distances (radius ~80-100)
+- **Galactic center glow**: Faint emissive sphere in the background suggesting the galactic core
 
-**Whistleblowers** — Add real headshot photos (public domain press images)
+### 2. Content Enhancement — Credible Sources with Links
 
-**Telescopes** — Real telescope facility photos from NASA/ESA press kits
+Add `sources` arrays with real URLs to all data files:
 
-**Implementation**: Use Wikimedia Commons API or direct URLs to public domain images. Create an `ImageGallery` component for photo sections.
+**`src/data/pyramids.ts`** — Add `sources: { label: string; url: string }[]` field:
+- Great Pyramid → National Geographic, Robert Bauval research, Smithsonian
+- Teotihuacan → INAH Mexico, mica chamber research papers
+- Each pyramid gets 3-4 linked sources
 
----
+**`src/data/whistleblowers.ts`** — Convert existing `sources: string[]` to `sources: { label: string; url: string }[]`:
+- Bob Lazar → Joe Rogan #1315, Jeremy Corbell documentary
+- David Grusch → C-SPAN testimony, NewsNation interview, The Debrief
+- Each whistleblower gets 3-5 clickable source links
 
-## 3. YouTube & TikTok Video Embeds
+**`src/data/uap-cases.ts`** — Convert existing `sources: string[]` to `sources: { label: string; url: string }[]`:
+- Nimitz → Pentagon FOIA release, NYTimes 2017, Fravor testimony
+- Each case gets links to primary documents
 
-Create a reusable `VideoEmbed` component that supports both YouTube and TikTok:
+**`src/data/timeline.ts`** — Add `sourceUrl` and `sourceLabel` fields to each entry
 
-**YouTube** (`<iframe>` embed):
-```tsx
-<iframe src="https://www.youtube.com/embed/{videoId}" />
-```
+**`src/data/gods.ts`** — Add `sources: { label: string; url: string }[]` to God interface in `types/index.ts`
 
-**TikTok** (`<blockquote>` + script embed):
-```tsx
-<blockquote className="tiktok-embed" cite="https://www.tiktok.com/@user/video/{id}" />
-```
+### 3. Reusable Components
 
-**Where videos go:**
-- **Whistleblowers**: Each profile gets a "Watch" section with 1-2 key YouTube interviews
-- **Pyramids**: "Discoveries" tab with recent documentary clips
-- **UAP Cases**: Key footage clips (Tic Tac FLIR, Gimbal, GoFast — all declassified)
-- **New "Media Vault" section on homepage**: Curated TikTok + YouTube playlist carousel
+**`src/components/SourceList.tsx`** — Collapsible "Sources" section with external link icons, `target="_blank" rel="noopener noreferrer"`. Used in PyramidInfo, PlanetInfo, WhistleblowerVaultPage, UAPPage, TimelinePage.
 
-**Video data**: Add `videos: { platform: 'youtube' | 'tiktok', id: string, title: string }[]` to relevant data types.
+**`src/components/VideoEmbed.tsx`** — YouTube iframe embed component with `loading="lazy"` and `youtube-nocookie.com` privacy mode. TikTok blockquote embed with dynamic script loading.
 
----
+**`src/components/KnowledgeLink.tsx`** — Inline styled link component that distinguishes internal (react-router Link) vs external (new tab) links with small icons.
 
-## 4. Deep-Dive Link Architecture
+### 4. Video Embeds in Data
 
-Every fact, name, and concept becomes a link:
+Add `videos: { platform: 'youtube' | 'tiktok'; id: string; title: string }[]` to:
+- Whistleblowers: Key interview clips per person
+- UAP cases: Declassified footage (Tic Tac FLIR, Gimbal)
+- Pyramids: Documentary clips about discoveries
 
-- Internal cross-links: Clicking "Orion" in Pyramids → navigates to Gods page filtered to Egyptian
-- External knowledge links: Clicking "Element 115" → Wikipedia article on Moscovium
-- Create a `KnowledgeLink` component that renders as a styled inline link with an icon indicating internal vs external
+### 5. UI Integration
 
----
+- **PyramidInfo.tsx**: Add SourceList and VideoEmbed sections below existing content
+- **PlanetInfo.tsx**: Add SourceList section
+- **WhistleblowerVaultPage.tsx**: Add SourceList and VideoEmbed to each profile card
+- **UAPPage.tsx**: Add SourceList with clickable links, VideoEmbed for declassified footage
+- **TimelinePage.tsx**: Add source link per event entry
+- **GodsPage.tsx**: Add reference links per deity
 
-## Implementation Order
+### 6. Files Changed
 
-1. **Data layer first**: Add `sources`, `videos`, `images` fields to all data files
-2. **Reusable components**: `VideoEmbed`, `SourceList`, `ImageGallery`, `KnowledgeLink`
-3. **Whistleblowers page** (richest content — sources, photos, videos)
-4. **Pyramids page** (photo gallery, discoveries section, videos)
-5. **UAP page** (declassified footage embeds, source links)
-6. **Timeline page** (source links per event)
-7. **Gods page** (mythology reference links)
-8. **Homepage media vault** (curated video carousel)
+| File | Change |
+|------|--------|
+| `src/data/pyramids.ts` | Add `sources` and `videos` arrays |
+| `src/data/whistleblowers.ts` | Convert sources to objects with URLs, add videos |
+| `src/data/uap-cases.ts` | Convert sources to objects with URLs, add videos |
+| `src/data/timeline.ts` | Add `sourceUrl`/`sourceLabel` fields |
+| `src/types/index.ts` | Add sources/videos to God and UAPCase interfaces |
+| `src/components/SourceList.tsx` | New reusable component |
+| `src/components/VideoEmbed.tsx` | New reusable component |
+| `src/components/KnowledgeLink.tsx` | New reusable component |
+| `src/components/galaxy/SolarSystem.tsx` | Add MilkyWay, Constellations components |
+| `src/components/pyramid/PyramidInfo.tsx` | Add SourceList, VideoEmbed |
+| `src/components/galaxy/PlanetInfo.tsx` | Add SourceList |
+| `src/pages/WhistleblowerVaultPage.tsx` | Integrate SourceList, VideoEmbed |
+| `src/pages/UAPPage.tsx` | Integrate SourceList, VideoEmbed |
+| `src/pages/TimelinePage.tsx` | Add source links |
+| `src/pages/GodsPage.tsx` | Add reference links |
 
----
+No database changes needed — all static data enhancements.
 
-## Technical Notes
-
-- All external links use `target="_blank" rel="noopener noreferrer"`
-- YouTube embeds use `loading="lazy"` and privacy-enhanced mode (`youtube-nocookie.com`)
-- TikTok embeds load the script dynamically to avoid performance impact
-- Real photos sourced from Wikimedia Commons (CC-BY-SA) with attribution
-- No database changes needed — all static data
