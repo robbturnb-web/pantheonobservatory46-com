@@ -46,7 +46,7 @@ export const planets: Planet[] = [
     name: 'Mercury',
     distance: 5,
     size: 0.3,
-    color: '#9ca3af',
+    color: '#8c7e6d',
     orbitSpeed: 4.15,
     facts: [
       'Closest planet to the Sun — 57.9 million km',
@@ -62,7 +62,7 @@ export const planets: Planet[] = [
     name: 'Venus',
     distance: 7,
     size: 0.5,
-    color: '#fcd34d',
+    color: '#e8c87a',
     orbitSpeed: 1.62,
     facts: [
       'Hottest planet: 465°C surface due to runaway greenhouse effect',
@@ -78,7 +78,7 @@ export const planets: Planet[] = [
     name: 'Earth',
     distance: 9.5,
     size: 0.55,
-    color: '#3b82f6',
+    color: '#2563eb',
     orbitSpeed: 1.0,
     facts: [
       'Only known planet with confirmed life',
@@ -113,7 +113,7 @@ export const planets: Planet[] = [
     name: 'Mars',
     distance: 12,
     size: 0.4,
-    color: '#ef4444',
+    color: '#c1440e',
     orbitSpeed: 0.53,
     facts: [
       'Has the largest volcano (Olympus Mons) and canyon (Valles Marineris)',
@@ -129,7 +129,7 @@ export const planets: Planet[] = [
     name: 'Jupiter',
     distance: 17,
     size: 1.5,
-    color: '#f97316',
+    color: '#c4956a',
     orbitSpeed: 0.084,
     facts: [
       'Largest planet — could fit 1,300 Earths inside',
@@ -164,7 +164,7 @@ export const planets: Planet[] = [
     name: 'Saturn',
     distance: 22,
     size: 1.2,
-    color: '#d4a574',
+    color: '#e8d5a3',
     orbitSpeed: 0.034,
     facts: [
       'Iconic ring system made of ice and rock particles',
@@ -199,7 +199,7 @@ export const planets: Planet[] = [
     name: 'Uranus',
     distance: 27,
     size: 0.8,
-    color: '#67e8f9',
+    color: '#72c8d5',
     orbitSpeed: 0.012,
     facts: [
       'Rotates on its side — 98° axial tilt',
@@ -215,7 +215,7 @@ export const planets: Planet[] = [
     name: 'Neptune',
     distance: 32,
     size: 0.75,
-    color: '#3b82f6',
+    color: '#3949ab',
     orbitSpeed: 0.006,
     facts: [
       'Fastest winds in the solar system: 2,100 km/h',
@@ -231,7 +231,7 @@ export const planets: Planet[] = [
     name: 'Pluto',
     distance: 37,
     size: 0.2,
-    color: '#a78bfa',
+    color: '#c2b59b',
     orbitSpeed: 0.004,
     facts: [
       'Reclassified as dwarf planet in 2006',

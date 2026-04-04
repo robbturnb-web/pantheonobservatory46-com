@@ -1,17 +1,21 @@
 import { useRef, useState, useMemo, forwardRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Stars, Html, Ring } from '@react-three/drei';
-// Post-processing removed due to R3F compatibility issues
 import * as THREE from 'three';
 import { planets, type Planet, type Moon } from '../../data/planets';
 
 function Sun() {
   const ref = useRef<THREE.Mesh>(null);
   const glowRef = useRef<THREE.Mesh>(null);
+  const coronaRef = useRef<THREE.Mesh>(null);
 
   useFrame((_, delta) => {
     if (ref.current) ref.current.rotation.y += delta * 0.1;
     if (glowRef.current) glowRef.current.rotation.z += delta * 0.05;
+    if (coronaRef.current) {
+      coronaRef.current.rotation.y -= delta * 0.03;
+      coronaRef.current.rotation.x += delta * 0.02;
+    }
   });
 
   return (
@@ -20,16 +24,23 @@ function Sun() {
         <sphereGeometry args={[2.5, 64, 64]} />
         <meshBasicMaterial color="#fbbf24" />
       </mesh>
+      {/* Inner glow */}
       <mesh ref={glowRef} scale={3.2}>
         <sphereGeometry args={[1, 32, 32]} />
-        <meshBasicMaterial color="#fbbf24" transparent opacity={0.15} />
+        <meshBasicMaterial color="#fbbf24" transparent opacity={0.18} />
       </mesh>
-      <mesh scale={4}>
+      {/* Corona */}
+      <mesh ref={coronaRef} scale={4.5}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshBasicMaterial color="#f59e0b" transparent opacity={0.06} />
       </mesh>
+      {/* Outer haze */}
+      <mesh scale={6}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshBasicMaterial color="#fde68a" transparent opacity={0.025} />
+      </mesh>
       <pointLight intensity={3} distance={120} color="#fbbf24" />
-      <pointLight intensity={1} distance={80} color="#fff7ed" />
+      <pointLight intensity={1.5} distance={80} color="#fff7ed" />
     </group>
   );
 }
@@ -37,14 +48,17 @@ function Sun() {
 function SaturnRings({ size }: { size: number }) {
   return (
     <group rotation={[Math.PI * 0.35, 0.1, 0]}>
-      <Ring args={[size * 1.4, size * 2.2, 64]}>
-        <meshBasicMaterial color="#d4a574" transparent opacity={0.5} side={THREE.DoubleSide} />
+      <Ring args={[size * 1.4, size * 1.8, 64]}>
+        <meshBasicMaterial color="#d4c4a0" transparent opacity={0.55} side={THREE.DoubleSide} />
       </Ring>
-      <Ring args={[size * 2.3, size * 2.6, 64]}>
-        <meshBasicMaterial color="#c4956a" transparent opacity={0.3} side={THREE.DoubleSide} />
+      <Ring args={[size * 1.85, size * 2.2, 64]}>
+        <meshBasicMaterial color="#c9b896" transparent opacity={0.4} side={THREE.DoubleSide} />
       </Ring>
-      <Ring args={[size * 2.7, size * 2.9, 64]}>
-        <meshBasicMaterial color="#b8855e" transparent opacity={0.2} side={THREE.DoubleSide} />
+      <Ring args={[size * 2.25, size * 2.5, 64]}>
+        <meshBasicMaterial color="#b8a882" transparent opacity={0.3} side={THREE.DoubleSide} />
+      </Ring>
+      <Ring args={[size * 2.55, size * 2.8, 64]}>
+        <meshBasicMaterial color="#a89872" transparent opacity={0.15} side={THREE.DoubleSide} />
       </Ring>
     </group>
   );
@@ -53,9 +67,64 @@ function SaturnRings({ size }: { size: number }) {
 function UranusRings({ size }: { size: number }) {
   return (
     <group rotation={[0.1, 0, Math.PI * 0.45]}>
-      <Ring args={[size * 1.5, size * 1.8, 64]}>
-        <meshBasicMaterial color="#67e8f9" transparent opacity={0.2} side={THREE.DoubleSide} />
+      <Ring args={[size * 1.5, size * 1.65, 64]}>
+        <meshBasicMaterial color="#8ed1dc" transparent opacity={0.2} side={THREE.DoubleSide} />
       </Ring>
+      <Ring args={[size * 1.7, size * 1.8, 64]}>
+        <meshBasicMaterial color="#72c8d5" transparent opacity={0.12} side={THREE.DoubleSide} />
+      </Ring>
+    </group>
+  );
+}
+
+/* Jupiter bands — layered atmosphere shells */
+function JupiterBands({ size }: { size: number }) {
+  return (
+    <group>
+      {/* Dark bands */}
+      <mesh scale={1.005}>
+        <sphereGeometry args={[size, 48, 48]} />
+        <meshStandardMaterial color="#a0734e" transparent opacity={0.3} roughness={1} />
+      </mesh>
+      {/* Great Red Spot hint */}
+      <mesh position={[size * 0.6, -size * 0.15, size * 0.6]} scale={[0.25, 0.15, 0.1]}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshBasicMaterial color="#c44d2e" transparent opacity={0.6} />
+      </mesh>
+    </group>
+  );
+}
+
+/* Earth continents hint */
+function EarthDetails({ size }: { size: number }) {
+  return (
+    <group>
+      {/* Land mass patches */}
+      <mesh scale={1.003}>
+        <sphereGeometry args={[size, 48, 48]} />
+        <meshStandardMaterial color="#2d8a4e" transparent opacity={0.25} roughness={0.9} />
+      </mesh>
+      {/* Ice caps */}
+      <mesh position={[0, size * 0.9, 0]} scale={[0.35, 0.1, 0.35]}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshBasicMaterial color="#e0f2fe" transparent opacity={0.5} />
+      </mesh>
+      <mesh position={[0, -size * 0.9, 0]} scale={[0.25, 0.08, 0.25]}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshBasicMaterial color="#e0f2fe" transparent opacity={0.4} />
+      </mesh>
+    </group>
+  );
+}
+
+/* Mars polar caps */
+function MarsDetails({ size }: { size: number }) {
+  return (
+    <group>
+      <mesh position={[0, size * 0.85, 0]} scale={[0.3, 0.08, 0.3]}>
+        <sphereGeometry args={[1, 16, 16]} />
+        <meshBasicMaterial color="#e8d5c4" transparent opacity={0.5} />
+      </mesh>
     </group>
   );
 }
@@ -104,6 +173,13 @@ function MoonMesh({
           metalness={0.05}
         />
       </mesh>
+      {/* Moon glow ring */}
+      {(isSelected || hovered) && (
+        <mesh rotation={[-Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[moon.size * 1.5, moon.size * 2, 32]} />
+          <meshBasicMaterial color={moon.color} transparent opacity={0.15} side={THREE.DoubleSide} />
+        </mesh>
+      )}
       <Html center distanceFactor={12} style={{ pointerEvents: 'none' }}>
         <div className={`px-1.5 py-0.5 rounded text-center whitespace-nowrap transition-all duration-200 ${
           isSelected
@@ -162,6 +238,14 @@ function PlanetMesh({
   };
   const tilt = tiltMap[planet.id] || 0;
 
+  const atmosphereColors: Record<string, string> = {
+    venus: '#e8d090',
+    earth: '#60a5fa',
+    jupiter: '#d4a574',
+    saturn: '#e8d5a3',
+    neptune: '#5c6bc0',
+  };
+
   return (
     <>
       <group ref={groupRef}>
@@ -177,16 +261,20 @@ function PlanetMesh({
             <meshStandardMaterial
               color={planet.color}
               emissive={planet.color}
-              emissiveIntensity={isSelected ? 0.6 : hovered ? 0.4 : 0.15}
+              emissiveIntensity={isSelected ? 0.5 : hovered ? 0.3 : 0.1}
               roughness={0.7}
               metalness={0.1}
             />
           </mesh>
+          {/* Planet-specific details */}
+          {planet.id === 'jupiter' && <JupiterBands size={planet.size} />}
+          {planet.id === 'earth' && <EarthDetails size={planet.size} />}
+          {planet.id === 'mars' && <MarsDetails size={planet.size} />}
           {hasAtmosphere && (
             <mesh ref={atmosphereRef} scale={1.12}>
               <sphereGeometry args={[planet.size, 32, 32]} />
               <meshBasicMaterial
-                color={planet.id === 'earth' ? '#60a5fa' : planet.color}
+                color={atmosphereColors[planet.id] || planet.color}
                 transparent
                 opacity={isSelected || hovered ? 0.2 : 0.08}
               />
@@ -194,6 +282,13 @@ function PlanetMesh({
           )}
           {hasSaturnRings && <SaturnRings size={planet.size} />}
           {hasUranusRings && <UranusRings size={planet.size} />}
+          {/* Selection glow ring */}
+          {(isSelected || hovered) && (
+            <mesh rotation={[-Math.PI / 2, 0, 0]}>
+              <ringGeometry args={[planet.size * 1.8, planet.size * 2.2, 64]} />
+              <meshBasicMaterial color={planet.color} transparent opacity={0.12} side={THREE.DoubleSide} />
+            </mesh>
+          )}
         </group>
         <Html center distanceFactor={18} style={{ pointerEvents: 'none' }}>
           <div className={`px-2 py-0.5 rounded text-center whitespace-nowrap transition-all duration-200 ${
@@ -232,25 +327,81 @@ function OrbitRing({ distance }: { distance: number }) {
 }
 
 function AsteroidBelt() {
+  const ref = useRef<THREE.Group>(null);
   const positions = useMemo(() => {
-    const arr: [number, number, number][] = [];
-    for (let i = 0; i < 200; i++) {
+    const arr: { pos: [number, number, number]; scale: number }[] = [];
+    for (let i = 0; i < 350; i++) {
       const angle = Math.random() * Math.PI * 2;
       const dist = 14 + Math.random() * 2.5;
-      const y = (Math.random() - 0.5) * 0.6;
-      arr.push([Math.cos(angle) * dist, y, Math.sin(angle) * dist]);
+      const y = (Math.random() - 0.5) * 0.8;
+      arr.push({
+        pos: [Math.cos(angle) * dist, y, Math.sin(angle) * dist],
+        scale: 0.02 + Math.random() * 0.06,
+      });
     }
     return arr;
   }, []);
 
+  useFrame((_, delta) => {
+    if (ref.current) ref.current.rotation.y += delta * 0.005;
+  });
+
   return (
-    <group>
-      {positions.map((pos, i) => (
-        <mesh key={i} position={pos}>
-          <sphereGeometry args={[0.03 + Math.random() * 0.04, 6, 6]} />
-          <meshBasicMaterial color="#6b7280" transparent opacity={0.4} />
+    <group ref={ref}>
+      {positions.map((a, i) => (
+        <mesh key={i} position={a.pos}>
+          <dodecahedronGeometry args={[a.scale, 0]} />
+          <meshStandardMaterial color="#7a6e5d" roughness={1} metalness={0.1} emissive="#7a6e5d" emissiveIntensity={0.05} />
         </mesh>
       ))}
+    </group>
+  );
+}
+
+/* Comets that streak across the scene */
+function Comet({ startAngle, speed, radius }: { startAngle: number; speed: number; radius: number }) {
+  const groupRef = useRef<THREE.Group>(null);
+  const tailRef = useRef<THREE.Mesh>(null);
+
+  useFrame(({ clock }) => {
+    if (!groupRef.current) return;
+    const t = clock.getElapsedTime() * speed + startAngle;
+    const r = radius + Math.sin(t * 0.3) * 5;
+    groupRef.current.position.x = Math.cos(t) * r;
+    groupRef.current.position.z = Math.sin(t) * r;
+    groupRef.current.position.y = Math.sin(t * 0.7) * 3;
+    // Orient tail away from sun
+    groupRef.current.lookAt(0, 0, 0);
+    if (tailRef.current) tailRef.current.rotation.x = Math.PI;
+  });
+
+  return (
+    <group ref={groupRef}>
+      {/* Nucleus */}
+      <mesh>
+        <sphereGeometry args={[0.08, 8, 8]} />
+        <meshBasicMaterial color="#e0f7fa" />
+      </mesh>
+      {/* Coma glow */}
+      <mesh scale={2.5}>
+        <sphereGeometry args={[0.08, 8, 8]} />
+        <meshBasicMaterial color="#80deea" transparent opacity={0.3} />
+      </mesh>
+      {/* Tail */}
+      <mesh ref={tailRef} position={[0, 0, -0.8]}>
+        <coneGeometry args={[0.12, 2, 8]} />
+        <meshBasicMaterial color="#80deea" transparent opacity={0.15} />
+      </mesh>
+    </group>
+  );
+}
+
+function Comets() {
+  return (
+    <group>
+      <Comet startAngle={0} speed={0.08} radius={42} />
+      <Comet startAngle={Math.PI * 0.7} speed={0.12} radius={35} />
+      <Comet startAngle={Math.PI * 1.3} speed={0.06} radius={48} />
     </group>
   );
 }
@@ -273,12 +424,10 @@ function Spaceship({ targetPosition }: { targetPosition: THREE.Vector3 | null })
 
   return (
     <group ref={groupRef}>
-      {/* Body */}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
         <coneGeometry args={[0.15, 0.6, 8]} />
         <meshStandardMaterial color="#8b5cf6" emissive="#8b5cf6" emissiveIntensity={0.8} metalness={0.8} roughness={0.2} />
       </mesh>
-      {/* Engine glow */}
       <mesh position={[0, 0, 0.35]}>
         <sphereGeometry args={[0.1, 8, 8]} />
         <meshBasicMaterial color="#39ff14" transparent opacity={0.8} />
@@ -288,7 +437,6 @@ function Spaceship({ targetPosition }: { targetPosition: THREE.Vector3 | null })
   );
 }
 
-// Camera controller for tour mode
 function CameraController({ targetPlanetId, tourActive }: { targetPlanetId: string | null; tourActive: boolean }) {
   const { camera } = useThree();
   const targetPos = useRef(new THREE.Vector3(0, 25, 40));
@@ -305,17 +453,13 @@ function CameraController({ targetPlanetId, tourActive }: { targetPlanetId: stri
     targetPos.current.set(px + 8, 5, pz + 8);
     camera.position.lerp(targetPos.current, 0.02);
     const lookTarget = new THREE.Vector3(px, 0, pz);
-    const currentLook = new THREE.Vector3();
-    camera.getWorldDirection(currentLook);
     camera.lookAt(lookTarget);
   });
 
   return null;
 }
 
-export interface SolarSystemHandle {
-  // exposed for parent
-}
+export interface SolarSystemHandle {}
 
 interface SolarSystemProps {
   selectedPlanet: Planet | null;
@@ -334,9 +478,10 @@ export const SolarSystem = forwardRef<SolarSystemHandle, SolarSystemProps>(funct
   return (
     <Canvas camera={{ position: [0, 25, 40], fov: 50 }} style={{ background: 'transparent' }}>
       <ambientLight intensity={0.12} />
-      <Stars radius={120} depth={60} count={5000} factor={5} fade speed={0.8} />
+      <Stars radius={120} depth={60} count={6000} factor={5} fade speed={0.8} />
       <Sun />
       <AsteroidBelt />
+      <Comets />
       {planets.filter(p => p.distance > 0).map(planet => (
         <OrbitRing key={`orbit-${planet.id}`} distance={planet.distance} />
       ))}
