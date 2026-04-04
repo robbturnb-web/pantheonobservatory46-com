@@ -4,6 +4,7 @@ import { gods } from '../data/gods';
 import type { PantheonFilter } from '../types';
 import type { God } from '../types';
 import { X } from 'lucide-react';
+import { SourceList } from '../components/SourceList';
 
 const filters: PantheonFilter[] = ['All', 'Greek', 'Norse', 'Egyptian', 'Hindu', 'Anunnaki', 'Starseed'];
 
