@@ -58,6 +58,23 @@ function PyramidMesh({ pyramid, isSelected, onClick }: { pyramid: Pyramid; isSel
 }
 
 // Alignment lines (Orion & Sirius star positions)
+function BeamLine({ start, end, color }: { start: [number, number, number]; end: [number, number, number]; color: string }) {
+  const s = new THREE.Vector3(...start);
+  const e = new THREE.Vector3(...end);
+  const dir = e.clone().sub(s);
+  const len = dir.length();
+  const mid = s.clone().add(dir.multiplyScalar(0.5));
+  const orientation = new THREE.Matrix4().lookAt(s, e, new THREE.Vector3(0, 1, 0));
+  const quat = new THREE.Quaternion().setFromRotationMatrix(orientation);
+
+  return (
+    <mesh position={[mid.x, mid.y, mid.z]} quaternion={quat}>
+      <cylinderGeometry args={[0.02, 0.02, len, 4]} />
+      <meshBasicMaterial color={color} transparent opacity={0.4} />
+    </mesh>
+  );
+}
+
 function AlignmentLines() {
   const orion: [number, number, number] = [15, 20, -10];
   const sirius: [number, number, number] = [-12, 18, 8];
@@ -65,8 +82,8 @@ function AlignmentLines() {
 
   return (
     <group>
-      <Line points={[giza, orion]} color="#8b5cf6" lineWidth={1} />
-      <Line points={[giza, sirius]} color="#fbbf24" lineWidth={1} />
+      <BeamLine start={giza} end={orion} color="#8b5cf6" />
+      <BeamLine start={giza} end={sirius} color="#fbbf24" />
       {/* Star markers */}
       <mesh position={orion}>
         <sphereGeometry args={[0.3, 16, 16]} />
