@@ -199,7 +199,7 @@ export const planets: Planet[] = [
     name: 'Uranus',
     distance: 27,
     size: 0.8,
-    color: '#67e8f9',
+    color: '#72c8d5',
     orbitSpeed: 0.012,
     facts: [
       'Rotates on its side — 98° axial tilt',
