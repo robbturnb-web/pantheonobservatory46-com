@@ -62,7 +62,7 @@ export const planets: Planet[] = [
     name: 'Venus',
     distance: 7,
     size: 0.5,
-    color: '#fcd34d',
+    color: '#e8c87a',
     orbitSpeed: 1.62,
     facts: [
       'Hottest planet: 465°C surface due to runaway greenhouse effect',
