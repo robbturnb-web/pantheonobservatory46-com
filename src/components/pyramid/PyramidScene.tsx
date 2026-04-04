@@ -65,8 +65,8 @@ function AlignmentLines() {
 
   return (
     <group>
-      <Line points={[giza, orion]} color="#8b5cf6" lineWidth={1} transparent opacity={0.3} />
-      <Line points={[giza, sirius]} color="#fbbf24" lineWidth={1} transparent opacity={0.3} />
+      <Line points={[giza, orion]} color="#8b5cf6" lineWidth={1} />
+      <Line points={[giza, sirius]} color="#fbbf24" lineWidth={1} />
       {/* Star markers */}
       <mesh position={orion}>
         <sphereGeometry args={[0.3, 16, 16]} />
