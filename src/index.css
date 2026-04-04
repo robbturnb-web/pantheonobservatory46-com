@@ -167,10 +167,73 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Cinematic film grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  mix-blend-mode: overlay;
+}
+
+/* Cinematic vignette */
+.cinematic-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.55) 100%);
+}
+
+/* Cinematic letterbox bars — desktop only */
+.cinematic-letterbox::before,
+.cinematic-letterbox::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.15), transparent);
+}
+.cinematic-letterbox::before { top: 0; }
+.cinematic-letterbox::after { bottom: 0; }
+
+@media (max-width: 768px) {
+  .cinematic-letterbox::before,
+  .cinematic-letterbox::after {
+    display: none;
+  }
+}
+
+/* Ambient flicker for starfield */
+@keyframes ambient-flicker {
+  0%, 100% { opacity: 1; }
+  30% { opacity: 0.97; }
+  60% { opacity: 1.02; }
+  80% { opacity: 0.98; }
+}
+
+.ambient-flicker {
+  animation: ambient-flicker 8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  body::after,
+  .cinematic-vignette,
+  .cinematic-letterbox::before,
+  .cinematic-letterbox::after {
+    display: none;
   }
 }

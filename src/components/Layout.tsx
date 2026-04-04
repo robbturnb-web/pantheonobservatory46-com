@@ -29,8 +29,11 @@ export function Layout() {
   }, [location.pathname, trackPageVisit]);
 
   return (
-    <div className="min-h-screen relative">
-      <StarfieldCanvas />
+    <div className="min-h-screen relative cinematic-letterbox">
+      <div className="cinematic-vignette" />
+      <div className="ambient-flicker">
+        <StarfieldCanvas />
+      </div>
       <CosmicCursorTrail />
       <Navbar />
       <XPBar />
