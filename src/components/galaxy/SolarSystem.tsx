@@ -501,7 +501,7 @@ export const SolarSystem = forwardRef<SolarSystemHandle, SolarSystemProps>(funct
   return (
     <Canvas camera={{ position: [0, 25, 40], fov: 50 }} style={{ background: 'transparent' }}>
       <ambientLight intensity={0.12} />
-      <Stars radius={120} depth={60} count={6000} factor={5} fade speed={0.8} />
+      <Stars radius={120} depth={60} count={3000} factor={5} fade speed={0.8} />
       <Sun />
       <AsteroidBelt />
       <Comets />
