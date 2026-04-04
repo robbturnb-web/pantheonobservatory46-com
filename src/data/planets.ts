@@ -78,7 +78,7 @@ export const planets: Planet[] = [
     name: 'Earth',
     distance: 9.5,
     size: 0.55,
-    color: '#3b82f6',
+    color: '#2563eb',
     orbitSpeed: 1.0,
     facts: [
       'Only known planet with confirmed life',
