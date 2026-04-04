@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, Html } from '@react-three/drei';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
+// Post-processing removed due to R3F compatibility issues
 import * as THREE from 'three';
 import { pyramids, type Pyramid } from '../../data/pyramids';
 
