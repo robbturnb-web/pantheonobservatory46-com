@@ -17,6 +17,7 @@ export interface God {
   atmosphericDesc: string;
   symbol: string;
   image?: string;
+  sources?: { label: string; url: string }[];
 }
 
 export interface TimelineEvent {

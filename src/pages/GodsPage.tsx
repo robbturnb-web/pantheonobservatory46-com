@@ -93,6 +93,10 @@ function GodModal({ god, onClose }: { god: God; onClose: () => void }) {
                 "{god.reflectionQuestion}"
               </p>
             </motion.div>
+
+            {god.sources && god.sources.length > 0 && (
+              <SourceList sources={god.sources} defaultOpen />
+            )}
           </div>
         </div>
       </motion.div>

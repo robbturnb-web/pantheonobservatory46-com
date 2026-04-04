@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { uapCases } from '../data/uap-cases';
 import { EvidenceBadge } from '../components/EvidenceBadge';
-import { ChevronDown, ChevronUp, ExternalLink, Clock } from 'lucide-react';
+import { SourceList } from '../components/SourceList';
+import { VideoList } from '../components/VideoEmbed';
+import { ChevronDown, ChevronUp, Clock } from 'lucide-react';
 
 export function UAPPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -106,16 +108,11 @@ export function UAPPage() {
                         </div>
                       )}
 
-                      <div>
-                        <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Sources</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {c.sources.map((s, si) => (
-                            <span key={si} className="text-xs text-muted-foreground bg-secondary/50 px-3 py-1.5 rounded-lg flex items-center gap-1">
-                              <ExternalLink className="w-3 h-3" /> {s}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                      <SourceList sources={c.sources} />
+
+                      {c.videos && c.videos.length > 0 && (
+                        <VideoList videos={c.videos} title="Declassified Footage & Interviews" />
+                      )}
                     </div>
                   </motion.div>
                 )}
