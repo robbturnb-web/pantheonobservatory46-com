@@ -129,7 +129,7 @@ export const planets: Planet[] = [
     name: 'Jupiter',
     distance: 17,
     size: 1.5,
-    color: '#f97316',
+    color: '#c4956a',
     orbitSpeed: 0.084,
     facts: [
       'Largest planet — could fit 1,300 Earths inside',
