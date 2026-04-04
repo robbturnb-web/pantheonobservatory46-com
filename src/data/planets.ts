@@ -46,7 +46,7 @@ export const planets: Planet[] = [
     name: 'Mercury',
     distance: 5,
     size: 0.3,
-    color: '#9ca3af',
+    color: '#8c7e6d',
     orbitSpeed: 4.15,
     facts: [
       'Closest planet to the Sun — 57.9 million km',
