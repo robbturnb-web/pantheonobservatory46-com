@@ -164,7 +164,7 @@ export const planets: Planet[] = [
     name: 'Saturn',
     distance: 22,
     size: 1.2,
-    color: '#d4a574',
+    color: '#e8d5a3',
     orbitSpeed: 0.034,
     facts: [
       'Iconic ring system made of ice and rock particles',
