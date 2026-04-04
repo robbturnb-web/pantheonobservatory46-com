@@ -59,49 +59,27 @@ function PyramidMesh({ pyramid, isSelected, onClick }: { pyramid: Pyramid; isSel
 
 // Alignment lines (Orion & Sirius star positions)
 function AlignmentLines() {
-  const orion = new THREE.Vector3(15, 20, -10);
-  const sirius = new THREE.Vector3(-12, 18, 8);
-  const gizaPos = new THREE.Vector3(0, 0, 0);
+  const orion: [number, number, number] = [15, 20, -10];
+  const sirius: [number, number, number] = [-12, 18, 8];
+  const giza: [number, number, number] = [0, 0, 0];
 
   return (
     <group>
-      {/* Orion line */}
-      <line>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            array={new Float32Array([gizaPos.x, gizaPos.y, gizaPos.z, orion.x, orion.y, orion.z])}
-            count={2}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <lineBasicMaterial color="#8b5cf6" transparent opacity={0.3} />
-      </line>
-      {/* Sirius line */}
-      <line>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            array={new Float32Array([gizaPos.x, gizaPos.y, gizaPos.z, sirius.x, sirius.y, sirius.z])}
-            count={2}
-            itemSize={3}
-          />
-        </bufferGeometry>
-        <lineBasicMaterial color="#fbbf24" transparent opacity={0.3} />
-      </line>
+      <Line points={[giza, orion]} color="#8b5cf6" lineWidth={1} transparent opacity={0.3} />
+      <Line points={[giza, sirius]} color="#fbbf24" lineWidth={1} transparent opacity={0.3} />
       {/* Star markers */}
-      <mesh position={orion.toArray()}>
+      <mesh position={orion}>
         <sphereGeometry args={[0.3, 16, 16]} />
         <meshBasicMaterial color="#8b5cf6" />
       </mesh>
-      <Html position={orion.toArray()} center distanceFactor={20} style={{ pointerEvents: 'none' }}>
+      <Html position={orion} center distanceFactor={20} style={{ pointerEvents: 'none' }}>
         <span className="text-[9px] text-primary font-bold">ORION</span>
       </Html>
-      <mesh position={sirius.toArray()}>
+      <mesh position={sirius}>
         <sphereGeometry args={[0.3, 16, 16]} />
         <meshBasicMaterial color="#fbbf24" />
       </mesh>
-      <Html position={sirius.toArray()} center distanceFactor={20} style={{ pointerEvents: 'none' }}>
+      <Html position={sirius} center distanceFactor={20} style={{ pointerEvents: 'none' }}>
         <span className="text-[9px] text-yellow-400 font-bold">SIRIUS</span>
       </Html>
     </group>
