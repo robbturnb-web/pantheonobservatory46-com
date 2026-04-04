@@ -1,105 +1,107 @@
 
+# Phase 6: Deep Content Enhancement — Sources, Media & Real Visuals
 
-# Phase 5: Testing, Echo XP System & Cinematic Post-Processing
-
-Six workstreams: browser testing of existing features, then building the Echo XP/rank system, adding cinematic post-processing, and a full review pass.
+This is a large enhancement pass across every page to add credibility, real media, and deep-dive links.
 
 ---
 
-## 1. Test Galaxy Tour & Moons (Browser)
+## 1. Credible Sources & Fact Links
 
-Navigate to `/galaxy`, click "Let Echo Guide You", verify:
-- Spaceship mesh appears and moves between planets
-- Camera follows, narration panel cycles Mercury → Pluto
-- Stop/skip controls work
-- After tour: click Earth, Jupiter, Saturn — verify moon orbits render
-- Click Moon, Europa, Titan — verify info panel shows moon data
-- Check Saturn rings, Uranus tilt, asteroid belt
+Add `sources` arrays to all data files with clickable external links:
 
-Fix any issues found before proceeding.
+**Whistleblowers** (`src/data/whistleblowers.ts`):
+- Bob Lazar → Link to Joe Rogan interview, Jeremy Corbell documentary, MIT/CalTech investigation
+- David Grusch → Link to NewsNation interview, Congressional testimony C-SPAN, The Debrief article
+- Steven Greer → Link to Disclosure Project press conference (YouTube), CE5 documentary
+- Each whistleblower gets 3-5 source links with labels (Interview, Documentary, Government Record, News Article)
 
-## 2. Test Echoverse Signup & Chat (Browser)
+**Timeline** (`src/data/timeline.ts`):
+- Each event gets `sourceUrl` and `sourceLabel` fields
+- Göbekli Tepe → Link to Smithsonian article, Klaus Schmidt research
+- Roswell → Link to Project Blue Book files, FOIA documents
 
-Navigate to `/echoverse`, verify:
-- Channel list loads (5 channels from DB)
-- "Sign In" button opens AuthModal
-- Signup flow works (email + password + username)
-- After auth: message input appears, can send a message
-- Message appears in real-time feed
-- Sign out works
+**UAP Cases** (`src/data/uap-cases.ts`):
+- Tic Tac → Pentagon AATIP report, NYTimes 2017 article
+- Phoenix Lights → AZ Republic coverage, Gov. Fife Symington statement
 
-## 3. Test Pyramid Explorer (Browser)
+**Pyramids** (`src/data/pyramids.ts`):
+- Great Pyramid → National Geographic, Robert Bauval's research links
+- Teotihuacan → INAH Mexico, scholarly articles on mica chambers
 
-Navigate to `/pyramids`, verify:
-- 6 pyramids render in 3D scene
-- Click a pyramid → info panel slides in with facts, alignments, theories
-- Alignment lines visible (Orion/Sirius)
-- Orbit controls (drag/zoom) work
-- Close info panel works
+**Gods** (`src/data/gods.ts`):
+- Each deity → Link to Theoi.com (Greek), Norse-mythology.org, etc.
 
-## 4. Build Echo XP & Rank System
+**UI**: Add a "📎 Sources" collapsible section in each info panel/card with clickable links that open in new tabs.
 
-A global progression system that tracks user exploration and rewards knowledge.
+---
 
-**Database migration:**
-- `echo_xp` table: `id`, `user_id` (FK auth.users), `xp` (integer, default 0), `rank` (text, default 'Initiate'), `pages_visited` (jsonb, default '[]'), `created_at`, `updated_at`
-- RLS: users can read/update own row only
-- Trigger to auto-create row on signup (extend existing `handle_new_user` function)
+## 2. Real Photos & Visual Media
 
-**Rank tiers** (stored as constants in frontend):
-- 0 XP → Initiate
-- 100 XP → Seeker
-- 300 XP → Adept
-- 600 XP → Mystic
-- 1000 XP → Oracle
-- 2000 XP → Ascended
+Replace or supplement animations with real imagery:
 
-**XP sources:**
-- First visit to each page: +10 XP (tracked in `pages_visited` jsonb)
-- Sending a message in Echoverse: +5 XP
-- Asking Echo AI a question: +5 XP
-- Clicking a planet/pyramid/whistleblower for info: +2 XP
+**Pyramids Page** — Add a photo gallery section below the 3D explorer:
+- Real photos of each pyramid site (sourced from Wikimedia Commons / public domain)
+- "Hidden Discoveries" section with photos of: Giza void discovery (2017 muon scan), Teotihuacan mercury pools, Bosnian tunnel photos, Meroë restoration
 
-**Frontend:**
-- `src/hooks/use-echo-xp.ts` — hook that reads/updates XP from DB, computes rank
-- `src/components/XPBar.tsx` — small floating widget (bottom-right or top-right) showing current rank, XP progress bar to next rank, with neon-green glow
-- XP toast notifications on gain ("✨ +10 XP — Seeker rank unlocked!")
-- Integrate XP calls into: page navigation (Layout), Echoverse message send, Echo AI send, planet/pyramid clicks
+**Whistleblowers** — Add real headshot photos (public domain press images)
 
-**Files:** Migration SQL, `src/hooks/use-echo-xp.ts`, `src/components/XPBar.tsx`, edits to `Layout.tsx`, `MessageFeed.tsx`, `use-echo-chat.ts`, `SolarSystem.tsx`, `PyramidScene.tsx`
+**Telescopes** — Real telescope facility photos from NASA/ESA press kits
 
-## 5. Cinematic Post-Processing Effects
+**Implementation**: Use Wikimedia Commons API or direct URLs to public domain images. Create an `ImageGallery` component for photo sections.
 
-Add bloom and god-ray effects to the Galaxy Explorer and Pyramid Explorer using `@react-three/postprocessing`.
+---
 
-**Galaxy Explorer (`SolarSystem.tsx`):**
-- Add `EffectComposer` with `Bloom` (luminanceThreshold: 0.3, intensity: 1.5)
-- Sun and planet atmospheres will naturally glow
-- Spaceship engine glow enhanced
+## 3. YouTube & TikTok Video Embeds
 
-**Pyramid Explorer (`PyramidScene.tsx`):**
-- Add `EffectComposer` with `Bloom` (luminanceThreshold: 0.5, intensity: 0.8)
-- Alignment lines and pyramid edges glow dramatically
-- Star markers get halo effect
+Create a reusable `VideoEmbed` component that supports both YouTube and TikTok:
 
-**Package:** `@react-three/postprocessing@^2.16` + `postprocessing@^6.36`
+**YouTube** (`<iframe>` embed):
+```tsx
+<iframe src="https://www.youtube.com/embed/{videoId}" />
+```
 
-**Files:** `src/components/galaxy/SolarSystem.tsx`, `src/components/pyramid/PyramidScene.tsx`, `package.json`
+**TikTok** (`<blockquote>` + script embed):
+```tsx
+<blockquote className="tiktok-embed" cite="https://www.tiktok.com/@user/video/{id}" />
+```
 
-## 6. Full Review Pass
+**Where videos go:**
+- **Whistleblowers**: Each profile gets a "Watch" section with 1-2 key YouTube interviews
+- **Pyramids**: "Discoveries" tab with recent documentary clips
+- **UAP Cases**: Key footage clips (Tic Tac FLIR, Gimbal, GoFast — all declassified)
+- **New "Media Vault" section on homepage**: Curated TikTok + YouTube playlist carousel
 
-After all builds, navigate every page in sequence and verify:
-- Home → Timeline → UAP → Gods → Consciousness → Signals → Whistleblowers → Telescopes → Galaxy → Pyramids → Echoverse → Origin Chamber → Echo AI
-- Check: page loads, no console errors, navigation works, cosmic cursor trail active, starfield background renders
-- Verify navbar links all work on mobile (384px viewport)
-- Report any broken pages or missing content
+**Video data**: Add `videos: { platform: 'youtube' | 'tiktok', id: string, title: string }[]` to relevant data types.
+
+---
+
+## 4. Deep-Dive Link Architecture
+
+Every fact, name, and concept becomes a link:
+
+- Internal cross-links: Clicking "Orion" in Pyramids → navigates to Gods page filtered to Egyptian
+- External knowledge links: Clicking "Element 115" → Wikipedia article on Moscovium
+- Create a `KnowledgeLink` component that renders as a styled inline link with an icon indicating internal vs external
+
+---
+
+## Implementation Order
+
+1. **Data layer first**: Add `sources`, `videos`, `images` fields to all data files
+2. **Reusable components**: `VideoEmbed`, `SourceList`, `ImageGallery`, `KnowledgeLink`
+3. **Whistleblowers page** (richest content — sources, photos, videos)
+4. **Pyramids page** (photo gallery, discoveries section, videos)
+5. **UAP page** (declassified footage embeds, source links)
+6. **Timeline page** (source links per event)
+7. **Gods page** (mythology reference links)
+8. **Homepage media vault** (curated video carousel)
 
 ---
 
 ## Technical Notes
 
-- XP system requires auth — anonymous users see the XP bar but with "Sign in to track progress" prompt
-- Post-processing uses selective bloom via `meshBasicMaterial` (emissive materials bloom, standard materials don't)
-- All testing done via browser tools before and after code changes
-- Existing `handle_new_user` trigger extended to also insert into `echo_xp`
-
+- All external links use `target="_blank" rel="noopener noreferrer"`
+- YouTube embeds use `loading="lazy"` and privacy-enhanced mode (`youtube-nocookie.com`)
+- TikTok embeds load the script dynamically to avoid performance impact
+- Real photos sourced from Wikimedia Commons (CC-BY-SA) with attribution
+- No database changes needed — all static data
