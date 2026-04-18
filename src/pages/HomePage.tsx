@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid, Lock, Skull } from 'lucide-react';
 import { vaultSlots } from '@/data/the-46';
+import { VideoStrip } from '@/components/VideoStrip';
 
 const sections = [
   { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
@@ -293,6 +294,13 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* LATEST TRANSMISSIONS */}
+      <VideoStrip
+        title="Latest Transmissions"
+        subtitle="Fresh signal from the creators we track."
+        limit={3}
+      />
 
       {/* MANIFESTO */}
       <section className="py-24 px-4">

@@ -5,6 +5,7 @@ import { EvidenceBadge } from '../components/EvidenceBadge';
 import { SourceList } from '../components/SourceList';
 import { VideoList } from '../components/VideoEmbed';
 import { ChevronDown, ChevronUp, Clock } from 'lucide-react';
+import { VideoStrip } from '../components/VideoStrip';
 
 export function UAPPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -120,6 +121,10 @@ export function UAPPage() {
             </motion.div>
           );
         })}
+      </div>
+
+      <div className="-mx-4 sm:-mx-6 lg:-mx-8 mt-8">
+        <VideoStrip topic="UAP" title="From the Field" subtitle="Latest UAP coverage from our tracked sources." limit={3} />
       </div>
     </div>
   );
