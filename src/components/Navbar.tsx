@@ -11,6 +11,7 @@ const navLinks = [
   { to: '/shadow-pantheon', label: 'Shadow' },
   { to: '/consciousness', label: 'Consciousness' },
   { to: '/signals', label: 'Signals' },
+  { to: '/frequencies', label: 'Frequencies' },
   { to: '/whistleblowers', label: 'Whistleblowers' },
   { to: '/telescopes', label: 'Telescopes' },
   { to: '/galaxy', label: 'Galaxy' },

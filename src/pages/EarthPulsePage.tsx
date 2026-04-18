@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Activity, Sun, Mountain, Sparkles, ExternalLink } from 'lucide-react';
 import { pulseUpdates, type PulseUpdate } from '@/data/pulse-updates';
 import { Countdown } from '@/components/Countdown';
+import { VideoStrip } from '@/components/VideoStrip';
 
 const categoryIcon = (category: PulseUpdate['category']) => {
   switch (category) {
@@ -96,6 +97,15 @@ export function EarthPulsePage() {
             </motion.article>
           );
         })}
+      </div>
+
+      <div className="-mx-4 mt-8">
+        <VideoStrip
+          topic="energy"
+          title="Stefan Burns + Energy Updates"
+          subtitle="Solar, Schumann, and planetary frequency monitoring."
+          limit={3}
+        />
       </div>
     </div>
   );

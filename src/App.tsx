@@ -18,6 +18,7 @@ import { EarthPulsePage } from './pages/EarthPulsePage';
 import { OrbReportPage } from './pages/OrbReportPage';
 import { The46Page } from './pages/The46Page';
 import { ShadowPantheonPage } from './pages/ShadowPantheonPage';
+import { FrequenciesPage } from './pages/FrequenciesPage';
 
 export default function App() {
   return (
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/the-46" element={<The46Page />} />
           <Route path="/video-vault" element={<The46Page />} />
           <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
+          <Route path="/frequencies" element={<FrequenciesPage />} />
         </Route>
       </Routes>
       <Toaster />
