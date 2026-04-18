@@ -158,6 +158,12 @@ export function WhistleblowerVaultPage() {
             })}
           </AnimatePresence>
         </div>
+          </TabsContent>
+
+          <TabsContent value="deaths" className="mt-0">
+            <SuspiciousDeathsSection />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
