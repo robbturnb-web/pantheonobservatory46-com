@@ -118,12 +118,7 @@ export function ShadowPantheonPage() {
           <Skull className="w-3 h-3" />
           Restricted Chamber
         </div>
-        <h1
-          className="text-5xl sm:text-7xl font-black tracking-tight mb-3 bg-clip-text text-transparent"
-          style={{
-            backgroundImage: 'linear-gradient(180deg, hsl(var(--foreground)) 0%, rgb(220, 38, 38) 100%)',
-          }}
-        >
+        <h1 className="text-5xl sm:text-7xl font-black tracking-tight mb-3 text-foreground drop-shadow-[0_0_30px_rgba(220,38,38,0.5)]">
           {SHADOW_LORE.title}
         </h1>
         <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto italic">
