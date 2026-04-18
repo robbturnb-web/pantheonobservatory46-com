@@ -190,6 +190,58 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* THE 46 LIVE BANNER */}
+      <section className="px-4 pb-4">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Link
+              to="/the-46"
+              className="block relative overflow-hidden rounded-2xl border border-primary/30 glass-cosmic group hover:border-primary/60 transition-colors"
+            >
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                animate={{ opacity: [0.15, 0.35, 0.15] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                style={{
+                  background:
+                    'radial-gradient(circle at 20% 50%, rgba(139,92,246,0.25), transparent 60%), radial-gradient(circle at 85% 50%, rgba(57,255,20,0.15), transparent 55%)',
+                }}
+              />
+              <motion.div
+                className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-primary/70 to-transparent pointer-events-none"
+                animate={{ top: ['0%', '100%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+              />
+              <div className="relative z-10 p-5 sm:p-6 flex items-center gap-4 sm:gap-6">
+                <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/60 border border-primary/40 flex items-center justify-center">
+                  <Lock className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[10px] uppercase tracking-[3px] text-primary/80 mb-1">The Vault</div>
+                  <h3 className="text-lg sm:text-2xl font-black text-foreground tracking-tight">
+                    THE 46 — Sealed Disclosure Vault
+                  </h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1 line-clamp-2">
+                    {vaultSlots.filter((s) => s.status === 'unlocked').length} of 46 undisclosed UAP videos revealed. The countdown to full disclosure has begun.
+                  </p>
+                </div>
+                <div className="shrink-0 text-right">
+                  <div className="text-2xl sm:text-3xl font-black text-accent-neon">
+                    {vaultSlots.filter((s) => s.status === 'unlocked').length}
+                    <span className="text-muted-foreground/60 text-base">/46</span>
+                  </div>
+                  <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Revealed</div>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* SECTION GRID */}
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
