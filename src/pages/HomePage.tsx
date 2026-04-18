@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid } from 'lucide-react';
+import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid, Lock, Skull } from 'lucide-react';
+import { vaultSlots } from '@/data/the-46';
 
 const sections = [
   { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
@@ -13,6 +14,7 @@ const sections = [
   { to: '/telescopes', icon: Telescope, title: 'Telescope Observatory', desc: 'Hubble to James Webb — every discovery, every anomaly, year by year.', color: '#06b6d4' },
   { to: '/galaxy', icon: Globe, title: '3D Galaxy Explorer', desc: 'Fly through our solar system with moons, tour mode, and Echo narration.', color: '#a855f7' },
   { to: '/pyramids', icon: Pyramid, title: 'Pyramid Explorer', desc: '6 ancient structures with stellar alignments, acoustic anomalies, and forbidden theories.', color: '#d4a574' },
+  { to: '/shadow-pantheon', icon: Skull, title: 'Shadow Pantheon', desc: 'The gods they told you not to name. 10 dark archetypes for shadow integration work.', color: '#dc2626' },
   { to: '/echoverse', icon: Users, title: 'Echoverse', desc: 'Real-time community hub. Chat with fellow starseeds across 5 channels.', color: '#39ff14' },
   { to: '/origin', icon: Compass, title: 'Origin Chamber', desc: 'A 7-question quiz to discover your starseed archetype lineage.', color: '#c084fc' },
   { to: '/echo', icon: MessageCircle, title: 'Echo AI', desc: 'Ask the cosmic intelligence anything about UAPs, gods, or consciousness.', color: '#60a5fa' },
