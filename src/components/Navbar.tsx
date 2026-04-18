@@ -17,6 +17,7 @@ const navLinks = [
   { to: '/echoverse', label: 'Echoverse' },
   { to: '/earth-pulse', label: 'Earth Pulse' },
   { to: '/orb-report', label: 'Orb Report' },
+  { to: '/the-46', label: 'The 46' },
   { to: '/origin', label: 'Origin Chamber' },
   { to: '/echo', label: 'Echo AI' },
 ];
