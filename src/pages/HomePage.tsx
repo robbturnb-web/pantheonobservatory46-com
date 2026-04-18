@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid } from 'lucide-react';
+import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid, Lock, Skull } from 'lucide-react';
+import { vaultSlots } from '@/data/the-46';
 
 const sections = [
   { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
@@ -13,6 +14,7 @@ const sections = [
   { to: '/telescopes', icon: Telescope, title: 'Telescope Observatory', desc: 'Hubble to James Webb — every discovery, every anomaly, year by year.', color: '#06b6d4' },
   { to: '/galaxy', icon: Globe, title: '3D Galaxy Explorer', desc: 'Fly through our solar system with moons, tour mode, and Echo narration.', color: '#a855f7' },
   { to: '/pyramids', icon: Pyramid, title: 'Pyramid Explorer', desc: '6 ancient structures with stellar alignments, acoustic anomalies, and forbidden theories.', color: '#d4a574' },
+  { to: '/shadow-pantheon', icon: Skull, title: 'Shadow Pantheon', desc: 'The gods they told you not to name. 10 dark archetypes for shadow integration work.', color: '#dc2626' },
   { to: '/echoverse', icon: Users, title: 'Echoverse', desc: 'Real-time community hub. Chat with fellow starseeds across 5 channels.', color: '#39ff14' },
   { to: '/origin', icon: Compass, title: 'Origin Chamber', desc: 'A 7-question quiz to discover your starseed archetype lineage.', color: '#c084fc' },
   { to: '/echo', icon: MessageCircle, title: 'Echo AI', desc: 'Ask the cosmic intelligence anything about UAPs, gods, or consciousness.', color: '#60a5fa' },
@@ -185,6 +187,58 @@ export function HomePage() {
               <p className="text-sm text-muted-foreground">{stat.label}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* THE 46 LIVE BANNER */}
+      <section className="px-4 pb-4">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Link
+              to="/the-46"
+              className="block relative overflow-hidden rounded-2xl border border-primary/30 glass-cosmic group hover:border-primary/60 transition-colors"
+            >
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                animate={{ opacity: [0.15, 0.35, 0.15] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                style={{
+                  background:
+                    'radial-gradient(circle at 20% 50%, rgba(139,92,246,0.25), transparent 60%), radial-gradient(circle at 85% 50%, rgba(57,255,20,0.15), transparent 55%)',
+                }}
+              />
+              <motion.div
+                className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-primary/70 to-transparent pointer-events-none"
+                animate={{ top: ['0%', '100%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+              />
+              <div className="relative z-10 p-5 sm:p-6 flex items-center gap-4 sm:gap-6">
+                <div className="shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/60 border border-primary/40 flex items-center justify-center">
+                  <Lock className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-[10px] uppercase tracking-[3px] text-primary/80 mb-1">The Vault</div>
+                  <h3 className="text-lg sm:text-2xl font-black text-foreground tracking-tight">
+                    THE 46 — Sealed Disclosure Vault
+                  </h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1 line-clamp-2">
+                    {vaultSlots.filter((s) => s.status === 'unlocked').length} of 46 undisclosed UAP videos revealed. The countdown to full disclosure has begun.
+                  </p>
+                </div>
+                <div className="shrink-0 text-right">
+                  <div className="text-2xl sm:text-3xl font-black text-accent-neon">
+                    {vaultSlots.filter((s) => s.status === 'unlocked').length}
+                    <span className="text-muted-foreground/60 text-base">/46</span>
+                  </div>
+                  <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Revealed</div>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
         </div>
       </section>
 

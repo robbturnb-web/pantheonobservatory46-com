@@ -17,6 +17,7 @@ import { PyramidExplorerPage } from './pages/PyramidExplorerPage';
 import { EarthPulsePage } from './pages/EarthPulsePage';
 import { OrbReportPage } from './pages/OrbReportPage';
 import { The46Page } from './pages/The46Page';
+import { ShadowPantheonPage } from './pages/ShadowPantheonPage';
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/earth-pulse" element={<EarthPulsePage />} />
           <Route path="/orb-report" element={<OrbReportPage />} />
           <Route path="/the-46" element={<The46Page />} />
+          <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
         </Route>
       </Routes>
       <Toaster />

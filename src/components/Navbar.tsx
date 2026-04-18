@@ -8,6 +8,7 @@ const navLinks = [
   { to: '/timeline', label: 'Timeline' },
   { to: '/uap', label: 'UAP Files' },
   { to: '/gods', label: 'Gods' },
+  { to: '/shadow-pantheon', label: 'Shadow' },
   { to: '/consciousness', label: 'Consciousness' },
   { to: '/signals', label: 'Signals' },
   { to: '/whistleblowers', label: 'Whistleblowers' },
