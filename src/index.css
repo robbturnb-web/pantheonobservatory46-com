@@ -64,6 +64,33 @@
   --cosmic-glow-strong: 0 0 60px rgba(157, 77, 237, 0.4), 0 0 120px rgba(0, 255, 136, 0.08);
   --neon-glow: 0 0 20px rgba(0, 255, 136, 0.3);
   --neon-glow-strong: 0 0 40px rgba(0, 255, 136, 0.4), 0 0 80px rgba(0, 255, 136, 0.15);
+
+  /* Pantheon semantic palette */
+  --sacred: #00cc66;
+  --sacred-light: #00ff88;
+  --sacred-glow: #4ade80;
+
+  --mystic: #9d4edd;
+  --mystic-light: #c77dff;
+  --mystic-deep: #7209b7;
+
+  --cosmic: #4a7ba7;
+  --cosmic-bright: #00d9ff;
+  --cosmic-deep: #1a1f3a;
+
+  --clarity: #ffffff;
+  --clarity-silver: #e5e7eb;
+  --clarity-gray: #9ca3af;
+
+  --space-black: #000000;
+  --space-navy: #0a0e1a;
+  --space-blue: #1a1f3a;
+
+  --alert: #ff3366;
+  --alert-deep: #cc0033;
+
+  --gold: #fbbf24;
+  --gold-glow: #fde68a;
 }
 
 @theme inline {
@@ -172,6 +199,11 @@
 .glass-cosmic:hover {
   border-color: rgba(157, 77, 237, 0.5);
   box-shadow: var(--cosmic-glow-strong);
+}
+
+/* Cosmic gradient background utility */
+.bg-cosmic-gradient {
+  background: linear-gradient(to bottom, #0a0e1a, #000000);
 }
 
 /* Evidence grade badges */
