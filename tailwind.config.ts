@@ -64,6 +64,39 @@ export default {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
         },
+        sacred: {
+          DEFAULT: "var(--sacred)",
+          light: "var(--sacred-light)",
+          glow: "var(--sacred-glow)",
+        },
+        mystic: {
+          DEFAULT: "var(--mystic)",
+          light: "var(--mystic-light)",
+          deep: "var(--mystic-deep)",
+        },
+        cosmic: {
+          DEFAULT: "var(--cosmic)",
+          bright: "var(--cosmic-bright)",
+          deep: "var(--cosmic-deep)",
+        },
+        clarity: {
+          DEFAULT: "var(--clarity)",
+          silver: "var(--clarity-silver)",
+          gray: "var(--clarity-gray)",
+        },
+        space: {
+          black: "var(--space-black)",
+          navy: "var(--space-navy)",
+          blue: "var(--space-blue)",
+        },
+        alert: {
+          DEFAULT: "var(--alert)",
+          deep: "var(--alert-deep)",
+        },
+        gold: {
+          DEFAULT: "var(--gold)",
+          glow: "var(--gold-glow)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
