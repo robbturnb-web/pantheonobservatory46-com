@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, ChevronDown, ChevronUp } from 'lucide-react';
+import { Shield, ChevronDown, ChevronUp, Skull } from 'lucide-react';
 import { EvidenceBadge } from '../components/EvidenceBadge';
 import { SourceList } from '../components/SourceList';
 import { VideoList } from '../components/VideoEmbed';
+import { SuspiciousDeathsSection } from '../components/SuspiciousDeathsSection';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs';
 import { whistleblowers, type Whistleblower } from '../data/whistleblowers';
 import type { EvidenceGrade } from '../types';
 
