@@ -23,7 +23,7 @@ export const shadowGods: ShadowGod[] = [
     reflectionQuestion: 'What have you sabotaged because you secretly believed you did not deserve it?',
     atmosphericBg: 'linear-gradient(135deg, #1a0000 0%, #3d0a00 50%, #2a0500 100%)',
     atmosphericDesc: 'Red desert under a black sun. Sandstorms that erase footprints. The howl of a creature with no name.',
-    symbol: '𓁣',
+    symbol: '🐺',
   },
   {
     id: 'apep',

@@ -119,12 +119,9 @@ export function ShadowPantheonPage() {
           Restricted Chamber
         </div>
         <h1
-          className="text-5xl sm:text-7xl font-black tracking-tight mb-3"
+          className="text-5xl sm:text-7xl font-black tracking-tight mb-3 bg-clip-text text-transparent"
           style={{
-            background: 'linear-gradient(180deg, hsl(var(--foreground)) 0%, rgba(180, 30, 30, 0.7) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            backgroundImage: 'linear-gradient(180deg, hsl(var(--foreground)) 0%, rgb(220, 38, 38) 100%)',
           }}
         >
           {SHADOW_LORE.title}
