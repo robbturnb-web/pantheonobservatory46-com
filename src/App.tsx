@@ -40,6 +40,7 @@ export default function App() {
           <Route path="/earth-pulse" element={<EarthPulsePage />} />
           <Route path="/orb-report" element={<OrbReportPage />} />
           <Route path="/the-46" element={<The46Page />} />
+          <Route path="/video-vault" element={<The46Page />} />
           <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
         </Route>
       </Routes>
