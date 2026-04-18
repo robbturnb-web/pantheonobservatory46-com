@@ -14,6 +14,8 @@ import { TelescopePage } from './pages/TelescopePage';
 import { GalaxyExplorerPage } from './pages/GalaxyExplorerPage';
 import { EchoversePage } from './pages/EchoversePage';
 import { PyramidExplorerPage } from './pages/PyramidExplorerPage';
+import { EarthPulsePage } from './pages/EarthPulsePage';
+import { OrbReportPage } from './pages/OrbReportPage';
 
 export default function App() {
   return (
@@ -33,6 +35,8 @@ export default function App() {
           <Route path="/galaxy" element={<GalaxyExplorerPage />} />
           <Route path="/echoverse" element={<EchoversePage />} />
           <Route path="/pyramids" element={<PyramidExplorerPage />} />
+          <Route path="/earth-pulse" element={<EarthPulsePage />} />
+          <Route path="/orb-report" element={<OrbReportPage />} />
         </Route>
       </Routes>
       <Toaster />
