@@ -201,6 +201,11 @@
   box-shadow: var(--cosmic-glow-strong);
 }
 
+/* Cosmic gradient background utility */
+.bg-cosmic-gradient {
+  background: linear-gradient(to bottom, #0a0e1a, #000000);
+}
+
 /* Evidence grade badges */
 .grade-documented { background: rgba(0, 204, 102, 0.15); color: #00cc66; border: 1px solid rgba(0, 204, 102, 0.3); }
 .grade-credible { background: rgba(0, 217, 255, 0.15); color: #00d9ff; border: 1px solid rgba(0, 217, 255, 0.3); }
