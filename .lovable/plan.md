@@ -1,70 +1,72 @@
 
+The user is locking in the full Pantheon design system: black/navy bases, neon green H1s with glow, purple H2s, cyan highlights, gradient buttons. This finalizes the palette work from the last two turns.
 
-# Full End-to-End Verification + Cinematic Effects
+## Plan: Lock in the full Pantheon design system
 
-## Current State
+### 1. Base + surface tokens (`src/index.css`)
 
-- **Build**: Clean — `tsc --noEmit` passes with zero errors
-- **Runtime**: No runtime errors detected
-- **Dev server**: Running smoothly on Vite 5
-- **Pages**: All 13 routes wired in `App.tsx` with matching navbar links
+- `--background: #000000` (pure black base)
+- `--card: rgba(26, 31, 58, 0.6)` (cosmic gray w/ transparency)
+- `--popover: #0a0e1a` (space navy)
+- `--secondary: rgba(26, 31, 58, 0.8)`
+- `--muted: rgba(26, 31, 58, 0.5)`
+- `--muted-foreground: #9ca3af` (metadata gray)
+- `--foreground: #ffffff` (use sparingly per spec)
+- `--border: rgba(157, 77, 237, 0.3)` (purple border)
+- Body background → `linear-gradient(to bottom, #0a0e1a, #000000)`
 
----
+### 2. Accent tokens (carry over greens + purples + blues + reds from prior plans)
 
-## 1. Browser Testing — Every Route (Using Browser Tools)
+- `--primary: #9d4edd`, `--accent-purple-deep: #7209b7`, `--accent-purple-glow: #c77dff`
+- `--accent-neon: #00ff88`, `--accent-emerald: #00cc66`, `--accent-green-glow: #4ade80`
+- `--accent-blue: #00d9ff`, `--accent-blue-deep: #4a7ba7`, `--accent-blue-bg: #1a1f3a`
+- `--destructive: #ff3366`, `--accent-red-deep: #cc0033`
 
-Navigate to each of the 13 routes and verify:
+### 3. Typography rules (`@layer base` in `index.css`)
 
-| Route | Check |
-|-------|-------|
-| `/` (Home) | All 12 section cards render, links navigate correctly, stat counters animate |
-| `/timeline` | Timeline entries render, source links open in new tabs |
-| `/uap` | UAP cases expand, sources are clickable, YouTube embeds load |
-| `/gods` | 18 gods render across pantheons, reference links work |
-| `/consciousness` | Content renders, all interactive elements work |
-| `/signals` | Signal ratings display, green/yellow/red badges correct |
-| `/whistleblowers` | 8 profiles render, source links open, YouTube embeds load |
-| `/telescopes` | Telescope cards render, expandable content works |
-| `/galaxy` | 3D scene loads — planets, moons, asteroids, comets, Milky Way, constellations visible; tour button works; planet click opens info panel |
-| `/pyramids` | 3D scene loads — 6 pyramids clickable, info panel shows sources and videos |
-| `/echoverse` | Auth modal opens, channel list renders |
-| `/origin` | Quiz questions render, selection works, result reveals archetype |
-| `/echo` | Chat interface loads, message input works |
+- `h1` → `color: #00ff88; text-shadow: 0 0 20px rgba(0,255,136,0.5);`
+- `h2` → `color: #9d4edd;`
+- `h3` → keep current foreground (white) for hierarchy
+- `a` → `color: #00cc66; hover: #00ff88;`
+- `.text-highlight` utility → cyan `#00d9ff` for important inline callouts
+- Keep Space Grotesk font
 
-Also test on mobile viewport (384px) — navbar hamburger menu opens, all links accessible, panels don't overflow.
+### 4. New utility classes
 
----
+- `.gradient-cta` → `background: linear-gradient(to right, #9d4edd, #00cc66); hover: filter: brightness(1.2);` (for buttons / CTAs)
+- `.gradient-highlight` → `background: linear-gradient(135deg, rgba(157,77,237,0.1), rgba(0,255,136,0.1));` (for emphasized sections)
+- `.glass-cosmic` → already exists; bump border to purple `rgba(157,77,237,0.3)`, shadow to new neon green/purple mix
 
-## 2. Cinematic Effects
+### 5. Tailwind mapping (`tailwind.config.ts`)
 
-Add CSS-based cinematic effects to `src/index.css` and update `Layout.tsx`:
+Extend `accent` with: `purpleDeep`, `purpleGlow`, `greenGlow`, `blueDeep`, `blueBg`, `redDeep`. So utilities like `text-accent-purpleGlow`, `bg-accent-blueBg` work.
 
-### Film grain overlay
-- CSS `::after` pseudo-element on `body` with a subtle noise texture using SVG filter (`feTurbulence`)
-- Very low opacity (0.03) so it's atmospheric but not distracting
+### 6. Component sweep (hard-coded → tokens)
 
-### Vignette
-- CSS `::before` on the main content wrapper with `radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.6) 100%)`
-- Fixed position, pointer-events: none, z-index above content but below modals
+Targeted only where hexes/tailwind colors are inline:
+- `Hero.tsx`, `HomePage.tsx` (REVEALED banner, section cards)
+- `WhistleblowerVaultPage.tsx` (alive status, CTAs)
+- `SuspiciousDeathsSection.tsx` (filters, modal accents)
+- `The46Page.tsx` / `VaultSlotCard.tsx` (unlocked greens, sealed reds)
+- `ShadowPantheonPage.tsx` (red palette alignment)
+- `XPBar.tsx`, `EchoBubble.tsx`, `Navbar.tsx`, `Footer.tsx`
+- `EvidenceBadge.tsx` already token-driven via grade classes — just verify
 
-### Cinematic letterbox bars (optional subtle)
-- Thin (2-3px) gradient bars at top/bottom of viewport for a widescreen cinema feel
-- Only visible on desktop (hidden on mobile)
+### What stays the same
 
-### Ambient light flicker
-- New keyframe animation `@keyframes ambient-flicker` that subtly varies the background brightness
-- Applied to the starfield container
+- Space Grotesk font, layout, animations, content
+- Shadow Pantheon's red-heavy theme (it just inherits the new red tokens)
+- Starfield, glass effects, vignette, film grain
 
-### Page transition enhancement
-- Update `Layout.tsx` page variants to include a brief scale shift (0.98 → 1) for a cinematic "camera push" on page enter
+### Out of scope
 
-### Files changed:
-- `src/index.css` — Add film grain, vignette, letterbox, ambient flicker keyframes
-- `src/components/Layout.tsx` — Add vignette wrapper div, update page transition variants with scale
+- No new pages, no new content, no new components
+- No changes to Echo logic, /the-46 logic, or auth
 
----
+### Result
 
-## 3. Fix Any Issues Found During Testing
-
-If browser testing reveals broken links, missing content, or UI issues, those will be fixed inline during implementation.
-
+One unified Pantheon design system:
+- Black base, navy cards, gray sections
+- Neon green H1s that glow, purple H2s, cyan highlights
+- Gradient purple→green CTAs
+- Token-driven so future palette tweaks are one-file changes
