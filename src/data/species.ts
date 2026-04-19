@@ -1,5 +1,43 @@
 import type { EvidenceGrade } from '../types';
 
+// Species portrait imports — cosmic horror / esoteric style
+import greysImg from '../assets/species/greys.jpg';
+import reptiliansImg from '../assets/species/reptilians.jpg';
+import draconiansImg from '../assets/species/draconians.jpg';
+import pleiadiansImg from '../assets/species/pleiadians.jpg';
+import arcturiansImg from '../assets/species/arcturians.jpg';
+import siriansImg from '../assets/species/sirians.jpg';
+import andromedansImg from '../assets/species/andromedans.jpg';
+import lyransImg from '../assets/species/lyrans.jpg';
+import mantidsImg from '../assets/species/mantids.jpg';
+import anunnakiImg from '../assets/species/anunnaki.jpg';
+import tallWhitesImg from '../assets/species/tall-whites.jpg';
+import syntheticsImg from '../assets/species/synthetics.jpg';
+import interdimensionalsImg from '../assets/species/interdimensionals.jpg';
+import mexicoBodiesImg from '../assets/species/mexico-bodies.jpg';
+import njDronesImg from '../assets/species/nj-drones.jpg';
+import jellyfishImg from '../assets/species/jellyfish.jpg';
+
+/** Maps species id → portrait image URL (imported as ES6 modules so Vite hashes them). */
+export const speciesImages: Record<string, string> = {
+  greys: greysImg,
+  reptilians: reptiliansImg,
+  draconians: draconiansImg,
+  pleiadians: pleiadiansImg,
+  arcturians: arcturiansImg,
+  sirians: siriansImg,
+  andromedans: andromedansImg,
+  lyrans: lyransImg,
+  mantids: mantidsImg,
+  anunnaki: anunnakiImg,
+  'tall-whites': tallWhitesImg,
+  synthetics: syntheticsImg,
+  interdimensionals: interdimensionalsImg,
+  'mexico-bodies': mexicoBodiesImg,
+  'nj-drones': njDronesImg,
+  jellyfish: jellyfishImg,
+};
+
 export type SpeciesClassification =
   | 'biological'
   | 'reptilian'
@@ -30,6 +68,8 @@ export interface Species {
   evidenceGrade: EvidenceGrade;
   summary: string;
   keyTraits: string[];
+  /** Optional locked lore — gated by Adept rank in the UI */
+  hiddenLore?: string;
   // Cross-links to existing case + whistleblower IDs
   keyCases: string[];
   keyWitnesses: string[];
