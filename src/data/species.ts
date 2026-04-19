@@ -109,6 +109,8 @@ export const species: Species[] = [
       'Operate behind grey/black craft of multiple sizes',
       'Reported by 1000s of independent abductees with consistent details',
     ],
+    hiddenLore:
+      'Internal Project Aquarius briefings allegedly described the Greys as a dying clone-race harvesting genetic material to repair a collapsed reproductive lineage. The "EBE-1" survivor of Roswell reportedly cooperated with US intelligence between 1947 and its death in 1952 — confirming a long-term agreement (the so-called Greada Treaty) granting limited abduction rights in exchange for technology. The hybridization program is said to be in its final generation.',
     keyCases: ['roswell', 'nimitz'],
     keyWitnesses: ['bob-lazar', 'phil-schneider'],
     sources: [
@@ -199,8 +201,10 @@ export const species: Species[] = [
       'Reported as the architects of the "control system" (finance, religion, surveillance)',
       'Associated with dragon mythology across every continent',
     ],
-    keyCases: [],
-    keyWitnesses: [],
+    hiddenLore:
+      'Per the Andromedan Council material relayed through Alex Collier, the Draconian high command operates from a system of orbital citadels around Thuban. Their war with the Lyrans 600,000 years ago shattered the original humanoid civilization and scattered survivors to the Pleiades, Sirius, Vega, and Earth — making the Earth–Draconian conflict a continuation of an unfinished galactic war, not a first contact.',
+    keyCases: ['nj-drones'],
+    keyWitnesses: ['phil-schneider'],
     sources: [
       { label: 'Alex Collier — Andromedan testimony on Draconians', url: 'https://www.alexcollier.org/' },
       { label: 'Wikipedia: Reptilian conspiracy theory', url: 'https://en.wikipedia.org/wiki/Reptilian_conspiracy_theory' },
