@@ -22,6 +22,7 @@ import { FrequenciesPage } from './pages/FrequenciesPage';
 import { SpeciesCodexPage } from './pages/SpeciesCodexPage';
 import { AuthPage } from './pages/AuthPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
+import { ProfilePage } from './pages/ProfilePage';
 
 export default function App() {
   return (
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
           <Route path="/frequencies" element={<FrequenciesPage />} />
           <Route path="/species" element={<SpeciesCodexPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />

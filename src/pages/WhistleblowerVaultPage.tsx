@@ -9,6 +9,7 @@ import { SuspiciousDeathsSection } from '../components/SuspiciousDeathsSection';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs';
 import { whistleblowers, type Whistleblower } from '../data/whistleblowers';
 import type { EvidenceGrade } from '../types';
+import { useEchoXp } from '../hooks/use-echo-xp';
 
 const gradeFilters: ('ALL' | EvidenceGrade)[] = ['ALL', 'DOCUMENTED', 'CREDIBLE', 'SPECULATIVE', 'UNVERIFIED'];
 
@@ -27,8 +28,18 @@ const statusLabels: Record<Whistleblower['status'], string> = {
 export function WhistleblowerVaultPage() {
   const [filter, setFilter] = useState<'ALL' | EvidenceGrade>('ALL');
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const { trackWhistleblowerOpen } = useEchoXp();
 
   const filtered = filter === 'ALL' ? whistleblowers : whistleblowers.filter(w => w.grade === filter);
+
+  const handleToggle = (id: string) => {
+    if (expandedId === id) {
+      setExpandedId(null);
+    } else {
+      setExpandedId(id);
+      trackWhistleblowerOpen(id);
+    }
+  };
 
   return (
     <div className="min-h-screen py-16 px-4">
@@ -84,7 +95,7 @@ export function WhistleblowerVaultPage() {
                   className="glass-cosmic rounded-xl overflow-hidden"
                 >
                   <button
-                    onClick={() => setExpandedId(isExpanded ? null : w.id)}
+                    onClick={() => handleToggle(w.id)}
                     className="w-full text-left p-6"
                   >
                     <div className="flex items-start gap-4">

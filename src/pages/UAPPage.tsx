@@ -7,9 +7,20 @@ import { VideoList } from '../components/VideoEmbed';
 import { SpeciesBadgesForCase } from '../components/SpeciesBadge';
 import { ChevronDown, ChevronUp, Clock } from 'lucide-react';
 import { VideoStrip } from '../components/VideoStrip';
+import { useEchoXp } from '../hooks/use-echo-xp';
 
 export function UAPPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
+  const { trackUapOpen } = useEchoXp();
+
+  const handleToggle = (id: string) => {
+    if (expanded === id) {
+      setExpanded(null);
+    } else {
+      setExpanded(id);
+      trackUapOpen(id);
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -39,7 +50,7 @@ export function UAPPage() {
             >
               <button
                 className="w-full text-left p-6 flex items-start justify-between gap-4"
-                onClick={() => setExpanded(isOpen ? null : c.id)}
+                onClick={() => handleToggle(c.id)}
               >
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-1 flex-wrap">

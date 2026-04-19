@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Users, LogIn, LogOut } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { ChannelList } from '@/components/echoverse/ChannelList';
 import { MessageFeed } from '@/components/echoverse/MessageFeed';
-import { AuthModal } from '@/components/echoverse/AuthModal';
 
 interface Channel {
   id: string;
@@ -19,7 +19,8 @@ export function EchoversePage() {
   const [activeSlug, setActiveSlug] = useState('general');
   const [userId, setUserId] = useState<string | null>(null);
   const [username, setUsername] = useState<string>('');
-  const [authOpen, setAuthOpen] = useState(false);
+  const navigate = useNavigate();
+  const goToAuth = () => navigate('/auth');
 
   // Auth listener
   useEffect(() => {
@@ -83,7 +84,7 @@ export function EchoversePage() {
               </>
             ) : (
               <button
-                onClick={() => setAuthOpen(true)}
+                onClick={goToAuth}
                 className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors"
               >
                 <LogIn className="w-4 h-4" /> Sign In
@@ -124,13 +125,11 @@ export function EchoversePage() {
               channelId={activeChannel.id}
               channelName={activeChannel.name}
               userId={userId}
-              onAuthRequired={() => setAuthOpen(true)}
+              onAuthRequired={goToAuth}
             />
           )}
         </main>
       </div>
-
-      <AuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
     </div>
   );
 }

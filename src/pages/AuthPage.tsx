@@ -6,6 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { lovable } from '@/integrations/lovable/index';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
+import { XP_VALUES } from '@/lib/xp-events';
 
 type Mode = 'signin' | 'signup' | 'forgot';
 
@@ -56,7 +57,7 @@ export function AuthPage() {
     setLoading(true);
     try {
       if (mode === 'signup') {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -65,9 +66,25 @@ export function AuthPage() {
           },
         });
         if (error) throw error;
+        // Award sign-up XP if a session was issued (auto-confirm flow)
+        const newUserId = data.user?.id;
+        if (newUserId && data.session) {
+          await supabase.from('echo_xp_events').insert({
+            user_id: newUserId,
+            event_type: 'sign_up',
+            event_id: newUserId,
+            xp: XP_VALUES.SIGN_UP,
+          });
+          await supabase
+            .from('echo_xp')
+            .update({ xp: XP_VALUES.SIGN_UP })
+            .eq('user_id', newUserId);
+        }
         toast({
-          title: 'Check your email',
-          description: 'We sent you a verification link. Click it to enter the Echoverse.',
+          title: 'Welcome, Starseed',
+          description: data.session
+            ? `+${XP_VALUES.SIGN_UP} XP — your journey begins.`
+            : 'We sent you a verification link. Click it to enter the Echoverse.',
         });
       } else if (mode === 'signin') {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
