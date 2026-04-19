@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid, Lock, Skull } from 'lucide-react';
+import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid, Lock, Skull, UserCircle2 } from 'lucide-react';
 import { vaultSlots } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
 
@@ -9,6 +9,7 @@ const sections = [
   { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
   { to: '/uap', icon: FileSearch, title: 'UAP Case Files', desc: 'Military encounters, whistleblower testimony, and evidence-graded case studies.', color: '#3b82f6' },
   { to: '/gods', icon: Sparkles, title: 'Gods & Archetypes', desc: '18 deities across 6 pantheons. Tap into mythological intelligence.', color: '#f59e0b' },
+  { to: '/species', icon: UserCircle2, title: 'Alien Species Codex', desc: '16 documented non-human intelligences. Greys, Draconians, Pleiadians, Mexico bodies, NJ drones — sourced.', color: '#22d3ee' },
   { to: '/consciousness', icon: Brain, title: 'Consciousness Lab', desc: 'Project Stargate, the CIA Gateway Process, NDEs, and the nature of mind.', color: '#10b981' },
   { to: '/signals', icon: Radio, title: 'Signal Watch', desc: 'Credibility ratings for researchers and creators. Green, yellow, red.', color: '#f43f5e' },
   { to: '/whistleblowers', icon: Shield, title: 'Whistleblower Vault', desc: '8 evidence-graded profiles of those who risked everything for disclosure.', color: '#ef4444' },

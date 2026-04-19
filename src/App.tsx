@@ -19,6 +19,7 @@ import { OrbReportPage } from './pages/OrbReportPage';
 import { The46Page } from './pages/The46Page';
 import { ShadowPantheonPage } from './pages/ShadowPantheonPage';
 import { FrequenciesPage } from './pages/FrequenciesPage';
+import { SpeciesCodexPage } from './pages/SpeciesCodexPage';
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="/video-vault" element={<The46Page />} />
           <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
           <Route path="/frequencies" element={<FrequenciesPage />} />
+          <Route path="/species" element={<SpeciesCodexPage />} />
         </Route>
       </Routes>
       <Toaster />
