@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Skull, AlertTriangle, Eye } from 'lucide-react';
+import { X, Skull, AlertTriangle, Eye, Flame } from 'lucide-react';
 import { shadowGods, SHADOW_LORE, type ShadowGod } from '@/data/shadow-gods';
+import { RankUnlock } from '@/components/RankUnlock';
 
 function ShadowGodModal({ god, onClose }: { god: ShadowGod; onClose: () => void }) {
   return (
@@ -102,6 +103,18 @@ function ShadowGodModal({ god, onClose }: { god: ShadowGod; onClose: () => void 
               <h3 className="text-[10px] font-semibold text-red-400 uppercase tracking-[2px] mb-2">Reflection</h3>
               <p className="text-foreground italic text-base leading-relaxed">"{god.reflectionQuestion}"</p>
             </motion.div>
+
+            {god.ritualLore && (
+              <div className="border-t border-amber-900/30 pt-4">
+                <h3 className="text-[10px] font-semibold text-amber-400/90 uppercase tracking-[2px] mb-2 flex items-center gap-1.5">
+                  <Flame className="w-3 h-3" />
+                  Ritual Details — Oracle Tier
+                </h3>
+                <RankUnlock minXp={1000} rankName="Oracle" label="historical invocation lore">
+                  <p className="text-sm text-amber-100/90 leading-relaxed">{god.ritualLore}</p>
+                </RankUnlock>
+              </div>
+            )}
 
             {god.sources && god.sources.length > 0 && (
               <div className="border-t border-red-900/30 pt-4">

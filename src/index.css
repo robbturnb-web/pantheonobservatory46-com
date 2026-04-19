@@ -206,11 +206,11 @@
   background: linear-gradient(to bottom, #0a0e1a, #000000);
 }
 
-/* Evidence grade badges */
-.grade-documented { background: rgba(0, 204, 102, 0.15); color: #00cc66; border: 1px solid rgba(0, 204, 102, 0.3); }
-.grade-credible { background: rgba(0, 217, 255, 0.15); color: #00d9ff; border: 1px solid rgba(0, 217, 255, 0.3); }
-.grade-speculative { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
-.grade-unverified { background: rgba(255, 51, 102, 0.15); color: #ff3366; border: 1px solid rgba(255, 51, 102, 0.3); }
+/* Evidence grade — color-only dot tokens (legacy class hooks) */
+.grade-documented  { color: #39ff14; }
+.grade-credible    { color: #38bdf8; }
+.grade-speculative { color: #2dd4bf; }
+.grade-unverified  { color: #a78bfa; }
 
 /* Signal ratings */
 .signal-green { color: #00cc66; }
