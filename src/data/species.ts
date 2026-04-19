@@ -1,5 +1,43 @@
 import type { EvidenceGrade } from '../types';
 
+// Species portrait imports — cosmic horror / esoteric style
+import greysImg from '../assets/species/greys.jpg';
+import reptiliansImg from '../assets/species/reptilians.jpg';
+import draconiansImg from '../assets/species/draconians.jpg';
+import pleiadiansImg from '../assets/species/pleiadians.jpg';
+import arcturiansImg from '../assets/species/arcturians.jpg';
+import siriansImg from '../assets/species/sirians.jpg';
+import andromedansImg from '../assets/species/andromedans.jpg';
+import lyransImg from '../assets/species/lyrans.jpg';
+import mantidsImg from '../assets/species/mantids.jpg';
+import anunnakiImg from '../assets/species/anunnaki.jpg';
+import tallWhitesImg from '../assets/species/tall-whites.jpg';
+import syntheticsImg from '../assets/species/synthetics.jpg';
+import interdimensionalsImg from '../assets/species/interdimensionals.jpg';
+import mexicoBodiesImg from '../assets/species/mexico-bodies.jpg';
+import njDronesImg from '../assets/species/nj-drones.jpg';
+import jellyfishImg from '../assets/species/jellyfish.jpg';
+
+/** Maps species id → portrait image URL (imported as ES6 modules so Vite hashes them). */
+export const speciesImages: Record<string, string> = {
+  greys: greysImg,
+  reptilians: reptiliansImg,
+  draconians: draconiansImg,
+  pleiadians: pleiadiansImg,
+  arcturians: arcturiansImg,
+  sirians: siriansImg,
+  andromedans: andromedansImg,
+  lyrans: lyransImg,
+  mantids: mantidsImg,
+  anunnaki: anunnakiImg,
+  'tall-whites': tallWhitesImg,
+  synthetics: syntheticsImg,
+  interdimensionals: interdimensionalsImg,
+  'mexico-bodies': mexicoBodiesImg,
+  'nj-drones': njDronesImg,
+  jellyfish: jellyfishImg,
+};
+
 export type SpeciesClassification =
   | 'biological'
   | 'reptilian'
@@ -30,6 +68,8 @@ export interface Species {
   evidenceGrade: EvidenceGrade;
   summary: string;
   keyTraits: string[];
+  /** Optional locked lore — gated by Adept rank in the UI */
+  hiddenLore?: string;
   // Cross-links to existing case + whistleblower IDs
   keyCases: string[];
   keyWitnesses: string[];
@@ -69,6 +109,8 @@ export const species: Species[] = [
       'Operate behind grey/black craft of multiple sizes',
       'Reported by 1000s of independent abductees with consistent details',
     ],
+    hiddenLore:
+      'Internal Project Aquarius briefings allegedly described the Greys as a dying clone-race harvesting genetic material to repair a collapsed reproductive lineage. The "EBE-1" survivor of Roswell reportedly cooperated with US intelligence between 1947 and its death in 1952 — confirming a long-term agreement (the so-called Greada Treaty) granting limited abduction rights in exchange for technology. The hybridization program is said to be in its final generation.',
     keyCases: ['roswell', 'nimitz'],
     keyWitnesses: ['bob-lazar', 'phil-schneider'],
     sources: [
@@ -159,8 +201,10 @@ export const species: Species[] = [
       'Reported as the architects of the "control system" (finance, religion, surveillance)',
       'Associated with dragon mythology across every continent',
     ],
-    keyCases: [],
-    keyWitnesses: [],
+    hiddenLore:
+      'Per the Andromedan Council material relayed through Alex Collier, the Draconian high command operates from a system of orbital citadels around Thuban. Their war with the Lyrans 600,000 years ago shattered the original humanoid civilization and scattered survivors to the Pleiades, Sirius, Vega, and Earth — making the Earth–Draconian conflict a continuation of an unfinished galactic war, not a first contact.',
+    keyCases: ['nj-drones'],
+    keyWitnesses: ['phil-schneider'],
     sources: [
       { label: 'Alex Collier — Andromedan testimony on Draconians', url: 'https://www.alexcollier.org/' },
       { label: 'Wikipedia: Reptilian conspiracy theory', url: 'https://en.wikipedia.org/wiki/Reptilian_conspiracy_theory' },
@@ -559,3 +603,14 @@ export const threatColors: Record<ThreatLevel, string> = {
   predator: 'hsl(0 75% 55%)',
   unknown: 'hsl(var(--muted-foreground))',
 };
+
+/** Returns all species whose `keyCases` includes the given UAP case id. */
+export function getSpeciesForCase(caseId: string): Species[] {
+  return species.filter((s) => s.keyCases.includes(caseId));
+}
+
+/** Returns all species whose `keyWitnesses` includes the given whistleblower id. */
+export function getSpeciesForWitness(witnessId: string): Species[] {
+  return species.filter((s) => s.keyWitnesses.includes(witnessId));
+}
+

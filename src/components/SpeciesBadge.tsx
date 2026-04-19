@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { species } from '../data/species';
+import { species, getSpeciesForCase, getSpeciesForWitness } from '../data/species';
 
 /**
  * Small badge linking to a species in the codex.
@@ -18,5 +18,35 @@ export function SpeciesBadge({ id }: { id: string }) {
       <span>{s.symbol}</span>
       <span>{s.name}</span>
     </Link>
+  );
+}
+
+/**
+ * Renders a row of species badges linked to a UAP case ID.
+ */
+export function SpeciesBadgesForCase({ caseId }: { caseId: string }) {
+  const list = getSpeciesForCase(caseId);
+  if (list.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {list.map((s) => (
+        <SpeciesBadge key={s.id} id={s.id} />
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Renders a row of species badges linked to a whistleblower ID.
+ */
+export function SpeciesBadgesForWitness({ witnessId }: { witnessId: string }) {
+  const list = getSpeciesForWitness(witnessId);
+  if (list.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {list.map((s) => (
+        <SpeciesBadge key={s.id} id={s.id} />
+      ))}
+    </div>
   );
 }

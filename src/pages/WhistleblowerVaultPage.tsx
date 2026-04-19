@@ -4,6 +4,7 @@ import { Shield, ChevronDown, ChevronUp, Skull } from 'lucide-react';
 import { EvidenceBadge } from '../components/EvidenceBadge';
 import { SourceList } from '../components/SourceList';
 import { VideoList } from '../components/VideoEmbed';
+import { SpeciesBadgesForWitness } from '../components/SpeciesBadge';
 import { SuspiciousDeathsSection } from '../components/SuspiciousDeathsSection';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs';
 import { whistleblowers, type Whistleblower } from '../data/whistleblowers';
@@ -107,6 +108,7 @@ export function WhistleblowerVaultPage() {
                         {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                       </div>
                     </div>
+                    <div className="mt-3"><SpeciesBadgesForWitness witnessId={w.id} /></div>
                     <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{w.summary}</p>
                   </button>
 
