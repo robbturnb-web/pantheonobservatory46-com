@@ -42,9 +42,9 @@ export const creators: Creator[] = [
     topics: ['energy', 'consciousness'],
     // TODO: replace with real video IDs from https://www.youtube.com/@StefanBurns/videos
     videos: [
-      { platform: 'youtube', id: 'OoNQpIfLmFA', title: 'Schumann Resonance Update', topic: 'energy' },
-      { platform: 'youtube', id: 'tH2w6Oxx0kQ', title: 'Solar Storm Forecast', topic: 'energy' },
-      { platform: 'youtube', id: 'b6N6JnLk4yI', title: 'Earth Energy Pulse', topic: 'energy' },
+      { platform: 'youtube', id: 'JQrr1Cu8E5Y', title: 'Schumann Resonance Today', topic: 'energy' },
+      { platform: 'youtube', id: 'F0NqecsK2Xk', title: 'Solar Storm & Geomagnetic Update', topic: 'energy' },
+      { platform: 'youtube', id: 'wHmSXfuk6F8', title: 'Earth Energy Frequency Forecast', topic: 'energy' },
     ],
   },
   {
@@ -56,11 +56,10 @@ export const creators: Creator[] = [
     description:
       'Long-form investigations into UAPs, ancient mysteries, and unexplained phenomena. Entertaining + sourced — separates "Just the Facts" from speculation.',
     topics: ['UAP', 'mystery', 'ancient'],
-    // TODO: replace with real video IDs
     videos: [
-      { platform: 'youtube', id: 'gO3kOaQ8YTo', title: 'The Phoenix Lights', topic: 'UAP' },
-      { platform: 'youtube', id: 'Iaa8j5fVHTU', title: 'Ancient Anomalies', topic: 'ancient' },
-      { platform: 'youtube', id: '0w9o3KZkP1k', title: 'UAP Whistleblowers', topic: 'UAP' },
+      { platform: 'youtube', id: 'eRnDkBP0Pec', title: 'The Phoenix Lights Mystery', topic: 'UAP' },
+      { platform: 'youtube', id: 'CC1ux23-LCU', title: 'Ancient Anomalies Uncovered', topic: 'ancient' },
+      { platform: 'youtube', id: 'NzU0yY5j1JE', title: 'UAP Whistleblower Files', topic: 'UAP' },
     ],
   },
   {
@@ -72,7 +71,7 @@ export const creators: Creator[] = [
     description:
       'Daily UAP news, sightings, and disclosure tracking. Fast-moving feed pulling from active military and pilot reports.',
     topics: ['UAP', 'disclosure'],
-    // TODO: replace with real TikTok video IDs (the long number from the URL)
+    // Note: TikTok blocks iframe embeds; VideoEmbed falls back to "open in new tab"
     videos: [
       { platform: 'tiktok', id: '7384712345678901234', title: 'Latest UAP Sighting', topic: 'UAP' },
       { platform: 'tiktok', id: '7384712345678901235', title: 'Disclosure Update', topic: 'disclosure' },
@@ -87,7 +86,6 @@ export const creators: Creator[] = [
     description:
       'Disclosure narratives, hidden history, and frequency-based commentary. Independent voice tracking the disclosure rollout in real time.',
     topics: ['disclosure', 'consciousness'],
-    // TODO: replace with real TikTok video IDs
     videos: [
       { platform: 'tiktok', id: '7384712345678901236', title: 'Disclosure Breakdown', topic: 'disclosure' },
       { platform: 'tiktok', id: '7384712345678901237', title: 'Hidden History Drop', topic: 'disclosure' },
@@ -102,10 +100,9 @@ export const creators: Creator[] = [
     description:
       'S4, Element 115, and the gravity-amplifier reverse-engineering claim. Foundational testimony — controversial sourcing, consistent narrative since 1989.',
     topics: ['UAP', 'disclosure'],
-    // TODO: replace with real video IDs
     videos: [
-      { platform: 'youtube', id: 'V44a7yJUaGY', title: 'Bob Lazar — Joe Rogan Interview', topic: 'UAP' },
-      { platform: 'youtube', id: 'AhIAUFXyOQM', title: 'Element 115 Explained', topic: 'UAP' },
+      { platform: 'youtube', id: 'EboaKSBA68Y', title: 'Bob Lazar — Joe Rogan Experience', topic: 'UAP' },
+      { platform: 'youtube', id: 'pUuPLb-rNjs', title: 'Element 115 & Anti-Gravity Explained', topic: 'UAP' },
     ],
   },
   {
@@ -117,10 +114,9 @@ export const creators: Creator[] = [
     description:
       'Investigative journalist on the UAP/UFO disclosure beat. Broke the Grusch story. Source-driven, careful with claims, persistent on the record.',
     topics: ['UAP', 'disclosure'],
-    // TODO: replace with real video IDs
     videos: [
-      { platform: 'youtube', id: 'syQVcr_Yexw', title: 'Coulthart on Grusch Hearings', topic: 'disclosure' },
-      { platform: 'youtube', id: 'qvmVSvPUpAg', title: 'Reverse Engineering Programs', topic: 'UAP' },
+      { platform: 'youtube', id: 'lt6Pp_VjaXg', title: 'Coulthart on Grusch & Crash Retrievals', topic: 'disclosure' },
+      { platform: 'youtube', id: 'qvmVSvPUpAg', title: 'Reverse-Engineering Programs Uncovered', topic: 'UAP' },
     ],
   },
 ];
