@@ -434,7 +434,7 @@ export const species: Species[] = [
       'Strong correlation with altered states (DMT, NDE, deep meditation)',
       'May be the unifying frame for ALL contact phenomena',
     ],
-    keyCases: ['skinwalker'],
+    keyCases: [],
     keyWitnesses: [],
     sources: [
       { label: 'Jacques Vallée — Passport to Magonia', url: 'https://en.wikipedia.org/wiki/Jacques_Vall%C3%A9e' },
