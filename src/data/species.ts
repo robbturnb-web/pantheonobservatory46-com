@@ -141,13 +141,10 @@ export const species: Species[] = [
       'Children are highly curious about humans',
       'Operate cigar-shaped craft seen near Nevada test ranges',
     ],
+    hiddenLore:
+      'Charles Hall\'s unpublished debriefs allegedly described the Tall Whites as a refugee colony from a dying system, granted limited US protection in exchange for propulsion and metallurgy data. Internal Project Snowbird memos reportedly catalogued at least 9 distinct family units rotating through Indian Springs, with strict protocol enforced by armed USAF escorts after a 1966 incident in which a startled Tall White killed a junior airman who reached for his sidearm.',
     keyCases: [],
     keyWitnesses: [],
-    sources: [
-      { label: "Charles Hall — Millennial Hospitality series", url: 'https://en.wikipedia.org/wiki/Charles_Hall_(ufologist)' },
-    ],
-    accentColor: '#f5f5f4',
-  },
 
   // ──────────────────────────────────────────────────────────────
   // REPTILIAN LINEAGE
