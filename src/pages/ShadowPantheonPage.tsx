@@ -33,17 +33,20 @@ function ShadowGodModal({ god, onClose }: { god: ShadowGod; onClose: () => void 
             <X className="w-4 h-4" />
           </button>
 
-          <div className="text-center mb-6">
-            <motion.span
-              initial={{ scale: 0, rotate: -45 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ type: 'spring', delay: 0.15 }}
-              className="text-6xl block mb-3 grayscale-[40%]"
-            >
-              {god.symbol}
-            </motion.span>
-            <h2 className="text-3xl font-black text-foreground tracking-tight">{god.name}</h2>
-            <p className="text-sm text-red-400/80 mt-1 uppercase tracking-[3px]">{god.pantheon}</p>
+          {/* Hero portrait */}
+          <div className="relative h-64 sm:h-80 -mx-7 -mt-7 mb-5 overflow-hidden">
+            <img
+              src={god.image}
+              alt={god.name}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-5">
+              <span className="text-4xl block mb-2">{god.symbol}</span>
+              <h2 className="text-3xl font-black text-foreground tracking-tight drop-shadow-lg">{god.name}</h2>
+              <p className="text-xs text-red-400/90 mt-1 uppercase tracking-[3px]">{god.pantheon}</p>
+            </div>
           </div>
 
           {god.warning && (
@@ -76,8 +79,18 @@ function ShadowGodModal({ god, onClose }: { god: ShadowGod; onClose: () => void 
             </div>
 
             <div className="border-t border-red-900/30 pt-4">
+              <h3 className="text-[10px] font-semibold text-red-400/80 uppercase tracking-[2px] mb-1">Why They're "Bad"</h3>
+              <p className="text-sm text-foreground/90 leading-relaxed">{god.whyTheyreBad}</p>
+            </div>
+
+            <div className="border-t border-red-900/30 pt-4">
               <h3 className="text-[10px] font-semibold text-red-400/80 uppercase tracking-[2px] mb-1">Shadow Aspect</h3>
               <p className="text-sm text-foreground/90 leading-relaxed">{god.shadowAspect}</p>
+            </div>
+
+            <div className="border-t border-red-900/30 pt-4">
+              <h3 className="text-[10px] font-semibold text-amber-400/90 uppercase tracking-[2px] mb-1">Why They're In This Codex</h3>
+              <p className="text-sm text-foreground/90 leading-relaxed">{god.purpose}</p>
             </div>
 
             <motion.div
@@ -89,6 +102,25 @@ function ShadowGodModal({ god, onClose }: { god: ShadowGod; onClose: () => void 
               <h3 className="text-[10px] font-semibold text-red-400 uppercase tracking-[2px] mb-2">Reflection</h3>
               <p className="text-foreground italic text-base leading-relaxed">"{god.reflectionQuestion}"</p>
             </motion.div>
+
+            {god.sources && god.sources.length > 0 && (
+              <div className="border-t border-red-900/30 pt-4">
+                <h3 className="text-[10px] font-semibold text-red-400/80 uppercase tracking-[2px] mb-2">Sources</h3>
+                <div className="space-y-1.5">
+                  {god.sources.map((s, i) => (
+                    <a
+                      key={i}
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-xs text-red-300 hover:text-red-200 hover:underline"
+                    >
+                      → {s.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </motion.div>
@@ -151,27 +183,29 @@ export function ShadowPantheonPage() {
             whileHover={{ scale: 1.025, y: -3 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => setSelected(god)}
-            className="relative text-left rounded-xl overflow-hidden border border-red-950/50 bg-black/60 hover:border-red-700/60 transition-colors group cursor-pointer min-h-[200px]"
+            className="relative text-left rounded-xl overflow-hidden border border-red-950/50 bg-black/60 hover:border-red-700/60 transition-colors group cursor-pointer min-h-[280px]"
           >
-            {/* Atmospheric backdrop */}
-            <div
-              className="absolute inset-0 opacity-50 group-hover:opacity-80 transition-opacity duration-700"
-              style={{ background: god.atmosphericBg }}
+            {/* Portrait image */}
+            <img
+              src={god.image}
+              alt={god.name}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/10" />
 
-            <div className="relative z-10 p-5 h-full flex flex-col justify-between">
+            <div className="relative z-10 p-5 h-full flex flex-col justify-between min-h-[280px]">
               <div className="flex items-start justify-between">
-                <span className="text-4xl grayscale-[30%] group-hover:grayscale-0 transition-all">{god.symbol}</span>
+                <span className="text-3xl">{god.symbol}</span>
                 {god.warning && (
                   <AlertTriangle className="w-3.5 h-3.5 text-red-400/70" />
                 )}
               </div>
 
               <div>
-                <h2 className="font-black text-xl text-foreground mb-0.5 tracking-tight">{god.name}</h2>
-                <p className="text-[10px] uppercase tracking-[2px] text-red-300/70 mb-2">{god.pantheon}</p>
-                <p className="text-xs text-foreground/80 leading-relaxed line-clamp-2">{god.archetypeRole}</p>
+                <h2 className="font-black text-xl text-foreground mb-0.5 tracking-tight drop-shadow-lg">{god.name}</h2>
+                <p className="text-[10px] uppercase tracking-[2px] text-red-300/80 mb-2">{god.pantheon}</p>
+                <p className="text-xs text-foreground/85 leading-relaxed line-clamp-2">{god.archetypeRole}</p>
               </div>
             </div>
           </motion.button>

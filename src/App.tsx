@@ -20,6 +20,8 @@ import { The46Page } from './pages/The46Page';
 import { ShadowPantheonPage } from './pages/ShadowPantheonPage';
 import { FrequenciesPage } from './pages/FrequenciesPage';
 import { SpeciesCodexPage } from './pages/SpeciesCodexPage';
+import { AuthPage } from './pages/AuthPage';
+import { ResetPasswordPage } from './pages/ResetPasswordPage';
 
 export default function App() {
   return (
@@ -47,6 +49,8 @@ export default function App() {
           <Route path="/frequencies" element={<FrequenciesPage />} />
           <Route path="/species" element={<SpeciesCodexPage />} />
         </Route>
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
       </Routes>
       <Toaster />
     </BrowserRouter>
