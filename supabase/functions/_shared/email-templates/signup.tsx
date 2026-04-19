@@ -30,30 +30,34 @@ export const SignupEmail = ({
 }: SignupEmailProps) => (
   <Html lang="en" dir="ltr">
     <Head />
-    <Preview>Confirm your email for {siteName}</Preview>
+    <Preview>The Observatory awaits — confirm your signal</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Heading style={h1}>Confirm your email</Heading>
-        <Text style={text}>
-          Thanks for signing up for{' '}
-          <Link href={siteUrl} style={link}>
-            <strong>{siteName}</strong>
-          </Link>
-          !
-        </Text>
-        <Text style={text}>
-          Please confirm your email address (
-          <Link href={`mailto:${recipient}`} style={link}>
-            {recipient}
-          </Link>
-          ) by clicking the button below:
-        </Text>
-        <Button style={button} href={confirmationUrl}>
-          Verify Email
-        </Button>
-        <Text style={footer}>
-          If you didn't create an account, you can safely ignore this email.
-        </Text>
+        <Section style={header}>
+          <Text style={eye}>◉</Text>
+          <Text style={brand}>PANTHEON OBSERVATORY</Text>
+        </Section>
+        <Container style={inner}>
+          <Heading style={h1}>Welcome, Starseed</Heading>
+          <Text style={text}>
+            A new signal has been detected. You're one click away from entering{' '}
+            <Link href={siteUrl} style={link}>the Observatory</Link>{' '}
+            — where the gods, the species, and the suppressed signals converge.
+          </Text>
+          <Text style={text}>
+            Confirm <strong>{recipient}</strong> to activate your account and
+            begin earning XP toward your first rank.
+          </Text>
+          <Section style={buttonWrap}>
+            <Button style={button} href={confirmationUrl}>
+              Open the Observatory
+            </Button>
+          </Section>
+          <Text style={footer}>
+            If you didn't request access, the signal will fade. You can safely
+            ignore this transmission.
+          </Text>
+        </Container>
       </Container>
     </Body>
   </Html>
@@ -61,27 +65,51 @@ export const SignupEmail = ({
 
 export default SignupEmail
 
-const main = { backgroundColor: '#ffffff', fontFamily: 'Arial, sans-serif' }
-const container = { padding: '20px 25px' }
-const h1 = {
-  fontSize: '22px',
+const main = {
+  backgroundColor: '#ffffff',
+  fontFamily: '"Space Grotesk", "Helvetica Neue", Arial, sans-serif',
+  margin: 0,
+  padding: '40px 0',
+}
+const container = {
+  maxWidth: '560px',
+  margin: '0 auto',
+  borderRadius: '16px',
+  overflow: 'hidden' as const,
+  border: '1px solid #ece9f5',
+}
+const header = {
+  background: 'linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 60%, #8b5cf6 100%)',
+  padding: '28px 32px',
+  textAlign: 'center' as const,
+}
+const eye = { fontSize: '32px', color: '#ffffff', margin: '0 0 6px', letterSpacing: '4px' }
+const brand = {
+  fontSize: '11px',
+  letterSpacing: '4px',
+  color: '#e9d5ff',
   fontWeight: 'bold' as const,
-  color: '#000000',
-  margin: '0 0 20px',
+  margin: 0,
 }
-const text = {
-  fontSize: '14px',
-  color: '#55575d',
-  lineHeight: '1.5',
-  margin: '0 0 25px',
+const inner = { padding: '36px 32px 32px' }
+const h1 = {
+  fontSize: '26px',
+  fontWeight: 'bold' as const,
+  color: '#1a0b2e',
+  margin: '0 0 18px',
+  letterSpacing: '-0.5px',
 }
-const link = { color: 'inherit', textDecoration: 'underline' }
+const text = { fontSize: '15px', color: '#4b4763', lineHeight: '1.65', margin: '0 0 18px' }
+const link = { color: '#8b5cf6', textDecoration: 'underline', fontWeight: 'bold' as const }
+const buttonWrap = { textAlign: 'center' as const, margin: '28px 0 24px' }
 const button = {
-  backgroundColor: '#000000',
+  backgroundColor: '#8b5cf6',
   color: '#ffffff',
-  fontSize: '14px',
-  borderRadius: '8px',
-  padding: '12px 20px',
+  fontSize: '15px',
+  fontWeight: 'bold' as const,
+  borderRadius: '12px',
+  padding: '14px 28px',
   textDecoration: 'none',
+  display: 'inline-block',
 }
-const footer = { fontSize: '12px', color: '#999999', margin: '30px 0 0' }
+const footer = { fontSize: '12px', color: '#9b96b3', margin: '24px 0 0', lineHeight: '1.6' }
