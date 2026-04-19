@@ -6,6 +6,7 @@ import { PantheonFooter } from './PantheonFooter';
 import { StarfieldCanvas } from './StarfieldCanvas';
 import { CosmicCursorTrail } from './CosmicCursorTrail';
 import { XPBar } from './XPBar';
+import { Walkthrough } from './Walkthrough';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 
 const pageVariants = {
@@ -37,6 +38,7 @@ export function Layout() {
       <CosmicCursorTrail />
       <Navbar />
       <XPBar />
+      <Walkthrough />
       <main className="pt-16 min-h-screen">
         <AnimatePresence mode="wait">
           <motion.div

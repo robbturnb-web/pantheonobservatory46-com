@@ -4,6 +4,7 @@ import { uapCases } from '../data/uap-cases';
 import { EvidenceBadge } from '../components/EvidenceBadge';
 import { SourceList } from '../components/SourceList';
 import { VideoList } from '../components/VideoEmbed';
+import { SpeciesBadgesForCase } from '../components/SpeciesBadge';
 import { ChevronDown, ChevronUp, Clock } from 'lucide-react';
 import { VideoStrip } from '../components/VideoStrip';
 
@@ -48,6 +49,7 @@ export function UAPPage() {
                   <p className="text-xs text-muted-foreground flex items-center gap-1">
                     <Clock className="w-3 h-3" /> {c.date}
                   </p>
+                  <div className="mt-2"><SpeciesBadgesForCase caseId={c.id} /></div>
                   {!isOpen && (
                     <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{c.summary}</p>
                   )}
