@@ -139,7 +139,7 @@ export function useEchoXp() {
           toast(`✨ +${amount} XP — ${reason}`);
         }
         return true;
-      } catch (e) {
+      } catch {
         return false;
       } finally {
         inFlight.current.delete(key);
@@ -194,6 +194,19 @@ export function useEchoXp() {
     [awardEvent]
   );
 
+  /**
+   * Legacy ad-hoc XP grant. Kept for chat/community features that reward
+   * activity rather than a discrete unique entity. Each call is a brand-new
+   * idempotent event keyed by timestamp + random suffix.
+   */
+  const addXp = useCallback(
+    async (amount: number, reason?: string) => {
+      const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+      return awardEvent('page', `adhoc:${id}`, amount, reason);
+    },
+    [awardEvent]
+  );
+
   return {
     xp,
     rank,
@@ -202,6 +215,7 @@ export function useEchoXp() {
     userId,
     loading,
     awardEvent,
+    addXp,
     trackPageVisit,
     trackSpeciesOpen,
     trackUapOpen,
