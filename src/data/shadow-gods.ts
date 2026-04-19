@@ -23,6 +23,7 @@ export interface ShadowGod {
   image: string;
   whyTheyreBad: string;       // What makes them "bad" — lore + behavior
   purpose: string;            // Why they exist in THIS app — what they teach
+  ritualLore?: string;        // Oracle-tier (1000 XP): historical invocation/ritual details
   warning?: string;
   sources?: { label: string; url: string }[];
 }
