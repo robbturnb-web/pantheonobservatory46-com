@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Eye } from 'lucide-react';
+import { Menu, X, Eye, Award } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEchoXp } from '@/hooks/use-echo-xp';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -29,6 +30,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { userId, rank } = useEchoXp();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -71,6 +73,16 @@ export function Navbar() {
                 )}
               </Link>
             ))}
+            {userId && (
+              <Link
+                to="/profile"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium border ml-1 transition-colors hover:bg-white/5"
+                style={{ color: rank.color, borderColor: `${rank.color}55` }}
+              >
+                <Award className="w-3.5 h-3.5" />
+                {rank.name}
+              </Link>
+            )}
           </div>
 
           <button className="lg:hidden text-foreground p-2" onClick={() => setOpen(!open)}>
@@ -101,6 +113,15 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              {userId && (
+                <Link
+                  to="/profile"
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium border mt-2"
+                  style={{ color: rank.color, borderColor: `${rank.color}55` }}
+                >
+                  <Award className="w-4 h-4" /> Profile · {rank.name}
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

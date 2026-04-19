@@ -4,9 +4,18 @@ import { Lock, Unlock, Eye } from 'lucide-react';
 import { vaultSlots, VAULT_LORE, type VaultSlot } from '@/data/the-46';
 import { VaultSlotCard } from '@/components/the46/VaultSlotCard';
 import { VaultSlotModal } from '@/components/the46/VaultSlotModal';
+import { useEchoXp } from '@/hooks/use-echo-xp';
 
 export function The46Page() {
   const [selected, setSelected] = useState<VaultSlot | null>(null);
+  const { trackVaultOpen } = useEchoXp();
+
+  const handleSelect = (slot: VaultSlot) => {
+    setSelected(slot);
+    if (slot.status === 'unlocked') {
+      trackVaultOpen(String(slot.id));
+    }
+  };
 
   const unlockedCount = vaultSlots.filter((s) => s.status === 'unlocked').length;
   const lockedCount = 46 - unlockedCount;
@@ -69,7 +78,7 @@ export function The46Page() {
       {/* Vault grid — 46 slots */}
       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2 sm:gap-3">
         {vaultSlots.map((slot, i) => (
-          <VaultSlotCard key={slot.id} slot={slot} index={i} onClick={() => setSelected(slot)} />
+          <VaultSlotCard key={slot.id} slot={slot} index={i} onClick={() => handleSelect(slot)} />
         ))}
       </div>
 

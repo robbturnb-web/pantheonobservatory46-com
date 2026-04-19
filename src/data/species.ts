@@ -141,6 +141,8 @@ export const species: Species[] = [
       'Children are highly curious about humans',
       'Operate cigar-shaped craft seen near Nevada test ranges',
     ],
+    hiddenLore:
+      'Charles Hall\'s unpublished debriefs allegedly described the Tall Whites as a refugee colony from a dying system, granted limited US protection in exchange for propulsion and metallurgy data. Internal Project Snowbird memos reportedly catalogued at least 9 distinct family units rotating through Indian Springs, with strict protocol enforced by armed USAF escorts after a 1966 incident in which a startled Tall White killed a junior airman who reached for his sidearm.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -172,6 +174,8 @@ export const species: Species[] = [
       'Linked in folklore to ancient serpent gods (Quetzalcoatl, Naga)',
       'Claimed shapeshifting ability in Icke and Lear traditions',
     ],
+    hiddenLore:
+      'Phil Schneider\'s 1995 lecture circuit testimony described a 1979 firefight at the Dulce underground complex in which 66 Delta Force operators were killed by Reptilian guards using directed-energy sidearms. The base, allegedly seven levels deep, reportedly housed cloning vats, "nightmare hall" hybrid experiments, and a contested human-Reptilian joint research program. Schneider was found dead in his apartment six months after going public — ruled suicide despite piano wire ligature marks around his neck.',
     keyCases: [],
     keyWitnesses: ['phil-schneider'],
     sources: [
@@ -235,6 +239,8 @@ export const species: Species[] = [
       'Frequently observed during DMT and ayahuasca journeys',
       'Linked to ancient Egyptian iconography (some researchers)',
     ],
+    hiddenLore:
+      'In Strassman\'s DMT studies at the University of New Mexico, mantis-form entities appeared in over 20% of high-dose volunteer reports — described identically by subjects who had never met. Researcher Mike Clelland\'s analysis suggests Mantids occupy a "soul-curator" role in the abduction hierarchy: present at first contact in childhood, again at major life transitions, and reportedly during the death moment itself. Several abductees describe being shown their own genetic line stretching forward across thousands of years.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -267,6 +273,8 @@ export const species: Species[] = [
       'Possibly the source-template for later god-pantheons',
       'Some traditions report ongoing involvement; others say they departed',
     ],
+    hiddenLore:
+      'Sitchin\'s untranslated tablets (currently sealed in private collections) allegedly describe a civil war between Enki — who saw humanity as kin — and Enlil, who viewed us as disposable labor. The Great Flood was reportedly Enlil\'s extermination order, sabotaged by Enki who warned Ziusudra (the original Noah). The Anunnaki bloodline is said to have continued through royal lineages — Sumerian, Egyptian, Greek, then European nobility — explaining the obsessive genealogical record-keeping of every ancient kingship.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -299,6 +307,8 @@ export const species: Species[] = [
       'Emphasize meditation, frequency, and DNA activation',
       'Often confused with Tall Whites and Nordics',
     ],
+    hiddenLore:
+      'Billy Meier\'s contact notes contain over 250 prophecies dated 1951–present, including the AIDS epidemic, the Chernobyl meltdown, and the collapse of the Soviet Union — published years before the events. The Pleiadian "Henoch Prophecies" reportedly warn of a 2020s–2030s civilizational inflection point: either a controlled collapse leading to renewal, or a "third world fire" if humanity refuses to disengage from the control system. The non-interference protocol is said to be approaching its expiration.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -328,6 +338,8 @@ export const species: Species[] = [
       'Associated with sacred geometry and sound healing',
       'Reportedly maintain a "lightship" near Earth',
     ],
+    hiddenLore:
+      'The "Arcturian Corridor" — described by Cayce as a soul-transit point between density levels — is said to be the post-mortem destination for a significant fraction of human consciousness, where past-life integration and next-incarnation planning occur. Channeled material from Tom Kenyon describes the Arcturians as actively shielding Earth\'s magnetosphere from solar harmonics that would otherwise destabilize human nervous systems during the current consciousness shift.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -357,6 +369,8 @@ export const species: Species[] = [
       'Two distinct phenotypes reported (humanoid + amphibian)',
       'Associated with mystery schools and initiation rites',
     ],
+    hiddenLore:
+      'Robert Temple\'s suppressed expanded edition of The Sirius Mystery argues the Dogon knowledge tradition is the surviving fragment of a global Sirian initiation network spanning Egypt, Mali, India, and pre-Columbian Mesoamerica. The amphibious Nommo allegedly remain present in the Mediterranean and West African coastal trenches — the basis for Dagon, the Philistines\' fish-god, and the modern "Mer-people" sightings consistently reported in deep-water naval encounters.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -386,6 +400,8 @@ export const species: Species[] = [
       'Communicate primarily through telepathy',
       'Source of much modern "galactic federation" lore',
     ],
+    hiddenLore:
+      'Alex Collier\'s most-cited disclosure: the Andromedan Council allegedly voted in 1995 on a clearance to militarily intervene against the Draconian presence in our solar system — a vote held in abeyance pending humanity\'s own choice to reject the control system. The "21 days of silence" prophecy (a multi-week worldwide power and signal blackout marking the inflection point) is said to be the trigger for either intervention or full withdrawal. Collier was deplatformed across major channels in 2020.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -415,6 +431,8 @@ export const species: Species[] = [
       'Feline sub-race linked to Egyptian sphinx and lion iconography',
       'Their war with Reptilians frames the entire galactic conflict',
     ],
+    hiddenLore:
+      'In the Lyssa Royal cosmology, the destruction of Lyra was not a battlefield defeat but a philosophical schism — the "service-to-self" Lyran faction siding with Draconian methodology, the "service-to-others" faction fleeing to seed peaceful colonies. Earth\'s split between predator-class power structures and remnant cooperative cultures is read as the same fracture playing out again. The feline Lyran sub-race (the "First Cats") are said to have survived in Egypt and may explain the species\' recurring association with sacred protection across cultures.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -447,6 +465,8 @@ export const species: Species[] = [
       'May explain the "doll-like" descriptions in some encounters',
       'Possibly the ones piloting smaller probe craft',
     ],
+    hiddenLore:
+      'Dr. David Jacobs\' later research argues a portion of synthetics are now walking among us — engineered hybrids indistinguishable from humans in casual observation, designed to acclimate to surface life and integrate quietly into society over decades. He calls this the "transition phase." Whether one accepts his thesis or not, the consistent independent description of expressionless, behaviorally flat humanoids by abductees worldwide is among the harder-to-dismiss anomalies in the literature.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -478,6 +498,8 @@ export const species: Species[] = [
       'Strong correlation with altered states (DMT, NDE, deep meditation)',
       'May be the unifying frame for ALL contact phenomena',
     ],
+    hiddenLore:
+      'Vallée\'s private notebooks (partially released by The Debrief in 2023) suggest the interdimensional intelligence operates a "control system" that periodically updates the cultural mythology around it — angels in the medieval period, fairies in the Renaissance, airships in the 1890s, flying saucers post-1947, drones now. The mythology is never the point. The point appears to be a slow recalibration of human belief structures across centuries — for purposes Vallée never claimed to understand.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -510,6 +532,8 @@ export const species: Species[] = [
       'Eggs found inside one specimen',
       'Triggered global media response and follow-up Peruvian government investigations',
     ],
+    hiddenLore:
+      'A second batch of Nazca specimens — never publicly displayed — reportedly contained partial soft-tissue preservation with intact organ structures distinct from any known terrestrial mammal. Peruvian Ministry of Culture filings were unsealed in 2024 confirming the bodies were transferred to a secured biological facility outside Lima. Researchers including Dr. José Zalce Benitez (Mexican Navy forensic analyst) have stated under oath that the specimens are not assembled from existing animal parts and show no evidence of modern fabrication.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -539,6 +563,8 @@ export const species: Species[] = [
       'Concentrated near nuclear, military, and presidential sites',
       'No agency publicly claimed responsibility',
     ],
+    hiddenLore:
+      'Internal sourcing reported by Ross Coulthart and George Knapp suggests at least two distinct categories were active in the NJ phenomenon: conventional craft from a classified DoD program reportedly searching for loose nuclear material, and a smaller subset displaying flight characteristics — instant acceleration, mid-air dematerialization — that no terrestrial drone platform can replicate. The official "no anomalous activity" position from FAA/DHS is said to be a deconfliction posture rather than an analytic conclusion.',
     keyCases: [],
     keyWitnesses: [],
     sources: [
@@ -568,6 +594,8 @@ export const species: Species[] = [
       'Maintains coherent shape across all observed conditions',
       'Possibly represents a "biological" UAP class',
     ],
+    hiddenLore:
+      'Multiple US Navy and AARO-adjacent sources have reportedly described the jellyfish phenotype as the most-encountered transmedium UAP in the Persian Gulf and Pacific theaters between 2018 and 2023, with hundreds of encounters logged but only one cleared for public release. The structural coherence under transmedium passage — air to water to solid wall without observable disturbance — implies the object is not a discrete physical body in any conventional sense, but a stable resonance pattern in some underlying field. No retrieval of "wreckage" has ever been reported because, allegedly, there is nothing material to retrieve.',
     keyCases: [],
     keyWitnesses: [],
     sources: [

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ExternalLink, Filter, Users } from 'lucide-react';
 import {
   species as allSpecies,
+  speciesImages,
   classificationLabels,
   threatLabels,
   threatColors,
@@ -10,9 +11,11 @@ import {
   type ThreatLevel,
 } from '../data/species';
 import { EvidenceBadge } from '../components/EvidenceBadge';
+import { RankUnlock } from '../components/RankUnlock';
 import { uapCases } from '../data/uap-cases';
 import { whistleblowers } from '../data/whistleblowers';
 import { Link } from 'react-router-dom';
+import { useEchoXp } from '../hooks/use-echo-xp';
 
 type ClassFilter = 'All' | SpeciesClassification;
 type ThreatFilter = 'All' | ThreatLevel;
@@ -34,6 +37,16 @@ export function SpeciesCodexPage() {
   const [classFilter, setClassFilter] = useState<ClassFilter>('All');
   const [threatFilter, setThreatFilter] = useState<ThreatFilter>('All');
   const [openId, setOpenId] = useState<string | null>(null);
+  const { trackSpeciesOpen } = useEchoXp();
+
+  const handleToggle = (id: string) => {
+    if (openId === id) {
+      setOpenId(null);
+    } else {
+      setOpenId(id);
+      trackSpeciesOpen(id);
+    }
+  };
 
   // Auto-open from hash (e.g. /species#greys)
   useEffect(() => {
@@ -133,6 +146,7 @@ export function SpeciesCodexPage() {
           const linkedCases = s.keyCases.map((id) => uapCases.find((c) => c.id === id)).filter(Boolean);
           const linkedWits = s.keyWitnesses.map((id) => whistleblowers.find((w) => w.id === id)).filter(Boolean);
 
+          const portrait = speciesImages[s.id];
           return (
             <motion.div
               key={s.id}
@@ -145,34 +159,80 @@ export function SpeciesCodexPage() {
               style={{ borderColor: open ? s.accentColor : 'hsl(var(--border))' }}
             >
               <button
-                onClick={() => setOpenId(open ? null : s.id)}
-                className="w-full flex items-center gap-4 p-5 text-left hover:bg-white/5 transition-colors"
+                onClick={() => handleToggle(s.id)}
+                className="w-full text-left hover:bg-white/5 transition-colors"
               >
-                <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl shrink-0"
-                  style={{ background: `${s.accentColor}22`, border: `1px solid ${s.accentColor}55` }}
-                >
-                  {s.symbol}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <h2 className="text-lg sm:text-xl font-bold text-foreground">{s.name}</h2>
-                    <EvidenceBadge grade={s.evidenceGrade} />
-                    <span
-                      className="text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded-full border"
-                      style={{ color: threatColors[s.threatLevel], borderColor: threatColors[s.threatLevel] }}
-                    >
-                      {threatLabels[s.threatLevel]}
-                    </span>
+                {portrait && (
+                  <div className="relative aspect-[16/9] sm:aspect-[4/3] overflow-hidden">
+                    <img
+                      src={portrait}
+                      alt={`${s.name} — esoteric portrait`}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background: `linear-gradient(180deg, transparent 0%, transparent 40%, hsl(var(--background) / 0.85) 100%)`,
+                      }}
+                    />
+                    <div
+                      className="absolute inset-0 mix-blend-overlay opacity-40"
+                      style={{ background: `radial-gradient(circle at 30% 30%, ${s.accentColor}66, transparent 70%)` }}
+                    />
+                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex items-end gap-3">
+                      <div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0 backdrop-blur"
+                        style={{ background: `${s.accentColor}33`, border: `1px solid ${s.accentColor}88` }}
+                      >
+                        {s.symbol}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h2 className="text-xl sm:text-2xl font-bold text-foreground drop-shadow-lg mb-1">{s.name}</h2>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <EvidenceBadge grade={s.evidenceGrade} />
+                          <span
+                            className="text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded-full border backdrop-blur bg-background/40"
+                            style={{ color: threatColors[s.threatLevel], borderColor: threatColors[s.threatLevel] }}
+                          >
+                            {threatLabels[s.threatLevel]}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs text-muted-foreground truncate">
-                    {classificationLabels[s.classification]} · {s.aliases.slice(0, 2).join(' · ')}
-                  </p>
+                )}
+                <div className="flex items-center gap-4 p-5">
+                  {!portrait && (
+                    <div
+                      className="w-14 h-14 rounded-xl flex items-center justify-center text-3xl shrink-0"
+                      style={{ background: `${s.accentColor}22`, border: `1px solid ${s.accentColor}55` }}
+                    >
+                      {s.symbol}
+                    </div>
+                  )}
+                  <div className="flex-1 min-w-0">
+                    {!portrait && (
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <h2 className="text-lg sm:text-xl font-bold text-foreground">{s.name}</h2>
+                        <EvidenceBadge grade={s.evidenceGrade} />
+                        <span
+                          className="text-[10px] uppercase tracking-widest font-semibold px-2 py-0.5 rounded-full border"
+                          style={{ color: threatColors[s.threatLevel], borderColor: threatColors[s.threatLevel] }}
+                        >
+                          {threatLabels[s.threatLevel]}
+                        </span>
+                      </div>
+                    )}
+                    <p className="text-xs text-muted-foreground truncate">
+                      {classificationLabels[s.classification]} · {s.aliases.slice(0, 2).join(' · ')}
+                    </p>
+                  </div>
+                  <ChevronDown
+                    className="w-5 h-5 text-muted-foreground transition-transform shrink-0"
+                    style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  />
                 </div>
-                <ChevronDown
-                  className="w-5 h-5 text-muted-foreground transition-transform shrink-0"
-                  style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                />
               </button>
 
               <AnimatePresence>
@@ -184,8 +244,25 @@ export function SpeciesCodexPage() {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="p-5 sm:p-6 pt-2 space-y-5 border-t border-border/50">
+                    <div className="p-5 sm:p-6 pt-5 space-y-5 border-t border-border/50">
                       <p className="text-foreground leading-relaxed">{s.summary}</p>
+
+                      {s.hiddenLore && (
+                        <RankUnlock minXp={300} rankName="Adept" label="hidden lore">
+                          <div
+                            className="rounded-xl border p-4 relative overflow-hidden"
+                            style={{
+                              borderColor: `${s.accentColor}55`,
+                              background: `linear-gradient(135deg, ${s.accentColor}10, transparent)`,
+                            }}
+                          >
+                            <div className="text-[10px] uppercase tracking-widest font-bold mb-2" style={{ color: s.accentColor }}>
+                              ✦ Adept Lore — Restricted
+                            </div>
+                            <p className="text-sm text-foreground leading-relaxed">{s.hiddenLore}</p>
+                          </div>
+                        </RankUnlock>
+                      )}
 
                       <div className="grid sm:grid-cols-2 gap-4 text-sm">
                         <Field label="Origin" value={s.origin} />
