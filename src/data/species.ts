@@ -603,3 +603,14 @@ export const threatColors: Record<ThreatLevel, string> = {
   predator: 'hsl(0 75% 55%)',
   unknown: 'hsl(var(--muted-foreground))',
 };
+
+/** Returns all species whose `keyCases` includes the given UAP case id. */
+export function getSpeciesForCase(caseId: string): Species[] {
+  return species.filter((s) => s.keyCases.includes(caseId));
+}
+
+/** Returns all species whose `keyWitnesses` includes the given whistleblower id. */
+export function getSpeciesForWitness(witnessId: string): Species[] {
+  return species.filter((s) => s.keyWitnesses.includes(witnessId));
+}
+
