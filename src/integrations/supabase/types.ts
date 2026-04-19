@@ -18,6 +18,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          last_daily_at: string | null
           pages_visited: Json
           rank: string
           updated_at: string
@@ -27,6 +28,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          last_daily_at?: string | null
           pages_visited?: Json
           rank?: string
           updated_at?: string
@@ -36,9 +38,37 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          last_daily_at?: string | null
           pages_visited?: Json
           rank?: string
           updated_at?: string
+          user_id?: string
+          xp?: number
+        }
+        Relationships: []
+      }
+      echo_xp_events: {
+        Row: {
+          created_at: string
+          event_id: string
+          event_type: string
+          id: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          event_type: string
+          id?: string
+          user_id: string
+          xp?: number
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          event_type?: string
+          id?: string
           user_id?: string
           xp?: number
         }
