@@ -1,87 +1,82 @@
 
-User wants me to finish the remaining work from the previous batch. Based on what I tracked as incomplete:
+User wants several things bundled. Let me parse:
 
-1. Render species portraits in SpeciesCodexPage cards
-2. Wire per-event XP triggers (species/uap/whistleblower/vault open)
-3. EchoversePage: replace AuthModal with /auth redirect
-4. Build /profile page
-5. Hidden lore on remaining 14 species
-6. Branded auth email templates
+1. **Verify live signup** — they're asking me to test it (browser tool ok per instructions)
+2. **Build first-visit walkthrough** — Walkthrough.tsx exists already but needs to be mounted/triggered
+3. **Add Oracle-tier Shadow Pantheon lore** — gated at 1000 XP
+4. **What's the app missing?** — open question, I'll surface gaps
+5. **Color scheme for ratings** — teal, neon green, sky blue. "No wordings, no lettering" — they want color-only badges (the EvidenceBadge currently shows text). They want it to work on the cosmic background.
+6. **Fix YouTube videos** — VideoEmbed.tsx exists with lite-yt pattern; need to verify the actual video IDs in frequencies.ts are real (the comment in VideoEmbed.tsx already flags placeholder IDs as a data problem)
 
-Keeping it tight — this is a continuation, not new scope.
+Let me check existing state quickly to scope properly.
 
----
+Re: "no wordings, no lettering for ratings" — they want EvidenceBadge to be color-only dots/pills, not text labels. That's a clear style call.
 
-# Plan: Finish the remaining work
+Re: walkthrough — Walkthrough.tsx exists but I need to verify it's mounted in Layout/HomePage.
 
-## Phase 1 — Species Codex portraits + XP triggers
+Re: videos — need to check frequencies.ts video IDs.
 
-**1a. Render portraits in `SpeciesCodexPage.tsx`**
-- Import `speciesImages` map
-- Add a 4:3 portrait at the top of each card with dark gradient overlay
-- Float name + classification badge over the bottom of the image
-
-**1b. Wire XP `awardEvent` calls into expand handlers**
-- `SpeciesCodexPage` → `trackSpeciesOpen(id)` on dossier expand
-- `UAPPage` → `trackUapOpen(id)` on case expand
-- `WhistleblowerVaultPage` → `trackWhistleblowerOpen(id)` on file expand
-- `The46Page` (vault) → `trackVaultOpen(id)` on slot reveal
-
-## Phase 2 — Loose ends
-
-**2a. EchoversePage modal → `/auth` redirect**
-- Replace `setShowAuth(true)` with `navigate('/auth')`
-- Remove `AuthModal` import (keep file)
-
-**2b. Sign-up XP grant (+50)**
-- In `AuthPage` after successful signup, call `awardEvent('sign_up', userId, 50)`
-
-## Phase 3 — Profile page (`/profile`)
-
-New page showing:
-- Current rank with colored halo + portrait
-- XP progress bar to next rank
-- 6 unlock tiles (locked/unlocked indicators with check/lock icons)
-- Recent XP events feed (last 20 from `echo_xp_events`)
-- Pages explored count
-
-Add nav link in `Navbar.tsx` (only visible when signed in).
-
-## Phase 4 — Hidden lore on remaining species
-
-Add `hiddenLore` paragraph to the 14 species missing it:
-reptilians, pleiadians, arcturians, sirians, andromedans, lyrans, mantids, anunnaki, tall-whites, synthetics, interdimensionals, mexico-bodies, nj-drones, jellyfish
-
-Render gated by `<RankUnlock minXp={300} rankName="Adept">` inside each expanded dossier.
-
-## Phase 5 — Branded auth email templates
-
-Custom Pantheon Observatory templates for: signup confirmation, password recovery, magic link, email change, invite, reauthentication.
-
-Style: white background (required), deep purple (#8b5cf6) accent header, observatory eye iconography, "Welcome, Starseed" tone. Will trigger the email domain setup dialog if not already configured.
+Plan stays focused. I'll present and let them approve.
 
 ---
 
-## Files touched (~12 edits + 1 new page + 6 templates)
+# Plan: Verify signup + walkthrough mount + Oracle lore + color-only ratings + fix videos
 
-**Created:**
-- `src/pages/ProfilePage.tsx`
-- 6 email template files via the email scaffolding tool
+## Phase 1 — Verify live signup flow (browser test)
 
-**Edited:**
-- `src/pages/SpeciesCodexPage.tsx` (portraits + XP)
-- `src/pages/UAPPage.tsx` (XP on expand)
-- `src/pages/WhistleblowerVaultPage.tsx` (XP on expand)
-- `src/pages/The46Page.tsx` (XP on slot reveal)
-- `src/pages/EchoversePage.tsx` (auth redirect)
-- `src/pages/AuthPage.tsx` (signup XP grant)
-- `src/data/species.ts` (14 hiddenLore additions)
-- `src/components/Navbar.tsx` (Profile link)
-- `src/App.tsx` (/profile route)
+Use the browser to:
+1. Navigate to `/auth`, sign up with a fresh test email
+2. Check that the signup completes and a verification email is queued
+3. After confirming (manual step you'll need to do in your inbox), reload `/profile` and confirm +50 XP / Seeker progress
 
-**Verification after build:**
-- /species shows portraits + filters work + opening a dossier grants 15 XP once
-- /uap and /whistleblowers open → 10 XP each (once per item)
-- /profile renders rank, progress, unlocks, and event feed
-- EchoversePage sign-in button routes to /auth
-- Confirmation email arrives with Pantheon Observatory branding
+I'll report what I see at each step. If the email fails to arrive, I'll check the queue logs and report back without guessing fixes.
+
+## Phase 2 — Mount the first-visit walkthrough
+
+`Walkthrough.tsx` exists but isn't mounted anywhere. Add it to `HomePage.tsx` so the 5-step tour auto-fires once for new visitors (localStorage-gated, already wired in the component).
+
+## Phase 3 — Oracle-tier Shadow Pantheon lore (1000 XP gate)
+
+Add a `ritualLore` field to each of the 10 shadow gods in `src/data/shadow-gods.ts`. Render gated by `<RankUnlock minXp={1000} rankName="Oracle">` inside each dossier on `ShadowPantheonPage.tsx` — a "Ritual Details" panel revealing how each god was historically invoked (Moloch's bronze furnace, Lilith's mirror summoning, Baphomet's inverted pentagram, etc.).
+
+## Phase 4 — Color-only rating badges
+
+Redesign `EvidenceBadge.tsx`:
+- Remove the text labels ("Documented", "Credible", etc.)
+- Replace with a small glowing dot + ring pill (no letters)
+- New palette tuned for the dark cosmic background:
+  - DOCUMENTED → neon green (#39ff14)
+  - CREDIBLE → sky blue (#38bdf8)
+  - SPECULATIVE → teal (#2dd4bf)
+  - UNVERIFIED → muted purple/grey
+- Add tooltip on hover showing the grade name (so accessibility isn't lost)
+- Update `index.css` `.grade-*` classes accordingly
+
+## Phase 5 — Fix YouTube videos
+
+The `VideoEmbed.tsx` lite-yt pattern is solid. The real issue is video IDs. I'll:
+1. Audit `src/data/frequencies.ts` and any other data files with `videos: []` arrays
+2. Replace placeholder IDs with real, embeddable YouTube IDs for the relevant frequency/topic (432Hz, 528Hz, Schumann resonance, etc.) — picking videos that allow embedding
+3. For TikTok: keep the "open in new tab" fallback (TikTok blocks iframe embeds without their script — this is a TikTok restriction, not fixable client-side)
+
+## Phase 6 — Quick "what's missing" gap report
+
+After the build, I'll surface a short list of meaningful gaps I noticed (e.g. no search across codex, no bookmarks, no daily lore drop, profile lacks avatar, no share buttons on cases, no global "explored %" counter). You decide what's next — no scope creep this batch.
+
+---
+
+## Files touched
+
+**Edited (~6):**
+- `src/components/EvidenceBadge.tsx` (color-only redesign)
+- `src/index.css` (grade-* classes → neon/teal/sky)
+- `src/pages/HomePage.tsx` (mount Walkthrough)
+- `src/pages/ShadowPantheonPage.tsx` (render ritualLore with RankUnlock)
+- `src/data/shadow-gods.ts` (add ritualLore to 10 gods)
+- `src/data/frequencies.ts` (replace placeholder video IDs)
+
+**Verification:**
+- Browser test of signup flow on live preview
+- Manual: check /shadow at 1000+ XP, verify ritual panels unlock
+- Manual: refresh / with cleared localStorage to retrigger walkthrough
+- Manual: open /frequencies and play 2-3 videos to confirm they load
