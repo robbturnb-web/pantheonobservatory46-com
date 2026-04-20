@@ -4,7 +4,6 @@ import { useRef, useState, useEffect } from 'react';
 import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid, Lock, Skull, UserCircle2 } from 'lucide-react';
 import { vaultSlots } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
-import { Walkthrough } from '@/components/Walkthrough';
 import { DailyPulseCard } from '@/components/cosmos/DailyPulseCard';
 
 const sections = [
