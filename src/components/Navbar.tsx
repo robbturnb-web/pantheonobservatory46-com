@@ -1,36 +1,64 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Eye, Award } from 'lucide-react';
+import { Menu, X, Eye, Award, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 
-const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/timeline', label: 'Timeline' },
-  { to: '/uap', label: 'UAP Files' },
-  { to: '/gods', label: 'Gods' },
-  { to: '/species', label: 'Species' },
-  { to: '/shadow-pantheon', label: 'Shadow' },
-  { to: '/consciousness', label: 'Consciousness' },
-  { to: '/signals', label: 'Signals' },
-  { to: '/frequencies', label: 'Frequencies' },
-  { to: '/whistleblowers', label: 'Whistleblowers' },
-  { to: '/telescopes', label: 'Telescopes' },
-  { to: '/galaxy', label: 'Galaxy' },
-  { to: '/pyramids', label: 'Pyramids' },
-  { to: '/echoverse', label: 'Echoverse' },
-  { to: '/earth-pulse', label: 'Earth Pulse' },
-  { to: '/orb-report', label: 'Orb Report' },
-  { to: '/the-46', label: 'The 46' },
-  { to: '/origin', label: 'Origin Chamber' },
-  { to: '/echo', label: 'Echo AI' },
+interface NavLink { to: string; label: string; }
+interface NavCategory { label: string; links: NavLink[]; }
+
+const NAV_CATEGORIES: NavCategory[] = [
+  {
+    label: 'Cosmos',
+    links: [
+      { to: '/timeline', label: 'Timeline' },
+      { to: '/telescopes', label: 'Telescopes' },
+      { to: '/galaxy', label: 'Galaxy' },
+      { to: '/pyramids', label: 'Pyramids' },
+      { to: '/earth-pulse', label: 'Earth Pulse' },
+    ],
+  },
+  {
+    label: 'Disclosure',
+    links: [
+      { to: '/uap', label: 'UAP Files' },
+      { to: '/whistleblowers', label: 'Whistleblowers' },
+      { to: '/orb-report', label: 'Orb Report' },
+      { to: '/the-46', label: 'The 46' },
+    ],
+  },
+  {
+    label: 'Lore',
+    links: [
+      { to: '/gods', label: 'Gods' },
+      { to: '/shadow-pantheon', label: 'Shadow' },
+      { to: '/species', label: 'Species' },
+      { to: '/consciousness', label: 'Consciousness' },
+      { to: '/signals', label: 'Signals' },
+      { to: '/frequencies', label: 'Frequencies' },
+      { to: '/elements', label: 'Elements Lab' },
+      { to: '/glyphs', label: 'Glyphs' },
+      { to: '/stone-faces', label: 'Stone Faces' },
+    ],
+  },
+  {
+    label: 'Community',
+    links: [
+      { to: '/echoverse', label: 'Echoverse' },
+      { to: '/community', label: 'Vault' },
+      { to: '/origin', label: 'Origin Chamber' },
+      { to: '/echo', label: 'Echo AI' },
+    ],
+  },
 ];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const location = useLocation();
   const { userId, rank } = useEchoXp();
+  const closeTimer = useRef<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -38,8 +66,19 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => { setOpen(false); }, [location.pathname]);
+  useEffect(() => { setOpen(false); setActiveMenu(null); }, [location.pathname]);
+
+  const openMenu = (label: string) => {
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    setActiveMenu(label);
+  };
+  const scheduleClose = () => {
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    closeTimer.current = window.setTimeout(() => setActiveMenu(null), 180);
+  };
+
+  const isCategoryActive = (cat: NavCategory) =>
+    cat.links.some((l) => location.pathname === l.to);
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -53,25 +92,58 @@ export function Navbar() {
           </Link>
 
           <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`relative px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  location.pathname === link.to
-                    ? 'text-primary'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
+            <Link
+              to="/"
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                location.pathname === '/' ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Home
+            </Link>
+            {NAV_CATEGORIES.map((cat) => (
+              <div
+                key={cat.label}
+                className="relative"
+                onMouseEnter={() => openMenu(cat.label)}
+                onMouseLeave={scheduleClose}
               >
-                {link.label}
-                {location.pathname === link.to && (
-                  <motion.div
-                    layoutId="nav-indicator"
-                    className="absolute inset-0 bg-accent rounded-lg -z-10"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-              </Link>
+                <button
+                  type="button"
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${
+                    isCategoryActive(cat)
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {cat.label}
+                  <ChevronDown className="w-3 h-3" />
+                </button>
+                <AnimatePresence>
+                  {activeMenu === cat.label && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute left-0 top-full mt-1 min-w-[180px] glass-cosmic border border-border rounded-lg p-1 shadow-xl"
+                    >
+                      {cat.links.map((link) => (
+                        <Link
+                          key={link.to}
+                          to={link.to}
+                          className={`block px-3 py-2 rounded-md text-sm transition-colors ${
+                            location.pathname === link.to
+                              ? 'text-primary bg-primary/10'
+                              : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
             {userId && (
               <Link
@@ -97,21 +169,38 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass-cosmic border-t border-border"
+            className="lg:hidden glass-cosmic border-t border-border max-h-[80vh] overflow-y-auto"
           >
-            <div className="px-4 py-3 space-y-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                    location.pathname === link.to
-                      ? 'text-primary bg-accent'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-accent'
-                  }`}
-                >
-                  {link.label}
-                </Link>
+            <div className="px-4 py-3 space-y-3">
+              <Link
+                to="/"
+                className={`block px-3 py-2 rounded-lg text-sm font-medium ${
+                  location.pathname === '/' ? 'text-primary bg-accent' : 'text-muted-foreground'
+                }`}
+              >
+                Home
+              </Link>
+              {NAV_CATEGORIES.map((cat) => (
+                <div key={cat.label}>
+                  <div className="text-[10px] uppercase tracking-wider text-muted-foreground/70 px-3 mb-1">
+                    {cat.label}
+                  </div>
+                  <div className="space-y-0.5">
+                    {cat.links.map((link) => (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        className={`block px-3 py-2 rounded-lg text-sm ${
+                          location.pathname === link.to
+                            ? 'text-primary bg-accent'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               ))}
               {userId && (
                 <Link
