@@ -69,7 +69,7 @@ export function PeriodicTable({ selected, highlightSymbol, onSelect }: Props) {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-18 gap-0.5 sm:gap-1" style={{ gridTemplateColumns: 'repeat(18, minmax(0, 1fr))' }}>
+      <div className="grid gap-0.5 sm:gap-1" style={{ gridTemplateColumns: 'repeat(18, minmax(0, 1fr))' }}>
         {mainGrid.flatMap((row, p) => row.map((el, g) => renderCell(el, `${p}-${g}`)))}
       </div>
       <div className="mt-2 sm:mt-3 grid gap-0.5 sm:gap-1" style={{ gridTemplateColumns: 'repeat(15, minmax(0, 1fr))', marginLeft: '11.1%' }}>

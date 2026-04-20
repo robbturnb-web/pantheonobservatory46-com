@@ -98,7 +98,6 @@ export function HomePage() {
 
   return (
     <div className="relative">
-      <Walkthrough />
       {/* HERO */}
       <motion.div
         ref={heroRef}
