@@ -10,6 +10,10 @@ export const XP_VALUES = {
   ORIGIN_QUIZ_COMPLETE: 100,
   SIGN_UP: 50,
   DAILY_RETURN: 25,
+  ELEMENT_OPEN: 8,
+  GLYPH_DECODE: 30,
+  STONE_MARKER_OPEN: 12,
+  TESTIMONY_SUBMIT: 40,
 } as const;
 
 export type XpEventType =
