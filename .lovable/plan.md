@@ -1,82 +1,113 @@
 
-User wants several things bundled. Let me parse:
+# Plan: Elements Lab + Glyphs Archive + Stone Faces + Community Vault + Live data spine
 
-1. **Verify live signup** — they're asking me to test it (browser tool ok per instructions)
-2. **Build first-visit walkthrough** — Walkthrough.tsx exists already but needs to be mounted/triggered
-3. **Add Oracle-tier Shadow Pantheon lore** — gated at 1000 XP
-4. **What's the app missing?** — open question, I'll surface gaps
-5. **Color scheme for ratings** — teal, neon green, sky blue. "No wordings, no lettering" — they want color-only badges (the EvidenceBadge currently shows text). They want it to work on the cosmic background.
-6. **Fix YouTube videos** — VideoEmbed.tsx exists with lite-yt pattern; need to verify the actual video IDs in frequencies.ts are real (the comment in VideoEmbed.tsx already flags placeholder IDs as a data problem)
-
-Let me check existing state quickly to scope properly.
-
-Re: "no wordings, no lettering for ratings" — they want EvidenceBadge to be color-only dots/pills, not text labels. That's a clear style call.
-
-Re: walkthrough — Walkthrough.tsx exists but I need to verify it's mounted in Layout/HomePage.
-
-Re: videos — need to check frequencies.ts video IDs.
-
-Plan stays focused. I'll present and let them approve.
+## Scope confirmed
+- **Slice**: Elements & Alchemy Lab, Glyphs & Symbols Archive, Stone Faces & Lost Markers
+- **Live data**: free APIs + Lovable AI for daily Stefan Burns summary (cron-driven edge function)
+- **Community**: full submissions + tags + search + mod queue + your pinned story + Flow Drive embed
+- **Style**: keep existing Pantheon Observatory cosmic-purple theme
 
 ---
 
-# Plan: Verify signup + walkthrough mount + Oracle lore + color-only ratings + fix videos
+## Phase 1 — Database (one migration)
 
-## Phase 1 — Verify live signup flow (browser test)
+Tables:
+- `community_testimonies` — id, user_id, title, body, tags (text[]), category, status ('pending'|'approved'|'rejected'), pinned (bool), flow_drive_url (text, nullable), created_at, approved_at, approved_by
+- `user_roles` — id, user_id, role enum ('admin','moderator','user') — proper RLS pattern with `has_role()` security definer fn
+- `glyph_submissions` — id, user_id, image_url, drawn_svg (text), ai_interpretation (text, nullable), culture_tags (text[]), status, created_at
+- `daily_cosmos_pulse` — id, summary_date (date unique), source_url, summary_md, generated_at — populated by daily edge function
 
-Use the browser to:
-1. Navigate to `/auth`, sign up with a fresh test email
-2. Check that the signup completes and a verification email is queued
-3. After confirming (manual step you'll need to do in your inbox), reload `/profile` and confirm +50 XP / Seeker progress
+Storage buckets:
+- `glyphs` (public read, auth write) — uploaded glyph images
+- `testimony-media` (public read, auth write) — optional images for testimonies
 
-I'll report what I see at each step. If the email fails to arrive, I'll check the queue logs and report back without guessing fixes.
+RLS: anyone can read approved content; users can insert/edit their own; only admins/moderators can approve or pin.
 
-## Phase 2 — Mount the first-visit walkthrough
+## Phase 2 — Elements & Alchemy Lab (`/elements`)
 
-`Walkthrough.tsx` exists but isn't mounted anywhere. Add it to `HomePage.tsx` so the 5-step tour auto-fires once for new visitors (localStorage-gated, already wired in the component).
+- Full periodic table grid (118 elements + spotlight Element 115 / Moscovium with Lazar fuel lore card)
+- Click any element → detail panel with properties, lore, animations
+- **Mixer mode**: drag-drop two elements onto a "reactor" → particle collision animation (framer-motion + canvas burst) → outcome card showing real chemistry (when known) + "exotic matter" speculation for combos involving 115/119/heavy synthetics
+- Compatibility highlighting: when one element is selected, valid reaction partners glow neon-green; incompatible fade
+- Mad-scientist toggle that unlocks fictional UFO-fuel outcomes
 
-## Phase 3 — Oracle-tier Shadow Pantheon lore (1000 XP gate)
+Data: `src/data/elements.ts` (full periodic table, each with `lore?` field for the spotlight ones). Reaction logic in `src/lib/element-reactions.ts`.
 
-Add a `ritualLore` field to each of the 10 shadow gods in `src/data/shadow-gods.ts`. Render gated by `<RankUnlock minXp={1000} rankName="Oracle">` inside each dossier on `ShadowPantheonPage.tsx` — a "Ritual Details" panel revealing how each god was historically invoked (Moloch's bronze furnace, Lilith's mirror summoning, Baphomet's inverted pentagram, etc.).
+## Phase 3 — Glyphs & Symbols Archive (`/glyphs`)
 
-## Phase 4 — Color-only rating badges
+- Curated grid of ~30 ancient glyphs (Sumerian cuneiform, Egyptian hieroglyphs, Mayan, Vinča, Indus, crop-circle motifs) in `src/data/glyphs.ts`
+- Each card flips on hover, rotates with subtle animation, opens dossier with culture/era/translation/ET interpretation
+- **Decoder tool**: upload an image OR draw on a canvas (use `react-signature-canvas` or a tiny custom canvas) → submit → edge function `glyph-decode` calls Lovable AI (gemini-2.5-pro for vision) with prompt: "Match this glyph to known ancient symbols and provide a literal + ET-disclosure interpretation"
+- Submitted glyphs save to `glyph_submissions` and can be browsed in a public gallery once approved
 
-Redesign `EvidenceBadge.tsx`:
-- Remove the text labels ("Documented", "Credible", etc.)
-- Replace with a small glowing dot + ring pill (no letters)
-- New palette tuned for the dark cosmic background:
-  - DOCUMENTED → neon green (#39ff14)
-  - CREDIBLE → sky blue (#38bdf8)
-  - SPECULATIVE → teal (#2dd4bf)
-  - UNVERIFIED → muted purple/grey
-- Add tooltip on hover showing the grade name (so accessibility isn't lost)
-- Update `index.css` `.grade-*` classes accordingly
+## Phase 4 — Stone Faces & Lost Markers (`/stone-faces`)
 
-## Phase 5 — Fix YouTube videos
+- Curated dossier set: Treasure Island, Oak Island, Easter Island moai, Olmec heads, Göbekli Tepe pillars, Yonaguni monument, Bucegi sphinx
+- World map (use `react-simple-maps` — already in the React ecosystem, no API key) with pulsing markers at coordinates
+- Click marker → side dossier with theories, builder hypotheses, photo, "activation" pulse animation when opened
+- Data: `src/data/stone-markers.ts`
 
-The `VideoEmbed.tsx` lite-yt pattern is solid. The real issue is video IDs. I'll:
-1. Audit `src/data/frequencies.ts` and any other data files with `videos: []` arrays
-2. Replace placeholder IDs with real, embeddable YouTube IDs for the relevant frequency/topic (432Hz, 528Hz, Schumann resonance, etc.) — picking videos that allow embedding
-3. For TikTok: keep the "open in new tab" fallback (TikTok blocks iframe embeds without their script — this is a TikTok restriction, not fixable client-side)
+## Phase 5 — Community Vault (`/community`)
 
-## Phase 6 — Quick "what's missing" gap report
+- Public feed of approved testimonies, sorted: pinned first, then newest
+- Filters: by tag, by category (sighting/encounter/contact/dream/synchronicity), full-text search
+- Submit form (auth-gated) → goes into `pending` queue
+- Moderator dashboard at `/community/mod` — gated by `has_role(uid, 'moderator')` — approve/reject/pin
+- Your personal story seeded as pinned with the Flow Drive video embed (URL passed by you later or placeholder for now)
 
-After the build, I'll surface a short list of meaningful gaps I noticed (e.g. no search across codex, no bookmarks, no daily lore drop, profile lacks avatar, no share buttons on cases, no global "explored %" counter). You decide what's next — no scope creep this batch.
+## Phase 6 — Daily Cosmos Pulse spine (foundational for the bigger Live Cosmos Pulse next batch)
+
+- Edge function `daily-cosmos-pulse`:
+  - Fetch Stefan Burns YouTube channel RSS (`https://www.youtube.com/feeds/videos.xml?channel_id=...` — public, no key)
+  - Take latest video title + description
+  - Send to Lovable AI (gemini-2.5-flash) → "Summarize this Stefan Burns update in 3 bullets emphasizing planetary/energetic forecasts"
+  - Upsert into `daily_cosmos_pulse` keyed by today's date
+- pg_cron job runs it daily at 23:00 UTC
+- Small `<DailyPulseCard />` widget mounted on `HomePage` showing today's summary + link to source video
+- This is the foundation for Phase 2's full Live Cosmos Pulse page next batch
+
+## Phase 7 — Navigation + wiring
+
+- Add 4 new routes: `/elements`, `/glyphs`, `/stone-faces`, `/community` (+ `/community/mod`)
+- Add to `Navbar.tsx` nav links (it's already getting long — group them visually under collapsible categories: "Cosmos / Disclosure / Lore / Community")
+- XP events for new pages (10 XP each first visit)
+- Daily pulse widget on HomePage above the existing fold
 
 ---
 
-## Files touched
+## Files (new ~14, edited ~5)
 
-**Edited (~6):**
-- `src/components/EvidenceBadge.tsx` (color-only redesign)
-- `src/index.css` (grade-* classes → neon/teal/sky)
-- `src/pages/HomePage.tsx` (mount Walkthrough)
-- `src/pages/ShadowPantheonPage.tsx` (render ritualLore with RankUnlock)
-- `src/data/shadow-gods.ts` (add ritualLore to 10 gods)
-- `src/data/frequencies.ts` (replace placeholder video IDs)
+**New:**
+- `src/data/elements.ts`, `src/data/glyphs.ts`, `src/data/stone-markers.ts`
+- `src/lib/element-reactions.ts`
+- `src/pages/ElementsLabPage.tsx`, `src/pages/GlyphsArchivePage.tsx`, `src/pages/StoneFacesPage.tsx`, `src/pages/CommunityVaultPage.tsx`, `src/pages/CommunityModPage.tsx`
+- `src/components/elements/PeriodicTable.tsx`, `src/components/elements/ElementMixer.tsx`
+- `src/components/glyphs/GlyphDecoder.tsx`
+- `src/components/community/TestimonySubmitForm.tsx`, `src/components/community/TestimonyCard.tsx`
+- `src/components/cosmos/DailyPulseCard.tsx`
+- `src/hooks/use-user-role.ts`
+- `supabase/functions/glyph-decode/index.ts`
+- `supabase/functions/daily-cosmos-pulse/index.ts`
 
-**Verification:**
-- Browser test of signup flow on live preview
-- Manual: check /shadow at 1000+ XP, verify ritual panels unlock
-- Manual: refresh / with cleared localStorage to retrigger walkthrough
-- Manual: open /frequencies and play 2-3 videos to confirm they load
+**Edited:**
+- `src/App.tsx` (5 new routes)
+- `src/components/Navbar.tsx` (collapsible nav categories — getting too long)
+- `src/pages/HomePage.tsx` (mount `<DailyPulseCard />`)
+- `src/lib/xp-events.ts` (4 new event ids)
+- `supabase/config.toml` (new function entries)
+
+**One migration**: 4 tables + user_roles enum + has_role function + 2 storage buckets + RLS policies + pg_cron schedule for daily pulse
+
+---
+
+## Verification
+- Click periodic table cells, run a few mixes (Hydrogen + Oxygen → water animation; Element 115 + anything heavy → "exotic matter")
+- Open Glyph decoder, draw a symbol, get AI interpretation back
+- Open `/stone-faces`, click Easter Island marker, see dossier
+- Submit a testimony, switch to mod account (I'll seed you as admin), approve it, see it appear in public feed
+- Check `/profile` after visiting all 4 new pages → +40 XP
+
+## Out of scope (next batches, not this one)
+- Live Cosmos Pulse full page + 3D solar system + Comet Vault + JWST + USGS feeds
+- Local UFO Pulse map + crash retrieval map + Entity Encounters + Underground bases + CERN + Antarctica + Atlantis + Burchett tracker
+- These are massive on their own — I'll tackle them in dedicated batches after you approve and we verify this slice
