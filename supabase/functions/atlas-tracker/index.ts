@@ -1,13 +1,11 @@
 // 3I/ATLAS comet tracker — pulls live telemetry, AI-summarised, cached 6h.
 // Public endpoint (verify_jwt = false).
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-const CACHE_KEY = '3i-atlas';
 const CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6h
 
 // Tiny in-memory cache (per edge instance — good enough for our traffic)

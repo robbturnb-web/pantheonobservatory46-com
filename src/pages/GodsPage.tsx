@@ -114,7 +114,7 @@ export function GodsPage() {
       </motion.div>
 
       <AnimatePresence>
-        {selectedGod && <GodModal god={selectedGod} onClose={() => setSelectedGod(null)} />}
+        {selectedGod && <GodDossierModal god={selectedGod} onClose={() => setSelectedGod(null)} />}
       </AnimatePresence>
     </div>
   );
