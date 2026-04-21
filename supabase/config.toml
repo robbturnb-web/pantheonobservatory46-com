@@ -5,3 +5,9 @@ project_id = "jsmndieejtfemhfldiza"
     verify_jwt = false
   [functions.process-email-queue]
     verify_jwt = true
+  [functions.echo-chat]
+    verify_jwt = true
+  [functions.daily-cosmos-pulse]
+    verify_jwt = false
+  [functions.glyph-decode]
+    verify_jwt = true
