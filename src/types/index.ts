@@ -6,6 +6,11 @@ export type SignalRating = 'GREEN' | 'YELLOW' | 'RED';
 
 export type PantheonFilter = 'All' | 'Greek' | 'Norse' | 'Egyptian' | 'Hindu' | 'Anunnaki' | 'Starseed';
 
+export interface GodMyth {
+  title: string;
+  body: string;
+}
+
 export interface God {
   id: string;
   name: string;
@@ -18,6 +23,15 @@ export interface God {
   symbol: string;
   image?: string;
   sources?: { label: string; url: string }[];
+  // Deep dossier (all optional — gradual rollout)
+  originStory?: string;
+  keyMyths?: GodMyth[];
+  powersAndRelics?: string[];
+  relationships?: string[];
+  worship?: string;
+  modernRelevance?: string;
+  oracleLore?: string;
+  quotes?: string[];
 }
 
 export interface TimelineEvent {

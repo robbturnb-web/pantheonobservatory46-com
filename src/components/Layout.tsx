@@ -5,6 +5,8 @@ import { Navbar } from './Navbar';
 import { PantheonFooter } from './PantheonFooter';
 import { StarfieldCanvas } from './StarfieldCanvas';
 import { CosmicCursorTrail } from './CosmicCursorTrail';
+import { CometTrails } from './cosmic/CometTrails';
+import { SpaceshipFlyby } from './cosmic/SpaceshipFlyby';
 import { XPBar } from './XPBar';
 import { Walkthrough } from './Walkthrough';
 import { useEchoXp } from '@/hooks/use-echo-xp';
@@ -36,6 +38,8 @@ export function Layout() {
         <StarfieldCanvas />
       </div>
       <CosmicCursorTrail />
+      <CometTrails />
+      <SpaceshipFlyby />
       <Navbar />
       <XPBar />
       <Walkthrough />
