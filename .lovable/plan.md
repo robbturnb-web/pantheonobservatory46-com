@@ -1,113 +1,83 @@
 
-# Plan: Elements Lab + Glyphs Archive + Stone Faces + Community Vault + Live data spine
 
-## Scope confirmed
-- **Slice**: Elements & Alchemy Lab, Glyphs & Symbols Archive, Stone Faces & Lost Markers
-- **Live data**: free APIs + Lovable AI for daily Stefan Burns summary (cron-driven edge function)
-- **Community**: full submissions + tags + search + mod queue + your pinned story + Flow Drive embed
-- **Style**: keep existing Pantheon Observatory cosmic-purple theme
+# Plan: God Lore Expansion + Cosmic Visual Upgrade
 
----
+## Part 1 — Deep Lore for the Gods (`/gods`)
 
-## Phase 1 — Database (one migration)
+The current god entries are single sentences. I'll rewrite all 26 gods to match the depth pattern already used in `shadow-gods.ts` (origin story, full mythology, why they matter today, ritual lore for high-rank users).
 
-Tables:
-- `community_testimonies` — id, user_id, title, body, tags (text[]), category, status ('pending'|'approved'|'rejected'), pinned (bool), flow_drive_url (text, nullable), created_at, approved_at, approved_by
-- `user_roles` — id, user_id, role enum ('admin','moderator','user') — proper RLS pattern with `has_role()` security definer fn
-- `glyph_submissions` — id, user_id, image_url, drawn_svg (text), ai_interpretation (text, nullable), culture_tags (text[]), status, created_at
-- `daily_cosmos_pulse` — id, summary_date (date unique), source_url, summary_md, generated_at — populated by daily edge function
+**Schema additions to `God` type:**
+- `originStory` — 2-3 paragraph birth/origin myth
+- `keyMyths` — array of 2-4 famous stories with title + body
+- `powersAndRelics` — bullet list of weapons, abilities, sacred objects
+- `relationships` — key allies, rivals, lovers, children (with brief context)
+- `worship` — how they were honored (temples, festivals, offerings)
+- `modernRelevance` — what this archetype means for the seeker today
+- `oracleLore` — Oracle-tier (1000 XP) deeper esoteric/ET-disclosure interpretation
+- `quotes` — 1-2 ancient quotes attributed to them
 
-Storage buckets:
-- `glyphs` (public read, auth write) — uploaded glyph images
-- `testimony-media` (public read, auth write) — optional images for testimonies
+**Modal redesign (`GodsPage.tsx`):**
+- Make the dossier modal scrollable and tabbed: **Origin · Myths · Powers · Relationships · Worship · Modern · Oracle (locked)**
+- Use the existing `RankUnlock` component to gate the Oracle tab at 1000 XP (matches Shadow Pantheon pattern)
+- Keep the atmospheric image header, add a "scroll for more" indicator
 
-RLS: anyone can read approved content; users can insert/edit their own; only admins/moderators can approve or pin.
+**Scope:** Full rewrite of all 26 gods. Each entry grows from ~1 line to a full dossier (~400-600 words). One file: `src/data/gods.ts`.
 
-## Phase 2 — Elements & Alchemy Lab (`/elements`)
+## Part 2 — Cosmic Visual Upgrade (background layer)
 
-- Full periodic table grid (118 elements + spotlight Element 115 / Moscovium with Lazar fuel lore card)
-- Click any element → detail panel with properties, lore, animations
-- **Mixer mode**: drag-drop two elements onto a "reactor" → particle collision animation (framer-motion + canvas burst) → outcome card showing real chemistry (when known) + "exotic matter" speculation for combos involving 115/119/heavy synthetics
-- Compatibility highlighting: when one element is selected, valid reaction partners glow neon-green; incompatible fade
-- Mad-scientist toggle that unlocks fictional UFO-fuel outcomes
+**A. Cursor-following comets** (replace static comet boxes)
+- New `CometTrails.tsx` — canvas component that spawns 1-2 comets per minute that streak across the viewport from random edges
+- One comet always tracks toward the cursor with a glowing ion tail (purple→cyan gradient)
+- Mouse-idle comets fall back to free-flight across the sky
+- Replaces any existing static "comet square" elements
 
-Data: `src/data/elements.ts` (full periodic table, each with `lore?` field for the spotlight ones). Reaction logic in `src/lib/element-reactions.ts`.
+**B. 3I/ATLAS hero on HomePage**
+- New `<AtlasHero />` section above the existing fold
+- Live 3D model of comet 3I/ATLAS using `@react-three/fiber` (already installed): glowing nucleus + procedurally-animated ion tail trailing toward the sun
+- Live data card next to it pulled from JPL Horizons / TheSkyLive RSS via a new edge function `atlas-tracker` (cached 6h):
+  - Current distance from Earth (AU)
+  - Current speed (km/s)
+  - Closest approach date
+  - Current constellation it's passing through
+- "What is 3I/ATLAS?" expandable lore: 3rd known interstellar object, discovered July 2025, hyperbolic trajectory, anomalies (non-gravitational acceleration, unusual brightening)
+- Companion card: "Comet Watch" listing other inbound comets (C/2024 G3, C/2023 A3 leftovers) — fetched from same edge function
 
-## Phase 3 — Glyphs & Symbols Archive (`/glyphs`)
+**C. Passing spaceship cameo**
+- New `<SpaceshipFlyby />` — every 90-180 seconds a small SVG saucer (subtle, not cartoony) glides across the starfield with a faint engine glow trail
+- Click it for an easter-egg toast: "👽 You spotted a Lazar-class craft" + grants 25 XP (one-time per session)
 
-- Curated grid of ~30 ancient glyphs (Sumerian cuneiform, Egyptian hieroglyphs, Mayan, Vinča, Indus, crop-circle motifs) in `src/data/glyphs.ts`
-- Each card flips on hover, rotates with subtle animation, opens dossier with culture/era/translation/ET interpretation
-- **Decoder tool**: upload an image OR draw on a canvas (use `react-signature-canvas` or a tiny custom canvas) → submit → edge function `glyph-decode` calls Lovable AI (gemini-2.5-pro for vision) with prompt: "Match this glyph to known ancient symbols and provide a literal + ET-disclosure interpretation"
-- Submitted glyphs save to `glyph_submissions` and can be browsed in a public gallery once approved
+**D. Stefan Burns "Where is he?" widget**
+- Mount a small `<StefanLocator />` card on HomePage next to DailyPulseCard
+- Reads the latest video title from the existing `daily_cosmos_pulse` table
+- AI-extracts location/topic from the title via a tiny edge function (`stefan-locator`) and displays: "Latest signal: [topic] · [date] · [link to video]"
 
-## Phase 4 — Stone Faces & Lost Markers (`/stone-faces`)
+## Part 3 — Files
 
-- Curated dossier set: Treasure Island, Oak Island, Easter Island moai, Olmec heads, Göbekli Tepe pillars, Yonaguni monument, Bucegi sphinx
-- World map (use `react-simple-maps` — already in the React ecosystem, no API key) with pulsing markers at coordinates
-- Click marker → side dossier with theories, builder hypotheses, photo, "activation" pulse animation when opened
-- Data: `src/data/stone-markers.ts`
+**New (8):**
+- `src/components/cosmic/CometTrails.tsx`
+- `src/components/cosmic/SpaceshipFlyby.tsx`
+- `src/components/cosmic/AtlasHero.tsx`
+- `src/components/cosmic/StefanLocator.tsx`
+- `src/components/gods/GodDossierModal.tsx` (extracted + tabbed)
+- `supabase/functions/atlas-tracker/index.ts`
+- `supabase/functions/stefan-locator/index.ts`
 
-## Phase 5 — Community Vault (`/community`)
+**Edited (5):**
+- `src/types/index.ts` — expanded `God` interface
+- `src/data/gods.ts` — full rewrite with deep lore for all 26 gods
+- `src/pages/GodsPage.tsx` — use new tabbed modal
+- `src/components/Layout.tsx` — mount `<CometTrails />` and `<SpaceshipFlyby />`
+- `src/pages/HomePage.tsx` — mount `<AtlasHero />` and `<StefanLocator />`
+- `supabase/config.toml` — register two new edge functions
 
-- Public feed of approved testimonies, sorted: pinned first, then newest
-- Filters: by tag, by category (sighting/encounter/contact/dream/synchronicity), full-text search
-- Submit form (auth-gated) → goes into `pending` queue
-- Moderator dashboard at `/community/mod` — gated by `has_role(uid, 'moderator')` — approve/reject/pin
-- Your personal story seeded as pinned with the Flow Drive video embed (URL passed by you later or placeholder for now)
+## Part 4 — Verification
+- Open `/gods`, click Zeus → see tabbed dossier with Origin/Myths/Powers/etc., Oracle tab gated until 1000 XP
+- Hover the homepage — comet should track cursor, then drift away
+- Wait 60-90s on any page — spaceship should fly across, click for XP
+- HomePage shows live 3I/ATLAS distance + Stefan's latest signal
 
-## Phase 6 — Daily Cosmos Pulse spine (foundational for the bigger Live Cosmos Pulse next batch)
+## Out of scope (next batch)
+- Live Cosmos Pulse full page with planetary parade 3D viewer
+- Local UFO Pulse map, Crash Retrieval, Entity Encounters
+- Underground Bases / CERN / Antarctica / Burchett tracker
 
-- Edge function `daily-cosmos-pulse`:
-  - Fetch Stefan Burns YouTube channel RSS (`https://www.youtube.com/feeds/videos.xml?channel_id=...` — public, no key)
-  - Take latest video title + description
-  - Send to Lovable AI (gemini-2.5-flash) → "Summarize this Stefan Burns update in 3 bullets emphasizing planetary/energetic forecasts"
-  - Upsert into `daily_cosmos_pulse` keyed by today's date
-- pg_cron job runs it daily at 23:00 UTC
-- Small `<DailyPulseCard />` widget mounted on `HomePage` showing today's summary + link to source video
-- This is the foundation for Phase 2's full Live Cosmos Pulse page next batch
-
-## Phase 7 — Navigation + wiring
-
-- Add 4 new routes: `/elements`, `/glyphs`, `/stone-faces`, `/community` (+ `/community/mod`)
-- Add to `Navbar.tsx` nav links (it's already getting long — group them visually under collapsible categories: "Cosmos / Disclosure / Lore / Community")
-- XP events for new pages (10 XP each first visit)
-- Daily pulse widget on HomePage above the existing fold
-
----
-
-## Files (new ~14, edited ~5)
-
-**New:**
-- `src/data/elements.ts`, `src/data/glyphs.ts`, `src/data/stone-markers.ts`
-- `src/lib/element-reactions.ts`
-- `src/pages/ElementsLabPage.tsx`, `src/pages/GlyphsArchivePage.tsx`, `src/pages/StoneFacesPage.tsx`, `src/pages/CommunityVaultPage.tsx`, `src/pages/CommunityModPage.tsx`
-- `src/components/elements/PeriodicTable.tsx`, `src/components/elements/ElementMixer.tsx`
-- `src/components/glyphs/GlyphDecoder.tsx`
-- `src/components/community/TestimonySubmitForm.tsx`, `src/components/community/TestimonyCard.tsx`
-- `src/components/cosmos/DailyPulseCard.tsx`
-- `src/hooks/use-user-role.ts`
-- `supabase/functions/glyph-decode/index.ts`
-- `supabase/functions/daily-cosmos-pulse/index.ts`
-
-**Edited:**
-- `src/App.tsx` (5 new routes)
-- `src/components/Navbar.tsx` (collapsible nav categories — getting too long)
-- `src/pages/HomePage.tsx` (mount `<DailyPulseCard />`)
-- `src/lib/xp-events.ts` (4 new event ids)
-- `supabase/config.toml` (new function entries)
-
-**One migration**: 4 tables + user_roles enum + has_role function + 2 storage buckets + RLS policies + pg_cron schedule for daily pulse
-
----
-
-## Verification
-- Click periodic table cells, run a few mixes (Hydrogen + Oxygen → water animation; Element 115 + anything heavy → "exotic matter")
-- Open Glyph decoder, draw a symbol, get AI interpretation back
-- Open `/stone-faces`, click Easter Island marker, see dossier
-- Submit a testimony, switch to mod account (I'll seed you as admin), approve it, see it appear in public feed
-- Check `/profile` after visiting all 4 new pages → +40 XP
-
-## Out of scope (next batches, not this one)
-- Live Cosmos Pulse full page + 3D solar system + Comet Vault + JWST + USGS feeds
-- Local UFO Pulse map + crash retrieval map + Entity Encounters + Underground bases + CERN + Antarctica + Atlantis + Burchett tracker
-- These are massive on their own — I'll tackle them in dedicated batches after you approve and we verify this slice
