@@ -1,83 +1,79 @@
 
 
-# Plan: God Lore Expansion + Cosmic Visual Upgrade
+# Plan: Neon stat colors + Real "46" Hegseth list + Fix videos
 
-## Part 1 — Deep Lore for the Gods (`/gods`)
+## 1. Neon-green + yellow stat numbers on HomePage
 
-The current god entries are single sentences. I'll rewrite all 26 gods to match the depth pattern already used in `shadow-gods.ts` (origin story, full mythology, why they matter today, ritual lore for high-rank users).
+Current: stat counters (UAP Cases, Ancient Gods, Whistleblowers, Pyramids, Telescopes) are plain white. You want the OBSERVATORY purple/neon-green look.
 
-**Schema additions to `God` type:**
-- `originStory` — 2-3 paragraph birth/origin myth
-- `keyMyths` — array of 2-4 famous stories with title + body
-- `powersAndRelics` — bullet list of weapons, abilities, sacred objects
-- `relationships` — key allies, rivals, lovers, children (with brief context)
-- `worship` — how they were honored (temples, festivals, offerings)
-- `modernRelevance` — what this archetype means for the seeker today
-- `oracleLore` — Oracle-tier (1000 XP) deeper esoteric/ET-disclosure interpretation
-- `quotes` — 1-2 ancient quotes attributed to them
+**Edit `src/pages/HomePage.tsx`:**
+- Stat number: change `text-foreground` → `text-accent-neon` with `neon-glow` class (matches the "VATORY" text)
+- Stat label: split-color treatment — first word in `text-primary` (purple), second word in `text-yellow-400` (yellow accent) so "UAP Cases", "Ancient Gods", "Whistleblowers", "Pyramids", "Telescopes" pop on the dark starfield
+- Add subtle yellow glow on the icon ring
 
-**Modal redesign (`GodsPage.tsx`):**
-- Make the dossier modal scrollable and tabbed: **Origin · Myths · Powers · Relationships · Worship · Modern · Oracle (locked)**
-- Use the existing `RankUnlock` component to gate the Oracle tab at 1000 XP (matches Shadow Pantheon pattern)
-- Keep the atmospheric image header, add a "scroll for more" indicator
+Result: Numbers glow neon-green, labels are purple+yellow. Same vibe as the "OBSER**VATORY**" hero treatment.
 
-**Scope:** Full rewrite of all 26 gods. Each entry grows from ~1 line to a full dossier (~400-600 words). One file: `src/data/gods.ts`.
+## 2. Replace the 4-slot placeholder vault with the real Hegseth letter list
 
-## Part 2 — Cosmic Visual Upgrade (background layer)
+Your screenshots are the **Crockett/Mace congressional letter to Pete Hegseth (March 31, 2026)** demanding 46 specific UAP video files by **April 14, 2026**. That's the actual "46" — not the publicly released Pentagon clips currently shown.
 
-**A. Cursor-following comets** (replace static comet boxes)
-- New `CometTrails.tsx` — canvas component that spawns 1-2 comets per minute that streak across the viewport from random edges
-- One comet always tracks toward the cursor with a glowing ion tail (purple→cyan gradient)
-- Mouse-idle comets fall back to free-flight across the sky
-- Replaces any existing static "comet square" elements
+**Rewrite `src/data/the-46.ts`:**
+- Seed all 46 slots with the **real codenames + dates** from the letter (Hackney 6 / Persian Gulf, HH-11 UAPs, Spherical UAP pulsing over water, Voodoo 4X Cranberry, NGA UAP, Warlock 4X, AFSOC Kabul, USCG C-144 Tic Tac IR, F-18 FLIR UAP, Eglin AFB IIR, Lake H, Kazakhstan IIR 1777, MQ-9 East China Sea, etc.)
+- All 46 start with `status: 'pending-disclosure'` (new third status) — meaning Congress has demanded them but they haven't been released yet
+- Each slot shows: the official codename, the date of the encounter, the platform (MQ-9, F-18, USCG C-144, etc.), the geographic area
+- Add `requestedBy: "Rep. Anna Paulina Luna / Rep. Jasmine Crockett — H. Oversight Committee Task Force on Declassification"` and `dueBy: "2026-04-14"`
+- Keep the 4 currently-released DoD videos (Tic Tac, Gimbal, Go Fast, Aguadilla) in a **separate "Already Public" section** at the bottom of `/the-46` page so the ones you mean (the 46 Congress is asking for) stand alone
 
-**B. 3I/ATLAS hero on HomePage**
-- New `<AtlasHero />` section above the existing fold
-- Live 3D model of comet 3I/ATLAS using `@react-three/fiber` (already installed): glowing nucleus + procedurally-animated ion tail trailing toward the sun
-- Live data card next to it pulled from JPL Horizons / TheSkyLive RSS via a new edge function `atlas-tracker` (cached 6h):
-  - Current distance from Earth (AU)
-  - Current speed (km/s)
-  - Closest approach date
-  - Current constellation it's passing through
-- "What is 3I/ATLAS?" expandable lore: 3rd known interstellar object, discovered July 2025, hyperbolic trajectory, anomalies (non-gravitational acceleration, unusual brightening)
-- Companion card: "Comet Watch" listing other inbound comets (C/2024 G3, C/2023 A3 leftovers) — fetched from same edge function
+**Update `src/components/the46/VaultSlotCard.tsx` + `VaultSlotModal.tsx`:**
+- Add visual treatment for new `pending-disclosure` status: amber lock icon + countdown to April 14
+- Update the locked-state copy to match the real story: "Demanded by Congress · Awaiting DoD response"
 
-**C. Passing spaceship cameo**
-- New `<SpaceshipFlyby />` — every 90-180 seconds a small SVG saucer (subtle, not cartoony) glides across the starfield with a faint engine glow trail
-- Click it for an easter-egg toast: "👽 You spotted a Lazar-class craft" + grants 25 XP (one-time per session)
+**Update `/the-46` page header:**
+- Lead with the actual congressional letter: "On March 31, 2026, the House Oversight Committee demanded 46 specific UAP videos from Secretary Hegseth by April 14, 2026."
+- Embed image of the letter (I'll save your screenshots into `src/assets/the-46/` as the source proof)
 
-**D. Stefan Burns "Where is he?" widget**
-- Mount a small `<StefanLocator />` card on HomePage next to DailyPulseCard
-- Reads the latest video title from the existing `daily_cosmos_pulse` table
-- AI-extracts location/topic from the title via a tiny edge function (`stefan-locator`) and displays: "Latest signal: [topic] · [date] · [link to video]"
+**Update the homepage banner counter:**
+- Currently shows "X of 46 unlocked" — change to "0 of 46 disclosed · Demand expired April 14, 2026" with a live "days overdue" counter
 
-## Part 3 — Files
+## 3. Fix the broken videos
 
-**New (8):**
-- `src/components/cosmic/CometTrails.tsx`
-- `src/components/cosmic/SpaceshipFlyby.tsx`
-- `src/components/cosmic/AtlasHero.tsx`
-- `src/components/cosmic/StefanLocator.tsx`
-- `src/components/gods/GodDossierModal.tsx` (extracted + tabbed)
-- `supabase/functions/atlas-tracker/index.ts`
-- `supabase/functions/stefan-locator/index.ts`
+Two separate issues, both data-side, not code:
 
-**Edited (5):**
-- `src/types/index.ts` — expanded `God` interface
-- `src/data/gods.ts` — full rewrite with deep lore for all 26 gods
-- `src/pages/GodsPage.tsx` — use new tabbed modal
-- `src/components/Layout.tsx` — mount `<CometTrails />` and `<SpaceshipFlyby />`
-- `src/pages/HomePage.tsx` — mount `<AtlasHero />` and `<StefanLocator />`
-- `supabase/config.toml` — register two new edge functions
+**A. Most TikTok IDs are fake placeholders** (`7384712345678901234`, `7384712345678901235`) — those return 404. The current `VideoEmbed.tsx` already handles TikTok correctly (opens in new tab since TikTok blocks iframes), but there's no real video to open.
 
-## Part 4 — Verification
-- Open `/gods`, click Zeus → see tabbed dossier with Origin/Myths/Powers/etc., Oracle tab gated until 1000 XP
-- Hover the homepage — comet should track cursor, then drift away
-- Wait 60-90s on any page — spaceship should fly across, click for XP
-- HomePage shows live 3I/ATLAS distance + Stefan's latest signal
+**B. Some YouTube IDs may be embedding-disabled or stale.** The `VideoEmbed.tsx` is already correct (lite-YT pattern with thumbnail → iframe on click + always-visible "Open on YouTube" fallback). The fix is replacing the IDs.
 
-## Out of scope (next batch)
-- Live Cosmos Pulse full page with planetary parade 3D viewer
-- Local UFO Pulse map, Crash Retrieval, Entity Encounters
-- Underground Bases / CERN / Antarctica / Burchett tracker
+**Action:**
+- Replace all placeholder TikTok IDs across `src/data/frequencies.ts` with **real recent video IDs** from each creator's actual TikTok page (I'll fetch their channels and pull the latest 2–3 video IDs each)
+- Replace any stale YouTube IDs with verified current uploads from each creator's channel
+- For Stefan Burns specifically: pull his 3 most recent videos (the daily-cosmos-pulse function already targets his RSS feed, so I'll align the seed videos with whatever his channel has live now)
+
+**No code change needed in `VideoEmbed.tsx`** — it's already production-quality. The fix is data only.
+
+## 4. Mobile vs desktop note (answering your question)
+
+There is **no functional difference** between editing on mobile vs desktop for what we're doing. Same AI, same memory, same code. Mobile just has a smaller preview panel. You can run everything from your phone. Nothing about visuals or graphics needs the desktop. Use whatever's in your hand.
+
+---
+
+## Files
+
+**Edited:**
+- `src/pages/HomePage.tsx` — neon-green stats + yellow labels + updated 46 banner
+- `src/data/the-46.ts` — 46 real Hegseth-letter codenames, new `pending-disclosure` status, separate "already public" section
+- `src/data/frequencies.ts` — real TikTok + YouTube IDs across all creators
+- `src/components/the46/VaultSlotCard.tsx` — render `pending-disclosure` state
+- `src/components/the46/VaultSlotModal.tsx` — render `pending-disclosure` modal copy
+- `src/pages/The46Page.tsx` — new header explaining the real congressional letter + demand expired counter
+
+**New:**
+- `src/assets/the-46/hegseth-letter-page-1.jpg` through `page-4.jpg` (your 4 screenshots as proof)
+
+**No backend changes. No migrations. Pure frontend + data.**
+
+## Verification
+- Open `/` on mobile → stat numbers glow neon-green, labels purple+yellow
+- Scroll to The 46 banner → shows "0/46 disclosed · X days overdue"
+- Open `/the-46` → see all 46 codenames from the letter, the 4 already-public videos in their own section below, embedded letter screenshots at top
+- Open `/frequencies` → click 3 different videos → all play (YouTube via thumbnail-then-iframe, TikTok opens in new tab to a real video)
 
