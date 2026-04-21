@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid, Lock, Skull, UserCircle2 } from 'lucide-react';
-import { vaultSlots } from '@/data/the-46';
+import { vaultSlots, daysOverdue } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
 import { Walkthrough } from '@/components/Walkthrough';
 
@@ -175,22 +175,32 @@ export function HomePage() {
       {/* STATS */}
       <section className="py-20 px-4">
         <div className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="glass-cosmic rounded-xl p-6 text-center"
-            >
-              <stat.icon className="w-6 h-6 text-primary mx-auto mb-3" />
-              <div className="text-3xl sm:text-4xl font-bold text-foreground mb-1">
-                <AnimatedCounter value={stat.value} />
-              </div>
-              <p className="text-sm text-muted-foreground">{stat.label}</p>
-            </motion.div>
-          ))}
+          {stats.map((stat, i) => {
+            const [first, ...rest] = stat.label.split(' ');
+            const second = rest.join(' ');
+            return (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-cosmic rounded-xl p-6 text-center group hover:border-accent-neon/40 transition-colors"
+              >
+                <div className="relative w-fit mx-auto mb-3">
+                  <div className="absolute inset-0 bg-yellow-400/20 blur-md rounded-full" />
+                  <stat.icon className="w-6 h-6 text-yellow-400 relative" />
+                </div>
+                <div className="text-3xl sm:text-4xl font-black text-accent-neon neon-glow mb-1 tracking-tight">
+                  <AnimatedCounter value={stat.value} />
+                </div>
+                <p className="text-sm font-bold uppercase tracking-wider">
+                  <span className="text-primary">{first}</span>
+                  {second && <span className="text-yellow-400"> {second}</span>}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
@@ -230,15 +240,15 @@ export function HomePage() {
                     THE 46 — Sealed Disclosure Vault
                   </h3>
                   <p className="text-xs sm:text-sm text-muted-foreground mt-1 line-clamp-2">
-                    {vaultSlots.filter((s) => s.status === 'unlocked').length} of 46 undisclosed UAP videos revealed. The countdown to full disclosure has begun.
+                    {vaultSlots.filter((s) => s.status === 'unlocked').length} of 46 disclosed · Congressional demand expired April 14, 2026 · <span className="text-amber-300 font-semibold">{daysOverdue()} days overdue</span>
                   </p>
                 </div>
                 <div className="shrink-0 text-right">
-                  <div className="text-2xl sm:text-3xl font-black text-accent-neon">
+                  <div className="text-2xl sm:text-3xl font-black text-accent-neon neon-glow">
                     {vaultSlots.filter((s) => s.status === 'unlocked').length}
                     <span className="text-muted-foreground/60 text-base">/46</span>
                   </div>
-                  <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Revealed</div>
+                  <div className="text-[9px] uppercase tracking-wider text-amber-300">Disclosed</div>
                 </div>
               </div>
             </Link>
