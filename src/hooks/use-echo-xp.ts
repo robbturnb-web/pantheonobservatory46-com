@@ -110,30 +110,24 @@ export function useEchoXp() {
       inFlight.current.add(key);
 
       try {
-        // Insert event row — unique constraint blocks duplicates
-        const { error: insertErr } = await supabase
-          .from('echo_xp_events')
-          .insert({ user_id: userId, event_type: type, event_id: eventId, xp: amount });
+        // Server-side bounded XP grant — client cannot inflate xp/rank
+        const { data, error } = await supabase.rpc('award_xp', {
+          p_event_type: type,
+          p_event_id: eventId,
+          p_amount: amount,
+        });
 
-        if (insertErr) {
-          // 23505 = unique_violation → already granted
-          if ((insertErr as { code?: string }).code === '23505') return false;
-          throw insertErr;
-        }
+        if (error) return false;
+        const result = data as { granted: boolean; xp: number; rank: string } | null;
+        if (!result || !result.granted) return false;
 
         const oldRank = getRankForXp(xp);
-        const newXp = xp + amount;
-        const newRank = getRankForXp(newXp);
-        setXp(newXp);
-
-        await supabase
-          .from('echo_xp')
-          .update({ xp: newXp, rank: newRank.name })
-          .eq('user_id', userId);
+        setXp(result.xp);
+        const newRank = getRankForXp(result.xp);
 
         if (newRank.name !== oldRank.name) {
           toast(`🌟 Rank Up! You are now ${newRank.name}`, {
-            description: `${newXp} XP earned`,
+            description: `${result.xp} XP earned`,
           });
         } else if (reason) {
           toast(`✨ +${amount} XP — ${reason}`);
@@ -148,19 +142,22 @@ export function useEchoXp() {
     [userId, xp]
   );
 
-  // Daily-return helper (separate path because it needs to bypass the React-state guard at boot)
-  const grantDaily = async (uid: string, currentXp: number) => {
+  // Daily-return helper — also goes through the secured RPC
+  const grantDaily = async (uid: string, _currentXp: number) => {
     const today = new Date().toISOString().slice(0, 10);
-    const { error } = await supabase
-      .from('echo_xp_events')
-      .insert({ user_id: uid, event_type: 'daily', event_id: today, xp: XP_VALUES.DAILY_RETURN });
-    if (error) return; // duplicate or RLS — silent
-    const newXp = currentXp + XP_VALUES.DAILY_RETURN;
-    const newRank = getRankForXp(newXp);
-    setXp(newXp);
+    const { data, error } = await supabase.rpc('award_xp', {
+      p_event_type: 'daily',
+      p_event_id: today,
+      p_amount: XP_VALUES.DAILY_RETURN,
+    });
+    if (error) return;
+    const result = data as { granted: boolean; xp: number } | null;
+    if (!result?.granted) return;
+    setXp(result.xp);
+    // last_daily_at is metadata only — still client-writable via RLS
     await supabase
       .from('echo_xp')
-      .update({ xp: newXp, rank: newRank.name, last_daily_at: new Date().toISOString() })
+      .update({ last_daily_at: new Date().toISOString() })
       .eq('user_id', uid);
     toast(`🌅 Daily return — +${XP_VALUES.DAILY_RETURN} XP`);
   };

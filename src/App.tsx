@@ -23,11 +23,6 @@ import { SpeciesCodexPage } from './pages/SpeciesCodexPage';
 import { AuthPage } from './pages/AuthPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { ProfilePage } from './pages/ProfilePage';
-import { ElementsLabPage } from './pages/ElementsLabPage';
-import { GlyphsArchivePage } from './pages/GlyphsArchivePage';
-import { StoneFacesPage } from './pages/StoneFacesPage';
-import { CommunityVaultPage } from './pages/CommunityVaultPage';
-import { CommunityModPage } from './pages/CommunityModPage';
 
 export default function App() {
   return (
@@ -55,11 +50,6 @@ export default function App() {
           <Route path="/frequencies" element={<FrequenciesPage />} />
           <Route path="/species" element={<SpeciesCodexPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/elements" element={<ElementsLabPage />} />
-          <Route path="/glyphs" element={<GlyphsArchivePage />} />
-          <Route path="/stone-faces" element={<StoneFacesPage />} />
-          <Route path="/community" element={<CommunityVaultPage />} />
-          <Route path="/community/mod" element={<CommunityModPage />} />
         </Route>
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />

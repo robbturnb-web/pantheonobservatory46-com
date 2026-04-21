@@ -1,3 +1,5 @@
+import { supabase } from '@/integrations/supabase/client';
+
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/echo-chat`;
 
 export type Msg = { role: 'user' | 'assistant'; content: string };
@@ -13,11 +15,19 @@ export async function streamChat({
   onDone: () => void;
   onError: (err: string) => void;
 }) {
+  // Require a signed-in user — Echo AI is a gated feature
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session?.access_token) {
+    onError('Please sign in to use Echo AI.');
+    return;
+  }
+
   const resp = await fetch(CHAT_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+      Authorization: `Bearer ${session.access_token}`,
+      apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
     },
     body: JSON.stringify({ messages }),
   });
@@ -25,11 +35,13 @@ export async function streamChat({
   if (!resp.ok) {
     const data = await resp.json().catch(() => ({}));
     const errMsg =
-      resp.status === 429
-        ? 'Rate limit exceeded — please wait a moment and try again.'
-        : resp.status === 402
-          ? 'AI credits exhausted. Add funds in Settings → Workspace → Usage.'
-          : data.error || 'Something went wrong with Echo AI.';
+      resp.status === 401
+        ? 'Please sign in to use Echo AI.'
+        : resp.status === 429
+          ? 'Rate limit exceeded — please wait a moment and try again.'
+          : resp.status === 402
+            ? 'AI credits exhausted. Add funds in Settings → Workspace → Usage.'
+            : data.error || 'Something went wrong with Echo AI.';
     onError(errMsg);
     return;
   }

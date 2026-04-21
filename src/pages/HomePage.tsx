@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle, ChevronDown, Shield, BookOpen, Zap, Globe, Telescope, Users, Pyramid, Lock, Skull, UserCircle2 } from 'lucide-react';
 import { vaultSlots } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
-import { DailyPulseCard } from '@/components/cosmos/DailyPulseCard';
+import { Walkthrough } from '@/components/Walkthrough';
 
 const sections = [
   { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
@@ -97,6 +97,7 @@ export function HomePage() {
 
   return (
     <div className="relative">
+      <Walkthrough />
       {/* HERO */}
       <motion.div
         ref={heroRef}
@@ -170,13 +171,6 @@ export function HomePage() {
           <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
         </motion.div>
       </motion.div>
-
-      {/* DAILY COSMOS PULSE */}
-      <section className="px-4 pt-12">
-        <div className="max-w-5xl mx-auto">
-          <DailyPulseCard />
-        </div>
-      </section>
 
       {/* STATS */}
       <section className="py-20 px-4">

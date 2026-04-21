@@ -414,6 +414,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      award_xp: {
+        Args: { p_amount: number; p_event_id: string; p_event_type: string }
+        Returns: Json
+      }
+      compute_rank: { Args: { _xp: number }; Returns: string }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
