@@ -15,6 +15,7 @@ const navLinks = [
   { to: '/signals', label: 'Signals' },
   { to: '/frequencies', label: 'Frequencies' },
   { to: '/whistleblowers', label: 'Whistleblowers' },
+  { to: '/missing', label: 'Missing' },
   { to: '/telescopes', label: 'Telescopes' },
   { to: '/galaxy', label: 'Galaxy' },
   { to: '/pyramids', label: 'Pyramids' },
