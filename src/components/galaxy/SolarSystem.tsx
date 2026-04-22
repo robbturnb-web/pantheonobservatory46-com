@@ -25,6 +25,8 @@ function Sun() {
         <sphereGeometry args={[2.5, 64, 64]} />
         <meshBasicMaterial color="#fbbf24" />
       </mesh>
+      {/* Surface flares + CME bursts */}
+      <SolarFlares baseRadius={2.5} />
       {/* Inner glow */}
       <mesh ref={glowRef} scale={3.2}>
         <sphereGeometry args={[1, 32, 32]} />
@@ -61,7 +63,49 @@ function SaturnRings({ size }: { size: number }) {
       <Ring args={[size * 2.55, size * 2.8, 64]}>
         <meshBasicMaterial color="#a89872" transparent opacity={0.15} side={THREE.DoubleSide} />
       </Ring>
+      {/* Particle ring chunks */}
+      <SaturnRingParticles size={size} />
     </group>
+  );
+}
+
+function SaturnRingParticles({ size }: { size: number }) {
+  const meshRef = useRef<THREE.InstancedMesh>(null);
+  const COUNT = 300;
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+  const params = useMemo(() => {
+    const arr: { angle: number; radius: number; y: number; scale: number; speed: number }[] = [];
+    for (let i = 0; i < COUNT; i++) {
+      arr.push({
+        angle: Math.random() * Math.PI * 2,
+        radius: size * (1.4 + Math.random() * 1.4),
+        y: (Math.random() - 0.5) * 0.04,
+        scale: 0.015 + Math.random() * 0.04,
+        speed: 0.03 + Math.random() * 0.04,
+      });
+    }
+    return arr;
+  }, [size]);
+
+  useFrame(({ clock }) => {
+    if (!meshRef.current) return;
+    const t = clock.getElapsedTime();
+    for (let i = 0; i < COUNT; i++) {
+      const p = params[i];
+      const a = p.angle + t * p.speed;
+      dummy.position.set(Math.cos(a) * p.radius, p.y, Math.sin(a) * p.radius);
+      dummy.scale.setScalar(p.scale);
+      dummy.updateMatrix();
+      meshRef.current.setMatrixAt(i, dummy.matrix);
+    }
+    meshRef.current.instanceMatrix.needsUpdate = true;
+  });
+
+  return (
+    <instancedMesh ref={meshRef} args={[undefined, undefined, COUNT]}>
+      <icosahedronGeometry args={[1, 0]} />
+      <meshStandardMaterial color="#e8d5a3" roughness={0.9} flatShading />
+    </instancedMesh>
   );
 }
 
@@ -96,8 +140,15 @@ function JupiterBands({ size }: { size: number }) {
   );
 }
 
-/* Earth continents hint */
+/* Earth continents + city lights on night side + polar aurora */
 function EarthDetails({ size }: { size: number }) {
+  const auroraRef = useRef<THREE.Mesh>(null);
+  useFrame(({ clock }) => {
+    if (auroraRef.current) {
+      const m = auroraRef.current.material as THREE.MeshBasicMaterial;
+      m.opacity = 0.25 + Math.sin(clock.getElapsedTime() * 1.2) * 0.1;
+    }
+  });
   return (
     <group>
       {/* Land mass patches */}
@@ -113,6 +164,27 @@ function EarthDetails({ size }: { size: number }) {
       <mesh position={[0, -size * 0.9, 0]} scale={[0.25, 0.08, 0.25]}>
         <sphereGeometry args={[1, 16, 16]} />
         <meshBasicMaterial color="#e0f2fe" transparent opacity={0.4} />
+      </mesh>
+      {/* City lights — warm glow on night hemisphere */}
+      <mesh scale={1.012}>
+        <sphereGeometry args={[size, 32, 32]} />
+        <meshBasicMaterial
+          color="#fde68a"
+          transparent
+          opacity={0.18}
+          blending={THREE.AdditiveBlending}
+          depthWrite={false}
+        />
+      </mesh>
+      {/* Aurora — faint green ring near north pole */}
+      <mesh ref={auroraRef} position={[0, size * 0.85, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[size * 0.4, size * 0.04, 8, 32]} />
+        <meshBasicMaterial color="#34d399" transparent opacity={0.3} blending={THREE.AdditiveBlending} depthWrite={false} />
+      </mesh>
+      {/* Aurora — south */}
+      <mesh position={[0, -size * 0.85, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[size * 0.32, size * 0.03, 8, 32]} />
+        <meshBasicMaterial color="#22d3ee" transparent opacity={0.22} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
     </group>
   );
