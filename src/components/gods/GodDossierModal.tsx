@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Scroll, Swords, Sparkles, Users, Flame, Compass, Lock } from 'lucide-react';
+import { X, Scroll, Swords, Sparkles, Users, Flame, Compass, Lock, Play } from 'lucide-react';
 import type { God } from '@/types';
 import { SourceList } from '@/components/SourceList';
 import { RankUnlock } from '@/components/RankUnlock';
+import { VideoEmbed } from '@/components/VideoEmbed';
+import { godVideos } from '@/data/god-videos';
 
-type TabId = 'origin' | 'myths' | 'powers' | 'relationships' | 'worship' | 'modern' | 'oracle';
+type TabId = 'origin' | 'myths' | 'powers' | 'relationships' | 'worship' | 'modern' | 'watch' | 'oracle';
 
 const TABS: { id: TabId; label: string; icon: typeof Scroll }[] = [
   { id: 'origin', label: 'Origin', icon: Scroll },
@@ -14,6 +16,7 @@ const TABS: { id: TabId; label: string; icon: typeof Scroll }[] = [
   { id: 'relationships', label: 'Bonds', icon: Users },
   { id: 'worship', label: 'Worship', icon: Flame },
   { id: 'modern', label: 'Modern', icon: Compass },
+  { id: 'watch', label: 'Watch', icon: Play },
   { id: 'oracle', label: 'Oracle', icon: Lock },
 ];
 
