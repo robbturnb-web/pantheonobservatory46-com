@@ -123,14 +123,14 @@ function IonTail() {
   const sunDir = useMemo(() => SUN_POSITION.clone().normalize(), []);
   const tailDir = useMemo(() => sunDir.clone().multiplyScalar(-1), [sunDir]);
 
-  const { positions, velocities, lives, colors } = useMemo(() => {
+  const { positions, velocities, lives, sizes } = useMemo(() => {
     const positions = new Float32Array(COUNT * 3);
     const velocities = new Float32Array(COUNT);
     const lives = new Float32Array(COUNT);
-    const colors = new Float32Array(COUNT * 3);
+    const sizes = new Float32Array(COUNT);
     for (let i = 0; i < COUNT; i++) {
       const t = Math.random();
-      const r = (1 - t) * 0.25 + 0.05; // tighter near nucleus
+      const r = (1 - t) * 0.25 + 0.05;
       const angle = Math.random() * Math.PI * 2;
       const offX = Math.cos(angle) * r * (1 - t * 0.3);
       const offY = Math.sin(angle) * r * (1 - t * 0.3);
@@ -140,23 +140,32 @@ function IonTail() {
       positions[i * 3 + 2] = tailDir.z * dist;
       velocities[i] = 0.012 + Math.random() * 0.02;
       lives[i] = t;
-      // Color: white at root → cyan at tip
-      colors[i * 3] = 0.6 + (1 - t) * 0.4;     // R
-      colors[i * 3 + 1] = 0.9 + (1 - t) * 0.1; // G
-      colors[i * 3 + 2] = 1.0;                 // B
+      // Head particles bigger, tip particles tiny — real taper
+      sizes[i] = (1 - t) * 22 + 4 + Math.random() * 3;
     }
-    return { positions, velocities, lives, colors };
+    return { positions, velocities, lives, sizes };
   }, [tailDir]);
 
   const geom = useMemo(() => {
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    g.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    g.setAttribute('aLife', new THREE.BufferAttribute(lives, 1));
+    g.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
     return g;
-  }, [positions, colors]);
+  }, [positions, lives, sizes]);
+
+  const uniforms = useMemo(
+    () => ({
+      uPixelRatio: { value: Math.min(window.devicePixelRatio, 1.5) },
+      uColorCore: { value: new THREE.Color('#ffffff') },
+      uColorTip: { value: new THREE.Color('#22d3ee') },
+    }),
+    []
+  );
 
   useFrame(() => {
     const arr = geom.attributes.position.array as Float32Array;
+    const lifeArr = geom.attributes.aLife.array as Float32Array;
     for (let i = 0; i < COUNT; i++) {
       lives[i] += velocities[i];
       if (lives[i] > 1) lives[i] = 0;
@@ -169,20 +178,21 @@ function IonTail() {
       arr[i * 3] = tailDir.x * dist + offX;
       arr[i * 3 + 1] = tailDir.y * dist + offY;
       arr[i * 3 + 2] = tailDir.z * dist;
+      lifeArr[i] = t;
     }
     geom.attributes.position.needsUpdate = true;
+    geom.attributes.aLife.needsUpdate = true;
   });
 
   return (
     <points ref={ref} geometry={geom}>
-      <pointsMaterial
-        size={0.05}
-        vertexColors
+      <shaderMaterial
+        vertexShader={TAIL_VERT}
+        fragmentShader={TAIL_FRAG}
+        uniforms={uniforms}
         transparent
-        opacity={0.85}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
         depthWrite={false}
+        blending={THREE.AdditiveBlending}
       />
     </points>
   );
@@ -196,16 +206,17 @@ function DustTail() {
   // Perpendicular for curve direction
   const perp = useMemo(() => new THREE.Vector3(0, -1, 0).cross(tailDir).normalize(), [tailDir]);
 
-  const { positions, velocities, lives } = useMemo(() => {
+  const { positions, velocities, lives, sizes } = useMemo(() => {
     const positions = new Float32Array(COUNT * 3);
     const velocities = new Float32Array(COUNT);
     const lives = new Float32Array(COUNT);
+    const sizes = new Float32Array(COUNT);
     for (let i = 0; i < COUNT; i++) {
       const t = Math.random();
       lives[i] = t;
       velocities[i] = 0.008 + Math.random() * 0.015;
       const dist = t * 6;
-      const curve = Math.pow(t, 1.6) * 1.6; // arcs more at tip
+      const curve = Math.pow(t, 1.6) * 1.6;
       const angle = Math.random() * Math.PI * 2;
       const r = (1 - t) * 0.3 + 0.06;
       const offX = Math.cos(angle) * r;
@@ -213,18 +224,31 @@ function DustTail() {
       positions[i * 3] = tailDir.x * dist + perp.x * curve + offX;
       positions[i * 3 + 1] = tailDir.y * dist + perp.y * curve - 0.2 * t + offY;
       positions[i * 3 + 2] = tailDir.z * dist + perp.z * curve;
+      sizes[i] = (1 - t) * 26 + 5 + Math.random() * 4;
     }
-    return { positions, velocities, lives };
+    return { positions, velocities, lives, sizes };
   }, [tailDir, perp]);
 
   const geom = useMemo(() => {
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    g.setAttribute('aLife', new THREE.BufferAttribute(lives, 1));
+    g.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
     return g;
-  }, [positions]);
+  }, [positions, lives, sizes]);
+
+  const uniforms = useMemo(
+    () => ({
+      uPixelRatio: { value: Math.min(window.devicePixelRatio, 1.5) },
+      uColorCore: { value: new THREE.Color('#fff7ed') },
+      uColorTip: { value: new THREE.Color('#fbbf24') },
+    }),
+    []
+  );
 
   useFrame(() => {
     const arr = geom.attributes.position.array as Float32Array;
+    const lifeArr = geom.attributes.aLife.array as Float32Array;
     for (let i = 0; i < COUNT; i++) {
       lives[i] += velocities[i];
       if (lives[i] > 1) lives[i] = 0;
@@ -236,20 +260,21 @@ function DustTail() {
       arr[i * 3] = tailDir.x * dist + perp.x * curve + Math.cos(angle) * r;
       arr[i * 3 + 1] = tailDir.y * dist + perp.y * curve - 0.2 * t + Math.sin(angle) * r;
       arr[i * 3 + 2] = tailDir.z * dist + perp.z * curve;
+      lifeArr[i] = t;
     }
     geom.attributes.position.needsUpdate = true;
+    geom.attributes.aLife.needsUpdate = true;
   });
 
   return (
     <points geometry={geom}>
-      <pointsMaterial
-        color="#fbbf24"
-        size={0.06}
+      <shaderMaterial
+        vertexShader={TAIL_VERT}
+        fragmentShader={TAIL_FRAG}
+        uniforms={uniforms}
         transparent
-        opacity={0.55}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
         depthWrite={false}
+        blending={THREE.AdditiveBlending}
       />
     </points>
   );
