@@ -55,7 +55,13 @@ export function GodsPage() {
               className="relative group cursor-pointer"
               onClick={() => setSelectedGod(god)}
             >
-              <div className="glass-cosmic rounded-xl overflow-hidden h-full transition-all group-hover:scale-[1.02]">
+              {/* Desktop-only atmospheric glow halo */}
+              <div
+                className="hidden lg:block absolute -inset-2 rounded-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none blur-2xl"
+                style={{ background: god.atmosphericBg }}
+                aria-hidden
+              />
+              <div className="relative glass-cosmic rounded-xl overflow-hidden h-full transition-all group-hover:scale-[1.02] lg:group-hover:shadow-[0_0_40px_-5px_hsl(var(--primary)/0.4)]">
                 {/* Portrait Image */}
                 {god.image ? (
                   <div className="relative h-52 overflow-hidden">

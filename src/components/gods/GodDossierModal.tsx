@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Scroll, Swords, Sparkles, Users, Flame, Compass, Lock } from 'lucide-react';
+import { X, Scroll, Swords, Sparkles, Users, Flame, Compass, Lock, Play } from 'lucide-react';
 import type { God } from '@/types';
 import { SourceList } from '@/components/SourceList';
 import { RankUnlock } from '@/components/RankUnlock';
+import { VideoEmbed } from '@/components/VideoEmbed';
+import { godVideos } from '@/data/god-videos';
 
-type TabId = 'origin' | 'myths' | 'powers' | 'relationships' | 'worship' | 'modern' | 'oracle';
+type TabId = 'origin' | 'myths' | 'powers' | 'relationships' | 'worship' | 'modern' | 'watch' | 'oracle';
 
 const TABS: { id: TabId; label: string; icon: typeof Scroll }[] = [
   { id: 'origin', label: 'Origin', icon: Scroll },
@@ -14,6 +16,7 @@ const TABS: { id: TabId; label: string; icon: typeof Scroll }[] = [
   { id: 'relationships', label: 'Bonds', icon: Users },
   { id: 'worship', label: 'Worship', icon: Flame },
   { id: 'modern', label: 'Modern', icon: Compass },
+  { id: 'watch', label: 'Watch', icon: Play },
   { id: 'oracle', label: 'Oracle', icon: Lock },
 ];
 
@@ -24,6 +27,7 @@ interface Props {
 
 export function GodDossierModal({ god, onClose }: Props) {
   const [tab, setTab] = useState<TabId>('origin');
+  const videos = god.videos ?? godVideos[god.id] ?? [];
 
   const hasContent = (id: TabId): boolean => {
     switch (id) {
@@ -33,6 +37,7 @@ export function GodDossierModal({ god, onClose }: Props) {
       case 'relationships': return !!(god.relationships && god.relationships.length);
       case 'worship': return !!god.worship;
       case 'modern': return !!god.modernRelevance;
+      case 'watch': return videos.length > 0;
       case 'oracle': return !!god.oracleLore;
     }
   };
@@ -207,6 +212,28 @@ export function GodDossierModal({ god, onClose }: Props) {
                       "{god.reflectionQuestion}"
                     </p>
                   </div>
+                </div>
+              )}
+
+              {tab === 'watch' && (
+                <div className="space-y-4">
+                  {videos.length ? (
+                    <>
+                      <p className="text-xs text-muted-foreground">
+                        Curated documentaries & lectures. Click any thumbnail to play.
+                      </p>
+                      {videos.map((v, i) => (
+                        <div key={i} className="space-y-1.5">
+                          <VideoEmbed video={{ platform: 'youtube', id: v.id, title: v.title }} />
+                          <p className="text-[10px] uppercase tracking-[2px] text-primary/80">
+                            {v.channel}
+                          </p>
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <em className="text-muted-foreground">Curated videos coming soon for this archetype.</em>
+                  )}
                 </div>
               )}
 

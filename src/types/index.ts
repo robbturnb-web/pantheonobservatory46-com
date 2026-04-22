@@ -11,6 +11,12 @@ export interface GodMyth {
   body: string;
 }
 
+export interface CuratedVideo {
+  id: string;
+  title: string;
+  channel: string;
+}
+
 export interface God {
   id: string;
   name: string;
@@ -32,6 +38,7 @@ export interface God {
   modernRelevance?: string;
   oracleLore?: string;
   quotes?: string[];
+  videos?: CuratedVideo[];
 }
 
 export interface TimelineEvent {
