@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, Stars, Html, Ring } from '@react-three/drei';
 import * as THREE from 'three';
 import { planets, type Planet, type Moon } from '../../data/planets';
+import { SolarFlares } from './SolarFlares';
 
 function Sun() {
   const ref = useRef<THREE.Mesh>(null);
