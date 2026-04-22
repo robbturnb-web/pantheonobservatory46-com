@@ -38,6 +38,7 @@ export interface God {
   modernRelevance?: string;
   oracleLore?: string;
   quotes?: string[];
+  videos?: CuratedVideo[];
 }
 
 export interface TimelineEvent {
