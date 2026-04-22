@@ -215,6 +215,28 @@ export function GodDossierModal({ god, onClose }: Props) {
                 </div>
               )}
 
+              {tab === 'watch' && (
+                <div className="space-y-4">
+                  {videos.length ? (
+                    <>
+                      <p className="text-xs text-muted-foreground">
+                        Curated documentaries & lectures. Click any thumbnail to play.
+                      </p>
+                      {videos.map((v, i) => (
+                        <div key={i} className="space-y-1.5">
+                          <VideoEmbed video={{ platform: 'youtube', id: v.id, title: v.title }} />
+                          <p className="text-[10px] uppercase tracking-[2px] text-primary/80">
+                            {v.channel}
+                          </p>
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <em className="text-muted-foreground">Curated videos coming soon for this archetype.</em>
+                  )}
+                </div>
+              )}
+
               {tab === 'oracle' && (
                 <RankUnlock minXp={1000} rankName="Oracle" label="esoteric stratum">
                   <div className="space-y-4">
