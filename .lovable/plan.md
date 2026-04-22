@@ -1,94 +1,93 @@
 
 
-# Plan: Holographic Particle Glow-Up — Starfield, ATLAS Hero, Shadow Pantheon
+# Plan: Tab-by-Tab Enhancement — Desktop-First Visuals + Credible Video Layer
 
-A focused visual upgrade to the particle systems and the Shadow Pantheon's atmosphere. No data, no backend — pure shader and canvas work.
+A structured, multi-batch upgrade. Each tab gets richer information, sharper desktop visuals, and curated YouTube videos (high-view, credible channels only — History Channel, BBC, PBS, National Geographic, Joe Rogan, NewsNation, Crash Course, Religion for Breakfast, etc.).
 
----
-
-## 1. Global Starfield — "Living Stars" (`src/components/StarfieldCanvas.tsx`)
-
-**Current:** uniform 0.18-size purple dots. Flat. No depth, no twinkle.
-
-**Upgrade:**
-- **Per-star size variation** — 3 size tiers via custom shader: tiny dust (60%), mid stars (30%), bright giants (10%) with halo
-- **Soft round glow sprite** — replace square `pointsMaterial` with a custom shader that draws each star as a radial-gradient glow (hot core → soft falloff). No more pixelated squares.
-- **Twinkle** — each star has its own phase; shader animates brightness with `sin(time * speed + phase)` so the field shimmers
-- **Color depth** — add hot-pink and cyan to the palette alongside violet/lavender for richer chromatic field
-- **Parallax depth layers** — split into 3 `<points>` groups at different z-depths (near/mid/far) rotating at different speeds. Closer stars feel bigger and move faster on mouse-drift.
-- **Bright "hero stars"** — ~20 special stars with a lens-flare cross spike (4-point star sprite) that pulse occasionally
-- **Replace the static nebula plane** with 2 slow-drifting volumetric nebula clouds (large noise-textured planes, additive, very low opacity) in violet + cyan that crossfade
-
-**Result:** the starfield reads as a real deep-space view with depth, twinkle, and color, not a flat dot pattern.
+We'll do **one tab per batch** so each gets full attention and you can review before we move on.
 
 ---
 
-## 2. ATLAS Hero Comet — Sharper Particles & Holographic HUD (`src/components/cosmic/AtlasHero.tsx`)
+## Foundation work (Batch 0 — quick, before tab batches)
 
-**Current:** ion + dust tails are square dots. HUD is flat.
+Two tiny additions that every tab will reuse:
 
-**Upgrade:**
-- **Round glowing particle sprite** for both tails (custom point shader with radial alpha gradient) — particles now read as light, not pixels
-- **Size variance per particle** — head particles 2x larger and brighter, tip particles tiny — gives the tail real taper
-- **Velocity-driven streaks** — fast particles get slight motion blur (additive trail behind each)
-- **Coma pulse** — the gas halo gently pulses (size + opacity) on a 4-second breath cycle
-- **Holographic HUD upgrade** — animate the scanline grid downward (CRT effect), add a faint chromatic-aberration RGB split on corner brackets, blinking "REC" dot, animated telemetry numbers (live distance counter ticks)
-- **Sun lens flare** — when the sun's position is roughly visible, draw a soft horizontal flare bar across the canvas
+1. **Extend the `God` / `Species` / `ShadowGod` / `UAPCase` / `Whistleblower` / `Pyramid` types** with an optional `videos: { id: string; title: string; channel: string }[]` field — fully optional so existing data still works.
+2. **Reuse the existing `<VideoEmbed />`** (lite-thumbnail → click-to-play pattern, already battle-tested) inside each dossier modal as a new "Watch" tab.
+
+No new dependencies. No layout shift on load.
 
 ---
 
-## 3. Shadow Pantheon — Holographic Restricted-Chamber Atmosphere (`src/pages/ShadowPantheonPage.tsx`)
+## Tab batches (proposed order — confirm or reorder)
 
-**Current:** static red gradient bg, plain card grid. Doesn't feel "restricted" or holographic.
+### Batch 1 — **Gods & Archetypes** (start here)
+- **Add a "Watch" tab** to the `GodDossierModal` showing 1-3 curated YouTube videos per god (origin story, mythology breakdown, or documentary clip).
+- **Curated sources only**: Religion for Breakfast, Crash Course Mythology, Overly Sarcastic Productions (Mythology series), History Channel, PBS, Mythology & Fiction Explained — all high-view, well-reviewed channels.
+- **Desktop visual upgrade**: hover on a god card now reveals a soft atmospheric glow matching `god.atmosphericBg`; modal gets a subtle parallax layer behind the portrait.
+- **Curate ~3 videos for each of the 18 gods** (~54 video IDs, all verified live before commit).
 
-**Upgrade:**
+### Batch 2 — **Species Codex**
+- Add **Watch tab** to species dossiers (Greys, Reptilians, Pleiadians, Mantis, Tall Whites, NJ drones, Mexico bodies, etc.).
+- Curated sources: Joe Rogan (Bob Lazar, David Grusch, Jacques Vallée segments), NewsNation (Coulthart), History Channel "Ancient Aliens" (clearly tagged as speculative), Why Files episodes per species.
+- **Desktop visual**: holographic species card frame on hover, scan-line overlay reading "SPECIMEN //  CLASS //  ORIGIN".
 
-**Background layer (new):**
-- A scoped `<ShadowAtmosphere />` component layered behind the page content with:
-  - **Holographic scanlines** — animated horizontal CRT lines drifting upward, reddish tint
-  - **Floating glyph particles** — 80 occult symbols (✦ ◯ ✕ ⌬ ◬) drifting slowly, faintly red/violet, twinkling
-  - **Embers/ash particles** — 150 small orange-red particles rising slowly with flicker
-  - **Volumetric fog** — 2 large red-violet noise planes drifting in opposite directions, very low opacity
-  - **Vignette pulse** — subtle red corner glow that breathes with a 6s cycle (like a pulsing warning)
+### Batch 3 — **Shadow Pantheon**
+- Watch tab inside each `ShadowCodexModal` — occult/comparative-religion lectures (Religion for Breakfast on Lilith, ESOTERICA on Lucifer/Set, Crecganford on dark deities).
+- **Desktop visual**: deepen the existing holographic atmosphere — add a "REDACTED // RESTRICTED" header band only visible at ≥lg breakpoints, animated red pulse on the corner of each card.
 
-**Card upgrade — holographic style:**
-- Add a thin **scanline overlay** on each card (animated diagonal lines)
-- **Glitch-shimmer** on hover — RGB split effect on the title text for ~200ms
-- **Holographic edge** — gradient border that shifts hue (red → violet → red) on hover, with a brief sweep of light across the card
-- Symbol icon gets a soft red glow halo
-- Card background gains a subtle iridescent sheen (conic gradient at low opacity)
+### Batch 4 — **UAP Files**
+- Add **Watch tab** to each of the 6 UAP cases (Roswell, Phoenix Lights, Tic-Tac, Rendlesham, Travis Walton, Aguadilla).
+- Sources: NewsNation Coulthart segments, original Navy Tic-Tac footage, congressional hearing clips, Joe Rogan #1315 (Lazar), Lex Fridman (Avi Loeb).
+- **Desktop visual**: each case gets a "DECLASSIFIED" stamp watermark and a parallax document-stack background behind its dossier.
 
-**Modal upgrade:**
-- Replace flat backdrop with the same scanlines + floating embers
-- Title "Shadow Codex" headline gets a holographic shimmer (animated linear-gradient text-clip with red/violet/cyan)
-- Section dividers become animated pulsing lines
+### Batch 5 — **Whistleblowers**
+- Watch tab per whistleblower (Grusch, Elizondo, Fravor, Mellon, Bushman, Lazar, etc.) — pin their best on-camera testimony from credible outlets only (Congressional C-SPAN, NewsNation, 60 Minutes, Joe Rogan).
+- **Desktop visual**: dossier header gets a "REC ●" blinking indicator and a typewriter-style classification banner.
 
-**Result:** entering Shadow Pantheon feels like opening a forbidden holographic terminal, not a styled grid.
+### Batch 6 — **Pyramid Explorer**
+- Add a **"Documentaries" panel** to each pyramid info card (Joe Rogan / Graham Hancock segments, Ancient Architects, UnchartedX, History Channel pyramid specials).
+- **Desktop visual**: the 3D scene gets a wider field of view and a HUD-style coordinate readout in the top-left at lg+ breakpoints.
 
----
+### Batch 7 — **Timeline**
+- Add **"Watch this era" buttons** at major timeline nodes (Sumerian tablets, Vimanas, Roswell era, Tic-Tac era, Grusch testimony) linking to a single curated video each.
+- **Desktop visual**: the timeline rail gets parallax depth — events further from the viewport blur slightly.
 
-## Files
-
-**Edited (3):**
-- `src/components/StarfieldCanvas.tsx` — custom shader stars, twinkle, parallax layers, hero stars, drifting nebulae
-- `src/components/cosmic/AtlasHero.tsx` — round glowing tail particles, size variance, coma pulse, holographic HUD animations
-- `src/pages/ShadowPantheonPage.tsx` — wire in the new atmosphere component, holographic card + modal styling
-
-**New (1):**
-- `src/components/shadow/ShadowAtmosphere.tsx` — scoped holographic background (scanlines, glyphs, embers, fog) for the Shadow Pantheon page only
-
-**No data changes. No new dependencies (uses existing three / framer-motion / canvas).**
+### Batch 8 — **Consciousness Lab, Telescopes, Galaxy, Earth Pulse, Echoverse, Origin Chamber**
+- Lighter pass each: 1-2 curated videos per major section, plus desktop-only visual touches (constellation overlays on Telescope page, Voyager-feed style HUD on Galaxy at lg+, ambient frequency waveform on Earth Pulse at lg+).
 
 ---
 
-## Verification
+## Desktop-first principles applied across every batch
 
-- `/` → starfield has depth, twinkles, varied star sizes, soft round glow (no square pixels), occasional bright lens-flare stars
-- `/` → ATLAS comet tails have soft round particles with size taper; HUD scanlines drift; corner brackets shimmer
-- `/shadow-pantheon` → holographic scanlines drift up the background, ash embers rise, occult glyphs float, cards have scanline overlays and holographic borders that shift on hover, modal title shimmers
+- **All new visual flourishes gated behind `lg:` breakpoint** so phones stay fast (you mentioned the heavier graphics were too much for mobile).
+- **Hover-state polish** (glow, parallax, scanlines) — invisible on touch devices, meaningful on desktop.
+- **Wider 7xl/6xl containers** where currently capped at 5xl to fill big monitors.
+- **No new heavy 3D scenes** — desktop polish through CSS, SVG, and reused canvases only.
 
-## Out of scope (next batch)
+---
 
-- WebGL post-processing bloom (would need `@react-three/postprocessing`; using shader/sprite glow instead for now)
-- Audio layer (low ambient hum on Shadow Pantheon)
+## Video curation rules (applied to every tab)
+
+- **Minimum 100K views** OR from a verified credible channel (History, PBS, BBC, Smithsonian, NewsNation, Joe Rogan, Lex Fridman, Religion for Breakfast, ESOTERICA, Crash Course).
+- **No clickbait, no UFO TikTok reuploads, no flat-earth/conspiracy-grift channels.**
+- **Verify each video ID is live** via YouTube oEmbed before commit (same process used for `frequencies.ts`).
+- Videos shown in lite-embed mode (thumbnail → click to play), so no autoplay tax on page load.
+
+---
+
+## Files touched per batch (typical)
+
+- `src/types/index.ts` — add optional `videos` field (Batch 0 only)
+- `src/data/<topic>.ts` — append `videos: [...]` to each entry
+- `src/components/<topic>/<X>Modal.tsx` — add Watch tab
+- `src/pages/<X>Page.tsx` — small desktop-only visual additions
+
+No backend, no migrations, no new dependencies.
+
+---
+
+## What I need from you to start
+
+Pick batch order (or accept the proposed order: **Gods first**), and I'll execute one batch per turn. Each batch ends with a verification list so you can confirm before moving on.
 
