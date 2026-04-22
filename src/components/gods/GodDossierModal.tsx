@@ -27,6 +27,7 @@ interface Props {
 
 export function GodDossierModal({ god, onClose }: Props) {
   const [tab, setTab] = useState<TabId>('origin');
+  const videos = god.videos ?? godVideos[god.id] ?? [];
 
   const hasContent = (id: TabId): boolean => {
     switch (id) {
@@ -36,6 +37,7 @@ export function GodDossierModal({ god, onClose }: Props) {
       case 'relationships': return !!(god.relationships && god.relationships.length);
       case 'worship': return !!god.worship;
       case 'modern': return !!god.modernRelevance;
+      case 'watch': return videos.length > 0;
       case 'oracle': return !!god.oracleLore;
     }
   };
