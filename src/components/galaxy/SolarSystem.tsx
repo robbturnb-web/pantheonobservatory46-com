@@ -739,6 +739,8 @@ export const SolarSystem = forwardRef<SolarSystemHandle, SolarSystemProps>(funct
       <Sun />
       <AsteroidBelt />
       <Comets />
+      <ShootingStars />
+      <VoyagerProbe />
       {planets.filter(p => p.distance > 0).map(planet => (
         <OrbitRing key={`orbit-${planet.id}`} distance={planet.distance} />
       ))}
