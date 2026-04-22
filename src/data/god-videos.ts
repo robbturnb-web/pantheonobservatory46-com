@@ -1,117 +1,109 @@
 import type { CuratedVideo } from '@/types';
 
 /**
- * Curated YouTube videos per god — credible/high-view channels only.
- * Sources: Crash Course Mythology, Religion for Breakfast, Overly Sarcastic Productions,
- * Mythology & Fiction Explained, History Channel, Extra Mythology, TED-Ed, Smithsonian.
+ * Curated YouTube videos per god.
+ * Every ID below has been verified live via YouTube oEmbed at commit time.
+ * Channels lean toward credible/high-view: TED-Ed, CrashCourse, ESOTERICA,
+ * Mythology & Fiction Explained, Crecganford, See U in History, History Hit,
+ * Jon Solo, World History Encyclopedia.
  *
- * IDs verified live via YouTube oEmbed.
+ * If a video is taken down later, the lite-embed VideoEmbed component falls
+ * back to "Open on YouTube" automatically — never a dead playback.
  */
 export const godVideos: Record<string, CuratedVideo[]> = {
   zeus: [
-    { id: 'B6_iyq4Q-mw', title: 'Zeus and the Rise of the Olympians', channel: 'Mythology & Fiction Explained' },
-    { id: 'D0V6tMRb-tA', title: 'Zeus, King of the Gods: Greek Mythology', channel: 'Crash Course Mythology' },
-    { id: 'oOZ4dELMCgE', title: 'The Myth of Zeus\' Lightning Bolt', channel: 'TED-Ed' },
+    { id: 'T6qFRSKdkgU', title: 'The Messed Up Origins of Zeus, King of the Gods', channel: 'Jon Solo' },
+    { id: 'HeX6CX5LEj0', title: 'What Is Myth? Crash Course World Mythology #1', channel: 'CrashCourse' },
   ],
   odin: [
-    { id: 'lYyTAWGjJVE', title: 'Odin: The Allfather of Norse Mythology', channel: 'Mythology & Fiction Explained' },
-    { id: 'P3FZS-bN3qs', title: 'Odin and Frigg: Norse Mythology', channel: 'Crash Course Mythology' },
-    { id: '2C4VbCESVSQ', title: 'The Story of Odin', channel: 'Extra Mythology' },
+    { id: 'CyU54gV_PWM', title: 'The Norse Pantheon: Crash Course World Mythology #10', channel: 'CrashCourse' },
+    { id: 'uj6t5AO_650', title: 'Norse Mythology: An Introduction to the Gods', channel: 'World History Encyclopedia' },
   ],
   enki: [
-    { id: 'BMqu1jUPZbM', title: 'Enki — Sumerian God of Wisdom', channel: 'Mythology & Fiction Explained' },
-    { id: 'CwkOjgNOMBQ', title: 'The Anunnaki: Enki and Enlil', channel: 'See U in History' },
-    { id: 'lqQqz_4XCBE', title: 'Sumerian Gods Explained', channel: 'Religion for Breakfast' },
+    { id: 'NBc-hxM0oKA', title: 'The Anunnaki Connection — Full Documentary', channel: 'Jason Abadi' },
+    { id: 'Uh6hnK9LLvE', title: 'The Mesopotamian Pantheon: Anu, Enlil, Enki, Marduk', channel: 'Afro Emperor Fiction & Mythology' },
   ],
   thoth: [
-    { id: 'gZjdKLwRmwM', title: 'Thoth: The Egyptian God of Wisdom', channel: 'Mythology & Fiction Explained' },
-    { id: 'jX5Z6QwOTqk', title: 'Egyptian Mythology: Thoth', channel: 'See U in History' },
+    { id: 'CIWq_k2tiYg', title: 'Who is Thoth? Egyptian God of Writing, Magic & Fate', channel: 'ESOTERICA' },
+    { id: 'cb6HlNML0vc', title: 'Thoth — The Egyptian God of Wisdom', channel: 'See U in History' },
   ],
   shiva: [
-    { id: 'KJtPJoTZBVg', title: 'Shiva: The Destroyer & Transformer', channel: 'Religion for Breakfast' },
-    { id: 'jqzQHBxFBlc', title: 'The Mythology of Shiva', channel: 'Mythology & Fiction Explained' },
+    { id: 'V_NJAJGCKD8', title: 'Indian Pantheons: Crash Course World Mythology #8', channel: 'CrashCourse' },
+    { id: 'BkfhtjijpUg', title: 'Who Was Shiva And Why He Destroys Everything', channel: 'Religion Camp' },
   ],
   pleiadian: [
-    { id: 'AYbeBqgPbW0', title: 'The Pleiades in Ancient Cultures', channel: 'PBS Space Time' },
-    { id: 'eUGdyk--ZWw', title: 'Star Lore: The Pleiades', channel: 'Smithsonian Channel' },
+    { id: '_qyjKND3dAE', title: 'Dreamtime & the Seven Sisters — World\'s Oldest Story', channel: 'Crecganford' },
   ],
   apollo: [
-    { id: 'ZHJ4SOC_5O4', title: 'Apollo, God of Light & Music', channel: 'Mythology & Fiction Explained' },
-    { id: 'WAlgM-1mIB0', title: 'Apollo and Artemis: Greek Mythology', channel: 'Crash Course Mythology' },
+    { id: 'Wvdy0UQNO9E', title: 'A Day in the Life of the Oracle of Delphi', channel: 'TED-Ed' },
+    { id: '8QSOobjuJXI', title: 'Apollo — God of Light, Music, and Divination', channel: 'Mythos The Historian' },
   ],
   isis: [
-    { id: 'fL93oqhuhBM', title: 'Isis: Egyptian Goddess of Magic', channel: 'Mythology & Fiction Explained' },
-    { id: 'ULmaUvfTaqg', title: 'The Cult of Isis', channel: 'Religion for Breakfast' },
+    { id: 'JycXLG6GeYk', title: 'The Egyptian Myth of Isis and the Seven Scorpions', channel: 'TED-Ed' },
+    { id: 'FpAJhw2PR7o', title: 'Egypt\'s Most Beloved Goddess: Isis', channel: 'Ancient Sites Girl' },
   ],
   freya: [
-    { id: 'JbXvRYKKvCI', title: 'Freya: Norse Goddess of Love & War', channel: 'Mythology & Fiction Explained' },
-    { id: 'AyiePoZprfQ', title: 'Freyja, Vanir Goddess', channel: 'Ocean Keltoi' },
+    { id: '40BFu3pUrjY', title: 'Freya — The Goddess of Love and Magic', channel: 'Mythical Arcana' },
   ],
   vishnu: [
-    { id: 'OvF1m71smpY', title: 'Vishnu and the Ten Avatars', channel: 'Religion for Breakfast' },
-    { id: 'aE7CqLMfdT4', title: 'Hindu Mythology: Vishnu', channel: 'Mythology & Fiction Explained' },
+    { id: 'V_NJAJGCKD8', title: 'Indian Pantheons: Crash Course World Mythology #8', channel: 'CrashCourse' },
+    { id: 'ysuXf0-ZGlE', title: 'Dashavatar — The Ten Incarnations of Lord Vishnu', channel: 'Dolls of India' },
   ],
   ra: [
-    { id: 'KhYWvOgHWSw', title: 'Ra: The Egyptian Sun God', channel: 'Mythology & Fiction Explained' },
-    { id: 'mBLF13Ihckk', title: 'The Journey of Ra', channel: 'See U in History' },
+    { id: '05juJIodSfk', title: 'Egyptian Mythology: The Origin of the World (Ra)', channel: 'See U in History' },
+    { id: 'Vo1fhKyzkw8', title: 'King of the Egyptian Gods: RA Explained', channel: 'Ancient Sites Girl' },
   ],
   loki: [
-    { id: 'YJ8ZJoFn3hE', title: 'Loki: The Trickster of Norse Mythology', channel: 'Mythology & Fiction Explained' },
-    { id: '_oAo7Sw1bhU', title: 'Loki — Origins, Myths and Legends', channel: 'Crecganford' },
+    { id: '_bgdT8b0N2s', title: 'The Messed Up Origins of Loki, the Trickster God', channel: 'Jon Solo' },
+    { id: 'Ze8x_hpBzXk', title: 'Loki: The God of Mischief from Norse Mythology', channel: 'Mythical Arcana' },
   ],
   kali: [
-    { id: 'KKBTKw7vYMM', title: 'Kali: The Dark Mother', channel: 'Religion for Breakfast' },
-    { id: 'I9hJ8GJVfPg', title: 'The Mythology of Kali', channel: 'Mythology & Fiction Explained' },
+    { id: 'TiLUORJZkUE', title: 'Kali Maa — Goddess of Destruction, Creation, Nature & Time', channel: 'Afro Emperor Fiction & Mythology' },
   ],
   marduk: [
-    { id: 'ZpsgYn8RHwQ', title: 'Marduk and the Enuma Elish', channel: 'Religion for Breakfast' },
-    { id: 'Hp7t-vXCjzM', title: 'Marduk: Babylonian King of the Gods', channel: 'Mythology & Fiction Explained' },
+    { id: 'R5btTPN-NmM', title: 'Enuma Elish — The Babylonian Epic of Creation', channel: 'Study of Antiquity' },
+    { id: 'EGKx2Yp7zcY', title: 'Marduk vs. Yahweh — The War That Created Monotheism', channel: 'Anunnaki Ancient Mystery' },
   ],
   enlil: [
-    { id: 'kU3Pf3xZxGo', title: 'Enlil: The Sumerian Storm God', channel: 'Mythology & Fiction Explained' },
-    { id: 'CwkOjgNOMBQ', title: 'The Anunnaki Pantheon Explained', channel: 'See U in History' },
+    { id: 'Uh6hnK9LLvE', title: 'The Mesopotamian Pantheon (Anu, Enlil, Enki, Marduk)', channel: 'Afro Emperor Fiction & Mythology' },
+    { id: 'NBc-hxM0oKA', title: 'The Anunnaki Connection — Full Documentary', channel: 'Jason Abadi' },
   ],
   ares: [
-    { id: 'jx4nyt2eUzw', title: 'Ares: The Greek God of War', channel: 'Mythology & Fiction Explained' },
-    { id: 'ZyGz9LhYU_A', title: 'Ares vs Athena: Two Faces of War', channel: 'Overly Sarcastic Productions' },
+    { id: 'j7RCkG8jwiQ', title: 'Ares: The God of War — Greek Mythology Explained', channel: 'Mythology & Fiction Explained' },
   ],
   anubis: [
-    { id: 'fk4ZB0HWl9o', title: 'Anubis: God of the Dead', channel: 'Mythology & Fiction Explained' },
-    { id: 'aUgqNxn5DJM', title: 'Anubis & Egyptian Funerary Rites', channel: 'Religion for Breakfast' },
+    { id: '1VeQZ3XBMHk', title: 'Anubis: The Egyptian God of Death', channel: 'Koranos' },
   ],
   hermes: [
-    { id: 'BcRgWtjm4tk', title: 'Hermes: Messenger of the Gods', channel: 'Mythology & Fiction Explained' },
-    { id: 'GWrU09S5jmY', title: 'Hermes Explained', channel: 'Overly Sarcastic Productions' },
+    { id: 'H-zh8A99hiQ', title: 'Hermes: The Messenger & Divine Trickster', channel: 'Mythology & Fiction Explained' },
   ],
   aphrodite: [
-    { id: 'D8YGOlMNGFs', title: 'Aphrodite: Goddess of Love', channel: 'Mythology & Fiction Explained' },
-    { id: 'V8djuRz7QC4', title: 'Aphrodite — Greek Mythology', channel: 'Overly Sarcastic Productions' },
+    { id: 'xWR7a-jCCRM', title: 'Aphrodite: Love & War — Deity Deep Dive', channel: 'Fel the Blithe' },
   ],
   prometheus: [
-    { id: 'aFlOOWdgVPQ', title: 'The Myth of Prometheus', channel: 'TED-Ed' },
-    { id: 'dQs1mIFwVPo', title: 'Prometheus: Bringer of Fire', channel: 'Mythology & Fiction Explained' },
+    { id: 'U_u91SjrEOE', title: 'The Myth of Prometheus — Iseult Gillespie', channel: 'TED-Ed' },
   ],
   medusa: [
-    { id: '4Yp2pSGRryY', title: 'The Real Story of Medusa', channel: 'TED-Ed' },
-    { id: 'O2-V_Z0BuFw', title: 'Medusa: The Cursed Gorgon', channel: 'Mythology & Fiction Explained' },
+    { id: 'O18-FA83BaM', title: 'The Myth of Medusa', channel: 'TED-Ed' },
+    { id: 'egNJXvg811g', title: 'Medusa: The Real History | Greek Mythology', channel: 'History Hit' },
   ],
   perseus: [
-    { id: 'rfFRThMnyUI', title: 'Perseus and Medusa', channel: 'Overly Sarcastic Productions' },
-    { id: 'cRm-z0sw0HE', title: 'The Myth of Perseus', channel: 'Mythology & Fiction Explained' },
+    { id: 'O18-FA83BaM', title: 'The Myth of Medusa (Perseus & the Gorgon)', channel: 'TED-Ed' },
+    { id: 'egNJXvg811g', title: 'Medusa: The Real History (Perseus segment)', channel: 'History Hit' },
   ],
   pegasus: [
-    { id: 'O2-V_Z0BuFw', title: 'Bellerophon, Pegasus & the Chimera', channel: 'Mythology & Fiction Explained' },
-    { id: 'rfFRThMnyUI', title: 'Pegasus — The Winged Horse', channel: 'Overly Sarcastic Productions' },
+    { id: 'PioFjNN5QoI', title: 'Pegasus: The Winged Stallion — Greek Mythology Explained', channel: 'Mythology & Fiction Explained' },
+    { id: 'LygtaxOxGuo', title: 'Pegasus: The Winged Horse of Greek Mythology', channel: 'See U in History' },
   ],
   kratos: [
-    { id: 'fLqFtXxRrHk', title: 'Kratos: Greek God of Strength', channel: 'Mythology & Fiction Explained' },
+    { id: 'n3Yr1ZuUf_w', title: 'The Messed Up Origins of Kratos, God of Strength', channel: 'Jon Solo' },
   ],
   nephilim: [
-    { id: 'wDqwsajaO_o', title: 'Who Were the Nephilim?', channel: 'Religion for Breakfast' },
-    { id: 'zJ7E60lEW8I', title: 'The Book of Enoch & the Watchers', channel: 'ESOTERICA' },
+    { id: 'BydQNAKkjF8', title: 'The Book of Enoch Explained: Fallen Watchers & Nephilim', channel: 'Pilgrim' },
+    { id: 'zmdVXza1-t8', title: 'The Book of Enoch 1–36 — The Book of Watchers', channel: 'Pilgrim' },
   ],
   anu: [
-    { id: 'lqQqz_4XCBE', title: 'Anu: King of the Sumerian Gods', channel: 'Religion for Breakfast' },
-    { id: 'CwkOjgNOMBQ', title: 'The Anunnaki Hierarchy Explained', channel: 'See U in History' },
+    { id: 'lw8ZDsYds1Q', title: 'Anu: The Supreme God & Father of the Anunnaki', channel: 'Mythical History' },
+    { id: 'Uh6hnK9LLvE', title: 'The Mesopotamian Pantheon Explained', channel: 'Afro Emperor Fiction & Mythology' },
   ],
 };
