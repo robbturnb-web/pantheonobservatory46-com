@@ -454,10 +454,19 @@ function AsteroidBelt() {
   );
 }
 
-/* Comets that streak across the scene */
-function Comet({ startAngle, speed, radius }: { startAngle: number; speed: number; radius: number }) {
+/* Comets that streak across the scene — typed as ice (blue/cyan) or dust (golden) */
+function Comet({
+  startAngle, speed, radius, kind = 'ice', size = 1,
+}: {
+  startAngle: number; speed: number; radius: number;
+  kind?: 'ice' | 'dust'; size?: number;
+}) {
   const groupRef = useRef<THREE.Group>(null);
   const tailRef = useRef<THREE.Mesh>(null);
+
+  const palette = kind === 'ice'
+    ? { core: '#e0f7fa', coma: '#80deea', tail: '#67e8f9' }
+    : { core: '#fff7e0', coma: '#fbbf24', tail: '#f59e0b' };
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
@@ -466,27 +475,23 @@ function Comet({ startAngle, speed, radius }: { startAngle: number; speed: numbe
     groupRef.current.position.x = Math.cos(t) * r;
     groupRef.current.position.z = Math.sin(t) * r;
     groupRef.current.position.y = Math.sin(t * 0.7) * 3;
-    // Orient tail away from sun
     groupRef.current.lookAt(0, 0, 0);
     if (tailRef.current) tailRef.current.rotation.x = Math.PI;
   });
 
   return (
     <group ref={groupRef}>
-      {/* Nucleus */}
       <mesh>
-        <sphereGeometry args={[0.08, 8, 8]} />
-        <meshBasicMaterial color="#e0f7fa" />
+        <sphereGeometry args={[0.08 * size, 10, 10]} />
+        <meshBasicMaterial color={palette.core} />
       </mesh>
-      {/* Coma glow */}
-      <mesh scale={2.5}>
-        <sphereGeometry args={[0.08, 8, 8]} />
-        <meshBasicMaterial color="#80deea" transparent opacity={0.3} />
+      <mesh scale={2.8 * size}>
+        <sphereGeometry args={[0.08, 10, 10]} />
+        <meshBasicMaterial color={palette.coma} transparent opacity={0.32} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
-      {/* Tail */}
-      <mesh ref={tailRef} position={[0, 0, -0.8]}>
-        <coneGeometry args={[0.12, 2, 8]} />
-        <meshBasicMaterial color="#80deea" transparent opacity={0.15} />
+      <mesh ref={tailRef} position={[0, 0, -0.8 * size]}>
+        <coneGeometry args={[0.12 * size, 2.2 * size, 10]} />
+        <meshBasicMaterial color={palette.tail} transparent opacity={0.22} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
     </group>
   );
@@ -495,11 +500,108 @@ function Comet({ startAngle, speed, radius }: { startAngle: number; speed: numbe
 function Comets() {
   return (
     <group>
-      <Comet startAngle={0} speed={0.08} radius={42} />
-      <Comet startAngle={Math.PI * 0.7} speed={0.12} radius={35} />
-      <Comet startAngle={Math.PI * 1.3} speed={0.06} radius={48} />
+      <Comet startAngle={0} speed={0.08} radius={42} kind="ice" size={1} />
+      <Comet startAngle={Math.PI * 0.7} speed={0.12} radius={35} kind="ice" size={0.7} />
+      <Comet startAngle={Math.PI * 1.3} speed={0.06} radius={48} kind="dust" size={1.2} />
+      <Comet startAngle={Math.PI * 0.3} speed={0.05} radius={55} kind="ice" size={1.5} />
+      <Comet startAngle={Math.PI * 1.7} speed={0.1} radius={28} kind="dust" size={0.8} />
+      <Comet startAngle={Math.PI * 0.9} speed={0.07} radius={62} kind="dust" size={1} />
     </group>
   );
+}
+
+/* Voyager probe — tiny spacecraft drifting outward past Pluto with a faint signal blink */
+function VoyagerProbe() {
+  const groupRef = useRef<THREE.Group>(null);
+  const blinkRef = useRef<THREE.Mesh>(null);
+  const startTime = useRef(0);
+
+  useFrame(({ clock }) => {
+    if (!groupRef.current) return;
+    const t = clock.getElapsedTime();
+    if (startTime.current === 0) startTime.current = t;
+    // Slow drift outward at angle
+    const drift = (t - startTime.current) * 0.04;
+    const angle = 0.7;
+    const baseR = 60;
+    const r = baseR + drift;
+    groupRef.current.position.set(Math.cos(angle) * r, 1.5, Math.sin(angle) * r);
+    groupRef.current.rotation.y = t * 0.3;
+    // Blink
+    if (blinkRef.current) {
+      const m = blinkRef.current.material as THREE.MeshBasicMaterial;
+      m.opacity = (Math.sin(t * 2.5) > 0.7) ? 0.95 : 0.15;
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      {/* Bus body */}
+      <mesh>
+        <boxGeometry args={[0.18, 0.18, 0.18]} />
+        <meshStandardMaterial color="#cbd5e1" metalness={0.7} roughness={0.4} />
+      </mesh>
+      {/* Dish antenna */}
+      <mesh position={[0, 0.18, 0]} rotation={[0, 0, 0]}>
+        <cylinderGeometry args={[0.16, 0.16, 0.02, 16]} />
+        <meshStandardMaterial color="#e2e8f0" metalness={0.5} roughness={0.3} />
+      </mesh>
+      {/* Signal blink */}
+      <mesh ref={blinkRef} position={[0, 0.22, 0]}>
+        <sphereGeometry args={[0.04, 8, 8]} />
+        <meshBasicMaterial color="#39ff14" transparent opacity={0.5} />
+      </mesh>
+      {/* Boom arm */}
+      <mesh position={[0.2, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.012, 0.012, 0.4, 6]} />
+        <meshStandardMaterial color="#94a3b8" metalness={0.6} roughness={0.5} />
+      </mesh>
+      <Html center distanceFactor={30} position={[0, 0.45, 0]} style={{ pointerEvents: 'none' }}>
+        <div className="text-[8px] font-mono uppercase tracking-[2px] text-[hsl(var(--accent-neon))]/70 whitespace-nowrap">
+          ⟢ VOYAGER · 1977
+        </div>
+      </Html>
+    </group>
+  );
+}
+
+/* Background shooting stars — 1-2 per minute streaking across the starfield */
+function ShootingStars() {
+  interface Shoot { start: THREE.Vector3; dir: THREE.Vector3; t: number; life: number; }
+  const shots = useRef<Shoot[]>([]);
+  const groupRef = useRef<THREE.Group>(null);
+  const lastSpawn = useRef(0);
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    if (t - lastSpawn.current > 30 + Math.random() * 30) {
+      lastSpawn.current = t;
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 70 + Math.random() * 30;
+      const start = new THREE.Vector3(Math.cos(angle) * dist, 10 + Math.random() * 20, Math.sin(angle) * dist);
+      const dir = new THREE.Vector3((Math.random() - 0.5) * 4, -2 - Math.random() * 2, (Math.random() - 0.5) * 4).normalize();
+      shots.current.push({ start, dir, t: 0, life: 2.5 });
+    }
+    // Update children
+    if (groupRef.current) {
+      groupRef.current.clear();
+      shots.current = shots.current.filter((s) => {
+        s.t += 0.016;
+        if (s.t > s.life) return false;
+        const p = s.start.clone().add(s.dir.clone().multiplyScalar(s.t * 30));
+        const fade = 1 - s.t / s.life;
+        const head = new THREE.Mesh(
+          new THREE.SphereGeometry(0.12, 6, 6),
+          new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: fade }),
+        );
+        head.position.copy(p);
+        groupRef.current!.add(head);
+        return true;
+      });
+    }
+  });
+
+  return <group ref={groupRef} />;
 }
 
 // Spaceship mesh
