@@ -23,6 +23,9 @@ const SUN_POSITION = new THREE.Vector3(12, 2, -2);
 
 function CometNucleus() {
   const nucleusRef = useRef<THREE.Mesh>(null);
+  const coma1 = useRef<THREE.Mesh>(null);
+  const coma2 = useRef<THREE.Mesh>(null);
+  const coma3 = useRef<THREE.Mesh>(null);
 
   // High-detail cratered sphere via vertex displacement (procedural)
   const geometry = useMemo(() => {
@@ -32,7 +35,6 @@ function CometNucleus() {
     for (let i = 0; i < pos.count; i++) {
       v.fromBufferAttribute(pos, i);
       const n = v.clone().normalize();
-      // Layered noise: large lumps + medium ridges + fine craters
       const big = Math.sin(n.x * 4 + 0.7) * Math.cos(n.y * 4 - 0.3) * 0.06;
       const med = Math.sin(n.x * 9 + n.z * 7) * 0.03;
       const crater = Math.cos(n.y * 18 + n.z * 14) * Math.sin(n.x * 16) * 0.018;
@@ -45,15 +47,28 @@ function CometNucleus() {
   }, []);
 
   useFrame((state) => {
+    const t = state.clock.elapsedTime;
     if (nucleusRef.current) {
       nucleusRef.current.rotation.y += 0.004;
-      nucleusRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.08;
+      nucleusRef.current.rotation.x = Math.sin(t * 0.3) * 0.08;
+    }
+    // Coma pulse — 4-second breath cycle
+    const breath = 1 + Math.sin(t * (Math.PI * 2) / 4) * 0.08;
+    if (coma1.current) {
+      coma1.current.scale.setScalar(breath);
+      (coma1.current.material as THREE.MeshBasicMaterial).opacity = 0.28 + Math.sin(t * 1.5) * 0.05;
+    }
+    if (coma2.current) {
+      coma2.current.scale.setScalar(1 + (breath - 1) * 1.4);
+      (coma2.current.material as THREE.MeshBasicMaterial).opacity = 0.13 + Math.sin(t * 1.5 + 0.5) * 0.04;
+    }
+    if (coma3.current) {
+      coma3.current.scale.setScalar(1 + (breath - 1) * 1.8);
     }
   });
 
   return (
     <group>
-      {/* Cratered icy nucleus */}
       <mesh ref={nucleusRef} geometry={geometry}>
         <meshStandardMaterial
           color="#cfd9e0"
@@ -64,22 +79,54 @@ function CometNucleus() {
           flatShading={false}
         />
       </mesh>
-      {/* Multi-layer coma (gas halo) */}
-      <mesh>
+      <mesh ref={coma1}>
         <sphereGeometry args={[0.78, 32, 32]} />
         <meshBasicMaterial color="#67e8f9" transparent opacity={0.28} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
-      <mesh>
+      <mesh ref={coma2}>
         <sphereGeometry args={[1.05, 24, 24]} />
         <meshBasicMaterial color="#22d3ee" transparent opacity={0.13} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
-      <mesh>
+      <mesh ref={coma3}>
         <sphereGeometry args={[1.5, 18, 18]} />
         <meshBasicMaterial color="#a78bfa" transparent opacity={0.05} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
     </group>
   );
 }
+
+/* Round glowing point shader for tail particles (radial gradient, no square pixels) */
+const TAIL_VERT = /* glsl */ `
+  attribute float aSize;
+  attribute float aLife;
+  varying float vLife;
+  varying float vSize;
+  uniform float uPixelRatio;
+  void main() {
+    vLife = aLife;
+    vSize = aSize;
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    gl_Position = projectionMatrix * mv;
+    gl_PointSize = aSize * (300.0 / -mv.z) * uPixelRatio;
+  }
+`;
+const TAIL_FRAG = /* glsl */ `
+  precision mediump float;
+  uniform vec3 uColorCore;
+  uniform vec3 uColorTip;
+  varying float vLife;
+  varying float vSize;
+  void main() {
+    vec2 uv = gl_PointCoord - 0.5;
+    float d = length(uv);
+    if (d > 0.5) discard;
+    float core = smoothstep(0.5, 0.0, d);
+    float halo = pow(core, 2.4);
+    vec3 col = mix(uColorCore, uColorTip, vLife);
+    float a = halo * (1.0 - vLife * 0.85);
+    gl_FragColor = vec4(col, a);
+  }
+`;
 
 /* Straight ion tail — points directly away from sun, electric blue → white at root */
 function IonTail() {
@@ -90,14 +137,14 @@ function IonTail() {
   const sunDir = useMemo(() => SUN_POSITION.clone().normalize(), []);
   const tailDir = useMemo(() => sunDir.clone().multiplyScalar(-1), [sunDir]);
 
-  const { positions, velocities, lives, colors } = useMemo(() => {
+  const { positions, velocities, lives, sizes } = useMemo(() => {
     const positions = new Float32Array(COUNT * 3);
     const velocities = new Float32Array(COUNT);
     const lives = new Float32Array(COUNT);
-    const colors = new Float32Array(COUNT * 3);
+    const sizes = new Float32Array(COUNT);
     for (let i = 0; i < COUNT; i++) {
       const t = Math.random();
-      const r = (1 - t) * 0.25 + 0.05; // tighter near nucleus
+      const r = (1 - t) * 0.25 + 0.05;
       const angle = Math.random() * Math.PI * 2;
       const offX = Math.cos(angle) * r * (1 - t * 0.3);
       const offY = Math.sin(angle) * r * (1 - t * 0.3);
@@ -107,23 +154,32 @@ function IonTail() {
       positions[i * 3 + 2] = tailDir.z * dist;
       velocities[i] = 0.012 + Math.random() * 0.02;
       lives[i] = t;
-      // Color: white at root → cyan at tip
-      colors[i * 3] = 0.6 + (1 - t) * 0.4;     // R
-      colors[i * 3 + 1] = 0.9 + (1 - t) * 0.1; // G
-      colors[i * 3 + 2] = 1.0;                 // B
+      // Head particles bigger, tip particles tiny — real taper
+      sizes[i] = (1 - t) * 22 + 4 + Math.random() * 3;
     }
-    return { positions, velocities, lives, colors };
+    return { positions, velocities, lives, sizes };
   }, [tailDir]);
 
   const geom = useMemo(() => {
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    g.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    g.setAttribute('aLife', new THREE.BufferAttribute(lives, 1));
+    g.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
     return g;
-  }, [positions, colors]);
+  }, [positions, lives, sizes]);
+
+  const uniforms = useMemo(
+    () => ({
+      uPixelRatio: { value: Math.min(window.devicePixelRatio, 1.5) },
+      uColorCore: { value: new THREE.Color('#ffffff') },
+      uColorTip: { value: new THREE.Color('#22d3ee') },
+    }),
+    []
+  );
 
   useFrame(() => {
     const arr = geom.attributes.position.array as Float32Array;
+    const lifeArr = geom.attributes.aLife.array as Float32Array;
     for (let i = 0; i < COUNT; i++) {
       lives[i] += velocities[i];
       if (lives[i] > 1) lives[i] = 0;
@@ -136,20 +192,21 @@ function IonTail() {
       arr[i * 3] = tailDir.x * dist + offX;
       arr[i * 3 + 1] = tailDir.y * dist + offY;
       arr[i * 3 + 2] = tailDir.z * dist;
+      lifeArr[i] = t;
     }
     geom.attributes.position.needsUpdate = true;
+    geom.attributes.aLife.needsUpdate = true;
   });
 
   return (
     <points ref={ref} geometry={geom}>
-      <pointsMaterial
-        size={0.05}
-        vertexColors
+      <shaderMaterial
+        vertexShader={TAIL_VERT}
+        fragmentShader={TAIL_FRAG}
+        uniforms={uniforms}
         transparent
-        opacity={0.85}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
         depthWrite={false}
+        blending={THREE.AdditiveBlending}
       />
     </points>
   );
@@ -163,16 +220,17 @@ function DustTail() {
   // Perpendicular for curve direction
   const perp = useMemo(() => new THREE.Vector3(0, -1, 0).cross(tailDir).normalize(), [tailDir]);
 
-  const { positions, velocities, lives } = useMemo(() => {
+  const { positions, velocities, lives, sizes } = useMemo(() => {
     const positions = new Float32Array(COUNT * 3);
     const velocities = new Float32Array(COUNT);
     const lives = new Float32Array(COUNT);
+    const sizes = new Float32Array(COUNT);
     for (let i = 0; i < COUNT; i++) {
       const t = Math.random();
       lives[i] = t;
       velocities[i] = 0.008 + Math.random() * 0.015;
       const dist = t * 6;
-      const curve = Math.pow(t, 1.6) * 1.6; // arcs more at tip
+      const curve = Math.pow(t, 1.6) * 1.6;
       const angle = Math.random() * Math.PI * 2;
       const r = (1 - t) * 0.3 + 0.06;
       const offX = Math.cos(angle) * r;
@@ -180,18 +238,31 @@ function DustTail() {
       positions[i * 3] = tailDir.x * dist + perp.x * curve + offX;
       positions[i * 3 + 1] = tailDir.y * dist + perp.y * curve - 0.2 * t + offY;
       positions[i * 3 + 2] = tailDir.z * dist + perp.z * curve;
+      sizes[i] = (1 - t) * 26 + 5 + Math.random() * 4;
     }
-    return { positions, velocities, lives };
+    return { positions, velocities, lives, sizes };
   }, [tailDir, perp]);
 
   const geom = useMemo(() => {
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    g.setAttribute('aLife', new THREE.BufferAttribute(lives, 1));
+    g.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1));
     return g;
-  }, [positions]);
+  }, [positions, lives, sizes]);
+
+  const uniforms = useMemo(
+    () => ({
+      uPixelRatio: { value: Math.min(window.devicePixelRatio, 1.5) },
+      uColorCore: { value: new THREE.Color('#fff7ed') },
+      uColorTip: { value: new THREE.Color('#fbbf24') },
+    }),
+    []
+  );
 
   useFrame(() => {
     const arr = geom.attributes.position.array as Float32Array;
+    const lifeArr = geom.attributes.aLife.array as Float32Array;
     for (let i = 0; i < COUNT; i++) {
       lives[i] += velocities[i];
       if (lives[i] > 1) lives[i] = 0;
@@ -203,20 +274,21 @@ function DustTail() {
       arr[i * 3] = tailDir.x * dist + perp.x * curve + Math.cos(angle) * r;
       arr[i * 3 + 1] = tailDir.y * dist + perp.y * curve - 0.2 * t + Math.sin(angle) * r;
       arr[i * 3 + 2] = tailDir.z * dist + perp.z * curve;
+      lifeArr[i] = t;
     }
     geom.attributes.position.needsUpdate = true;
+    geom.attributes.aLife.needsUpdate = true;
   });
 
   return (
     <points geometry={geom}>
-      <pointsMaterial
-        color="#fbbf24"
-        size={0.06}
+      <shaderMaterial
+        vertexShader={TAIL_VERT}
+        fragmentShader={TAIL_FRAG}
+        uniforms={uniforms}
         transparent
-        opacity={0.55}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
         depthWrite={false}
+        blending={THREE.AdditiveBlending}
       />
     </points>
   );
@@ -256,6 +328,21 @@ function CameraDrift() {
   });
 
   return null;
+}
+
+/* Animated live-distance ticker for the HUD */
+function LiveDistanceTicker() {
+  const [val, setVal] = useState(1.81);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setVal((v) => {
+        const next = v + (Math.random() - 0.45) * 0.0007;
+        return Math.max(1.7, Math.min(1.95, next));
+      });
+    }, 600);
+    return () => clearInterval(id);
+  }, []);
+  return <>Δ{val.toFixed(4)} AU</>;
 }
 
 export function AtlasHero() {
@@ -337,33 +424,43 @@ export function AtlasHero() {
             </Suspense>
           </Canvas>
 
-          {/* HUD overlay — corner brackets, crosshair, telemetry */}
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Corner brackets */}
-            <div className="absolute top-2 left-2 w-5 h-5 border-l-2 border-t-2 border-accent-neon/60" />
-            <div className="absolute top-2 right-2 w-5 h-5 border-r-2 border-t-2 border-accent-neon/60" />
-            <div className="absolute bottom-2 left-2 w-5 h-5 border-l-2 border-b-2 border-accent-neon/60" />
-            <div className="absolute bottom-2 right-2 w-5 h-5 border-r-2 border-b-2 border-accent-neon/60" />
+          {/* HUD overlay — holographic brackets, crosshair, drifting scanlines, REC blink */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {/* Corner brackets w/ chromatic aberration */}
+            <div className="hud-aberration absolute top-2 left-2 w-5 h-5 border-l-2 border-t-2 border-accent-neon/60" />
+            <div className="hud-aberration absolute top-2 right-2 w-5 h-5 border-r-2 border-t-2 border-accent-neon/60" />
+            <div className="hud-aberration absolute bottom-2 left-2 w-5 h-5 border-l-2 border-b-2 border-accent-neon/60" />
+            <div className="hud-aberration absolute bottom-2 right-2 w-5 h-5 border-r-2 border-b-2 border-accent-neon/60" />
             {/* Center crosshair */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 opacity-30">
               <div className="absolute top-1/2 left-0 right-0 h-px bg-accent-neon" />
               <div className="absolute left-1/2 top-0 bottom-0 w-px bg-accent-neon" />
               <div className="absolute inset-3 border border-accent-neon rounded-full" />
             </div>
-            {/* Faint scanline grid */}
+            {/* Drifting CRT scanlines */}
+            <div className="hud-scanlines absolute inset-0 opacity-[0.09]" />
+            {/* Sun lens flare bar (faint horizontal streak from sun direction — right side) */}
             <div
-              className="absolute inset-0 opacity-[0.07]"
+              className="absolute top-1/2 right-0 -translate-y-1/2 w-2/3 h-8 opacity-30 mix-blend-screen"
               style={{
-                backgroundImage:
-                  'repeating-linear-gradient(0deg, transparent 0 2px, hsl(var(--accent-neon)) 2px 3px)',
+                background:
+                  'linear-gradient(90deg, transparent 0%, rgba(253, 230, 138, 0.0) 30%, rgba(253, 230, 138, 0.4) 75%, rgba(255, 255, 255, 0.6) 95%, transparent 100%)',
+                filter: 'blur(3px)',
               }}
             />
-            {/* Telemetry label */}
-            <div className="absolute top-3 left-9 text-[9px] font-mono text-accent-neon/80 uppercase tracking-[2px]">
-              JWST·NEAR-IR · LIVE
+            {/* Telemetry label + REC blink */}
+            <div className="absolute top-3 left-9 flex items-center gap-2 text-[9px] font-mono text-accent-neon/80 uppercase tracking-[2px]">
+              <span className="hud-rec inline-block w-1.5 h-1.5 rounded-full bg-red-500" />
+              REC · JWST·NEAR-IR
+            </div>
+            <div className="absolute top-3 right-9 text-[9px] font-mono text-accent-neon/70 uppercase tracking-[2px]">
+              <LiveDistanceTicker />
             </div>
             <div className="absolute bottom-3 right-9 text-[9px] font-mono text-accent-neon/70 uppercase tracking-[2px]">
               ⟢ HYPERBOLIC TRAJECTORY
+            </div>
+            <div className="absolute bottom-3 left-9 text-[9px] font-mono text-accent-neon/60 uppercase tracking-[2px]">
+              SIG·LOCK ▮▮▮▮▯
             </div>
           </div>
         </motion.div>
