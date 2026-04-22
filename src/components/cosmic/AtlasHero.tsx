@@ -81,6 +81,39 @@ function CometNucleus() {
   );
 }
 
+/* Round glowing point shader for tail particles (radial gradient, no square pixels) */
+const TAIL_VERT = /* glsl */ `
+  attribute float aSize;
+  attribute float aLife;
+  varying float vLife;
+  varying float vSize;
+  uniform float uPixelRatio;
+  void main() {
+    vLife = aLife;
+    vSize = aSize;
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    gl_Position = projectionMatrix * mv;
+    gl_PointSize = aSize * (300.0 / -mv.z) * uPixelRatio;
+  }
+`;
+const TAIL_FRAG = /* glsl */ `
+  precision mediump float;
+  uniform vec3 uColorCore;
+  uniform vec3 uColorTip;
+  varying float vLife;
+  varying float vSize;
+  void main() {
+    vec2 uv = gl_PointCoord - 0.5;
+    float d = length(uv);
+    if (d > 0.5) discard;
+    float core = smoothstep(0.5, 0.0, d);
+    float halo = pow(core, 2.4);
+    vec3 col = mix(uColorCore, uColorTip, vLife);
+    float a = halo * (1.0 - vLife * 0.85);
+    gl_FragColor = vec4(col, a);
+  }
+`;
+
 /* Straight ion tail — points directly away from sun, electric blue → white at root */
 function IonTail() {
   const ref = useRef<THREE.Points>(null);
