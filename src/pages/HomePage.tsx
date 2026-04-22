@@ -6,7 +6,6 @@ import { vaultSlots, daysOverdue } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
 import { Walkthrough } from '@/components/Walkthrough';
 
-import { StefanLocator } from '@/components/cosmic/StefanLocator';
 import { DailyPulseCard } from '@/components/cosmos/DailyPulseCard';
 import silhouetteMale from '@/assets/missing/silhouette-male.jpg';
 import silhouetteFemale from '@/assets/missing/silhouette-female.jpg';
@@ -178,10 +177,9 @@ export function HomePage() {
         </motion.div>
       </motion.div>
 
-      {/* STEFAN + DAILY PULSE */}
+      {/* DAILY PULSE */}
       <section className="px-4 pb-4">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <StefanLocator />
+        <div className="max-w-5xl mx-auto">
           <DailyPulseCard />
         </div>
       </section>
