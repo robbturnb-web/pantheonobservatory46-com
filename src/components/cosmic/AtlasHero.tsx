@@ -330,7 +330,22 @@ function CameraDrift() {
   return null;
 }
 
-export function AtlasHero() {
+/* Animated live-distance ticker for the HUD */
+function LiveDistanceTicker() {
+  const [val, setVal] = useState(1.81);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setVal((v) => {
+        const next = v + (Math.random() - 0.45) * 0.0007;
+        return Math.max(1.7, Math.min(1.95, next));
+      });
+    }, 600);
+    return () => clearInterval(id);
+  }, []);
+  return <>Δ{val.toFixed(4)} AU</>;
+}
+
+
   const [data, setData] = useState<AtlasData | null>(null);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
