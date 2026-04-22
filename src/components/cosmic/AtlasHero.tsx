@@ -345,7 +345,7 @@ function LiveDistanceTicker() {
   return <>Δ{val.toFixed(4)} AU</>;
 }
 
-
+export function AtlasHero() {
   const [data, setData] = useState<AtlasData | null>(null);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
