@@ -409,33 +409,43 @@ export function AtlasHero() {
             </Suspense>
           </Canvas>
 
-          {/* HUD overlay — corner brackets, crosshair, telemetry */}
-          <div className="absolute inset-0 pointer-events-none">
-            {/* Corner brackets */}
-            <div className="absolute top-2 left-2 w-5 h-5 border-l-2 border-t-2 border-accent-neon/60" />
-            <div className="absolute top-2 right-2 w-5 h-5 border-r-2 border-t-2 border-accent-neon/60" />
-            <div className="absolute bottom-2 left-2 w-5 h-5 border-l-2 border-b-2 border-accent-neon/60" />
-            <div className="absolute bottom-2 right-2 w-5 h-5 border-r-2 border-b-2 border-accent-neon/60" />
+          {/* HUD overlay — holographic brackets, crosshair, drifting scanlines, REC blink */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {/* Corner brackets w/ chromatic aberration */}
+            <div className="hud-aberration absolute top-2 left-2 w-5 h-5 border-l-2 border-t-2 border-accent-neon/60" />
+            <div className="hud-aberration absolute top-2 right-2 w-5 h-5 border-r-2 border-t-2 border-accent-neon/60" />
+            <div className="hud-aberration absolute bottom-2 left-2 w-5 h-5 border-l-2 border-b-2 border-accent-neon/60" />
+            <div className="hud-aberration absolute bottom-2 right-2 w-5 h-5 border-r-2 border-b-2 border-accent-neon/60" />
             {/* Center crosshair */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 opacity-30">
               <div className="absolute top-1/2 left-0 right-0 h-px bg-accent-neon" />
               <div className="absolute left-1/2 top-0 bottom-0 w-px bg-accent-neon" />
               <div className="absolute inset-3 border border-accent-neon rounded-full" />
             </div>
-            {/* Faint scanline grid */}
+            {/* Drifting CRT scanlines */}
+            <div className="hud-scanlines absolute inset-0 opacity-[0.09]" />
+            {/* Sun lens flare bar (faint horizontal streak from sun direction — right side) */}
             <div
-              className="absolute inset-0 opacity-[0.07]"
+              className="absolute top-1/2 right-0 -translate-y-1/2 w-2/3 h-8 opacity-30 mix-blend-screen"
               style={{
-                backgroundImage:
-                  'repeating-linear-gradient(0deg, transparent 0 2px, hsl(var(--accent-neon)) 2px 3px)',
+                background:
+                  'linear-gradient(90deg, transparent 0%, rgba(253, 230, 138, 0.0) 30%, rgba(253, 230, 138, 0.4) 75%, rgba(255, 255, 255, 0.6) 95%, transparent 100%)',
+                filter: 'blur(3px)',
               }}
             />
-            {/* Telemetry label */}
-            <div className="absolute top-3 left-9 text-[9px] font-mono text-accent-neon/80 uppercase tracking-[2px]">
-              JWST·NEAR-IR · LIVE
+            {/* Telemetry label + REC blink */}
+            <div className="absolute top-3 left-9 flex items-center gap-2 text-[9px] font-mono text-accent-neon/80 uppercase tracking-[2px]">
+              <span className="hud-rec inline-block w-1.5 h-1.5 rounded-full bg-red-500" />
+              REC · JWST·NEAR-IR
+            </div>
+            <div className="absolute top-3 right-9 text-[9px] font-mono text-accent-neon/70 uppercase tracking-[2px]">
+              <LiveDistanceTicker />
             </div>
             <div className="absolute bottom-3 right-9 text-[9px] font-mono text-accent-neon/70 uppercase tracking-[2px]">
               ⟢ HYPERBOLIC TRAJECTORY
+            </div>
+            <div className="absolute bottom-3 left-9 text-[9px] font-mono text-accent-neon/60 uppercase tracking-[2px]">
+              SIG·LOCK ▮▮▮▮▯
             </div>
           </div>
         </motion.div>
