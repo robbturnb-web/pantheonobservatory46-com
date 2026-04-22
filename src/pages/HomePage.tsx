@@ -273,6 +273,75 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* MISSING PERSONS ARCHIVE TEASER */}
+      <section className="px-4 pb-4">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Link
+              to="/missing"
+              className="block relative overflow-hidden rounded-2xl border border-red-900/40 glass-cosmic group hover:border-red-500/60 transition-colors"
+            >
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                animate={{ opacity: [0.1, 0.25, 0.1] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                style={{
+                  background:
+                    'radial-gradient(circle at 15% 50%, rgba(220,38,38,0.2), transparent 60%), radial-gradient(circle at 90% 50%, rgba(100,100,100,0.15), transparent 55%)',
+                }}
+              />
+              <motion.div
+                className="absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-red-500/60 to-transparent pointer-events-none"
+                animate={{ top: ['0%', '100%'] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+              />
+              <div className="relative z-10 p-5 sm:p-6 flex flex-col sm:flex-row items-center gap-5 sm:gap-6">
+                {/* Portrait collage */}
+                <div className="shrink-0 flex -space-x-4">
+                  {[silhouetteMale, silhouetteFemale, silhouetteMilitary].map((src, i) => (
+                    <div
+                      key={i}
+                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-red-900/50 overflow-hidden bg-black"
+                      style={{ filter: 'grayscale(100%) contrast(1.1) brightness(0.85)' }}
+                    >
+                      <img src={src} alt="" className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Center content */}
+                <div className="flex-1 min-w-0 text-center sm:text-left">
+                  <div className="text-[10px] uppercase tracking-[3px] text-red-500/90 mb-1 font-semibold">
+                    ▌ Investigation
+                  </div>
+                  <h3 className="text-lg sm:text-2xl font-black text-foreground tracking-tight leading-tight">
+                    The Vanishing — 11 Scientists. 6 Programs. Zero Answers.
+                  </h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-2 leading-relaxed">
+                    House Oversight Committee inquiry into the deaths and disappearances of US scientists tied to nuclear, fusion, and aerospace programs.
+                  </p>
+                  <div className="text-[11px] uppercase tracking-wider text-muted-foreground/80 mt-2 font-mono">
+                    11 dossiers · 6 programs · 4 historical precedents
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <div className="shrink-0 w-full sm:w-auto">
+                  <div className="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-4 py-2.5 rounded-lg bg-red-950/40 border border-red-700/50 text-red-100 text-sm font-semibold group-hover:bg-red-900/60 group-hover:border-red-500 transition-colors">
+                    <FileSearch className="w-4 h-4" />
+                    Open the Archive →
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* SECTION GRID */}
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
