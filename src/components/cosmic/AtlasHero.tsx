@@ -23,6 +23,9 @@ const SUN_POSITION = new THREE.Vector3(12, 2, -2);
 
 function CometNucleus() {
   const nucleusRef = useRef<THREE.Mesh>(null);
+  const coma1 = useRef<THREE.Mesh>(null);
+  const coma2 = useRef<THREE.Mesh>(null);
+  const coma3 = useRef<THREE.Mesh>(null);
 
   // High-detail cratered sphere via vertex displacement (procedural)
   const geometry = useMemo(() => {
@@ -32,7 +35,6 @@ function CometNucleus() {
     for (let i = 0; i < pos.count; i++) {
       v.fromBufferAttribute(pos, i);
       const n = v.clone().normalize();
-      // Layered noise: large lumps + medium ridges + fine craters
       const big = Math.sin(n.x * 4 + 0.7) * Math.cos(n.y * 4 - 0.3) * 0.06;
       const med = Math.sin(n.x * 9 + n.z * 7) * 0.03;
       const crater = Math.cos(n.y * 18 + n.z * 14) * Math.sin(n.x * 16) * 0.018;
@@ -45,15 +47,28 @@ function CometNucleus() {
   }, []);
 
   useFrame((state) => {
+    const t = state.clock.elapsedTime;
     if (nucleusRef.current) {
       nucleusRef.current.rotation.y += 0.004;
-      nucleusRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.08;
+      nucleusRef.current.rotation.x = Math.sin(t * 0.3) * 0.08;
+    }
+    // Coma pulse — 4-second breath cycle
+    const breath = 1 + Math.sin(t * (Math.PI * 2) / 4) * 0.08;
+    if (coma1.current) {
+      coma1.current.scale.setScalar(breath);
+      (coma1.current.material as THREE.MeshBasicMaterial).opacity = 0.28 + Math.sin(t * 1.5) * 0.05;
+    }
+    if (coma2.current) {
+      coma2.current.scale.setScalar(1 + (breath - 1) * 1.4);
+      (coma2.current.material as THREE.MeshBasicMaterial).opacity = 0.13 + Math.sin(t * 1.5 + 0.5) * 0.04;
+    }
+    if (coma3.current) {
+      coma3.current.scale.setScalar(1 + (breath - 1) * 1.8);
     }
   });
 
   return (
     <group>
-      {/* Cratered icy nucleus */}
       <mesh ref={nucleusRef} geometry={geometry}>
         <meshStandardMaterial
           color="#cfd9e0"
@@ -64,16 +79,15 @@ function CometNucleus() {
           flatShading={false}
         />
       </mesh>
-      {/* Multi-layer coma (gas halo) */}
-      <mesh>
+      <mesh ref={coma1}>
         <sphereGeometry args={[0.78, 32, 32]} />
         <meshBasicMaterial color="#67e8f9" transparent opacity={0.28} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
-      <mesh>
+      <mesh ref={coma2}>
         <sphereGeometry args={[1.05, 24, 24]} />
         <meshBasicMaterial color="#22d3ee" transparent opacity={0.13} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
-      <mesh>
+      <mesh ref={coma3}>
         <sphereGeometry args={[1.5, 18, 18]} />
         <meshBasicMaterial color="#a78bfa" transparent opacity={0.05} blending={THREE.AdditiveBlending} depthWrite={false} />
       </mesh>
