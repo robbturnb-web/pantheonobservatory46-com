@@ -5,7 +5,7 @@ import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle,
 import { vaultSlots, daysOverdue } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
 import { Walkthrough } from '@/components/Walkthrough';
-import { AtlasHero } from '@/components/cosmic/AtlasHero';
+
 import { StefanLocator } from '@/components/cosmic/StefanLocator';
 import { DailyPulseCard } from '@/components/cosmos/DailyPulseCard';
 import silhouetteMale from '@/assets/missing/silhouette-male.jpg';
@@ -177,9 +177,6 @@ export function HomePage() {
           <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
         </motion.div>
       </motion.div>
-
-      {/* 3I/ATLAS LIVE TRACKER */}
-      <AtlasHero />
 
       {/* STEFAN + DAILY PULSE */}
       <section className="px-4 pb-4">
