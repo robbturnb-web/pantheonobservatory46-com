@@ -8,6 +8,9 @@ import { Walkthrough } from '@/components/Walkthrough';
 import { AtlasHero } from '@/components/cosmic/AtlasHero';
 import { StefanLocator } from '@/components/cosmic/StefanLocator';
 import { DailyPulseCard } from '@/components/cosmos/DailyPulseCard';
+import silhouetteMale from '@/assets/missing/silhouette-male.jpg';
+import silhouetteFemale from '@/assets/missing/silhouette-female.jpg';
+import silhouetteMilitary from '@/assets/missing/silhouette-military.jpg';
 
 const sections = [
   { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
