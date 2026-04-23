@@ -24,6 +24,20 @@ import { AuthPage } from './pages/AuthPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { MissingPage } from './pages/MissingPage';
+import { AntarcticaPage } from './pages/AntarcticaPage';
+import {
+  AtlantisPage,
+  AaroPage,
+  CrashRetrievalPage,
+  UndergroundBasesPage,
+  EntityEncountersPage,
+  ExtinctSpeciesPage,
+  CernPage,
+  FederationPage,
+  BuildersPage,
+  GlyphsPage,
+  StoneFacesPage,
+} from './pages/PlaceholderPages';
 
 export default function App() {
   return (
@@ -52,6 +66,18 @@ export default function App() {
           <Route path="/species" element={<SpeciesCodexPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/missing" element={<MissingPage />} />
+          <Route path="/antarctica" element={<AntarcticaPage />} />
+          <Route path="/atlantis" element={<AtlantisPage />} />
+          <Route path="/aaro" element={<AaroPage />} />
+          <Route path="/crash-retrieval" element={<CrashRetrievalPage />} />
+          <Route path="/underground" element={<UndergroundBasesPage />} />
+          <Route path="/encounters" element={<EntityEncountersPage />} />
+          <Route path="/extinct" element={<ExtinctSpeciesPage />} />
+          <Route path="/cern" element={<CernPage />} />
+          <Route path="/federation" element={<FederationPage />} />
+          <Route path="/builders" element={<BuildersPage />} />
+          <Route path="/glyphs" element={<GlyphsPage />} />
+          <Route path="/stone-faces" element={<StoneFacesPage />} />
         </Route>
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
