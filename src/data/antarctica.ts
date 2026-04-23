@@ -70,7 +70,6 @@ export const antarcticaEntries: DossierEntry[] = [
     ],
     skepticalView:
       'Byrd\'s actual papers — over 500 boxes — are held at the Byrd Polar and Climate Research Center, Ohio State University. The "Secret Diary" is not among them. Linguistic analysis points to a 1970s-era forgery.',
-    confidence: 'ALLEGED',
     sources: [
       { label: 'Byrd Polar and Climate Research Center, Ohio State University', url: 'https://bpcrc.osu.edu/' },
       { label: 'Loren Coleman — analysis of Byrd diary forgery claims' },
@@ -185,7 +184,6 @@ export const antarcticaEntries: DossierEntry[] = [
       '2020: A-68A breaks apart approaching South Georgia.',
       '2023: Multiple papers confirm accelerating Peninsula mass loss.',
     ],
-    confidence: 'VERIFIED',
     sources: [
       { label: 'NASA Earth Observatory — A-68 timeline', url: 'https://earthobservatory.nasa.gov/' },
       { label: 'British Antarctic Survey — Larsen C ecosystem report (2018)' },
@@ -233,7 +231,6 @@ export const antarcticaEntries: DossierEntry[] = [
       'Oct 2000: Body returned to Christchurch for autopsy.',
       '2008: NZ coroner releases findings — death by methanol, source undetermined.',
     ],
-    confidence: 'VERIFIED',
     sources: [
       { label: 'New Zealand Coroner findings on Rodney Marks (2008)', url: 'https://coronialservices.justice.govt.nz/' },
       { label: 'The Australian — long-form investigation by Greg Roberts (2008)' },
