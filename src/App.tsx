@@ -26,6 +26,7 @@ import { ProfilePage } from './pages/ProfilePage';
 import { MissingPage } from './pages/MissingPage';
 import { AntarcticaPage } from './pages/AntarcticaPage';
 import { AtlantisPage } from './pages/AtlantisPage';
+import { ElementsLabPage } from './pages/ElementsLabPage';
 import {
   AaroPage,
   CrashRetrievalPage,
@@ -78,6 +79,7 @@ export default function App() {
           <Route path="/builders" element={<BuildersPage />} />
           <Route path="/glyphs" element={<GlyphsPage />} />
           <Route path="/stone-faces" element={<StoneFacesPage />} />
+          <Route path="/elements" element={<ElementsLabPage />} />
         </Route>
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
