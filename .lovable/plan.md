@@ -1,93 +1,137 @@
 
 
-# Plan: Tab-by-Tab Enhancement — Desktop-First Visuals + Credible Video Layer
+# Plan: Pantheon Expansion — 12 New Themed Dossier Pages + Mega-Menu
 
-A structured, multi-batch upgrade. Each tab gets richer information, sharper desktop visuals, and curated YouTube videos (high-view, credible channels only — History Channel, BBC, PBS, National Geographic, Joe Rogan, NewsNation, Crash Course, Religion for Breakfast, etc.).
-
-We'll do **one tab per batch** so each gets full attention and you can review before we move on.
+We bring the categorized mega-menu from your other remix into this app and build out **12 new fully-themed pages** at the same depth as `/missing` and `/gods`. Each new tab gets its own visual identity — like Missing has its "classified detective case" theme, every new section gets its own atmosphere.
 
 ---
 
-## Foundation work (Batch 0 — quick, before tab batches)
+## 1. Navbar — Categorized Mega-Menu
 
-Two tiny additions that every tab will reuse:
+Replace the current flat link list with a grouped dropdown matching your screenshots:
 
-1. **Extend the `God` / `Species` / `ShadowGod` / `UAPCase` / `Whistleblower` / `Pyramid` types** with an optional `videos: { id: string; title: string; channel: string }[]` field — fully optional so existing data still works.
-2. **Reuse the existing `<VideoEmbed />`** (lite-thumbnail → click-to-play pattern, already battle-tested) inside each dossier modal as a new "Watch" tab.
+- **Cosmos & Disclosure** (purple): UAP Catalog, AARO Watch, Crash Retrieval, Disclosure Timeline, Whistleblower Vault, Cosmos Pulse
+- **Ancient Mysteries** (gold): Atlantis, Pyramid Interior, Glyphs Codex, Stone Faces, Pantheon of Gods, **Antarctica Files**
+- **Entity Encounters** (red): Alien Species, Entity Encounters, Extinct Species, Underground Bases
+- **Federation & Forge** (cyan): Galactic Federation, Builder's Arena, Elements Lab, CERN Watch, Observer Profile
 
-No new dependencies. No layout shift on load.
-
----
-
-## Tab batches (proposed order — confirm or reorder)
-
-### Batch 1 — **Gods & Archetypes** (start here)
-- **Add a "Watch" tab** to the `GodDossierModal` showing 1-3 curated YouTube videos per god (origin story, mythology breakdown, or documentary clip).
-- **Curated sources only**: Religion for Breakfast, Crash Course Mythology, Overly Sarcastic Productions (Mythology series), History Channel, PBS, Mythology & Fiction Explained — all high-view, well-reviewed channels.
-- **Desktop visual upgrade**: hover on a god card now reveals a soft atmospheric glow matching `god.atmosphericBg`; modal gets a subtle parallax layer behind the portrait.
-- **Curate ~3 videos for each of the 18 gods** (~54 video IDs, all verified live before commit).
-
-### Batch 2 — **Species Codex**
-- Add **Watch tab** to species dossiers (Greys, Reptilians, Pleiadians, Mantis, Tall Whites, NJ drones, Mexico bodies, etc.).
-- Curated sources: Joe Rogan (Bob Lazar, David Grusch, Jacques Vallée segments), NewsNation (Coulthart), History Channel "Ancient Aliens" (clearly tagged as speculative), Why Files episodes per species.
-- **Desktop visual**: holographic species card frame on hover, scan-line overlay reading "SPECIMEN //  CLASS //  ORIGIN".
-
-### Batch 3 — **Shadow Pantheon**
-- Watch tab inside each `ShadowCodexModal` — occult/comparative-religion lectures (Religion for Breakfast on Lilith, ESOTERICA on Lucifer/Set, Crecganford on dark deities).
-- **Desktop visual**: deepen the existing holographic atmosphere — add a "REDACTED // RESTRICTED" header band only visible at ≥lg breakpoints, animated red pulse on the corner of each card.
-
-### Batch 4 — **UAP Files**
-- Add **Watch tab** to each of the 6 UAP cases (Roswell, Phoenix Lights, Tic-Tac, Rendlesham, Travis Walton, Aguadilla).
-- Sources: NewsNation Coulthart segments, original Navy Tic-Tac footage, congressional hearing clips, Joe Rogan #1315 (Lazar), Lex Fridman (Avi Loeb).
-- **Desktop visual**: each case gets a "DECLASSIFIED" stamp watermark and a parallax document-stack background behind its dossier.
-
-### Batch 5 — **Whistleblowers**
-- Watch tab per whistleblower (Grusch, Elizondo, Fravor, Mellon, Bushman, Lazar, etc.) — pin their best on-camera testimony from credible outlets only (Congressional C-SPAN, NewsNation, 60 Minutes, Joe Rogan).
-- **Desktop visual**: dossier header gets a "REC ●" blinking indicator and a typewriter-style classification banner.
-
-### Batch 6 — **Pyramid Explorer**
-- Add a **"Documentaries" panel** to each pyramid info card (Joe Rogan / Graham Hancock segments, Ancient Architects, UnchartedX, History Channel pyramid specials).
-- **Desktop visual**: the 3D scene gets a wider field of view and a HUD-style coordinate readout in the top-left at lg+ breakpoints.
-
-### Batch 7 — **Timeline**
-- Add **"Watch this era" buttons** at major timeline nodes (Sumerian tablets, Vimanas, Roswell era, Tic-Tac era, Grusch testimony) linking to a single curated video each.
-- **Desktop visual**: the timeline rail gets parallax depth — events further from the viewport blur slightly.
-
-### Batch 8 — **Consciousness Lab, Telescopes, Galaxy, Earth Pulse, Echoverse, Origin Chamber**
-- Lighter pass each: 1-2 curated videos per major section, plus desktop-only visual touches (constellation overlays on Telescope page, Voyager-feed style HUD on Galaxy at lg+, ambient frequency waveform on Earth Pulse at lg+).
+Desktop: hover-triggered mega-menu with icons + colored category headers.
+Mobile: same accordion pattern from the screenshot.
 
 ---
 
-## Desktop-first principles applied across every batch
+## 2. Twelve New Pages — Each Themed Like a Distinct "Case File"
 
-- **All new visual flourishes gated behind `lg:` breakpoint** so phones stay fast (you mentioned the heavier graphics were too much for mobile).
-- **Hover-state polish** (glow, parallax, scanlines) — invisible on touch devices, meaningful on desktop.
-- **Wider 7xl/6xl containers** where currently capped at 5xl to fill big monitors.
-- **No new heavy 3D scenes** — desktop polish through CSS, SVG, and reused canvases only.
+Every page follows the proven `/missing` formula: themed hero → curated dossiers → expandable detail modal → curated YouTube videos → sources. Each gets its own **visual atmosphere** (color palette, overlay effects, typography flourish).
 
----
+| # | Page | Route | Theme | Content depth |
+|---|---|---|---|---|
+| 1 | **AARO Watch** | `/aaro` | "Pentagon briefing room" — beige folders, redaction bars, `[CLASSIFIED]` stamps | All AARO leadership, every annual report, every congressional hearing, current case backlog |
+| 2 | **Crash Retrieval** | `/crash-retrieval` | "Black-program recovery vault" — graphite + amber warning, blueprint grid | Roswell, Kingman, Kecksburg, Aztec, Varginha, Bob Lazar's S-4 metals, Grusch's reverse-engineering claims |
+| 3 | **Atlantis** | `/atlantis` | "Submerged ruins" — deep teal, caustic light ripples, ancient Greek serif | Plato's accounts, Bimini Road, Yonaguni, Cuba sunken city, Edgar Cayce readings, Hancock theories, geological dating |
+| 4 | **Antarctica Files** | `/antarctica` | "Ice-station expedition log" — white/cyan, snow particles, frostbite vignette, Operation Highjump dossier feel | Operation Highjump, Admiral Byrd diary, Lake Vostok, pyramid claims, Nazi base rumor, recent ice-shelf anomalies, scientist deaths there |
+| 5 | **Glyphs Codex** | `/glyphs` | "Cuneiform scroll" — papyrus + ink, animated sigil reveal | Sumerian, Egyptian, Vedic, Olmec, crop circles, Voynich — uses existing `glyphs.ts` |
+| 6 | **Stone Faces** | `/stone-faces` | "Field-archaeology dig site" — dust + sepia, callipers UI | Easter Island, Olmec heads, Bucegi, Gobekli Tepe, Yonaguni faces, Adam's Calendar — uses `stone-markers.ts` |
+| 7 | **Entity Encounters** | `/encounters` | "Witness interview transcript" — typewriter font, polaroid stack | Travis Walton, Betty/Barney Hill, Pascagoula, Ariel School, Kelly-Hopkinsville, Skinwalker Ranch encounters |
+| 8 | **Extinct Species** | `/extinct` | "Natural-history museum exhibit" — bone white, taxonomy plates | Nephilim giants, Denisovans, Hobbits (H. floresiensis), Paracas elongated skulls, Lovelock cave giants, Patagonian giants |
+| 9 | **Underground Bases** | `/underground` | "Subterranean schematic" — black + ember, cross-section diagrams | Dulce, Area 51 S-4, Mount Weather, Cheyenne Mountain, DUMBs theory, Pine Gap, Hawaiian volcano claims |
+| 10 | **Galactic Federation** | `/federation` | "Diplomatic treaty hall" — deep indigo + gold, embassy seals | Haim Eshed claims, Pleiadian council, Andromedan council, Ashtar Command, Sirian high council, Galactic Confederation overlap |
+| 11 | **Builder's Arena** | `/builders` | "Architect's drafting board" — blueprint blue + ruler grid | Megalith builders worldwide: Egypt, Puma Punku, Sacsayhuamán, Baalbek, Stonehenge, Nan Madol, Yonaguni — engineering analysis |
+| 12 | **CERN Watch** | `/cern` | "Particle-collider control room" — cyan + magenta hex grid, oscilloscope HUD | LHC timeline, Mandela Effect correlation theories, Shiva statue, dimensional-portal claims, every public experiment, anomaly logs |
 
-## Video curation rules (applied to every tab)
-
-- **Minimum 100K views** OR from a verified credible channel (History, PBS, BBC, Smithsonian, NewsNation, Joe Rogan, Lex Fridman, Religion for Breakfast, ESOTERICA, Crash Course).
-- **No clickbait, no UFO TikTok reuploads, no flat-earth/conspiracy-grift channels.**
-- **Verify each video ID is live** via YouTube oEmbed before commit (same process used for `frequencies.ts`).
-- Videos shown in lite-embed mode (thumbnail → click to play), so no autoplay tax on page load.
-
----
-
-## Files touched per batch (typical)
-
-- `src/types/index.ts` — add optional `videos` field (Batch 0 only)
-- `src/data/<topic>.ts` — append `videos: [...]` to each entry
-- `src/components/<topic>/<X>Modal.tsx` — add Watch tab
-- `src/pages/<X>Page.tsx` — small desktop-only visual additions
-
-No backend, no migrations, no new dependencies.
+**Each page includes:**
+- Themed hero banner with page-specific atmospheric effect
+- 6-12 dossier cards (full content, not stubs)
+- Click-to-expand modal with: Origin/Background, Key events, Evidence, Skeptical view, Curated videos (3 per dossier from credible channels — same rules as Gods batch), Sources
+- Confidence/evidence badges where relevant (VERIFIED / REPORTED / ALLEGED / DEBATED)
 
 ---
 
-## What I need from you to start
+## 3. Foundation — Reusable Themed Page Kit
 
-Pick batch order (or accept the proposed order: **Gods first**), and I'll execute one batch per turn. Each batch ends with a verification list so you can confirm before moving on.
+To avoid 12 one-off files, we build:
+
+- **`<DossierPageLayout>`** — accepts `theme` prop (color palette, hero overlay, font flourish) and renders consistent hero + grid + modal scaffolding
+- **`<DossierCard>`** + **`<DossierModal>`** — universal expandable card with tabs (Overview · Evidence · Watch · Sources)
+- **Theme tokens** in `src/lib/page-themes.ts` — one config per page (12 themes)
+
+This means the 12 pages share the same battle-tested code, but each *feels* distinct via theme config + hero artwork.
+
+---
+
+## 4. Data Files (12 new)
+
+Each at `src/data/<topic>.ts` with a `<Topic>Entry[]` export containing 6-12 fully-written entries (200-400 words each), curated `videos[]` (verified live via oEmbed), and `sources[]`.
+
+```
+src/data/aaro.ts
+src/data/crash-retrieval.ts
+src/data/atlantis.ts
+src/data/antarctica.ts
+src/data/entity-encounters.ts
+src/data/extinct-species.ts
+src/data/underground-bases.ts
+src/data/galactic-federation.ts
+src/data/builders.ts
+src/data/cern.ts
+```
+(`glyphs.ts` and `stone-markers.ts` already exist — reuse.)
+
+---
+
+## 5. Execution — One Page Per Batch
+
+Same rhythm we used for Gods. Per batch:
+1. Write the data file (full content + verified videos)
+2. Wire the page to the shared `<DossierPageLayout>` with that page's theme
+3. Add to router + mega-menu
+4. Verify videos via oEmbed
+5. You review → next batch
+
+**Proposed order** (heaviest themes first while energy is high):
+1. **Antarctica Files** (you mentioned it first)
+2. **Atlantis** (you mentioned it second)
+3. Crash Retrieval
+4. Underground Bases
+5. AARO Watch
+6. Entity Encounters
+7. Extinct Species
+8. CERN Watch
+9. Galactic Federation
+10. Builder's Arena
+11. Glyphs Codex (page over existing data)
+12. Stone Faces (page over existing data)
+
+**Pre-batches:**
+- **Batch A**: Mega-menu + `<DossierPageLayout>` + theme tokens (foundation only, no new pages yet)
+
+---
+
+## 6. Files Touched
+
+**New:**
+- `src/components/Navbar.tsx` (rewrite to mega-menu)
+- `src/components/dossier/DossierPageLayout.tsx`
+- `src/components/dossier/DossierCard.tsx`
+- `src/components/dossier/DossierModal.tsx`
+- `src/lib/page-themes.ts`
+- 10 new `src/data/*.ts` files
+- 12 new `src/pages/*.tsx` files
+
+**Edited:**
+- `src/App.tsx` (12 new routes)
+
+**No backend changes. No new dependencies.** All visuals via CSS/SVG/canvas.
+
+---
+
+## 7. Mobile Note
+
+You said this is desktop-first. New pages render fully on desktop with all atmospheric effects; mobile gets the same content with effects disabled (gated behind `lg:` breakpoint) so phones stay fast.
+
+---
+
+## What I need from you
+
+Confirm the **batch order** above (or reorder), and I'll start with **Batch A (foundation + mega-menu)**, then **Antarctica Files** as the first themed page.
 
