@@ -27,9 +27,9 @@ import { MissingPage } from './pages/MissingPage';
 import { AntarcticaPage } from './pages/AntarcticaPage';
 import { AtlantisPage } from './pages/AtlantisPage';
 import { ElementsLabPage } from './pages/ElementsLabPage';
+import { CrashRetrievalPage } from './pages/CrashRetrievalPage';
 import {
   AaroPage,
-  CrashRetrievalPage,
   UndergroundBasesPage,
   EntityEncountersPage,
   ExtinctSpeciesPage,
