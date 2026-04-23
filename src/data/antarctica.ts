@@ -41,8 +41,9 @@ export const antarcticaEntries: DossierEntry[] = [
     skepticalView:
       'Mainstream historians (e.g., Lisle Rose, "Assault on Eternity", USNI Press 1980) attribute the early termination to severe weather, equipment failures, and Cold-War redeployment — not combat with unidentified craft. The Byrd "fighters from the poles" quote is real but is interpreted as a Cold-War warning about Soviet polar bombers, not extraterrestrials.',
     videos: [
-      { id: 'mP2YYthVxXk', title: 'Operation Highjump: The Untold Story', channel: 'The Why Files' },
-      { id: '5x6Xk5HOXr0', title: "Admiral Byrd's Antarctic Mystery", channel: 'Bedtime Stories' },
+      { id: 'VNa6PrHW2cU', title: 'Operation Highjump 1946 — U.S. Navy Antarctic Research Expedition', channel: 'PeriscopeFilm' },
+      { id: 'E9chz8COYVc', title: 'The Secret Land — Operation Highjump (1946 official film)', channel: 'PeriscopeFilm' },
+      { id: 'YI9gSyFHcbw', title: 'Admiral Richard Byrd · Operation Highjump · Antarctic Expedition Documentary', channel: 'livingselfsufficient' },
     ],
     sources: [
       { label: 'NARA Task Force 68 declassified report', url: 'https://catalog.archives.gov/' },
@@ -103,7 +104,8 @@ export const antarcticaEntries: DossierEntry[] = [
     skepticalView:
       'Most contamination concerns from kerosene drilling have not been ruled out; the unknown DNA may reflect drill-fluid contaminants. The magnetic anomaly is most parsimoniously explained by a geological intrusion, not a manufactured object.',
     videos: [
-      { id: 'mIAi9Z7QkqI', title: 'The Mystery of Lake Vostok', channel: 'SciShow' },
+      { id: 'quf62SMgtfA', title: 'Russians Reach Antarctic Lake (Lake Vostok breakthrough)', channel: 'Associated Press' },
+      { id: 'ceZlMfYP8yQ', title: 'What Lies Beneath Antarctica? The Lake Vostok Mystery', channel: 'World Wonders' },
     ],
     sources: [
       { label: 'Studinger et al. (2001) — EPSL paper on Vostok geophysics' },
@@ -131,6 +133,10 @@ export const antarcticaEntries: DossierEntry[] = [
     ],
     skepticalView:
       'Geomorphologists overwhelmingly classify these features as glacial horns (nunataks). The "perfect symmetry" appearance is largely a function of viewing angle in the original photographs.',
+    videos: [
+      { id: 'cIZ7625Ts6A', title: 'Pyramids Found Beneath Antarctic Ice | The UnXplained S3', channel: 'HISTORY' },
+      { id: '1RXIEIHhlMc', title: "What's Hidden Under Antarctica Will Cause Global Tension", channel: 'New Nature' },
+    ],
     sources: [
       { label: 'British Antarctic Survey expedition imagery (2013)', url: 'https://www.bas.ac.uk/' },
       { label: 'USGS Antarctic Topographic Database' },
@@ -158,7 +164,8 @@ export const antarcticaEntries: DossierEntry[] = [
     skepticalView:
       'The expedition was real but limited. Both surrendered U-boats had standard wartime crews; their commanders (Wermuth and Schäffer) gave detailed depositions accounting for their movements. No supplies, fuel, or construction logistics on the scale required for a sustained Antarctic base existed in 1944–45 Germany.',
     videos: [
-      { id: '4zaLh7t1trk', title: "Hitler's Antarctic Base 211", channel: 'Bedtime Stories' },
+      { id: '0DRbjg_0zu8', title: 'Cryptids Vol. 3: The Antarctic Cover-up', channel: 'The Why Files' },
+      { id: 'BVOkGp5w14I', title: 'Joe Rogan Experience #2327 — AJ Gentile (Antarctica segment)', channel: 'PowerfulJRE' },
     ],
     sources: [
       { label: 'Cornelia Lüdecke — "Antarctic Research and the Geophysical Year" (peer-reviewed)' },
@@ -183,6 +190,10 @@ export const antarcticaEntries: DossierEntry[] = [
       'Feb 2018: BAS rapid-response cruise documents previously hidden seafloor ecosystem.',
       '2020: A-68A breaks apart approaching South Georgia.',
       '2023: Multiple papers confirm accelerating Peninsula mass loss.',
+    ],
+    videos: [
+      { id: 'oXe7T4SQNts', title: 'Chasing Ice: Largest Glacier Calving Ever Filmed', channel: 'AGU' },
+      { id: 'kPgdfPz235I', title: 'Solving the Mystery of Blood Falls in Antarctica', channel: 'Anton Petrov' },
     ],
     sources: [
       { label: 'NASA Earth Observatory — A-68 timeline', url: 'https://earthobservatory.nasa.gov/' },
