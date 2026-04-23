@@ -25,8 +25,8 @@ import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { MissingPage } from './pages/MissingPage';
 import { AntarcticaPage } from './pages/AntarcticaPage';
+import { AtlantisPage } from './pages/AtlantisPage';
 import {
-  AtlantisPage,
   AaroPage,
   CrashRetrievalPage,
   UndergroundBasesPage,
