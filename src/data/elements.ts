@@ -128,7 +128,7 @@ export const ELEMENTS: ChemElement[] = [
   { number: 87, symbol: 'Fr', name: 'Francium', mass: 223, category: 'alkali-metal', group: 1, period: 7 },
   { number: 88, symbol: 'Ra', name: 'Radium', mass: 226, category: 'alkaline-earth', group: 2, period: 7 },
   { number: 89, symbol: 'Ac', name: 'Actinium', mass: 227, category: 'actinide', group: 3, period: 7 },
-  { number: 90, symbol: 'Th', name: 'Thorium', mass: 232.04, category: 'actinide', group: 0, period: 9 },
+  { number: 90, symbol: 'Th', name: 'Thorium', mass: 232.04, category: 'actinide', group: 0, period: 9, lore: 'NEXT-GEN NUCLEAR FUEL. Thorium-232 is fertile — bombarded with neutrons it becomes fissile U-233. Molten-salt reactors (LFTR) promise meltdown-proof power, 200× the energy density of uranium, and minimal long-lived waste. India holds 25% of global reserves and has staked its energy future on it.' },
   { number: 91, symbol: 'Pa', name: 'Protactinium', mass: 231.04, category: 'actinide', group: 0, period: 9 },
   { number: 92, symbol: 'U', name: 'Uranium', mass: 238.03, category: 'actinide', group: 0, period: 9 },
   { number: 93, symbol: 'Np', name: 'Neptunium', mass: 237, category: 'actinide', group: 0, period: 9 },

@@ -38,6 +38,12 @@ const RULES: ReactionRule[] = [
   { match: pair('Fe', 'C'), result: { product: 'Steel', formula: 'Fe-C', description: 'Civilization-defining alloy.' } },
   { match: pair('Cu', 'Sn'), result: { product: 'Bronze', formula: 'Cu-Sn', description: 'Bronze Age. Sumerians + Anunnaki tech transfer (alleged).' } },
   { match: pair('Hg', 'Au'), result: { product: 'Vimana Mercury Drive', formula: 'Hg-Au', description: 'Sanskrit Vaimanika Shastra describes mercury-vortex propulsion.', exotic: true, fuel: true } },
+  { match: pair('Th', 'Th'), result: { product: 'Molten-Salt Reactor Core', formula: 'Th-232 → U-233', description: 'Two thorium nuclei seed a LFTR — meltdown-proof, 200× uranium energy density. India\'s entire civilian nuclear program is built on this.', exotic: true, fuel: true } },
+  { match: pair('Th', 'U'), result: { product: 'Thorium-Uranium Breeder', formula: 'Th + U', description: 'Thorium fertile blanket around a uranium driver — converts ²³²Th into fissile ²³³U. Oak Ridge proved it works in 1965.', exotic: true } },
+  { match: pair('Th', 'H'), result: { product: 'Hydride Moderator', formula: 'ThH₂', description: 'Thorium hydride — neutron moderator candidate for compact reactors.' } },
+  { match: pair('Th', 'O'), result: { product: 'Thorium Dioxide', formula: 'ThO₂', description: 'Highest melting point of any oxide (3300°C). Refractory, weakly radioactive — used in old gas mantles.' } },
+  { match: pair('Th', 'Mc'), result: { product: 'Hyper-Stable Lattice', formula: 'Th + Mc', description: 'Speculative: thorium-115 binary — actinide stabilizes the moscovium island. Exotic-matter substrate, no known synthesis route.', exotic: true, fuel: true } },
+  { match: pair('Pu', 'Pu'), result: { product: 'Plutonium Pit', formula: '²³⁹Pu₂', description: 'Implosion-trigger core — Trinity-test geometry.', exotic: true } },
 ];
 
 export function findReaction(symbolA: string, symbolB: string): ReactionOutcome | null {

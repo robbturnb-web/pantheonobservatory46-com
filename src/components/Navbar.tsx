@@ -84,6 +84,7 @@ const categories: NavCategory[] = [
       { to: '/builders', label: "Builder's Arena" },
       { to: '/frequencies', label: 'Frequencies' },
       { to: '/cern', label: 'CERN Watch' },
+      { to: '/elements', label: 'Elements Lab' },
       { to: '/consciousness', label: 'Consciousness' },
       { to: '/origin', label: 'Origin Chamber' },
       { to: '/echo', label: 'Echo AI' },
