@@ -234,6 +234,7 @@
 }
 
 .cosmic-float { animation: cosmic-float 6s ease-in-out infinite; }
+.cosmic-float-slow { animation: cosmic-float 18s ease-in-out infinite; }
 .cosmic-pulse { animation: cosmic-pulse 4s ease-in-out infinite; }
 .cosmic-glow-pulse { animation: cosmic-glow-pulse 3s ease-in-out infinite; }
 
