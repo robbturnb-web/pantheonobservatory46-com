@@ -141,18 +141,71 @@ export function HomePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 relative z-10 drop-shadow-[0_0_40px_hsl(var(--background))]"
+          className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 relative z-10"
+          style={{
+            textShadow:
+              '0 0 40px hsl(var(--background)), 0 4px 24px rgba(0,0,0,0.85), 0 0 80px rgba(0,0,0,0.6)',
+          }}
         >
-          <span className="text-foreground">PANTHEON</span>
+          {/* PANT — dark gold → light gold → fades to transparent at H */}
+          <span
+            style={{
+              backgroundImage:
+                'linear-gradient(90deg, #b8860b 0%, #daa520 25%, #fcd34d 55%, rgba(253,224,71,0.4) 85%, rgba(253,224,71,0) 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+            }}
+          >
+            PANTH
+          </span>
+          {/* EON — cosmic green */}
+          <span
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #34d399 0%, #10b981 60%, #059669 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+              textShadow: '0 0 30px rgba(16,185,129,0.5)',
+            }}
+          >
+            EON
+          </span>
         </motion.h1>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-8 relative z-10 drop-shadow-[0_0_30px_hsl(var(--background))]"
+          className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-8 relative z-10"
+          style={{
+            textShadow:
+              '0 0 30px hsl(var(--background)), 0 4px 18px rgba(0,0,0,0.85), 0 0 60px rgba(0,0,0,0.5)',
+          }}
         >
-          <span className="text-primary">OBSER</span><span className="text-accent-neon neon-glow">VATORY</span>
+          {/* OBSER — green */}
+          <span
+            style={{
+              backgroundImage: 'linear-gradient(135deg, #34d399 0%, #10b981 60%, #059669 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+            }}
+          >
+            OBSER
+          </span>
+          {/* VATORY — fades back into gold */}
+          <span
+            style={{
+              backgroundImage:
+                'linear-gradient(90deg, #10b981 0%, rgba(253,224,71,0.55) 25%, #fcd34d 55%, #daa520 85%, #b8860b 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+            }}
+          >
+            VATORY
+          </span>
         </motion.div>
 
         <motion.p
