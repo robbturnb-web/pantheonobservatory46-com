@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Eye } from 'lucide-react';
+import { PantheonWordmark } from './Wordmark';
 
 const navGroups = [
   {
@@ -28,9 +29,9 @@ export function PantheonFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link to="/" className="flex items-center gap-2 text-primary font-bold text-xl mb-4">
+            <Link to="/" className="flex items-center gap-2 mb-4" style={{ color: '#a78bfa' }}>
               <Eye className="w-6 h-6" />
-              PANTHEON OBSERVATORY
+              <PantheonWordmark size="md" />
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
               A knowledge platform exploring UAPs, ancient mysteries, consciousness research,

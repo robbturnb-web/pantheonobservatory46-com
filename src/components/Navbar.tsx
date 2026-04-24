@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEchoXp } from '@/hooks/use-echo-xp';
+import { PantheonWordmark } from './Wordmark';
 
 interface NavLink {
   to: string;
@@ -134,9 +135,11 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2 text-primary font-bold text-xl group shrink-0">
+          <Link to="/" className="flex items-center gap-2 font-bold text-xl group shrink-0" style={{ color: '#a78bfa' }}>
             <Eye className="w-6 h-6 group-hover:scale-110 transition-transform" />
-            <span className="hidden sm:inline">PANTHEON</span>
+            <span className="hidden sm:inline">
+              <PantheonWordmark size="sm" short />
+            </span>
           </Link>
 
           {/* Desktop categorized menu */}

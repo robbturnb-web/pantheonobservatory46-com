@@ -28,14 +28,14 @@ import { AntarcticaPage } from './pages/AntarcticaPage';
 import { AtlantisPage } from './pages/AtlantisPage';
 import { ElementsLabPage } from './pages/ElementsLabPage';
 import { CrashRetrievalPage } from './pages/CrashRetrievalPage';
+import { UndergroundBasesPage } from './pages/UndergroundBasesPage';
+import { BuildersArenaPage } from './pages/BuildersArenaPage';
 import {
   AaroPage,
-  UndergroundBasesPage,
   EntityEncountersPage,
   ExtinctSpeciesPage,
   CernPage,
   FederationPage,
-  BuildersPage,
   GlyphsPage,
   StoneFacesPage,
 } from './pages/PlaceholderPages';
@@ -76,7 +76,7 @@ export default function App() {
           <Route path="/extinct" element={<ExtinctSpeciesPage />} />
           <Route path="/cern" element={<CernPage />} />
           <Route path="/federation" element={<FederationPage />} />
-          <Route path="/builders" element={<BuildersPage />} />
+          <Route path="/builders" element={<BuildersArenaPage />} />
           <Route path="/glyphs" element={<GlyphsPage />} />
           <Route path="/stone-faces" element={<StoneFacesPage />} />
           <Route path="/elements" element={<ElementsLabPage />} />
