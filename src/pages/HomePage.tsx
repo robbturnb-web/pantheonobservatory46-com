@@ -141,7 +141,7 @@ export function HomePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter mb-4"
+          className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 relative z-10 drop-shadow-[0_0_40px_hsl(var(--background))]"
         >
           <span className="text-foreground">PANTHEON</span>
         </motion.h1>
@@ -150,7 +150,7 @@ export function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-8"
+          className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-8 relative z-10 drop-shadow-[0_0_30px_hsl(var(--background))]"
         >
           <span className="text-primary">OBSER</span><span className="text-accent-neon neon-glow">VATORY</span>
         </motion.div>
@@ -159,7 +159,7 @@ export function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.2 }}
-          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed relative z-10 drop-shadow-[0_2px_12px_hsl(var(--background))]"
         >
           The questions humanity was told to stop asking — about who we are, where we came from,
           and what's been watching from above since the beginning.
@@ -169,11 +169,11 @@ export function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.8 }}
-          className="flex flex-col sm:flex-row gap-4"
+          className="flex flex-col sm:flex-row gap-4 relative z-10"
         >
           <Link
             to="/timeline"
-            className="px-8 py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-colors flex items-center gap-2"
+            className="px-8 py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-[0_0_30px_hsl(var(--primary)/0.4)]"
           >
             <Zap className="w-5 h-5" /> Begin the Descent
           </Link>
@@ -189,7 +189,7 @@ export function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3.5 }}
-          className="absolute bottom-8"
+          className="absolute bottom-8 z-10"
         >
           <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
         </motion.div>
