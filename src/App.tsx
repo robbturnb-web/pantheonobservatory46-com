@@ -31,8 +31,8 @@ import { CrashRetrievalPage } from './pages/CrashRetrievalPage';
 import { UndergroundBasesPage } from './pages/UndergroundBasesPage';
 import { BuildersArenaPage } from './pages/BuildersArenaPage';
 import { AaroWatchPage } from './pages/AaroWatchPage';
+import { EntityEncountersPage } from './pages/EntityEncountersPage';
 import {
-  EntityEncountersPage,
   ExtinctSpeciesPage,
   CernPage,
   FederationPage,
