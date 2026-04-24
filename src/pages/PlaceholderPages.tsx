@@ -23,7 +23,6 @@ function Placeholder({ themeId }: PlaceholderProps) {
   );
 }
 
-export const EntityEncountersPage = () => <Placeholder themeId="encounters" />;
 export const ExtinctSpeciesPage = () => <Placeholder themeId="extinct" />;
 export const CernPage = () => <Placeholder themeId="cern" />;
 export const FederationPage = () => <Placeholder themeId="federation" />;
