@@ -10,6 +10,7 @@ import { DailyPulseCard } from '@/components/cosmos/DailyPulseCard';
 import silhouetteMale from '@/assets/missing/silhouette-male.jpg';
 import silhouetteFemale from '@/assets/missing/silhouette-female.jpg';
 import silhouetteMilitary from '@/assets/missing/silhouette-military.jpg';
+import pantheonShipHero from '@/assets/pantheon-ship-hero.jpg';
 
 const sections = [
   { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
@@ -107,13 +108,30 @@ export function HomePage() {
       <motion.div
         ref={heroRef}
         style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
-        className="min-h-[90vh] flex flex-col items-center justify-center text-center px-4 relative"
+        className="min-h-[90vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden"
       >
+        {/* Giant Pantheon Ship — full-bleed cinematic background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <motion.img
+            src={pantheonShipHero}
+            alt="The Pantheon — a colossal temple-ship adrift in deep cosmic space"
+            width={1920}
+            height={1080}
+            initial={{ scale: 1.08, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.85 }}
+            transition={{ duration: 2.4, ease: 'easeOut' }}
+            className="w-full h-full object-cover object-center cosmic-float-slow"
+          />
+          {/* Cinematic vignette + readability gradient */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(var(--background))_85%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
-          className="mb-8 relative"
+          className="mb-8 relative z-10"
         >
           <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full" />
           <Eye className="w-20 h-20 sm:w-28 sm:h-28 text-primary cosmic-float relative z-10" />
@@ -123,7 +141,7 @@ export function HomePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter mb-4"
+          className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 relative z-10 drop-shadow-[0_0_40px_hsl(var(--background))]"
         >
           <span className="text-foreground">PANTHEON</span>
         </motion.h1>
@@ -132,7 +150,7 @@ export function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-8"
+          className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-8 relative z-10 drop-shadow-[0_0_30px_hsl(var(--background))]"
         >
           <span className="text-primary">OBSER</span><span className="text-accent-neon neon-glow">VATORY</span>
         </motion.div>
@@ -141,7 +159,7 @@ export function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.2 }}
-          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed relative z-10 drop-shadow-[0_2px_12px_hsl(var(--background))]"
         >
           The questions humanity was told to stop asking — about who we are, where we came from,
           and what's been watching from above since the beginning.
@@ -151,11 +169,11 @@ export function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.8 }}
-          className="flex flex-col sm:flex-row gap-4"
+          className="flex flex-col sm:flex-row gap-4 relative z-10"
         >
           <Link
             to="/timeline"
-            className="px-8 py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-colors flex items-center gap-2"
+            className="px-8 py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-colors flex items-center gap-2 shadow-[0_0_30px_hsl(var(--primary)/0.4)]"
           >
             <Zap className="w-5 h-5" /> Begin the Descent
           </Link>
@@ -171,7 +189,7 @@ export function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3.5 }}
-          className="absolute bottom-8"
+          className="absolute bottom-8 z-10"
         >
           <ChevronDown className="w-6 h-6 text-muted-foreground animate-bounce" />
         </motion.div>
