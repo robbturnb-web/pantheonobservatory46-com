@@ -118,13 +118,15 @@ export function HomePage() {
             width={1920}
             height={1080}
             initial={{ scale: 1.08, opacity: 0 }}
-            animate={{ scale: 1, opacity: 0.85 }}
+            animate={{ scale: 1, opacity: 0.65 }}
             transition={{ duration: 2.4, ease: 'easeOut' }}
             className="w-full h-full object-cover object-center cosmic-float-slow"
           />
           {/* Cinematic vignette + readability gradient */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(var(--background))_85%)]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_15%,hsl(var(--background)/0.55)_55%,hsl(var(--background))_90%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/20 to-background" />
+          {/* Centerline scrim — reading band behind wordmark + CTAs */}
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[55%] bg-[radial-gradient(ellipse_at_center,hsl(var(--background)/0.7)_0%,hsl(var(--background)/0.35)_45%,transparent_75%)]" />
         </div>
 
         <motion.div
