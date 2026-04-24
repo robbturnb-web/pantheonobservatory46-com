@@ -108,13 +108,30 @@ export function HomePage() {
       <motion.div
         ref={heroRef}
         style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
-        className="min-h-[90vh] flex flex-col items-center justify-center text-center px-4 relative"
+        className="min-h-[90vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden"
       >
+        {/* Giant Pantheon Ship — full-bleed cinematic background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <motion.img
+            src={pantheonShipHero}
+            alt="The Pantheon — a colossal temple-ship adrift in deep cosmic space"
+            width={1920}
+            height={1080}
+            initial={{ scale: 1.08, opacity: 0 }}
+            animate={{ scale: 1, opacity: 0.85 }}
+            transition={{ duration: 2.4, ease: 'easeOut' }}
+            className="w-full h-full object-cover object-center cosmic-float-slow"
+          />
+          {/* Cinematic vignette + readability gradient */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,hsl(var(--background))_85%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
-          className="mb-8 relative"
+          className="mb-8 relative z-10"
         >
           <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full" />
           <Eye className="w-20 h-20 sm:w-28 sm:h-28 text-primary cosmic-float relative z-10" />
