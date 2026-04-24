@@ -30,8 +30,8 @@ import { ElementsLabPage } from './pages/ElementsLabPage';
 import { CrashRetrievalPage } from './pages/CrashRetrievalPage';
 import { UndergroundBasesPage } from './pages/UndergroundBasesPage';
 import { BuildersArenaPage } from './pages/BuildersArenaPage';
+import { AaroWatchPage } from './pages/AaroWatchPage';
 import {
-  AaroPage,
   EntityEncountersPage,
   ExtinctSpeciesPage,
   CernPage,
@@ -69,7 +69,7 @@ export default function App() {
           <Route path="/missing" element={<MissingPage />} />
           <Route path="/antarctica" element={<AntarcticaPage />} />
           <Route path="/atlantis" element={<AtlantisPage />} />
-          <Route path="/aaro" element={<AaroPage />} />
+          <Route path="/aaro" element={<AaroWatchPage />} />
           <Route path="/crash-retrieval" element={<CrashRetrievalPage />} />
           <Route path="/underground" element={<UndergroundBasesPage />} />
           <Route path="/encounters" element={<EntityEncountersPage />} />
