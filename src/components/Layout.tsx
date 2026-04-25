@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from './Navbar';
 import { PantheonFooter } from './PantheonFooter';
-import { StarfieldCanvas } from './StarfieldCanvas';
+import { BackgroundManager } from './BackgroundManager';
 import { CosmicCursorTrail } from './CosmicCursorTrail';
 import { CometTrails } from './cosmic/CometTrails';
 import { SpaceshipFlyby } from './cosmic/SpaceshipFlyby';
@@ -36,7 +36,7 @@ export function Layout() {
     <div className="min-h-screen relative cinematic-letterbox">
       <div className="cinematic-vignette" />
       <div className="ambient-flicker">
-        <StarfieldCanvas />
+        <BackgroundManager />
       </div>
       <CosmicCursorTrail />
       <CometTrails />
