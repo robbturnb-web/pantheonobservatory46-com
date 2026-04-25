@@ -8,6 +8,7 @@ import { SpeciesBadgesForCase } from '../components/SpeciesBadge';
 import { ChevronDown, ChevronUp, Clock } from 'lucide-react';
 import { VideoStrip } from '../components/VideoStrip';
 import { useEchoXp } from '../hooks/use-echo-xp';
+import { SEO } from '@/components/SEO';
 
 export function UAPPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -24,6 +25,11 @@ export function UAPPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <SEO
+        title="UAP Case Files — Pantheon Observatory"
+        description={`${uapCases.length} documented UAP encounters, each graded by evidence quality. Tic-Tac, Gimbal, GoFast and beyond.`}
+        canonical="/uap"
+      />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">UAP Case Files</h1>
         <p className="text-muted-foreground text-lg mb-4">

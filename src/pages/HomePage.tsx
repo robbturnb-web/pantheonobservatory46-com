@@ -158,6 +158,11 @@ export function HomePage() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Pantheon Observatory — Cosmic intelligence, disclosure & the unexplained"
+        description="A living archive of UAP cases, whistleblower testimony, ancient mythology, and cosmic disclosure. Explore the signal."
+        canonical="/"
+      />
       <Walkthrough />
       {/* HERO */}
       <motion.div

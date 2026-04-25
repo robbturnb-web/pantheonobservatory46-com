@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { gods } from '../data/gods';
 import type { PantheonFilter, God } from '../types';
 import { GodDossierModal } from '@/components/gods/GodDossierModal';
+import { SEO } from '@/components/SEO';
 
 const filters: PantheonFilter[] = ['All', 'Greek', 'Norse', 'Egyptian', 'Hindu', 'Anunnaki', 'Starseed'];
 
@@ -14,6 +15,11 @@ export function GodsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <SEO
+        title="Gods & Archetypes — Pantheon Observatory"
+        description={`${gods.length} deities across Greek, Norse, Egyptian, Hindu, Anunnaki and Starseed pantheons. Tap any card to enter their atmosphere.`}
+        canonical="/gods"
+      />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Gods & Archetypes</h1>
         <p className="text-muted-foreground text-lg">
