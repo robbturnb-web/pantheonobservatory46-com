@@ -17,12 +17,13 @@ export function AntarcticaPage() {
         categories={antarcticaCategories}
         introSlot={
           <p>
-          The white continent has hosted the largest naval operation south of the equator,
-          the longest-isolated freshwater lake on Earth, and a string of unexplained scientist
-          deaths. This archive consolidates the verified record alongside the persistent
-          claims that refuse to thaw.
-        </p>
-      }
-    />
+            The white continent has hosted the largest naval operation south of the equator,
+            the longest-isolated freshwater lake on Earth, and a string of unexplained scientist
+            deaths. This archive consolidates the verified record alongside the persistent
+            claims that refuse to thaw.
+          </p>
+        }
+      />
+    </>
   );
 }
