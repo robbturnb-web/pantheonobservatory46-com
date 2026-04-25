@@ -32,10 +32,10 @@ import { UndergroundBasesPage } from './pages/UndergroundBasesPage';
 import { BuildersArenaPage } from './pages/BuildersArenaPage';
 import { AaroWatchPage } from './pages/AaroWatchPage';
 import { EntityEncountersPage } from './pages/EntityEncountersPage';
+import { FederationPage } from './pages/FederationPage';
 import {
   ExtinctSpeciesPage,
   CernPage,
-  FederationPage,
   GlyphsPage,
   StoneFacesPage,
 } from './pages/PlaceholderPages';
