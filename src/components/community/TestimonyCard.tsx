@@ -14,20 +14,29 @@ export interface TestimonyCardData {
   approved_at?: string | null;
 }
 
+// YouTube IDs are 11 chars of [A-Za-z0-9_-]; Vimeo IDs are pure digits.
+// Validate before composing the iframe src to prevent injection.
+const YOUTUBE_ID_RE = /^[a-zA-Z0-9_-]{11}$/;
+const VIMEO_ID_RE = /^[0-9]+$/;
+
 function getEmbedUrl(url: string): string | null {
   try {
     const u = new URL(url);
+    if (u.protocol !== 'https:' && u.protocol !== 'http:') return null;
+
     if (u.hostname.includes('youtube.com') || u.hostname.includes('youtu.be')) {
       const id = u.hostname.includes('youtu.be')
         ? u.pathname.slice(1)
-        : u.searchParams.get('v');
-      return id ? `https://www.youtube.com/embed/${id}` : null;
+        : u.searchParams.get('v') ?? '';
+      return id && YOUTUBE_ID_RE.test(id)
+        ? `https://www.youtube-nocookie.com/embed/${id}`
+        : null;
     }
     if (u.hostname.includes('vimeo.com')) {
-      const id = u.pathname.split('/').filter(Boolean).pop();
-      return id ? `https://player.vimeo.com/video/${id}` : null;
+      const id = u.pathname.split('/').filter(Boolean).pop() ?? '';
+      return VIMEO_ID_RE.test(id) ? `https://player.vimeo.com/video/${id}` : null;
     }
-    return url;
+    return null;
   } catch {
     return null;
   }

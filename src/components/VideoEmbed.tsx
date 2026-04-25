@@ -21,12 +21,26 @@ interface VideoEmbedProps {
   video: VideoData;
 }
 
+// YouTube video IDs are exactly 11 chars of [A-Za-z0-9_-].
+// Validating before injection prevents URL/script injection via data files.
+const YOUTUBE_ID_RE = /^[a-zA-Z0-9_-]{11}$/;
+
 export function VideoEmbed({ video }: VideoEmbedProps) {
   const [activated, setActivated] = useState(false);
 
   if (video.platform === 'youtube') {
-    const watchUrl = `https://www.youtube.com/watch?v=${video.id}`;
-    const thumb = `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
+    const safeId = YOUTUBE_ID_RE.test(video.id) ? video.id : null;
+
+    if (!safeId) {
+      return (
+        <div className="rounded-lg aspect-video bg-muted/30 border border-border flex items-center justify-center text-xs text-muted-foreground p-4 text-center">
+          Video unavailable (invalid ID)
+        </div>
+      );
+    }
+
+    const watchUrl = `https://www.youtube.com/watch?v=${safeId}`;
+    const thumb = `https://i.ytimg.com/vi/${safeId}/hqdefault.jpg`;
 
     // Lite-YT pattern: show clickable thumbnail until user clicks → then load iframe with autoplay.
     if (!activated) {
@@ -75,7 +89,7 @@ export function VideoEmbed({ video }: VideoEmbedProps) {
     return (
       <div className="rounded-lg overflow-hidden aspect-video">
         <iframe
-          src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+          src={`https://www.youtube-nocookie.com/embed/${safeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
           title={video.title}
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
