@@ -66,19 +66,16 @@ export function AuthPage() {
           },
         });
         if (error) throw error;
-        // Award sign-up XP if a session was issued (auto-confirm flow)
+        // Award sign-up XP via the secured RPC if a session was issued (auto-confirm flow).
+        // Direct table writes are no longer allowed; award_xp() is SECURITY DEFINER and
+        // performs idempotent, bounded XP grants.
         const newUserId = data.user?.id;
         if (newUserId && data.session) {
-          await supabase.from('echo_xp_events').insert({
-            user_id: newUserId,
-            event_type: 'sign_up',
-            event_id: newUserId,
-            xp: XP_VALUES.SIGN_UP,
+          await supabase.rpc('award_xp', {
+            p_event_type: 'page',
+            p_event_id: `sign_up:${newUserId}`,
+            p_amount: XP_VALUES.SIGN_UP,
           });
-          await supabase
-            .from('echo_xp')
-            .update({ xp: XP_VALUES.SIGN_UP })
-            .eq('user_id', newUserId);
         }
         toast({
           title: 'Welcome, Starseed',
