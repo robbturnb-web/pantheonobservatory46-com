@@ -32,13 +32,11 @@ import { UndergroundBasesPage } from './pages/UndergroundBasesPage';
 import { BuildersArenaPage } from './pages/BuildersArenaPage';
 import { AaroWatchPage } from './pages/AaroWatchPage';
 import { EntityEncountersPage } from './pages/EntityEncountersPage';
-import {
-  ExtinctSpeciesPage,
-  CernPage,
-  FederationPage,
-  GlyphsPage,
-  StoneFacesPage,
-} from './pages/PlaceholderPages';
+import { FederationPage } from './pages/FederationPage';
+import { GlyphsPage } from './pages/GlyphsPage';
+import { StoneFacesPage } from './pages/StoneFacesPage';
+import { ExtinctSpeciesPage } from './pages/ExtinctSpeciesPage';
+import { CernPage } from './pages/CernPage';
 
 export default function App() {
   return (
