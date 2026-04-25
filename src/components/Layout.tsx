@@ -9,6 +9,7 @@ import { CometTrails } from './cosmic/CometTrails';
 import { SpaceshipFlyby } from './cosmic/SpaceshipFlyby';
 import { XPBar } from './XPBar';
 import { Walkthrough } from './Walkthrough';
+import { ErrorBoundary } from './ErrorBoundary';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 
 const pageVariants = {
@@ -53,7 +54,9 @@ export function Layout() {
             variants={pageVariants}
             transition={pageTransition}
           >
-            <Outlet />
+            <ErrorBoundary key={location.pathname}>
+              <Outlet />
+            </ErrorBoundary>
           </motion.div>
         </AnimatePresence>
       </main>
