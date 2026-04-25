@@ -59,6 +59,23 @@
   --accent-amber: #f59e0b;
   --accent-rose: #f43f5e;
 
+  /* ─────────────────────────────────────────────────────────────
+   * Hub accents — used to break the all-purple-everywhere feel.
+   * Each homepage hub + every themed page maps to one of these.
+   * ───────────────────────────────────────────────────────────── */
+  --hub-disclosure: #dc2626;   /* crimson — UAP / whistleblowers / vault */
+  --hub-disclosure-glow: #ef4444;
+  --hub-ancient: #d4a574;      /* warm gold — timeline / gods / pyramids */
+  --hub-ancient-glow: #fcd34d;
+  --hub-cosmic: #8b5cf6;       /* violet — galaxy / starfield (kept) */
+  --hub-cosmic-glow: #c77dff;
+  --hub-life: #10b981;         /* emerald — consciousness / echo / inner work */
+  --hub-life-glow: #34d399;
+  --hub-signal: #22d3ee;       /* cyan — cern / species / observatory */
+  --hub-signal-glow: #67e8f9;
+  --hub-warning: #f59e0b;      /* amber — missing / 46 / redacted */
+  --hub-warning-glow: #fbbf24;
+
   /* Glows */
   --cosmic-glow: 0 0 30px rgba(157, 77, 237, 0.3);
   --cosmic-glow-strong: 0 0 60px rgba(157, 77, 237, 0.4), 0 0 120px rgba(0, 255, 136, 0.08);
