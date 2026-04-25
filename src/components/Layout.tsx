@@ -10,6 +10,7 @@ import { SpaceshipFlyby } from './cosmic/SpaceshipFlyby';
 import { XPBar } from './XPBar';
 import { Walkthrough } from './Walkthrough';
 import { ErrorBoundary } from './ErrorBoundary';
+import { AudioPlayer } from './AudioPlayer';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 
 const pageVariants = {
@@ -43,6 +44,7 @@ export function Layout() {
       <SpaceshipFlyby />
       <Navbar />
       <XPBar />
+      <AudioPlayer />
       <Walkthrough />
       <main className="pt-16 min-h-screen">
         <AnimatePresence mode="wait">
