@@ -5,6 +5,7 @@ import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle,
 import { vaultSlots, daysOverdue } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
 import { Walkthrough } from '@/components/Walkthrough';
+import { SEO } from '@/components/SEO';
 
 import { DailyPulseCard } from '@/components/cosmos/DailyPulseCard';
 import silhouetteMale from '@/assets/missing/silhouette-male.jpg';
