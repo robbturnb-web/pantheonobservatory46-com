@@ -10,13 +10,10 @@ export function FederationPage() {
       categories={federationCategories}
       introSlot={
         <p>
-          Every "Galactic Federation" claim of the modern era — the Adamski / Van Tassel
-          contactee lineage, the Council of Nine channeled through Andrija Puharich's lab,
-          the Andromeda Council of Alex Collier, Israeli space-security chief Haim Eshed's
-          2020 statement, the alleged Greada Treaty at Holloman, Project Serpo, the
-          Sphere-Being Alliance, and the Rendlesham binary download. Each entry is presented
-          with its origin, primary sources, named witnesses, and the strongest skeptical
-          counter-position. The vault is a catalog, not an endorsement.
+          The embassy archive — every alleged interstellar council, treaty, and species delegation
+          on the public record. From channeled Council of Nine sessions to Brig. Gen. Haim Eshed\'s
+          2020 Galactic Federation disclosure, each sealed file is opened with both the claim and
+          its skeptical counterweight.
         </p>
       }
     />

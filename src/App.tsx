@@ -33,12 +33,10 @@ import { BuildersArenaPage } from './pages/BuildersArenaPage';
 import { AaroWatchPage } from './pages/AaroWatchPage';
 import { EntityEncountersPage } from './pages/EntityEncountersPage';
 import { FederationPage } from './pages/FederationPage';
-import {
-  ExtinctSpeciesPage,
-  CernPage,
-  GlyphsPage,
-  StoneFacesPage,
-} from './pages/PlaceholderPages';
+import { GlyphsPage } from './pages/GlyphsPage';
+import { StoneFacesPage } from './pages/StoneFacesPage';
+import { ExtinctSpeciesPage } from './pages/ExtinctSpeciesPage';
+import { CernPage } from './pages/CernPage';
 
 export default function App() {
   return (
