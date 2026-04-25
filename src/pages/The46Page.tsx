@@ -14,6 +14,7 @@ import { VaultSlotCard } from '@/components/the46/VaultSlotCard';
 import { VaultSlotModal } from '@/components/the46/VaultSlotModal';
 import { VideoEmbed } from '@/components/VideoEmbed';
 import { useEchoXp } from '@/hooks/use-echo-xp';
+import { SEO } from '@/components/SEO';
 
 import letter1 from '@/assets/the-46/hegseth-letter-page-1.jpg';
 import letter2 from '@/assets/the-46/hegseth-letter-page-2.jpg';
