@@ -12,21 +12,75 @@ import silhouetteFemale from '@/assets/missing/silhouette-female.jpg';
 import silhouetteMilitary from '@/assets/missing/silhouette-military.jpg';
 import pantheonShipHero from '@/assets/pantheon-ship-hero.jpg';
 
-const sections = [
-  { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.', color: '#8b5cf6' },
-  { to: '/uap', icon: FileSearch, title: 'UAP Case Files', desc: 'Military encounters, whistleblower testimony, and evidence-graded case studies.', color: '#3b82f6' },
-  { to: '/gods', icon: Sparkles, title: 'Gods & Archetypes', desc: '18 deities across 6 pantheons. Tap into mythological intelligence.', color: '#f59e0b' },
-  { to: '/species', icon: UserCircle2, title: 'Alien Species Codex', desc: '16 documented non-human intelligences. Greys, Draconians, Pleiadians, Mexico bodies, NJ drones — sourced.', color: '#22d3ee' },
-  { to: '/consciousness', icon: Brain, title: 'Consciousness Lab', desc: 'Project Stargate, the CIA Gateway Process, NDEs, and the nature of mind.', color: '#10b981' },
-  { to: '/signals', icon: Radio, title: 'Signal Watch', desc: 'Credibility ratings for researchers and creators. Green, yellow, red.', color: '#f43f5e' },
-  { to: '/whistleblowers', icon: Shield, title: 'Whistleblower Vault', desc: '8 evidence-graded profiles of those who risked everything for disclosure.', color: '#ef4444' },
-  { to: '/telescopes', icon: Telescope, title: 'Telescope Observatory', desc: 'Hubble to James Webb — every discovery, every anomaly, year by year.', color: '#06b6d4' },
-  { to: '/galaxy', icon: Globe, title: '3D Galaxy Explorer', desc: 'Fly through our solar system with moons, tour mode, and Echo narration.', color: '#a855f7' },
-  { to: '/pyramids', icon: Pyramid, title: 'Pyramid Explorer', desc: '6 ancient structures with stellar alignments, acoustic anomalies, and forbidden theories.', color: '#d4a574' },
-  { to: '/shadow-pantheon', icon: Skull, title: 'Shadow Pantheon', desc: 'The gods they told you not to name. 10 dark archetypes for shadow integration work.', color: '#dc2626' },
-  { to: '/echoverse', icon: Users, title: 'Echoverse', desc: 'Real-time community hub. Chat with fellow starseeds across 5 channels.', color: '#39ff14' },
-  { to: '/origin', icon: Compass, title: 'Origin Chamber', desc: 'A 7-question quiz to discover your starseed archetype lineage.', color: '#c084fc' },
-  { to: '/echo', icon: MessageCircle, title: 'Echo AI', desc: 'Ask the cosmic intelligence anything about UAPs, gods, or consciousness.', color: '#60a5fa' },
+type HubKey = 'disclosure' | 'ancient' | 'cosmic' | 'life';
+
+interface HubSection {
+  to: string;
+  icon: typeof Clock;
+  title: string;
+  desc: string;
+}
+
+interface Hub {
+  key: HubKey;
+  label: string;
+  tagline: string;
+  accent: string;        // CSS color used for headers, hover glow, accent line
+  accentVar: string;     // CSS var name (for inline gradients)
+  sections: HubSection[];
+}
+
+const hubs: Hub[] = [
+  {
+    key: 'disclosure',
+    label: 'Disclosure Files',
+    tagline: 'Evidence-graded testimony, classified leaks, the long cover-up.',
+    accent: '#ef4444',
+    accentVar: '--hub-disclosure',
+    sections: [
+      { to: '/uap', icon: FileSearch, title: 'UAP Case Files', desc: 'Military encounters, whistleblower testimony, and evidence-graded case studies.' },
+      { to: '/whistleblowers', icon: Shield, title: 'Whistleblower Vault', desc: '8 evidence-graded profiles of those who risked everything for disclosure.' },
+      { to: '/signals', icon: Radio, title: 'Signal Watch', desc: 'Credibility ratings for researchers and creators. Green, yellow, red.' },
+    ],
+  },
+  {
+    key: 'ancient',
+    label: 'Ancient Intelligence',
+    tagline: 'The history humanity was told to forget.',
+    accent: '#fcd34d',
+    accentVar: '--hub-ancient',
+    sections: [
+      { to: '/timeline', icon: Clock, title: 'Cosmic Timeline', desc: 'From 300,000 BCE to congressional hearings — the hidden history humanity forgot.' },
+      { to: '/gods', icon: Sparkles, title: 'Gods & Archetypes', desc: '18 deities across 6 pantheons. Tap into mythological intelligence.' },
+      { to: '/shadow-pantheon', icon: Skull, title: 'Shadow Pantheon', desc: 'The gods they told you not to name. 10 dark archetypes for shadow integration work.' },
+      { to: '/pyramids', icon: Pyramid, title: 'Pyramid Explorer', desc: '6 ancient structures with stellar alignments, acoustic anomalies, and forbidden theories.' },
+    ],
+  },
+  {
+    key: 'cosmic',
+    label: 'Cosmic Observatory',
+    tagline: 'Look outward. The sky is no longer empty.',
+    accent: '#67e8f9',
+    accentVar: '--hub-signal',
+    sections: [
+      { to: '/galaxy', icon: Globe, title: '3D Galaxy Explorer', desc: 'Fly through our solar system with moons, tour mode, and Echo narration.' },
+      { to: '/telescopes', icon: Telescope, title: 'Telescope Observatory', desc: 'Hubble to James Webb — every discovery, every anomaly, year by year.' },
+      { to: '/species', icon: UserCircle2, title: 'Alien Species Codex', desc: '16 documented non-human intelligences. Greys, Draconians, Pleiadians, sourced.' },
+    ],
+  },
+  {
+    key: 'life',
+    label: 'Inner Work',
+    tagline: 'The sky reflects the mind. Tune the receiver.',
+    accent: '#34d399',
+    accentVar: '--hub-life',
+    sections: [
+      { to: '/consciousness', icon: Brain, title: 'Consciousness Lab', desc: 'Project Stargate, the CIA Gateway Process, NDEs, and the nature of mind.' },
+      { to: '/origin', icon: Compass, title: 'Origin Chamber', desc: 'A 7-question quiz to discover your starseed archetype lineage.' },
+      { to: '/echoverse', icon: Users, title: 'Echoverse', desc: 'Real-time community hub. Chat with fellow starseeds across 5 channels.' },
+      { to: '/echo', icon: MessageCircle, title: 'Echo AI', desc: 'Ask the cosmic intelligence anything about UAPs, gods, or consciousness.' },
+    ],
+  },
 ];
 
 const stats = [
