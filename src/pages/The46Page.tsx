@@ -14,6 +14,7 @@ import { VaultSlotCard } from '@/components/the46/VaultSlotCard';
 import { VaultSlotModal } from '@/components/the46/VaultSlotModal';
 import { VideoEmbed } from '@/components/VideoEmbed';
 import { useEchoXp } from '@/hooks/use-echo-xp';
+import { SEO } from '@/components/SEO';
 
 import letter1 from '@/assets/the-46/hegseth-letter-page-1.jpg';
 import letter2 from '@/assets/the-46/hegseth-letter-page-2.jpg';
@@ -41,6 +42,11 @@ export function The46Page() {
 
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-20 max-w-6xl mx-auto">
+      <SEO
+        title="The 46 — Pending Disclosure Vault"
+        description={`The 46-slot disclosure vault: locked files, expired demands, and the videos already public. ${overdue} days overdue.`}
+        canonical="/the-46"
+      />
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

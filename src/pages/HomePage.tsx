@@ -5,6 +5,7 @@ import { Eye, Clock, FileSearch, Sparkles, Brain, Radio, Compass, MessageCircle,
 import { vaultSlots, daysOverdue } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
 import { Walkthrough } from '@/components/Walkthrough';
+import { SEO } from '@/components/SEO';
 
 import { DailyPulseCard } from '@/components/cosmos/DailyPulseCard';
 import silhouetteMale from '@/assets/missing/silhouette-male.jpg';
@@ -157,6 +158,11 @@ export function HomePage() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Pantheon Observatory — Cosmic intelligence, disclosure & the unexplained"
+        description="A living archive of UAP cases, whistleblower testimony, ancient mythology, and cosmic disclosure. Explore the signal."
+        canonical="/"
+      />
       <Walkthrough />
       {/* HERO */}
       <motion.div

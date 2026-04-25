@@ -10,6 +10,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/ui/tabs'
 import { whistleblowers, type Whistleblower } from '../data/whistleblowers';
 import type { EvidenceGrade } from '../types';
 import { useEchoXp } from '../hooks/use-echo-xp';
+import { SEO } from '@/components/SEO';
 
 const gradeFilters: ('ALL' | EvidenceGrade)[] = ['ALL', 'DOCUMENTED', 'CREDIBLE', 'SPECULATIVE', 'UNVERIFIED'];
 
@@ -43,6 +44,11 @@ export function WhistleblowerVaultPage() {
 
   return (
     <div className="min-h-screen py-16 px-4">
+      <SEO
+        title="Whistleblower Vault — Pantheon Observatory"
+        description="Evidence-graded profiles of those who risked everything to disclose UAP, aerospace, and intelligence programs — and the forensic registry of suspicious deaths."
+        canonical="/whistleblowers"
+      />
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
