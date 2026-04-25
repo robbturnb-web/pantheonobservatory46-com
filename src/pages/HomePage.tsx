@@ -464,7 +464,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* SECTION GRID */}
+      {/* HUBS — 4 themed chambers replacing the flat 14-card grid */}
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <motion.h2
@@ -479,37 +479,87 @@ export function HomePage() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-muted-foreground text-center mb-12 max-w-xl mx-auto"
+            className="text-muted-foreground text-center mb-16 max-w-xl mx-auto"
           >
-            Seven chambers of knowledge. Each one pulls you deeper.
+            Four chambers. Each pulls you deeper.
           </motion.p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sections.map((section, i) => (
+          <div className="space-y-20">
+            {hubs.map((hub) => (
               <motion.div
-                key={section.to}
-                initial={{ opacity: 0, y: 30 }}
+                key={hub.key}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.5 }}
+                className="relative"
+                style={{
+                  // Faint accent band — gives each hub a visual identity
+                  background: `radial-gradient(ellipse at 50% 0%, ${hub.accent}0d, transparent 65%)`,
+                  borderRadius: '1.5rem',
+                  padding: '2rem 0',
+                }}
               >
-                <Link
-                  to={section.to}
-                  className="block glass-cosmic rounded-xl p-6 transition-all hover:scale-[1.03] group relative overflow-hidden h-full"
-                >
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: `radial-gradient(circle at 50% 100%, ${section.color}15, transparent 70%)` }}
-                  />
-                  <div className="relative z-10">
-                    <section.icon
-                      className="w-10 h-10 mb-4 transition-all duration-300 group-hover:scale-110"
-                      style={{ color: section.color }}
+                {/* Hub header */}
+                <div className="mb-8 px-2">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div
+                      className="h-px flex-1 max-w-12"
+                      style={{ background: `linear-gradient(90deg, transparent, ${hub.accent})` }}
                     />
-                    <h3 className="text-xl font-bold text-foreground mb-2">{section.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{section.desc}</p>
+                    <span
+                      className="text-[10px] uppercase tracking-[4px] font-bold"
+                      style={{ color: hub.accent }}
+                    >
+                      Hub · {String(hubs.indexOf(hub) + 1).padStart(2, '0')}
+                    </span>
+                    <div
+                      className="h-px flex-1"
+                      style={{ background: `linear-gradient(90deg, ${hub.accent}, transparent)` }}
+                    />
                   </div>
-                </Link>
+                  <h3
+                    className="text-2xl sm:text-3xl font-black tracking-tight text-center"
+                    style={{ color: hub.accent }}
+                  >
+                    {hub.label}
+                  </h3>
+                  <p className="text-sm text-muted-foreground text-center mt-2 max-w-xl mx-auto">
+                    {hub.tagline}
+                  </p>
+                </div>
+
+                {/* Hub cards */}
+                <div className={`grid gap-5 px-2 ${hub.sections.length === 4 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
+                  {hub.sections.map((section, i) => (
+                    <motion.div
+                      key={section.to}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.06 }}
+                    >
+                      <Link
+                        to={section.to}
+                        className="block glass-cosmic rounded-xl p-5 transition-all hover:scale-[1.03] group relative overflow-hidden h-full"
+                        style={{ borderColor: `${hub.accent}33` }}
+                      >
+                        <div
+                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                          style={{ background: `radial-gradient(circle at 50% 100%, ${hub.accent}22, transparent 70%)` }}
+                        />
+                        <div className="relative z-10">
+                          <section.icon
+                            className="w-9 h-9 mb-3 transition-all duration-300 group-hover:scale-110"
+                            style={{ color: hub.accent }}
+                          />
+                          <h4 className="text-lg font-bold text-foreground mb-2 leading-tight">{section.title}</h4>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{section.desc}</p>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>
