@@ -1,88 +1,110 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
-import { HomePage } from './pages/HomePage';
 import { Toaster } from './components/ui/toaster';
-import { TimelinePage } from './pages/TimelinePage';
-import { UAPPage } from './pages/UAPPage';
-import { GodsPage } from './pages/GodsPage';
-import { ConsciousnessPage } from './pages/ConsciousnessPage';
-import { SignalsPage } from './pages/SignalsPage';
-import { OriginChamberPage } from './pages/OriginChamberPage';
-import { EchoPage } from './pages/EchoPage';
-import { WhistleblowerVaultPage } from './pages/WhistleblowerVaultPage';
-import { TelescopePage } from './pages/TelescopePage';
-import { GalaxyExplorerPage } from './pages/GalaxyExplorerPage';
-import { EchoversePage } from './pages/EchoversePage';
-import { PyramidExplorerPage } from './pages/PyramidExplorerPage';
-import { EarthPulsePage } from './pages/EarthPulsePage';
-import { OrbReportPage } from './pages/OrbReportPage';
-import { The46Page } from './pages/The46Page';
-import { ShadowPantheonPage } from './pages/ShadowPantheonPage';
-import { FrequenciesPage } from './pages/FrequenciesPage';
-import { SpeciesCodexPage } from './pages/SpeciesCodexPage';
+import { ErrorBoundary } from './components/ErrorBoundary';
+
+// Eager: critical entry routes (no need to lazy-load)
+import { HomePage } from './pages/HomePage';
 import { AuthPage } from './pages/AuthPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
-import { ProfilePage } from './pages/ProfilePage';
-import { MissingPage } from './pages/MissingPage';
-import { AntarcticaPage } from './pages/AntarcticaPage';
-import { AtlantisPage } from './pages/AtlantisPage';
-import { ElementsLabPage } from './pages/ElementsLabPage';
-import { CrashRetrievalPage } from './pages/CrashRetrievalPage';
-import { UndergroundBasesPage } from './pages/UndergroundBasesPage';
-import { BuildersArenaPage } from './pages/BuildersArenaPage';
-import { AaroWatchPage } from './pages/AaroWatchPage';
-import { EntityEncountersPage } from './pages/EntityEncountersPage';
-import { FederationPage } from './pages/FederationPage';
-import { GlyphsPage } from './pages/GlyphsPage';
-import { StoneFacesPage } from './pages/StoneFacesPage';
-import { ExtinctSpeciesPage } from './pages/ExtinctSpeciesPage';
-import { CernPage } from './pages/CernPage';
+
+// Lazy: every other route gets its own chunk
+const TimelinePage = lazy(() => import('./pages/TimelinePage').then(m => ({ default: m.TimelinePage })));
+const UAPPage = lazy(() => import('./pages/UAPPage').then(m => ({ default: m.UAPPage })));
+const GodsPage = lazy(() => import('./pages/GodsPage').then(m => ({ default: m.GodsPage })));
+const ConsciousnessPage = lazy(() => import('./pages/ConsciousnessPage').then(m => ({ default: m.ConsciousnessPage })));
+const SignalsPage = lazy(() => import('./pages/SignalsPage').then(m => ({ default: m.SignalsPage })));
+const OriginChamberPage = lazy(() => import('./pages/OriginChamberPage').then(m => ({ default: m.OriginChamberPage })));
+const EchoPage = lazy(() => import('./pages/EchoPage').then(m => ({ default: m.EchoPage })));
+const WhistleblowerVaultPage = lazy(() => import('./pages/WhistleblowerVaultPage').then(m => ({ default: m.WhistleblowerVaultPage })));
+const TelescopePage = lazy(() => import('./pages/TelescopePage').then(m => ({ default: m.TelescopePage })));
+const GalaxyExplorerPage = lazy(() => import('./pages/GalaxyExplorerPage').then(m => ({ default: m.GalaxyExplorerPage })));
+const EchoversePage = lazy(() => import('./pages/EchoversePage').then(m => ({ default: m.EchoversePage })));
+const PyramidExplorerPage = lazy(() => import('./pages/PyramidExplorerPage').then(m => ({ default: m.PyramidExplorerPage })));
+const EarthPulsePage = lazy(() => import('./pages/EarthPulsePage').then(m => ({ default: m.EarthPulsePage })));
+const OrbReportPage = lazy(() => import('./pages/OrbReportPage').then(m => ({ default: m.OrbReportPage })));
+const The46Page = lazy(() => import('./pages/The46Page').then(m => ({ default: m.The46Page })));
+const ShadowPantheonPage = lazy(() => import('./pages/ShadowPantheonPage').then(m => ({ default: m.ShadowPantheonPage })));
+const FrequenciesPage = lazy(() => import('./pages/FrequenciesPage').then(m => ({ default: m.FrequenciesPage })));
+const SpeciesCodexPage = lazy(() => import('./pages/SpeciesCodexPage').then(m => ({ default: m.SpeciesCodexPage })));
+const ProfilePage = lazy(() => import('./pages/ProfilePage').then(m => ({ default: m.ProfilePage })));
+const MissingPage = lazy(() => import('./pages/MissingPage').then(m => ({ default: m.MissingPage })));
+const AntarcticaPage = lazy(() => import('./pages/AntarcticaPage').then(m => ({ default: m.AntarcticaPage })));
+const AtlantisPage = lazy(() => import('./pages/AtlantisPage').then(m => ({ default: m.AtlantisPage })));
+const ElementsLabPage = lazy(() => import('./pages/ElementsLabPage').then(m => ({ default: m.ElementsLabPage })));
+const CrashRetrievalPage = lazy(() => import('./pages/CrashRetrievalPage').then(m => ({ default: m.CrashRetrievalPage })));
+const UndergroundBasesPage = lazy(() => import('./pages/UndergroundBasesPage').then(m => ({ default: m.UndergroundBasesPage })));
+const BuildersArenaPage = lazy(() => import('./pages/BuildersArenaPage').then(m => ({ default: m.BuildersArenaPage })));
+const AaroWatchPage = lazy(() => import('./pages/AaroWatchPage').then(m => ({ default: m.AaroWatchPage })));
+const EntityEncountersPage = lazy(() => import('./pages/EntityEncountersPage').then(m => ({ default: m.EntityEncountersPage })));
+const FederationPage = lazy(() => import('./pages/FederationPage').then(m => ({ default: m.FederationPage })));
+const GlyphsPage = lazy(() => import('./pages/GlyphsPage').then(m => ({ default: m.GlyphsPage })));
+const StoneFacesPage = lazy(() => import('./pages/StoneFacesPage').then(m => ({ default: m.StoneFacesPage })));
+const ExtinctSpeciesPage = lazy(() => import('./pages/ExtinctSpeciesPage').then(m => ({ default: m.ExtinctSpeciesPage })));
+const CernPage = lazy(() => import('./pages/CernPage').then(m => ({ default: m.CernPage })));
+
+/** Themed cosmic loader shown while a lazy route chunk downloads. */
+function RouteLoader() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-12 h-12 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
+        <p className="text-sm text-muted-foreground tracking-widest uppercase">Tuning the signal…</p>
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/timeline" element={<TimelinePage />} />
-          <Route path="/uap" element={<UAPPage />} />
-          <Route path="/gods" element={<GodsPage />} />
-          <Route path="/consciousness" element={<ConsciousnessPage />} />
-          <Route path="/signals" element={<SignalsPage />} />
-          <Route path="/origin" element={<OriginChamberPage />} />
-          <Route path="/echo" element={<EchoPage />} />
-          <Route path="/whistleblowers" element={<WhistleblowerVaultPage />} />
-          <Route path="/telescopes" element={<TelescopePage />} />
-          <Route path="/galaxy" element={<GalaxyExplorerPage />} />
-          <Route path="/echoverse" element={<EchoversePage />} />
-          <Route path="/pyramids" element={<PyramidExplorerPage />} />
-          <Route path="/earth-pulse" element={<EarthPulsePage />} />
-          <Route path="/orb-report" element={<OrbReportPage />} />
-          <Route path="/the-46" element={<The46Page />} />
-          <Route path="/video-vault" element={<The46Page />} />
-          <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
-          <Route path="/frequencies" element={<FrequenciesPage />} />
-          <Route path="/species" element={<SpeciesCodexPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/missing" element={<MissingPage />} />
-          <Route path="/antarctica" element={<AntarcticaPage />} />
-          <Route path="/atlantis" element={<AtlantisPage />} />
-          <Route path="/aaro" element={<AaroWatchPage />} />
-          <Route path="/crash-retrieval" element={<CrashRetrievalPage />} />
-          <Route path="/underground" element={<UndergroundBasesPage />} />
-          <Route path="/encounters" element={<EntityEncountersPage />} />
-          <Route path="/extinct" element={<ExtinctSpeciesPage />} />
-          <Route path="/cern" element={<CernPage />} />
-          <Route path="/federation" element={<FederationPage />} />
-          <Route path="/builders" element={<BuildersArenaPage />} />
-          <Route path="/glyphs" element={<GlyphsPage />} />
-          <Route path="/stone-faces" element={<StoneFacesPage />} />
-          <Route path="/elements" element={<ElementsLabPage />} />
-        </Route>
-        <Route path="/auth" element={<AuthPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-      </Routes>
-      <Toaster />
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Suspense fallback={<RouteLoader />}>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<HomePage />} />
+              <Route path="/timeline" element={<TimelinePage />} />
+              <Route path="/uap" element={<UAPPage />} />
+              <Route path="/gods" element={<GodsPage />} />
+              <Route path="/consciousness" element={<ConsciousnessPage />} />
+              <Route path="/signals" element={<SignalsPage />} />
+              <Route path="/origin" element={<OriginChamberPage />} />
+              <Route path="/echo" element={<EchoPage />} />
+              <Route path="/whistleblowers" element={<WhistleblowerVaultPage />} />
+              <Route path="/telescopes" element={<TelescopePage />} />
+              <Route path="/galaxy" element={<GalaxyExplorerPage />} />
+              <Route path="/echoverse" element={<EchoversePage />} />
+              <Route path="/pyramids" element={<PyramidExplorerPage />} />
+              <Route path="/earth-pulse" element={<EarthPulsePage />} />
+              <Route path="/orb-report" element={<OrbReportPage />} />
+              <Route path="/the-46" element={<The46Page />} />
+              <Route path="/video-vault" element={<The46Page />} />
+              <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
+              <Route path="/frequencies" element={<FrequenciesPage />} />
+              <Route path="/species" element={<SpeciesCodexPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/missing" element={<MissingPage />} />
+              <Route path="/antarctica" element={<AntarcticaPage />} />
+              <Route path="/atlantis" element={<AtlantisPage />} />
+              <Route path="/aaro" element={<AaroWatchPage />} />
+              <Route path="/crash-retrieval" element={<CrashRetrievalPage />} />
+              <Route path="/underground" element={<UndergroundBasesPage />} />
+              <Route path="/encounters" element={<EntityEncountersPage />} />
+              <Route path="/extinct" element={<ExtinctSpeciesPage />} />
+              <Route path="/cern" element={<CernPage />} />
+              <Route path="/federation" element={<FederationPage />} />
+              <Route path="/builders" element={<BuildersArenaPage />} />
+              <Route path="/glyphs" element={<GlyphsPage />} />
+              <Route path="/stone-faces" element={<StoneFacesPage />} />
+              <Route path="/elements" element={<ElementsLabPage />} />
+            </Route>
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
+          </Routes>
+        </Suspense>
+        <Toaster />
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
