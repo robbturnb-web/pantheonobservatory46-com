@@ -1,140 +1,158 @@
-# Security Hardening Plan — Pantheon Observatory
 
-I ran the real security scanner against your project. The pasted audit was generic Express advice and missed the actual issues. Here's what's truly broken and how I'll fix it.
+# Batch 3 — The Visual & Navigation Overhaul
+
+This is the work you originally asked for: get rid of the "everything is purple cosmosis on every page" feel, give speakers real faces, and make the homepage feel organized instead of one long scroll of cards.
+
+Four parts. Each is independent — can ship together or one at a time.
 
 ---
 
-## What the scan actually found (these are real)
+## Part 1 — `BackgroundManager` (route-aware backdrops)
+
+**Problem:** Every page wears the same starfield + purple nebula. Disclosure pages, god pages, and underground bases all feel identical.
+
+**Build:**
+- New file: `src/components/BackgroundManager.tsx`
+- Reads `useLocation().pathname`, picks a config from a route map, renders a fixed full-screen layer at `z-index: -10` behind everything.
+- Animates a 600ms crossfade between backgrounds when route changes (Framer Motion `AnimatePresence`).
+- Each config controls: base gradient, accent tint, particle intensity (0–1), parallax speed, optional themed image/video layer.
+- Mounted once inside `Layout.tsx`, **replacing** the global `<StarfieldCanvas />` so we don't double-stack canvases. Starfield becomes one of the available "modes" the manager can render.
+
+**Route → mood map (initial pass — extends `src/lib/page-themes.ts` which already has 14 themes defined):**
 
 ```text
-SEVERITY  ISSUE                                                        WHERE
-─────────────────────────────────────────────────────────────────────────────────────────
-ERROR     Users can rewrite their own XP and rank to any value         echo_xp table
-ERROR     Users can forge XP event records (any event_type, any amount) echo_xp_events
-WARN      Every user UUID is publicly readable                         profiles table
-WARN      Any logged-in user can subscribe to every Realtime channel    realtime.messages
-WARN      Any logged-in user can read every file in private buckets     storage policies
+ROUTE                  MOOD                       ACCENT       BACKGROUND LAYER
+──────────────────────────────────────────────────────────────────────────────────
+/ (home)               cosmic-cathedral           gold+green   ship hero + dim starfield
+/timeline              deep-time                  amber        slow-drift nebula, no stars
+/uap                   declassified               red+amber    grain + redaction marks
+/whistleblowers        intel-drop                 red          dark vignette + scanlines
+/missing               somber-archive             desaturated  near-black, faint static
+/the-46                vault                      gold         locked-vault metal sheen
+/gods                  ancient-temple             gold+violet  warm gold particles
+/shadow-pantheon       underworld                 deep-red     ember rise, dark
+/species               specimen                   cyan         clinical grid lines
+/galaxy                cosmic-void                violet       full starfield (current look)
+/pyramids              desert-night               sand+gold    sand particles, low stars
+/antarctica            ice-station                ice-blue     snow particles
+/atlantis              submerged                  teal         caustic ripples
+/cern                  collider                   cyan+magenta hex-grid HUD
+/echoverse             social-warm                neon-green   soft starfield + bloom
+/echo                  conversation               soft-violet  breathing gradient
+default                cosmic                     purple       current starfield
 ```
 
-**Plain English:** Right now, anyone with a free account on your site can:
-- Open the dev console and crown themselves "Ascended" rank with infinite XP
-- Pull a list of every user UUID on the platform
-- Eavesdrop on Echoverse channels they were never invited to
-- Read every glyph SVG and testimony video another user uploaded
-
-These are the door-locks that are actually missing. The audit you pasted was about a car you don't own.
+Most of these moods already exist as `pageThemes` in `src/lib/page-themes.ts` — `BackgroundManager` will read from there as the source of truth, not duplicate the palette.
 
 ---
 
-## What from the pasted audit is real and worth doing
+## Part 2 — Real portraits for whistleblowers, witnesses, and "the 46"
 
-After checking your actual code:
+**Problem:** Bob Lazar is currently a `🧪` emoji. David Grusch is `🎖️`. You explicitly asked for faces.
+
+**Build:**
+- New folder: `src/assets/portraits/whistleblowers/` — one image per whistleblower in `src/data/whistleblowers.ts` (Lazar, Grusch, Elizondo, Mellon, Fravor, Burchett, Stratton, Coulthart). 8 images.
+- New folder: `src/assets/portraits/the-46/` — for the disclosed slots in `src/data/the-46.ts` that name a real person.
+- New folder: `src/assets/portraits/missing/` — the missing-scientists list in `src/data/missing-scientists.ts`.
+- Generate images via Lovable's image-generation tool — **stylized, not photographic**. Brief: high-contrast painted portrait, 3/4 angle, single key light from above (intel-file aesthetic), neutral grey-black background with subtle accent glow per person's accentColor. This avoids deepfake/likeness issues while still giving "a face by the name" — much better than emoji.
+- Update each data file: change `photo: '🧪'` → `photo: '/src/assets/portraits/whistleblowers/bob-lazar.jpg'` (import via `?url`).
+- Update `WhistleblowerVaultPage.tsx`, `VaultSlotCard.tsx`, and `MissingPage.tsx` to render `<img>` instead of emoji-as-text. Add a graceful fallback to the existing emoji + initials when an image is missing.
+- Add a new optional field `portraitCredit?: string` so we can attribute later if we swap to real licensed photos.
+
+This is a one-time generation pass — once they exist they stay.
+
+---
+
+## Part 3 — Homepage reorganization (the "everything in one thing" problem)
+
+**Current state:** Homepage scrolls through hero → daily pulse → stats → 46 banner → missing teaser → 14 section cards in one flat grid → video strip → CTA. All cards are equally weighted and visually identical, which is why it feels overwhelming.
+
+**New structure:** Group the 14 sections into **4 themed hubs**, each with its own short header strip and 3–4 cards. Hub headers act as visual chapter breaks.
 
 ```text
-ITEM                              VERDICT
-──────────────────────────────────────────────────────────────────
-Helmet middleware                 N/A — no Express server
-express-rate-limit                N/A — no Express, and Lovable says don't add yet
-cors() middleware                 N/A — handled per edge function already
-"OAuth state with btoa()"         N/A — you don't have that code anywhere
-Dev server host: true             Cosmetic, dev-only — skipping
-Security headers (CSP, etc.)      ✅ Real win. Ship via index.html meta tags.
-YouTube ID validation             ✅ Real. VideoEmbed injects raw IDs into iframe src.
-ErrorBoundary                     ✅ Real. You have none. A single crash blanks the site.
-Mobile hook hydration flash       ✅ Real. useIsMobile returns false on first paint.
-Theme localStorage whitelist      ⚪ N/A — no theme switcher reads raw localStorage.
-Remove "add" from deps            ⚪ N/A — already clean.
-Dedupe Google Fonts               ⚪ N/A — only loaded once.
+─────────────────────────────────────────────────────────────────
+ HERO (unchanged — ship + wordmark)
+─────────────────────────────────────────────────────────────────
+ LIVE STRIP (compact row)
+   → Daily Cosmos Pulse · The 46 counter · Missing teaser
+   (replaces the 3 separate full-width banner sections —
+    same info, 1 row of glass cards instead of 3 stacked)
+─────────────────────────────────────────────────────────────────
+ HUB 1 · DISCLOSURE FILES                            [red accent]
+   UAP Cases · Whistleblowers · Crash Retrieval · AARO Watch
+─────────────────────────────────────────────────────────────────
+ HUB 2 · ANCIENT INTELLIGENCE                       [gold accent]
+   Cosmic Timeline · Gods · Shadow Pantheon · Pyramids · Glyphs
+─────────────────────────────────────────────────────────────────
+ HUB 3 · COSMIC OBSERVATORY                       [violet accent]
+   Galaxy Explorer · Telescopes · Species Codex · Federation
+─────────────────────────────────────────────────────────────────
+ HUB 4 · INNER WORK                                [green accent]
+   Consciousness · Frequencies · Origin Chamber · Echo AI · Echoverse
+─────────────────────────────────────────────────────────────────
+ STATS STRIP (kept, moved to bottom as a "by the numbers")
+─────────────────────────────────────────────────────────────────
+ VIDEO STRIP + FINAL CTA
+─────────────────────────────────────────────────────────────────
 ```
 
----
+Each hub gets:
+- A 1-line section header in its accent color
+- 3–4 cards in a tighter grid (`grid-cols-2 lg:grid-cols-4`)
+- Cards inherit the hub's accent for hover glow, instead of all 14 having their own random color
+- Background: subtle gradient band in the hub's accent (very low opacity) so the eye gets a visual cue when crossing into a new section
 
-## Plan — two batches
-
-### BATCH 1 — Backend lockdown (the actual scan findings)
-
-**1. Lock down `echo_xp`**
-- Drop the client INSERT/UPDATE policies on `echo_xp`.
-- Keep SELECT (users can see their own XP).
-- All writes already go through `award_xp()` (SECURITY DEFINER) — the `guard_echo_xp_columns` trigger is in place but only fires for `authenticated` role; the policies are the actual hole. Removing them closes it.
-
-**2. Lock down `echo_xp_events`**
-- Drop any client INSERT policy.
-- Keep "users can SELECT their own events" for the XP history UI.
-- `award_xp()` already inserts as SECURITY DEFINER, so the app keeps working unchanged.
-
-**3. Restrict `profiles` SELECT to authenticated users**
-- Change policy from `USING (true)` → `USING (auth.uid() IS NOT NULL)`.
-- Anonymous visitors no longer get a list of every user UUID. Logged-in users still see profiles where they need to (Echoverse messages, etc.).
-
-**4. Scope `realtime.messages` to allowed channels**
-- Replace the blanket `USING (true)` with topic scoping: only allow subscribe if the channel topic matches a permitted prefix (e.g. `echoverse:*` requires the user to be authenticated; private DMs require user-id match).
-- I'll review existing channel naming first and write the policy to match — won't break anything in production.
-
-**5. Scope storage buckets to ownership**
-- `glyphs` and `testimony-media` policies become folder-scoped: a user can only read files under `<their-uuid>/...`.
-- Anything that needs to be publicly readable (e.g. an approved testimony) gets explicit allowlisting via a join to the `testimonies` table.
-
-**Migration is reversible.** I'll write each policy change as a single SQL migration, all RLS preserved, no data touched.
+This is **layout/grouping work in `HomePage.tsx` only** — no new pages, no removed features.
 
 ---
 
-### BATCH 2 — Frontend hardening (the real items from the audit)
+## Part 4 — Color palette refresh (move beyond all-purple)
 
-**1. Security headers via `index.html`**
-Add balanced defaults as `<meta http-equiv>` tags + Lovable hosting headers:
+You said: red+black, yellow+gold, some purple still, some greens. Currently everything is purple-dominant.
+
+**New accent system** (tokens added to `src/index.css` + `tailwind.config.ts`):
+
 ```text
-Content-Security-Policy:
-  default-src 'self';
-  script-src 'self' 'unsafe-inline' https://cdn.gpteng.co;
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  font-src 'self' https://fonts.gstatic.com;
-  img-src 'self' data: blob: https://i.ytimg.com https://*.supabase.co;
-  media-src 'self' blob: https://*.supabase.co;
-  frame-src https://www.youtube-nocookie.com https://www.youtube.com;
-  connect-src 'self' https://*.supabase.co wss://*.supabase.co
-              https://api.lovable.dev;
-  worker-src 'self' blob:;
-  object-src 'none';
-  base-uri 'self';
-  form-action 'self';
-X-Frame-Options: DENY
-X-Content-Type-Options: nosniff
-Referrer-Policy: strict-origin-when-cross-origin
-Permissions-Policy: camera=(), microphone=(), geolocation=()
+--accent-disclosure   #dc2626   crimson red    (whistleblower / UAP / vault)
+--accent-ancient      #d4a574   warm gold      (timeline / gods / pyramids)
+--accent-cosmic       #8b5cf6   violet         (galaxy / starfield — kept)
+--accent-life         #10b981   emerald        (consciousness / inner work / echo)
+--accent-signal       #22d3ee   cyan           (cern / species / observatory)
+--accent-warning      #f59e0b   amber          (47/missing/redacted)
 ```
-This is the **balanced** setting you picked. No site breakage; blocks injected scripts, untrusted iframes, MIME sniffing, and referrer leaks.
 
-**2. Validate YouTube IDs in `VideoEmbed.tsx` and `TestimonyCard.tsx`**
-- Add a one-line guard: `const safeId = /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null`.
-- If invalid → render the "Open on YouTube" fallback CTA instead of an empty iframe.
-- Same guard for the testimony-card YouTube parser.
+Existing `--primary` (purple) stays as the brand anchor — wordmark, navbar, default CTAs. The new accents are used **per hub, per page theme, per card hover** so the site reads as multi-colored without abandoning the cosmic identity.
 
-**3. Add `ErrorBoundary` and wrap the app**
-- New `src/components/ErrorBoundary.tsx` (class component, captures + resets).
-- Friendly fallback UI styled to match the cosmic theme.
-- Wrap `<Outlet />` inside `Layout.tsx` so a single page crash doesn't blank the navbar/footer.
-
-**4. Fix `useIsMobile` hydration flash**
-- Change return from `!!isMobile` to a tri-state object: `{ isMobile: boolean; ready: boolean }`.
-- Components that care can gate behind `ready` to avoid the desktop-flash-then-mobile-snap.
-- Keep a backwards-compatible export so existing call sites don't break (default to `false` until ready, same behavior as today, just no flash for new call sites that opt in).
+I'll do a sweep of the 14 section cards on the homepage and the navbar pills to use these tokens instead of the inline hex colors hardcoded in `HomePage.tsx` line 16-30.
 
 ---
 
-## What I'm explicitly NOT doing (and why)
+## What I'm explicitly NOT doing this batch
 
-- **No Helmet, no express-rate-limit, no cors() middleware** — you have no Express server. Putting them in package.json would do literally nothing.
-- **No OAuth-state CSRF "fix"** — that code doesn't exist in your project. Lovable Cloud's `lovable.auth.signInWithOAuth()` handles state for you.
-- **No backend rate limiting** — Lovable's documented stance: backend doesn't have good rate-limit primitives yet. Better to wait than to ship ad-hoc.
-- **No dev-server host change** — affects local dev only, not production.
+- **No live video backgrounds yet.** You mentioned 4K screensaver-style live backgrounds — those are 5-20MB files that hurt mobile performance. I want to land the image-based BackgroundManager first; if you love the system, we add 1-2 hero pages with looping video in a follow-up batch. Doing both at once = blame-a-bug nightmare.
+- **No new content / data.** All 14 sections, all whistleblowers, all 46 stay. This is purely visual reorg + portraits.
+- **No nav changes.** Navbar order stays the same. Only the homepage card grid is regrouped.
 
 ---
 
-## Order of work
+## Execution order
 
-Batch 1 first (backend) — it's where the real risk is. Then Batch 2 (frontend). I'll ask for migration approval before each SQL change so you can review what's being dropped/added.
+1. Part 4 (palette tokens) — 5 min, zero risk, unblocks 1 + 3
+2. Part 1 (BackgroundManager) — biggest visual payoff
+3. Part 3 (homepage reorg) — uses the new palette
+4. Part 2 (portraits) — last, because it's the slowest (image generation)
 
-After both batches, I'll re-run the scanner and report final state.
+I'll ship Parts 1–3 in one pass, then portraits as a follow-up so you can review the layout before we commit to a face for every name.
 
-Reply **go** to start with Batch 1 (backend lockdown). If you want frontend first instead, say **frontend first**.
+---
+
+## Technical notes (for the dev side)
+
+- `BackgroundManager` reads `pageThemes` from `src/lib/page-themes.ts` so the existing 14 themed pages don't get a different look from the manager and from their `<DossierPageLayout>` — single source of truth.
+- The current `<StarfieldCanvas>` in `Layout.tsx` is removed; it becomes one of the renderable modes inside `BackgroundManager` (default for `/`, `/galaxy`, `/echoverse`, `/echo`).
+- Cinematic effects already in `Layout.tsx` (`CometTrails`, `SpaceshipFlyby`, `CosmicCursorTrail`, `cinematic-vignette`) stay — they layer on top of whatever background mode is active.
+- Portrait images generated via the image-generation tool, saved to `src/assets/portraits/...`, imported with Vite `?url` so they're hashed and cached.
+- Homepage hub cards reuse the existing `glass-cosmic` class — no new card primitive needed.
+- All work is additive: no migration, no routing change, no auth touched. Backend from Batches 1-2 stays locked down.
+
+Reply **go** to ship Parts 1, 3, and 4 together (background system + homepage reorg + palette). Portraits follow in Part 2 once you've seen the new layout.
