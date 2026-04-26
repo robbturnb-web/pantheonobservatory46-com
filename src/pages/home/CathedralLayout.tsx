@@ -308,22 +308,36 @@ export function CathedralLayout() {
         {/* 3D scene or fallback */}
         <div className="relative w-full max-w-3xl aspect-square">
           {useFallback ? (
-            <CathedralFallback onHover={(d) => setDomain(d ?? 'none')} />
+            <>
+              <CathedralFallback onHover={(d) => setDomain(d ?? 'none')} />
+              {willRetry && (
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 text-[10px] uppercase tracking-[3px] text-white/50 bg-black/40 backdrop-blur px-3 py-1 rounded-full border border-white/10">
+                  Reconnecting in {retryCountdown}s…
+                </div>
+              )}
+            </>
           ) : (
             <CanvasErrorBoundary
+              key={retryAttempt}
               fallback={<CathedralFallback onHover={(d) => setDomain(d ?? 'none')} />}
-              onFallback={() => setCanvasFailed(true)}
+              onFallback={handleCanvasFailure}
             >
               <Canvas
+                key={retryAttempt}
                 camera={{ position: [0, 2, 7], fov: 60 }}
                 gl={{ antialias: true, failIfMajorPerformanceCaveat: true }}
                 onCreated={({ gl }) => {
                   // If the browser nukes the WebGL context (tab backgrounded,
-                  // GPU reset, OOM), switch to the SVG version instead of a
+                  // GPU reset, OOM), schedule a retry instead of leaving a
                   // frozen black square.
                   gl.domElement.addEventListener('webglcontextlost', (e) => {
                     e.preventDefault();
-                    setCanvasFailed(true);
+                    handleCanvasFailure();
+                  });
+                  // If the context comes back on its own, clear the failed
+                  // flag immediately so we don't keep showing the fallback.
+                  gl.domElement.addEventListener('webglcontextrestored', () => {
+                    setCanvasFailed(false);
                   });
                 }}
               >
