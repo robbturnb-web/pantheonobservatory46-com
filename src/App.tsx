@@ -45,6 +45,7 @@ const ExtinctSpeciesPage = lazy(() => import('./pages/ExtinctSpeciesPage').then(
 const CernPage = lazy(() => import('./pages/CernPage').then(m => ({ default: m.CernPage })));
 const ExpertsIndexPage = lazy(() => import('./pages/ExpertsIndexPage').then(m => ({ default: m.ExpertsIndexPage })));
 const ExpertProfilePage = lazy(() => import('./pages/ExpertProfilePage').then(m => ({ default: m.ExpertProfilePage })));
+const StyleGuidePage = lazy(() => import('./pages/StyleGuidePage').then(m => ({ default: m.StyleGuidePage })));
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
 function RouteLoader() {
@@ -102,6 +103,7 @@ export default function App() {
               <Route path="/elements" element={<ElementsLabPage />} />
               <Route path="/experts" element={<ExpertsIndexPage />} />
               <Route path="/experts/:slug" element={<ExpertProfilePage />} />
+              <Route path="/style-guide" element={<StyleGuidePage />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
