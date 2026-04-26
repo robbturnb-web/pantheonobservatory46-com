@@ -6,6 +6,8 @@ import * as THREE from 'three';
 import { ChevronDown, Zap } from 'lucide-react';
 import { useHomeTheme, HomeDomain } from '@/contexts/HomeThemeContext';
 import { LiveBackdrop } from '@/components/home/LiveBackdrop';
+import { CanvasErrorBoundary } from '@/components/home/CanvasErrorBoundary';
+import { isWebGLAvailable } from '@/lib/webgl';
 
 /**
  * Cathedral Layout — a 3D R3F scene of a "star cathedral" with four altars.
@@ -204,14 +206,23 @@ function CathedralFallback({ onHover }: { onHover: (id: HomeDomain | null) => vo
 export function CathedralLayout() {
   const { setDomain, bind } = useHomeTheme();
   const [isMobile, setIsMobile] = useState(false);
+  // Probe WebGL once on mount; default to "available" until we know otherwise
+  // so SSR / first paint don't flash the fallback unnecessarily.
+  const [webglOk, setWebglOk] = useState(true);
+  // Flips to true if the R3F subtree throws at runtime (driver crash, OOM, etc.)
+  const [canvasFailed, setCanvasFailed] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)');
     const update = () => setIsMobile(mq.matches);
     update();
     mq.addEventListener('change', update);
+    setWebglOk(isWebGLAvailable());
     return () => mq.removeEventListener('change', update);
   }, []);
+
+  // Use the SVG version on mobile, when WebGL isn't usable, or after a crash.
+  const useFallback = isMobile || !webglOk || canvasFailed;
 
   const handleAltarHover = (id: string | null) => {
     if (!id) return setDomain('none');
@@ -241,16 +252,33 @@ export function CathedralLayout() {
 
         {/* 3D scene or fallback */}
         <div className="relative w-full max-w-3xl aspect-square">
-          {isMobile ? (
+          {useFallback ? (
             <CathedralFallback onHover={(d) => setDomain(d ?? 'none')} />
           ) : (
-            <Canvas camera={{ position: [0, 2, 7], fov: 60 }} gl={{ antialias: true }}>
-              <CathedralScene onAltarHover={handleAltarHover} />
-            </Canvas>
+            <CanvasErrorBoundary
+              fallback={<CathedralFallback onHover={(d) => setDomain(d ?? 'none')} />}
+              onFallback={() => setCanvasFailed(true)}
+            >
+              <Canvas
+                camera={{ position: [0, 2, 7], fov: 60 }}
+                gl={{ antialias: true, failIfMajorPerformanceCaveat: true }}
+                onCreated={({ gl }) => {
+                  // If the browser nukes the WebGL context (tab backgrounded,
+                  // GPU reset, OOM), switch to the SVG version instead of a
+                  // frozen black square.
+                  gl.domElement.addEventListener('webglcontextlost', (e) => {
+                    e.preventDefault();
+                    setCanvasFailed(true);
+                  });
+                }}
+              >
+                <CathedralScene onAltarHover={handleAltarHover} />
+              </Canvas>
+            </CanvasErrorBoundary>
           )}
 
           {/* Click overlay for desktop (R3F doesn't navigate by itself) */}
-          {!isMobile && (
+          {!useFallback && (
             <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 pointer-events-none">
               {ALTARS.map((altar, i) => (
                 <Link
