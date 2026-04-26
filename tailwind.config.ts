@@ -68,6 +68,7 @@ export default {
           DEFAULT: "var(--sacred)",
           light: "var(--sacred-light)",
           glow: "var(--sacred-glow)",
+          dark: "#009955",
         },
         mystic: {
           DEFAULT: "var(--mystic)",
@@ -78,6 +79,7 @@ export default {
           DEFAULT: "var(--cosmic)",
           bright: "var(--cosmic-bright)",
           deep: "var(--cosmic-deep)",
+          dark: "#2a4a6f",
         },
         clarity: {
           DEFAULT: "var(--clarity)",
