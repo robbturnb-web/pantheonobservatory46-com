@@ -203,6 +203,11 @@ function CathedralFallback({ onHover }: { onHover: (id: HomeDomain | null) => vo
   );
 }
 
+// Up to 3 retry attempts after a WebGL crash, with exponential backoff
+// (2s → 4s → 8s). After the cap we stay on the SVG fallback for good.
+const MAX_CANVAS_RETRIES = 3;
+const RETRY_BASE_MS = 2000;
+
 export function CathedralLayout() {
   const { setDomain, bind } = useHomeTheme();
   const [isMobile, setIsMobile] = useState(false);
@@ -211,6 +216,13 @@ export function CathedralLayout() {
   const [webglOk, setWebglOk] = useState(true);
   // Flips to true if the R3F subtree throws at runtime (driver crash, OOM, etc.)
   const [canvasFailed, setCanvasFailed] = useState(false);
+  // Number of retries attempted so far; doubles as the Canvas remount key.
+  const [retryAttempt, setRetryAttempt] = useState(0);
+  // Countdown (seconds) shown in the fallback UI while we wait to retry.
+  const [retryCountdown, setRetryCountdown] = useState(0);
+  // Track outstanding timers so we can clean them up on unmount.
+  const retryTimerRef = useRef<number | null>(null);
+  const tickTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)');
@@ -218,11 +230,54 @@ export function CathedralLayout() {
     update();
     mq.addEventListener('change', update);
     setWebglOk(isWebGLAvailable());
-    return () => mq.removeEventListener('change', update);
+    return () => {
+      mq.removeEventListener('change', update);
+      if (retryTimerRef.current) window.clearTimeout(retryTimerRef.current);
+      if (tickTimerRef.current) window.clearInterval(tickTimerRef.current);
+    };
   }, []);
+
+  /**
+   * Schedule an automatic retry of the 3D scene after a backoff delay.
+   * Re-probes WebGL availability before remounting so a permanently dead
+   * context doesn't cause an infinite loop.
+   */
+  const scheduleRetry = (attempt: number) => {
+    if (attempt >= MAX_CANVAS_RETRIES) return;
+    const delayMs = RETRY_BASE_MS * Math.pow(2, attempt); // 2s, 4s, 8s
+    setRetryCountdown(Math.ceil(delayMs / 1000));
+
+    if (tickTimerRef.current) window.clearInterval(tickTimerRef.current);
+    tickTimerRef.current = window.setInterval(() => {
+      setRetryCountdown((s) => (s > 0 ? s - 1 : 0));
+    }, 1000);
+
+    if (retryTimerRef.current) window.clearTimeout(retryTimerRef.current);
+    retryTimerRef.current = window.setTimeout(() => {
+      if (tickTimerRef.current) window.clearInterval(tickTimerRef.current);
+      // Force-clear the cached WebGL probe so we re-detect a recovered GPU.
+      try { delete (window as any).__lov_webgl_ok__; } catch { /* noop */ }
+      const ok = isWebGLAvailable();
+      setWebglOk(ok);
+      if (ok) {
+        setCanvasFailed(false);
+        setRetryAttempt(attempt + 1); // also remounts Canvas via key
+      } else {
+        // GPU still gone — try again with the next backoff step.
+        scheduleRetry(attempt + 1);
+      }
+    }, delayMs);
+  };
+
+  /** Single entry point for both error-boundary and contextlost failures. */
+  const handleCanvasFailure = () => {
+    setCanvasFailed(true);
+    scheduleRetry(retryAttempt);
+  };
 
   // Use the SVG version on mobile, when WebGL isn't usable, or after a crash.
   const useFallback = isMobile || !webglOk || canvasFailed;
+  const willRetry = canvasFailed && retryAttempt < MAX_CANVAS_RETRIES && !isMobile;
 
   const handleAltarHover = (id: string | null) => {
     if (!id) return setDomain('none');
