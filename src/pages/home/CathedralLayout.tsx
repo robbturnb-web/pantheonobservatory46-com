@@ -206,14 +206,23 @@ function CathedralFallback({ onHover }: { onHover: (id: HomeDomain | null) => vo
 export function CathedralLayout() {
   const { setDomain, bind } = useHomeTheme();
   const [isMobile, setIsMobile] = useState(false);
+  // Probe WebGL once on mount; default to "available" until we know otherwise
+  // so SSR / first paint don't flash the fallback unnecessarily.
+  const [webglOk, setWebglOk] = useState(true);
+  // Flips to true if the R3F subtree throws at runtime (driver crash, OOM, etc.)
+  const [canvasFailed, setCanvasFailed] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)');
     const update = () => setIsMobile(mq.matches);
     update();
     mq.addEventListener('change', update);
+    setWebglOk(isWebGLAvailable());
     return () => mq.removeEventListener('change', update);
   }, []);
+
+  // Use the SVG version on mobile, when WebGL isn't usable, or after a crash.
+  const useFallback = isMobile || !webglOk || canvasFailed;
 
   const handleAltarHover = (id: string | null) => {
     if (!id) return setDomain('none');
