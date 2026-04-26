@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Radio, ExternalLink, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -38,9 +39,17 @@ export function StefanLocator() {
       className="relative rounded-xl border border-accent-neon/30 bg-gradient-to-br from-accent-neon/5 via-card/40 to-transparent p-5 overflow-hidden h-full"
     >
       <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-accent-neon/15 blur-3xl pointer-events-none" />
-      <div className="flex items-center gap-2 mb-3">
-        <Radio className="w-4 h-4 text-accent-neon animate-pulse" />
-        <span className="text-xs uppercase tracking-[3px] text-accent-neon font-bold">Stefan Burns · Locator</span>
+      <div className="flex items-center justify-between gap-2 mb-3">
+        <div className="flex items-center gap-2">
+          <Radio className="w-4 h-4 text-accent-neon animate-pulse" />
+          <span className="text-xs uppercase tracking-[3px] text-accent-neon font-bold">Stefan Burns · Locator</span>
+        </div>
+        <Link
+          to="/experts/stefan-burns"
+          className="text-[10px] uppercase tracking-[2px] text-cosmic-bright hover:text-sacred-light transition-colors"
+        >
+          Profile →
+        </Link>
       </div>
 
       {loading ? (
