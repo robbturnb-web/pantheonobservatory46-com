@@ -252,16 +252,33 @@ export function CathedralLayout() {
 
         {/* 3D scene or fallback */}
         <div className="relative w-full max-w-3xl aspect-square">
-          {isMobile ? (
+          {useFallback ? (
             <CathedralFallback onHover={(d) => setDomain(d ?? 'none')} />
           ) : (
-            <Canvas camera={{ position: [0, 2, 7], fov: 60 }} gl={{ antialias: true }}>
-              <CathedralScene onAltarHover={handleAltarHover} />
-            </Canvas>
+            <CanvasErrorBoundary
+              fallback={<CathedralFallback onHover={(d) => setDomain(d ?? 'none')} />}
+              onFallback={() => setCanvasFailed(true)}
+            >
+              <Canvas
+                camera={{ position: [0, 2, 7], fov: 60 }}
+                gl={{ antialias: true, failIfMajorPerformanceCaveat: true }}
+                onCreated={({ gl }) => {
+                  // If the browser nukes the WebGL context (tab backgrounded,
+                  // GPU reset, OOM), switch to the SVG version instead of a
+                  // frozen black square.
+                  gl.domElement.addEventListener('webglcontextlost', (e) => {
+                    e.preventDefault();
+                    setCanvasFailed(true);
+                  });
+                }}
+              >
+                <CathedralScene onAltarHover={handleAltarHover} />
+              </Canvas>
+            </CanvasErrorBoundary>
           )}
 
           {/* Click overlay for desktop (R3F doesn't navigate by itself) */}
-          {!isMobile && (
+          {!useFallback && (
             <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 pointer-events-none">
               {ALTARS.map((altar, i) => (
                 <Link
