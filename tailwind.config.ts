@@ -68,6 +68,7 @@ export default {
           DEFAULT: "var(--sacred)",
           light: "var(--sacred-light)",
           glow: "var(--sacred-glow)",
+          dark: "#009955",
         },
         mystic: {
           DEFAULT: "var(--mystic)",
@@ -78,6 +79,7 @@ export default {
           DEFAULT: "var(--cosmic)",
           bright: "var(--cosmic-bright)",
           deep: "var(--cosmic-deep)",
+          dark: "#2a4a6f",
         },
         clarity: {
           DEFAULT: "var(--clarity)",
@@ -116,6 +118,19 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      backgroundImage: {
+        'cosmic-gradient': 'linear-gradient(to bottom, #0a0e1a, #000000)',
+        'purple-green': 'linear-gradient(135deg, rgba(157, 77, 237, 0.2), rgba(0, 255, 136, 0.2))',
+        'purple-blue': 'linear-gradient(135deg, #9d4edd, #4a7ba7)',
+        'green-cyan': 'linear-gradient(135deg, #00cc66, #00d9ff)',
+        'full-spectrum': 'linear-gradient(90deg, #ff3366, #9d4edd, #4a7ba7, #00cc66, #ffd700)',
+      },
+      boxShadow: {
+        'neon-green': '0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 255, 136, 0.3)',
+        'neon-purple': '0 0 20px rgba(157, 77, 237, 0.5), 0 0 40px rgba(157, 77, 237, 0.3)',
+        'neon-blue': '0 0 20px rgba(0, 217, 255, 0.5), 0 0 40px rgba(0, 217, 255, 0.3)',
+        'cosmic-glow': '0 0 30px rgba(157, 77, 237, 0.4), 0 0 60px rgba(0, 255, 136, 0.2)',
       },
       keyframes: {
         "accordion-down": {
