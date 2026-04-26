@@ -6,6 +6,8 @@ import * as THREE from 'three';
 import { ChevronDown, Zap } from 'lucide-react';
 import { useHomeTheme, HomeDomain } from '@/contexts/HomeThemeContext';
 import { LiveBackdrop } from '@/components/home/LiveBackdrop';
+import { CanvasErrorBoundary } from '@/components/home/CanvasErrorBoundary';
+import { isWebGLAvailable } from '@/lib/webgl';
 
 /**
  * Cathedral Layout — a 3D R3F scene of a "star cathedral" with four altars.
