@@ -121,16 +121,14 @@ export function ExpertProfilePage() {
         <div className="flex gap-2 sm:gap-4 mb-8 border-b border-mystic/30 overflow-x-auto">
           <TabButton
             active={activeTab === 'knowledge'}
-            color="sacred-light"
-            shadow="shadow-neon-green"
+            activeClasses="text-sacred-light border-sacred-light shadow-neon-green"
             onClick={() => setActiveTab('knowledge')}
           >
             Knowledge ({expert.knowledge.length})
           </TabButton>
           <TabButton
             active={activeTab === 'videos'}
-            color="cosmic-bright"
-            shadow="shadow-neon-blue"
+            activeClasses="text-cosmic-bright border-cosmic-bright shadow-neon-blue"
             onClick={() => setActiveTab('videos')}
           >
             Videos ({expert.videos.length})
@@ -229,24 +227,22 @@ export function ExpertProfilePage() {
 
 function TabButton({
   active,
-  color,
-  shadow,
+  activeClasses,
   onClick,
   children,
 }: {
   active: boolean;
-  color: string;
-  shadow: string;
+  activeClasses: string;
   onClick: () => void;
   children: React.ReactNode;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`px-4 sm:px-6 py-3 font-semibold text-sm sm:text-base transition-all whitespace-nowrap ${
+      className={`px-4 sm:px-6 py-3 font-semibold text-sm sm:text-base transition-all whitespace-nowrap border-b-2 ${
         active
-          ? `text-${color} border-b-2 border-${color} ${shadow}`
-          : 'text-clarity-gray hover:text-clarity-silver'
+          ? activeClasses
+          : 'text-clarity-gray border-transparent hover:text-clarity-silver'
       }`}
     >
       {children}
