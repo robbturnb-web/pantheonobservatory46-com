@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, ExternalLink, Globe, Youtube, Twitter } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { VideoEmbed } from '@/components/VideoEmbed';
-import { NotFound } from './NotFound';
+import NotFound from './NotFound';
 import { getExpertBySlug, type ExpertCategory } from '@/data/experts';
 
 type Tab = 'knowledge' | 'videos';
