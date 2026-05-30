@@ -121,7 +121,7 @@ export const documentaries: Documentary[] = [
     topics: ['Disclosure Project', 'Black Budget', 'Whistleblowers'],
     synopsis:
       'Dr. Steven Greer\'s Disclosure Project testimony — hundreds of military, intelligence, and corporate insiders on the record. Argues a parallel unacknowledged special access program controls reverse-engineered craft.',
-    trailerYouTubeId: 'i7czbg6Pj4Q',
+    trailerYouTubeId: 'p-duAuIqsOQ',
     officialUrl: 'https://siriusdisclosure.com',
   },
   {
