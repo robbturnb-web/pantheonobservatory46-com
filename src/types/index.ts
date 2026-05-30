@@ -4,7 +4,29 @@ export type StarSeedId = 'pleiadian' | 'arcturian' | 'sirian' | 'lyran' | 'orion
 
 export type SignalRating = 'GREEN' | 'YELLOW' | 'RED';
 
-export type PantheonFilter = 'All' | 'Greek' | 'Norse' | 'Egyptian' | 'Hindu' | 'Anunnaki' | 'Starseed';
+export type PantheonFilter =
+  | 'All'
+  | 'Greek'
+  | 'Norse'
+  | 'Egyptian'
+  | 'Hindu'
+  | 'Anunnaki'
+  | 'Starseed'
+  | 'Chinese'
+  | 'Japanese'
+  | 'Buddhist'
+  | 'Islamic'
+  | 'Aztec'
+  | 'Mayan'
+  | 'Incan'
+  | 'Yoruba'
+  | 'Celtic'
+  | 'Slavic'
+  | 'Polynesian'
+  | 'Aboriginal'
+  | 'Native American'
+  | 'Mesopotamian'
+  | 'Zoroastrian';
 
 export interface GodMyth {
   title: string;
