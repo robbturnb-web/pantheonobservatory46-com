@@ -16,6 +16,7 @@ import heroExtinct from '@/assets/hero-extinct.jpg';
 import heroCern from '@/assets/hero-cern.jpg';
 import heroAaro from '@/assets/hero-aaro.jpg';
 import heroBuilders from '@/assets/hero-builders.jpg';
+import heroBlackPrograms from '@/assets/black-programs/hero-black-programs.jpg';
 
 export type AtmosphereId =
   | 'frost'
@@ -266,6 +267,24 @@ export const pageThemes = {
     fontFamily: "'Cormorant Garamond', serif",
     stampColor: '#a16207',
     heroImage: heroStoneFaces,
+  },
+  blackPrograms: {
+    id: 'blackPrograms',
+    name: 'Black Programs Vault',
+    tagline: "Alleged UAP Special Access Programs · Rubik's Cube & beyond",
+    classificationLabel: 'TOP SECRET // SAP // NOFORN',
+    atmosphere: 'redaction',
+    pageBg: 'linear-gradient(180deg, #0a0405 0%, #1a0608 50%, #050203 100%)',
+    heroOverlay:
+      'radial-gradient(ellipse at top, rgba(220, 38, 38, 0.12) 0%, transparent 60%), linear-gradient(180deg, rgba(10, 4, 5, 0.55) 0%, rgba(5, 2, 3, 0.98) 100%)',
+    accent: '#DC2626',
+    accentAlt: '#fca5a5',
+    heroFg: '#fee2e2',
+    cardSurface: 'rgba(26, 6, 8, 0.82)',
+    cardBorder: 'rgba(220, 38, 38, 0.28)',
+    fontFamily: "'Space Mono', monospace",
+    stampColor: '#DC2626',
+    heroImage: heroBlackPrograms,
   },
 } as const satisfies Record<string, PageTheme>;
 

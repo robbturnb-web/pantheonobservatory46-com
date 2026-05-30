@@ -1,86 +1,57 @@
+## Black Programs Vault — Rubik's Cube & the Hidden UAP SAPs
 
-# Finish hero rollout + worldwide species expansion
+A new dedicated page cataloging every alleged / unacknowledged UAP-related Special Access Program (SAP), with **Rubik's Cube** as the flagship featured dossier at the top.
 
-Two phases. Phase A closes out the realm-tinted hero image waves already in flight. Phase B opens a new, larger expansion of the Species dataset.
+### Why a new page (not just an entry in Crash Retrieval)
+Crash Retrieval = recovered *craft/bodies*. The 46 Vault = the specific congressional file list. Neither cleanly hosts the **programs themselves** (the umbrellas that allegedly fund, hide, and reverse-engineer the material). This deserves its own vault — and Rubik's Cube specifically has zero coverage anywhere on the site right now.
 
----
+### Route & Navigation
+- New route: `/black-programs`
+- New navbar link: **"Black Programs"** (placed next to Crash Retrieval)
+- Reuses `DossierPageLayout` + `DossierCard` + `DossierModal` (same look/feel as Crash Retrieval, Glyphs, Stone Faces)
 
-## Phase A — Finish Waves 3 & 4 (hero images)
+### Featured: Rubik's Cube (top of page, oversized hero)
+Custom hero block above the standard grid — cinematic banner image of a glowing multi-colored cube lattice over redacted document scans + crimson "BLACK PROJECTS" classification strip. Contents:
+- **What it allegedly is**: A compartmented UAP material-analysis / reverse-engineering program named for the way recovered NHI craft components reportedly reconfigure their internal geometry like a Rubik's cube — surfaced publicly via Jake Barber, Ross Coulthart, and Shawn Ryan Show interviews (2024-2025).
+- **Current status / what they may have found**: alleged "egg" craft retrieval, biologics, material that responds to consciousness, the "psionic pilot" claims.
+- **Speculations & theories**: tie-ins to Immaculate Constellation, Kona Blue, Legacy Program.
+- **Linked people**: Jake Barber, Ross Coulthart, Matthew Brown, Tim Gallaudet, Lue Elizondo, David Grusch (adjacent).
+- **Sources**: Shawn Ryan Show ep, NewsNation Reality Check, Liberation Times, Coulthart Substack — with citation chips.
+- **Curated videos**: Barber/Ryan interview, Coulthart NewsNation segments.
 
-Continuation of the realm-tinted cinematic rollout. Same pattern as Waves 1-2: generate `.jpg` assets in `src/assets/`, extend the dataset/type if needed, import + map to entry IDs, render via existing `DossierCard` `heroImage` prop or section-local equivalent.
+### Standard grid: every alleged UAP program
+~15 dossier cards, each with hero image, evidence grade, origin, key events, evidence, skeptical view, sources, videos:
 
-### Wave 3 — Disclosure adjacency (~39 images)
+1. **Rubik's Cube** (also rendered as featured card)
+2. **Immaculate Constellation** — Matthew Brown's 2024 report, "umbrella" UAP SAP
+3. **Kona Blue** — DHS-proposed successor to AAWSAP, never funded per DoD
+4. **AAWSAP / AATIP** — Bigelow/DIA, the publicly-acknowledged seed
+5. **Legacy Program** — Grusch's term for the multi-decade retrieval program
+6. **Project Aquarius** — alleged MJ-12 era successor to Grudge
+7. **Project Grudge / Sign / Blue Book** — the historical acknowledged trilogy
+8. **MJ-12 / Majestic** — the contested foundational document
+9. **GATEWAY / Sunstreak / Stargate** — CIA/DIA remote viewing (UAP overlap)
+10. **Project Pounce** — alleged USAF crash-recovery team
+11. **Project Moon Dust / Operation Blue Fly** — declassified foreign-tech recovery
+12. **SOLAR WARDEN** — alleged secret space fleet (low confidence, included as "ALLEGED")
+13. **Yankee Blue / Yankee White adjuncts** — alleged indoctrination ops (Lue Elizondo testimony)
+14. **NRO "Zodiac" / unnamed compartments** — referenced in Schumer Amendment
+15. **UAPTF / AARO** — the modern public-facing layer (for contrast)
 
-Sequential per dataset, verify after each.
+Each card carries a confidence stamp: VERIFIED (AATIP, Blue Book, AARO), REPORTED (Immaculate Constellation, Rubik's Cube), ALLEGED (Solar Warden, MJ-12), DEBATED (Kona Blue, Legacy).
 
-- **Pyramids (6)** — finish wiring. Add `heroImage?: string` to `Pyramid` type, render in `PyramidInfo` UI, attach the 6 already-generated `pyramid-*.jpg` assets. Amber + gold, desert night, monolithic sacred geometry.
-- **Stone Faces (~12)** — bronze + violet, weathered monumental carvings (Easter Island, Olmec heads, Bayon, Mt Nemrut, etc.).
-- **Glyphs (~8)** — indigo + cyan, glowing engraved symbols (Nazca, cuneiform, Mayan, Voynich-style, etc.).
-- **Missing Scientists (~15)** — desaturated noir + crimson surveillance/archival energy. Unique heroes for named cases; shared fallback for any remainder.
-- **Whistleblowers gaps (~4)** — emerald + obsidian portrait energy, matching existing whistleblower set.
+### Hero imagery
+Generate one cinematic hero per program (~16 images, premium quality) in `src/assets/black-programs/` — consistent visual language: obsidian + crimson accent (matches the "Black Projects" realm token `#DC2626`), redaction bars, classification stamps, no fake "alien" art for unverified programs (stays truth-oriented per established pattern).
 
-### Wave 4 — The 46 vault (50 images)
+### Technical details
+- New file `src/data/black-programs.ts` exporting `blackProgramEntries: DossierEntry[]` + `blackProgramCategories`
+- New page `src/pages/BlackProgramsPage.tsx` — custom Rubik's Cube hero section above `<DossierPageLayout>`
+- Add `pageThemes.blackPrograms` to `src/lib/page-themes.ts` (crimson accent, obsidian surface, classification label "TOP SECRET // SAP // NOFORN")
+- Lazy route + Navbar entry
+- SEO tags via `<SEO>` component
+- Realm color: crimson `#DC2626` (matches existing Black Projects realm token — no new colors)
 
-- Use `coverImage` on `VaultSlot` (already in type).
-- Two visual treatments handled in `VaultSlotCard` + `VaultSlotModal`:
-  - **Sealed/pending** slots → blurred + darkened + violet sigil overlay (classified-folder energy).
-  - **Unlocked** slots → full cinematic hero (royal violet + obsidian, classified-folder + sigil energy).
-- Generate 50 unique covers tied to each vault slot's theme.
-
-### Verification per wave
-
-Read final files, hit each affected page in preview, spot-check 3-4 cards per dataset for broken imports, missing alts, or generic-looking renders. Regenerate any image that reads as generic stock.
-
----
-
-## Phase B — Species worldwide expansion
-
-After Wave 4 lands cleanly. Goal: turn the species section into a true global cryptid/wildlife codex — every continent, ocean discoveries, and extinct/critically-endangered tracks — each with a hero image matching the existing species visual standard.
-
-### New entries (target ~60-70 additions, grouped)
-
-- **Asia (incl. China)** — e.g. Yeren (China wildman), Almas (Mongolia), Mongolian Death Worm, Nguma-monene, Orang Pendek (Sumatra), Hibagon (Japan), Ahool (Java), Mongolian ibex sightings, Tibetan migou.
-- **Australia & Oceania** — Yowie, Bunyip, Burrunjor, Queensland Tiger, Moehau (NZ), Megalania reports, Tasmanian Tiger modern sightings.
-- **Africa** — Mokele-Mbembe, Kongamato, Emela-ntouka, Mngwa, Nandi Bear, Inkanyamba.
-- **South America** — Mapinguari, Chupacabra (deep cut beyond existing), Minhocão, Ucumar, Cuero.
-- **Europe** — Beast of Bodmin, Beast of Gévaudan, Lagarfljót Worm, Tatzelwurm.
-- **Arctic / Antarctic** — Ningen, Tizheruk, Adlet.
-- **Ocean — new findings (real, recent)** — Hadal snailfish (Mariana), Casper octopus, scaly-foot snail, yeti crab, deep-sea bigfin squid sightings, recently described Indonesian coelacanth populations, 2020s reef discoveries. Tag as "Verified discovery" vs "Cryptid report" so the grade system stays honest.
-- **Extinct / recently lost** — Thylacine, Steller's sea cow, Caspian tiger, Pyrenean ibex, Baiji river dolphin, Pinta Island tortoise, Bramble Cay melomys, Po'ouli, Splendid poison frog.
-- **Going extinct (critically endangered)** — Vaquita, Saola, Javan rhino, Sumatran rhino, Northern white rhino, Amur leopard, Yangtze finless porpoise, Kakapo, Axolotl (wild), Hawksbill.
-
-### Data model touch-ups
-
-Add to species entry type (only if not already present):
-
-- `region: "Asia" | "Africa" | ...` for filtering
-- `status: "cryptid" | "verified-discovery" | "extinct" | "critically-endangered"`
-- `heroImage: string` (required for new entries; backfill existing if missing)
-- Keep evidence-grade system as-is; new "verified-discovery" and "extinct" entries should carry strong grades (peer-reviewed, museum specimens, photo/video).
-
-### UI touch-ups
-
-- Add region + status filter chips to the species page so the larger dataset stays navigable.
-- Section headers per region OR per status (pick whichever reads cleaner — likely region groups with status badges on cards).
-- Reuse existing species card; ensure hero image area matches DossierCard treatment for visual consistency.
-
-### Style lock for species images
-
-Match the existing species set already shipped — same lighting, framing, and grade. Subtle region-tinted atmosphere (jungle green for SE Asia, ice blue for Arctic, bioluminescent deep blue for ocean finds, sepia/archival for extinct) but the creature stays the hero, photoreal, no generic stock energy.
-
----
-
-## Out of scope
-
-- No copy rewrites on existing entries beyond adding `heroImage`/`region`/`status` fields.
-- No new pages — everything lands inside existing Species, Disclosure, and 46 surfaces.
-- No animation work on hero images this pass.
-
-## Execution order
-
-1. Wave 3 (Pyramids → Stone Faces → Glyphs → Missing Scientists → Whistleblowers gaps)
-2. Wave 4 (The 46 vault, with both sealed + unlocked treatments)
-3. Species type/UI updates (region + status filters)
-4. Species expansion in regional batches: Asia → Oceania → Africa → S. America → Europe → Arctic → Ocean discoveries → Extinct → Critically endangered
-
-Verify in preview between each batch; regenerate any image that reads as generic before moving on.
+### Out of scope
+- No backend / database changes
+- No edits to existing Crash Retrieval, The 46, or Whistleblower vaults (they cross-link via shared people only)
+- No new auth / cloud features
