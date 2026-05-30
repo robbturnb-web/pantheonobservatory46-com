@@ -26,7 +26,7 @@ export const documentaries: Documentary[] = [
     topics: ['UAP', 'Disclosure', 'Whistleblowers', 'Congress'],
     synopsis:
       'Premiered at SXSW 2025. Thirty-four U.S. military, intelligence, and government officials — including Sen. Marco Rubio, Sen. Kirsten Gillibrand, Lue Elizondo, David Grusch, and Chris Mellon — go on the record about an 80-year cover-up of non-human intelligence and the active retrieval of crashed craft. The most credentialed disclosure documentary ever filmed.',
-    trailerYouTubeId: 'GcwYDS9OLBE',
+    trailerYouTubeId: 'DkU7ZqbADRs',
     officialUrl: 'https://theageofdisclosure.com',
     watchUrl: 'https://www.amazon.com/Age-Disclosure-David-Grusch/dp/B0F8N5Y9XZ',
   },
@@ -54,9 +54,10 @@ export const documentaries: Documentary[] = [
     topics: ['Skinwalker Ranch', 'Paranormal', 'DIA'],
     synopsis:
       'The full classified-era story of Skinwalker Ranch, the AAWSAP/BAASS program, and physicist Eric Davis. Built around interviews with the intelligence-funded scientists who lived through the high-strangeness.',
-    trailerYouTubeId: 'cWpFw3JuOEM',
+    watchUrl: 'https://www.amazon.com/Hunt-Skinwalker-George-Knapp/dp/B07HJBJTV5',
     officialUrl: 'https://www.huntfortheskinwalker.com',
   },
+
   {
     id: 'bob-lazar-area-51',
     title: 'Bob Lazar: Area 51 & Flying Saucers',
@@ -67,7 +68,7 @@ export const documentaries: Documentary[] = [
     topics: ['Bob Lazar', 'Area 51', 'S-4', 'Element 115'],
     synopsis:
       'The definitive Bob Lazar profile. His S-4 testimony, element 115 reactor claims, and the FBI raid on his property — narrated by Mickey Rourke. Pushed Lazar back into mainstream discourse on Joe Rogan and beyond.',
-    trailerYouTubeId: 'wKbsxKW7nuw',
+    trailerYouTubeId: 'JzQkVGOFQTY',
     officialUrl: 'https://www.extraordinarybeliefs.com',
     watchUrl: 'https://www.netflix.com/title/81074513',
   },
@@ -94,7 +95,7 @@ export const documentaries: Documentary[] = [
     topics: ['UAP', 'Pentagon', 'Cold War'],
     synopsis:
       'James Fox\'s landmark documentary — first to feature on-camera testimony from Sen. Harry Reid, John Podesta, Cmdr. David Fravor, and the children of the Ariel School encounter (Zimbabwe, 1994). The film that legitimized UAP discourse pre-Grusch.',
-    trailerYouTubeId: 'EmGwoyhrnK4',
+    trailerYouTubeId: 'XjJomA4NDQI',
     officialUrl: 'https://www.thephenomenonfilm.com',
   },
   {
@@ -107,7 +108,7 @@ export const documentaries: Documentary[] = [
     topics: ['Varginha', 'Brazil', 'Mass Encounter'],
     synopsis:
       'Deep-dive into the 1996 Varginha, Brazil incident — multiple witnesses, military recovery, and the rumored capture of two non-human entities. The most credible mass encounter of the modern era.',
-    trailerYouTubeId: 'rH4SVbZk-Yc',
+    trailerYouTubeId: 'ikqYDjT4KP0',
     officialUrl: 'https://www.thephenomenonfilm.com/moment-of-contact',
   },
   {
@@ -120,7 +121,7 @@ export const documentaries: Documentary[] = [
     topics: ['Disclosure Project', 'Black Budget', 'Whistleblowers'],
     synopsis:
       'Dr. Steven Greer\'s Disclosure Project testimony — hundreds of military, intelligence, and corporate insiders on the record. Argues a parallel unacknowledged special access program controls reverse-engineered craft.',
-    trailerYouTubeId: 'i7czbg6Pj4Q',
+    trailerYouTubeId: 'p-duAuIqsOQ',
     officialUrl: 'https://siriusdisclosure.com',
   },
   {
@@ -133,7 +134,7 @@ export const documentaries: Documentary[] = [
     topics: ['CE-5', 'Consciousness', 'Contact'],
     synopsis:
       'Greer\'s framework for "consciousness-assisted contact" (CE-5) — meditation-induced craft sightings, witness protocols, and the case for non-hostile contact.',
-    trailerYouTubeId: 'I3bWyhE6Wfg',
+    trailerYouTubeId: 'qLW9XFikYNA',
     officialUrl: 'https://siriusdisclosure.com',
   },
 ];
