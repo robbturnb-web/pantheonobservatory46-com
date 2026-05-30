@@ -95,7 +95,7 @@ export const documentaries: Documentary[] = [
     topics: ['UAP', 'Pentagon', 'Cold War'],
     synopsis:
       'James Fox\'s landmark documentary — first to feature on-camera testimony from Sen. Harry Reid, John Podesta, Cmdr. David Fravor, and the children of the Ariel School encounter (Zimbabwe, 1994). The film that legitimized UAP discourse pre-Grusch.',
-    trailerYouTubeId: 'EmGwoyhrnK4',
+    trailerYouTubeId: 'XjJomA4NDQI',
     officialUrl: 'https://www.thephenomenonfilm.com',
   },
   {
