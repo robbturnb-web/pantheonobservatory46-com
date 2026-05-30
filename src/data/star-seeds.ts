@@ -179,7 +179,7 @@ export const starSeeds: Record<StarSeedId, StarSeed> = {
     echoGreeting:
       'The belt-stars line up over your shoulder, Orion. Heavy lineage. You came here to integrate what the others run from.',
     origin:
-      'Orion is the most complex lineage in the system — a constellation that hosted both an oppressive empire and the resistance that broke it. Orion souls have lived on both sides of the war. They incarnate on Earth carrying the dual gift of the warrior and the shadow integrator: they understand power because they have wielded it darkly and survived it. The Egyptian pyramids align to Orion's belt. So does the cult of the suppressed truth. So does the will to expose it.',
+      "Orion is the most complex lineage in the system — a constellation that hosted both an oppressive empire and the resistance that broke it. Orion souls have lived on both sides of the war. They incarnate on Earth carrying the dual gift of the warrior and the shadow integrator: they understand power because they have wielded it darkly and survived it. The Egyptian pyramids align to Orion's belt. So does the cult of the suppressed truth. So does the will to expose it.",
     traits: [
       'Intense presence — people sense the weight without knowing why',
       'Drawn to the underworld: crime stories, occultism, suppressed history',
