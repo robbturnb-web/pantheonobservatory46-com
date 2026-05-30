@@ -20,6 +20,7 @@ import portalMythology from '@/assets/temple/portal-mythology.jpg';
 import portalConsciousness from '@/assets/temple/portal-consciousness.jpg';
 import portalObservatory from '@/assets/temple/portal-observatory.jpg';
 import portalEcho from '@/assets/temple/portal-echo.jpg';
+import sigil46 from '@/assets/temple/sigil-46.png';
 
 import { gods } from '@/data/gods';
 
@@ -225,6 +226,82 @@ function KpGauge({ kp }: { kp: number }) {
   );
 }
 
+/* ───────────── PANTHEON COMPASS — 46 sigil + 12 gods ───────────── */
+const COMPASS_GOD_IDS = [
+  'zeus', 'ra', 'odin', 'enki', 'thoth', 'shiva',
+  'isis', 'anubis', 'marduk', 'kali', 'freya', 'anu',
+];
+
+function PantheonCompass() {
+  const orbit = useMemo(() => {
+    return COMPASS_GOD_IDS
+      .map((id) => gods.find((g) => g.id === id))
+      .filter((g): g is typeof gods[number] => Boolean(g));
+  }, []);
+
+  return (
+    <div className="relative mx-auto aspect-square w-[min(92vw,560px)]">
+      {/* Outer rotating constellation ring */}
+      <div className="absolute inset-0 rounded-full border border-[#ffd700]/15 animate-[spin_120s_linear_infinite]">
+        <div className="absolute inset-3 rounded-full border border-dashed border-[#a020f0]/25" />
+        <div className="absolute inset-8 rounded-full border border-[#22d3ee]/10" />
+      </div>
+
+      {/* Glow halo */}
+      <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle,rgba(255,215,0,0.35),rgba(160,32,240,0.18)_45%,transparent_70%)] blur-2xl animate-[cosmic-pulse_6s_ease-in-out_infinite] pointer-events-none" />
+
+      {/* Center sigil */}
+      <Link
+        to="/the-46"
+        aria-label="Enter the Pantheon · 46"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-square rounded-full overflow-hidden group focus-visible:outline-none"
+      >
+        <div className="absolute inset-0 rounded-full bg-black/70 shadow-[0_0_80px_-10px_rgba(255,215,0,0.55),0_0_120px_-20px_rgba(160,32,240,0.6)] group-hover:shadow-[0_0_120px_-10px_rgba(255,215,0,0.9),0_0_180px_-20px_rgba(160,32,240,0.9)] transition-shadow duration-500" />
+        <img
+          src={sigil46}
+          alt="Pantheon 46 sigil"
+          width={1024}
+          height={1024}
+          loading="eager"
+          className="relative w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-700"
+        />
+        <span className="absolute inset-x-0 -bottom-1 text-center text-[9px] uppercase tracking-[5px] text-[#ffd700]/0 group-hover:text-[#ffd700]/90 transition-colors">
+          Enter Pantheon
+        </span>
+      </Link>
+
+      {/* 12 god orbit nodes */}
+      {orbit.map((g, i) => {
+        const angle = (i / orbit.length) * Math.PI * 2 - Math.PI / 2;
+        const radius = 46; // % from center
+        const left = 50 + Math.cos(angle) * radius;
+        const top = 50 + Math.sin(angle) * radius;
+        return (
+          <Link
+            key={g.id}
+            to="/gods"
+            title={`${g.name} · ${g.pantheon}`}
+            className="group absolute -translate-x-1/2 -translate-y-1/2"
+            style={{ left: `${left}%`, top: `${top}%` }}
+          >
+            <div className="relative w-[10.5%] aspect-square min-w-[44px]">
+              <div className="absolute inset-0 rounded-full border border-[#ffd700]/40 bg-black/70 overflow-hidden shadow-[0_0_18px_-2px_rgba(255,215,0,0.5)] group-hover:shadow-[0_0_28px_-2px_rgba(255,215,0,0.95)] group-hover:border-[#ffd700] group-hover:scale-110 transition-all duration-300">
+                {g.image && (
+                  <img src={g.image} alt={g.name} loading="lazy" className="w-full h-full object-cover object-top" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              </div>
+              <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1 text-[8.5px] uppercase tracking-[2px] font-bold text-[#fde68a] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_8px_rgba(0,0,0,0.9)]">
+                {g.name}
+              </div>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
 /* ───────────── HERO ───────────── */
 function Hero({ kp, utc }: { kp: number; utc: Date }) {
   return (
@@ -253,39 +330,47 @@ function Hero({ kp, utc }: { kp: number; utc: Date }) {
         </span>
       </h1>
       <div className="text-center mt-2 text-[10px] uppercase tracking-[6px] text-white/45">
-        Pantheon · Frequency 46
+        Pantheon · Frequency 46 · The Twelve Return
       </div>
 
-      {/* Central stage */}
-      <div className="relative mt-6 grid lg:grid-cols-[1fr_auto_1fr] gap-6 items-center max-w-6xl mx-auto">
-        {/* Left flank — flare class bar */}
-        <div className="hidden lg:flex flex-col gap-2 order-1">
-          <div className="text-[10px] uppercase tracking-[3px] text-white/50">Flare Class</div>
-          <FlareClassBar current="M2.4" />
+      {/* Central stage: KP / Compass / CTAs */}
+      <div className="relative mt-8 grid lg:grid-cols-[260px_1fr_220px] gap-8 items-center max-w-6xl mx-auto">
+        {/* Left flank — KP gauge + flare bar */}
+        <div className="order-2 lg:order-1 flex flex-col gap-3">
+          <div className="rounded-xl border border-[#a020f0]/30 bg-black/45 backdrop-blur-md p-3">
+            <KpGauge kp={kp} />
+            <div className="mt-2 flex items-center justify-center gap-2">
+              <Flame className="w-3 h-3 text-[#ffd700]" />
+              <span className="text-[10px] uppercase tracking-[3px] text-white/60">Flare</span>
+              <span className="text-sm font-bold text-[#ffd700]">M2.4</span>
+              <span className="text-[9px] uppercase tracking-[2px] text-emerald-300 ml-1">Quiet</span>
+            </div>
+          </div>
+          <div className="hidden lg:block">
+            <div className="text-[10px] uppercase tracking-[3px] text-white/50 mb-2">Flare Class</div>
+            <FlareClassBar current="M2.4" />
+          </div>
         </div>
 
-        {/* Center — gauge + flare callout */}
-        <div className="order-2 relative">
-          <div className="absolute -inset-8 rounded-full bg-[#a020f0]/15 blur-3xl pointer-events-none" />
-          <KpGauge kp={kp} />
-          <div className="relative mt-3 text-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#ffd700]/40 bg-black/40">
-              <Flame className="w-3 h-3 text-[#ffd700]" />
-              <span className="text-[10px] uppercase tracking-[3px] text-white/60">Solar Flare</span>
-              <span className="text-sm font-bold text-[#ffd700]">M2.4</span>
-              <span className="text-[10px] uppercase tracking-[2px] text-emerald-300 ml-1">Quiet</span>
-            </div>
-            <p className="text-xs text-white/60 mt-3 max-w-md mx-auto leading-relaxed">
-              Geomagnetic conditions quiet. Aurora visibility elevated at high latitudes.
-            </p>
-          </div>
+        {/* Center — Pantheon compass */}
+        <div className="order-1 lg:order-2 relative">
+          <div className="absolute -inset-12 rounded-full bg-[#a020f0]/10 blur-3xl pointer-events-none" />
+          <PantheonCompass />
         </div>
 
         {/* Right flank — quick CTAs */}
         <div className="order-3 flex flex-col gap-2 items-stretch lg:items-end">
-          <Link to="/earth-pulse" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#a020f0]/40 bg-[#a020f0]/10 hover:bg-[#a020f0]/20 transition-colors">
-            <span className="text-[10px] uppercase tracking-[3px] text-[#c77dff]">Earth Pulse Live</span>
+          <Link to="/the-46" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#ffd700]/50 bg-[#ffd700]/10 hover:bg-[#ffd700]/20 transition-colors">
+            <span className="text-[10px] uppercase tracking-[3px] text-[#fde68a]">The 46 Codex</span>
+            <ChevronRight className="w-3.5 h-3.5 text-[#fde68a] group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+          <Link to="/gods" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#a020f0]/40 bg-[#a020f0]/10 hover:bg-[#a020f0]/20 transition-colors">
+            <span className="text-[10px] uppercase tracking-[3px] text-[#c77dff]">Enter Mythology</span>
             <ChevronRight className="w-3.5 h-3.5 text-[#c77dff] group-hover:translate-x-0.5 transition-transform" />
+          </Link>
+          <Link to="/earth-pulse" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-red-400/40 bg-red-500/10 hover:bg-red-500/20 transition-colors">
+            <span className="text-[10px] uppercase tracking-[3px] text-red-300">Earth Pulse Live</span>
+            <ChevronRight className="w-3.5 h-3.5 text-red-300 group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <Link to="/echo" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-cyan-400/40 bg-cyan-400/10 hover:bg-cyan-400/20 transition-colors">
             <span className="text-[10px] uppercase tracking-[3px] text-cyan-300">Open Echo AI</span>
@@ -788,6 +873,19 @@ export function TempleObservatoryPage() {
 
       <div className="relative z-10">
         <TopNav kp={kp} />
+        {/* Mobile realm strip */}
+        <nav className="lg:hidden flex gap-2 overflow-x-auto px-3 py-2 border-b border-[#a020f0]/20 bg-[#0a0a1f]/80 backdrop-blur-xl scrollbar-none">
+          {SIDE_ITEMS.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-[2px] text-white/80 hover:border-[#ffd700]/50 hover:text-[#fde68a] transition-colors"
+            >
+              <item.icon className={`w-3.5 h-3.5 ${item.tone}`} />
+              {item.label}
+            </Link>
+          ))}
+        </nav>
         <div className="flex">
           <Sidebar />
           <main className="flex-1 min-w-0">
