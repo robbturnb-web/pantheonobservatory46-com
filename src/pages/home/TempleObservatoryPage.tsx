@@ -5,6 +5,7 @@ import {
   Home, Eye, Mountain, Brain, Satellite, Folder, Bot, Settings,
   Sun, Volume2, Radio, Flame, Activity, AlertTriangle, ChevronRight,
   MapPin, Lock, Telescope, Sparkles, Zap, Waves,
+  Shield, Skull, Plane, Mountain as MountainIcon, Users, Radio as RadioIcon, Globe,
 } from 'lucide-react';
 
 import heroBg from '@/assets/dashboard-hero.jpg';
@@ -117,27 +118,35 @@ function TopNav({ kp }: { kp: number }) {
 /* ───────────── SIDEBAR ───────────── */
 interface SideItem { to: string; label: string; icon: typeof Home; tone: string; glow: string }
 const SIDE_ITEMS: SideItem[] = [
-  { to: '/',              label: 'Home',          icon: Home,      tone: 'text-white',           glow: 'shadow-[0_0_16px_-2px_rgba(255,255,255,0.5)]' },
-  { to: '/uap',           label: 'Disclosure',    icon: Eye,       tone: 'text-emerald-300',     glow: 'shadow-[0_0_16px_-2px_rgba(16,185,129,0.7)]' },
-  { to: '/gods',          label: 'Mythology',     icon: Mountain,  tone: 'text-[#ffd700]',       glow: 'shadow-[0_0_16px_-2px_rgba(255,215,0,0.7)]' },
-  { to: '/consciousness', label: 'Conscious',     icon: Brain,     tone: 'text-emerald-300',     glow: 'shadow-[0_0_16px_-2px_rgba(52,211,153,0.7)]' },
-  { to: '/galaxy',        label: 'Observatory',   icon: Satellite, tone: 'text-[#c77dff]',       glow: 'shadow-[0_0_16px_-2px_rgba(160,32,240,0.7)]' },
-  { to: '/the-46',        label: 'Archives',      icon: Folder,    tone: 'text-amber-300',       glow: 'shadow-[0_0_16px_-2px_rgba(251,191,36,0.7)]' },
-  { to: '/echo',          label: 'Echo AI',       icon: Bot,       tone: 'text-cyan-300',        glow: 'shadow-[0_0_16px_-2px_rgba(34,211,238,0.7)]' },
-  { to: '/profile',       label: 'Settings',      icon: Settings,  tone: 'text-white/70',        glow: '' },
+  { to: '/',                label: 'Home',          icon: Home,         tone: 'text-white',         glow: 'shadow-[0_0_16px_-2px_rgba(255,255,255,0.5)]' },
+  { to: '/the-46',          label: 'The 46',        icon: Folder,       tone: 'text-amber-300',     glow: 'shadow-[0_0_16px_-2px_rgba(251,191,36,0.7)]' },
+  { to: '/uap',             label: 'Disclosure',    icon: Eye,          tone: 'text-emerald-300',   glow: 'shadow-[0_0_16px_-2px_rgba(16,185,129,0.7)]' },
+  { to: '/uap',             label: 'UAP Cases',     icon: Plane,        tone: 'text-cyan-300',      glow: '' },
+  { to: '/whistleblowers',  label: 'Whistleblw',    icon: Shield,       tone: 'text-emerald-300',   glow: '' },
+  { to: '/whistleblowers',  label: 'Crash Retr',    icon: AlertTriangle,tone: 'text-red-400',       glow: '' },
+  { to: '/missing',         label: 'Missing',       icon: Users,        tone: 'text-amber-300',     glow: '' },
+  { to: '/whistleblowers',  label: 'Deaths',        icon: Skull,        tone: 'text-red-400',       glow: '' },
+  { to: '/uap',             label: 'Bases',         icon: MountainIcon, tone: 'text-stone-300',     glow: '' },
+  { to: '/gods',            label: 'Mythology',     icon: Mountain,     tone: 'text-[#ffd700]',     glow: 'shadow-[0_0_16px_-2px_rgba(255,215,0,0.7)]' },
+  { to: '/consciousness',   label: 'Conscious',     icon: Brain,        tone: 'text-indigo-300',    glow: '' },
+  { to: '/consciousness',   label: 'Frequency',     icon: RadioIcon,    tone: 'text-cyan-300',      glow: '' },
+  { to: '/galaxy',          label: 'Observatory',   icon: Satellite,    tone: 'text-[#c77dff]',     glow: 'shadow-[0_0_16px_-2px_rgba(160,32,240,0.7)]' },
+  { to: '/galaxy',          label: 'Earth Pulse',   icon: Globe,        tone: 'text-cyan-300',      glow: '' },
+  { to: '/echo',            label: 'Echo AI',       icon: Bot,          tone: 'text-cyan-300',      glow: 'shadow-[0_0_16px_-2px_rgba(34,211,238,0.7)]' },
+  { to: '/profile',         label: 'Settings',      icon: Settings,     tone: 'text-white/70',      glow: '' },
 ];
 
 function Sidebar() {
   const active = '/';
   return (
-    <aside className="hidden lg:flex shrink-0 w-[84px] flex-col items-center py-5 gap-1 border-r border-[#a020f0]/20 bg-[#0a0a1f]/85 backdrop-blur-xl">
+    <aside className="hidden lg:flex shrink-0 w-[84px] flex-col items-center py-4 gap-0.5 border-r border-[#a020f0]/20 bg-[#0a0a1f]/85 backdrop-blur-xl max-h-screen sticky top-14 overflow-y-auto scrollbar-thin">
       {SIDE_ITEMS.map((item) => {
-        const isActive = item.to === active;
+        const isActive = item.to === active && item.label === 'Home';
         return (
           <Link
             key={item.label}
             to={item.to}
-            className={`group relative w-16 py-2.5 flex flex-col items-center gap-1 rounded-lg transition-colors ${
+            className={`group relative w-16 py-2 flex flex-col items-center gap-1 rounded-lg transition-colors ${
               isActive ? 'bg-white/5' : 'hover:bg-white/5'
             }`}
           >
@@ -147,7 +156,7 @@ function Sidebar() {
             <item.icon
               className={`w-5 h-5 ${item.tone} ${isActive ? item.glow : ''} group-hover:scale-110 transition-transform`}
             />
-            <span className="text-[8.5px] uppercase tracking-[1.5px] text-white/55 group-hover:text-white/90">
+            <span className="text-[8.5px] uppercase tracking-[1.2px] text-white/55 group-hover:text-white/90 text-center leading-tight">
               {item.label}
             </span>
           </Link>
