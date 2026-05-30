@@ -2,6 +2,12 @@ import type { EvidenceGrade } from '../types';
 import type { Source } from '../components/SourceList';
 import type { VideoData } from '../components/VideoEmbed';
 
+import davidGruschImg from '@/assets/whistleblowers/david-grusch.jpg';
+import lueElizondoImg from '@/assets/whistleblowers/lue-elizondo.png';
+import stevenGreerImg from '@/assets/whistleblowers/steven-greer.jpg';
+import philSchneiderImg from '@/assets/whistleblowers/phil-schneider.png';
+import garyMckinnonImg from '@/assets/whistleblowers/gary-mckinnon.jpg';
+
 export interface Whistleblower {
   id: string;
   name: string;
@@ -9,6 +15,8 @@ export interface Whistleblower {
   status: 'alive' | 'deceased' | 'murdered';
   grade: EvidenceGrade;
   photo: string;
+  /** Real public-domain / Wikipedia portrait. Absent when no verified photo is available. */
+  image?: string;
   summary: string;
   keyClaims: string[];
   timeline: { year: string; event: string }[];
@@ -82,6 +90,7 @@ export const whistleblowers: Whistleblower[] = [
       { platform: 'youtube', id: 'KQ7Dw-739VY', title: 'Congressional UAP Hearing (Full) — C-SPAN' },
     ],
     accentColor: '#10b981',
+    image: davidGruschImg,
   },
   {
     id: 'lue-elizondo',
@@ -113,6 +122,7 @@ export const whistleblowers: Whistleblower[] = [
       { platform: 'youtube', id: 'ZBtMbBPzqHY', title: '60 Minutes — UFOs: Lue Elizondo Interview' },
     ],
     accentColor: '#8b5cf6',
+    image: lueElizondoImg,
   },
   {
     id: 'steven-greer',
@@ -144,6 +154,7 @@ export const whistleblowers: Whistleblower[] = [
       { platform: 'youtube', id: '4DrcG7VGgQU', title: 'Disclosure Project — National Press Club (2001)' },
     ],
     accentColor: '#f59e0b',
+    image: stevenGreerImg,
   },
   {
     id: 'phil-schneider',
@@ -173,6 +184,7 @@ export const whistleblowers: Whistleblower[] = [
       { platform: 'youtube', id: 'xedmfAgx8eg', title: 'Phil Schneider — Last Lecture Before Death' },
     ],
     accentColor: '#ef4444',
+    image: philSchneiderImg,
   },
   {
     id: 'gary-mckinnon',
@@ -202,6 +214,7 @@ export const whistleblowers: Whistleblower[] = [
     ],
     videos: [],
     accentColor: '#06b6d4',
+    image: garyMckinnonImg,
   },
   {
     id: 'mark-mccandlish',

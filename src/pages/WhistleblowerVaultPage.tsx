@@ -105,13 +105,26 @@ export function WhistleblowerVaultPage() {
                     className="w-full text-left p-6"
                   >
                     <div className="flex items-start gap-4">
-                      <div
-                        className="text-4xl w-14 h-14 flex items-center justify-center rounded-lg shrink-0"
-                        style={{ background: `${w.accentColor}20` }}
-                      >
-                        {w.photo}
-                      </div>
+                      {w.image ? (
+                        <div
+                          className="relative w-16 h-20 rounded-md overflow-hidden shrink-0 ring-1"
+                          style={{ boxShadow: `0 0 18px -4px ${w.accentColor}80`, ['--tw-ring-color' as never]: `${w.accentColor}66` }}
+                        >
+                          <img src={w.image} alt={w.name} loading="lazy" className="w-full h-full object-cover object-top" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                          <div className="absolute bottom-0.5 left-0 right-0 text-center text-[7px] uppercase tracking-[1.5px] text-white/80 font-mono">CLASSIFIED</div>
+                        </div>
+                      ) : (
+                        <div
+                          className="relative w-16 h-20 rounded-md shrink-0 flex flex-col items-center justify-center border border-dashed"
+                          style={{ background: `${w.accentColor}10`, borderColor: `${w.accentColor}55` }}
+                        >
+                          <span className="text-3xl">{w.photo}</span>
+                          <span className="text-[7px] uppercase tracking-[1.5px] text-white/50 font-mono mt-0.5">NO PHOTO</span>
+                        </div>
+                      )}
                       <div className="flex-1 min-w-0">
+
                         <div className="flex items-center gap-2 flex-wrap mb-1">
                           <h3 className="text-lg font-bold text-foreground">{w.name}</h3>
                           <EvidenceBadge grade={w.grade} />
