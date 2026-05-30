@@ -134,7 +134,7 @@ export const documentaries: Documentary[] = [
     topics: ['CE-5', 'Consciousness', 'Contact'],
     synopsis:
       'Greer\'s framework for "consciousness-assisted contact" (CE-5) — meditation-induced craft sightings, witness protocols, and the case for non-hostile contact.',
-    trailerYouTubeId: 'I3bWyhE6Wfg',
+    trailerYouTubeId: 'qLW9XFikYNA',
     officialUrl: 'https://siriusdisclosure.com',
   },
 ];
