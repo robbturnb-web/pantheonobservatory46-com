@@ -20,6 +20,7 @@ import portalMythology from '@/assets/temple/portal-mythology.jpg';
 import portalConsciousness from '@/assets/temple/portal-consciousness.jpg';
 import portalObservatory from '@/assets/temple/portal-observatory.jpg';
 import portalEcho from '@/assets/temple/portal-echo.jpg';
+import sigil46 from '@/assets/temple/sigil-46.png';
 
 import { gods } from '@/data/gods';
 
