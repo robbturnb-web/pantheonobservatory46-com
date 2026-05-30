@@ -54,9 +54,10 @@ export const documentaries: Documentary[] = [
     topics: ['Skinwalker Ranch', 'Paranormal', 'DIA'],
     synopsis:
       'The full classified-era story of Skinwalker Ranch, the AAWSAP/BAASS program, and physicist Eric Davis. Built around interviews with the intelligence-funded scientists who lived through the high-strangeness.',
-    trailerYouTubeId: 'cWpFw3JuOEM',
+    watchUrl: 'https://www.amazon.com/Hunt-Skinwalker-George-Knapp/dp/B07HJBJTV5',
     officialUrl: 'https://www.huntfortheskinwalker.com',
   },
+
   {
     id: 'bob-lazar-area-51',
     title: 'Bob Lazar: Area 51 & Flying Saucers',
