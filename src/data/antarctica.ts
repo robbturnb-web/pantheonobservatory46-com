@@ -1,4 +1,13 @@
 import type { DossierEntry } from '@/components/dossier/types';
+import highjumpImg from '@/assets/antarctica-highjump.jpg';
+import byrd_diaryImg from '@/assets/antarctica-byrd-diary.jpg';
+import lake_vostokImg from '@/assets/antarctica-lake-vostok.jpg';
+import antarctic_pyramidsImg from '@/assets/antarctica-antarctic-pyramids.jpg';
+import nazi_base_211Img from '@/assets/antarctica-nazi-base-211.jpg';
+import ice_shelf_anomalyImg from '@/assets/antarctica-ice-shelf-anomaly.jpg';
+import kerry_visitImg from '@/assets/antarctica-kerry-visit.jpg';
+import rodney_marksImg from '@/assets/antarctica-rodney-marks.jpg';
+import wilkes_pyramidImg from '@/assets/antarctica-wilkes-pyramid.jpg';
 
 /**
  * Antarctica Files — ice-station expedition log
@@ -15,6 +24,7 @@ import type { DossierEntry } from '@/components/dossier/types';
 export const antarcticaEntries: DossierEntry[] = [
   {
     id: 'highjump',
+    heroImage: highjumpImg,
     title: 'Operation Highjump',
     subtitle: 'US Navy expedition · 1946–1947',
     category: 'Operation',
@@ -53,6 +63,7 @@ export const antarcticaEntries: DossierEntry[] = [
   },
   {
     id: 'byrd-diary',
+    heroImage: byrd_diaryImg,
     title: "Admiral Byrd's Secret Diary",
     subtitle: 'Alleged 1947 inner-Earth flight log',
     category: 'Document',
@@ -78,6 +89,7 @@ export const antarcticaEntries: DossierEntry[] = [
   },
   {
     id: 'lake-vostok',
+    heroImage: lake_vostokImg,
     title: 'Lake Vostok',
     subtitle: 'Subglacial lake sealed for 15+ million years',
     category: 'Site',
@@ -115,6 +127,7 @@ export const antarcticaEntries: DossierEntry[] = [
   },
   {
     id: 'antarctic-pyramids',
+    heroImage: antarctic_pyramidsImg,
     title: 'The "Antarctic Pyramids"',
     subtitle: 'Pyramid-shaped peaks in the Ellsworth Mountains',
     category: 'Anomaly',
@@ -144,6 +157,7 @@ export const antarcticaEntries: DossierEntry[] = [
   },
   {
     id: 'nazi-base-211',
+    heroImage: nazi_base_211Img,
     title: 'Base 211 / New Swabia',
     subtitle: 'German wartime expedition & post-war legend',
     category: 'Operation',
@@ -174,6 +188,7 @@ export const antarcticaEntries: DossierEntry[] = [
   },
   {
     id: 'ice-shelf-anomaly',
+    heroImage: ice_shelf_anomalyImg,
     title: 'Larsen Ice-Shelf Anomalies',
     subtitle: 'A-68 calving & subsequent glacial behavior',
     category: 'Anomaly',
@@ -202,6 +217,7 @@ export const antarcticaEntries: DossierEntry[] = [
   },
   {
     id: 'kerry-visit',
+    heroImage: kerry_visitImg,
     title: 'John Kerry\'s 2016 Visit',
     subtitle: 'Sitting Secretary of State visits the South Pole',
     category: 'Event',
@@ -225,6 +241,7 @@ export const antarcticaEntries: DossierEntry[] = [
   },
   {
     id: 'rodney-marks',
+    heroImage: rodney_marksImg,
     title: 'Death of Rodney Marks',
     subtitle: 'South Pole astrophysicist · methanol poisoning',
     category: 'Casefile',
@@ -314,6 +331,7 @@ export const antarcticaEntries: DossierEntry[] = [
   },
   {
     id: 'wilkes-pyramid',
+    heroImage: wilkes_pyramidImg,
     title: 'The "Antarctic Pyramid" Claim',
     subtitle: 'Wilkes Land peaks photographed 2013 onward',
     category: 'Anomaly',
