@@ -1,4 +1,14 @@
 import type { DossierEntry } from '@/components/dossier/types';
+import gobekliImg from '@/assets/stone-gobekli-tepe.jpg';
+import pumaImg from '@/assets/stone-puma-punku.jpg';
+import easterImg from '@/assets/stone-easter-island.jpg';
+import gunungImg from '@/assets/stone-gunung-padang.jpg';
+import olmecImg from '@/assets/stone-olmec-heads.jpg';
+import sphinxImg from '@/assets/stone-sphinx-erosion.jpg';
+import yonaguniImg from '@/assets/stone-yonaguni.jpg';
+import baalbekImg from '@/assets/stone-baalbek.jpg';
+import karahanImg from '@/assets/stone-karahan-tepe.jpg';
+import sacsayImg from '@/assets/stone-sacsayhuaman.jpg';
 
 /**
  * Stone Faces — Field-archaeology dig site dossiers.
@@ -8,6 +18,7 @@ import type { DossierEntry } from '@/components/dossier/types';
 export const stoneFacesEntries: DossierEntry[] = [
   {
     id: 'gobekli-tepe',
+    heroImage: gobekliImg,
     title: 'Göbekli Tepe',
     subtitle: 'Şanlıurfa, Turkey · ~9500 BCE',
     category: 'Temple',
@@ -45,6 +56,7 @@ export const stoneFacesEntries: DossierEntry[] = [
   },
   {
     id: 'puma-punku',
+    heroImage: pumaImg,
     title: 'Puma Punku',
     subtitle: 'Tiwanaku, Bolivia · ~500 CE (disputed)',
     category: 'Megalith',
@@ -80,6 +92,7 @@ export const stoneFacesEntries: DossierEntry[] = [
   },
   {
     id: 'easter-island-moai',
+    heroImage: easterImg,
     title: 'Rapa Nui Moai',
     subtitle: 'Easter Island · ~1100-1500 CE',
     category: 'Megalith',
@@ -111,6 +124,7 @@ export const stoneFacesEntries: DossierEntry[] = [
   },
   {
     id: 'gunung-padang',
+    heroImage: gunungImg,
     title: 'Gunung Padang',
     subtitle: 'West Java, Indonesia · disputed dating',
     category: 'Pyramid',
@@ -145,6 +159,7 @@ export const stoneFacesEntries: DossierEntry[] = [
   },
   {
     id: 'olmec-heads',
+    heroImage: olmecImg,
     title: 'Olmec Colossal Heads',
     subtitle: 'Veracruz / Tabasco · ~1500-400 BCE',
     category: 'Statue',
@@ -175,6 +190,7 @@ export const stoneFacesEntries: DossierEntry[] = [
   },
   {
     id: 'sphinx-water-erosion',
+    heroImage: sphinxImg,
     title: 'Great Sphinx — Water Erosion',
     subtitle: 'Giza Plateau · disputed dating',
     category: 'Megalith',
@@ -208,6 +224,7 @@ export const stoneFacesEntries: DossierEntry[] = [
   },
   {
     id: 'yonaguni-monument',
+    heroImage: yonaguniImg,
     title: 'Yonaguni Monument',
     subtitle: 'Ryukyu Islands, Japan · ~10,000 BCE if man-made',
     category: 'Submerged',
@@ -238,6 +255,7 @@ export const stoneFacesEntries: DossierEntry[] = [
   },
   {
     id: 'baalbek-trilithon',
+    heroImage: baalbekImg,
     title: 'Baalbek Trilithon',
     subtitle: 'Bekaa Valley, Lebanon · Roman + pre-Roman',
     category: 'Megalith',
@@ -269,6 +287,7 @@ export const stoneFacesEntries: DossierEntry[] = [
   },
   {
     id: 'gobeklitepe-karahan',
+    heroImage: karahanImg,
     title: 'Karahan Tepe',
     subtitle: 'Şanlıurfa, Turkey · ~9000-7000 BCE',
     category: 'Temple',
@@ -300,6 +319,7 @@ export const stoneFacesEntries: DossierEntry[] = [
   },
   {
     id: 'sacsayhuaman',
+    heroImage: sacsayImg,
     title: 'Sacsayhuamán',
     subtitle: 'Cusco, Peru · ~1100-1500 CE',
     category: 'Megalith',

@@ -1,4 +1,16 @@
 import type { DossierEntry } from '@/components/dossier/types';
+import sumerImg from '@/assets/glyph-sumerian-cuneiform.jpg';
+import egyptImg from '@/assets/glyph-egyptian-hieroglyphs.jpg';
+import voynichImg from '@/assets/glyph-voynich.jpg';
+import linearaImg from '@/assets/glyph-linear-a.jpg';
+import indusImg from '@/assets/glyph-indus-script.jpg';
+import rongoImg from '@/assets/glyph-rongorongo.jpg';
+import wandjinaImg from '@/assets/glyph-wandjina.jpg';
+import dogonImg from '@/assets/glyph-dogon-sirius.jpg';
+import nazcaImg from '@/assets/glyph-nazca-lines.jpg';
+import flowerImg from '@/assets/glyph-flower-of-life.jpg';
+import cropImg from '@/assets/glyph-crop-circles.jpg';
+import phaistosImg from '@/assets/glyph-phaistos-disc.jpg';
 
 /**
  * Glyphs Codex — Comparative undeciphered & sacred-script archive.
@@ -8,6 +20,7 @@ import type { DossierEntry } from '@/components/dossier/types';
 export const glyphsEntries: DossierEntry[] = [
   {
     id: 'sumerian-cuneiform',
+    heroImage: sumerImg,
     title: 'Sumerian Cuneiform',
     subtitle: 'Uruk · ~3200 BCE',
     category: 'Script',
@@ -45,6 +58,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'egyptian-hieroglyphs',
+    heroImage: egyptImg,
     title: 'Egyptian Hieroglyphs',
     subtitle: 'Nile Valley · ~3200 BCE',
     category: 'Script',
@@ -78,6 +92,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'voynich-manuscript',
+    heroImage: voynichImg,
     title: 'Voynich Manuscript',
     subtitle: 'Vellum codex · early 1400s',
     category: 'Undeciphered',
@@ -114,6 +129,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'linear-a',
+    heroImage: linearaImg,
     title: 'Linear A',
     subtitle: 'Minoan Crete · ~1800-1450 BCE',
     category: 'Undeciphered',
@@ -145,6 +161,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'indus-script',
+    heroImage: indusImg,
     title: 'Indus Script',
     subtitle: 'Harappan civilization · ~2600-1900 BCE',
     category: 'Undeciphered',
@@ -177,6 +194,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'rongorongo',
+    heroImage: rongoImg,
     title: 'Rongorongo',
     subtitle: 'Rapa Nui · pre-1864',
     category: 'Undeciphered',
@@ -208,6 +226,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'wandjina',
+    heroImage: wandjinaImg,
     title: 'Wandjina Rock Art',
     subtitle: 'Kimberley, Australia · ~4000 BCE',
     category: 'Pictograph',
@@ -238,6 +257,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'dogon-sirius',
+    heroImage: dogonImg,
     title: 'Dogon Sirius Knowledge',
     subtitle: 'Mali, West Africa · pre-1500 CE',
     category: 'Cosmology',
@@ -270,6 +290,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'nazca-lines',
+    heroImage: nazcaImg,
     title: 'Nazca Lines',
     subtitle: 'Peruvian coastal desert · 500 BCE – 500 CE',
     category: 'Geoglyph',
@@ -304,6 +325,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'flower-of-life',
+    heroImage: flowerImg,
     title: 'Flower of Life',
     subtitle: 'Cross-cultural · attested ~600 BCE',
     category: 'Sacred Geometry',
@@ -333,6 +355,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'crop-circles',
+    heroImage: cropImg,
     title: 'Crop Circle Glyphs',
     subtitle: 'Modern phenomenon · 1976 – present',
     category: 'Modern',
@@ -365,6 +388,7 @@ export const glyphsEntries: DossierEntry[] = [
   },
   {
     id: 'phaistos-disc',
+    heroImage: phaistosImg,
     title: 'Phaistos Disc',
     subtitle: 'Minoan Crete · ~1700 BCE',
     category: 'Undeciphered',
