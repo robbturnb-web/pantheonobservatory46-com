@@ -1,107 +1,89 @@
+## Goal
 
-# Pantheon Frequency 46 — Full App Audit & Enhancement Plan
+Every card in every grid gets its own cinematic, realm-tinted hero image. No two-grade placeholders, no shared stock — each card gets a custom prompt tied to its actual content. Cards become visual first, readable second.
 
-I walked the whole app: 40+ routes, Temple Observatory home with its own top-nav + 84px sidebar, a separate mega-menu `Navbar` on every other page, The 46 page (massive — 5 sections stacked), Echoverse, Echo AI, Galaxy/Telescopes, Pyramids, Atlantis, Antarctica, etc. There's incredible content, but discoverability, navigation consistency, and mobile UX are the weak links.
+## Realm tint mapping (locked palette per dataset)
 
-Below is what I'd enhance, organized by impact. I won't touch anything until you pick what to ship.
+Each dataset gets a fixed accent baked into every prompt so the section reads as one realm at a glance.
 
----
+- Antarctica → icy cyan + obsidian, aurora, ice-shelf cold
+- Atlantis → emerald + gold, deep ocean, submerged ruins
+- Crash Retrieval → crimson + black, military hangar, redacted-document energy
+- Underground Bases → crimson + amber, tunnel lighting, subterranean industrial
+- Entity Encounters → indigo + violet, dreamlike, eerie close-range
+- Pyramids → amber + gold, desert night, monolithic sacred geometry
+- Stone Faces → bronze + violet, weathered monumental carvings
+- Glyphs → indigo + cyan, glowing engraved symbols on stone/metal
+- Missing Scientists → desaturated noir + crimson, surveillance / archival
+- Whistleblowers (gaps only) → emerald + obsidian portrait energy, matches existing set
+- The 46 (vault slots) → royal violet + obsidian, classified-folder + sigil energy. Pending-disclosure slots get sealed/redacted look; unlocked slots get the actual subject matter.
 
-## 1. Navigation — biggest issue, highest ROI
+All prompts share the Pantheon base: obsidian backgrounds, cinematic photoreal, dramatic volumetric lighting, ultra-detailed, no on-image text.
 
-**Problem:** Two completely different nav systems.
-- Home (`/`) uses a custom Temple Observatory top bar + 84px icon sidebar (desktop only).
-- Every other route uses `Navbar.tsx` with 4-category mega-menu.
-- Sidebar links are inconsistent (`Crash Retr` → `/whistleblowers` instead of `/crash-retrieval`, `Bases` → `/uap` instead of `/underground`, `Frequency` → `/consciousness` instead of `/frequencies`, `Earth Pulse` → `/galaxy` instead of `/earth-pulse`).
-- 40 routes, but mobile users only get the mega-menu — sidebar is `hidden lg:`.
+## Scope (final card counts to image)
 
-**Fix:**
-- Unify on one nav: keep the Temple top-bar as global header on every page (replaces `Navbar`), keep the sidebar persistent on `lg:+`, drop the mega-menu duplication.
-- Fix every broken sidebar link to point to its real route.
-- Add a slide-out drawer version of the sidebar for mobile/tablet (currently nothing — small viewports have to dig through accordion).
-- Add a ⌘K command palette ("Search the Pantheon") indexing every route + key entities (gods, UAP cases, experts, the 46 slots). One keystroke jumps anywhere.
+Pulled live from the data files:
 
-## 2. Content architecture — group the 40 pages into hubs
+- Antarctica: 11
+- Atlantis: 12
+- Crash Retrieval: 9
+- Underground Bases: 9
+- Entity Encounters: 10
+- Pyramids: 6
+- Stone Faces: ~12 (verify on read)
+- Glyphs: ~8 (verify on read)
+- Missing Scientists: ~15 high-profile entries (cap the list — 699-line file likely has more than warrant a unique image; rest get a shared category fallback)
+- Whistleblowers gaps: ~4 missing portraits
+- The 46: 50
 
-Right now everything is a sibling route. Suggested hubs (URL slugs unchanged, just a hub index page each):
+Estimated total: ~146 new images. Generated with the standard tier for cinematic detail.
 
-- **`/disclosure`** hub → UAP, AARO, Crash Retrieval, Whistleblowers, Missing, Deaths, The 46, Bases, Documentaries
-- **`/mythology`** hub → Gods, Shadow Pantheon, Atlantis, Pyramids, Glyphs, Stone Faces, Antarctica
-- **`/observatory`** hub → Galaxy, Telescopes, Earth Pulse, Orb Report, Signals, CERN, Elements
-- **`/consciousness`** hub → Consciousness, Frequencies, Origin Chamber, Species, Encounters, Extinct, Federation
-- **`/forge`** hub → Echo AI, Echoverse, Builders, Experts, Profile
+## Data layer pattern (consistent across every dataset)
 
-Each hub = cinematic landing page with cards previewing each sub-page (count, last update, accent color). Solves the "where do I find X" problem and gives every realm a proper front door.
+1. Add `heroImage?: string` to the entry type (or reuse `image` where it already exists, like Whistleblowers).
+2. Top-of-file ES6 imports for each new image: `import slugImg from '@/assets/<dataset>-<slug>.jpg'`.
+3. Attach `heroImage: slugImg` on each entry.
+4. For The 46, store under `coverImage` on `VaultSlot` so vault-specific UI can decide pending vs unlocked treatment.
 
-## 3. The 46 page — split it
+## UI layer pattern
 
-It's currently ~280 lines stacking: header → stats → letter → 5 letter screenshots → 46-slot grid → SkepticSpotlight → TikTokVoicesSection → LiveDropsTicker → AudioSoundscapeAdmin → "Already Public" → footer modals. On mobile (384px) this is a 6000px scroll.
+For each list/grid page (`AntarcticaPage`, `AtlantisPage`, `CrashRetrievalPage`, `UndergroundBasesPage`, `EntityEncountersPage`, `PyramidExplorerPage`, `StoneFacesPage`, `GlyphsPage`, `MissingPage`, `The46Page`, `WhistleblowerVaultPage`):
 
-**Fix:** Tabs at top — `Vault` · `Voices` · `Live Drops` · `Already Public` · `Soundscape`. Default tab `Vault`. Hash routing (`/the-46#voices`) so links survive.
+- Render a 16:9 hero header above the existing card body, identical pattern to the UAP card I just shipped:
+  - `<img loading="lazy">` absolute-filled, `object-cover`, `transition-transform group-hover:scale-105`
+  - Bottom-to-top gradient `from-background via-background/60 to-transparent` so titles overlap cleanly
+  - Confidence / status badge anchored bottom-left over the gradient
+  - Whole image is the same click target as the card (open modal / expand)
+- Where cards already use the shared `DossierCard` component (Antarctica, Atlantis, etc.), extend `DossierCard` once with an optional `heroImage` prop — single change cascades to every consumer.
+- Vault slots get a slightly different treatment: pending-disclosure slots use a sealed/blurred cover with the 46 sigil watermark; unlocked slots show the full image.
 
-## 4. Mobile polish (you're on 384×674 right now)
+## Execution waves (so we can ship visibly, not all-or-nothing)
 
-- Temple Observatory home has no sidebar on mobile → no quick nav at all. Add the drawer above.
-- Hero KP gauge is 280px wide — clips on 384 viewports with padding. Make it fluid.
-- Top bar right cluster (Solar pill + Kp pill + Feed + Volume + avatar) overflows on small screens. Collapse non-essentials into a single ⋯ menu under `sm:`.
-- The 46 vault grid uses `grid-cols-4` on mobile — slots become tiny tap targets. Drop to `grid-cols-3` under `sm:`.
+Wave 1 — Antarctica + Atlantis (23 images). Highest user-priority sections, both already flagged for the deepest layout work. Extend `DossierCard` here.
 
-## 5. Audio system — finish the wiring
+Wave 2 — Crash Retrieval + Underground Bases + Entity Encounters + Pyramids (34 images). All share the dossier pattern, no new component work.
 
-- `AudioPlayer` (global, in Layout) still reads from local playlists, not the new `audio_tracks` registry.
-- `AudioSoundscapeAdmin` is currently exposed to all users on `/the-46`. Gate behind `has_role('admin')` via `use-user-role`.
-- Wire `use-remote-playlists` into `AudioPlayer` so generated tracks appear automatically.
+Wave 3 — Stone Faces + Glyphs + Missing Scientists + Whistleblowers gaps (~39 images). Each page gets the same hero-header pattern; Missing Scientists capped to ~15 unique heroes plus a shared fallback.
 
-## 6. Echoverse polish
+Wave 4 — The 46 vault (50 images). Two visual treatments (pending vs unlocked). `VaultSlotCard` and `VaultSlotModal` updated to render the cover.
 
-- Header avatar is just initial letter — pull from `profiles.avatar_url`.
-- No member count / online indicator per channel.
-- No unread badge on `ChannelList`.
-- Mobile uses a `<select>` for channels — works but feels off-brand. A horizontal scrolling chip row matches the cosmic aesthetic.
+Each wave is fully self-contained: types updated, images generated in parallel, page rendered, verified before moving on.
 
-## 7. Echo AI surfacing
+## Verification per wave
 
-Echo is a major feature buried at `/echo`. Add a floating Echo Orb (component already exists at `src/components/echo/EchoOrb.tsx`) globally in Layout. Tap to open a slide-over chat — talk to Echo from anywhere.
+- Read final file to confirm imports + heroImage fields landed cleanly.
+- Visit the page in preview, screenshot a card, zoom in to confirm image renders, gradient sits right, badge contrast holds, hover scale fires.
+- Fix any prompt that came back generic (e.g. wrong subject) before moving to the next wave.
 
-## 8. Performance + a11y quick wins
+## Technical notes
 
-- Layout always mounts `BackgroundManager` + `CosmicCursorTrail` + `CometTrails` + `SpaceshipFlyby` + Three.js starfield. On mobile that's heavy. Disable cursor trail under `md:` and respect `prefers-reduced-motion` across all framer-motion animations.
-- Many decorative icons missing `aria-hidden`; many interactive `<div>` cards should be `<button>` for keyboard nav.
-- Add skip-to-content link.
+- All images saved to `src/assets/<dataset>-<slug>.jpg`, 1280×720, standard quality tier.
+- Realm tint enforced in every prompt string, not via CSS overlay — the image itself carries the color identity.
+- No design-token violations: badges and gradients continue to use semantic tokens (`bg-background`, `text-realm-*`, `text-signal-online`), never raw hex in components.
+- `DossierCard` change is additive — `heroImage` is optional, so any dossier dataset that doesn't get a hero (yet) continues to render the existing text-only layout.
 
-## 9. SEO / sharing
+## Out of scope this pass
 
-- Most lazy-loaded pages don't render `SEO` component → no per-page title/description. Add `SEO` to every page (UAP, Gods, Antarctica, Atlantis, Echoverse, etc.).
-- Add OpenGraph image per hub.
-
-## 10. Small organizational fixes
-
-- `/the-46` and `/video-vault` both render `The46Page` — pick one canonical, redirect the other.
-- `PlaceholderPages.tsx` exists but isn't routed — confirm or delete.
-- `StyleGuidePage` is publicly routed at `/style-guide` — gate behind admin or move to `/admin/style-guide`.
-
----
-
-## Suggested execution order
-
-```text
-Phase 1 (high impact, ~1 build)
-  - Unify nav: Temple top-bar global + mobile drawer + fixed sidebar links
-  - Tab-split The 46 page
-  - Gate AudioSoundscapeAdmin behind admin role
-  - Mobile hero/grid fixes
-
-Phase 2
-  - Hub landing pages (5 hubs)
-  - ⌘K command palette
-  - Floating Echo Orb global
-
-Phase 3
-  - Wire AudioPlayer → audio_tracks registry
-  - Echoverse polish (avatars, unread, mobile chips)
-  - SEO per page + a11y pass + reduced-motion
-```
-
----
-
-**Which phase do you want me to build first? Or pick specific items à la carte and I'll bundle them.**
+- Animating the hero (parallax, video loops) — static images first; we can promote standout cards to video later.
+- Regenerating the existing UAP set or the existing Whistleblower portraits — those stay.
+- Editing copy, sources, or video lists on any card — visuals only.

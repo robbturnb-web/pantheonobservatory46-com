@@ -1,4 +1,15 @@
 import type { DossierEntry } from '@/components/dossier/types';
+import plato_accountImg from '@/assets/atlantis-plato-account.jpg';
+import bimini_roadImg from '@/assets/atlantis-bimini-road.jpg';
+import yonaguniImg from '@/assets/atlantis-yonaguni.jpg';
+import cuban_anomalyImg from '@/assets/atlantis-cuban-anomaly.jpg';
+import azores_hypothesisImg from '@/assets/atlantis-azores-hypothesis.jpg';
+import eye_of_saharaImg from '@/assets/atlantis-eye-of-sahara.jpg';
+import santoriniImg from '@/assets/atlantis-santorini.jpg';
+import edgar_cayceImg from '@/assets/atlantis-edgar-cayce.jpg';
+import younger_dryasImg from '@/assets/atlantis-younger-dryas.jpg';
+import gobekli_tepeImg from '@/assets/atlantis-gobekli-tepe.jpg';
+import azores_pyramidImg from '@/assets/atlantis-azores-pyramid.jpg';
 
 /**
  * Atlantis — Submerged ruins / lost civilization dossier
@@ -10,6 +21,7 @@ import type { DossierEntry } from '@/components/dossier/types';
 export const atlantisEntries: DossierEntry[] = [
   {
     id: 'plato-account',
+    heroImage: plato_accountImg,
     title: "Plato's Original Account",
     subtitle: 'Timaeus & Critias · c. 360 BCE',
     category: 'Primary Source',
@@ -45,6 +57,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'bimini-road',
+    heroImage: bimini_roadImg,
     title: 'The Bimini Road',
     subtitle: 'Submerged limestone "wall" off the Bahamas',
     category: 'Site',
@@ -79,6 +92,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'yonaguni',
+    heroImage: yonaguniImg,
     title: 'Yonaguni Monument',
     subtitle: 'Underwater terraced structure off Japan',
     category: 'Site',
@@ -113,6 +127,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'cuban-anomaly',
+    heroImage: cuban_anomalyImg,
     title: 'The Cuban Underwater "City"',
     subtitle: 'Sonar anomaly off Guanahacabibes Peninsula',
     category: 'Anomaly',
@@ -139,6 +154,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'azores-hypothesis',
+    heroImage: azores_hypothesisImg,
     title: 'The Azores Hypothesis',
     subtitle: 'Mid-Atlantic ridge as Plato\'s sunken kingdom',
     category: 'Theory',
@@ -170,6 +186,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'eye-of-sahara',
+    heroImage: eye_of_saharaImg,
     title: 'Richat Structure — "Eye of the Sahara"',
     subtitle: 'Concentric ring formation in Mauritania',
     category: 'Site',
@@ -196,6 +213,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'santorini',
+    heroImage: santoriniImg,
     title: 'Santorini & the Minoan Theory',
     subtitle: 'Thera eruption · 1600 BCE',
     category: 'Theory',
@@ -225,6 +243,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'edgar-cayce',
+    heroImage: edgar_cayceImg,
     title: "Edgar Cayce's Atlantean Readings",
     subtitle: 'Trance prophecies · 1923–1944',
     category: 'Theory',
@@ -251,6 +270,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'younger-dryas',
+    heroImage: younger_dryasImg,
     title: 'Younger Dryas & the Lost Civilization',
     subtitle: 'Cosmic impact c. 12,800 BP',
     category: 'Theory',
@@ -284,6 +304,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'gobekli-tepe',
+    heroImage: gobekli_tepeImg,
     title: 'Göbekli Tepe · The Reset Clock',
     subtitle: 'Pre-pottery Neolithic megaliths · c. 9600 BCE',
     category: 'Site',
@@ -355,6 +376,7 @@ export const atlantisEntries: DossierEntry[] = [
   },
   {
     id: 'azores-pyramid',
+    heroImage: azores_pyramidImg,
     title: 'The Azores Underwater Pyramid',
     subtitle: 'Pyramidal seamount · 8 km base · ~40 m below surface',
     category: 'Site',

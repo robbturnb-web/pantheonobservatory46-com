@@ -39,6 +39,26 @@ export function DossierCard({ entry, theme, index, onOpen }: DossierCardProps) {
         fontFamily: theme.fontFamily,
       }}
     >
+      {/* Hero image (optional) */}
+      {entry.heroImage && (
+        <div className="relative w-full aspect-[16/9] overflow-hidden">
+          <img
+            src={entry.heroImage}
+            alt={entry.title}
+            loading="lazy"
+            width={1280}
+            height={720}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(to top, ${theme.cardSurface} 0%, transparent 55%, transparent 100%)`,
+            }}
+          />
+        </div>
+      )}
+
       {/* Top classification strip */}
       <div
         className="h-1 w-full"

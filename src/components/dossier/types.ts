@@ -41,4 +41,6 @@ export interface DossierEntry {
   sources?: DossierSource[];
   /** Optional iconography (emoji or short symbol) */
   symbol?: string;
+  /** Optional cinematic hero image rendered as card header + modal banner */
+  heroImage?: string;
 }
