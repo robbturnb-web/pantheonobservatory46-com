@@ -92,7 +92,7 @@ export const pyramids: Pyramid[] = [
       { label: 'Mica Chambers Research', url: 'https://en.wikipedia.org/wiki/Teotihuacan' },
     ],
     videos: [
-      { platform: 'youtube', id: 'tZ8Jyq5Xzas', title: 'Teotihuacan — Lost City of the Gods' },
+      { platform: 'youtube', id: 'YefW8sDIka4', title: 'Teotihuacan: City of the Gods — Full Documentary' },
     ],
   },
   {

@@ -86,17 +86,15 @@ export const EXPERTS: Expert[] = [
       },
     ],
     videos: [
-      // NOTE: Replace the placeholder IDs below with real 11-char YouTube IDs
-      // (the part after `?v=` in the URL). Invalid IDs render a friendly fallback.
       {
         platform: 'youtube',
-        id: 'XXXXXXXXXXX',
-        title: 'The Physics of UAP Flight — Stefan Burns Explains',
+        id: 'KBOWxvhQJ_k',
+        title: "You Won't Believe The Interstellar Signal Earth Just Received",
       },
       {
         platform: 'youtube',
-        id: 'YYYYYYYYYYY',
-        title: 'Consciousness & Reality: A Scientific Approach',
+        id: 'q7fMtINMFsM',
+        title: "What's Coming Will Change Humanity Forever",
       },
     ],
     socialLinks: {
