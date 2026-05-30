@@ -108,7 +108,7 @@ export const documentaries: Documentary[] = [
     topics: ['Varginha', 'Brazil', 'Mass Encounter'],
     synopsis:
       'Deep-dive into the 1996 Varginha, Brazil incident — multiple witnesses, military recovery, and the rumored capture of two non-human entities. The most credible mass encounter of the modern era.',
-    trailerYouTubeId: 'rH4SVbZk-Yc',
+    trailerYouTubeId: 'ikqYDjT4KP0',
     officialUrl: 'https://www.thephenomenonfilm.com/moment-of-contact',
   },
   {
