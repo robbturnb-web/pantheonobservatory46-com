@@ -1,15 +1,23 @@
 import type { UAPCase } from '../types';
 import type { Source } from '../components/SourceList';
 import type { VideoData } from '../components/VideoEmbed';
+import nimitzImg from '@/assets/uap-nimitz.jpg';
+import gruschImg from '@/assets/uap-grusch.jpg';
+import phoenixImg from '@/assets/uap-phoenix.jpg';
+import roswellImg from '@/assets/uap-roswell.jpg';
+import rendleshamImg from '@/assets/uap-rendlesham.jpg';
+import tehranImg from '@/assets/uap-tehran.jpg';
 
 export interface UAPCaseEnhanced extends Omit<UAPCase, 'sources'> {
   sources: Source[];
   videos: VideoData[];
+  heroImage?: string;
 }
 
 export const uapCases: UAPCaseEnhanced[] = [
   {
     id: 'nimitz',
+    heroImage: nimitzImg,
     title: 'USS Nimitz Tic Tac Incident',
     date: 'November 14, 2004',
     grade: 'DOCUMENTED',
@@ -36,6 +44,7 @@ export const uapCases: UAPCaseEnhanced[] = [
   },
   {
     id: 'grusch',
+    heroImage: gruschImg,
     title: 'David Grusch Congressional Testimony',
     date: 'July 26, 2023',
     grade: 'DOCUMENTED',
@@ -61,6 +70,7 @@ export const uapCases: UAPCaseEnhanced[] = [
   },
   {
     id: 'phoenix-lights',
+    heroImage: phoenixImg,
     title: 'The Phoenix Lights',
     date: 'March 13, 1997',
     grade: 'CREDIBLE',
@@ -86,6 +96,7 @@ export const uapCases: UAPCaseEnhanced[] = [
   },
   {
     id: 'roswell',
+    heroImage: roswellImg,
     title: 'Roswell, New Mexico',
     date: 'July 1947',
     grade: 'CREDIBLE',
@@ -108,6 +119,7 @@ export const uapCases: UAPCaseEnhanced[] = [
   },
   {
     id: 'rendlesham',
+    heroImage: rendleshamImg,
     title: 'Rendlesham Forest Incident',
     date: 'December 26–28, 1980',
     grade: 'CREDIBLE',
@@ -132,6 +144,7 @@ export const uapCases: UAPCaseEnhanced[] = [
   },
   {
     id: 'tehran-1976',
+    heroImage: tehranImg,
     title: 'Tehran UFO Incident',
     date: 'September 19, 1976',
     grade: 'DOCUMENTED',

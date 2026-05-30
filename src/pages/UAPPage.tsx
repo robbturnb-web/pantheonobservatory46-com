@@ -54,6 +54,28 @@ export function UAPPage() {
               transition={{ delay: i * 0.08 }}
               className="glass-cosmic rounded-xl overflow-hidden"
             >
+              {c.heroImage && (
+                <button
+                  type="button"
+                  onClick={() => handleToggle(c.id)}
+                  className="relative w-full h-48 sm:h-64 overflow-hidden group block"
+                  aria-label={`Open ${c.title}`}
+                >
+                  <img
+                    src={c.heroImage}
+                    alt={c.title}
+                    loading="lazy"
+                    width={1280}
+                    height={720}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4 flex items-center gap-2 flex-wrap">
+                    <EvidenceBadge grade={c.grade} />
+                    <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">{c.date}</span>
+                  </div>
+                </button>
+              )}
               <button
                 className="w-full text-left p-6 flex items-start justify-between gap-4"
                 onClick={() => handleToggle(c.id)}
@@ -61,7 +83,7 @@ export function UAPPage() {
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-1 flex-wrap">
                     <h2 className="text-lg font-bold text-foreground">{c.title}</h2>
-                    <EvidenceBadge grade={c.grade} />
+                    {!c.heroImage && <EvidenceBadge grade={c.grade} />}
                   </div>
                   <p className="text-xs text-muted-foreground flex items-center gap-1">
                     <Clock className="w-3 h-3" /> {c.date}
