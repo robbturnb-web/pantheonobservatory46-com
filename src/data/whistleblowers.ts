@@ -2,6 +2,12 @@ import type { EvidenceGrade } from '../types';
 import type { Source } from '../components/SourceList';
 import type { VideoData } from '../components/VideoEmbed';
 
+import davidGruschImg from '@/assets/whistleblowers/david-grusch.jpg';
+import lueElizondoImg from '@/assets/whistleblowers/lue-elizondo.png';
+import stevenGreerImg from '@/assets/whistleblowers/steven-greer.jpg';
+import philSchneiderImg from '@/assets/whistleblowers/phil-schneider.png';
+import garyMckinnonImg from '@/assets/whistleblowers/gary-mckinnon.jpg';
+
 export interface Whistleblower {
   id: string;
   name: string;
@@ -9,6 +15,8 @@ export interface Whistleblower {
   status: 'alive' | 'deceased' | 'murdered';
   grade: EvidenceGrade;
   photo: string;
+  /** Real public-domain / Wikipedia portrait. Absent when no verified photo is available. */
+  image?: string;
   summary: string;
   keyClaims: string[];
   timeline: { year: string; event: string }[];
