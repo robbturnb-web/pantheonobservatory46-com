@@ -20,7 +20,7 @@ export const godVideos: Record<string, CuratedVideo[]> = {
     { id: 'uj6t5AO_650', title: 'Norse Mythology: An Introduction to the Gods', channel: 'World History Encyclopedia' },
   ],
   enki: [
-    { id: 'NBc-hxM0oKA', title: 'The Anunnaki Connection — Full Documentary', channel: 'Jason Abadi' },
+    { id: 'URSJhn8fxnQ', title: 'Anunnaki: Alien Gods Before Babylon — Full Documentary', channel: 'THE STREAM' },
     { id: 'Uh6hnK9LLvE', title: 'The Mesopotamian Pantheon: Anu, Enlil, Enki, Marduk', channel: 'Afro Emperor Fiction & Mythology' },
   ],
   thoth: [
@@ -66,7 +66,7 @@ export const godVideos: Record<string, CuratedVideo[]> = {
   ],
   enlil: [
     { id: 'Uh6hnK9LLvE', title: 'The Mesopotamian Pantheon (Anu, Enlil, Enki, Marduk)', channel: 'Afro Emperor Fiction & Mythology' },
-    { id: 'NBc-hxM0oKA', title: 'The Anunnaki Connection — Full Documentary', channel: 'Jason Abadi' },
+    { id: 'URSJhn8fxnQ', title: 'Anunnaki: Alien Gods Before Babylon — Full Documentary', channel: 'THE STREAM' },
   ],
   ares: [
     { id: 'j7RCkG8jwiQ', title: 'Ares: The God of War — Greek Mythology Explained', channel: 'Mythology & Fiction Explained' },
