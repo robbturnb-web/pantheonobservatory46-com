@@ -54,7 +54,17 @@ export function DossierPageLayout({
       }}
     >
       {/* Hero */}
-      <header className="relative pt-24 pb-12 lg:pt-32 lg:pb-16 overflow-hidden">
+      <header className="relative pt-24 pb-12 lg:pt-40 lg:pb-20 overflow-hidden min-h-[55vh] lg:min-h-[70vh] flex flex-col justify-end">
+        {/* Cinematic hero photograph — represents the section visually */}
+        {theme.heroImage && (
+          <img
+            src={theme.heroImage}
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
         {/* Atmosphere — desktop only */}
         <div className="hidden lg:block absolute inset-0">
           <Atmosphere id={theme.atmosphere} accent={theme.accent} />
@@ -64,7 +74,7 @@ export function DossierPageLayout({
           style={{ background: theme.heroOverlay }}
         />
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           {/* Classification banner */}
           <div
             className="inline-flex items-center gap-2 px-3 py-1 mb-5 text-[10px] font-bold tracking-[0.3em] border"

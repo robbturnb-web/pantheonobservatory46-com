@@ -79,21 +79,19 @@ function DocCard({ doc, index }: { doc: Documentary; index: number }) {
       transition={{ delay: index * 0.06 }}
       className="glass-cosmic rounded-2xl overflow-hidden border border-border hover:border-primary/40 transition-colors group"
     >
-      {/* Trailer / poster */}
-      <div className="relative aspect-video bg-black overflow-hidden">
+      {/* Trailer / poster — uses VideoEmbed (lite-yt thumbnail + click-to-play + open-on-YouTube fallback) */}
+      <div className="relative">
         {doc.trailerYouTubeId ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${doc.trailerYouTubeId}`}
-            title={`${doc.title} trailer`}
-            className="w-full h-full"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          <VideoEmbed video={{ platform: 'youtube', id: doc.trailerYouTubeId, title: `${doc.title} — trailer` }} />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 via-background to-emerald-500/10">
-            <PlayCircle className="w-16 h-16 text-primary/40" />
-          </div>
+          <a
+            href={doc.watchUrl ?? doc.officialUrl ?? '#'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative block aspect-video bg-gradient-to-br from-primary/20 via-background to-emerald-500/10 flex items-center justify-center group"
+          >
+            <PlayCircle className="w-16 h-16 text-primary/60 group-hover:text-primary transition-colors" />
+          </a>
         )}
       </div>
 
