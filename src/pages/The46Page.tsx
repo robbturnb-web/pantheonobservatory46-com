@@ -80,24 +80,36 @@ export function The46Page() {
         canonical="/the-46"
       />
 
-      {/* Header */}
+      {/* Cinematic hero banner */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-8"
+        initial={{ opacity: 0, scale: 1.02 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
+        className="relative -mx-4 sm:-mx-6 lg:-mx-8 -mt-20 mb-8 h-[44vh] sm:h-[52vh] overflow-hidden"
       >
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-xs uppercase tracking-[3px] text-amber-300 mb-4">
-          <Clock className="w-3 h-3" />
-          Demand Expired · {overdue} Days Overdue
+        <img
+          src={vaultHero}
+          alt="The 46 — sealed cosmic vault of undisclosed UAP records"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+        <div className="absolute inset-x-0 bottom-0 pb-6 sm:pb-10 px-4 sm:px-6 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-[10px] sm:text-xs uppercase tracking-[3px] text-amber-300 mb-4 backdrop-blur-sm">
+            <Clock className="w-3 h-3" />
+            Demand Expired · {overdue} Days Overdue
+          </div>
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-to-b from-foreground via-foreground to-primary/60 bg-clip-text text-transparent mb-3 drop-shadow-[0_2px_30px_rgba(124,58,237,0.45)]">
+            {VAULT_LORE.title}
+          </h1>
+          <p className="text-sm sm:text-base text-foreground/85 max-w-2xl mx-auto">
+            {VAULT_LORE.subtitle}
+          </p>
         </div>
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-to-b from-foreground via-foreground to-primary/50 bg-clip-text text-transparent mb-3">
-          {VAULT_LORE.title}
-        </h1>
-        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
-          {VAULT_LORE.subtitle}
-        </p>
       </motion.div>
+
 
       {/* Stats bar */}
       <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 max-w-md mx-auto">
