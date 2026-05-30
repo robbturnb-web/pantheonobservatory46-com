@@ -16,6 +16,7 @@ import { LiveDropsTicker } from '@/components/the46/LiveDropsTicker';
 import { SkepticSpotlight } from '@/components/the46/SkepticSpotlight';
 import { AudioSoundscapeAdmin } from '@/components/audio/AudioSoundscapeAdmin';
 import { VaultSlotCard } from '@/components/the46/VaultSlotCard';
+import { DefianceModule } from '@/components/the46/DefianceModule';
 import { VaultSlotModal } from '@/components/the46/VaultSlotModal';
 import { VideoEmbed } from '@/components/VideoEmbed';
 import { useEchoXp } from '@/hooks/use-echo-xp';
@@ -111,8 +112,13 @@ export function The46Page() {
       </motion.div>
 
 
+
+      {/* Frequency 46 — Defiance Module */}
+      <DefianceModule />
+
       {/* Stats bar */}
       <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 max-w-md mx-auto">
+
         <div className="glass-cosmic rounded-xl p-3 text-center border border-amber-500/30">
           <Clock className="w-4 h-4 mx-auto mb-1 text-amber-400" />
           <div className="text-2xl font-bold text-amber-300">{pendingCount}</div>
