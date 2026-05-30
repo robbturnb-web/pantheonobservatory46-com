@@ -68,7 +68,7 @@ export const documentaries: Documentary[] = [
     topics: ['Bob Lazar', 'Area 51', 'S-4', 'Element 115'],
     synopsis:
       'The definitive Bob Lazar profile. His S-4 testimony, element 115 reactor claims, and the FBI raid on his property — narrated by Mickey Rourke. Pushed Lazar back into mainstream discourse on Joe Rogan and beyond.',
-    trailerYouTubeId: 'wKbsxKW7nuw',
+    trailerYouTubeId: 'JzQkVGOFQTY',
     officialUrl: 'https://www.extraordinarybeliefs.com',
     watchUrl: 'https://www.netflix.com/title/81074513',
   },
