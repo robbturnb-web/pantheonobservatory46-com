@@ -1,5 +1,11 @@
 import type { Source } from '../components/SourceList';
 import type { VideoData } from '../components/VideoEmbed';
+import gizaImg from '@/assets/pyramid-giza.jpg';
+import teotihuacanImg from '@/assets/pyramid-teotihuacan.jpg';
+import bosnianImg from '@/assets/pyramid-bosnian.jpg';
+import nubianImg from '@/assets/pyramid-nubian.jpg';
+import kukulcanImg from '@/assets/pyramid-kukulcan.jpg';
+import zigguratImg from '@/assets/pyramid-ziggurat.jpg';
 
 export interface Pyramid {
   id: string;
@@ -16,11 +22,13 @@ export interface Pyramid {
   scale: number;
   sources: Source[];
   videos: VideoData[];
+  heroImage?: string;
 }
 
 export const pyramids: Pyramid[] = [
   {
     id: 'giza',
+    heroImage: gizaImg,
     name: 'Great Pyramid of Giza',
     location: 'Giza, Egypt',
     coordinates: '29.9792° N, 31.1342° E',
@@ -55,6 +63,7 @@ export const pyramids: Pyramid[] = [
   },
   {
     id: 'teotihuacan',
+    heroImage: teotihuacanImg,
     name: 'Pyramid of the Sun',
     location: 'Teotihuacan, Mexico',
     coordinates: '19.6925° N, 98.8438° W',
@@ -88,6 +97,7 @@ export const pyramids: Pyramid[] = [
   },
   {
     id: 'bosnian',
+    heroImage: bosnianImg,
     name: 'Bosnian Pyramid of the Sun',
     location: 'Visoko, Bosnia',
     coordinates: '43.9769° N, 18.1768° E',
@@ -118,6 +128,7 @@ export const pyramids: Pyramid[] = [
   },
   {
     id: 'nubian',
+    heroImage: nubianImg,
     name: 'Nubian Pyramids of Meroë',
     location: 'Meroë, Sudan',
     coordinates: '16.9386° N, 33.7489° E',
@@ -148,6 +159,7 @@ export const pyramids: Pyramid[] = [
   },
   {
     id: 'kukulcan',
+    heroImage: kukulcanImg,
     name: 'El Castillo (Kukulcán)',
     location: 'Chichén Itzá, Mexico',
     coordinates: '20.6829° N, 88.5686° W',
@@ -181,6 +193,7 @@ export const pyramids: Pyramid[] = [
   },
   {
     id: 'ziggurat',
+    heroImage: zigguratImg,
     name: 'Ziggurat of Ur',
     location: 'Nasiriyah, Iraq',
     coordinates: '30.9627° N, 46.1031° E',
