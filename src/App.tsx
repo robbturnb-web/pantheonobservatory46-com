@@ -46,6 +46,7 @@ const CernPage = lazy(() => import('./pages/CernPage').then(m => ({ default: m.C
 const ExpertsIndexPage = lazy(() => import('./pages/ExpertsIndexPage').then(m => ({ default: m.ExpertsIndexPage })));
 const ExpertProfilePage = lazy(() => import('./pages/ExpertProfilePage').then(m => ({ default: m.ExpertProfilePage })));
 const StyleGuidePage = lazy(() => import('./pages/StyleGuidePage').then(m => ({ default: m.StyleGuidePage })));
+const DocumentariesPage = lazy(() => import('./pages/DocumentariesPage').then(m => ({ default: m.DocumentariesPage })));
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
 function RouteLoader() {
@@ -104,6 +105,7 @@ export default function App() {
               <Route path="/experts" element={<ExpertsIndexPage />} />
               <Route path="/experts/:slug" element={<ExpertProfilePage />} />
               <Route path="/style-guide" element={<StyleGuidePage />} />
+              <Route path="/documentaries" element={<DocumentariesPage />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
