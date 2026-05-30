@@ -26,7 +26,7 @@ export const documentaries: Documentary[] = [
     topics: ['UAP', 'Disclosure', 'Whistleblowers', 'Congress'],
     synopsis:
       'Premiered at SXSW 2025. Thirty-four U.S. military, intelligence, and government officials — including Sen. Marco Rubio, Sen. Kirsten Gillibrand, Lue Elizondo, David Grusch, and Chris Mellon — go on the record about an 80-year cover-up of non-human intelligence and the active retrieval of crashed craft. The most credentialed disclosure documentary ever filmed.',
-    trailerYouTubeId: 'GcwYDS9OLBE',
+    trailerYouTubeId: 'DkU7ZqbADRs',
     officialUrl: 'https://theageofdisclosure.com',
     watchUrl: 'https://www.amazon.com/Age-Disclosure-David-Grusch/dp/B0F8N5Y9XZ',
   },
