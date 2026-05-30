@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Lock, Unlock, Clock, ExternalLink, FileText, Play, Radio } from 'lucide-react';
+import { Lock, Unlock, Clock, ExternalLink, FileText, Play } from 'lucide-react';
 import {
   vaultSlots,
   publicSlots,
@@ -10,7 +10,7 @@ import {
   type VaultSlot,
   type PublicSlot,
 } from '@/data/the-46';
-import { tiktokVoices } from '@/data/tiktok-voices';
+import { TikTokVoicesSection } from '@/components/the46/TikTokVoicesSection';
 import { VaultSlotCard } from '@/components/the46/VaultSlotCard';
 import { VaultSlotModal } from '@/components/the46/VaultSlotModal';
 import { VideoEmbed } from '@/components/VideoEmbed';
