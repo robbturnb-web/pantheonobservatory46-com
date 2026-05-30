@@ -329,7 +329,12 @@ export function The46Page() {
         </p>
       </motion.div>
 
-      <VaultSlotModal slot={selected} onClose={() => setSelected(null)} />
+      <VaultSlotModal
+        slot={selected}
+        slots={vaultSlots}
+        onClose={() => setSelected(null)}
+        onNavigate={(next) => handleSelect(next)}
+      />
 
       {/* Public slot modal */}
       {activePublic && (
