@@ -1,4 +1,5 @@
 import type { Source } from '../components/SourceList';
+import scientistArchiveImg from '@/assets/missing/scientist-archive.jpg';
 
 export type CaseStatus = 'missing' | 'deceased' | 'murdered';
 export type ConfidenceGrade = 'VERIFIED' | 'REPORTED' | 'ALLEGED' | 'UNDER_INVESTIGATION';
@@ -39,6 +40,7 @@ export interface MissingScientist {
   confidence: ConfidenceGrade;
   confidenceNote: string;
   sources: Source[];
+  heroImage?: string;
 }
 
 export const programInfo: Record<Program, { name: string; description: string; accent: string }> = {
@@ -102,6 +104,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 1. McCASLAND ─────────────────────────
   {
     id: 'mccasland',
+    heroImage: scientistArchiveImg,
     name: 'Maj. Gen. William Neil McCasland (USAF, ret.)',
     age: 68,
     status: 'missing',
@@ -152,6 +155,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 2. REZA ─────────────────────────
   {
     id: 'reza',
+    heroImage: scientistArchiveImg,
     name: 'Monica Jacinto Reza',
     age: 60,
     status: 'missing',
@@ -201,6 +205,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 3. GARCIA ─────────────────────────
   {
     id: 'garcia',
+    heroImage: scientistArchiveImg,
     name: 'Steven Garcia',
     age: 48,
     status: 'missing',
@@ -245,6 +250,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 4. CHAVEZ ─────────────────────────
   {
     id: 'chavez',
+    heroImage: scientistArchiveImg,
     name: 'Anthony Chavez',
     age: 78,
     status: 'missing',
@@ -292,6 +298,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 5. CASIAS ─────────────────────────
   {
     id: 'casias',
+    heroImage: scientistArchiveImg,
     name: 'Melissa Casias',
     age: 53,
     status: 'missing',
@@ -339,6 +346,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 6. HICKS ─────────────────────────
   {
     id: 'hicks',
+    heroImage: scientistArchiveImg,
     name: 'Michael David Hicks',
     age: 59,
     status: 'deceased',
@@ -383,6 +391,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 7. MAIWALD ─────────────────────────
   {
     id: 'maiwald',
+    heroImage: scientistArchiveImg,
     name: 'Frank Werner Maiwald',
     age: 61,
     status: 'deceased',
@@ -426,6 +435,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 8. THOMAS ─────────────────────────
   {
     id: 'thomas',
+    heroImage: scientistArchiveImg,
     name: 'Jason Thomas',
     age: 46,
     status: 'deceased',
@@ -468,6 +478,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 9. GRILLMAIR ─────────────────────────
   {
     id: 'grillmair',
+    heroImage: scientistArchiveImg,
     name: 'Carl Grillmair',
     age: 67,
     status: 'murdered',
@@ -516,6 +527,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 10. LOUREIRO ─────────────────────────
   {
     id: 'loureiro',
+    heroImage: scientistArchiveImg,
     name: 'Nuno Gomes Loureiro',
     age: 47,
     status: 'murdered',
@@ -561,6 +573,7 @@ export const missingScientists: MissingScientist[] = [
   // ───────────────────────── 11. ESKRIDGE ─────────────────────────
   {
     id: 'eskridge',
+    heroImage: scientistArchiveImg,
     name: 'Amy Eskridge',
     age: 34,
     status: 'deceased',
@@ -612,11 +625,13 @@ export interface HistoricalCase {
   summary: string;
   whyItMatters: string;
   sources: Source[];
+  heroImage?: string;
 }
 
 export const historicalPrecedent: HistoricalCase[] = [
   {
     id: 'marconi-cluster',
+    heroImage: scientistArchiveImg,
     name: 'The Marconi / SDI Cluster',
     era: '1982–1988',
     field: 'UK defense electronics — Strategic Defense Initiative',
@@ -631,6 +646,7 @@ export const historicalPrecedent: HistoricalCase[] = [
   },
   {
     id: 'microbiologist-cluster',
+    heroImage: scientistArchiveImg,
     name: 'The Post-9/11 Microbiologist Cluster',
     era: 'Nov 2001 – Mar 2002',
     field: 'Bioweapons defense / infectious disease research',
@@ -646,6 +662,7 @@ export const historicalPrecedent: HistoricalCase[] = [
   },
   {
     id: 'iranian-nuclear',
+    heroImage: scientistArchiveImg,
     name: 'Iranian Nuclear Scientist Assassinations',
     era: '2010–2020',
     field: 'Nuclear physics — Iran',
@@ -659,6 +676,7 @@ export const historicalPrecedent: HistoricalCase[] = [
   },
   {
     id: 'frank-olson',
+    heroImage: scientistArchiveImg,
     name: 'Frank Olson',
     era: '1953',
     field: 'CIA — biological warfare research',
@@ -672,6 +690,7 @@ export const historicalPrecedent: HistoricalCase[] = [
   },
   {
     id: 'eugene-mallove',
+    heroImage: scientistArchiveImg,
     name: 'Eugene Mallove',
     era: '2004',
     field: 'MIT-trained engineer — cold fusion',
@@ -685,6 +704,7 @@ export const historicalPrecedent: HistoricalCase[] = [
   },
   {
     id: 'hutchison',
+    heroImage: scientistArchiveImg,
     name: 'The Hutchison Effect Researchers',
     era: '1985–present',
     field: 'Anomalous gravitational and electromagnetic effects',

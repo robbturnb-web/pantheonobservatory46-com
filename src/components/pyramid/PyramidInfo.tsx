@@ -20,6 +20,23 @@ export function PyramidInfo({ pyramid, onClose }: PyramidInfoProps) {
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           className="absolute right-4 top-4 bottom-4 w-[360px] glass-cosmic rounded-2xl overflow-hidden z-10 flex flex-col"
         >
+          {pyramid.heroImage && (
+            <div className="relative h-40 w-full overflow-hidden flex-shrink-0">
+              <img
+                src={pyramid.heroImage}
+                alt={pyramid.name}
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+              <button
+                onClick={onClose}
+                className="absolute top-2 right-2 p-1.5 rounded-lg bg-background/60 backdrop-blur text-foreground hover:bg-background/80 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
           <div className="p-5 pb-3 border-b border-border/30">
             <div className="flex items-start justify-between">
               <div>
@@ -30,9 +47,11 @@ export function PyramidInfo({ pyramid, onClose }: PyramidInfoProps) {
                 </div>
                 <p className="text-[10px] text-muted-foreground/60 mt-0.5">{pyramid.coordinates}</p>
               </div>
-              <button onClick={onClose} className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted/30 transition-colors">
-                <X className="w-4 h-4" />
-              </button>
+              {!pyramid.heroImage && (
+                <button onClick={onClose} className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted/30 transition-colors">
+                  <X className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
 

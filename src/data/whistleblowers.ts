@@ -7,6 +7,9 @@ import lueElizondoImg from '@/assets/whistleblowers/lue-elizondo.png';
 import stevenGreerImg from '@/assets/whistleblowers/steven-greer.jpg';
 import philSchneiderImg from '@/assets/whistleblowers/phil-schneider.png';
 import garyMckinnonImg from '@/assets/whistleblowers/gary-mckinnon.jpg';
+import bobLazarImg from '@/assets/whistleblowers/bob-lazar.jpg';
+import markMccandlishImg from '@/assets/whistleblowers/mark-mccandlish.jpg';
+import bobFishImg from '@/assets/whistleblowers/bob-fish.jpg';
 
 export interface Whistleblower {
   id: string;
@@ -28,6 +31,7 @@ export interface Whistleblower {
 export const whistleblowers: Whistleblower[] = [
   {
     id: 'bob-lazar',
+    image: bobLazarImg,
     name: 'Bob Lazar',
     role: 'Physicist — Area 51 / S-4',
     status: 'alive',
@@ -218,6 +222,7 @@ export const whistleblowers: Whistleblower[] = [
   },
   {
     id: 'mark-mccandlish',
+    image: markMccandlishImg,
     name: 'Mark McCandlish',
     role: 'Aerospace Illustrator — ARV Witness',
     status: 'deceased',
@@ -245,6 +250,7 @@ export const whistleblowers: Whistleblower[] = [
   },
   {
     id: 'bob-fish',
+    image: bobFishImg,
     name: 'Bob Fish',
     role: 'Intelligence Insider — DIA / Navy',
     status: 'alive',
