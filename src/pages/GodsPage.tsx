@@ -5,7 +5,7 @@ import type { PantheonFilter, God } from '../types';
 import { GodDossierModal } from '@/components/gods/GodDossierModal';
 import { SEO } from '@/components/SEO';
 
-const filters: PantheonFilter[] = ['All', 'Greek', 'Norse', 'Egyptian', 'Hindu', 'Anunnaki', 'Starseed'];
+const filters: PantheonFilter[] = ['All', 'Greek', 'Norse', 'Egyptian', 'Hindu', 'Anunnaki', 'Starseed', 'Chinese', 'Japanese', 'Buddhist', 'Aztec', 'Mayan', 'Incan'];
 
 export function GodsPage() {
   const [filter, setFilter] = useState<PantheonFilter>('All');
