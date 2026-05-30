@@ -107,12 +107,12 @@ export const vaultSlots: VaultSlot[] = rawList.map((item, i) => ({
 export const publicSlots: PublicSlot[] = [
   {
     id: 'tic-tac',
-    codename: 'TIC TAC',
+    codename: 'TIC TAC (FLIR1)',
     date: '2004-11-14',
     classification: 'DECLASSIFIED — DoD',
     summary:
       'USS Nimitz FLIR1. Cmdr. David Fravor and Lt. Cmdr. Chad Underwood engaged a 40ft white tic-tac shaped craft off the coast of San Diego. Object descended from 80,000ft to sea level in under a second, exhibited no visible propulsion, disappeared at hypersonic speeds.',
-    videoEmbedId: 'auGTQYHj_KQ',
+    videoEmbedId: '6rWOtrke0HY',
     source: 'DoD official release (April 2020) via TTSA (2017)',
   },
   {
@@ -122,7 +122,7 @@ export const publicSlots: PublicSlot[] = [
     classification: 'DECLASSIFIED — DoD',
     summary:
       'F/A-18 Super Hornet ATFLIR footage from USS Theodore Roosevelt. Object rotates mid-air against 120-knot winds with no visible propulsion. Pilot: "There\'s a whole fleet of them."',
-    videoEmbedId: 'MzeFXVCLrx0',
+    videoEmbedId: 'tf1uLwUTDA0',
     source: 'DoD official release (April 2020) via TTSA',
   },
   {
@@ -132,7 +132,7 @@ export const publicSlots: PublicSlot[] = [
     classification: 'DECLASSIFIED — DoD',
     summary:
       'East Coast encounter. ATFLIR pod tracks small object skimming above ocean at extreme apparent velocity. Parallax suggests slow movement — but small size and lack of exhaust remain unexplained.',
-    videoEmbedId: 'PPN8c3wfzbg',
+    videoEmbedId: 'wxVRg7LLaQA',
     source: 'DoD official release (April 2020) via TTSA',
   },
   {
@@ -142,10 +142,11 @@ export const publicSlots: PublicSlot[] = [
     classification: 'LEAKED — DHS / CBP',
     summary:
       'CBP DHC-8 thermal footage over Aguadilla Airport, Puerto Rico. Small craft enters ocean, splits in two, continues underwater — exhibiting transmedium capability. Analyzed by SCU.',
-    videoEmbedId: 'tmCCKDcoqUY',
-    source: 'DHS / CBP — leaked 2013, analyzed by SCU 2019',
+    videoEmbedId: 'cuSZDrBDgb8',
+    source: 'DHS / CBP — FOIA release, analyzed by SCU (2019)',
   },
 ];
+
 
 export const VAULT_LORE = {
   title: 'THE 46',
