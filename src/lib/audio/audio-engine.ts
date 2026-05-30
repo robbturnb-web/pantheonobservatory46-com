@@ -148,6 +148,9 @@ export class AudioEngine {
 
     const wasPlaying = this.playing;
     this.playlist = list;
+    // New playlist deserves a fresh shot at playing.
+    this.errorStreak = 0;
+    this.exhausted = false;
     // Clamp index to the new playlist length.
     if (this.index >= list.length) this.index = 0;
 
