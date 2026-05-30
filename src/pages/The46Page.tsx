@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Lock, Unlock, Clock, ExternalLink, FileText, Play } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Lock, Unlock, Clock, ExternalLink, FileText, Play, Folder, Users, Radio, Sparkles, Eye } from 'lucide-react';
 import {
   vaultSlots,
   publicSlots,
@@ -28,16 +29,42 @@ import letter5 from '@/assets/the-46/hegseth-letter-page-5.jpg';
 
 const letterImages = [letter1, letter2, letter3, letter4, letter5];
 
+type Tab = 'vault' | 'voices' | 'drops' | 'public' | 'soundscape';
+
+const TABS: { id: Tab; label: string; icon: typeof Folder; hint: string }[] = [
+  { id: 'vault',      label: 'Vault',      icon: Folder,    hint: '46 demanded files' },
+  { id: 'voices',     label: 'Voices',     icon: Users,     hint: 'TikTok disclosure creators' },
+  { id: 'drops',      label: 'Live Drops', icon: Radio,     hint: 'Real-time updates' },
+  { id: 'public',     label: 'Already Public', icon: Eye,   hint: 'Context videos' },
+  { id: 'soundscape', label: 'Soundscape', icon: Sparkles,  hint: 'Admin: generate ambient' },
+];
+
+function tabFromHash(hash: string): Tab {
+  const clean = hash.replace('#', '') as Tab;
+  return (TABS.find(t => t.id === clean)?.id) ?? 'vault';
+}
+
 export function The46Page() {
   const [selected, setSelected] = useState<VaultSlot | null>(null);
   const [activePublic, setActivePublic] = useState<PublicSlot | null>(null);
   const { trackVaultOpen } = useEchoXp();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [tab, setTab] = useState<Tab>(() => tabFromHash(location.hash));
+
+  useEffect(() => {
+    setTab(tabFromHash(location.hash));
+  }, [location.hash]);
+
+  const setTabAndHash = (next: Tab) => {
+    setTab(next);
+    navigate({ hash: next === 'vault' ? '' : next }, { replace: false });
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleSelect = (slot: VaultSlot) => {
     setSelected(slot);
-    if (slot.status === 'unlocked') {
-      trackVaultOpen(String(slot.id));
-    }
+    if (slot.status === 'unlocked') trackVaultOpen(String(slot.id));
   };
 
   const unlockedCount = vaultSlots.filter((s) => s.status === 'unlocked').length;
@@ -51,18 +78,19 @@ export function The46Page() {
         description={`The 46-slot disclosure vault: locked files, expired demands, and the videos already public. ${overdue} days overdue.`}
         canonical="/the-46"
       />
+
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-center mb-10"
+        className="text-center mb-8"
       >
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-xs uppercase tracking-[3px] text-amber-300 mb-4">
           <Clock className="w-3 h-3" />
           Demand Expired · {overdue} Days Overdue
         </div>
-        <h1 className="text-5xl sm:text-7xl font-black tracking-tight bg-gradient-to-b from-foreground via-foreground to-primary/50 bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight bg-gradient-to-b from-foreground via-foreground to-primary/50 bg-clip-text text-transparent mb-3">
           {VAULT_LORE.title}
         </h1>
         <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
@@ -71,12 +99,7 @@ export function The46Page() {
       </motion.div>
 
       {/* Stats bar */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="grid grid-cols-3 gap-3 mb-8 max-w-md mx-auto"
-      >
+      <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 max-w-md mx-auto">
         <div className="glass-cosmic rounded-xl p-3 text-center border border-amber-500/30">
           <Clock className="w-4 h-4 mx-auto mb-1 text-amber-400" />
           <div className="text-2xl font-bold text-amber-300">{pendingCount}</div>
@@ -92,138 +115,196 @@ export function The46Page() {
           <div className="text-2xl font-bold text-primary">46</div>
           <div className="text-[10px] uppercase tracking-wider text-muted-foreground">Total</div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Lore + Letter */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="glass-cosmic rounded-2xl p-5 sm:p-6 mb-8 border border-amber-500/30"
-      >
-        <div className="text-[10px] uppercase tracking-[3px] text-amber-300 mb-2">
-          Congressional Letter · March 31, 2026
-        </div>
-        <p className="text-sm text-foreground/85 leading-relaxed mb-4">{VAULT_LORE.intro}</p>
-        <div className="text-xs text-muted-foreground border-l-2 border-amber-500/50 pl-3 mb-4">
-          {VAULT_LORE.requestedBy}
-        </div>
-        <a
-          href={VAULT_LORE.letterUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
+      {/* Tabs */}
+      <div className="sticky top-14 z-30 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 mb-6 bg-background/85 backdrop-blur-xl border-y border-border/40">
+        <div
+          role="tablist"
+          aria-label="The 46 sections"
+          className="flex gap-1.5 overflow-x-auto no-scrollbar"
         >
-          <FileText className="w-4 h-4" />
-          Read the original letter (oversight.house.gov)
-          <ExternalLink className="w-3 h-3" />
-        </a>
-      </motion.div>
-
-      {/* Letter screenshots */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="mb-10"
-      >
-        <div className="text-[10px] uppercase tracking-[3px] text-muted-foreground mb-3 text-center">
-          Source Proof — The Letter Pages
+          {TABS.map((t) => {
+            const active = tab === t.id;
+            return (
+              <button
+                key={t.id}
+                role="tab"
+                aria-selected={active}
+                onClick={() => setTabAndHash(t.id)}
+                className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11px] uppercase tracking-[2px] font-semibold border transition-colors ${
+                  active
+                    ? 'border-primary/60 bg-primary/15 text-primary-foreground shadow-[0_0_18px_-4px_hsl(var(--primary))]'
+                    : 'border-border/50 text-muted-foreground hover:text-foreground hover:border-border'
+                }`}
+                title={t.hint}
+              >
+                <t.icon className="w-3.5 h-3.5" />
+                {t.label}
+              </button>
+            );
+          })}
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
-          {letterImages.map((img, i) => (
+      </div>
+
+      {/* VAULT TAB */}
+      {tab === 'vault' && (
+        <motion.section
+          key="vault"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          {/* Lore + Letter */}
+          <div className="glass-cosmic rounded-2xl p-5 sm:p-6 mb-6 border border-amber-500/30">
+            <div className="text-[10px] uppercase tracking-[3px] text-amber-300 mb-2">
+              Congressional Letter · March 31, 2026
+            </div>
+            <p className="text-sm text-foreground/85 leading-relaxed mb-4">{VAULT_LORE.intro}</p>
+            <div className="text-xs text-muted-foreground border-l-2 border-amber-500/50 pl-3 mb-4">
+              {VAULT_LORE.requestedBy}
+            </div>
             <a
-              key={i}
-              href={img}
+              href={VAULT_LORE.letterUrl}
               target="_blank"
               rel="noreferrer"
-              className="block rounded-lg overflow-hidden border border-border hover:border-primary/50 transition-colors group"
+              className="inline-flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors"
             >
-              <img
-                src={img}
-                alt={`Hegseth letter page ${i + 1}`}
-                className="w-full aspect-[9/16] object-cover group-hover:opacity-90 transition-opacity"
-                loading="lazy"
-              />
+              <FileText className="w-4 h-4" />
+              Read the original letter (oversight.house.gov)
+              <ExternalLink className="w-3 h-3" />
             </a>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Vault grid — 46 slots */}
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-xs uppercase tracking-[3px] text-muted-foreground">
-          The 46 Files · Demanded
-        </h2>
-        <div className="text-[10px] font-mono text-amber-300">
-          DUE: {VAULT_LORE.dueDate}
-        </div>
-      </div>
-      <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2 sm:gap-3">
-        {vaultSlots.map((slot, i) => (
-          <VaultSlotCard
-            key={slot.id}
-            slot={slot}
-            index={i}
-            onClick={() => handleSelect(slot)}
-          />
-        ))}
-      </div>
-
-      <SkepticSpotlight />
-
-      <TikTokVoicesSection />
-
-      <div className="mt-10">
-        <LiveDropsTicker />
-      </div>
-
-      <div className="mt-12">
-        <AudioSoundscapeAdmin />
-      </div>
-
-      {/* Already public section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="mt-16 pt-10 border-t border-border"
-      >
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-neon/10 border border-accent-neon/30 text-xs uppercase tracking-[3px] text-accent-neon mb-3">
-            <Unlock className="w-3 h-3" />
-            For Context — Not Part of the 46
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-            {ALREADY_PUBLIC_LORE.title}
-          </h2>
-          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-            {ALREADY_PUBLIC_LORE.intro}
-          </p>
-        </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {publicSlots.map((p) => (
-            <button
-              key={p.id}
-              onClick={() => setActivePublic(p)}
-              className="group relative aspect-square rounded-xl overflow-hidden border border-accent-neon/40 bg-gradient-to-br from-accent-neon/10 via-primary/5 to-black hover:border-accent-neon transition-colors"
-            >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
-                <Play className="w-7 h-7 text-accent-neon fill-accent-neon" />
-                <span className="text-xs font-bold text-foreground">{p.codename}</span>
-                <span className="text-[10px] font-mono text-muted-foreground">{p.date}</span>
-              </div>
-            </button>
-          ))}
-        </div>
-      </motion.div>
+          {/* Letter screenshots */}
+          <div className="mb-8">
+            <div className="text-[10px] uppercase tracking-[3px] text-muted-foreground mb-3 text-center">
+              Source Proof — The Letter Pages
+            </div>
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
+              {letterImages.map((img, i) => (
+                <a
+                  key={i}
+                  href={img}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block rounded-lg overflow-hidden border border-border hover:border-primary/50 transition-colors group"
+                >
+                  <img
+                    src={img}
+                    alt={`Hegseth letter page ${i + 1}`}
+                    className="w-full aspect-[9/16] object-cover group-hover:opacity-90 transition-opacity"
+                    loading="lazy"
+                  />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Vault grid — 46 slots */}
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-xs uppercase tracking-[3px] text-muted-foreground">
+              The 46 Files · Demanded
+            </h2>
+            <div className="text-[10px] font-mono text-amber-300">DUE: {VAULT_LORE.dueDate}</div>
+          </div>
+          <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-7 lg:grid-cols-8 gap-2 sm:gap-3">
+            {vaultSlots.map((slot, i) => (
+              <VaultSlotCard
+                key={slot.id}
+                slot={slot}
+                index={i}
+                onClick={() => handleSelect(slot)}
+              />
+            ))}
+          </div>
+
+          <div className="mt-10">
+            <SkepticSpotlight />
+          </div>
+        </motion.section>
+      )}
+
+      {/* VOICES TAB */}
+      {tab === 'voices' && (
+        <motion.section
+          key="voices"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          <TikTokVoicesSection />
+        </motion.section>
+      )}
+
+      {/* LIVE DROPS TAB */}
+      {tab === 'drops' && (
+        <motion.section
+          key="drops"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          <LiveDropsTicker />
+        </motion.section>
+      )}
+
+      {/* ALREADY PUBLIC TAB */}
+      {tab === 'public' && (
+        <motion.section
+          key="public"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-neon/10 border border-accent-neon/30 text-xs uppercase tracking-[3px] text-accent-neon mb-3">
+              <Unlock className="w-3 h-3" />
+              For Context — Not Part of the 46
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+              {ALREADY_PUBLIC_LORE.title}
+            </h2>
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+              {ALREADY_PUBLIC_LORE.intro}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {publicSlots.map((p) => (
+              <button
+                key={p.id}
+                onClick={() => setActivePublic(p)}
+                className="group relative aspect-square rounded-xl overflow-hidden border border-accent-neon/40 bg-gradient-to-br from-accent-neon/10 via-primary/5 to-black hover:border-accent-neon transition-colors"
+              >
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
+                  <Play className="w-7 h-7 text-accent-neon fill-accent-neon" />
+                  <span className="text-xs font-bold text-foreground">{p.codename}</span>
+                  <span className="text-[10px] font-mono text-muted-foreground">{p.date}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </motion.section>
+      )}
+
+      {/* SOUNDSCAPE TAB */}
+      {tab === 'soundscape' && (
+        <motion.section
+          key="soundscape"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          <AudioSoundscapeAdmin />
+        </motion.section>
+      )}
 
       {/* Footer */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
+        transition={{ delay: 0.4 }}
         className="text-center mt-12 text-xs text-muted-foreground/70 max-w-md mx-auto"
       >
         <p>

@@ -124,18 +124,19 @@ const SIDE_ITEMS: SideItem[] = [
   { to: '/documentaries',   label: 'Docs',          icon: Film,         tone: 'text-emerald-300',   glow: '' },
   { to: '/uap',             label: 'UAP Cases',     icon: Plane,        tone: 'text-cyan-300',      glow: '' },
   { to: '/whistleblowers',  label: 'Whistleblw',    icon: Shield,       tone: 'text-emerald-300',   glow: '' },
-  { to: '/whistleblowers',  label: 'Crash Retr',    icon: AlertTriangle,tone: 'text-red-400',       glow: '' },
+  { to: '/crash-retrieval', label: 'Crash Retr',    icon: AlertTriangle,tone: 'text-red-400',       glow: '' },
   { to: '/missing',         label: 'Missing',       icon: Users,        tone: 'text-amber-300',     glow: '' },
   { to: '/whistleblowers',  label: 'Deaths',        icon: Skull,        tone: 'text-red-400',       glow: '' },
-  { to: '/uap',             label: 'Bases',         icon: MountainIcon, tone: 'text-stone-300',     glow: '' },
+  { to: '/underground',     label: 'Bases',         icon: MountainIcon, tone: 'text-stone-300',     glow: '' },
   { to: '/gods',            label: 'Mythology',     icon: Mountain,     tone: 'text-[#ffd700]',     glow: 'shadow-[0_0_16px_-2px_rgba(255,215,0,0.7)]' },
   { to: '/consciousness',   label: 'Conscious',     icon: Brain,        tone: 'text-indigo-300',    glow: '' },
-  { to: '/consciousness',   label: 'Frequency',     icon: RadioIcon,    tone: 'text-cyan-300',      glow: '' },
+  { to: '/frequencies',     label: 'Frequency',     icon: RadioIcon,    tone: 'text-cyan-300',      glow: '' },
   { to: '/galaxy',          label: 'Observatory',   icon: Satellite,    tone: 'text-[#c77dff]',     glow: 'shadow-[0_0_16px_-2px_rgba(160,32,240,0.7)]' },
-  { to: '/galaxy',          label: 'Earth Pulse',   icon: Globe,        tone: 'text-cyan-300',      glow: '' },
+  { to: '/earth-pulse',     label: 'Earth Pulse',   icon: Globe,        tone: 'text-cyan-300',      glow: '' },
   { to: '/echo',            label: 'Echo AI',       icon: Bot,          tone: 'text-cyan-300',      glow: 'shadow-[0_0_16px_-2px_rgba(34,211,238,0.7)]' },
   { to: '/profile',         label: 'Settings',      icon: Settings,     tone: 'text-white/70',      glow: '' },
 ];
+
 
 function Sidebar() {
   const active = '/';
