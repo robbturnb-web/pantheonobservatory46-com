@@ -28,6 +28,7 @@ const pageTransition = {
 export function Layout() {
   const location = useLocation();
   const { trackPageVisit } = useEchoXp();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     trackPageVisit(location.pathname);
@@ -42,11 +43,12 @@ export function Layout() {
       <CosmicCursorTrail />
       <CometTrails />
       <SpaceshipFlyby />
-      <Navbar />
+      {/* Home renders its own Temple Observatory top nav + sidebar */}
+      {!isHome && <Navbar />}
       <XPBar />
       <AudioPlayer />
       <Walkthrough />
-      <main className="pt-16 min-h-screen">
+      <main className={`${isHome ? '' : 'pt-16'} min-h-screen`}>
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
@@ -62,7 +64,7 @@ export function Layout() {
           </motion.div>
         </AnimatePresence>
       </main>
-      <PantheonFooter />
+      {!isHome && <PantheonFooter />}
     </div>
   );
 }

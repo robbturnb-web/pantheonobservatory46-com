@@ -499,6 +499,12 @@ body::after {
 }
 .hud-rec { animation: hud-rec-blink 1.2s steps(2) infinite; }
 
+/* Temple Observatory — transmissions ticker */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 @keyframes hud-bracket-aberration {
   0%, 100% { filter: drop-shadow(-1px 0 rgba(255, 0, 80, 0.4)) drop-shadow(1px 0 rgba(0, 200, 255, 0.4)); }
   50% { filter: drop-shadow(1px 0 rgba(255, 0, 80, 0.4)) drop-shadow(-1px 0 rgba(0, 200, 255, 0.4)); }
