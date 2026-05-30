@@ -1,4 +1,13 @@
 import type { DossierEntry } from '@/components/dossier/types';
+import dulce_baseImg from '@/assets/bases-dulce-base.jpg';
+import s4_papooseImg from '@/assets/bases-s4-papoose.jpg';
+import mount_weatherImg from '@/assets/bases-mount-weather.jpg';
+import cheyenne_mountainImg from '@/assets/bases-cheyenne-mountain.jpg';
+import raven_rockImg from '@/assets/bases-raven-rock.jpg';
+import pine_gapImg from '@/assets/bases-pine-gap.jpg';
+import yamantauImg from '@/assets/bases-yamantau.jpg';
+import montaukImg from '@/assets/bases-montauk.jpg';
+import sauder_dumbsImg from '@/assets/bases-sauder-dumbs.jpg';
 
 /**
  * Underground Bases — Subterranean schematic
@@ -8,6 +17,7 @@ import type { DossierEntry } from '@/components/dossier/types';
 export const undergroundBaseEntries: DossierEntry[] = [
   {
     id: 'dulce-base',
+    heroImage: dulce_baseImg,
     title: 'Dulce Base',
     subtitle: 'Archuleta Mesa · Northern New Mexico',
     category: 'DUMB',
@@ -45,6 +55,7 @@ export const undergroundBaseEntries: DossierEntry[] = [
   },
   {
     id: 's4-papoose',
+    heroImage: s4_papooseImg,
     title: 'S-4 / Papoose Lake',
     subtitle: 'NTTR · Lazar disclosure site',
     category: 'Black Site',
@@ -83,6 +94,7 @@ export const undergroundBaseEntries: DossierEntry[] = [
   },
   {
     id: 'mount-weather',
+    heroImage: mount_weatherImg,
     title: 'Mount Weather',
     subtitle: 'Mount Weather Emergency Operations Center · FEMA',
     category: 'Continuity Site',
@@ -118,6 +130,7 @@ export const undergroundBaseEntries: DossierEntry[] = [
   },
   {
     id: 'cheyenne-mountain',
+    heroImage: cheyenne_mountainImg,
     title: 'Cheyenne Mountain Complex',
     subtitle: 'NORAD · 2,000 ft of granite',
     category: 'Military',
@@ -151,6 +164,7 @@ export const undergroundBaseEntries: DossierEntry[] = [
   },
   {
     id: 'raven-rock',
+    heroImage: raven_rockImg,
     title: 'Raven Rock (Site R)',
     subtitle: 'Underground Pentagon · Continuity of Operations',
     category: 'Continuity Site',
@@ -184,6 +198,7 @@ export const undergroundBaseEntries: DossierEntry[] = [
   },
   {
     id: 'pine-gap',
+    heroImage: pine_gapImg,
     title: 'Pine Gap',
     subtitle: 'Joint Defence Facility · US-Australia SIGINT',
     category: 'Black Site',
@@ -218,6 +233,7 @@ export const undergroundBaseEntries: DossierEntry[] = [
   },
   {
     id: 'yamantau',
+    heroImage: yamantauImg,
     title: 'Yamantau Mountain',
     subtitle: 'Mezhgorye complex · South Urals',
     category: 'Foreign DUMB',
@@ -251,6 +267,7 @@ export const undergroundBaseEntries: DossierEntry[] = [
   },
   {
     id: 'montauk',
+    heroImage: montaukImg,
     title: 'Camp Hero / Montauk',
     subtitle: 'Decommissioned AFS · Long Island',
     category: 'Black Site',
@@ -286,6 +303,7 @@ export const undergroundBaseEntries: DossierEntry[] = [
   },
   {
     id: 'sauder-dumbs',
+    heroImage: sauder_dumbsImg,
     title: 'DUMBs Network',
     subtitle: 'Richard Sauder · Academic survey',
     category: 'Research',

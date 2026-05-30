@@ -1,4 +1,14 @@
 import type { DossierEntry } from '@/components/dossier/types';
+import pascagoula_1973Img from '@/assets/entities-pascagoula-1973.jpg';
+import zimbabwe_ariel_1994Img from '@/assets/entities-zimbabwe-ariel-1994.jpg';
+import travis_walton_1975Img from '@/assets/entities-travis-walton-1975.jpg';
+import kelly_hopkinsville_1955Img from '@/assets/entities-kelly-hopkinsville-1955.jpg';
+import flatwoods_monster_1952Img from '@/assets/entities-flatwoods-monster-1952.jpg';
+import mothman_1966Img from '@/assets/entities-mothman-1966.jpg';
+import allagash_1976Img from '@/assets/entities-allagash-1976.jpg';
+import voronezh_1989Img from '@/assets/entities-voronezh-1989.jpg';
+import varginha_1996Img from '@/assets/entities-varginha-1996.jpg';
+import rendlesham_aliens_1980Img from '@/assets/entities-rendlesham-aliens-1980.jpg';
 
 /**
  * Entity Encounters — Witness interview transcript theme
@@ -9,6 +19,7 @@ import type { DossierEntry } from '@/components/dossier/types';
 export const entityEncounterEntries: DossierEntry[] = [
   {
     id: 'pascagoula-1973',
+    heroImage: pascagoula_1973Img,
     title: 'Pascagoula Abduction',
     subtitle: 'Hickson & Parker · Mississippi riverbank',
     category: 'Close Encounter — CE-IV',
@@ -46,6 +57,7 @@ export const entityEncounterEntries: DossierEntry[] = [
   },
   {
     id: 'zimbabwe-ariel-1994',
+    heroImage: zimbabwe_ariel_1994Img,
     title: 'Ariel School Encounter',
     subtitle: 'Ruwa, Zimbabwe · 62 child witnesses',
     category: 'Mass Sighting — Children',
@@ -83,6 +95,7 @@ export const entityEncounterEntries: DossierEntry[] = [
   },
   {
     id: 'travis-walton-1975',
+    heroImage: travis_walton_1975Img,
     title: 'Travis Walton Abduction',
     subtitle: 'Apache-Sitgreaves Forest · 5-day disappearance',
     category: 'Abduction — CE-IV',
@@ -120,6 +133,7 @@ export const entityEncounterEntries: DossierEntry[] = [
   },
   {
     id: 'kelly-hopkinsville-1955',
+    heroImage: kelly_hopkinsville_1955Img,
     title: 'Kelly–Hopkinsville Encounter',
     subtitle: 'Sutton farmhouse siege',
     category: 'Goblin / Hostile Entity',
@@ -157,6 +171,7 @@ export const entityEncounterEntries: DossierEntry[] = [
   },
   {
     id: 'flatwoods-monster-1952',
+    heroImage: flatwoods_monster_1952Img,
     title: 'Flatwoods Monster',
     subtitle: 'Braxton County, West Virginia',
     category: 'Tall Entity',
@@ -194,6 +209,7 @@ export const entityEncounterEntries: DossierEntry[] = [
   },
   {
     id: 'mothman-1966',
+    heroImage: mothman_1966Img,
     title: 'Mothman of Point Pleasant',
     subtitle: '13 months · 100+ witnesses · Silver Bridge collapse',
     category: 'Cryptid / Harbinger',
@@ -231,6 +247,7 @@ export const entityEncounterEntries: DossierEntry[] = [
   },
   {
     id: 'allagash-1976',
+    heroImage: allagash_1976Img,
     title: 'Allagash Abduction',
     subtitle: 'Four art-school witnesses · Maine canoe trip',
     category: 'Multi-witness Abduction',
@@ -268,6 +285,7 @@ export const entityEncounterEntries: DossierEntry[] = [
   },
   {
     id: 'voronezh-1989',
+    heroImage: voronezh_1989Img,
     title: 'Voronezh Park Landing',
     subtitle: 'Soviet Union · TASS official report',
     category: 'Mass Sighting — Children + State',
@@ -305,6 +323,7 @@ export const entityEncounterEntries: DossierEntry[] = [
   },
   {
     id: 'varginha-1996',
+    heroImage: varginha_1996Img,
     title: 'Varginha ET Capture',
     subtitle: 'Brazilian military recovery operation',
     category: 'Live Capture / Death of Soldier',
@@ -342,6 +361,7 @@ export const entityEncounterEntries: DossierEntry[] = [
   },
   {
     id: 'rendlesham-aliens-1980',
+    heroImage: rendlesham_aliens_1980Img,
     title: 'Rendlesham Forest Entities',
     subtitle: 'USAF base · airmen + senior officer testimony',
     category: 'Military CE-III',

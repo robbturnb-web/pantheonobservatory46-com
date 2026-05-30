@@ -1,4 +1,13 @@
 import type { DossierEntry } from '@/components/dossier/types';
+import roswell_1947Img from '@/assets/crash-roswell-1947.jpg';
+import aztec_1948Img from '@/assets/crash-aztec-1948.jpg';
+import kingman_1953Img from '@/assets/crash-kingman-1953.jpg';
+import kecksburg_1965Img from '@/assets/crash-kecksburg-1965.jpg';
+import varginha_1996Img from '@/assets/crash-varginha-1996.jpg';
+import lazar_s4Img from '@/assets/crash-lazar-s4.jpg';
+import grusch_2023Img from '@/assets/crash-grusch-2023.jpg';
+import trinity_1945Img from '@/assets/crash-trinity-1945.jpg';
+import wilson_davis_memoImg from '@/assets/crash-wilson-davis-memo.jpg';
 
 /**
  * Crash Retrieval — Black-program recovery vault
@@ -9,6 +18,7 @@ import type { DossierEntry } from '@/components/dossier/types';
 export const crashRetrievalEntries: DossierEntry[] = [
   {
     id: 'roswell-1947',
+    heroImage: roswell_1947Img,
     title: 'Roswell',
     subtitle: 'Foster Ranch · July 1947',
     category: 'Crash',
@@ -49,6 +59,7 @@ export const crashRetrievalEntries: DossierEntry[] = [
   },
   {
     id: 'aztec-1948',
+    heroImage: aztec_1948Img,
     title: 'Aztec',
     subtitle: 'Hart Canyon · March 1948',
     category: 'Crash',
@@ -86,6 +97,7 @@ export const crashRetrievalEntries: DossierEntry[] = [
   },
   {
     id: 'kingman-1953',
+    heroImage: kingman_1953Img,
     title: 'Kingman',
     subtitle: 'Arizona desert · May 1953',
     category: 'Crash',
@@ -120,6 +132,7 @@ export const crashRetrievalEntries: DossierEntry[] = [
   },
   {
     id: 'kecksburg-1965',
+    heroImage: kecksburg_1965Img,
     title: 'Kecksburg',
     subtitle: 'Pennsylvania woods · December 1965',
     category: 'Crash',
@@ -155,6 +168,7 @@ export const crashRetrievalEntries: DossierEntry[] = [
   },
   {
     id: 'varginha-1996',
+    heroImage: varginha_1996Img,
     title: 'Varginha',
     subtitle: 'Brazilian highlands · January 1996',
     category: 'Encounter + Recovery',
@@ -192,6 +206,7 @@ export const crashRetrievalEntries: DossierEntry[] = [
   },
   {
     id: 'lazar-s4',
+    heroImage: lazar_s4Img,
     title: 'Bob Lazar & S-4',
     subtitle: 'Papoose Lake · 1988-1989',
     category: 'Reverse-Engineering',
@@ -230,6 +245,7 @@ export const crashRetrievalEntries: DossierEntry[] = [
   },
   {
     id: 'grusch-2023',
+    heroImage: grusch_2023Img,
     title: 'David Grusch Disclosure',
     subtitle: 'Congressional UAP testimony · 2023',
     category: 'Whistleblower',
@@ -269,6 +285,7 @@ export const crashRetrievalEntries: DossierEntry[] = [
   },
   {
     id: 'trinity-1945',
+    heroImage: trinity_1945Img,
     title: 'Trinity / San Antonio',
     subtitle: 'New Mexico · August 1945',
     category: 'Crash',
@@ -304,6 +321,7 @@ export const crashRetrievalEntries: DossierEntry[] = [
   },
   {
     id: 'wilson-davis-memo',
+    heroImage: wilson_davis_memoImg,
     title: 'Wilson-Davis Memo',
     subtitle: 'Reverse-engineering paper trail · 2002',
     category: 'Document',
