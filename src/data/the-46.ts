@@ -11,6 +11,10 @@ export interface VaultSlot {
   summary?: string;
   videoEmbedId?: string; // YouTube ID when revealed
   source?: string;
+  /** ISO date when the file was released to the public, if ever. */
+  releasedAt?: string;
+  /** Direct link to the public source (X/YouTube/article). */
+  publicUrl?: string;
 }
 
 export interface PublicSlot {
