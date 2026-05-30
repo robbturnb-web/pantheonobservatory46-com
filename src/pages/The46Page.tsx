@@ -11,6 +11,9 @@ import {
   type PublicSlot,
 } from '@/data/the-46';
 import { TikTokVoicesSection } from '@/components/the46/TikTokVoicesSection';
+import { LiveDropsTicker } from '@/components/the46/LiveDropsTicker';
+import { SkepticSpotlight } from '@/components/the46/SkepticSpotlight';
+import { AudioSoundscapeAdmin } from '@/components/audio/AudioSoundscapeAdmin';
 import { VaultSlotCard } from '@/components/the46/VaultSlotCard';
 import { VaultSlotModal } from '@/components/the46/VaultSlotModal';
 import { VideoEmbed } from '@/components/VideoEmbed';
@@ -167,7 +170,17 @@ export function The46Page() {
         ))}
       </div>
 
+      <SkepticSpotlight />
+
       <TikTokVoicesSection />
+
+      <div className="mt-10">
+        <LiveDropsTicker />
+      </div>
+
+      <div className="mt-12">
+        <AudioSoundscapeAdmin />
+      </div>
 
       {/* Already public section */}
       <motion.div

@@ -331,7 +331,7 @@ export const atlantisEntries: DossierEntry[] = [
     summary:
       'In 2001, the Canadian survey company Advanced Digital Communications, working with the Cuban Academy of Sciences, recorded sonar images of geometric stone structures 700 meters below the surface off western Cuba. Lead researcher Paulina Zelitsky described pyramids, roads, and right-angled blocks.',
     origin:
-      'ADC was searching for sunken Spanish galleons when their Sonar Acoustics Tracker imaged what Zelitsky called "some kind of megaliths you'd find on Stonehenge or Easter Island." The depth (~700 m) is problematic: it would require either tens of thousands of years of subsidence or a sudden tectonic drop. A planned 2003 follow-up dive with a remotely operated vehicle was repeatedly delayed and never publicly returned conclusive imagery.',
+      `ADC was searching for sunken Spanish galleons when their Sonar Acoustics Tracker imaged what Zelitsky called "some kind of megaliths you'd find on Stonehenge or Easter Island." The depth (~700 m) is problematic: it would require either tens of thousands of years of subsidence or a sudden tectonic drop. A planned 2003 follow-up dive with a remotely operated vehicle was repeatedly delayed and never publicly returned conclusive imagery.`,
     keyEvents: [
       'May 2001: ADC sonar identifies the formation.',
       'July 2001: National Geographic covers the story.',
