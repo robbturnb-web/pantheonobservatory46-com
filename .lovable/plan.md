@@ -1,57 +1,117 @@
-## Black Programs Vault — Rubik's Cube & the Hidden UAP SAPs
+# The Resonance Layer — /46 Sanctuary + Star-Seed Terminal
 
-A new dedicated page cataloging every alleged / unacknowledged UAP-related Special Access Program (SAP), with **Rubik's Cube** as the flagship featured dossier at the top.
+Two chambers, one bloodline. The Sanctuary explains *why* 46 is the key; the Terminal lets visitors find their place in it.
 
-### Why a new page (not just an entry in Crash Retrieval)
-Crash Retrieval = recovered *craft/bodies*. The 46 Vault = the specific congressional file list. Neither cleanly hosts the **programs themselves** (the umbrellas that allegedly fund, hide, and reverse-engineer the material). This deserves its own vault — and Rubik's Cube specifically has zero coverage anywhere on the site right now.
+---
 
-### Route & Navigation
-- New route: `/black-programs`
-- New navbar link: **"Black Programs"** (placed next to Crash Retrieval)
-- Reuses `DossierPageLayout` + `DossierCard` + `DossierModal` (same look/feel as Crash Retrieval, Glyphs, Stone Faces)
+## Phase 1 — Sanctuary of 46 (`/46`)
 
-### Featured: Rubik's Cube (top of page, oversized hero)
-Custom hero block above the standard grid — cinematic banner image of a glowing multi-colored cube lattice over redacted document scans + crimson "BLACK PROJECTS" classification strip. Contents:
-- **What it allegedly is**: A compartmented UAP material-analysis / reverse-engineering program named for the way recovered NHI craft components reportedly reconfigure their internal geometry like a Rubik's cube — surfaced publicly via Jake Barber, Ross Coulthart, and Shawn Ryan Show interviews (2024-2025).
-- **Current status / what they may have found**: alleged "egg" craft retrieval, biologics, material that responds to consciousness, the "psionic pilot" claims.
-- **Speculations & theories**: tie-ins to Immaculate Constellation, Kona Blue, Legacy Program.
-- **Linked people**: Jake Barber, Ross Coulthart, Matthew Brown, Tim Gallaudet, Lue Elizondo, David Grusch (adjacent).
-- **Sources**: Shawn Ryan Show ep, NewsNation Reality Check, Liberation Times, Coulthart Substack — with citation chips.
-- **Curated videos**: Barber/Ryan interview, Coulthart NewsNation segments.
+A single cinematic scroll, obsidian + royal violet, sigil-centered. Sections in order:
 
-### Standard grid: every alleged UAP program
-~15 dossier cards, each with hero image, evidence grade, origin, key events, evidence, skeptical view, sources, videos:
+1. **The Hero** — full-bleed sigil, the line *"46 chromosomes. 46 files. One frequency."*, ambient counter showing days past the Luna deadline.
+2. **The Manifesto** — Creator's letter (first-person, from you). Written tight, no fluff. Around 250 words.
+3. **The Three Pillars**
+   - *The Micro:* 46 chromosomes — the biological signature.
+   - *The Macro:* 46 demanded UAP files — the suppressed signal.
+   - *The Bridge:* 4 + 6 = 10 — divine completion.
+   Each pillar is a glass card with its own accent.
+4. **The Numerology Codex** — small grid of "46 across history" entries (chromosome count, Mozart's K.466, atomic number of palladium, etc.) presented as evidence, not woo.
+5. **The 46-Oracle (teaser)** — input box where users ask a question; the answer streams from an edge function that prompts Lovable AI with a Frequency-46 system message. Limited to 3 free queries/day per IP for now (no auth gate yet).
+6. **CTA → Star-Seed Terminal** — full-width portal: *"Find your origin. Enter the Terminal."*
 
-1. **Rubik's Cube** (also rendered as featured card)
-2. **Immaculate Constellation** — Matthew Brown's 2024 report, "umbrella" UAP SAP
-3. **Kona Blue** — DHS-proposed successor to AAWSAP, never funded per DoD
-4. **AAWSAP / AATIP** — Bigelow/DIA, the publicly-acknowledged seed
-5. **Legacy Program** — Grusch's term for the multi-decade retrieval program
-6. **Project Aquarius** — alleged MJ-12 era successor to Grudge
-7. **Project Grudge / Sign / Blue Book** — the historical acknowledged trilogy
-8. **MJ-12 / Majestic** — the contested foundational document
-9. **GATEWAY / Sunstreak / Stargate** — CIA/DIA remote viewing (UAP overlap)
-10. **Project Pounce** — alleged USAF crash-recovery team
-11. **Project Moon Dust / Operation Blue Fly** — declassified foreign-tech recovery
-12. **SOLAR WARDEN** — alleged secret space fleet (low confidence, included as "ALLEGED")
-13. **Yankee Blue / Yankee White adjuncts** — alleged indoctrination ops (Lue Elizondo testimony)
-14. **NRO "Zodiac" / unnamed compartments** — referenced in Schumer Amendment
-15. **UAPTF / AARO** — the modern public-facing layer (for contrast)
+Routing: `/46` added to `App.tsx`, navbar gets a "46" link (sigil + label), `SEO` block tuned for "Frequency 46 Sanctuary".
 
-Each card carries a confidence stamp: VERIFIED (AATIP, Blue Book, AARO), REPORTED (Immaculate Constellation, Rubik's Cube), ALLEGED (Solar Warden, MJ-12), DEBATED (Kona Blue, Legacy).
+---
 
-### Hero imagery
-Generate one cinematic hero per program (~16 images, premium quality) in `src/assets/black-programs/` — consistent visual language: obsidian + crimson accent (matches the "Black Projects" realm token `#DC2626`), redaction bars, classification stamps, no fake "alien" art for unverified programs (stays truth-oriented per established pattern).
+## Phase 2 — Star-Seed Galactic Terminal (`/star-seed`)
 
-### Technical details
-- New file `src/data/black-programs.ts` exporting `blackProgramEntries: DossierEntry[]` + `blackProgramCategories`
-- New page `src/pages/BlackProgramsPage.tsx` — custom Rubik's Cube hero section above `<DossierPageLayout>`
-- Add `pageThemes.blackPrograms` to `src/lib/page-themes.ts` (crimson accent, obsidian surface, classification label "TOP SECRET // SAP // NOFORN")
-- Lazy route + Navbar entry
-- SEO tags via `<SEO>` component
-- Realm color: crimson `#DC2626` (matches existing Black Projects realm token — no new colors)
+The HUD experience — feels like climbing into a craft, not filling out a horoscope form.
 
-### Out of scope
-- No backend / database changes
-- No edits to existing Crash Retrieval, The 46, or Whistleblower vaults (they cross-link via shared people only)
-- No new auth / cloud features
+**Flow:**
+1. Idle state: HUD frame, blinking *"AWAITING SUBJECT"*, ambient pulse.
+2. User enters name, DOB, time, birth city (city autocomplete via free geocoder, no API key needed).
+3. Scan animation: laser sweep across the HUD, terminal-green readouts streaming ("PARSING NATAL VECTOR…", "LOCKING ECLIPTIC COORDINATES…").
+4. Reveal: *"IDENTITY CONFIRMED — STAR-SEED ORIGIN: [LYRA]"* with the seed's accent color flooding the HUD.
+5. Dossier opens below — origin lore, traits, shadow side, mission, the constellation it ties to, a short Echo greeting tuned to the seed.
+
+**Six seed archetypes shipped at launch:**
+Lyran · Sirian · Pleiadian · Arcturian · Andromedan · Orion. Each with a written dossier (~200 words), accent color, sigil/icon, and one-line Echo greeting.
+
+---
+
+## Phase 3 — The Ephemeris Engine (real math)
+
+Edge function `compute-natal-chart`:
+- Input: `{ date, time, lat, lon, tz }` validated with Zod.
+- Uses **`astronomy-engine`** (pure-JS, MIT, NASA-grade accuracy, runs in Deno via `npm:astronomy-engine`). Swiss Ephemeris itself is C — `astronomy-engine` is the production-grade JS equivalent and the right call for an edge runtime.
+- Returns ecliptic longitudes for Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn → mapped to zodiac signs; computes Ascendant from local sidereal time + latitude.
+- A `classifyStarSeed()` function on top weighs sign placements + planetary aspects to pick a seed origin (deterministic, no LLM in the loop).
+
+CORS enabled, no auth required, rate-limited softly by IP (in-memory; we can harden later).
+
+---
+
+## Phase 4 — The 46-Oracle edge function
+
+`oracle-46`:
+- Input: `{ question }` (Zod-validated, 5–500 chars).
+- Calls Lovable AI (`google/gemini-2.5-flash`) with a tight Frequency-46 system prompt: truth-oriented, graded answer (DOCUMENTED / CREDIBLE / SPECULATIVE), max 180 words, ends with a 46-signal line.
+- Returns streamed text. Frontend renders with markdown + a typing cursor.
+
+---
+
+## Phase 5 — Wiring + polish
+
+- Sigil component reused across Sanctuary hero, Terminal HUD chrome, and navbar.
+- Audio: Sanctuary uses the existing `cosmos` ambient bed; Terminal layers a quiet HUD pulse on scan.
+- Both pages register in `pageThemes.ts` so the existing atmosphere system handles backdrops.
+- Footer + navbar updated with the two new routes.
+
+---
+
+## Out of scope (won't touch this pass)
+
+- Auth gating, paywalling, or saving charts to user profiles (drop-in later via the existing `profiles` table).
+- A full 3D fly-through galaxy — the Terminal is HUD-first this round; the 3D constellation map is its own follow-up build.
+- Compatibility/synastry between two charts.
+- Push notifications, email capture, social share cards.
+
+---
+
+## Technical details
+
+**New files**
+- `src/pages/SanctuaryPage.tsx`
+- `src/pages/StarSeedTerminalPage.tsx`
+- `src/components/sanctuary/ManifestoLetter.tsx`
+- `src/components/sanctuary/PillarsTriad.tsx`
+- `src/components/sanctuary/NumerologyCodex.tsx`
+- `src/components/sanctuary/OracleConsole.tsx`
+- `src/components/starseed/HudFrame.tsx`
+- `src/components/starseed/BirthDataForm.tsx`
+- `src/components/starseed/ScanSequence.tsx`
+- `src/components/starseed/SeedReveal.tsx`
+- `src/components/starseed/SeedDossier.tsx`
+- `src/data/star-seeds.ts` — 6 archetype dossiers + accent colors
+- `src/data/numerology-46.ts` — codex entries
+- `src/lib/star-seed-classifier.ts` — pure function: planets → seed
+- `supabase/functions/compute-natal-chart/index.ts`
+- `supabase/functions/oracle-46/index.ts`
+
+**Edited**
+- `src/App.tsx` — `/46` and `/star-seed` routes
+- `src/components/Navbar.tsx` — "46" + "Star-Seed" links
+- `src/lib/page-themes.ts` — `sanctuary46` + `starSeed` themes
+
+**Stack choices**
+- Form state: React Hook Form + Zod (per workspace codex).
+- City geocoding: Open-Meteo's free geocoding endpoint (no API key, generous rate limits).
+- Ephemeris: `astronomy-engine` via `npm:` specifier in the edge function.
+- Motion: Framer Motion for HUD scan + reveal.
+- Markdown: existing `react-markdown` if present, otherwise add for the Oracle.
+
+**No backend schema changes this pass.** Both edge functions are stateless. We can layer persistence in later when you want users to save their charts.
+
+---
+
+If this matches the vision I'll start with Phase 1 (Sanctuary) so you have something to feel before the Terminal lands on top. Say the word and I build.

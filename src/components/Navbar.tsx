@@ -94,6 +94,8 @@ const categories: NavCategory[] = [
       { to: '/echo', label: 'Echo AI' },
       { to: '/echoverse', label: 'Echoverse' },
       { to: '/the-46', label: 'The 46' },
+      { to: '/46', label: 'Sanctuary of 46' },
+      { to: '/star-seed', label: 'Star-Seed Terminal' },
       { to: '/experts', label: 'Voices · Experts' },
       { to: '/profile', label: 'Observer Profile' },
     ],
