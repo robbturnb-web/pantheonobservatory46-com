@@ -40,6 +40,7 @@ const categories: NavCategory[] = [
       { to: '/crash-retrieval', label: 'Crash Retrieval' },
       { to: '/timeline', label: 'Disclosure Timeline' },
       { to: '/whistleblowers', label: 'Whistleblower Vault' },
+      { to: '/corbell', label: 'Jeremy Corbell' },
       { to: '/missing', label: 'Missing Scientists' },
       { to: '/earth-pulse', label: 'Cosmos Pulse' },
       { to: '/orb-report', label: 'Orb Report' },

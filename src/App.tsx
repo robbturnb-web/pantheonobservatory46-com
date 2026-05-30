@@ -47,6 +47,7 @@ const ExpertsIndexPage = lazy(() => import('./pages/ExpertsIndexPage').then(m =>
 const ExpertProfilePage = lazy(() => import('./pages/ExpertProfilePage').then(m => ({ default: m.ExpertProfilePage })));
 const StyleGuidePage = lazy(() => import('./pages/StyleGuidePage').then(m => ({ default: m.StyleGuidePage })));
 const DocumentariesPage = lazy(() => import('./pages/DocumentariesPage').then(m => ({ default: m.DocumentariesPage })));
+const JeremyCorbellPage = lazy(() => import('./pages/JeremyCorbellPage').then(m => ({ default: m.JeremyCorbellPage })));
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
 function RouteLoader() {
@@ -106,6 +107,8 @@ export default function App() {
               <Route path="/experts/:slug" element={<ExpertProfilePage />} />
               <Route path="/style-guide" element={<StyleGuidePage />} />
               <Route path="/documentaries" element={<DocumentariesPage />} />
+              <Route path="/corbell" element={<JeremyCorbellPage />} />
+              <Route path="/jeremy-corbell" element={<JeremyCorbellPage />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
