@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Film, ExternalLink, PlayCircle, Calendar, Clock, User } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { documentaries, docTopics, type Documentary } from '@/data/documentaries';
+import { VideoEmbed } from '@/components/VideoEmbed';
 
 const STATUS_COLORS: Record<string, string> = {
   streaming: 'text-signal-online border-signal-online/40 bg-signal-online/10',
