@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ShieldAlert, Eye, ArrowDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ShieldAlert, Eye, ArrowDown, ArrowRight } from 'lucide-react';
 import { DossierPageLayout } from '@/components/dossier/DossierPageLayout';
 import { blackProgramEntries, blackProgramCategories } from '@/data/black-programs';
 import { pageThemes } from '@/lib/page-themes';
@@ -108,10 +109,25 @@ function FeaturedRubiksCube() {
               effort named for material that reconfigures its own internal geometry like a cube
               being turned.
             </p>
-            <div className="mt-4 flex items-center gap-2 text-[11px] font-bold tracking-wider opacity-70" style={{ color: '#fca5a5' }}>
-              <Eye className="w-3.5 h-3.5" />
-              Full dossier below
-              <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <Link
+                to="/rubiks-cube"
+                className="inline-flex items-center gap-2 px-3.5 py-2 text-[11px] font-bold tracking-[0.25em] rounded border transition-colors hover:bg-[rgba(220,38,38,0.2)]"
+                style={{
+                  color: '#fee2e2',
+                  borderColor: '#DC2626',
+                  background: 'rgba(220,38,38,0.12)',
+                  fontFamily: "'Space Mono', monospace",
+                }}
+              >
+                OPEN DEDICATED DOSSIER
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <span className="inline-flex items-center gap-2 text-[11px] font-bold tracking-wider opacity-70" style={{ color: '#fca5a5' }}>
+                <Eye className="w-3.5 h-3.5" />
+                or scroll for the full vault
+                <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+              </span>
             </div>
           </div>
         </div>

@@ -49,6 +49,7 @@ const StyleGuidePage = lazy(() => import('./pages/StyleGuidePage').then(m => ({ 
 const DocumentariesPage = lazy(() => import('./pages/DocumentariesPage').then(m => ({ default: m.DocumentariesPage })));
 const JeremyCorbellPage = lazy(() => import('./pages/JeremyCorbellPage').then(m => ({ default: m.JeremyCorbellPage })));
 const BlackProgramsPage = lazy(() => import('./pages/BlackProgramsPage').then(m => ({ default: m.BlackProgramsPage })));
+const RubiksCubePage = lazy(() => import('./pages/RubiksCubePage').then(m => ({ default: m.RubiksCubePage })));
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
 function RouteLoader() {
@@ -96,6 +97,7 @@ export default function App() {
               <Route path="/aaro" element={<AaroWatchPage />} />
               <Route path="/crash-retrieval" element={<CrashRetrievalPage />} />
               <Route path="/black-programs" element={<BlackProgramsPage />} />
+              <Route path="/rubiks-cube" element={<RubiksCubePage />} />
               <Route path="/underground" element={<UndergroundBasesPage />} />
               <Route path="/encounters" element={<EntityEncountersPage />} />
               <Route path="/extinct" element={<ExtinctSpeciesPage />} />
