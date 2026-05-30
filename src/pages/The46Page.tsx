@@ -26,6 +26,7 @@ import letter2 from '@/assets/the-46/hegseth-letter-page-2.jpg';
 import letter3 from '@/assets/the-46/hegseth-letter-page-3.jpg';
 import letter4 from '@/assets/the-46/hegseth-letter-page-4.jpg';
 import letter5 from '@/assets/the-46/hegseth-letter-page-5.jpg';
+import vaultHero from '@/assets/the-46/vault-hero.jpg';
 
 const letterImages = [letter1, letter2, letter3, letter4, letter5];
 
