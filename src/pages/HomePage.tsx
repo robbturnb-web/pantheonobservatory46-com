@@ -1,22 +1,17 @@
 import { SEO } from '@/components/SEO';
 import { Walkthrough } from '@/components/Walkthrough';
-import { HomeThemeProvider } from '@/contexts/HomeThemeContext';
-import { HomeLowerSections } from '@/components/home/HomeLowerSections';
-import { DashboardLayout } from './home/DashboardLayout';
+import { TempleObservatoryPage } from './home/TempleObservatoryPage';
 
 export function HomePage() {
   return (
-    <HomeThemeProvider>
-      <div className="relative">
-        <SEO
-          title="Pantheon Observatory — Cosmic intelligence, disclosure & the unexplained"
-          description="A living archive of UAP cases, whistleblower testimony, ancient mythology, and cosmic disclosure. Explore the signal."
-          canonical="/"
-        />
-        <Walkthrough />
-        <DashboardLayout />
-        <HomeLowerSections />
-      </div>
-    </HomeThemeProvider>
+    <>
+      <SEO
+        title="Pantheon Frequency 46 — Temple Observatory"
+        description="A cinematic cosmic operating system. UAP cases, mythology, consciousness, live solar weather, and Echo AI — all in one observatory."
+        canonical="/"
+      />
+      <Walkthrough />
+      <TempleObservatoryPage />
+    </>
   );
 }
