@@ -92,6 +92,33 @@ export type Database = {
         }
         Relationships: []
       }
+      echo_usage: {
+        Row: {
+          created_at: string
+          id: string
+          message_count: number
+          updated_at: string
+          usage_date: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message_count?: number
+          updated_at?: string
+          usage_date?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message_count?: number
+          updated_at?: string
+          usage_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       echo_xp: {
         Row: {
           created_at: string
@@ -337,6 +364,96 @@ export type Database = {
         }
         Relationships: []
       }
+      observer_achievements: {
+        Row: {
+          achievement_id: string
+          id: string
+          unlocked_at: string
+          user_id: string
+        }
+        Insert: {
+          achievement_id: string
+          id?: string
+          unlocked_at?: string
+          user_id: string
+        }
+        Update: {
+          achievement_id?: string
+          id?: string
+          unlocked_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      observer_field_notes: {
+        Row: {
+          conviction: string | null
+          created_at: string
+          entity_id: string
+          entity_type: string
+          id: string
+          note: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          conviction?: string | null
+          created_at?: string
+          entity_id: string
+          entity_type: string
+          id?: string
+          note?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          conviction?: string | null
+          created_at?: string
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          note?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      observer_files: {
+        Row: {
+          bio: string | null
+          clearance: string
+          codename: string
+          joined_at: string
+          public_profile: boolean
+          slug: string | null
+          starseed_archetype: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          bio?: string | null
+          clearance?: string
+          codename: string
+          joined_at?: string
+          public_profile?: boolean
+          slug?: string | null
+          starseed_archetype?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          bio?: string | null
+          clearance?: string
+          codename?: string
+          joined_at?: string
+          public_profile?: boolean
+          slug?: string | null
+          starseed_archetype?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -361,6 +478,54 @@ export type Database = {
           updated_at?: string
           user_id?: string
           username?: string
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          cancel_at_period_end: boolean | null
+          created_at: string | null
+          current_period_end: string | null
+          current_period_start: string | null
+          environment: string
+          id: string
+          price_id: string
+          product_id: string
+          status: string
+          stripe_customer_id: string
+          stripe_subscription_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          cancel_at_period_end?: boolean | null
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          environment?: string
+          id?: string
+          price_id: string
+          product_id: string
+          status?: string
+          stripe_customer_id: string
+          stripe_subscription_id: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          cancel_at_period_end?: boolean | null
+          created_at?: string | null
+          current_period_end?: string | null
+          current_period_start?: string | null
+          environment?: string
+          id?: string
+          price_id?: string
+          product_id?: string
+          status?: string
+          stripe_customer_id?: string
+          stripe_subscription_id?: string
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -411,13 +576,67 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_glyphs: {
+        Row: {
+          created_at: string | null
+          culture_tags: string[] | null
+          id: string | null
+          image_url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          culture_tags?: string[] | null
+          id?: string | null
+          image_url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          culture_tags?: string[] | null
+          id?: string | null
+          image_url?: string | null
+        }
+        Relationships: []
+      }
+      public_observer_xp: {
+        Row: {
+          rank: string | null
+          updated_at: string | null
+          user_id: string | null
+          xp: number | null
+        }
+        Relationships: []
+      }
+      public_testimonies: {
+        Row: {
+          body: string | null
+          created_at: string | null
+          id: string | null
+          media_url: string | null
+          title: string | null
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          media_url?: string | null
+          title?: string | null
+        }
+        Update: {
+          body?: string | null
+          created_at?: string | null
+          id?: string | null
+          media_url?: string | null
+          title?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       award_xp: {
         Args: { p_amount: number; p_event_id: string; p_event_type: string }
         Returns: Json
       }
+      compute_clearance: { Args: { _xp: number }; Returns: string }
       compute_rank: { Args: { _xp: number }; Returns: string }
       delete_email: {
         Args: { message_id: number; queue_name: string }
@@ -427,6 +646,10 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      has_active_subscription: {
+        Args: { check_env?: string; user_uuid: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -434,6 +657,11 @@ export type Database = {
         }
         Returns: boolean
       }
+      increment_echo_usage: {
+        Args: { _env?: string; _limit?: number; _user_id: string }
+        Returns: Json
+      }
+      is_premium: { Args: { _env?: string }; Returns: boolean }
       move_to_dlq: {
         Args: {
           dlq_name: string
@@ -451,6 +679,8 @@ export type Database = {
           read_ct: number
         }[]
       }
+      track_page_visit: { Args: { _page: string }; Returns: undefined }
+      unlock_achievement: { Args: { _achievement_id: string }; Returns: Json }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
