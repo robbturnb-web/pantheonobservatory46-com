@@ -282,6 +282,106 @@ export const atlantisEntries: DossierEntry[] = [
       { label: 'Hancock, G. — Magicians of the Gods (2015)' },
     ],
   },
+  {
+    id: 'gobekli-tepe',
+    title: 'Göbekli Tepe · The Reset Clock',
+    subtitle: 'Pre-pottery Neolithic megaliths · c. 9600 BCE',
+    category: 'Site',
+    era: '9600–8000 BCE',
+    location: 'Şanlıurfa Province, southeastern Turkey',
+    confidence: 'VERIFIED',
+    symbol: '🗿',
+    summary:
+      "The oldest known megalithic complex on Earth, intentionally built and intentionally buried roughly 11,600 years ago — exactly the date Plato gives for Atlantis's destruction. Carved T-pillars depict animals, abstract symbols, and what Sweatman and Tsikritsis (2017) argue is a record of the Younger Dryas impact event.",
+    origin:
+      "Discovered in 1963 but only excavated from 1995 by German archaeologist Klaus Schmidt and the German Archaeological Institute. The site contains at least 20 stone circles built by people who had not yet domesticated plants or animals — overturning the prior assumption that organized religion and monumental architecture required agriculture.\n\nPillar 43 ('Vulture Stone') depicts a scorpion, a bird carrying a disc, and headless figures. Sweatman & Tsikritsis (2017) interpret the imagery as a date stamp using astronomical asterisms, encoding c. 10950 BCE — within the Younger Dryas onset window. The site was deliberately backfilled around 8000 BCE, sealing it.",
+    keyEvents: [
+      'c.9600 BCE: First megaliths erected.',
+      'c.8000 BCE: Site deliberately buried.',
+      '1963: Surface survey notes "Neolithic mound".',
+      '1995: Schmidt begins systematic excavation.',
+      '2017: Sweatman & Tsikritsis publish astronomical-symbolism analysis in Mediterranean Archaeology and Archaeometry.',
+      '2018: UNESCO World Heritage inscription.',
+    ],
+    evidence: [
+      'Klaus Schmidt — "Göbekli Tepe: A Stone Age Sanctuary in South-Eastern Anatolia" (2012).',
+      'Sweatman, M. & Tsikritsis, D. (2017) — "Decoding Göbekli Tepe with archaeoastronomy", MAA 17(1).',
+      'Karahan Tepe, Sayburç, and other newly excavated sister sites within 100 km radius.',
+    ],
+    skepticalView:
+      "Most archaeologists reject the Sweatman comet hypothesis as cherry-picked iconography. The carvings are accepted as ceremonial, but the leap to 'cataclysm date stamp' is not consensus. However, the existence of the site itself at 9600 BCE — the Atlantis date — is no longer in dispute.",
+    videos: [
+      { id: 'KxQbiq67D4Y', title: "World's Oldest Temple? Göbekli Tepe Full Documentary", channel: 'Ancient Architects' },
+      { id: 'EGJ1hyYmmTc', title: 'Graham Hancock on Göbekli Tepe and the Younger Dryas', channel: 'PowerfulJRE' },
+    ],
+    sources: [
+      { label: 'Sweatman & Tsikritsis (2017) MAA paper', url: 'https://www.maajournal.com/' },
+      { label: 'UNESCO World Heritage List — Göbekli Tepe (2018)' },
+    ],
+  },
+  {
+    id: 'cuban-anomaly',
+    title: 'The Cuban Underwater Anomaly',
+    subtitle: 'Geometric structures · 700 m below Yucatán Channel',
+    category: 'Site',
+    era: 'Discovered 2001',
+    location: '22.3°N 84.6°W · west of Cape San Antonio, Cuba',
+    confidence: 'DEBATED',
+    symbol: '🌊',
+    summary:
+      'In 2001, the Canadian survey company Advanced Digital Communications, working with the Cuban Academy of Sciences, recorded sonar images of geometric stone structures 700 meters below the surface off western Cuba. Lead researcher Paulina Zelitsky described pyramids, roads, and right-angled blocks.',
+    origin:
+      'ADC was searching for sunken Spanish galleons when their Sonar Acoustics Tracker imaged what Zelitsky called "some kind of megaliths you'd find on Stonehenge or Easter Island." The depth (~700 m) is problematic: it would require either tens of thousands of years of subsidence or a sudden tectonic drop. A planned 2003 follow-up dive with a remotely operated vehicle was repeatedly delayed and never publicly returned conclusive imagery.',
+    keyEvents: [
+      'May 2001: ADC sonar identifies the formation.',
+      'July 2001: National Geographic covers the story.',
+      '2003: Planned ROV mission postponed.',
+      '2009: Manuel Iturralde-Vinent (Cuban National Museum of Natural History) publishes geological skepticism.',
+      '2010s: Site largely unmentioned in mainstream literature.',
+    ],
+    evidence: [
+      'Original ADC sonar imagery (sole public copy held by ADC).',
+      'National Geographic News, July 11 2001 — interview with Zelitsky.',
+      'Iturralde-Vinent, M. (2009) — geological commentary in Cuban media.',
+    ],
+    skepticalView:
+      'Geologists note no plausible tectonic mechanism for the depth, and the resolution of sonar imagery cannot distinguish natural blocky basalt from worked stone. The absence of follow-up ROV evidence after two decades is the strongest argument against the artificial-structure interpretation.',
+    videos: [
+      { id: 'wkIfNcBmeJ0', title: 'Sunken Cities That Inspired Atlantis (incl. Cuban anomaly)', channel: 'Spark' },
+    ],
+    sources: [
+      { label: 'National Geographic — "Lost City Found Off Cuba?" (July 11 2001)' },
+    ],
+  },
+  {
+    id: 'azores-pyramid',
+    title: 'The Azores Underwater Pyramid',
+    subtitle: 'Pyramidal seamount · 8 km base · ~40 m below surface',
+    category: 'Site',
+    era: 'Discovered 2013',
+    location: 'Bank between São Miguel and Terceira, Azores',
+    confidence: 'ALLEGED',
+    symbol: '🌋',
+    summary:
+      "In 2013, Portuguese yachtsman Diocleciano Silva reported sonar images of a perfectly pyramidal underwater mountain 60 meters tall with a square base of ~8 km, oriented to the cardinal points. The Portuguese Navy investigated and concluded it was a volcanic feature.",
+    origin:
+      'Silva, a yacht charter operator, claimed his GPS-fishfinder picked up the structure between the islands of São Miguel and Terceira. Image went viral via Diário Insular. The Portuguese Hydrographic Institute and the University of the Azores reviewed the sonar logs and identified the feature as a volcanic cone consistent with the Mid-Atlantic Ridge geology of the region.',
+    keyEvents: [
+      'Sep 2013: Silva publishes his sonar imagery.',
+      'Sep 2013: Portuguese Hydrographic Institute reviews data.',
+      'Oct 2013: Official statement attributes the feature to volcanic origin.',
+    ],
+    evidence: [
+      'Silva sonar logs (one public release).',
+      'Portuguese Hydrographic Institute official statement, Oct 2013.',
+    ],
+    skepticalView:
+      "Multiple Atlantic seamounts are pyramidal due to volcanic crystallization patterns and erosion. The cardinal orientation, if real, can result from prevailing currents. No further imaging — submersible or multibeam — has confirmed any artificial features.",
+    videos: [],
+    sources: [
+      { label: 'Diário Insular (Azores) — September 2013 coverage' },
+    ],
+  },
 ];
 
 export const atlantisCategories = ['All', 'Primary Source', 'Site', 'Anomaly', 'Theory'];
