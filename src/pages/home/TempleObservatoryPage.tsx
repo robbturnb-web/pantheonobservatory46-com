@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import {
   Home, Eye, Mountain, Brain, Satellite, Folder, Bot, Settings,
   Sun, Volume2, Radio, Flame, Activity, AlertTriangle, ChevronRight,
-  MapPin, Lock, Telescope, Sparkles, Zap, Waves,
+  MapPin, Lock, Telescope, Sparkles, Zap, Waves, Film,
   Shield, Skull, Plane, Mountain as MountainIcon, Users, Radio as RadioIcon, Globe,
 } from 'lucide-react';
 
@@ -121,6 +121,7 @@ const SIDE_ITEMS: SideItem[] = [
   { to: '/',                label: 'Home',          icon: Home,         tone: 'text-white',         glow: 'shadow-[0_0_16px_-2px_rgba(255,255,255,0.5)]' },
   { to: '/the-46',          label: 'The 46',        icon: Folder,       tone: 'text-amber-300',     glow: 'shadow-[0_0_16px_-2px_rgba(251,191,36,0.7)]' },
   { to: '/uap',             label: 'Disclosure',    icon: Eye,          tone: 'text-emerald-300',   glow: 'shadow-[0_0_16px_-2px_rgba(16,185,129,0.7)]' },
+  { to: '/documentaries',   label: 'Docs',          icon: Film,         tone: 'text-emerald-300',   glow: '' },
   { to: '/uap',             label: 'UAP Cases',     icon: Plane,        tone: 'text-cyan-300',      glow: '' },
   { to: '/whistleblowers',  label: 'Whistleblw',    icon: Shield,       tone: 'text-emerald-300',   glow: '' },
   { to: '/whistleblowers',  label: 'Crash Retr',    icon: AlertTriangle,tone: 'text-red-400',       glow: '' },
