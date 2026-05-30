@@ -873,6 +873,19 @@ export function TempleObservatoryPage() {
 
       <div className="relative z-10">
         <TopNav kp={kp} />
+        {/* Mobile realm strip */}
+        <nav className="lg:hidden flex gap-2 overflow-x-auto px-3 py-2 border-b border-[#a020f0]/20 bg-[#0a0a1f]/80 backdrop-blur-xl scrollbar-none">
+          {SIDE_ITEMS.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-[2px] text-white/80 hover:border-[#ffd700]/50 hover:text-[#fde68a] transition-colors"
+            >
+              <item.icon className={`w-3.5 h-3.5 ${item.tone}`} />
+              {item.label}
+            </Link>
+          ))}
+        </nav>
         <div className="flex">
           <Sidebar />
           <main className="flex-1 min-w-0">
