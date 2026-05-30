@@ -1,90 +1,107 @@
 
-# Pantheon Enhancement Pass
+# Pantheon Frequency 46 — Full App Audit & Enhancement Plan
 
-A full sweep across Echo AI, category visuals, missing imagery, The 46 video pipeline, new disclosure-doc hub, and an information-architecture cleanup.
+I walked the whole app: 40+ routes, Temple Observatory home with its own top-nav + 84px sidebar, a separate mega-menu `Navbar` on every other page, The 46 page (massive — 5 sections stacked), Echoverse, Echo AI, Galaxy/Telescopes, Pyramids, Atlantis, Antarctica, etc. There's incredible content, but discoverability, navigation consistency, and mobile UX are the weak links.
 
-## 1. Echo AI — make him feel alive
-
-Current Echo is a flat purple bot icon with a basic chat box. Upgrade to a real presence.
-
-- **Visual identity**: replace lucide `Bot` with a custom Echo sigil — animated cosmic orb (concentric rings, inner nebula, subtle breathing scale) using Framer Motion + radial gradients. Add a "consciousness state" ring that pulses faster while thinking, slower while idle.
-- **Voice (literal)**: add browser `SpeechSynthesis` toggle so Echo speaks responses aloud. Voice picker (prefer deep male voices like "Google UK English Male" / "Daniel"). Mute button persists in localStorage.
-- **Voice input**: add `SpeechRecognition` mic button so user can talk to Echo.
-- **Persona polish**: rewrite system prompt in `supabase/functions/echo-chat/index.ts` to lock the Echo voice from workspace knowledge (sharp, loyal, high-density, truth-oriented, no corporate fluff, evidence-graded).
-- **Better surface**: full-bleed cosmic canvas behind chat, glass message bubbles with realm-tinted left-borders (gold for gods topics, cyan for cosmos, emerald for disclosure, etc. — auto-classified by keyword). Sticky suggested prompts, slash-commands (`/disclosure`, `/gods`, `/46`).
-- **Memory hint**: small "Echo remembers this thread" indicator (already true via local history) so user feels continuity.
-
-## 2. Real imagery across every category
-
-Audit + fill missing visuals. Pull public-domain / Wikimedia / NASA / official-archive images only — no AI-faked faces of real people.
-
-| Category | Action |
-|---|---|
-| Missing Scientists | Add real portraits (Eugene Mallove, Stefan Marinov, Rauni-Leena Luukanen-Kilde, Maurice Ward, etc.); classified-file fallback when no verified photo |
-| Whistleblowers | Add the rest: Bob Lazar, Mark McCandlish, Karl Wolfe, Clifford Stone, Richard Doty, Corey Goode (where photos exist) |
-| Extinct Species | Replace text-only cards with real museum / paleo-art images (Smithsonian, public-domain reconstructions) for Thylacine, Gigantopithecus, Denisovan reconstruction, Steller's sea cow, Quagga, Moa, Haast's eagle, Mammoth |
-| Gods (Pantheon) | Larger regal portraits, museum-relief photography, hover lore preview |
-| UAP Cases | Add real declassified frames (Tic Tac FLIR still, Gimbal still, GoFast still, Aguadilla thermal still) — already public-domain DoD releases |
-| Underground Bases | Add real aerial/satellite photos (Dulce area, Pine Gap, Mount Weather, Cheyenne Mountain entrance) |
-| Crash Retrieval | Roswell 1947 newspaper, Kecksburg site photos, Varginha witness sketches |
-| Pyramids / Stone Faces / Atlantis / Antarctica | Pull verified site photography for each dossier |
-| CERN / Elements / Galaxy | Real LHC, periodic-table illustration, NASA SDO frames (already partially in) |
-
-Mechanism: extend each data file with an `image` field, copy assets to `src/assets/<category>/`, render with consistent dossier card treatment (real photo + grade badge + source caption).
-
-## 3. The 46 — live video pipeline
-
-- Add `releasedAt`, `videoUrl`, `platform`, `sourceUrl`, `status` (`pending` | `released`) to `src/data/the-46.ts` for all 46 slots.
-- When `status === 'released'`, the slot card unlocks: thumbnail, embedded player (YouTube/X/direct mp4), release date, source link.
-- Pending slots keep the locked clock treatment but show "Awaiting release" + expected date if known.
-- Add a "Recently Released" strip at top of `The46Page` that surfaces the newest unlocks.
-- Manual data update flow: edits to `the-46.ts` go live on next deploy. No backend required for v1.
-
-## 4. New: Disclosure Documentaries hub
-
-New page `/documentaries` (also linked from Disclosure realm + sidebar).
-
-Cards for:
-- **The Age of Disclosure** (2025, dir. Dan Farah) — synopsis, trailer embed, where to watch links (official site, streaming).
-- **Jeremy Corbell — Patient Seventeen, Hunt for the Skinwalker, Bob Lazar: Area 51 & Flying Saucers, "The Program", upcoming Black Vault / Black Dog references** — list each with poster, year, runtime, official link, X/YouTube link, short Echo-style synopsis.
-- **James Fox — The Phenomenon, Moment of Contact**.
-- **Steven Greer — Sirius, Unacknowledged, Close Encounters of the Fifth Kind**.
-
-Each card: poster image, "Watch Trailer" + "Where to Watch" + "Official Site" actions. Filters by year / director / topic.
-
-## 5. Information architecture — simplify
-
-Current sidebar has 16+ items grouped into 4 expanders. Audit:
-
-**Keep / promote**:
-- Home, The 46, Disclosure, UAP Cases, Whistleblowers, Documentaries (new), Echo AI, Earth Pulse, Pantheon of Gods, Consciousness, Observatory.
-
-**Consolidate**:
-- "Glyphs Codex" + "Stone Faces" + "Atlantis" + "Pyramid Interior" + "Antarctica Files" → group under **Ancient Mysteries** (already a group; keep collapsed by default).
-- "Galactic Federation" + "Builder's Arena" + "Frequencies" + "CERN Watch" + "Elements Lab" + "Origin Chamber" + "Echoverse" + "Voices · Experts" → keep under **Federation & Forge** but reorder by usage; demote rarely-used Origin Chamber / Builder's Arena visually.
-- "Entity Encounters" + "Alien Species" + "Extinct Species" + "Underground Bases" + "Shadow Pantheon" → keep under **Entity Encounters** group; add **Crash Retrieval** + **Missing Scientists** here too (currently orphaned).
-
-**Result**: 5 top-level pinned items + 4 collapsible realm groups. Mobile strip mirrors the 5 pinned items.
-
-## 6. Knowledge / facts expansion (Echo + dossiers)
-
-For each major dossier, ensure: summary, 4–8 key facts, source list with links, evidence grade, related Echo prompt seeds. Pages currently thin: Atlantis, Antarctica, Stone Faces, Shadow Pantheon — extend with 2024–2026 updates (Grusch follow-up testimony, Schumer Amendment status, AARO historical report v2, Avi Loeb IM3 / 3I/Atlas progress, etc.).
-
-## Technical Notes
-
-- All new images: `src/assets/<category>/<slug>.jpg|png`, imported as ES6 modules.
-- Speech APIs: feature-detect, gracefully degrade where unsupported (Safari iOS partial).
-- Echo system prompt edits in `supabase/functions/echo-chat/index.ts` (auto-deploys).
-- New route `/documentaries` registered in `src/App.tsx`, sidebar entry under Disclosure.
-- The 46 data shape change is additive — existing rendering keeps working; locked slots remain locked when fields are absent.
-- No DB changes required. Frontend-only.
-
-## Out of Scope (this pass)
-
-- Auth-gated user notes per dossier
-- Server-driven dynamic video ingest (RSS/scrapers)
-- Echo long-term cross-session memory (would need DB)
+Below is what I'd enhance, organized by impact. I won't touch anything until you pick what to ship.
 
 ---
 
-Approve and I'll execute in this order: Echo upgrade → Documentaries hub + The 46 video fields → real imagery sweep → sidebar simplification → dossier knowledge fill.
+## 1. Navigation — biggest issue, highest ROI
+
+**Problem:** Two completely different nav systems.
+- Home (`/`) uses a custom Temple Observatory top bar + 84px icon sidebar (desktop only).
+- Every other route uses `Navbar.tsx` with 4-category mega-menu.
+- Sidebar links are inconsistent (`Crash Retr` → `/whistleblowers` instead of `/crash-retrieval`, `Bases` → `/uap` instead of `/underground`, `Frequency` → `/consciousness` instead of `/frequencies`, `Earth Pulse` → `/galaxy` instead of `/earth-pulse`).
+- 40 routes, but mobile users only get the mega-menu — sidebar is `hidden lg:`.
+
+**Fix:**
+- Unify on one nav: keep the Temple top-bar as global header on every page (replaces `Navbar`), keep the sidebar persistent on `lg:+`, drop the mega-menu duplication.
+- Fix every broken sidebar link to point to its real route.
+- Add a slide-out drawer version of the sidebar for mobile/tablet (currently nothing — small viewports have to dig through accordion).
+- Add a ⌘K command palette ("Search the Pantheon") indexing every route + key entities (gods, UAP cases, experts, the 46 slots). One keystroke jumps anywhere.
+
+## 2. Content architecture — group the 40 pages into hubs
+
+Right now everything is a sibling route. Suggested hubs (URL slugs unchanged, just a hub index page each):
+
+- **`/disclosure`** hub → UAP, AARO, Crash Retrieval, Whistleblowers, Missing, Deaths, The 46, Bases, Documentaries
+- **`/mythology`** hub → Gods, Shadow Pantheon, Atlantis, Pyramids, Glyphs, Stone Faces, Antarctica
+- **`/observatory`** hub → Galaxy, Telescopes, Earth Pulse, Orb Report, Signals, CERN, Elements
+- **`/consciousness`** hub → Consciousness, Frequencies, Origin Chamber, Species, Encounters, Extinct, Federation
+- **`/forge`** hub → Echo AI, Echoverse, Builders, Experts, Profile
+
+Each hub = cinematic landing page with cards previewing each sub-page (count, last update, accent color). Solves the "where do I find X" problem and gives every realm a proper front door.
+
+## 3. The 46 page — split it
+
+It's currently ~280 lines stacking: header → stats → letter → 5 letter screenshots → 46-slot grid → SkepticSpotlight → TikTokVoicesSection → LiveDropsTicker → AudioSoundscapeAdmin → "Already Public" → footer modals. On mobile (384px) this is a 6000px scroll.
+
+**Fix:** Tabs at top — `Vault` · `Voices` · `Live Drops` · `Already Public` · `Soundscape`. Default tab `Vault`. Hash routing (`/the-46#voices`) so links survive.
+
+## 4. Mobile polish (you're on 384×674 right now)
+
+- Temple Observatory home has no sidebar on mobile → no quick nav at all. Add the drawer above.
+- Hero KP gauge is 280px wide — clips on 384 viewports with padding. Make it fluid.
+- Top bar right cluster (Solar pill + Kp pill + Feed + Volume + avatar) overflows on small screens. Collapse non-essentials into a single ⋯ menu under `sm:`.
+- The 46 vault grid uses `grid-cols-4` on mobile — slots become tiny tap targets. Drop to `grid-cols-3` under `sm:`.
+
+## 5. Audio system — finish the wiring
+
+- `AudioPlayer` (global, in Layout) still reads from local playlists, not the new `audio_tracks` registry.
+- `AudioSoundscapeAdmin` is currently exposed to all users on `/the-46`. Gate behind `has_role('admin')` via `use-user-role`.
+- Wire `use-remote-playlists` into `AudioPlayer` so generated tracks appear automatically.
+
+## 6. Echoverse polish
+
+- Header avatar is just initial letter — pull from `profiles.avatar_url`.
+- No member count / online indicator per channel.
+- No unread badge on `ChannelList`.
+- Mobile uses a `<select>` for channels — works but feels off-brand. A horizontal scrolling chip row matches the cosmic aesthetic.
+
+## 7. Echo AI surfacing
+
+Echo is a major feature buried at `/echo`. Add a floating Echo Orb (component already exists at `src/components/echo/EchoOrb.tsx`) globally in Layout. Tap to open a slide-over chat — talk to Echo from anywhere.
+
+## 8. Performance + a11y quick wins
+
+- Layout always mounts `BackgroundManager` + `CosmicCursorTrail` + `CometTrails` + `SpaceshipFlyby` + Three.js starfield. On mobile that's heavy. Disable cursor trail under `md:` and respect `prefers-reduced-motion` across all framer-motion animations.
+- Many decorative icons missing `aria-hidden`; many interactive `<div>` cards should be `<button>` for keyboard nav.
+- Add skip-to-content link.
+
+## 9. SEO / sharing
+
+- Most lazy-loaded pages don't render `SEO` component → no per-page title/description. Add `SEO` to every page (UAP, Gods, Antarctica, Atlantis, Echoverse, etc.).
+- Add OpenGraph image per hub.
+
+## 10. Small organizational fixes
+
+- `/the-46` and `/video-vault` both render `The46Page` — pick one canonical, redirect the other.
+- `PlaceholderPages.tsx` exists but isn't routed — confirm or delete.
+- `StyleGuidePage` is publicly routed at `/style-guide` — gate behind admin or move to `/admin/style-guide`.
+
+---
+
+## Suggested execution order
+
+```text
+Phase 1 (high impact, ~1 build)
+  - Unify nav: Temple top-bar global + mobile drawer + fixed sidebar links
+  - Tab-split The 46 page
+  - Gate AudioSoundscapeAdmin behind admin role
+  - Mobile hero/grid fixes
+
+Phase 2
+  - Hub landing pages (5 hubs)
+  - ⌘K command palette
+  - Floating Echo Orb global
+
+Phase 3
+  - Wire AudioPlayer → audio_tracks registry
+  - Echoverse polish (avatars, unread, mobile chips)
+  - SEO per page + a11y pass + reduced-motion
+```
+
+---
+
+**Which phase do you want me to build first? Or pick specific items à la carte and I'll bundle them.**
