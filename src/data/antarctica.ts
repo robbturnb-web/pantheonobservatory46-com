@@ -247,6 +247,100 @@ export const antarcticaEntries: DossierEntry[] = [
       { label: 'The Australian — long-form investigation by Greg Roberts (2008)' },
     ],
   },
+  {
+    id: 'lake-vostok',
+    title: 'Lake Vostok · Subglacial Anomaly',
+    subtitle: 'Buried freshwater lake · 4 km under the ice',
+    category: 'Site',
+    era: '1996–present',
+    location: 'East Antarctic Ice Sheet (78°S 106°E)',
+    confidence: 'VERIFIED',
+    symbol: '🧊',
+    summary:
+      "The largest of Antarctica's 400+ subglacial lakes, sealed beneath 3.7 km of ice for at least 15 million years. Russian drilling in 2012 finally penetrated the lake — and Russian state media reported a 'powerful magnetic anomaly' at the south end that no published paper has fully explained.",
+    origin:
+      "Mapped in 1996 by joint Russian, British, and American radar surveys. Roughly 250 km long, 50 km wide, with depths to 800 m. The water is 10 to 15 million years old and entirely cut off from the atmosphere. Russia's Vostok Station drilled the borehole 5G that reached the lake on February 5, 2012.\n\nA TASS report citing chief driller Valery Lukin mentioned a 'magnetic anomaly' near the southern shore detected during airborne surveys — a feature consistent with either a buried iron-rich intrusion or, per fringe interpretation, an artificial structure. Western scientists have not replicated or refuted the anomaly publicly.",
+    keyEvents: [
+      '1996: Russia–UK–USA radar surveys publish initial Vostok dimensions in Nature.',
+      '2008: Studinger et al. publish magnetic survey hinting at a localized anomaly.',
+      'Feb 5 2012: Borehole 5G punctures the lake surface.',
+      '2013: Russian team announces "bacterial species unknown to science" found in sample — later contested as drilling-fluid contamination.',
+    ],
+    evidence: [
+      'Studinger, M. et al. (2008) — "Sub-ice geology inland of the Transantarctic Mountains in light of new aerogeophysical data", Earth Planet. Sci. Lett.',
+      'Bulat, S. (2016) — paper on Vostok lake microbiology in Phil. Trans. R. Soc.',
+      'TASS Russian state news release, Feb 8 2012.',
+    ],
+    skepticalView:
+      'Mainstream geophysicists (e.g., Robin Bell, Lamont-Doherty) attribute the magnetic anomaly to a thinned section of crust or a buried mafic intrusion. The "unknown species" was retracted as kerosene-derived contamination from the drill column.',
+    videos: [
+      { id: 'PsX5N6Vlfb4', title: 'Lake Vostok: The Mystery Under Antarctic Ice', channel: 'Be Smart' },
+    ],
+    sources: [
+      { label: 'Studinger et al. 2008 — EPSL', url: 'https://doi.org/10.1016/j.epsl.2008.09.020' },
+      { label: 'TASS Vostok drilling report (Feb 2012)' },
+    ],
+  },
+  {
+    id: 'byrd-diary',
+    title: "Admiral Byrd's Alleged Secret Diary",
+    subtitle: '"The Inner Earth · My Secret Diary" · attributed to 1947',
+    category: 'Document',
+    era: '1947 (attributed)',
+    location: 'Inner Earth / Antarctica',
+    confidence: 'ALLEGED',
+    symbol: '📓',
+    summary:
+      "A 14-page document that surfaced in fringe circles in the 1970s claiming to be Admiral Byrd's personal flight log from a polar expedition where he entered a hollow earth via the South Pole and met a being called 'The Master' in an underground city called 'Agartha.'",
+    origin:
+      "The document is dated February 1947 and describes Byrd piloting a single aircraft past the pole into a warm, lush interior, encountering swastika-marked craft, and being escorted into a crystalline city. No original physical copy with provenance has ever surfaced; the earliest verifiable appearance is in mimeographed UFO-society newsletters circa 1970, long after Byrd's death in 1957.",
+    keyEvents: [
+      '1947: Byrd flies Operation Highjump (real expedition).',
+      '1957: Byrd dies; no such diary found in his estate at Ohio State University.',
+      'c.1970: First mimeographed copies circulate among UFO researchers.',
+      '1990s onward: Text reproduced on websites and in self-published books.',
+    ],
+    evidence: [
+      'The Ohio State University Byrd Polar Research Center catalog of Byrd papers — contains no such diary.',
+      'The diary text itself, widely reproduced (e.g. in Tim Beckley reprints).',
+    ],
+    skepticalView:
+      "Treated as a hoax by all credentialed Byrd biographers (Lisle Rose, Eugene Rodgers). The writing style does not match Byrd's known journals, technical aviation details are wrong for 1947 aircraft, and the document's first appearance two decades after Byrd's death is the classic pattern of postmortem fabrication.",
+    videos: [],
+    sources: [
+      { label: 'Byrd Polar Research Center, Ohio State University — official archive index' },
+      { label: 'Eugene Rodgers — Beyond the Barrier (1990), Naval Institute Press' },
+    ],
+  },
+  {
+    id: 'wilkes-pyramid',
+    title: 'The "Antarctic Pyramid" Claim',
+    subtitle: 'Wilkes Land peaks photographed 2013 onward',
+    category: 'Anomaly',
+    era: '2013–present',
+    location: 'Ellsworth Mountains, Western Antarctica',
+    confidence: 'DEBATED',
+    symbol: '🔺',
+    summary:
+      'Satellite images of two pyramidal peaks in the Ellsworth Mountains have circulated since 2013 with claims they are artificial structures. Geologists identify them as classic glacial nunataks — peaks shaped by ice abrasion on four sides — but the visual symmetry is striking.',
+    origin:
+      "Photographs from researchers and Google Earth captures (notably one peak at 79°58'S 81°57'W) show near-perfect four-sided pyramidal forms. Fringe coverage attributes them to a buried Atlantean or Anunnaki civilization. Mainstream glaciology attributes the form to 'horn' or 'pyramidal-peak' erosion, identical in mechanism to the Matterhorn in the Alps.",
+    keyEvents: [
+      '2013: First viral images of "Antarctic Pyramid" hit social media.',
+      '2016: Live Science article quotes glaciologists Eric Rignot and Mauri Pelto debunking artificial origin.',
+      '2020+: New satellite passes (Sentinel-2) keep the story alive online.',
+    ],
+    evidence: [
+      'Google Earth imagery at 79.978°S, 81.957°W.',
+      'Pelto, M. — Mauri Pelto interview, Live Science (2016).',
+    ],
+    skepticalView:
+      'Glaciologists are unanimous: these are erosional horns, naturally common in heavily glaciated mountain ranges. The same shape appears in the Alps and the Andes without anyone calling them artificial.',
+    videos: [],
+    sources: [
+      { label: 'Live Science — "Are There Pyramids in Antarctica?" (2016)' },
+    ],
+  },
 ];
 
 export const antarcticaCategories = ['All', 'Operation', 'Document', 'Site', 'Anomaly', 'Event', 'Casefile'];

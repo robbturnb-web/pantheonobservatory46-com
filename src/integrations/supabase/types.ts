@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      audio_tracks: {
+        Row: {
+          created_at: string
+          duration_seconds: number
+          error_message: string | null
+          generated_at: string | null
+          id: string
+          label: string
+          playlist: string
+          prompt: string
+          public_url: string | null
+          status: string
+          track_key: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number
+          error_message?: string | null
+          generated_at?: string | null
+          id?: string
+          label: string
+          playlist: string
+          prompt: string
+          public_url?: string | null
+          status?: string
+          track_key: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number
+          error_message?: string | null
+          generated_at?: string | null
+          id?: string
+          label?: string
+          playlist?: string
+          prompt?: string
+          public_url?: string | null
+          status?: string
+          track_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       community_testimonies: {
         Row: {
           approved_at: string | null
