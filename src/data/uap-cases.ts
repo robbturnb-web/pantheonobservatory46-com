@@ -1,10 +1,17 @@
 import type { UAPCase } from '../types';
 import type { Source } from '../components/SourceList';
 import type { VideoData } from '../components/VideoEmbed';
+import nimitzImg from '@/assets/uap-nimitz.jpg';
+import gruschImg from '@/assets/uap-grusch.jpg';
+import phoenixImg from '@/assets/uap-phoenix.jpg';
+import roswellImg from '@/assets/uap-roswell.jpg';
+import rendleshamImg from '@/assets/uap-rendlesham.jpg';
+import tehranImg from '@/assets/uap-tehran.jpg';
 
 export interface UAPCaseEnhanced extends Omit<UAPCase, 'sources'> {
   sources: Source[];
   videos: VideoData[];
+  heroImage?: string;
 }
 
 export const uapCases: UAPCaseEnhanced[] = [
