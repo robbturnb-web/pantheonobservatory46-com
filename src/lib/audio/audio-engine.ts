@@ -184,6 +184,9 @@ export class AudioEngine {
 
   async play(): Promise<void> {
     if (!this.playlist.length) return;
+    // User explicitly hit play — give the engine another chance.
+    this.errorStreak = 0;
+    this.exhausted = false;
     if (!this.active.src) this.loadCurrent();
     this.active.volume = this.volume;
     try {
