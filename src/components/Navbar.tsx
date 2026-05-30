@@ -39,6 +39,7 @@ const categories: NavCategory[] = [
       { to: '/aaro', label: 'AARO Watch' },
       { to: '/crash-retrieval', label: 'Crash Retrieval' },
       { to: '/black-programs', label: 'Black Programs' },
+      { to: '/rubiks-cube', label: "Rubik's Cube" },
       { to: '/timeline', label: 'Disclosure Timeline' },
       { to: '/whistleblowers', label: 'Whistleblower Vault' },
       { to: '/corbell', label: 'Jeremy Corbell' },
