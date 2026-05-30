@@ -40,7 +40,8 @@ export const documentaries: Documentary[] = [
     topics: ['Abductions', 'Implants', 'Surgery'],
     synopsis:
       'Corbell follows Dr. Roger Leir as he surgically removes a metallic implant from "Patient 17" — an object the patient claims was placed during a non-human encounter. Independent lab analysis follows.',
-    trailerYouTubeId: 'NL7Z3PEbE8w',
+    // Trailer not embeddable — page falls back to Watch CTA (Tubi / official site)
+    watchUrl: 'https://tubitv.com/movies/100038651/patient-seventeen',
     officialUrl: 'https://www.extraordinarybeliefs.com',
   },
   {
