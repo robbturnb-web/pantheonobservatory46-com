@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Lock, Unlock, Clock, ExternalLink, FileText, Play, Radio } from 'lucide-react';
+import { Lock, Unlock, Clock, ExternalLink, FileText, Play } from 'lucide-react';
 import {
   vaultSlots,
   publicSlots,
@@ -10,7 +10,7 @@ import {
   type VaultSlot,
   type PublicSlot,
 } from '@/data/the-46';
-import { tiktokVoices } from '@/data/tiktok-voices';
+import { TikTokVoicesSection } from '@/components/the46/TikTokVoicesSection';
 import { VaultSlotCard } from '@/components/the46/VaultSlotCard';
 import { VaultSlotModal } from '@/components/the46/VaultSlotModal';
 import { VideoEmbed } from '@/components/VideoEmbed';
@@ -167,81 +167,7 @@ export function The46Page() {
         ))}
       </div>
 
-      {/* TikTok Disclosure Voices */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="mt-16 pt-10 border-t border-border"
-      >
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-realm-gods/10 border border-realm-gods/30 text-xs uppercase tracking-[3px] text-realm-gods mb-3">
-            <Radio className="w-3 h-3" />
-            TikTok Disclosure Voices
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-2">
-            Real voices. Real sources.
-          </h2>
-          <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-            Turning skeptics into seekers — the creators driving disclosure into the mainstream feed.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {tiktokVoices.map((v, i) => {
-            const ring =
-              v.rating === 'GREEN'
-                ? 'border-signal-online/40 hover:border-signal-online'
-                : v.rating === 'YELLOW'
-                  ? 'border-realm-gods/40 hover:border-realm-gods'
-                  : 'border-realm-blackProjects/40 hover:border-realm-blackProjects';
-            const dot =
-              v.rating === 'GREEN'
-                ? 'bg-signal-online'
-                : v.rating === 'YELLOW'
-                  ? 'bg-realm-gods'
-                  : 'bg-realm-blackProjects';
-            return (
-              <motion.a
-                key={v.id}
-                href={v.url}
-                target="_blank"
-                rel="noreferrer"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className={`group glass-cosmic rounded-2xl p-5 border ${ring} transition-all hover:-translate-y-1 hover:shadow-[0_0_40px_-10px_hsl(var(--primary)/0.4)]`}
-              >
-                <div className="flex items-start justify-between gap-2 mb-3">
-                  <div>
-                    <div className="text-sm font-bold text-foreground">{v.creator}</div>
-                    <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
-                      {v.handle}
-                    </div>
-                  </div>
-                  <span
-                    className={`inline-flex items-center gap-1 text-[9px] uppercase tracking-wider px-2 py-1 rounded-full bg-background/40 ${dot.replace('bg-', 'text-')}`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full ${dot}`} />
-                    {v.rating}
-                  </span>
-                </div>
-                <blockquote className="text-sm text-foreground/90 leading-relaxed italic border-l-2 border-primary/40 pl-3 mb-3">
-                  “{v.quote}”
-                </blockquote>
-                <div className="text-[11px] text-muted-foreground mb-3">{v.topic}</div>
-                <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary group-hover:text-accent-neon transition-colors">
-                  <Play className="w-3 h-3 fill-current" />
-                  Watch Clip
-                  <ExternalLink className="w-3 h-3" />
-                </div>
-              </motion.a>
-            );
-          })}
-        </div>
-      </motion.section>
+      <TikTokVoicesSection />
 
       {/* Already public section */}
       <motion.div

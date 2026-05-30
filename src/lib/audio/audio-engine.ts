@@ -47,6 +47,10 @@ export class AudioEngine {
   private playlist: Track[] = [];
   private index = 0;
   private playing = false;
+  /** Consecutive load failures; reset on any successful play. */
+  private errorStreak = 0;
+  /** True once we've given up on the current playlist because every track failed. */
+  private exhausted = false;
 
   // Crossfade RAF kill-switch — bumped on every new fade so old loops self-terminate.
   private fadeToken = 0;
@@ -64,17 +68,38 @@ export class AudioEngine {
       this.audioA.loop = false;
       this.audioB.loop = false;
 
-      // Auto-skip on error or end so a missing file doesn't freeze the player.
-      const handleEnded = () => this.next();
-      const handleError = () => {
-        // Silently advance if the active track failed to load.
+      // Auto-skip on end. Errors are handled defensively to avoid 404 loops.
+      const handleEnded = () => {
+        this.errorStreak = 0;
         this.next();
+      };
+      const handleError = (e: Event) => {
+        // Only react to errors from the currently active element. Ignore
+        // the inactive ping-pong audio (it may legitimately have a stale src).
+        if (e.currentTarget !== this.active) return;
+        this.errorStreak += 1;
+        // If every track in the playlist failed in a row, stop. This prevents
+        // a missing-file storm from rerendering the UI hundreds of times/sec.
+        if (this.playlist.length === 0 || this.errorStreak >= this.playlist.length) {
+          this.exhausted = true;
+          this.playing = false;
+          this.emit('pause');
+          return;
+        }
+        // Otherwise try the next file, but only while the user wants playback.
+        if (this.playing) this.next();
       };
 
       this.audioA.addEventListener('ended', handleEnded);
       this.audioB.addEventListener('ended', handleEnded);
       this.audioA.addEventListener('error', handleError);
       this.audioB.addEventListener('error', handleError);
+      const handlePlaying = () => {
+        this.errorStreak = 0;
+        this.exhausted = false;
+      };
+      this.audioA.addEventListener('playing', handlePlaying);
+      this.audioB.addEventListener('playing', handlePlaying);
     }
 
     this.restore();
@@ -123,6 +148,9 @@ export class AudioEngine {
 
     const wasPlaying = this.playing;
     this.playlist = list;
+    // New playlist deserves a fresh shot at playing.
+    this.errorStreak = 0;
+    this.exhausted = false;
     // Clamp index to the new playlist length.
     if (this.index >= list.length) this.index = 0;
 
@@ -156,6 +184,9 @@ export class AudioEngine {
 
   async play(): Promise<void> {
     if (!this.playlist.length) return;
+    // User explicitly hit play — give the engine another chance.
+    this.errorStreak = 0;
+    this.exhausted = false;
     if (!this.active.src) this.loadCurrent();
     this.active.volume = this.volume;
     try {
