@@ -90,6 +90,7 @@ export const whistleblowers: Whistleblower[] = [
       { platform: 'youtube', id: 'KQ7Dw-739VY', title: 'Congressional UAP Hearing (Full) — C-SPAN' },
     ],
     accentColor: '#10b981',
+    image: davidGruschImg,
   },
   {
     id: 'lue-elizondo',
@@ -121,6 +122,7 @@ export const whistleblowers: Whistleblower[] = [
       { platform: 'youtube', id: 'ZBtMbBPzqHY', title: '60 Minutes — UFOs: Lue Elizondo Interview' },
     ],
     accentColor: '#8b5cf6',
+    image: lueElizondoImg,
   },
   {
     id: 'steven-greer',
@@ -152,6 +154,7 @@ export const whistleblowers: Whistleblower[] = [
       { platform: 'youtube', id: '4DrcG7VGgQU', title: 'Disclosure Project — National Press Club (2001)' },
     ],
     accentColor: '#f59e0b',
+    image: stevenGreerImg,
   },
   {
     id: 'phil-schneider',
@@ -181,6 +184,7 @@ export const whistleblowers: Whistleblower[] = [
       { platform: 'youtube', id: 'xedmfAgx8eg', title: 'Phil Schneider — Last Lecture Before Death' },
     ],
     accentColor: '#ef4444',
+    image: philSchneiderImg,
   },
   {
     id: 'gary-mckinnon',
@@ -210,6 +214,7 @@ export const whistleblowers: Whistleblower[] = [
     ],
     videos: [],
     accentColor: '#06b6d4',
+    image: garyMckinnonImg,
   },
   {
     id: 'mark-mccandlish',
