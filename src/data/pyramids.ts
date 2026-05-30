@@ -92,7 +92,7 @@ export const pyramids: Pyramid[] = [
       { label: 'Mica Chambers Research', url: 'https://en.wikipedia.org/wiki/Teotihuacan' },
     ],
     videos: [
-      { platform: 'youtube', id: 'tZ8Jyq5Xzas', title: 'Teotihuacan — Lost City of the Gods' },
+      { platform: 'youtube', id: 'YefW8sDIka4', title: 'Teotihuacan: City of the Gods — Full Documentary' },
     ],
   },
   {
@@ -188,7 +188,7 @@ export const pyramids: Pyramid[] = [
       { label: 'UNESCO — Chichén Itzá', url: 'https://whc.unesco.org/en/list/483/' },
     ],
     videos: [
-      { platform: 'youtube', id: 'b-HY1Kvjd1A', title: 'Equinox Serpent at Kukulcán — Chichén Itzá' },
+      { platform: 'youtube', id: 'Zvv9EnBuem4', title: 'Equinox Serpent at Kukulcán — Chichén Itzá' },
     ],
   },
   {

@@ -181,11 +181,11 @@ export const whistleblowers: Whistleblower[] = [
       { year: '1996 Jan', event: 'Found dead — ruled suicide, family disputes cause' },
     ],
     sources: [
-      { label: 'Phil Schneider Lecture Series (1995)', url: 'https://www.youtube.com/watch?v=xedmfAgx8eg' },
+      { label: 'Phil Schneider Lecture Series (1995)', url: 'https://www.youtube.com/watch?v=Slgb5U-OqFM' },
       { label: 'Cynthia Drayer Interview', url: 'https://www.youtube.com/results?search_query=cynthia+drayer+phil+schneider' },
     ],
     videos: [
-      { platform: 'youtube', id: 'xedmfAgx8eg', title: 'Phil Schneider — Last Lecture Before Death' },
+      { platform: 'youtube', id: 'Slgb5U-OqFM', title: 'Phil Schneider — Last Lecture Before Death' },
     ],
     accentColor: '#ef4444',
     image: philSchneiderImg,

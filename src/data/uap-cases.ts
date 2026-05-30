@@ -31,7 +31,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'SCU Nimitz Analysis Report', url: 'https://www.explorescu.org/post/nimitz_strike_group_2004' },
     ],
     videos: [
-      { platform: 'youtube', id: 'lWLZwnUBMGQ', title: 'Official Pentagon FLIR1 "Tic Tac" Footage' },
+      { platform: 'youtube', id: '6rWOtrke0HY', title: 'Official Pentagon FLIR1 "Tic Tac" Footage' },
       { platform: 'youtube', id: 'aB8zcAttP1E', title: 'CDR Fravor on Lex Fridman — Full Account' },
     ],
     timeline: [
@@ -128,11 +128,11 @@ export const uapCases: UAPCaseEnhanced[] = [
     alternativeExplanation: "Multiple credentialed military witnesses across multiple nights. Radiation levels at the landing site were elevated. Penniston's binary code, when decoded, yields GPS coordinates.",
     sources: [
       { label: 'Halt Memo (Declassified)', url: 'https://en.wikipedia.org/wiki/Rendlesham_Forest_incident' },
-      { label: 'Halt Audio Recording', url: 'https://www.youtube.com/watch?v=kqPkEMqGCDc' },
+      { label: 'Halt Audio Recording', url: 'https://www.youtube.com/watch?v=1eCmcmefTbM' },
       { label: 'UK National Archives — UFO Files', url: 'https://www.nationalarchives.gov.uk/ufos/' },
     ],
     videos: [
-      { platform: 'youtube', id: 'kqPkEMqGCDc', title: 'Col. Halt Audio — Rendlesham Forest (1980)' },
+      { platform: 'youtube', id: '1eCmcmefTbM', title: 'Col. Halt Audio — Rendlesham Forest (1980)' },
     ],
     timeline: [
       { year: 'Dec 26, 1980', description: 'USAF security patrol investigates lights in Rendlesham Forest; encounters a craft' },
@@ -153,11 +153,11 @@ export const uapCases: UAPCaseEnhanced[] = [
     alternativeExplanation: 'One of the most well-documented military UAP encounters. Multiple radar contacts, visual confirmation, weapons systems disabled, electromagnetic interference documented.',
     sources: [
       { label: 'DIA Assessment (FOIA)', url: 'https://www.theblackvault.com/documentarchive/iran-1976-ufo-incident/' },
-      { label: 'Gen. Parviz Jafari Testimony', url: 'https://www.youtube.com/watch?v=6GkCNeRr_gc' },
+      { label: 'Gen. Parviz Jafari Testimony', url: 'https://www.youtube.com/watch?v=YIzwV1zShaM' },
       { label: 'Dr. Bruce Maccabee Analysis', url: 'https://brumac.mysite.com/' },
     ],
     videos: [
-      { platform: 'youtube', id: '6GkCNeRr_gc', title: 'Gen. Jafari — Tehran UFO Incident (1976)' },
+      { platform: 'youtube', id: 'YIzwV1zShaM', title: 'Gen. Jafari — Tehran UFO Incident (1976)' },
     ],
     timeline: [
       { year: 'Sept 19, 1976', description: 'Multiple civilian reports of bright object over Tehran' },

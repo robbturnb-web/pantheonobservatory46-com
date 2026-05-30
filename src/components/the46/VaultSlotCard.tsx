@@ -14,10 +14,10 @@ export function VaultSlotCard({ slot, index, onClick }: Props) {
   const isUnlocked = slot.status === 'unlocked';
 
   const borderClass = isUnlocked
-    ? 'border-accent-neon/50 bg-black/40 hover:border-accent-neon'
+    ? 'border-accent-neon/50 bg-black/40 hover:border-accent-neon hover:shadow-[0_0_28px_-6px_hsl(var(--accent-neon))]'
     : isPending
-    ? 'border-amber-500/40 bg-black/60 hover:border-amber-400'
-    : 'border-border bg-black/60 hover:border-primary/40';
+    ? 'border-amber-500/40 bg-black/60 hover:border-amber-400 hover:shadow-[0_0_28px_-6px_rgba(245,158,11,0.6)]'
+    : 'border-border bg-black/60 hover:border-primary/40 hover:shadow-[0_0_28px_-6px_hsl(var(--primary))]';
 
   return (
     <motion.button
@@ -25,9 +25,9 @@ export function VaultSlotCard({ slot, index, onClick }: Props) {
       initial={{ opacity: 0, y: 20, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ delay: index * 0.012, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-      whileHover={{ scale: 1.04, y: -2 }}
-      whileTap={{ scale: 0.97 }}
-      className={`relative aspect-square rounded-xl overflow-hidden border ${borderClass} transition-colors group cursor-pointer`}
+      whileHover={{ scale: 1.06, y: -3 }}
+      whileTap={{ scale: 0.96 }}
+      className={`relative aspect-square rounded-xl overflow-hidden border ${borderClass} transition-[border-color,box-shadow] duration-300 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60`}
       aria-label={`Slot ${slot.id} — ${slot.codename}`}
       title={slot.codename}
     >
@@ -41,6 +41,32 @@ export function VaultSlotCard({ slot, index, onClick }: Props) {
                 'repeating-linear-gradient(0deg, rgba(255,255,255,0.15) 0px, rgba(255,255,255,0.15) 1px, transparent 1px, transparent 3px)',
             }}
           />
+          {/* Faint Pantheon 46 sigil watermark */}
+          <div
+            className="absolute inset-0 flex items-center justify-center opacity-[0.08] pointer-events-none"
+            aria-hidden
+          >
+            <svg viewBox="0 0 24 24" className="w-3/4 h-3/4">
+              <polygon
+                points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.6"
+                className={isPending ? 'text-amber-300' : 'text-primary'}
+              />
+              <text
+                x="12"
+                y="14.5"
+                textAnchor="middle"
+                fontSize="6"
+                fontWeight="700"
+                fill="currentColor"
+                className={isPending ? 'text-amber-300' : 'text-primary'}
+              >
+                46
+              </text>
+            </svg>
+          </div>
           <motion.div
             className="absolute inset-0 pointer-events-none"
             animate={{ opacity: [0.1, 0.4, 0.1, 0.25, 0.1] }}
@@ -109,6 +135,14 @@ export function VaultSlotCard({ slot, index, onClick }: Props) {
       <div className="absolute top-1 right-1 px-1 py-0.5 rounded bg-black/60 border border-border">
         <Eye className="w-2.5 h-2.5 text-muted-foreground/60" />
       </div>
+
+      {/* Hover violet rim flash */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, rgba(124,58,237,0.18), transparent 70%)',
+        }}
+      />
     </motion.button>
   );
 }
