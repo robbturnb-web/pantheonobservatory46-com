@@ -258,30 +258,68 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass-cosmic border-t border-border max-h-[80vh] overflow-y-auto"
+            className="lg:hidden border-t border-white/10 max-h-[80vh] overflow-y-auto relative"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(10,6,24,0.96) 0%, rgba(5,3,13,0.98) 100%)',
+              backdropFilter: 'blur(20px)',
+            }}
           >
-            <div className="px-4 py-3 space-y-1">
+            {/* Animated nebula glow behind menu */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full blur-[80px] opacity-30 animate-pulse" style={{ background: '#7C3AED', animationDuration: '6s' }} />
+              <div className="absolute top-1/2 -right-20 w-64 h-64 rounded-full blur-[90px] opacity-20 animate-pulse" style={{ background: '#22D3EE', animationDuration: '9s' }} />
+              <div className="absolute bottom-0 left-1/3 w-56 h-56 rounded-full blur-[100px] opacity-20 animate-pulse" style={{ background: '#D6B35A', animationDuration: '11s' }} />
+            </div>
+
+            <div className="relative px-3 py-4 space-y-2">
               <Link
                 to="/"
-                className={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all border ${
                   location.pathname === '/'
-                    ? 'text-primary bg-accent'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                    ? 'text-primary border-primary/40 bg-primary/10'
+                    : 'text-muted-foreground hover:text-foreground border-white/5 hover:border-white/15 hover:bg-white/5'
                 }`}
               >
-                Home
+                <Eye className="w-4 h-4" />
+                Home · Temple Observatory
               </Link>
               {categories.map((cat) => {
                 const expanded = mobileExpanded === cat.id;
                 return (
-                  <div key={cat.id}>
+                  <motion.div
+                    key={cat.id}
+                    layout
+                    className="rounded-xl overflow-hidden border relative"
+                    style={{
+                      borderColor: expanded ? `${cat.color}55` : 'rgba(255,255,255,0.06)',
+                      background: expanded
+                        ? `linear-gradient(135deg, ${cat.color}14, transparent 70%)`
+                        : 'rgba(255,255,255,0.02)',
+                      boxShadow: expanded ? `0 0 24px ${cat.color}22, inset 0 0 24px ${cat.color}0a` : undefined,
+                    }}
+                  >
+                    {/* Accent bar */}
+                    <div
+                      className="absolute left-0 top-0 bottom-0 w-1 transition-opacity"
+                      style={{ background: cat.color, opacity: expanded ? 1 : 0.35 }}
+                    />
                     <button
                       onClick={() => setMobileExpanded(expanded ? null : cat.id)}
-                      className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider"
+                      className="w-full flex items-center justify-between px-4 py-3.5 text-sm font-bold uppercase tracking-wider transition-colors"
                       style={{ color: cat.color }}
                     >
-                      <span className="inline-flex items-center gap-2">
-                        <cat.icon className="w-4 h-4" />
+                      <span className="inline-flex items-center gap-2.5">
+                        <span
+                          className="inline-flex w-7 h-7 rounded-lg items-center justify-center border"
+                          style={{
+                            borderColor: `${cat.color}55`,
+                            background: `${cat.color}1a`,
+                            boxShadow: `0 0 12px ${cat.color}55`,
+                          }}
+                        >
+                          <cat.icon className="w-3.5 h-3.5" style={{ filter: `drop-shadow(0 0 4px ${cat.color})` }} />
+                        </span>
                         {cat.label}
                       </span>
                       <ChevronDown
@@ -294,40 +332,67 @@ export function Navbar() {
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
-                          className="overflow-hidden pl-4"
+                          className="overflow-hidden"
                         >
-                          {cat.links.map((link) => (
-                            <Link
-                              key={link.to}
-                              to={link.to}
-                              className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
-                                location.pathname === link.to
-                                  ? 'text-primary bg-accent'
-                                  : 'text-muted-foreground hover:text-foreground hover:bg-accent'
-                              }`}
-                            >
-                              {link.label}
-                            </Link>
-                          ))}
+                          <div className="px-3 pb-3 pt-1 grid gap-1">
+                            {cat.links.map((link, i) => {
+                              const active = location.pathname === link.to;
+                              return (
+                                <motion.div
+                                  key={link.to}
+                                  initial={{ opacity: 0, x: -8 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: i * 0.025 }}
+                                >
+                                  <Link
+                                    to={link.to}
+                                    className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm transition-all border"
+                                    style={{
+                                      color: active ? cat.color : 'hsl(var(--foreground) / 0.75)',
+                                      borderColor: active ? `${cat.color}55` : 'transparent',
+                                      background: active ? `${cat.color}14` : 'transparent',
+                                      boxShadow: active ? `0 0 14px ${cat.color}33` : undefined,
+                                    }}
+                                  >
+                                    <span
+                                      className="w-1.5 h-1.5 rounded-full"
+                                      style={{
+                                        background: cat.color,
+                                        opacity: active ? 1 : 0.4,
+                                        boxShadow: active ? `0 0 6px ${cat.color}` : undefined,
+                                      }}
+                                    />
+                                    {link.label}
+                                  </Link>
+                                </motion.div>
+                              );
+                            })}
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 );
               })}
               {userId && (
                 <Link
                   to="/profile"
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium border mt-2"
-                  style={{ color: rank.color, borderColor: `${rank.color}55` }}
+                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium border mt-2"
+                  style={{
+                    color: rank.color,
+                    borderColor: `${rank.color}55`,
+                    background: `${rank.color}10`,
+                    boxShadow: `0 0 18px ${rank.color}33`,
+                  }}
                 >
-                  <Award className="w-4 h-4" /> Profile · {rank.name}
+                  <Award className="w-4 h-4" style={{ filter: `drop-shadow(0 0 4px ${rank.color})` }} /> Profile · {rank.name}
                 </Link>
               )}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
     </nav>
   );
 }
