@@ -57,6 +57,43 @@ import intiImg from '../assets/gods/inti.jpg';
 import mama_quillaImg from '../assets/gods/mama-quilla.jpg';
 import pachamamaImg from '../assets/gods/pachamama.jpg';
 
+// ── Phase 2: Hindu, Yoruba, Celtic, Slavic, Polynesian, Aboriginal, Native American, Zoroastrian, Islamic ──
+import agniImg from '../assets/gods/agni.jpg';
+import durgaImg from '../assets/gods/durga.jpg';
+import ganeshaImg from '../assets/gods/ganesha.jpg';
+import hanumanImg from '../assets/gods/hanuman.jpg';
+import indraImg from '../assets/gods/indra.jpg';
+import krishnaImg from '../assets/gods/krishna.jpg';
+import lakshmiImg from '../assets/gods/lakshmi.jpg';
+import ramaImg from '../assets/gods/rama.jpg';
+import saraswatiImg from '../assets/gods/saraswati.jpg';
+import eshuImg from '../assets/gods/eshu.jpg';
+import ogunImg from '../assets/gods/ogun.jpg';
+import shangoImg from '../assets/gods/shango.jpg';
+import yemojaImg from '../assets/gods/yemoja.jpg';
+import brigidImg from '../assets/gods/brigid.jpg';
+import cernunnosImg from '../assets/gods/cernunnos.jpg';
+import dagdaImg from '../assets/gods/dagda.jpg';
+import lughImg from '../assets/gods/lugh.jpg';
+import morriganImg from '../assets/gods/morrigan.jpg';
+import mokoshImg from '../assets/gods/mokosh.jpg';
+import perunImg from '../assets/gods/perun.jpg';
+import velesImg from '../assets/gods/veles.jpg';
+import mauiImg from '../assets/gods/maui.jpg';
+import peleImg from '../assets/gods/pele.jpg';
+import tangaroaImg from '../assets/gods/tangaroa.jpg';
+import baiameImg from '../assets/gods/baiame.jpg';
+import rainbowSerpentImg from '../assets/gods/rainbow-serpent.jpg';
+import coyoteImg from '../assets/gods/coyote.jpg';
+import thunderbirdImg from '../assets/gods/thunderbird.jpg';
+import wakanTankaImg from '../assets/gods/wakan-tanka.jpg';
+import ahuraMazdaImg from '../assets/gods/ahura-mazda.jpg';
+import mithraImg from '../assets/gods/mithra.jpg';
+import alLatImg from '../assets/gods/al-lat.jpg';
+import hubalImg from '../assets/gods/hubal.jpg';
+
+
+
 export const gods: God[] = [
   {
     id: 'zeus', name: 'Zeus', pantheon: 'Greek',
