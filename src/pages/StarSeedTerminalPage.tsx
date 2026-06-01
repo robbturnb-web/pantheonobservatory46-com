@@ -146,6 +146,26 @@ export function StarSeedTerminalPage() {
         subjectName: values.name,
       });
       setPhase('revealed');
+
+      // 5. Persist to the observer's file (auth required)
+      const { data: who } = await supabase.auth.getSession();
+      const uid = who.session?.user.id;
+      if (!uid) {
+        setSaveStatus('guest');
+      } else {
+        setSaveStatus('saving');
+        const { error: upsertErr } = await supabase
+          .from('observer_files')
+          .update({ starseed_archetype: classification.seed })
+          .eq('user_id', uid);
+        if (!upsertErr) {
+          setSavedSeed(classification.seed);
+          setSaveStatus('saved');
+        } else {
+          setSaveStatus('idle');
+        }
+      }
+
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Terminal misfire.');
       setPhase('error');
