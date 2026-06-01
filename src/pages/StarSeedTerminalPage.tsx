@@ -22,14 +22,6 @@ const FormSchema = z.object({
 });
 type FormValues = z.infer<typeof FormSchema>;
 
-interface GeocodeResult {
-  name: string;
-  country: string;
-  latitude: number;
-  longitude: number;
-  timezone: string;
-}
-
 type Phase = 'idle' | 'scanning' | 'revealed' | 'error';
 
 const SCAN_LINES = [
@@ -90,7 +82,12 @@ export function StarSeedTerminalPage() {
     }, 700);
 
     try {
-      const { chart, place } = await computeNatalChart(values);
+      const parsedValues = FormSchema.parse(values);
+      const { chart, place } = await computeNatalChart({
+        date: parsedValues.date,
+        time: parsedValues.time,
+        city: parsedValues.city,
+      });
 
       // 4. Classify
       const classification = classifyStarSeed(chart);
@@ -102,7 +99,7 @@ export function StarSeedTerminalPage() {
         seedId: classification.seed,
         confidence: classification.confidence,
         chart,
-        subjectName: values.name,
+        subjectName: parsedValues.name,
         placeLabel: `${place.name}, ${place.country}`,
       });
       setPhase('revealed');
