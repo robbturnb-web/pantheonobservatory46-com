@@ -165,7 +165,7 @@ export function StarSeedTerminalPage() {
   const seed = result ? starSeeds[result.seedId] : null;
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-x-hidden">
       <SEO
         title="Star-Seed Galactic Terminal — Pantheon Frequency 46"
         description="Find your galactic origin. The Terminal reads your natal chart through real ephemeris and reveals your star-seed lineage — Lyran, Sirian, Pleiadian, Arcturian, Andromedan, or Orion."
