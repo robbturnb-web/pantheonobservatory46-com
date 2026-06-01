@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle } from 'lucide-react';
+import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle, Save, CheckCircle2 } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { supabase } from '@/integrations/supabase/client';
-import { classifyStarSeed, type NatalChart } from '@/lib/star-seed-classifier';
-import { starSeeds } from '@/data/star-seeds';
+import { classifyStarSeed, type NatalChart, type ZodiacSign } from '@/lib/star-seed-classifier';
+import { starSeeds, type StarSeedId } from '@/data/star-seeds';
+import { BirthdayInput } from '@/components/starseed/BirthdayInput';
+import { planetMeaning, readPlacement, type Planet } from '@/data/natal-interpretations';
 import sigil from '@/assets/temple/sigil-46.png';
 
 const FormSchema = z.object({
@@ -41,8 +43,10 @@ export function StarSeedTerminalPage() {
   const [phase, setPhase] = useState<Phase>('idle');
   const [scanIdx, setScanIdx] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [savedSeed, setSavedSeed] = useState<StarSeedId | null>(null);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'guest'>('idle');
   const [result, setResult] = useState<{
-    seedId: keyof typeof starSeeds;
+    seedId: StarSeedId;
     confidence: number;
     chart: NatalChart;
     subjectName: string;
@@ -52,6 +56,28 @@ export function StarSeedTerminalPage() {
     resolver: zodResolver(FormSchema),
     defaultValues: { name: '', date: '', time: '12:00', city: '' },
   });
+
+  // Load any previously-saved star seed for the signed-in user
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const uid = sessionData.session?.user.id;
+      if (!uid) return;
+      const { data } = await supabase
+        .from('observer_files')
+        .select('starseed_archetype')
+        .eq('user_id', uid)
+        .maybeSingle();
+      if (!cancelled && data?.starseed_archetype && data.starseed_archetype in starSeeds) {
+        setSavedSeed(data.starseed_archetype as StarSeedId);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
 
   const onSubmit = async (values: FormValues) => {
     setError(null);
