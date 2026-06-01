@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle, Save, CheckCircle2 } from 'lucide-react';
+import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle, Save, CheckCircle2, Orbit, Satellite } from 'lucide-react';
 import { SEO } from '@/components/SEO';
-import { supabase } from '@/integrations/supabase/client';
 import { classifyStarSeed, type NatalChart, type ZodiacSign } from '@/lib/star-seed-classifier';
 import { starSeeds, type StarSeedId } from '@/data/star-seeds';
 import { BirthdayInput } from '@/components/starseed/BirthdayInput';
 import { planetMeaning, readPlacement, type Planet } from '@/data/natal-interpretations';
+import { getCurrentZodiacSeason, getSkyTimestamp, getTransitHighlights, planetGlyphs, zodiacGlyphs } from '@/data/zodiac-current';
+import { computeCurrentSkyChart, computeNatalChart, getSavedStarSeed, saveStarSeed } from '@/services/star-seed-service';
 import sigil from '@/assets/temple/sigil-46.png';
 
 const FormSchema = z.object({
@@ -39,17 +40,23 @@ const SCAN_LINES = [
   'STAR-SEED ORIGIN CONFIRMED',
 ];
 
+const CURRENT_SKY_TIME = new Date('2026-06-01T15:00:00');
+const currentSeason = getCurrentZodiacSeason(CURRENT_SKY_TIME);
+const skyTimestamp = getSkyTimestamp(CURRENT_SKY_TIME);
+
 export function StarSeedTerminalPage() {
   const [phase, setPhase] = useState<Phase>('idle');
   const [scanIdx, setScanIdx] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [savedSeed, setSavedSeed] = useState<StarSeedId | null>(null);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'guest'>('idle');
+  const [currentSky, setCurrentSky] = useState<NatalChart | null>(null);
   const [result, setResult] = useState<{
     seedId: StarSeedId;
     confidence: number;
     chart: NatalChart;
     subjectName: string;
+    placeLabel: string;
   } | null>(null);
 
   const form = useForm<FormValues>({
@@ -61,17 +68,10 @@ export function StarSeedTerminalPage() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data: sessionData } = await supabase.auth.getSession();
-      const uid = sessionData.session?.user.id;
-      if (!uid) return;
-      const { data } = await supabase
-        .from('observer_files')
-        .select('starseed_archetype')
-        .eq('user_id', uid)
-        .maybeSingle();
-      if (!cancelled && data?.starseed_archetype && data.starseed_archetype in starSeeds) {
-        setSavedSeed(data.starseed_archetype as StarSeedId);
-      }
+      const [storedSeed, sky] = await Promise.allSettled([getSavedStarSeed(), computeCurrentSkyChart()]);
+      if (cancelled) return;
+      if (storedSeed.status === 'fulfilled') setSavedSeed(storedSeed.value);
+      if (sky.status === 'fulfilled') setCurrentSky(sky.value);
     })();
     return () => {
       cancelled = true;
@@ -90,48 +90,7 @@ export function StarSeedTerminalPage() {
     }, 700);
 
     try {
-      // 1. Geocode the city (Open-Meteo, no API key)
-      const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
-        values.city,
-      )}&count=1&language=en&format=json`;
-      const geoResp = await fetch(geoUrl);
-      if (!geoResp.ok) throw new Error('City lookup failed. Try again.');
-      const geoJson = await geoResp.json();
-      const place: GeocodeResult | undefined = geoJson.results?.[0];
-      if (!place) throw new Error(`Could not locate "${values.city}". Try the nearest major city.`);
-
-      // 2. Resolve timezone offset for the birth date (Open-Meteo timezone API)
-      const tzUrl = `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&timezone=${encodeURIComponent(
-        place.timezone,
-      )}&start_date=${values.date}&end_date=${values.date}&hourly=temperature_2m`;
-      const tzResp = await fetch(tzUrl);
-      const tzJson = await tzResp.json();
-      const tzOffsetMinutes = Math.round((tzJson.utc_offset_seconds ?? 0) / 60);
-
-      // 3. Compute natal chart via edge function
-      const projectRef = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-      const fnUrl = `https://${projectRef}.supabase.co/functions/v1/compute-natal-chart`;
-      const { data: sessionData } = await supabase.auth.getSession();
-      const token = sessionData.session?.access_token;
-      const chartResp = await fetch(fnUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          date: values.date,
-          time: values.time,
-          lat: place.latitude,
-          lon: place.longitude,
-          tzOffsetMinutes,
-        }),
-      });
-      if (!chartResp.ok) {
-        const err = await chartResp.json().catch(() => ({}));
-        throw new Error(err.error || 'Ephemeris engine returned an error.');
-      }
-      const { chart } = await chartResp.json();
+      const { chart, place } = await computeNatalChart(values);
 
       // 4. Classify
       const classification = classifyStarSeed(chart);
@@ -144,30 +103,23 @@ export function StarSeedTerminalPage() {
         confidence: classification.confidence,
         chart,
         subjectName: values.name,
+        placeLabel: `${place.name}, ${place.country}`,
       });
       setPhase('revealed');
 
-      // 5. Persist to the observer's file (auth required)
-      const { data: who } = await supabase.auth.getSession();
-      const uid = who.session?.user.id;
-      if (!uid) {
+      setSaveStatus('saving');
+      const saved = await saveStarSeed(classification.seed);
+      if (saved === 'saved') {
+        setSavedSeed(classification.seed);
+        setSaveStatus('saved');
+      } else if (saved === 'guest') {
         setSaveStatus('guest');
       } else {
-        setSaveStatus('saving');
-        const { error: upsertErr } = await supabase
-          .from('observer_files')
-          .update({ starseed_archetype: classification.seed })
-          .eq('user_id', uid);
-        if (!upsertErr) {
-          setSavedSeed(classification.seed);
-          setSaveStatus('saved');
-        } else {
-          setSaveStatus('idle');
-        }
+        setSaveStatus('idle');
       }
 
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Terminal misfire.');
+      setError(e instanceof Error ? e.message : 'The Star Seed scan hit interference. Check the city, date, and time, then run it again.');
       setPhase('error');
     } finally {
       window.clearInterval(scanTimer);
