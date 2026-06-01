@@ -182,6 +182,28 @@ export function StarSeedTerminalPage() {
           </p>
         </div>
 
+        <div className="mb-5 rounded-lg border border-border/70 bg-background/55 p-4 backdrop-blur-xl">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="mb-1 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[3px] text-primary">
+                <Satellite className="h-3.5 w-3.5" /> Live Sky Lock
+              </div>
+              <p className="text-sm font-semibold text-foreground">
+                {zodiacGlyphs[currentSeason.sign]} {currentSeason.sign} season · {currentSeason.mantra}
+              </p>
+              <p className="mt-1 text-[11px] text-muted-foreground">Pinned to {skyTimestamp}</p>
+            </div>
+            {currentSky && (
+              <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-right font-mono text-[10px] uppercase tracking-[2px] text-muted-foreground">
+                <span>{planetGlyphs.sun} {currentSky.sun.sign}</span>
+                <span>{planetGlyphs.moon} {currentSky.moon.sign}</span>
+                <span>{planetGlyphs.mercury} {currentSky.mercury.sign}</span>
+                <span>{planetGlyphs.venus} {currentSky.venus.sign}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* HUD frame */}
         <div
           className="relative rounded-2xl border bg-background/70 backdrop-blur-xl overflow-hidden"
@@ -404,6 +426,30 @@ export function StarSeedTerminalPage() {
                   <Dossier label="Tie to the 46" accent={seed.accent}>
                     {seed.fortySixTie}
                   </Dossier>
+
+                  {currentSky && (
+                    <div className="mb-5 rounded-lg border bg-background/40 p-4" style={{ borderColor: `${seed.accent}33` }}>
+                      <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[3px] font-mono" style={{ color: seed.accent }}>
+                        <Orbit className="h-3.5 w-3.5" /> Current Transit Overlay
+                      </div>
+                      <p className="mb-3 text-xs text-muted-foreground">
+                        Today’s sky is in {currentSeason.sign} season. Your scan was locked from {result.placeLabel}, then compared against the active planetary weather.
+                      </p>
+                      <div className="grid grid-cols-2 gap-2 text-[11px] sm:grid-cols-4">
+                        {(['sun', 'moon', 'mercury', 'venus'] as Planet[]).map((planet) => (
+                          <div key={planet} className="rounded-md border border-border/60 bg-background/40 p-2">
+                            <div className="font-mono text-[10px] uppercase tracking-[2px] text-muted-foreground">{planetGlyphs[planet]} {planetMeaning[planet].label}</div>
+                            <div className="font-bold text-foreground">{zodiacGlyphs[currentSky[planet].sign]} {currentSky[planet].sign}</div>
+                          </div>
+                        ))}
+                      </div>
+                      {getTransitHighlights(result.chart, currentSky).length > 0 && (
+                        <ul className="mt-3 space-y-1.5 text-xs text-foreground/80">
+                          {getTransitHighlights(result.chart, currentSky).map((highlight) => <li key={highlight}>• {highlight}</li>)}
+                        </ul>
+                      )}
+                    </div>
+                  )}
 
                   {/* Save status */}
                   {saveStatus !== 'idle' && (
