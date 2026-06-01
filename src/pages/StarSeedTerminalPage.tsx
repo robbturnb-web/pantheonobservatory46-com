@@ -1,19 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle } from 'lucide-react';
+import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle, Save, CheckCircle2 } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { supabase } from '@/integrations/supabase/client';
-import { classifyStarSeed, type NatalChart } from '@/lib/star-seed-classifier';
-import { starSeeds } from '@/data/star-seeds';
+import { classifyStarSeed, type NatalChart, type ZodiacSign } from '@/lib/star-seed-classifier';
+import { starSeeds, type StarSeedId } from '@/data/star-seeds';
+import { BirthdayInput } from '@/components/starseed/BirthdayInput';
+import { planetMeaning, readPlacement, type Planet } from '@/data/natal-interpretations';
 import sigil from '@/assets/temple/sigil-46.png';
 
 const FormSchema = z.object({
   name: z.string().trim().min(1, 'Required').max(80),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'YYYY-MM-DD'),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Enter a valid date'),
   time: z.string().regex(/^\d{2}:\d{2}$/, 'HH:MM'),
   city: z.string().trim().min(2, 'City required').max(120),
 });
@@ -41,8 +43,10 @@ export function StarSeedTerminalPage() {
   const [phase, setPhase] = useState<Phase>('idle');
   const [scanIdx, setScanIdx] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [savedSeed, setSavedSeed] = useState<StarSeedId | null>(null);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'guest'>('idle');
   const [result, setResult] = useState<{
-    seedId: keyof typeof starSeeds;
+    seedId: StarSeedId;
     confidence: number;
     chart: NatalChart;
     subjectName: string;
@@ -52,6 +56,28 @@ export function StarSeedTerminalPage() {
     resolver: zodResolver(FormSchema),
     defaultValues: { name: '', date: '', time: '12:00', city: '' },
   });
+
+  // Load any previously-saved star seed for the signed-in user
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const uid = sessionData.session?.user.id;
+      if (!uid) return;
+      const { data } = await supabase
+        .from('observer_files')
+        .select('starseed_archetype')
+        .eq('user_id', uid)
+        .maybeSingle();
+      if (!cancelled && data?.starseed_archetype && data.starseed_archetype in starSeeds) {
+        setSavedSeed(data.starseed_archetype as StarSeedId);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
 
   const onSubmit = async (values: FormValues) => {
     setError(null);
@@ -120,6 +146,26 @@ export function StarSeedTerminalPage() {
         subjectName: values.name,
       });
       setPhase('revealed');
+
+      // 5. Persist to the observer's file (auth required)
+      const { data: who } = await supabase.auth.getSession();
+      const uid = who.session?.user.id;
+      if (!uid) {
+        setSaveStatus('guest');
+      } else {
+        setSaveStatus('saving');
+        const { error: upsertErr } = await supabase
+          .from('observer_files')
+          .update({ starseed_archetype: classification.seed })
+          .eq('user_id', uid);
+        if (!upsertErr) {
+          setSavedSeed(classification.seed);
+          setSaveStatus('saved');
+        } else {
+          setSaveStatus('idle');
+        }
+      }
+
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Terminal misfire.');
       setPhase('error');
@@ -139,7 +185,7 @@ export function StarSeedTerminalPage() {
   const seed = result ? starSeeds[result.seedId] : null;
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-x-hidden">
       <SEO
         title="Star-Seed Galactic Terminal — Pantheon Frequency 46"
         description="Find your galactic origin. The Terminal reads your natal chart through real ephemeris and reveals your star-seed lineage — Lyran, Sirian, Pleiadian, Arcturian, Andromedan, or Orion."
@@ -227,9 +273,18 @@ export function StarSeedTerminalPage() {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-4"
                 >
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[4px] text-cyan-400 mb-4 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                    AWAITING SUBJECT
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="flex items-center gap-2 text-[10px] uppercase tracking-[4px] text-cyan-400 font-mono">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                      AWAITING SUBJECT
+                    </div>
+                    {savedSeed && (
+                      <div className="text-[10px] uppercase tracking-[3px] font-mono flex items-center gap-1.5"
+                           style={{ color: starSeeds[savedSeed].accent }}>
+                        <CheckCircle2 className="w-3 h-3" />
+                        Saved: {starSeeds[savedSeed].name}
+                      </div>
+                    )}
                   </div>
 
                   <Field label="Subject Name" error={form.formState.errors.name?.message}>
@@ -240,22 +295,24 @@ export function StarSeedTerminalPage() {
                     />
                   </Field>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    <Field label="Date of Birth" error={form.formState.errors.date?.message}>
-                      <input
-                        type="date"
-                        {...form.register('date')}
-                        className="hud-input"
-                      />
-                    </Field>
-                    <Field label="Time (Local)" error={form.formState.errors.time?.message}>
-                      <input
-                        type="time"
-                        {...form.register('time')}
-                        className="hud-input"
-                      />
-                    </Field>
-                  </div>
+                  <Field label="Date of Birth" hint="MM / DD / YYYY" error={form.formState.errors.date?.message}>
+                    <Controller
+                      control={form.control}
+                      name="date"
+                      render={({ field }) => (
+                        <BirthdayInput value={field.value} onChange={field.onChange} />
+                      )}
+                    />
+                  </Field>
+
+                  <Field label="Time of Birth (Local)" hint="Use 12:00 if unknown" error={form.formState.errors.time?.message}>
+                    <input
+                      type="time"
+                      {...form.register('time')}
+                      className="hud-input"
+                    />
+                  </Field>
+
 
                   <Field
                     label="Birth City"
@@ -399,28 +456,67 @@ export function StarSeedTerminalPage() {
                     {seed.fortySixTie}
                   </Dossier>
 
-                  {/* Natal snapshot */}
-                  <div className="mt-6 pt-5 border-t border-border/50">
-                    <div className="text-[10px] uppercase tracking-[3px] text-muted-foreground mb-3 font-mono">
-                      Natal Snapshot (Ephemeris)
+                  {/* Save status */}
+                  {saveStatus !== 'idle' && (
+                    <div
+                      className="mt-2 mb-4 flex items-center gap-2 text-[10px] uppercase tracking-[3px] font-mono"
+                      style={{ color: saveStatus === 'saved' ? seed.accent : 'hsl(var(--muted-foreground))' }}
+                    >
+                      {saveStatus === 'saving' && <><Loader2 className="w-3 h-3 animate-spin" /> Saving to observer file…</>}
+                      {saveStatus === 'saved' && <><Save className="w-3 h-3" /> Saved to your profile</>}
+                      {saveStatus === 'guest' && (
+                        <span>Sign in to save this chart to your profile.</span>
+                      )}
                     </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-xs">
-                      {(['sun', 'moon', 'ascendant', 'mercury', 'venus', 'mars', 'jupiter', 'saturn'] as const).map(
-                        (planet) => (
-                          <div
-                            key={planet}
-                            className="rounded border border-border/40 bg-background/40 px-2 py-1.5"
-                          >
-                            <div className="text-muted-foreground capitalize">{planet}</div>
-                            <div className="text-foreground">
-                              {result.chart[planet].sign}
-                              <span className="text-muted-foreground">
-                                {' '}
-                                {result.chart[planet].degree.toFixed(1)}°
-                              </span>
+                  )}
+
+                  {/* Full natal breakdown with interpretations */}
+                  <div className="mt-6 pt-5 border-t border-border/50">
+                    <div
+                      className="text-[10px] uppercase tracking-[3px] mb-1 font-mono font-bold"
+                      style={{ color: seed.accent }}
+                    >
+                      Natal Chart — Full Breakdown
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-4">
+                      Eight placements, eight signal channels. Each one tells a different part of your story.
+                    </p>
+                    <div className="space-y-3">
+                      {(['sun', 'moon', 'ascendant', 'mercury', 'venus', 'mars', 'jupiter', 'saturn'] as Planet[]).map(
+                        (planet) => {
+                          const pos = result.chart[planet];
+                          const meta = planetMeaning[planet];
+                          return (
+                            <div
+                              key={planet}
+                              className="rounded-lg border bg-background/40 p-3"
+                              style={{ borderColor: `${seed.accent}33` }}
+                            >
+                              <div className="flex items-baseline justify-between gap-3 mb-1">
+                                <div className="flex items-baseline gap-2">
+                                  <span
+                                    className="font-mono text-[10px] uppercase tracking-[3px] font-bold"
+                                    style={{ color: seed.accent }}
+                                  >
+                                    {meta.label}
+                                  </span>
+                                  <span className="text-sm font-bold text-foreground">
+                                    in {pos.sign}
+                                  </span>
+                                </div>
+                                <span className="font-mono text-[10px] text-muted-foreground">
+                                  {pos.degree.toFixed(1)}°
+                                </span>
+                              </div>
+                              <div className="text-[10px] text-muted-foreground italic mb-1.5">
+                                {meta.gloss}
+                              </div>
+                              <p className="text-xs text-foreground/85 leading-relaxed">
+                                {readPlacement(planet, pos.sign as ZodiacSign)}
+                              </p>
                             </div>
-                          </div>
-                        ),
+                          );
+                        },
                       )}
                     </div>
                   </div>
@@ -431,6 +527,7 @@ export function StarSeedTerminalPage() {
                   >
                     ← Scan Another Subject
                   </button>
+
                 </motion.div>
               )}
             </AnimatePresence>
