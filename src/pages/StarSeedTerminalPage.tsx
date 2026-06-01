@@ -273,9 +273,18 @@ export function StarSeedTerminalPage() {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-4"
                 >
-                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[4px] text-cyan-400 mb-4 font-mono">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                    AWAITING SUBJECT
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <div className="flex items-center gap-2 text-[10px] uppercase tracking-[4px] text-cyan-400 font-mono">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                      AWAITING SUBJECT
+                    </div>
+                    {savedSeed && (
+                      <div className="text-[10px] uppercase tracking-[3px] font-mono flex items-center gap-1.5"
+                           style={{ color: starSeeds[savedSeed].accent }}>
+                        <CheckCircle2 className="w-3 h-3" />
+                        Saved: {starSeeds[savedSeed].name}
+                      </div>
+                    )}
                   </div>
 
                   <Field label="Subject Name" error={form.formState.errors.name?.message}>
@@ -286,22 +295,24 @@ export function StarSeedTerminalPage() {
                     />
                   </Field>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    <Field label="Date of Birth" error={form.formState.errors.date?.message}>
-                      <input
-                        type="date"
-                        {...form.register('date')}
-                        className="hud-input"
-                      />
-                    </Field>
-                    <Field label="Time (Local)" error={form.formState.errors.time?.message}>
-                      <input
-                        type="time"
-                        {...form.register('time')}
-                        className="hud-input"
-                      />
-                    </Field>
-                  </div>
+                  <Field label="Date of Birth" hint="MM / DD / YYYY" error={form.formState.errors.date?.message}>
+                    <Controller
+                      control={form.control}
+                      name="date"
+                      render={({ field }) => (
+                        <BirthdayInput value={field.value} onChange={field.onChange} />
+                      )}
+                    />
+                  </Field>
+
+                  <Field label="Time of Birth (Local)" hint="Use 12:00 if unknown" error={form.formState.errors.time?.message}>
+                    <input
+                      type="time"
+                      {...form.register('time')}
+                      className="hud-input"
+                    />
+                  </Field>
+
 
                   <Field
                     label="Birth City"
