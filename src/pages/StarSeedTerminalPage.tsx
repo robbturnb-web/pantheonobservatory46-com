@@ -456,28 +456,67 @@ export function StarSeedTerminalPage() {
                     {seed.fortySixTie}
                   </Dossier>
 
-                  {/* Natal snapshot */}
-                  <div className="mt-6 pt-5 border-t border-border/50">
-                    <div className="text-[10px] uppercase tracking-[3px] text-muted-foreground mb-3 font-mono">
-                      Natal Snapshot (Ephemeris)
+                  {/* Save status */}
+                  {saveStatus !== 'idle' && (
+                    <div
+                      className="mt-2 mb-4 flex items-center gap-2 text-[10px] uppercase tracking-[3px] font-mono"
+                      style={{ color: saveStatus === 'saved' ? seed.accent : 'hsl(var(--muted-foreground))' }}
+                    >
+                      {saveStatus === 'saving' && <><Loader2 className="w-3 h-3 animate-spin" /> Saving to observer file…</>}
+                      {saveStatus === 'saved' && <><Save className="w-3 h-3" /> Saved to your profile</>}
+                      {saveStatus === 'guest' && (
+                        <span>Sign in to save this chart to your profile.</span>
+                      )}
                     </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-xs">
-                      {(['sun', 'moon', 'ascendant', 'mercury', 'venus', 'mars', 'jupiter', 'saturn'] as const).map(
-                        (planet) => (
-                          <div
-                            key={planet}
-                            className="rounded border border-border/40 bg-background/40 px-2 py-1.5"
-                          >
-                            <div className="text-muted-foreground capitalize">{planet}</div>
-                            <div className="text-foreground">
-                              {result.chart[planet].sign}
-                              <span className="text-muted-foreground">
-                                {' '}
-                                {result.chart[planet].degree.toFixed(1)}°
-                              </span>
+                  )}
+
+                  {/* Full natal breakdown with interpretations */}
+                  <div className="mt-6 pt-5 border-t border-border/50">
+                    <div
+                      className="text-[10px] uppercase tracking-[3px] mb-1 font-mono font-bold"
+                      style={{ color: seed.accent }}
+                    >
+                      Natal Chart — Full Breakdown
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-4">
+                      Eight placements, eight signal channels. Each one tells a different part of your story.
+                    </p>
+                    <div className="space-y-3">
+                      {(['sun', 'moon', 'ascendant', 'mercury', 'venus', 'mars', 'jupiter', 'saturn'] as Planet[]).map(
+                        (planet) => {
+                          const pos = result.chart[planet];
+                          const meta = planetMeaning[planet];
+                          return (
+                            <div
+                              key={planet}
+                              className="rounded-lg border bg-background/40 p-3"
+                              style={{ borderColor: `${seed.accent}33` }}
+                            >
+                              <div className="flex items-baseline justify-between gap-3 mb-1">
+                                <div className="flex items-baseline gap-2">
+                                  <span
+                                    className="font-mono text-[10px] uppercase tracking-[3px] font-bold"
+                                    style={{ color: seed.accent }}
+                                  >
+                                    {meta.label}
+                                  </span>
+                                  <span className="text-sm font-bold text-foreground">
+                                    in {pos.sign}
+                                  </span>
+                                </div>
+                                <span className="font-mono text-[10px] text-muted-foreground">
+                                  {pos.degree.toFixed(1)}°
+                                </span>
+                              </div>
+                              <div className="text-[10px] text-muted-foreground italic mb-1.5">
+                                {meta.gloss}
+                              </div>
+                              <p className="text-xs text-foreground/85 leading-relaxed">
+                                {readPlacement(planet, pos.sign as ZodiacSign)}
+                              </p>
                             </div>
-                          </div>
-                        ),
+                          );
+                        },
                       )}
                     </div>
                   </div>
@@ -488,6 +527,7 @@ export function StarSeedTerminalPage() {
                   >
                     ← Scan Another Subject
                   </button>
+
                 </motion.div>
               )}
             </AnimatePresence>
