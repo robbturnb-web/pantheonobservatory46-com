@@ -143,9 +143,19 @@ export async function saveStarSeed(seed: StarSeedId): Promise<'saved' | 'guest' 
   const uid = userData.user?.id;
   if (!uid) return 'guest';
 
+  const { data: updated, error: updateError } = await supabase
+    .from('observer_files')
+    .update({ starseed_archetype: seed })
+    .eq('user_id', uid)
+    .select('user_id')
+    .maybeSingle();
+
+  if (updateError) return 'failed';
+  if (updated) return 'saved';
+
   const { error } = await supabase
     .from('observer_files')
-    .upsert({ user_id: uid, codename: 'Observer-0046', starseed_archetype: seed }, { onConflict: 'user_id' });
+    .insert({ user_id: uid, codename: 'Observer-0046', starseed_archetype: seed });
 
   return error ? 'failed' : 'saved';
 }
