@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle, Save, CheckCircle2 } from 'lucide-react';
+import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle, Save, CheckCircle2, Orbit, Satellite } from 'lucide-react';
 import { SEO } from '@/components/SEO';
-import { supabase } from '@/integrations/supabase/client';
 import { classifyStarSeed, type NatalChart, type ZodiacSign } from '@/lib/star-seed-classifier';
 import { starSeeds, type StarSeedId } from '@/data/star-seeds';
 import { BirthdayInput } from '@/components/starseed/BirthdayInput';
 import { planetMeaning, readPlacement, type Planet } from '@/data/natal-interpretations';
+import { getCurrentZodiacSeason, getSkyTimestamp, getTransitHighlights, planetGlyphs, zodiacGlyphs } from '@/data/zodiac-current';
+import { computeCurrentSkyChart, computeNatalChart, getSavedStarSeed, saveStarSeed } from '@/services/star-seed-service';
 import sigil from '@/assets/temple/sigil-46.png';
 
 const FormSchema = z.object({
@@ -20,14 +21,6 @@ const FormSchema = z.object({
   city: z.string().trim().min(2, 'City required').max(120),
 });
 type FormValues = z.infer<typeof FormSchema>;
-
-interface GeocodeResult {
-  name: string;
-  country: string;
-  latitude: number;
-  longitude: number;
-  timezone: string;
-}
 
 type Phase = 'idle' | 'scanning' | 'revealed' | 'error';
 
@@ -39,17 +32,23 @@ const SCAN_LINES = [
   'STAR-SEED ORIGIN CONFIRMED',
 ];
 
+const CURRENT_SKY_TIME = new Date('2026-06-01T15:00:00');
+const currentSeason = getCurrentZodiacSeason(CURRENT_SKY_TIME);
+const skyTimestamp = getSkyTimestamp(CURRENT_SKY_TIME);
+
 export function StarSeedTerminalPage() {
   const [phase, setPhase] = useState<Phase>('idle');
   const [scanIdx, setScanIdx] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [savedSeed, setSavedSeed] = useState<StarSeedId | null>(null);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'guest'>('idle');
+  const [currentSky, setCurrentSky] = useState<NatalChart | null>(null);
   const [result, setResult] = useState<{
     seedId: StarSeedId;
     confidence: number;
     chart: NatalChart;
     subjectName: string;
+    placeLabel: string;
   } | null>(null);
 
   const form = useForm<FormValues>({
@@ -61,17 +60,10 @@ export function StarSeedTerminalPage() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data: sessionData } = await supabase.auth.getSession();
-      const uid = sessionData.session?.user.id;
-      if (!uid) return;
-      const { data } = await supabase
-        .from('observer_files')
-        .select('starseed_archetype')
-        .eq('user_id', uid)
-        .maybeSingle();
-      if (!cancelled && data?.starseed_archetype && data.starseed_archetype in starSeeds) {
-        setSavedSeed(data.starseed_archetype as StarSeedId);
-      }
+      const [storedSeed, sky] = await Promise.allSettled([getSavedStarSeed(), computeCurrentSkyChart()]);
+      if (cancelled) return;
+      if (storedSeed.status === 'fulfilled') setSavedSeed(storedSeed.value);
+      if (sky.status === 'fulfilled') setCurrentSky(sky.value);
     })();
     return () => {
       cancelled = true;
@@ -90,48 +82,12 @@ export function StarSeedTerminalPage() {
     }, 700);
 
     try {
-      // 1. Geocode the city (Open-Meteo, no API key)
-      const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
-        values.city,
-      )}&count=1&language=en&format=json`;
-      const geoResp = await fetch(geoUrl);
-      if (!geoResp.ok) throw new Error('City lookup failed. Try again.');
-      const geoJson = await geoResp.json();
-      const place: GeocodeResult | undefined = geoJson.results?.[0];
-      if (!place) throw new Error(`Could not locate "${values.city}". Try the nearest major city.`);
-
-      // 2. Resolve timezone offset for the birth date (Open-Meteo timezone API)
-      const tzUrl = `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&timezone=${encodeURIComponent(
-        place.timezone,
-      )}&start_date=${values.date}&end_date=${values.date}&hourly=temperature_2m`;
-      const tzResp = await fetch(tzUrl);
-      const tzJson = await tzResp.json();
-      const tzOffsetMinutes = Math.round((tzJson.utc_offset_seconds ?? 0) / 60);
-
-      // 3. Compute natal chart via edge function
-      const projectRef = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-      const fnUrl = `https://${projectRef}.supabase.co/functions/v1/compute-natal-chart`;
-      const { data: sessionData } = await supabase.auth.getSession();
-      const token = sessionData.session?.access_token;
-      const chartResp = await fetch(fnUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({
-          date: values.date,
-          time: values.time,
-          lat: place.latitude,
-          lon: place.longitude,
-          tzOffsetMinutes,
-        }),
+      const parsedValues = FormSchema.parse(values);
+      const { chart, place } = await computeNatalChart({
+        date: parsedValues.date,
+        time: parsedValues.time,
+        city: parsedValues.city,
       });
-      if (!chartResp.ok) {
-        const err = await chartResp.json().catch(() => ({}));
-        throw new Error(err.error || 'Ephemeris engine returned an error.');
-      }
-      const { chart } = await chartResp.json();
 
       // 4. Classify
       const classification = classifyStarSeed(chart);
@@ -143,31 +99,24 @@ export function StarSeedTerminalPage() {
         seedId: classification.seed,
         confidence: classification.confidence,
         chart,
-        subjectName: values.name,
+        subjectName: parsedValues.name,
+        placeLabel: `${place.name}, ${place.country}`,
       });
       setPhase('revealed');
 
-      // 5. Persist to the observer's file (auth required)
-      const { data: who } = await supabase.auth.getSession();
-      const uid = who.session?.user.id;
-      if (!uid) {
+      setSaveStatus('saving');
+      const saved = await saveStarSeed(classification.seed);
+      if (saved === 'saved') {
+        setSavedSeed(classification.seed);
+        setSaveStatus('saved');
+      } else if (saved === 'guest') {
         setSaveStatus('guest');
       } else {
-        setSaveStatus('saving');
-        const { error: upsertErr } = await supabase
-          .from('observer_files')
-          .update({ starseed_archetype: classification.seed })
-          .eq('user_id', uid);
-        if (!upsertErr) {
-          setSavedSeed(classification.seed);
-          setSaveStatus('saved');
-        } else {
-          setSaveStatus('idle');
-        }
+        setSaveStatus('idle');
       }
 
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Terminal misfire.');
+      setError(e instanceof Error ? e.message : 'The Star Seed scan hit interference. Check the city, date, and time, then run it again.');
       setPhase('error');
     } finally {
       window.clearInterval(scanTimer);
@@ -231,6 +180,28 @@ export function StarSeedTerminalPage() {
           <p className="text-sm text-muted-foreground max-w-lg mx-auto">
             Real ephemeris. Real coordinates. Read through the Pantheon lineage framework.
           </p>
+        </div>
+
+        <div className="mb-5 rounded-lg border border-border/70 bg-background/55 p-4 backdrop-blur-xl">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="mb-1 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[3px] text-primary">
+                <Satellite className="h-3.5 w-3.5" /> Live Sky Lock
+              </div>
+              <p className="text-sm font-semibold text-foreground">
+                {zodiacGlyphs[currentSeason.sign]} {currentSeason.sign} season · {currentSeason.mantra}
+              </p>
+              <p className="mt-1 text-[11px] text-muted-foreground">Pinned to {skyTimestamp}</p>
+            </div>
+            {currentSky && (
+              <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-right font-mono text-[10px] uppercase tracking-[2px] text-muted-foreground">
+                <span>{planetGlyphs.sun} {currentSky.sun.sign}</span>
+                <span>{planetGlyphs.moon} {currentSky.moon.sign}</span>
+                <span>{planetGlyphs.mercury} {currentSky.mercury.sign}</span>
+                <span>{planetGlyphs.venus} {currentSky.venus.sign}</span>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* HUD frame */}
@@ -455,6 +426,30 @@ export function StarSeedTerminalPage() {
                   <Dossier label="Tie to the 46" accent={seed.accent}>
                     {seed.fortySixTie}
                   </Dossier>
+
+                  {currentSky && (
+                    <div className="mb-5 rounded-lg border bg-background/40 p-4" style={{ borderColor: `${seed.accent}33` }}>
+                      <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[3px] font-mono" style={{ color: seed.accent }}>
+                        <Orbit className="h-3.5 w-3.5" /> Current Transit Overlay
+                      </div>
+                      <p className="mb-3 text-xs text-muted-foreground">
+                        Today’s sky is in {currentSeason.sign} season. Your scan was locked from {result.placeLabel}, then compared against the active planetary weather.
+                      </p>
+                      <div className="grid grid-cols-2 gap-2 text-[11px] sm:grid-cols-4">
+                        {(['sun', 'moon', 'mercury', 'venus'] as Planet[]).map((planet) => (
+                          <div key={planet} className="rounded-md border border-border/60 bg-background/40 p-2">
+                            <div className="font-mono text-[10px] uppercase tracking-[2px] text-muted-foreground">{planetGlyphs[planet]} {planetMeaning[planet].label}</div>
+                            <div className="font-bold text-foreground">{zodiacGlyphs[currentSky[planet].sign]} {currentSky[planet].sign}</div>
+                          </div>
+                        ))}
+                      </div>
+                      {getTransitHighlights(result.chart, currentSky).length > 0 && (
+                        <ul className="mt-3 space-y-1.5 text-xs text-foreground/80">
+                          {getTransitHighlights(result.chart, currentSky).map((highlight) => <li key={highlight}>• {highlight}</li>)}
+                        </ul>
+                      )}
+                    </div>
+                  )}
 
                   {/* Save status */}
                   {saveStatus !== 'idle' && (

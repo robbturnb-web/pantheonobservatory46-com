@@ -1,7 +1,7 @@
 /**
  * compute-natal-chart
  *
- * Computes a real natal chart (ecliptic longitudes for Sun, Moon, and
+ * Computes a natal chart (ecliptic longitudes for Sun, Moon, and
  * inner/social planets + Ascendant) from birth data using the
  * `astronomy-engine` library — pure JS, NASA-grade precision, runs in
  * Deno via `npm:` specifier.
@@ -56,13 +56,10 @@ function longitudeToSign(longitude: number): PlanetPosition {
 }
 
 /**
- * Convert a body's geocentric equatorial position to ecliptic longitude.
- * astronomy-engine returns equatorial coordinates by default; we use
- * Ecliptic() to project them onto the ecliptic plane.
+ * Convert a body's geocentric vector to true ecliptic longitude of date.
  */
 function eclipticLongitude(body: Astronomy.Body, date: Date): number {
-  const equator = Astronomy.Equator(body, date, null, true, true);
-  const vector = Astronomy.VectorFromEquator(equator, date);
+  const vector = Astronomy.GeoVector(body, date, true);
   const ecliptic = Astronomy.Ecliptic(vector);
   return ecliptic.elon;
 }
@@ -145,10 +142,9 @@ serve(async (req) => {
       status: 200,
     });
   } catch (err) {
-    console.error("compute-natal-chart error:", err);
     return new Response(
       JSON.stringify({
-        error: err instanceof Error ? err.message : "Internal error",
+        error: err instanceof Error ? err.message : "Chart engine could not complete this scan.",
       }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
