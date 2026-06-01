@@ -15,7 +15,7 @@ import sigil from '@/assets/temple/sigil-46.png';
 
 const FormSchema = z.object({
   name: z.string().trim().min(1, 'Required').max(80),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'YYYY-MM-DD'),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Enter a valid date'),
   time: z.string().regex(/^\d{2}:\d{2}$/, 'HH:MM'),
   city: z.string().trim().min(2, 'City required').max(120),
 });
