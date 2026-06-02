@@ -17,6 +17,7 @@ import heroCern from '@/assets/hero-cern.jpg';
 import heroAaro from '@/assets/hero-aaro.jpg';
 import heroBuilders from '@/assets/hero-builders.jpg';
 import heroBlackPrograms from '@/assets/black-programs/hero-black-programs.jpg';
+import heroBrazil from '@/assets/brazil/hero-brazil.jpg';
 
 export type AtmosphereId =
   | 'frost'
@@ -285,6 +286,24 @@ export const pageThemes = {
     fontFamily: "'Space Mono', monospace",
     stampColor: '#DC2626',
     heroImage: heroBlackPrograms,
+  },
+  brazil: {
+    id: 'brazil',
+    name: 'Brazil UAP Dossier',
+    tagline: 'Operação Prato · Varginha · Trindade · The Noite Oficial dos OVNIs',
+    classificationLabel: 'FAB DECLASSIFIED // SIGILO LEVANTADO',
+    atmosphere: 'redaction',
+    pageBg: 'linear-gradient(180deg, #04130a 0%, #0a2b18 45%, #050f08 100%)',
+    heroOverlay:
+      'radial-gradient(ellipse at top, rgba(250, 204, 21, 0.10) 0%, transparent 60%), linear-gradient(180deg, rgba(4, 19, 10, 0.55) 0%, rgba(5, 15, 8, 0.98) 100%)',
+    accent: '#facc15',
+    accentAlt: '#22c55e',
+    heroFg: '#fef9c3',
+    cardSurface: 'rgba(10, 43, 24, 0.78)',
+    cardBorder: 'rgba(250, 204, 21, 0.28)',
+    fontFamily: "'Space Mono', monospace",
+    stampColor: '#22c55e',
+    heroImage: heroBrazil,
   },
 } as const satisfies Record<string, PageTheme>;
 
