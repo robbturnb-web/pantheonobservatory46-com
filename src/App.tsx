@@ -52,6 +52,7 @@ const BlackProgramsPage = lazy(() => import('./pages/BlackProgramsPage').then(m 
 const RubiksCubePage = lazy(() => import('./pages/RubiksCubePage').then(m => ({ default: m.RubiksCubePage })));
 const SanctuaryPage = lazy(() => import('./pages/SanctuaryPage').then(m => ({ default: m.SanctuaryPage })));
 const StarSeedTerminalPage = lazy(() => import('./pages/StarSeedTerminalPage').then(m => ({ default: m.StarSeedTerminalPage })));
+const BrazilPage = lazy(() => import('./pages/BrazilPage').then(m => ({ default: m.BrazilPage })));
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
 function RouteLoader() {
@@ -117,6 +118,7 @@ export default function App() {
               <Route path="/documentaries" element={<DocumentariesPage />} />
               <Route path="/corbell" element={<JeremyCorbellPage />} />
               <Route path="/jeremy-corbell" element={<JeremyCorbellPage />} />
+              <Route path="/brazil" element={<BrazilPage />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
