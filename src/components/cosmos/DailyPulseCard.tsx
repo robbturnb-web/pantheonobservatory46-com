@@ -61,8 +61,8 @@ export function DailyPulseCard() {
               Watch source <ExternalLink className="w-3 h-3" />
             </a>
           )}
-          <Link to="/community" className="text-xs text-muted-foreground hover:text-foreground">
-            Discuss in Community Vault →
+          <Link to="/echoverse" className="text-xs text-muted-foreground hover:text-foreground">
+            Discuss in Echoverse →
           </Link>
         </div>
       </motion.div>
