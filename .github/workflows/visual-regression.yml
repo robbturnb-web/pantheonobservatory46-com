@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      routes:
+        description: "Comma-separated routes to test (e.g. /,/profile). Leave blank for all."
+        required: false
+        default: ""
 
 jobs:
   playwright:
@@ -41,6 +46,7 @@ jobs:
         run: bunx playwright test
         env:
           CI: "true"
+          VISUAL_ROUTES: ${{ github.event.inputs.routes }}
 
       - name: Upload Playwright report
         if: always()
