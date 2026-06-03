@@ -29,6 +29,28 @@ Baselines are committed under
 - Tolerance is `maxDiffPixelRatio: 0.01` — any styling drift larger than
   1% of pixels fails the test.
 
+## CI / workflow_dispatch
+
+The GitHub Actions workflow (`.github/workflows/visual-regression.yml`) runs on every PR and `main` branch push. You can also trigger it manually from the **Actions** tab.
+
+### Manual run with the `routes` input
+
+When triggering via `workflow_dispatch`, you can limit which routes are tested by setting the **routes** input to a comma-separated list:
+
+| Scenario | `routes` value |
+|---|---|
+| Test only Home and Profile | `/,/profile` |
+| Test only The 46 and Pyramids | `/the-46,/pyramids` |
+| Run all routes (default) | leave blank |
+
+**Example:** Trigger a manual run for just `/` and `/echoverse`:
+
+1. Go to **Actions → Visual Regression → Run workflow**
+2. Enter `/,/echoverse` in the **routes** field
+3. Click **Run workflow**
+
+The workflow passes the input to `VISUAL_ROUTES`, and the Playwright spec filters `ALL_ROUTES` to only the matched paths. If the input is blank or omitted, the full matrix of all five routes across three viewports runs as normal.
+
 ## Note
 
 This sandbox does not have the system libraries Chromium requires
