@@ -110,19 +110,26 @@ export default function CodexPage() {
               >
                 <Link
                   to={btn.to}
-                  className="group relative flex flex-col items-center justify-center gap-2 aspect-square rounded-xl border border-[#ffd700]/30 bg-gradient-to-b from-[#1a1038]/80 to-[#05030D]/90 backdrop-blur-sm shadow-[0_0_20px_-6px_rgba(255,215,0,0.35),inset_0_0_30px_-10px_rgba(160,32,240,0.4)] hover:border-[#ffd700]/70 hover:shadow-[0_0_30px_-4px_rgba(255,215,0,0.65),inset_0_0_40px_-10px_rgba(160,32,240,0.6)] transition-all duration-300"
+                  className={`group relative flex flex-col items-center justify-center gap-2 aspect-square rounded-xl border backdrop-blur-sm transition-all duration-300 ${
+                    isActive(btn.to)
+                      ? 'border-[#ffd700] bg-gradient-to-b from-[#2a1a4a]/90 to-[#1a1038]/95 shadow-[0_0_40px_-4px_rgba(255,215,0,0.7),inset_0_0_50px_-10px_rgba(160,32,240,0.7)]'
+                      : 'border-[#ffd700]/30 bg-gradient-to-b from-[#1a1038]/80 to-[#05030D]/90 shadow-[0_0_20px_-6px_rgba(255,215,0,0.35),inset_0_0_30px_-10px_rgba(160,32,240,0.4)] hover:border-[#ffd700]/70 hover:shadow-[0_0_30px_-4px_rgba(255,215,0,0.65),inset_0_0_40px_-10px_rgba(160,32,240,0.6)]'
+                  }`}
                 >
                   <div className="relative">
-                    <div className="absolute inset-0 rounded-full bg-[#ffd700]/20 blur-xl group-hover:bg-[#ffd700]/40 transition-colors" />
-                    <btn.icon className="relative w-7 h-7 sm:w-8 sm:h-8 text-[#fde68a] drop-shadow-[0_0_8px_rgba(255,215,0,0.7)] group-hover:scale-110 transition-transform" />
+                    <div className={`absolute inset-0 rounded-full blur-xl transition-colors ${isActive(btn.to) ? 'bg-[#ffd700]/50' : 'bg-[#ffd700]/20 group-hover:bg-[#ffd700]/40'}`} />
+                    <btn.icon className={`relative w-7 h-7 sm:w-8 sm:h-8 drop-shadow-[0_0_8px_rgba(255,215,0,0.7)] transition-transform ${isActive(btn.to) ? 'text-[#ffd700] scale-110' : 'text-[#fde68a] group-hover:scale-110'}`} />
                   </div>
                   <div
-                    className="text-[10px] sm:text-[11px] uppercase tracking-[2px] font-bold text-center text-white/90 leading-tight px-2"
+                    className={`text-[10px] sm:text-[11px] uppercase tracking-[2px] font-bold text-center leading-tight px-2 ${isActive(btn.to) ? 'text-[#ffd700]' : 'text-white/90'}`}
                     style={{ fontFamily: '"Cinzel", "Space Grotesk", serif' }}
                   >
                     {btn.label}
                   </div>
-                  <span className="absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#ffd700]/60 to-transparent" />
+                  <span className={`absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent to-transparent ${isActive(btn.to) ? 'via-[#ffd700]' : 'via-[#ffd700]/60'}`} />
+                  {isActive(btn.to) && (
+                    <span className="absolute -bottom-1 w-2 h-2 rounded-full bg-[#ffd700] shadow-[0_0_10px_rgba(255,215,0,0.9)]" />
+                  )}
                 </Link>
               </motion.div>
             ))}
