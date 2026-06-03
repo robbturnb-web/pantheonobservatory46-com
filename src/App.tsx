@@ -54,6 +54,7 @@ const SanctuaryPage = lazy(() => import('./pages/SanctuaryPage').then(m => ({ de
 const StarSeedTerminalPage = lazy(() => import('./pages/StarSeedTerminalPage').then(m => ({ default: m.StarSeedTerminalPage })));
 const BrazilPage = lazy(() => import('./pages/BrazilPage').then(m => ({ default: m.BrazilPage })));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const CodexPage = lazy(() => import('./pages/CodexPage'));
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
 function RouteLoader() {
@@ -90,6 +91,7 @@ export default function App() {
               <Route path="/earth-pulse" element={<EarthPulsePage />} />
               <Route path="/orb-report" element={<OrbReportPage />} />
               <Route path="/the-46" element={<The46Page />} />
+              <Route path="/codex" element={<CodexPage />} />
               <Route path="/video-vault" element={<The46Page />} />
               <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
               <Route path="/frequencies" element={<FrequenciesPage />} />
