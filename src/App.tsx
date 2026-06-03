@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Toaster } from './components/ui/toaster';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -53,6 +53,7 @@ const RubiksCubePage = lazy(() => import('./pages/RubiksCubePage').then(m => ({ 
 const SanctuaryPage = lazy(() => import('./pages/SanctuaryPage').then(m => ({ default: m.SanctuaryPage })));
 const StarSeedTerminalPage = lazy(() => import('./pages/StarSeedTerminalPage').then(m => ({ default: m.StarSeedTerminalPage })));
 const BrazilPage = lazy(() => import('./pages/BrazilPage').then(m => ({ default: m.BrazilPage })));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
 function RouteLoader() {
@@ -119,6 +120,8 @@ export default function App() {
               <Route path="/corbell" element={<JeremyCorbellPage />} />
               <Route path="/jeremy-corbell" element={<JeremyCorbellPage />} />
               <Route path="/brazil" element={<BrazilPage />} />
+              <Route path="/community" element={<Navigate to="/echoverse" replace />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
