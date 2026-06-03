@@ -168,6 +168,7 @@ const html = `<!doctype html>
   <h1>Pantheon — Security Report</h1>
   <div class="sub">Generated ${escapeHtml(new Date().toISOString())}</div>
 
+  <h2 style="color:#D6B35A;font-family:Cinzel,serif;margin-top:8px;">npm audit</h2>
   <div class="grid">
     <div class="card"><div class="n">${totals.total}</div><div class="l">Total</div></div>
     <div class="card"><div class="n sev-critical">${totals.critical}</div><div class="l">Critical</div></div>
@@ -188,9 +189,20 @@ const html = `<!doctype html>
       : `<div class="empty">No vulnerabilities detected. 🎉</div>`
   }
 
+  <h2 style="color:#D6B35A;font-family:Cinzel,serif;margin-top:32px;">Supabase linter</h2>
+  <div class="grid">
+    <div class="card"><div class="n">${supabaseTotals.total}</div><div class="l">Total</div></div>
+    <div class="card"><div class="n sev-critical">${supabaseTotals.error ?? 0}</div><div class="l">Error</div></div>
+    <div class="card"><div class="n sev-moderate">${(supabaseTotals.warning ?? 0) + (supabaseTotals.warn ?? 0)}</div><div class="l">Warning</div></div>
+    <div class="card"><div class="n sev-info">${supabaseTotals.info ?? 0}</div><div class="l">Info</div></div>
+  </div>
+
+  ${supabaseSection}
+
   <footer>
-    Raw data: <code>npm-audit.json</code> · Plaintext summary: <code>npm-audit.txt</code><br/>
-    For backend (Supabase) findings, run the Lovable Security scan from the Security panel.
+    Raw data: <code>npm-audit.json</code>, <code>supabase-lint.json</code><br/>
+    Plaintext: <code>npm-audit.txt</code>, <code>supabase-lint.txt</code><br/>
+    For deeper backend findings (RLS, public buckets, etc.), also run the Lovable Security scan from the Security panel.
   </footer>
 </body>
 </html>
