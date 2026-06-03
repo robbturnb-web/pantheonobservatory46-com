@@ -70,8 +70,61 @@ const advisoryRows = Object.entries(audit?.vulnerabilities ?? {})
   .join("\n");
 
 function severityRank(s) {
-  return { critical: 5, high: 4, moderate: 3, low: 2, info: 1 }[s] ?? 0;
+  return { critical: 5, error: 5, high: 4, moderate: 3, warning: 3, warn: 3, low: 2, info: 1 }[s] ?? 0;
 }
+
+// Supabase linter findings
+let supabase = null;
+if (existsSync(supabasePath)) {
+  try {
+    supabase = JSON.parse(readFileSync(supabasePath, "utf8"));
+  } catch (err) {
+    console.error("Failed to parse supabase-lint.json:", err.message);
+  }
+}
+
+const supabaseSkipped = !!supabase?.skipped;
+const supabaseFindings = Array.isArray(supabase) ? supabase : Array.isArray(supabase?.findings) ? supabase.findings : [];
+const supabaseTotals = supabaseFindings.reduce(
+  (acc, f) => {
+    const lvl = String(f.level ?? f.severity ?? "info").toLowerCase();
+    acc[lvl] = (acc[lvl] ?? 0) + 1;
+    acc.total += 1;
+    return acc;
+  },
+  { total: 0 }
+);
+
+const supabaseRows = supabaseFindings
+  .slice()
+  .sort((a, b) => severityRank(b.level ?? b.severity) - severityRank(a.level ?? a.severity))
+  .map((f) => {
+    const lvl = String(f.level ?? f.severity ?? "info").toLowerCase();
+    const link = f.remediation || f.cache_key
+      ? `<a href="${escapeHtml(f.remediation ?? "#")}" target="_blank" rel="noopener">docs</a>`
+      : "—";
+    return `
+      <tr class="sev-${escapeHtml(lvl)}">
+        <td><span class="badge sev-${escapeHtml(lvl)}">${escapeHtml(lvl)}</span></td>
+        <td><code>${escapeHtml(f.name ?? f.title ?? "")}</code></td>
+        <td>${escapeHtml(f.description ?? f.detail ?? "")}</td>
+        <td>${escapeHtml(f.facing ?? f.categories?.join(", ") ?? "")}</td>
+        <td>${link}</td>
+      </tr>
+    `;
+  })
+  .join("\n");
+
+const supabaseSection = supabaseSkipped
+  ? `<div class="empty">Supabase scan skipped — set <code>SUPABASE_ACCESS_TOKEN</code> and <code>SUPABASE_PROJECT_REF</code> repo secrets to enable.</div>`
+  : supabaseRows
+    ? `<table>
+        <thead>
+          <tr><th>Level</th><th>Name</th><th>Description</th><th>Categories</th><th>Docs</th></tr>
+        </thead>
+        <tbody>${supabaseRows}</tbody>
+      </table>`
+    : `<div class="empty">No Supabase linter findings. 🎉</div>`;
 
 const html = `<!doctype html>
 <html lang="en">
