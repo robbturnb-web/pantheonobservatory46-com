@@ -1,12 +1,30 @@
 import { test, expect, Page } from "@playwright/test";
 
-const ROUTES: Array<{ path: string; slug: string }> = [
+const ALL_ROUTES: Array<{ path: string; slug: string }> = [
   { path: "/",          slug: "home" },
   { path: "/the-46",    slug: "the-46" },
   { path: "/profile",   slug: "profile" },
   { path: "/echoverse", slug: "echoverse" },
   { path: "/pyramids",  slug: "pyramids" },
 ];
+
+// Optional filter: set VISUAL_ROUTES to a comma-separated list (e.g. "/,/profile")
+// to limit which routes are tested. Empty/unset = run all routes.
+const filter = (process.env.VISUAL_ROUTES ?? "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+const ROUTES = filter.length
+  ? ALL_ROUTES.filter((r) => filter.includes(r.path))
+  : ALL_ROUTES;
+
+if (filter.length && ROUTES.length === 0) {
+  throw new Error(
+    `VISUAL_ROUTES="${process.env.VISUAL_ROUTES}" matched no known routes. ` +
+      `Valid routes: ${ALL_ROUTES.map((r) => r.path).join(", ")}`,
+  );
+}
 
 async function gotoCodexFrom(page: Page, route: string) {
   // Visit the route first so location reflects it, then navigate to /codex
