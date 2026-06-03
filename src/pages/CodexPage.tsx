@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BookOpen, Sparkles, Plus, Users, Building2, ArrowLeft } from 'lucide-react';
 import { SEO } from '@/components/SEO';
