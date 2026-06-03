@@ -1,0 +1,79 @@
+name: Security Report
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      audit_level:
+        description: "Minimum severity to include in the human-readable summary (info, low, moderate, high, critical)"
+        required: false
+        default: "low"
+  schedule:
+    # Weekly Monday 06:00 UTC scan so reports stay fresh even without commits
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  security-report:
+    name: Generate & upload security scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Node (for npm audit + tooling)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Prepare report directory
+        run: mkdir -p security-report
+
+      - name: Run npm audit (JSON)
+        id: npm_audit
+        continue-on-error: true
+        run: |
+          npm audit --json > security-report/npm-audit.json || true
+          echo "Generated security-report/npm-audit.json"
+
+      - name: Run npm audit (human summary)
+        continue-on-error: true
+        env:
+          AUDIT_LEVEL: ${{ github.event.inputs.audit_level || 'low' }}
+        run: |
+          npm audit --audit-level="$AUDIT_LEVEL" > security-report/npm-audit.txt 2>&1 || true
+
+      - name: Render HTML report
+        run: node .github/scripts/render-security-report.mjs
+
+      - name: Print summary to job log
+        if: always()
+        run: |
+          echo "## Security Report" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          head -n 200 security-report/npm-audit.txt >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload security report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-report-${{ github.run_id }}
+          path: security-report/
+          retention-days: 30
+          if-no-files-found: error
