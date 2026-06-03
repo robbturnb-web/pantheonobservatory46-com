@@ -8,6 +8,7 @@ import { resolve } from "node:path";
 
 const DIR = resolve(process.cwd(), "security-report");
 const jsonPath = resolve(DIR, "npm-audit.json");
+const supabasePath = resolve(DIR, "supabase-lint.json");
 const outPath = resolve(DIR, "index.html");
 
 const escapeHtml = (s) =>
