@@ -21,6 +21,13 @@ const BUTTONS: CodexButton[] = [
 ];
 
 export default function CodexPage() {
+  const { pathname } = useLocation();
+
+  const isActive = (to: string) => {
+    if (to === '/') return pathname === '/';
+    return pathname === to || pathname.startsWith(to + '/');
+  };
+
   return (
     <>
       <SEO
