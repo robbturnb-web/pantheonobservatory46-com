@@ -58,16 +58,64 @@ jobs:
         run: |
           npm audit --audit-level="$AUDIT_LEVEL" > security-report/npm-audit.txt 2>&1 || true
 
+      - name: Setup Supabase CLI
+        if: env.SUPABASE_ACCESS_TOKEN != '' && env.SUPABASE_PROJECT_REF != ''
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+
+      - name: Run Supabase database linter
+        if: env.SUPABASE_ACCESS_TOKEN != '' && env.SUPABASE_PROJECT_REF != ''
+        continue-on-error: true
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+        run: |
+          supabase db lint \
+            --linked \
+            --project-ref "$SUPABASE_PROJECT_REF" \
+            --level warning \
+            --output json \
+            > security-report/supabase-lint.json 2> security-report/supabase-lint.err || true
+          supabase db lint \
+            --linked \
+            --project-ref "$SUPABASE_PROJECT_REF" \
+            --level warning \
+            > security-report/supabase-lint.txt 2>&1 || true
+
+      - name: Note when Supabase secrets are missing
+        if: env.SUPABASE_ACCESS_TOKEN == '' || env.SUPABASE_PROJECT_REF == ''
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+        run: |
+          echo "Supabase scan skipped: SUPABASE_ACCESS_TOKEN and/or SUPABASE_PROJECT_REF repo secrets are not set." \
+            > security-report/supabase-lint.txt
+          echo '{"skipped":true,"reason":"missing SUPABASE_ACCESS_TOKEN or SUPABASE_PROJECT_REF repo secret"}' \
+            > security-report/supabase-lint.json
+
       - name: Render HTML report
         run: node .github/scripts/render-security-report.mjs
 
       - name: Print summary to job log
         if: always()
         run: |
-          echo "## Security Report" >> "$GITHUB_STEP_SUMMARY"
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
-          head -n 200 security-report/npm-audit.txt >> "$GITHUB_STEP_SUMMARY" || true
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "## Security Report"
+            echo ""
+            echo "### npm audit"
+            echo '```'
+            head -n 120 security-report/npm-audit.txt || true
+            echo '```'
+            echo ""
+            echo "### Supabase linter"
+            echo '```'
+            head -n 120 security-report/supabase-lint.txt || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload security report artifact
         if: always()

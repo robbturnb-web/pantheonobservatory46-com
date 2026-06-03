@@ -8,6 +8,7 @@ import { resolve } from "node:path";
 
 const DIR = resolve(process.cwd(), "security-report");
 const jsonPath = resolve(DIR, "npm-audit.json");
+const supabasePath = resolve(DIR, "supabase-lint.json");
 const outPath = resolve(DIR, "index.html");
 
 const escapeHtml = (s) =>
@@ -69,8 +70,61 @@ const advisoryRows = Object.entries(audit?.vulnerabilities ?? {})
   .join("\n");
 
 function severityRank(s) {
-  return { critical: 5, high: 4, moderate: 3, low: 2, info: 1 }[s] ?? 0;
+  return { critical: 5, error: 5, high: 4, moderate: 3, warning: 3, warn: 3, low: 2, info: 1 }[s] ?? 0;
 }
+
+// Supabase linter findings
+let supabase = null;
+if (existsSync(supabasePath)) {
+  try {
+    supabase = JSON.parse(readFileSync(supabasePath, "utf8"));
+  } catch (err) {
+    console.error("Failed to parse supabase-lint.json:", err.message);
+  }
+}
+
+const supabaseSkipped = !!supabase?.skipped;
+const supabaseFindings = Array.isArray(supabase) ? supabase : Array.isArray(supabase?.findings) ? supabase.findings : [];
+const supabaseTotals = supabaseFindings.reduce(
+  (acc, f) => {
+    const lvl = String(f.level ?? f.severity ?? "info").toLowerCase();
+    acc[lvl] = (acc[lvl] ?? 0) + 1;
+    acc.total += 1;
+    return acc;
+  },
+  { total: 0 }
+);
+
+const supabaseRows = supabaseFindings
+  .slice()
+  .sort((a, b) => severityRank(b.level ?? b.severity) - severityRank(a.level ?? a.severity))
+  .map((f) => {
+    const lvl = String(f.level ?? f.severity ?? "info").toLowerCase();
+    const link = f.remediation || f.cache_key
+      ? `<a href="${escapeHtml(f.remediation ?? "#")}" target="_blank" rel="noopener">docs</a>`
+      : "—";
+    return `
+      <tr class="sev-${escapeHtml(lvl)}">
+        <td><span class="badge sev-${escapeHtml(lvl)}">${escapeHtml(lvl)}</span></td>
+        <td><code>${escapeHtml(f.name ?? f.title ?? "")}</code></td>
+        <td>${escapeHtml(f.description ?? f.detail ?? "")}</td>
+        <td>${escapeHtml(f.facing ?? f.categories?.join(", ") ?? "")}</td>
+        <td>${link}</td>
+      </tr>
+    `;
+  })
+  .join("\n");
+
+const supabaseSection = supabaseSkipped
+  ? `<div class="empty">Supabase scan skipped — set <code>SUPABASE_ACCESS_TOKEN</code> and <code>SUPABASE_PROJECT_REF</code> repo secrets to enable.</div>`
+  : supabaseRows
+    ? `<table>
+        <thead>
+          <tr><th>Level</th><th>Name</th><th>Description</th><th>Categories</th><th>Docs</th></tr>
+        </thead>
+        <tbody>${supabaseRows}</tbody>
+      </table>`
+    : `<div class="empty">No Supabase linter findings. 🎉</div>`;
 
 const html = `<!doctype html>
 <html lang="en">
@@ -114,6 +168,7 @@ const html = `<!doctype html>
   <h1>Pantheon — Security Report</h1>
   <div class="sub">Generated ${escapeHtml(new Date().toISOString())}</div>
 
+  <h2 style="color:#D6B35A;font-family:Cinzel,serif;margin-top:8px;">npm audit</h2>
   <div class="grid">
     <div class="card"><div class="n">${totals.total}</div><div class="l">Total</div></div>
     <div class="card"><div class="n sev-critical">${totals.critical}</div><div class="l">Critical</div></div>
@@ -134,9 +189,20 @@ const html = `<!doctype html>
       : `<div class="empty">No vulnerabilities detected. 🎉</div>`
   }
 
+  <h2 style="color:#D6B35A;font-family:Cinzel,serif;margin-top:32px;">Supabase linter</h2>
+  <div class="grid">
+    <div class="card"><div class="n">${supabaseTotals.total}</div><div class="l">Total</div></div>
+    <div class="card"><div class="n sev-critical">${supabaseTotals.error ?? 0}</div><div class="l">Error</div></div>
+    <div class="card"><div class="n sev-moderate">${(supabaseTotals.warning ?? 0) + (supabaseTotals.warn ?? 0)}</div><div class="l">Warning</div></div>
+    <div class="card"><div class="n sev-info">${supabaseTotals.info ?? 0}</div><div class="l">Info</div></div>
+  </div>
+
+  ${supabaseSection}
+
   <footer>
-    Raw data: <code>npm-audit.json</code> · Plaintext summary: <code>npm-audit.txt</code><br/>
-    For backend (Supabase) findings, run the Lovable Security scan from the Security panel.
+    Raw data: <code>npm-audit.json</code>, <code>supabase-lint.json</code><br/>
+    Plaintext: <code>npm-audit.txt</code>, <code>supabase-lint.txt</code><br/>
+    For deeper backend findings (RLS, public buckets, etc.), also run the Lovable Security scan from the Security panel.
   </footer>
 </body>
 </html>
