@@ -103,10 +103,19 @@ jobs:
       - name: Print summary to job log
         if: always()
         run: |
-          echo "## Security Report" >> "$GITHUB_STEP_SUMMARY"
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
-          head -n 200 security-report/npm-audit.txt >> "$GITHUB_STEP_SUMMARY" || true
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "## Security Report"
+            echo ""
+            echo "### npm audit"
+            echo '```'
+            head -n 120 security-report/npm-audit.txt || true
+            echo '```'
+            echo ""
+            echo "### Supabase linter"
+            echo '```'
+            head -n 120 security-report/supabase-lint.txt || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload security report artifact
         if: always()
