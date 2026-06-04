@@ -53,6 +53,7 @@ const RubiksCubePage = lazy(() => import('./pages/RubiksCubePage').then(m => ({ 
 const SanctuaryPage = lazy(() => import('./pages/SanctuaryPage').then(m => ({ default: m.SanctuaryPage })));
 const StarSeedTerminalPage = lazy(() => import('./pages/StarSeedTerminalPage').then(m => ({ default: m.StarSeedTerminalPage })));
 const BrazilPage = lazy(() => import('./pages/BrazilPage').then(m => ({ default: m.BrazilPage })));
+const JWSTPage = lazy(() => import('./pages/JWSTPage').then(m => ({ default: m.JWSTPage })));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const CodexPage = lazy(() => import('./pages/CodexPage'));
 
@@ -122,7 +123,9 @@ export default function App() {
               <Route path="/corbell" element={<JeremyCorbellPage />} />
               <Route path="/jeremy-corbell" element={<JeremyCorbellPage />} />
               <Route path="/brazil" element={<BrazilPage />} />
+              <Route path="/jwst" element={<JWSTPage />} />
               <Route path="/community" element={<Navigate to="/echoverse" replace />} />
+              <Route path="/index" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="/auth" element={<AuthPage />} />
