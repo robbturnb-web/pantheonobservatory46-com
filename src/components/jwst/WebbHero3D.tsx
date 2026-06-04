@@ -38,7 +38,7 @@ export function WebbHero3D({ onFallback }: Props) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   return (
-    <section className="relative h-screen min-h-[640px] w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden" style={{ height: isMobile ? '88vh' : '100vh', minHeight: isMobile ? 560 : 640 }}>
       {/* Deep field backdrop */}
       <div className="absolute inset-0">
         <img
@@ -52,7 +52,7 @@ export function WebbHero3D({ onFallback }: Props) {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse at center, rgba(5,3,13,0.4) 0%, rgba(5,3,13,0.85) 70%, rgba(5,3,13,1) 100%)',
+              'radial-gradient(ellipse at center, rgba(5,3,13,0.35) 0%, rgba(5,3,13,0.82) 68%, rgba(5,3,13,1) 100%)',
           }}
         />
         <div className="absolute -top-32 -left-32 w-[40rem] h-[40rem] rounded-full blur-[120px] opacity-30" style={{ background: '#7c3aed' }} />
@@ -63,7 +63,7 @@ export function WebbHero3D({ onFallback }: Props) {
       {webglOk && (
         <div className="absolute inset-0">
           <Canvas
-            camera={{ position: [0, 1, 9], fov: 42 }}
+            camera={{ position: [0, 1, isMobile ? 11 : 9], fov: isMobile ? 38 : 42 }}
             dpr={isMobile ? [1, 1.5] : [1, 2]}
             gl={{ antialias: true, alpha: true }}
             style={{ background: 'transparent' }}
@@ -72,7 +72,7 @@ export function WebbHero3D({ onFallback }: Props) {
             <directionalLight position={[5, 5, 5]} intensity={1.2} color="#fff8e0" />
             <Stars radius={60} depth={50} count={1500} factor={3} fade speed={0.4} />
             <Suspense fallback={null}>
-              <WebbModel3D autoRotate />
+              <WebbModel3D autoRotate scale={isMobile ? 0.75 : 1} />
             </Suspense>
             {!isMobile && (
               <OrbitControls
