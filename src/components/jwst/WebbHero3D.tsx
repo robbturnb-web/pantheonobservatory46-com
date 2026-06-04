@@ -88,7 +88,7 @@ export function WebbHero3D({ onFallback }: Props) {
       )}
 
       {/* Foreground content (top + bottom, keep middle clear for model) */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-between text-center px-4 py-12 pointer-events-none">
+      <div className="relative z-10 h-full flex flex-col items-center justify-between text-center px-4 py-6 md:py-12 pointer-events-none">
         <div className="pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, y: 8 }}
