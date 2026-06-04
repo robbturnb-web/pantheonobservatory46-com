@@ -1,15 +1,21 @@
-import { useEffect, useState } from 'react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
-import { DeepFieldHero } from '@/components/jwst/DeepFieldHero';
+import { WebbHero3D } from '@/components/jwst/WebbHero3D';
 import { MissionConsole } from '@/components/jwst/MissionConsole';
+import { WhyOnlyWebb } from '@/components/jwst/WhyOnlyWebb';
 import { FindingsVault } from '@/components/jwst/FindingsVault';
 import { CosmicTimeline } from '@/components/jwst/CosmicTimeline';
-import { LiveWebbFeed } from '@/components/jwst/LiveWebbFeed';
 import { FindingModal } from '@/components/jwst/FindingModal';
+import { JwstSubNav } from '@/components/jwst/JwstSubNav';
+import { DailyFindingsFeed } from '@/components/jwst/DailyFindingsFeed';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 import type { JwstFinding, JwstInstrument } from '@/data/jwst-findings';
+
+const LiveWebbFeed = lazy(() =>
+  import('@/components/jwst/LiveWebbFeed').then((m) => ({ default: m.LiveWebbFeed })),
+);
 
 export function JWSTPage() {
   const [instrumentFilter, setInstrumentFilter] = useState<JwstInstrument | 'all'>('all');
@@ -18,9 +24,9 @@ export function JWSTPage() {
 
   useEffect(() => {
     document.title = 'James Webb Space Telescope · Pantheon Observatory';
-    const meta = document.querySelector('meta[name="description"]');
     const desc =
-      'A cinematic mission console for the James Webb Space Telescope — its deepest images, atmospheric reads, and rewritten cosmic history.';
+      'The cinematic mission console for the James Webb Space Telescope — interactive 3D model, 25 hand-curated findings, "Why only Webb" comparisons, daily mission updates.';
+    const meta = document.querySelector('meta[name="description"]');
     if (meta) meta.setAttribute('content', desc);
     else {
       const m = document.createElement('meta');
@@ -29,16 +35,16 @@ export function JWSTPage() {
       document.head.appendChild(m);
     }
 
-    // JSON-LD
     const ld = document.createElement('script');
     ld.type = 'application/ld+json';
     ld.text = JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'CreativeWork',
-      name: 'James Webb Space Telescope — Mission Flagship',
+      '@type': 'Observatory',
+      name: 'James Webb Space Telescope — Pantheon Mission Flagship',
       description: desc,
       about: 'James Webb Space Telescope',
       publisher: { '@type': 'Organization', name: 'Pantheon Observatory' },
+      image: 'https://stsci-opo.org/STScI-01G7DCWB7137MYJ05CSH1Q5Z1Z.png',
     });
     document.head.appendChild(ld);
     return () => { document.head.removeChild(ld); };
@@ -51,15 +57,27 @@ export function JWSTPage() {
 
   return (
     <div className="relative min-h-screen -mt-16" style={{ background: 'linear-gradient(180deg, #05030d 0%, #0a0420 45%, #03020a 100%)' }}>
-      <DeepFieldHero />
+      <JwstSubNav />
+
+      <WebbHero3D />
 
       <MissionConsole active={instrumentFilter} onChange={setInstrumentFilter} />
 
+      <WhyOnlyWebb />
+
       <FindingsVault instrumentFilter={instrumentFilter} onOpen={handleOpen} />
 
-      <CosmicTimeline onOpen={handleOpen} />
+      <div id="jwst-timeline">
+        <CosmicTimeline onOpen={handleOpen} />
+      </div>
 
-      <LiveWebbFeed />
+      <DailyFindingsFeed />
+
+      <div id="jwst-live">
+        <Suspense fallback={<div className="py-20 text-center text-violet-300/40 text-xs">Loading live feed…</div>}>
+          <LiveWebbFeed />
+        </Suspense>
+      </div>
 
       {/* Echo handoff */}
       <section className="relative py-24 px-4">
