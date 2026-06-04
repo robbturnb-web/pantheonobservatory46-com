@@ -99,6 +99,44 @@ export function FindingModal({ finding, onClose }: Props) {
                 <p className="text-sm text-amber-50/90 leading-relaxed">{finding.why}</p>
               </section>
 
+              {/* Deep intel sections — only render if present */}
+              {([
+                ['Technique used', finding.technique, '#a78bfa'],
+                ['Prior attempts & why they failed', finding.priorAttempts, '#22d3ee'],
+                ['Open controversy', finding.controversy, '#f87171'],
+                ['What it rewrites', finding.implications, '#fde68a'],
+              ] as const).map(([label, text, color]) =>
+                text ? (
+                  <section
+                    key={label}
+                    className="rounded-xl border p-4"
+                    style={{ borderColor: `${color}55`, background: `${color}0d` }}
+                  >
+                    <h4 className="text-[11px] font-bold uppercase tracking-[0.25em] mb-2" style={{ color }}>
+                      {label}
+                    </h4>
+                    <p className="text-sm text-violet-100/85 leading-relaxed">{text}</p>
+                  </section>
+                ) : null,
+              )}
+
+              {finding.papers && finding.papers.length > 0 && (
+                <section>
+                  <h4 className="text-[11px] font-bold uppercase tracking-[0.25em] text-violet-200/70 mb-2">Papers</h4>
+                  <ul className="space-y-1.5">
+                    {finding.papers.map((p, i) => (
+                      <li key={i}>
+                        <a href={p.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-cyan-200 hover:text-amber-200 transition-colors">
+                          <ExternalLink className="w-3.5 h-3.5" /> {p.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+
+
               <section>
                 <h4 className="text-[11px] font-bold uppercase tracking-[0.25em] text-violet-200/70 mb-2">Sources</h4>
                 <ul className="space-y-1.5">
