@@ -9,22 +9,22 @@ function daysOnStation() {
   return Math.floor((Date.now() - launch) / (1000 * 60 * 60 * 24));
 }
 
-const BACKDROP = 'https://stsci-opo.org/STScI-01G77PKB8NKR7S8Z6HBXMYATGJ.png'; // Cosmic Cliffs
+const BACKDROP = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/NASA%E2%80%99s_Webb_Reveals_Cosmic_Cliffs%2C_Glittering_Landscape_of_Star_Birth_-_Flickr_-_James_Webb_Space_Telescope.png/1920px-NASA%E2%80%99s_Webb_Reveals_Cosmic_Cliffs%2C_Glittering_Landscape_of_Star_Birth_-_Flickr_-_James_Webb_Space_Telescope.png'; // Cosmic Cliffs
 const POLAROIDS = [
   {
-    src: 'https://stsci-opo.org/STScI-01GFNRPFVK15Y0FK2RZJBQXEYY.png',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Pillars_of_Creation_%28NIRCam_Image%29.png/1280px-Pillars_of_Creation_%28NIRCam_Image%29.png',
     label: 'Pillars of Creation',
     sub: 'NIRCam · 6,500 ly',
     rotate: -8,
   },
   {
-    src: 'https://stsci-opo.org/STScI-01GA76RHKZQ8E5JBJSYHKFAVMM.png',
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/M74_Galaxy_JWST_MIRI.jpg/1280px-M74_Galaxy_JWST_MIRI.jpg',
     label: 'Phantom Galaxy',
     sub: 'MIRI · M74',
     rotate: 4,
   },
   {
-    src: 'https://stsci-opo.org/STScI-01G7DCWB7137MYJ05CSH1Q5Z1Z.png',
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Webb%27s_First_Deep_Field.jpg/1280px-Webb%27s_First_Deep_Field.jpg",
     label: 'First Deep Field',
     sub: 'SMACS 0723',
     rotate: 9,

@@ -39,9 +39,9 @@ export const TELESCOPE_COMPARISONS: TelescopeComparison[] = [
     webbWin: 'Sees through dust to stellar nurseries and back to ~290 Myr after the Big Bang.',
     why: 'Light from the first galaxies is stretched by cosmic expansion out of Hubble\'s visible band into the infrared. Webb\'s 6.5 m mirror (6.25× the collecting area of Hubble) plus cryogenic detectors at −233 °C catch photons Hubble physically cannot register.',
     split: {
-      rivalImage: 'https://stsci-opo.org/STScI-01EVT9TKKKCFP1KVS50K2WCT4Z.png',
+      rivalImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/NASA%E2%80%99s_Webb_Reveals_Cosmic_Cliffs%2C_Glittering_Landscape_of_Star_Birth_-_Flickr_-_James_Webb_Space_Telescope.png/1920px-NASA%E2%80%99s_Webb_Reveals_Cosmic_Cliffs%2C_Glittering_Landscape_of_Star_Birth_-_Flickr_-_James_Webb_Space_Telescope.png',
       rivalLabel: 'Hubble · 1995',
-      webbImage: 'https://stsci-opo.org/STScI-01GFNNW3DM8VW2RY6BAFXFRGZW.png',
+      webbImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Pillars_of_Creation_%28NIRCam_Image%29.png/1280px-Pillars_of_Creation_%28NIRCam_Image%29.png',
       webbLabel: 'Webb · 2022 NIRCam',
       subject: 'Pillars of Creation — Eagle Nebula',
     },
