@@ -5,7 +5,10 @@ const SITE = 'https://pantheonobservatory46-com.lovable.app';
 type SEOProps = {
   title: string;
   description: string;
-  path: string;
+  /** Route path like "/uap". Either `path` or `canonical` is required. */
+  path?: string;
+  /** Full canonical URL override. */
+  canonical?: string;
   /** Optional JSON-LD schema object(s). */
   schema?: Record<string, unknown> | Record<string, unknown>[];
   /** noindex for gated/private routes. */
@@ -17,8 +20,8 @@ type SEOProps = {
  * Per-route SEO: title, description, canonical, og:*, optional JSON-LD.
  * Pair with the sitewide head in index.html (which provides social-crawler fallbacks).
  */
-export function SEO({ title, description, path, schema, noindex, image }: SEOProps) {
-  const url = `${SITE}${path}`;
+export function SEO({ title, description, path, canonical, schema, noindex, image }: SEOProps) {
+  const url = canonical ?? `${SITE}${path ?? '/'}`;
   const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
   return (
