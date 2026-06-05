@@ -11,6 +11,7 @@ import { whistleblowers, type Whistleblower } from '../data/whistleblowers';
 import type { EvidenceGrade } from '../types';
 import { useEchoXp } from '../hooks/use-echo-xp';
 import { SEO } from '@/components/SEO';
+import { HeroSection } from '@/components/HeroSection';
 
 const gradeFilters: ('ALL' | EvidenceGrade)[] = ['ALL', 'DOCUMENTED', 'CREDIBLE', 'SPECULATIVE', 'UNVERIFIED'];
 
