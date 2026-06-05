@@ -215,6 +215,8 @@ export function UAPPage() {
       <div className="-mx-4 sm:-mx-6 lg:-mx-8 mt-8">
         <VideoStrip topic="UAP" title="From the Field" subtitle="Latest UAP coverage from our tracked sources." limit={3} />
       </div>
+      </div>
     </div>
   );
 }
+
