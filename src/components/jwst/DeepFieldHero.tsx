@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Radio, Telescope } from 'lucide-react';
 
 const DEEP_FIELD =
-  'https://stsci-opo.org/STScI-01G7DCWB7137MYJ05CSH1Q5Z1Z.png';
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Webb%27s_First_Deep_Field.jpg/1920px-Webb%27s_First_Deep_Field.jpg";
 
 // JWST launched Dec 25, 2021. Day counter from that date.
 function daysOnStation() {
