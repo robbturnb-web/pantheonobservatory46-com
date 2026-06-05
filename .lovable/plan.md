@@ -1,85 +1,54 @@
-# JWST Flagship — Deep Polish Pass
 
-Turn `/jwst` from a solid page into the definitive Webb experience on the web. Four big additions, one polish pass.
+# JWST Section — Image Hero Swap + Expansion Backlog
 
-## 1. 3D James Webb Telescope (hero centerpiece)
+## Part 1 — Replace 3D telescope with image hero
 
-Replace the current static parallax hero with an interactive 3D Webb model.
+The 3D model isn't reading well on mobile. We'll retire it and rebuild the hero using the same visual language as Gods, Cosmos, and Consciousness realms: cinematic photography, layered glass cards, glow accents.
 
-- **Tech:** `@react-three/fiber@^8.18` + `@react-three/drei@^9.122.0` + `three@^0.160` (versions pinned per stack rules). Lazy-loaded with `Suspense`, gated by `isWebGLAvailable()` from `src/lib/webgl.ts` — falls back to current `DeepFieldHero` image on mobile/no-GPU.
-- **Model:** Stylized low-poly Webb built from primitives (no external GLB needed for v1):
-    - 18 hex gold-tinted primary mirror segments (`CylinderGeometry`, 6 sides)
-    - Secondary mirror on tripod struts
-    - 5-layer kapton sunshield (stacked rounded planes, amber→violet gradient material)
-    - Spacecraft bus + solar panel
-- **Motion:** Slow Y-axis rotation, mouse-parallax tilt, scroll-linked zoom-out revealing starfield. `OrbitControls` enabled on desktop, disabled on touch.
-- **Overlays:** Hot-spot pins on mirror / sunshield / instruments → click opens a side panel with that subsystem's spec sheet (aperture 6.5 m, mass 6,500 kg, L2 orbit 1.5M km, mirror coating: gold on beryllium, etc.).
-- **Status HUD:** Keep "ONLINE · L2 ORBIT · Day N" chip, add live telemetry-style readouts (temp −233 °C cold side / +85 °C hot side, fuel remaining estimate, next observation window).
+### Hero rebuild (`WebbHero3D.tsx` → `WebbHeroImage.tsx`)
+- **Backdrop**: NASA's Carina Nebula (Cosmic Cliffs) full-bleed, with parallax on scroll and a deep violet/obsidian radial vignette so text stays legible.
+- **Foreground composition**:
+  - Left/center: title block (JAMES WEBB · Cinzel, amber kicker, "Online · L2 Halo Orbit · Day X" green status pill).
+  - Right side (desktop) / below (mobile): **floating polaroid stack** of 3 iconic Webb images (Pillars of Creation, Phantom Galaxy, SMACS 0723 deep field) — tilted, glass-edged, with hover lift. Tapping any opens it fullscreen.
+  - Bottom: existing CTA pair (Mission Console / Browse Findings) + scroll chevron.
+- **Motion**: framer-motion entrance stagger, slow Ken Burns zoom on backdrop, subtle float on the polaroid stack. No three.js.
 
-New file: `src/components/jwst/WebbModel3D.tsx` + `src/components/jwst/WebbHero3D.tsx` (wraps Canvas + HUD).
+### Cleanup
+- Delete `WebbModel3D.tsx` and `WebbHero3D.tsx`.
+- Remove `@react-three/fiber`, `@react-three/drei`, `three` from `package.json` **only if** no other page uses them — `GalaxyExplorerPage`, `PyramidScene`, `SolarSystem` likely still need them, so keep installed.
+- Update `JWSTPage.tsx` import to `WebbHeroImage`.
 
-## 2. "Why Only Webb" — telescope comparison module
+### New "Webb Gallery" strip directly under the hero
+A horizontal scroll rail of ~12 hand-picked Webb images (NIRCam + MIRI), each captioned with target name, distance, instrument, and a "Why it matters" one-liner. Uses the existing `ImageWithFallback` pattern and lazy loading. Tapping opens a lightbox.
 
-Brand-new section answering exactly what the user asked: what Hubble / Spitzer / Kepler / ground scopes could **not** see, and **why** Webb can.
+Files:
+- New: `src/components/jwst/WebbHeroImage.tsx`, `src/components/jwst/WebbGalleryStrip.tsx`, `src/data/jwst-gallery.ts`
+- Edited: `src/pages/JWSTPage.tsx`
+- Deleted: `src/components/jwst/WebbModel3D.tsx`, `src/components/jwst/WebbHero3D.tsx`
 
-- Side-by-side comparison cards: Webb vs Hubble, vs Spitzer, vs Kepler, vs Keck/VLT.
-- For each rival: aperture, wavelength range, orbit, launch year, key limitation.
-- For each Webb advantage: physics explanation in plain English (e.g. "Hubble sees visible/UV — early-universe light is redshifted into infrared, invisible to Hubble. Webb's 6.5 m gold-coated mirror + cryogenic MIRI detector catch it.").
-- Visual: split-image sliders (Hubble vs Webb) for Pillars of Creation, Carina Nebula, Stephan's Quintet, Southern Ring — using existing curated CDN URLs.
-- New files: `src/components/jwst/WhyOnlyWebb.tsx`, `src/components/jwst/ImageCompareSlider.tsx`, `src/data/jwst-comparisons.ts`.
+## Part 2 — Expansion ideas (pick what to build next)
 
-## 3. Daily Findings Feed
+Ranked by impact for the flagship feel:
 
-A live "what Webb saw recently" rail, separate from the existing NASA image grid.
+1. **Webb vs Hubble Image Slider Gallery** — Expand current `WhyOnlyWebb` from 1–2 comparisons to 8+ side-by-side reveals (Pillars, Carina, Stephan's Quintet, Tarantula, Phantom Galaxy, Cartwheel, Ring Nebula, Southern Ring).
+2. **"What Webb Sees That Others Can't" infographic strip** — Visual EM-spectrum diagram showing infrared window, with hover callouts: redshifted galaxies, dust-piercing, exoplanet atmospheres, cold protostars. One scrollable graphic, no text wall.
+3. **Exoplanet Atmosphere Lab** — Dedicated subsection cataloguing every exoplanet Webb has sniffed (WASP-39b CO₂, WASP-96b H₂O, K2-18b DMS/CH₄, TRAPPIST-1 set, GJ 1214b haze). Each card shows the transmission spectrum graphic + plain-English "what this molecule means for life."
+4. **Deep Field Zoomer** — Interactive pan/zoom on SMACS 0723 with pinpoints on the most-distant galaxies, ages, and redshift values. Pure 2D (react-zoom-pan-pinch), feels 3D.
+5. **Mission Vitals Console** — Live-looking telemetry strip (temperature of each instrument, fuel remaining, days to mission end estimate, current pointing target from STScI schedule API). Adds the "operating system" feel.
+6. **"Discovery of the Week" featured card** — Editorial spotlight pulled from the daily feed but enlarged, with Echo commentary baked in.
+7. **Cost & Engineering Stats** — $10B, 25 years, 14 countries, 1,200 engineers, 344 single-point failures survived during deployment. Animated counter cards.
+8. **Threats & Limitations** — Honest section: micrometeoroid damage to segment C3 (2022), fuel-limited lifespan (~20 years), what could end the mission early. Adds credibility.
+9. **"Ask Webb" Echo prompt grid** — 6 pre-seeded deep-question buttons that hand off to Echo (e.g., "Explain JADES-GS-z13-0 to me like I'm 12").
+10. **Successor Telescopes preview** — Habitable Worlds Observatory, LUVOIR, what comes after Webb and why.
 
-- New edge function `supabase/functions/jwst-daily-findings/index.ts` that aggregates:
-    - NASA APOD API filtered for Webb (`?date=...`)
-    - STScI / ESA Webb news RSS (`https://esawebb.org/news/feed/`, `https://webbtelescope.org/news/news-releases.xml`) — parsed server-side.
-    - Falls back to curated list if both fail. 6-hour cache.
-- Client component `DailyFindingsFeed.tsx`: vertical timeline of last ~30 days, each entry has date chip, thumbnail, 1-paragraph summary, "Open dossier" if it matches a vault entry.
-- Wires into existing `useEchoXp` so opening a daily finding awards XP.
+### Recommended build order for next loop after hero swap
+Hero swap → Gallery strip → #1 expanded comparisons → #3 Exoplanet Lab → #4 Deep Field Zoomer. Save #2/#5–#10 as follow-ups.
 
-## 4. Intel deepening — expand every dossier
+## Out of scope for this plan
+- Removing three.js from the project (other pages still use it).
+- Real telemetry API hookup (#5 will be styled-static for v1).
+- New edge functions (daily feed already covers live data).
 
-Current `jwst-findings.ts` has 15 entries with short summaries. Expand each to full intel sheet:
+---
 
-- Add fields: `priorAttempts` (which scopes tried & failed and why), `techniqueUsed` (NIRCam grism, MIRI MRS, NIRSpec MOS, transmission spectroscopy, etc.), `controversies` (open debates / contradicting data), `implications` (what it rewrites in cosmology/astrobiology), `relatedFindings` (cross-links), `papers` (arXiv DOIs).
-- Add ~10 more findings to bring total to 25: WASP-96b water, GJ 1214b haze, NGC 346 protostars, Ring Nebula MIRI, Cassiopeia A reverse shock, Jupiter auroras, Saturn Enceladus plume IR, Uranus rings, asteroid Dimorphos DART debris, comet 238P main-belt water, plus 2 freshest 2025–2026 results pulled live.
-- Update `FindingModal.tsx` to render the new sections as collapsible accordions (Prior Attempts / Technique / Controversy / Implications / Papers).
-
-## 5. Polish pass
-
-- Mobile: cap 3D model DPR to 1.5, hide hot-spots, swap OrbitControls for a single auto-rotation.
-- Add a sticky sub-nav inside `/jwst`: `Hero · Mission · Why Webb · Findings · Timeline · Daily · Live`.
-- SEO: expand JSON-LD to `Observatory` schema, add OpenGraph image (SMACS 0723 hero).
-- Accessibility: every 3D hot-spot also reachable via keyboard list below the canvas.
-- Performance: `React.lazy` the 3D hero + LiveWebbFeed; preload critical images.
-
-## File map
-
-**New**
-- `src/components/jwst/WebbModel3D.tsx`
-- `src/components/jwst/WebbHero3D.tsx`
-- `src/components/jwst/WhyOnlyWebb.tsx`
-- `src/components/jwst/ImageCompareSlider.tsx`
-- `src/components/jwst/DailyFindingsFeed.tsx`
-- `src/components/jwst/JwstSubNav.tsx`
-- `src/data/jwst-comparisons.ts`
-- `supabase/functions/jwst-daily-findings/index.ts`
-
-**Edited**
-- `src/pages/JWSTPage.tsx` — wire new sections, sub-nav, lazy loading
-- `src/components/jwst/DeepFieldHero.tsx` — becomes the 2D fallback
-- `src/data/jwst-findings.ts` — expanded schema + 10 new entries + deeper copy
-- `src/components/jwst/FindingModal.tsx` — render new fields
-- `package.json` — add three, @react-three/fiber@^8.18, @react-three/drei@^9.122.0
-
-## Out of scope (call out before building)
-
-- Real GLB model of Webb (v1 uses primitives; can swap to a NASA-released GLB later if you want photoreal).
-- User accounts saving "favorite findings" — could be a follow-up.
-- Hubble / Spitzer dedicated pages — `/telescopes` hub already slots those as "Incoming".
-
-## One clarification before I build
-
-The 3D model: do you want **stylized low-poly Webb built from Three primitives** (fast, ships today, matches Pantheon's cosmic aesthetic) or should I hunt down a **photoreal GLB** from NASA's 3D resources (heavier, longer load, but museum-accurate)? I'll default to stylized unless you say otherwise.
+**Confirm**: greenlight the hero swap + gallery strip now, and tell me which of the 10 expansion ideas to queue immediately after.
