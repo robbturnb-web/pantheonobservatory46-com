@@ -1,5 +1,5 @@
 import { useState, Suspense, useEffect, useRef, useCallback } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, MessageCircle, Play, Square, SkipForward } from 'lucide-react';
 import { HeroSection } from '../components/HeroSection';
 import { SolarSystem } from '../components/galaxy/SolarSystem';
