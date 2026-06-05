@@ -46,7 +46,7 @@ export function WebbHeroImage() {
   return (
     <section
       className="relative w-full overflow-hidden"
-      style={{ minHeight: isMobile ? '92vh' : '100vh' }}
+      style={{ minHeight: isMobile ? 'auto' : '100vh' }}
     >
       {/* Backdrop with slow Ken Burns */}
       <motion.div
@@ -74,7 +74,7 @@ export function WebbHeroImage() {
       <div className="absolute -bottom-32 -right-32 w-[36rem] h-[36rem] rounded-full blur-[140px] opacity-20" style={{ background: '#22d3ee' }} />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32 pb-12 md:pb-20 grid md:grid-cols-[1.05fr_0.95fr] gap-10 items-center min-h-[88vh]">
+      <div className={`relative z-10 max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32 pb-12 md:pb-20 grid md:grid-cols-[1.05fr_0.95fr] gap-10 items-center ${isMobile ? '' : 'min-h-[88vh]'}`}>
         {/* Left — text block */}
         <div className="text-center md:text-left">
           <motion.div
@@ -173,19 +173,20 @@ export function WebbHeroImage() {
           </motion.p>
         </div>
 
-        {/* Right — floating polaroid stack */}
-        <div className="relative h-[380px] md:h-[520px] flex items-center justify-center">
-          {POLAROIDS.map((p, i) => {
-            const offsetX = (i - 1) * (isMobile ? 36 : 72);
-            const offsetY = (i - 1) * (isMobile ? 14 : 24);
+        {/* Right — floating polaroid stack (desktop) / single polaroid (mobile) */}
+        <div className={`relative ${isMobile ? 'h-[300px]' : 'h-[520px]'} flex items-center justify-center`}>
+          {(isMobile ? POLAROIDS.slice(0, 1) : POLAROIDS).map((p, i) => {
+            const offsetX = isMobile ? 0 : (i - 1) * 96;
+            const offsetY = isMobile ? 0 : (i - 1) * 24;
+            const rotate = isMobile ? -4 : p.rotate;
             return (
               <motion.figure
                 key={p.label}
                 initial={{ opacity: 0, y: 40, rotate: 0 }}
-                animate={{ opacity: 1, y: offsetY, rotate: p.rotate, x: offsetX }}
+                animate={{ opacity: 1, y: offsetY, rotate, x: offsetX }}
                 transition={{ delay: 0.4 + i * 0.15, duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
-                whileHover={{ scale: 1.06, rotate: p.rotate * 0.4, zIndex: 30 }}
-                className="absolute w-[58%] md:w-[64%] aspect-[4/5] rounded-md p-3 pb-12 backdrop-blur-md cursor-pointer"
+                whileHover={{ scale: 1.06, rotate: rotate * 0.4, zIndex: 30 }}
+                className={`${isMobile ? 'relative w-[68%]' : 'absolute w-[60%] md:w-[62%]'} aspect-[4/5] rounded-md p-3 pb-12 backdrop-blur-md cursor-pointer`}
                 style={{
                   background: 'linear-gradient(180deg, rgba(245,243,255,0.94), rgba(237,233,254,0.88))',
                   boxShadow: '0 30px 60px -20px rgba(0,0,0,0.7), 0 0 40px rgba(167,139,250,0.35)',
@@ -216,6 +217,7 @@ export function WebbHeroImage() {
           <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-12 rounded-full blur-2xl opacity-50" style={{ background: 'rgba(167,139,250,0.6)' }} />
         </div>
       </div>
+
 
       {/* Scroll chevron */}
       <motion.div
