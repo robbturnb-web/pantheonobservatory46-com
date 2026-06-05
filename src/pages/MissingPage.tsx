@@ -46,20 +46,24 @@ const statusConfig: Record<MissingScientist['status'], { label: string; tone: st
 
 const confidenceConfig: Record<
   ConfidenceGrade,
-  { label: string; bg: string; fg: string; border: string }
+  { label: string; color: string }
 > = {
-  VERIFIED: { label: 'Verified', bg: '#ecfccb', fg: '#365314', border: '#84cc16' },
-  REPORTED: { label: 'Reported', bg: '#dbeafe', fg: '#1e3a8a', border: '#3b82f6' },
-  ALLEGED: { label: 'Alleged', bg: '#fef3c7', fg: '#78350f', border: '#f59e0b' },
-  UNDER_INVESTIGATION: { label: 'Under investigation', bg: '#fae8ff', fg: '#581c87', border: '#a855f7' },
+  VERIFIED: { label: 'Verified', color: '#10b981' },
+  REPORTED: { label: 'Reported', color: '#22D3EE' },
+  ALLEGED: { label: 'Alleged', color: '#D6B35A' },
+  UNDER_INVESTIGATION: { label: 'Under investigation', color: '#4F46E5' },
 };
 
 function ConfidenceBadge({ grade }: { grade: ConfidenceGrade }) {
   const c = confidenceConfig[grade];
   return (
     <span
-      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider border"
-      style={{ background: c.bg, color: c.fg, borderColor: c.border }}
+      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider border transition-shadow hover:shadow-[0_0_12px_currentColor]"
+      style={{
+        background: `${c.color}15`,
+        color: c.color,
+        borderColor: `${c.color}55`,
+      }}
     >
       <ShieldAlert className="w-2.5 h-2.5" />
       {c.label}
