@@ -2,25 +2,28 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { consciousnessSections } from '../data/consciousness';
 import { EvidenceBadge } from '../components/EvidenceBadge';
+import { HeroSection } from '@/components/HeroSection';
 import { ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 
 export function ConsciousnessPage() {
   const [expanded, setExpanded] = useState<string | null>(consciousnessSections[0]?.id ?? null);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12">
-        <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Consciousness Lab</h1>
-        <p className="text-muted-foreground text-lg mb-6">
-          From classified military programs to the frontiers of mind. {consciousnessSections.length} research topics, evidence-graded.
-        </p>
-        <div className="flex flex-wrap gap-3 text-xs">
+    <>
+      <HeroSection
+        label="Realm of Consciousness"
+        title="Consciousness Lab"
+        tagline={`From classified military programs to the frontiers of mind. ${consciousnessSections.length} research topics, evidence-graded.`}
+        accent="#4F46E5"
+        atmosphere={{ radial: true, orbs: true }}
+      >
+        <div className="flex flex-wrap gap-3 text-xs mt-4">
           <div className="grade-documented px-3 py-1 rounded-full font-semibold">Documented — Government-confirmed</div>
           <div className="grade-credible px-3 py-1 rounded-full font-semibold">Credible — Scientific basis</div>
           <div className="grade-speculative px-3 py-1 rounded-full font-semibold">Speculative — Hypothesis stage</div>
         </div>
-      </motion.div>
-
+      </HeroSection>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="space-y-4">
         {consciousnessSections.map((section, i) => {
           const isOpen = expanded === section.id;
