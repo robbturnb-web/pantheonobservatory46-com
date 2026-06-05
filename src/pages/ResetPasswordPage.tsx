@@ -5,6 +5,7 @@ import { Lock, ArrowRight, Eye } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
+import { SEO } from '@/components/SEO';
 
 export function ResetPasswordPage() {
   const [password, setPassword] = useState('');
@@ -58,6 +59,12 @@ export function ResetPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-20 relative">
+      <SEO
+        title="Reset Password · Pantheon Observatory"
+        description="Reset your Pantheon Observatory password."
+        canonical="/reset-password"
+        noindex
+      />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

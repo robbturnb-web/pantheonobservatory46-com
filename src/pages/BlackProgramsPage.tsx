@@ -20,6 +20,13 @@ export function BlackProgramsPage() {
         title="Black Programs Vault — Rubik's Cube & UAP SAPs | Pantheon"
         description="Every alleged UAP Special Access Program in one vault — Rubik's Cube, Immaculate Constellation, Kona Blue, Legacy Program, AATIP, Stargate, Solar Warden, AARO and more. Sourced, graded, and cross-referenced."
         canonical="/black-programs"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Black Programs Vault',
+          description: 'Catalog of alleged UAP Special Access Programs with sourcing and evidence grading.',
+          url: 'https://pantheonobservatory46-com.lovable.app/black-programs',
+        }}
       />
       <DossierPageLayout
         theme={theme}

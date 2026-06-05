@@ -46,9 +46,16 @@ export function WhistleblowerVaultPage() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Whistleblower Vault — Pantheon Observatory"
+        title="Whistleblower Vault — Disclosure Testimony Archive | Pantheon"
         description="Evidence-graded profiles of those who risked everything to disclose UAP, aerospace, and intelligence programs — and the forensic registry of suspicious deaths."
         canonical="/whistleblowers"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Whistleblower Vault',
+          description: 'Profiles and testimony from UAP, aerospace, and intelligence whistleblowers.',
+          url: 'https://pantheonobservatory46-com.lovable.app/whistleblowers',
+        }}
       />
       <HeroSection
         label="Deep Archive · Testimony"

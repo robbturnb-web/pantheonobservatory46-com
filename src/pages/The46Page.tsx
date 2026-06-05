@@ -76,9 +76,16 @@ export function The46Page() {
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8 py-20 max-w-6xl mx-auto">
       <SEO
-        title="The 46 — Pending Disclosure Vault"
+        title="The 46 — Pending Disclosure Vault | Pantheon Observatory"
         description={`The 46-slot disclosure vault: locked files, expired demands, and the videos already public. ${overdue} days overdue.`}
         canonical="/the-46"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'The 46 — Pending Disclosure Vault',
+          description: 'The 46-slot vault of pending UAP disclosure files and released material.',
+          url: 'https://pantheonobservatory46-com.lovable.app/the-46',
+        }}
       />
 
       {/* Cinematic hero banner */}

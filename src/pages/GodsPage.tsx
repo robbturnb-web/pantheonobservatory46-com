@@ -17,9 +17,17 @@ export function GodsPage() {
   return (
     <>
       <SEO
-        title="Gods & Archetypes — Pantheon Observatory"
+        title="Gods & Archetypes — Pantheons of the World | Pantheon Observatory"
         description={`${gods.length} deities across Greek, Norse, Egyptian, Hindu, Anunnaki and Starseed pantheons. Tap any card to enter their atmosphere.`}
         canonical="/gods"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Gods & Archetypes',
+          description: 'Deities across Greek, Norse, Egyptian, Hindu, Anunnaki, and Starseed pantheons.',
+          url: 'https://pantheonobservatory46-com.lovable.app/gods',
+          numberOfItems: gods.length,
+        }}
       />
       <HeroSection
         label="Realm of Gods · Pantheon"

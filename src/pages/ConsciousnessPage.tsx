@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { consciousnessSections } from '../data/consciousness';
 import { EvidenceBadge } from '../components/EvidenceBadge';
 import { HeroSection } from '@/components/HeroSection';
+import { SEO } from '@/components/SEO';
 import { ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 
 export function ConsciousnessPage() {
@@ -10,6 +11,18 @@ export function ConsciousnessPage() {
 
   return (
     <>
+      <SEO
+        title="Consciousness Lab — Mind, Soul & Signal | Pantheon"
+        description="From the CIA Gateway Process to remote viewing, NDEs, and the frontiers of mind. Evidence-graded research across consciousness, perception, and the non-local self."
+        canonical="/consciousness"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Consciousness Lab',
+          description: 'Evidence-graded research on consciousness, remote viewing, and the Gateway Process.',
+          url: 'https://pantheonobservatory46-com.lovable.app/consciousness',
+        }}
+      />
       <HeroSection
         label="Realm of Consciousness"
         title="Consciousness Lab"

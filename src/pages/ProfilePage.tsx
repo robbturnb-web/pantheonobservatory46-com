@@ -5,6 +5,7 @@ import { Award, Lock, CheckCircle2, Sparkles, Map, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useEchoXp, RANK_TIERS } from '@/hooks/use-echo-xp';
 import { RANK_UNLOCKS } from '@/lib/xp-events';
+import { SEO } from '@/components/SEO';
 
 interface XpEvent {
   id: string;
@@ -67,6 +68,12 @@ export function ProfilePage() {
 
   return (
     <div className="relative">
+      <SEO
+        title="Your Pantheon Profile · XP, Rank & Unlocks"
+        description="Your Pantheon Observatory profile — XP, rank tier, and unlocked Echo capabilities."
+        canonical="/profile"
+        noindex
+      />
       {/* Aurora / nebula backdrop */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div

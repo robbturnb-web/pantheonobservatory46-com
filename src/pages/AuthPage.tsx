@@ -6,6 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { lovable } from '@/integrations/lovable/index';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
+import { SEO } from '@/components/SEO';
 import { XP_VALUES } from '@/lib/xp-events';
 
 type Mode = 'signin' | 'signup' | 'forgot';
@@ -114,6 +115,12 @@ export function AuthPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-20 relative">
+      <SEO
+        title="Sign In · Pantheon Observatory"
+        description="Access your Pantheon Observatory account to track XP, save sightings, and unlock Echo's deeper memory."
+        canonical="/auth"
+        noindex
+      />
       {/* Atmospheric background */}
       <div
         className="absolute inset-0 pointer-events-none"

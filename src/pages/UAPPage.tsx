@@ -27,9 +27,17 @@ export function UAPPage() {
   return (
     <div className="relative">
       <SEO
-        title="UAP Case Files — Pantheon Observatory"
-        description={`${uapCases.length} documented UAP encounters, each graded by evidence quality. Tic-Tac, Gimbal, GoFast and beyond.`}
+        title="UAP Case Files — Tic-Tac, Gimbal, GoFast & Beyond | Pantheon"
+        description={`${uapCases.length} documented UAP encounters, each graded by evidence quality. Tic-Tac, Gimbal, GoFast and the full disclosure archive.`}
         canonical="/uap"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'UAP Case Files',
+          description: `${uapCases.length} documented UAP encounters with evidence grading.`,
+          url: 'https://pantheonobservatory46-com.lovable.app/uap',
+          numberOfItems: uapCases.length,
+        }}
       />
 
       <HeroSection
