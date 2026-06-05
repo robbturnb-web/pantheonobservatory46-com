@@ -11,7 +11,6 @@ export function ConsciousnessPage() {
 
   return (
     <>
-    <>
       <SEO
         title="Consciousness Lab — Mind, Soul & Signal | Pantheon"
         description="From the CIA Gateway Process to remote viewing, NDEs, and the frontiers of mind. Evidence-graded research across consciousness, perception, and the non-local self."
