@@ -13,7 +13,7 @@ export function ImageWithFallback({
   alt, 
   className,
   style,
-  fallback = "https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop" 
+  fallback = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Webb%27s_First_Deep_Field.jpg/1280px-Webb%27s_First_Deep_Field.jpg" 
 }: ImageWithFallbackProps) {
   const [imgSrc, setImgSrc] = useState(src)
   const [hasError, setHasError] = useState(false)
