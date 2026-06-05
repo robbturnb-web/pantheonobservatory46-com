@@ -1,56 +1,47 @@
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 
-interface SEOProps {
+const SITE = 'https://pantheonobservatory46-com.lovable.app';
+
+type SEOProps = {
   title: string;
   description: string;
-  /** Optional canonical path (e.g. "/uap"). Defaults to current location. */
-  canonical?: string;
-}
+  path: string;
+  /** Optional JSON-LD schema object(s). */
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  /** noindex for gated/private routes. */
+  noindex?: boolean;
+  image?: string;
+};
 
 /**
- * Lightweight SEO updater — mutates document.title and the description
- * meta tag at mount. No dependencies, no provider needed.
- *
- * For SPA crawlers that execute JS (Google, Bing) this is sufficient
- * to give each route a unique title + description.
+ * Per-route SEO: title, description, canonical, og:*, optional JSON-LD.
+ * Pair with the sitewide head in index.html (which provides social-crawler fallbacks).
  */
-export function SEO({ title, description, canonical }: SEOProps) {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = title;
+export function SEO({ title, description, path, schema, noindex, image }: SEOProps) {
+  const url = `${SITE}${path}`;
+  const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
-    const setMeta = (name: string, content: string, attr: 'name' | 'property' = 'name') => {
-      let tag = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${name}"]`);
-      if (!tag) {
-        tag = document.createElement('meta');
-        tag.setAttribute(attr, name);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute('content', content);
-    };
+  return (
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <link rel="canonical" href={url} />
+      {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-    setMeta('description', description);
-    setMeta('og:title', title, 'property');
-    setMeta('og:description', description, 'property');
-    setMeta('twitter:title', title);
-    setMeta('twitter:description', description);
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={url} />
+      {image && <meta property="og:image" content={image} />}
 
-    // Canonical link
-    const href = canonical
-      ? `https://pantheonobservatory.com${canonical}`
-      : `https://pantheonobservatory.com${window.location.pathname}`;
-    let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    if (!link) {
-      link = document.createElement('link');
-      link.setAttribute('rel', 'canonical');
-      document.head.appendChild(link);
-    }
-    link.setAttribute('href', href);
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      {image && <meta name="twitter:image" content={image} />}
 
-    return () => {
-      document.title = prevTitle;
-    };
-  }, [title, description, canonical]);
-
-  return null;
+      {schemas.map((s, i) => (
+        <script key={i} type="application/ld+json">{JSON.stringify(s)}</script>
+      ))}
+    </Helmet>
+  );
 }
