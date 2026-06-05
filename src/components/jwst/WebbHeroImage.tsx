@@ -74,7 +74,7 @@ export function WebbHeroImage() {
       <div className="absolute -bottom-32 -right-32 w-[36rem] h-[36rem] rounded-full blur-[140px] opacity-20" style={{ background: '#22d3ee' }} />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32 pb-12 md:pb-20 grid md:grid-cols-[1.05fr_0.95fr] gap-10 items-center min-h-[88vh]">
+      <div className={`relative z-10 max-w-7xl mx-auto px-5 md:px-10 pt-24 md:pt-32 pb-12 md:pb-20 grid md:grid-cols-[1.05fr_0.95fr] gap-10 items-center ${isMobile ? '' : 'min-h-[88vh]'}`}>
         {/* Left — text block */}
         <div className="text-center md:text-left">
           <motion.div
