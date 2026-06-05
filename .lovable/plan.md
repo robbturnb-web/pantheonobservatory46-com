@@ -1,62 +1,80 @@
-# Cosmos/Disclosure Nav Split + Missing Badge Fix
+# Polish Pass — 3-Part Plan
 
-Two tightly scoped visual fixes. No backend, no new pages.
+A focused, surgical pass to lock in the foundations before adding more surface area. All work stays within frontend/presentation + one small DB read pattern check. No new features.
 
-## Part 1 — Split "Cosmos & Disclosure" mega-menu
+---
 
-File: `src/components/Navbar.tsx`
+## Part 1 — Orb Report auth UX hardening
 
-Today one purple dropdown holds 16 mixed links. Split into two realm-correct categories so the navbar stops feeling like a wall of violet.
+**Goal:** Make the sign-in gate feel native, not punishing. Users should never lose their draft or get stranded.
 
-**New `Cosmos` category** — cyan `#22D3EE` (realm-cosmos token)
-- JWST · James Webb (keep ★)
-- Telescope Observatory
-- Galaxy Explorer
-- Earth Pulse (Cosmos Pulse)
-- Signals
-- Rubik's Cube
+### Changes to `src/pages/OrbReportPage.tsx`
+1. **Persist draft across redirects** — On every form change, write `{location, date, description, email}` to `sessionStorage` under key `pantheon:orb-draft`. On mount, rehydrate if present. Clear on successful submit.
+2. **Replace toast-on-block with inline locked state** — When `authChecked && !user`, render the form fields as visually disabled with a centered "Sign in to log your sighting" call-to-action card overlaying the submit area. Uses emerald `text-realm-disclosure` accent + `Lock` icon (already imported).
+3. **Smart redirect** — CTA links to `/auth?redirect=/orb-report`. Add a small "Your draft is saved" microcopy line in muted text.
+4. **Post-login auto-return** — In `AuthPage.tsx`, read `?redirect=` from the URL and `navigate(redirect)` after successful sign-in/sign-up (fallback `/`).
 
-**New `Disclosure` category** — emerald `#10b981` (realm-disclosure token)
-- UAP Catalog
-- AARO Watch
-- Crash Retrieval
-- Black Programs
-- Disclosure Timeline
-- Whistleblower Vault
-- Jeremy Corbell
-- Brazil UAP Dossier
-- Missing Scientists
-- Orb Report
+### Changes to `src/pages/AuthPage.tsx`
+- Parse `redirect` query param via `useSearchParams`.
+- Validate it starts with `/` (no external URLs) before using.
+- Pass through to the post-auth `navigate()` call.
 
-Other two categories (Ancient Mysteries gold, Entity Encounters red, Federation & Forge cyan) stay as-is. Note: Federation currently uses cyan too — keep it; the eye distinguishes by label + icon, and Forge content is functionally different from Cosmos content.
+**Acceptance:** Type a sighting → hit submit while logged out → see locked overlay → click CTA → sign in → land back on `/orb-report` with fields still populated.
 
-Icons: Cosmos → `Telescope` (lucide), Disclosure → `FileSearch` or keep `Satellite`. Pick whichever reads cleaner at 14px.
+---
 
-No behavior changes — same hover mega-menu, same mobile accordion, same animation. Only the `categories` array changes.
+## Part 2 — HeroSection rollout to flagship realm pages
 
-## Part 2 — Fix invisible confidence badges on `/missing`
+**Goal:** Every primary realm page opens with the same cinematic vocabulary. Realm accent hierarchy becomes visible at a glance.
 
-File: `src/pages/MissingPage.tsx` (lines ~47-55)
+### Pages to refactor (use existing `HeroSection` component, `variant="section"`)
 
-Current `confidenceConfig` uses light-mode pastels (`#ecfccb`, `#dbeafe`, `#fef3c7`, `#fae8ff`) with dark text on a dark page → effectively invisible.
+| Page | Label | Title | Accent | Atmosphere |
+|---|---|---|---|---|
+| `MissingPage.tsx` | "Disclosure · Persons of Interest" | "The Missing" | `#10b981` (disclosure emerald) | `scanline: true` |
+| `GodsPage.tsx` | "Realm of Gods · Pantheon" | "Gods & Mythos" | `#D6B35A` (gods gold) | `radial: true` |
+| `ConsciousnessPage.tsx` | "Realm of Consciousness" | "Mind, Soul & Signal" | `#4F46E5` (indigo) | `radial: true, orbs: true` |
+| `BlackProgramsPage.tsx` | "Classified · Black Projects" | "Black Programs Archive" | `#DC2626` (crimson) | `scanline: true` |
+| `EchoPage.tsx` | "Echo · Live Intelligence" | "Echo AI" | `#E5F8FF` (echo white-cyan) | `radial: true` |
+| `WhistleblowerVaultPage.tsx` | "Deep Archive · Testimony" | "Whistleblower Vault" | `#7F1D1D` (dark red) | `scanline: true` |
+| `Index.tsx` / Observatory | "Observatory · Frequency 46" | (keep existing brand title if present) | `#7C3AED` (royal violet) | `radial: true, orbs: true` |
 
-Swap to dark-theme treatment using realm tokens:
+For each page:
+- Remove the existing inline `<header>` / `<h1>` block.
+- Insert `<HeroSection ... />` at the top of the main content wrapper.
+- Keep all existing tagline copy where strong; otherwise write a one-line tagline matching the realm's voice.
+- Preserve all downstream content untouched.
 
-```
-VERIFIED            → emerald   (realm-disclosure) #10b981
-REPORTED            → cyan      (realm-cosmos)     #22D3EE
-ALLEGED             → gold      (realm-gods)       #D6B35A
-UNDER_INVESTIGATION → indigo    (realm-consciousness) #4F46E5
-```
+**Acceptance:** Visiting any of the above pages presents the standardized hero with the correct realm token color. No hardcoded hex sneaks into the page bodies.
 
-Pattern per badge: transparent tinted bg (`color + '15'`), border (`color + '55'`), text in full color, subtle glow on hover. Matches the StatusPill treatment already in the same file.
+---
 
-## Out of scope
-- No nav structural rework beyond the split (no search, no command palette)
-- No content edits to `/missing` data
-- No changes to Ancient/Entity/Forge categories
-- No realm-color audit of individual disclosure pages (separate pass)
+## Part 3 — Navbar mobile QA + split-category fix
 
-## Files touched
-- `src/components/Navbar.tsx` — replace single `cosmos` category with `cosmos` + `disclosure`
-- `src/pages/MissingPage.tsx` — rewrite `confidenceConfig` color values
+**Goal:** Verify the recent Cosmos / Disclosure split doesn't break the 384px drawer or top bar.
+
+### Investigation
+- Open `/` at 384×674 (current viewport).
+- Inspect `Navbar.tsx` mobile drawer: confirm both new categories render, icons aren't clipped, accent dots match realm tokens, no horizontal scroll.
+
+### Likely fixes (apply only if issues confirmed)
+- If drawer overflows: tighten vertical spacing (`gap-2` → `gap-1.5`) and reduce category header font size on mobile.
+- If category headers wrap awkwardly: add `whitespace-nowrap` + slight letter-spacing reduction.
+- If accent dots are inconsistent: ensure both Cosmos (cyan) and Disclosure (emerald) categories use the realm tokens not hardcoded hex.
+
+### Deliverable
+- Mobile-tested navbar with both new categories rendering cleanly.
+- Brief screenshot confirmation in build mode.
+
+---
+
+## Out of scope (intentionally)
+- Echo entry point in nav (next pass)
+- SEO meta/JSON-LD pass (next pass)
+- New pages or features
+- Backend schema changes (orb_sightings RLS already in place from prior migration)
+
+## Order of execution
+1. Part 1 (Orb Report + AuthPage) — small, contained
+2. Part 2 (HeroSection rollout) — 7 page edits in parallel
+3. Part 3 (Navbar mobile QA) — verify + patch

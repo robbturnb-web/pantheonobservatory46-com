@@ -11,6 +11,7 @@ import { whistleblowers, type Whistleblower } from '../data/whistleblowers';
 import type { EvidenceGrade } from '../types';
 import { useEchoXp } from '../hooks/use-echo-xp';
 import { SEO } from '@/components/SEO';
+import { HeroSection } from '@/components/HeroSection';
 
 const gradeFilters: ('ALL' | EvidenceGrade)[] = ['ALL', 'DOCUMENTED', 'CREDIBLE', 'SPECULATIVE', 'UNVERIFIED'];
 
@@ -43,21 +44,21 @@ export function WhistleblowerVaultPage() {
   };
 
   return (
-    <div className="min-h-screen py-16 px-4">
+    <div className="min-h-screen">
       <SEO
         title="Whistleblower Vault — Pantheon Observatory"
         description="Evidence-graded profiles of those who risked everything to disclose UAP, aerospace, and intelligence programs — and the forensic registry of suspicious deaths."
         canonical="/whistleblowers"
       />
-      <div className="max-w-6xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
-          <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-3">Whistleblower Vault</h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Those who risked everything to tell the truth — and those who paid with their lives. Evidence-graded
-            profiles and a forensic registry of suspicious deaths across UAP, aerospace, and intelligence programs.
-          </p>
-        </motion.div>
+      <HeroSection
+        label="Deep Archive · Testimony"
+        title="Whistleblower Vault"
+        tagline="Those who risked everything to tell the truth — and those who paid with their lives. Evidence-graded profiles and a forensic registry of suspicious deaths across UAP, aerospace, and intelligence programs."
+        accent="#7F1D1D"
+        atmosphere={{ radial: true, scanline: true }}
+        align="center"
+      />
+      <div className="max-w-6xl mx-auto px-4 py-12">
 
         <Tabs defaultValue="profiles" className="w-full">
           <TabsList className="mx-auto mb-10 grid grid-cols-2 max-w-md bg-card/50 border border-border h-auto p-1">

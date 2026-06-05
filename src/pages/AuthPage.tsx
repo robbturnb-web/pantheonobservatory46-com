@@ -22,18 +22,25 @@ export function AuthPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  // Validate and resolve post-auth redirect target (in-app paths only)
+  const rawRedirect = searchParams.get('redirect');
+  const redirectTo =
+    rawRedirect && rawRedirect.startsWith('/') && !rawRedirect.startsWith('//')
+      ? rawRedirect
+      : '/echoverse';
+
   // Redirect if already signed in
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) navigate('/echoverse', { replace: true });
+      if (session) navigate(redirectTo, { replace: true });
     });
 
     const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) navigate('/echoverse', { replace: true });
+      if (session) navigate(redirectTo, { replace: true });
     });
 
     return () => subscription.subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, redirectTo]);
 
   const handleGoogle = async () => {
     setOauthLoading(true);

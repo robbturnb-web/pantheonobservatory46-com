@@ -4,6 +4,7 @@ import { gods } from '../data/gods';
 import type { PantheonFilter, God } from '../types';
 import { GodDossierModal } from '@/components/gods/GodDossierModal';
 import { SEO } from '@/components/SEO';
+import { HeroSection } from '@/components/HeroSection';
 
 const filters: PantheonFilter[] = ['All', 'Greek', 'Norse', 'Egyptian', 'Hindu', 'Anunnaki', 'Starseed', 'Chinese', 'Japanese', 'Buddhist', 'Aztec', 'Mayan', 'Incan', 'Yoruba', 'Celtic', 'Slavic', 'Polynesian', 'Aboriginal', 'Native American', 'Zoroastrian', 'Islamic'];
 
@@ -14,19 +15,20 @@ export function GodsPage() {
   const filtered = filter === 'All' ? gods : gods.filter((g) => g.pantheon === filter);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <>
       <SEO
         title="Gods & Archetypes — Pantheon Observatory"
         description={`${gods.length} deities across Greek, Norse, Egyptian, Hindu, Anunnaki and Starseed pantheons. Tap any card to enter their atmosphere.`}
         canonical="/gods"
       />
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-        <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Gods & Archetypes</h1>
-        <p className="text-muted-foreground text-lg">
-          {gods.length} deities across {filters.length - 1} pantheons. Tap any card to enter their atmosphere.
-        </p>
-      </motion.div>
-
+      <HeroSection
+        label="Realm of Gods · Pantheon"
+        title="Gods & Archetypes"
+        tagline={`${gods.length} deities across ${filters.length - 1} pantheons. Tap any card to enter their atmosphere.`}
+        accent="#D6B35A"
+        atmosphere={{ radial: true }}
+      />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex flex-wrap gap-2 mb-10">
         {filters.map((f) => (
           <button
@@ -128,6 +130,7 @@ export function GodsPage() {
       <AnimatePresence>
         {selectedGod && <GodDossierModal god={selectedGod} onClose={() => setSelectedGod(null)} />}
       </AnimatePresence>
-    </div>
+      </div>
+    </>
   );
 }

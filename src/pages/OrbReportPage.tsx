@@ -27,6 +27,8 @@ const orbSchema = z.object({
     .or(z.literal('')),
 });
 
+const DRAFT_KEY = 'pantheon:orb-draft';
+
 export function OrbReportPage() {
   const [form, setForm] = useState({
     location: '',
@@ -38,6 +40,33 @@ export function OrbReportPage() {
   const [submitting, setSubmitting] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
+
+  // Rehydrate draft from sessionStorage
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') {
+          setForm((prev) => ({ ...prev, ...parsed }));
+        }
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  // Persist draft on change
+  useEffect(() => {
+    const hasContent = form.location || form.date || form.description || form.email;
+    if (hasContent) {
+      try {
+        sessionStorage.setItem(DRAFT_KEY, JSON.stringify(form));
+      } catch {
+        /* ignore */
+      }
+    }
+  }, [form]);
 
   useEffect(() => {
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -84,6 +113,7 @@ export function OrbReportPage() {
     }
     setSubmitted(true);
     setForm({ location: '', date: '', description: '', email: '' });
+    try { sessionStorage.removeItem(DRAFT_KEY); } catch { /* ignore */ }
     setTimeout(() => setSubmitted(false), 5000);
   };
 
@@ -132,8 +162,11 @@ export function OrbReportPage() {
             <Lock className="w-6 h-6 text-primary" />
           </div>
           <h2 className="text-2xl font-bold text-foreground mb-2">Sign in to log a sighting</h2>
-          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+          <p className="text-muted-foreground mb-3 max-w-md mx-auto">
             We gate submissions to keep the feed clean and traceable. Your account stays attached to your report — never shown publicly.
+          </p>
+          <p className="text-xs text-muted-foreground/70 mb-6">
+            Your draft is saved — it'll be here when you return.
           </p>
           <Link
             to={`/auth?redirect=${encodeURIComponent('/orb-report')}`}
