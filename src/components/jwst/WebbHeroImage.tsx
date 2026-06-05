@@ -46,7 +46,7 @@ export function WebbHeroImage() {
   return (
     <section
       className="relative w-full overflow-hidden"
-      style={{ minHeight: isMobile ? '92vh' : '100vh' }}
+      style={{ minHeight: isMobile ? 'auto' : '100vh' }}
     >
       {/* Backdrop with slow Ken Burns */}
       <motion.div
