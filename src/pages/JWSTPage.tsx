@@ -2,7 +2,8 @@ import { Suspense, lazy, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
-import { WebbHero3D } from '@/components/jwst/WebbHero3D';
+import { WebbHeroImage } from '@/components/jwst/WebbHeroImage';
+import { WebbGalleryStrip } from '@/components/jwst/WebbGalleryStrip';
 import { MissionConsole } from '@/components/jwst/MissionConsole';
 import { WhyOnlyWebb } from '@/components/jwst/WhyOnlyWebb';
 import { FindingsVault } from '@/components/jwst/FindingsVault';
@@ -59,7 +60,9 @@ export function JWSTPage() {
     <div className="relative min-h-screen -mt-16" style={{ background: 'linear-gradient(180deg, #05030d 0%, #0a0420 45%, #03020a 100%)' }}>
       <JwstSubNav />
 
-      <WebbHero3D />
+      <WebbHeroImage />
+
+      <WebbGalleryStrip />
 
       <MissionConsole active={instrumentFilter} onChange={setInstrumentFilter} />
 
