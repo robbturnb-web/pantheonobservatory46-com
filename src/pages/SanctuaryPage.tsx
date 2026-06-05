@@ -28,6 +28,13 @@ export function SanctuaryPage() {
         title="The Sanctuary of 46 — Pantheon Frequency 46"
         description="46 chromosomes. 46 hidden UAP files. One frequency. The Sanctuary is the bridge between your biology and the stars — Manifesto, Codex, and the 46-Oracle."
         canonical="/46"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'The Sanctuary of 46',
+          description: 'The Pantheon Frequency 46 Sanctuary: Manifesto, Codex, and the 46-Oracle.',
+          url: 'https://pantheonobservatory46-com.lovable.app/46',
+        }}
       />
 
       {/* Cosmic backdrop unique to the Sanctuary */}
