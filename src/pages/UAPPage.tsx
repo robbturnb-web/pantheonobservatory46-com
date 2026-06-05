@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { HeroSection } from '../components/HeroSection';
 import { uapCases } from '../data/uap-cases';
 import { EvidenceBadge } from '../components/EvidenceBadge';
 import { SourceList } from '../components/SourceList';
@@ -31,62 +32,22 @@ export function UAPPage() {
         canonical="/uap"
       />
 
-      {/* Cinematic hero */}
-      <section className="relative overflow-hidden border-b border-border/40">
-        {/* Atmosphere */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse at 30% 20%, rgba(16,185,129,0.18), transparent 55%), radial-gradient(ellipse at 75% 80%, rgba(16,185,129,0.10), transparent 60%), linear-gradient(180deg, rgba(5,3,13,0) 0%, hsl(var(--background)) 100%)',
-          }}
-        />
-        {/* Scanline grid */}
-        <div
-          className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(16,185,129,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(16,185,129,0.6) 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
-          }}
-        />
-
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          >
-            <div
-              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.5em] mb-4"
-              style={{ color: '#10b981' }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#10b981', boxShadow: '0 0 8px #10b981' }} />
-              Disclosure · Case Archive
-            </div>
-            <h1
-              className="text-5xl sm:text-6xl md:text-7xl mb-5 leading-tight"
-              style={{
-                fontFamily: 'Cinzel, serif',
-                color: '#E5F8FF',
-                textShadow: '0 0 28px rgba(16,185,129,0.35), 0 2px 12px rgba(0,0,0,0.7)',
-              }}
-            >
-              UAP Case Files
-            </h1>
-            <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mb-6">
-              {uapCases.length} documented encounters. Tic-Tac, Gimbal, GoFast, Nimitz, Calvine, and every credible sighting in between — each one graded by evidence quality, never by belief.
-            </p>
-            <div className="flex flex-wrap gap-2 text-xs">
-              <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 self-center mr-1">Evidence tiers:</span>
-              <div className="grade-documented px-3 py-1 rounded-full font-semibold">Documented</div>
-              <div className="grade-credible px-3 py-1 rounded-full font-semibold">Credible</div>
-              <div className="grade-speculative px-3 py-1 rounded-full font-semibold">Speculative</div>
-              <div className="grade-unverified px-3 py-1 rounded-full font-semibold">Unverified</div>
-            </div>
-          </motion.div>
+      <HeroSection
+        label="Disclosure · Case Archive"
+        title="UAP Case Files"
+        tagline={`${uapCases.length} documented encounters. Tic-Tac, Gimbal, GoFast, Nimitz, Calvine, and every credible sighting in between — each one graded by evidence quality, never by belief.`}
+        accent="#10b981"
+        atmosphere={{ radial: true, scanline: true }}
+        align="left"
+      >
+        <div className="flex flex-wrap gap-2 text-xs">
+          <span className="text-[10px] uppercase tracking-widest text-muted-foreground/70 self-center mr-1">Evidence tiers:</span>
+          <div className="grade-documented px-3 py-1 rounded-full font-semibold">Documented</div>
+          <div className="grade-credible px-3 py-1 rounded-full font-semibold">Credible</div>
+          <div className="grade-speculative px-3 py-1 rounded-full font-semibold">Speculative</div>
+          <div className="grade-unverified px-3 py-1 rounded-full font-semibold">Unverified</div>
         </div>
-      </section>
+      </HeroSection>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
