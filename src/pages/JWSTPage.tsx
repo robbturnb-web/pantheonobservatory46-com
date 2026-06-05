@@ -11,6 +11,10 @@ import { CosmicTimeline } from '@/components/jwst/CosmicTimeline';
 import { FindingModal } from '@/components/jwst/FindingModal';
 import { JwstSubNav } from '@/components/jwst/JwstSubNav';
 import { DailyFindingsFeed } from '@/components/jwst/DailyFindingsFeed';
+import { HowWebbSees } from '@/components/jwst/HowWebbSees';
+import { InstrumentsDeepDive } from '@/components/jwst/InstrumentsDeepDive';
+import { L2OrbitExplainer } from '@/components/jwst/L2OrbitExplainer';
+import { MissionTimeline } from '@/components/jwst/MissionTimeline';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 import type { JwstFinding, JwstInstrument } from '@/data/jwst-findings';
 
@@ -66,7 +70,15 @@ export function JWSTPage() {
 
       <MissionConsole active={instrumentFilter} onChange={setInstrumentFilter} />
 
+      <HowWebbSees />
+
+      <InstrumentsDeepDive />
+
+      <L2OrbitExplainer />
+
       <WhyOnlyWebb />
+
+      <MissionTimeline />
 
       <FindingsVault instrumentFilter={instrumentFilter} onOpen={handleOpen} />
 

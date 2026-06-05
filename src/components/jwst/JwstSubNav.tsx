@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 
 const SECTIONS = [
   { id: 'jwst-console', label: 'Console' },
+  { id: 'jwst-physics', label: 'Physics' },
+  { id: 'jwst-instruments', label: 'Instruments' },
+  { id: 'jwst-orbit', label: 'L2 Orbit' },
   { id: 'jwst-why', label: 'Why Webb' },
+  { id: 'jwst-mission', label: 'Mission' },
   { id: 'jwst-vault', label: 'Findings' },
   { id: 'jwst-timeline', label: 'Timeline' },
   { id: 'jwst-daily', label: 'Daily' },
