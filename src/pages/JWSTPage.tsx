@@ -45,7 +45,7 @@ export function JWSTPage() {
       description: desc,
       about: 'James Webb Space Telescope',
       publisher: { '@type': 'Organization', name: 'Pantheon Observatory' },
-      image: 'https://stsci-opo.org/STScI-01G7DCWB7137MYJ05CSH1Q5Z1Z.png',
+      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Webb%27s_First_Deep_Field.jpg/1280px-Webb%27s_First_Deep_Field.jpg",
     });
     document.head.appendChild(ld);
     return () => { document.head.removeChild(ld); };
