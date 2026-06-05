@@ -173,19 +173,20 @@ export function WebbHeroImage() {
           </motion.p>
         </div>
 
-        {/* Right — floating polaroid stack */}
-        <div className="relative h-[380px] md:h-[520px] flex items-center justify-center">
-          {POLAROIDS.map((p, i) => {
-            const offsetX = (i - 1) * (isMobile ? 36 : 72);
-            const offsetY = (i - 1) * (isMobile ? 14 : 24);
+        {/* Right — floating polaroid stack (desktop) / single polaroid (mobile) */}
+        <div className={`relative ${isMobile ? 'h-[300px]' : 'h-[520px]'} flex items-center justify-center`}>
+          {(isMobile ? POLAROIDS.slice(0, 1) : POLAROIDS).map((p, i) => {
+            const offsetX = isMobile ? 0 : (i - 1) * 96;
+            const offsetY = isMobile ? 0 : (i - 1) * 24;
+            const rotate = isMobile ? -4 : p.rotate;
             return (
               <motion.figure
                 key={p.label}
                 initial={{ opacity: 0, y: 40, rotate: 0 }}
-                animate={{ opacity: 1, y: offsetY, rotate: p.rotate, x: offsetX }}
+                animate={{ opacity: 1, y: offsetY, rotate, x: offsetX }}
                 transition={{ delay: 0.4 + i * 0.15, duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
-                whileHover={{ scale: 1.06, rotate: p.rotate * 0.4, zIndex: 30 }}
-                className="absolute w-[58%] md:w-[64%] aspect-[4/5] rounded-md p-3 pb-12 backdrop-blur-md cursor-pointer"
+                whileHover={{ scale: 1.06, rotate: rotate * 0.4, zIndex: 30 }}
+                className={`${isMobile ? 'relative w-[68%]' : 'absolute w-[60%] md:w-[62%]'} aspect-[4/5] rounded-md p-3 pb-12 backdrop-blur-md cursor-pointer`}
                 style={{
                   background: 'linear-gradient(180deg, rgba(245,243,255,0.94), rgba(237,233,254,0.88))',
                   boxShadow: '0 30px 60px -20px rgba(0,0,0,0.7), 0 0 40px rgba(167,139,250,0.35)',
@@ -216,6 +217,7 @@ export function WebbHeroImage() {
           <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-12 rounded-full blur-2xl opacity-50" style={{ background: 'rgba(167,139,250,0.6)' }} />
         </div>
       </div>
+
 
       {/* Scroll chevron */}
       <motion.div
