@@ -130,6 +130,7 @@ export function GodsPage() {
       <AnimatePresence>
         {selectedGod && <GodDossierModal god={selectedGod} onClose={() => setSelectedGod(null)} />}
       </AnimatePresence>
-    </div>
+      </div>
+    </>
   );
 }

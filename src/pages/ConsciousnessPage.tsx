@@ -94,6 +94,7 @@ export function ConsciousnessPage() {
           );
         })}
       </div>
-    </div>
+      </div>
+    </>
   );
 }
