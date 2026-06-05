@@ -70,7 +70,15 @@ export function JWSTPage() {
 
       <MissionConsole active={instrumentFilter} onChange={setInstrumentFilter} />
 
+      <HowWebbSees />
+
+      <InstrumentsDeepDive />
+
+      <L2OrbitExplainer />
+
       <WhyOnlyWebb />
+
+      <MissionTimeline />
 
       <FindingsVault instrumentFilter={instrumentFilter} onOpen={handleOpen} />
 
