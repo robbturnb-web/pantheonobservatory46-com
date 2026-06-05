@@ -499,6 +499,39 @@ export type Database = {
         }
         Relationships: []
       }
+      orb_sightings: {
+        Row: {
+          created_at: string
+          description: string
+          email: string | null
+          id: string
+          location: string
+          sighting_date: string
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          email?: string | null
+          id?: string
+          location: string
+          sighting_date: string
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          email?: string | null
+          id?: string
+          location?: string
+          sighting_date?: string
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
