@@ -2,6 +2,7 @@ import { useState, Suspense, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, MessageCircle, Play, Square, SkipForward } from 'lucide-react';
 import { HeroSection } from '../components/HeroSection';
+import { SEO } from '@/components/SEO';
 import { SolarSystem } from '../components/galaxy/SolarSystem';
 import { PlanetInfo } from '../components/galaxy/PlanetInfo';
 import { planets, tourNarration, type Planet, type Moon } from '../data/planets';
@@ -80,6 +81,20 @@ export function GalaxyExplorerPage() {
   }, []);
 
   return (
+    <>
+      <SEO
+        title="Galaxy Explorer — Solar System Tour | Pantheon Observatory"
+        description="An interactive 3D solar-system tour. Every planet, every moon, every story — narrated, navigable, and woven into the cosmic disclosure archive."
+        canonical="/galaxy"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Galaxy Explorer',
+          description: 'Interactive 3D tour of the solar system with narrated planet and moon profiles.',
+          url: 'https://pantheonobservatory46-com.lovable.app/galaxy',
+          isPartOf: { '@type': 'WebSite', name: 'Pantheon Observatory' },
+        }}
+      />
     <div className="min-h-screen relative">
       {/* Cinematic title overlay */}
       <HeroSection
