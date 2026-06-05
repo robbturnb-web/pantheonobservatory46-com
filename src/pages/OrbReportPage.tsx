@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, Lock } from 'lucide-react';
 import { z } from 'zod';
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import type { User } from '@supabase/supabase-js';
+
 
 
 const orbSchema = z.object({
@@ -32,9 +35,26 @@ export function OrbReportPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user ?? null);
+      setAuthChecked(true);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) {
+      toast({ title: 'Sign in required', description: 'Log in to submit a sighting.', variant: 'destructive' });
+      return;
+    }
     const result = orbSchema.safeParse(form);
     if (!result.success) {
       toast({
@@ -46,6 +66,7 @@ export function OrbReportPage() {
     }
     setSubmitting(true);
     const { error } = await supabase.from('orb_sightings').insert({
+      user_id: user.id,
       location: result.data.location,
       sighting_date: result.data.date,
       description: result.data.description,
@@ -64,6 +85,7 @@ export function OrbReportPage() {
     setForm({ location: '', date: '', description: '', email: '' });
     setTimeout(() => setSubmitted(false), 5000);
   };
+
 
 
   return (
@@ -91,11 +113,36 @@ export function OrbReportPage() {
             review.
           </p>
         </motion.div>
+      ) : !authChecked ? (
+        <div className="glass-cosmic rounded-2xl p-12 flex items-center justify-center">
+          <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+        </div>
+      ) : !user ? (
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="glass-cosmic rounded-2xl p-10 text-center"
+        >
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/15 border border-primary/30 mb-5">
+            <Lock className="w-6 h-6 text-primary" />
+          </div>
+          <h2 className="text-2xl font-bold text-foreground mb-2">Sign in to log a sighting</h2>
+          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+            We gate submissions to keep the feed clean and traceable. Your account stays attached to your report — never shown publicly.
+          </p>
+          <Link
+            to={`/auth?redirect=${encodeURIComponent('/orb-report')}`}
+            className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground rounded-xl px-6 py-3 font-semibold hover:opacity-90 transition-opacity"
+          >
+            Sign in to continue
+          </Link>
+        </motion.div>
       ) : (
         <form
           onSubmit={handleSubmit}
           className="glass-cosmic rounded-2xl p-8 space-y-5"
         >
+
           <div>
             <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">
               Location
