@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { Send, Loader2 } from 'lucide-react';
 import { z } from 'zod';
 import { toast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+
 
 const orbSchema = z.object({
   location: z.string().trim().min(2, 'Location is required').max(120),
@@ -29,8 +31,9 @@ export function OrbReportPage() {
     email: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = orbSchema.safeParse(form);
     if (!result.success) {
@@ -41,11 +44,27 @@ export function OrbReportPage() {
       });
       return;
     }
-    console.log('Orb sighting submitted:', result.data);
+    setSubmitting(true);
+    const { error } = await supabase.from('orb_sightings').insert({
+      location: result.data.location,
+      sighting_date: result.data.date,
+      description: result.data.description,
+      email: result.data.email || null,
+    });
+    setSubmitting(false);
+    if (error) {
+      toast({
+        title: 'Could not log sighting',
+        description: error.message,
+        variant: 'destructive',
+      });
+      return;
+    }
     setSubmitted(true);
     setForm({ location: '', date: '', description: '', email: '' });
-    setTimeout(() => setSubmitted(false), 4000);
+    setTimeout(() => setSubmitted(false), 5000);
   };
+
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">
@@ -138,11 +157,13 @@ export function OrbReportPage() {
 
           <button
             type="submit"
-            className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground rounded-xl px-6 py-3 font-semibold hover:opacity-90 transition-opacity"
+            disabled={submitting}
+            className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground rounded-xl px-6 py-3 font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            <Send className="w-4 h-4" />
-            Submit Sighting
+            {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+            {submitting ? 'Logging…' : 'Submit Sighting'}
           </button>
+
         </form>
       )}
     </div>
