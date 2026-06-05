@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { HeroSection } from '../components/HeroSection';
+import { SEO } from '@/components/SEO';
 import { Send, Loader2, Lock } from 'lucide-react';
 import { z } from 'zod';
 import { toast } from '@/hooks/use-toast';
@@ -120,6 +121,23 @@ export function OrbReportPage() {
 
 
   return (
+    <>
+      <SEO
+        title="Report an Orb Sighting — Citizen UAP Log | Pantheon"
+        description="Submit a UAP or orb sighting to the Pantheon Observatory citizen archive. Bledsoe orbs, New Jersey swarms, backyard flickers — every report feeds the disclosure record."
+        canonical="/orb-report"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          name: 'Orb Sightings Log',
+          description: 'Citizen reporting channel for UAP and orb sightings.',
+          url: 'https://pantheonobservatory46-com.lovable.app/orb-report',
+          potentialAction: {
+            '@type': 'CommunicateAction',
+            name: 'Submit sighting report',
+          },
+        }}
+      />
     <div className="relative">
       <HeroSection
         label="Citizen Reporting Channel"

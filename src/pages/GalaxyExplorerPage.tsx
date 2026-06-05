@@ -207,5 +207,6 @@ export function GalaxyExplorerPage() {
         </Suspense>
       </div>
     </div>
+    </>
   );
 }
