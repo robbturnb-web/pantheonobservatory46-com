@@ -80,20 +80,60 @@ export function GalaxyExplorerPage() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Header */}
+      {/* Cinematic title overlay (top-center) */}
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
+        className="pointer-events-none absolute top-6 left-1/2 -translate-x-1/2 z-20 text-center px-4"
+      >
+        <div
+          className="text-[10px] uppercase tracking-[0.5em] mb-2"
+          style={{ color: '#22D3EE', textShadow: '0 0 12px rgba(34,211,238,0.6)' }}
+        >
+          Cosmos · Realm of Stars
+        </div>
+        <h1
+          className="font-serif text-4xl sm:text-5xl md:text-6xl tracking-wide"
+          style={{
+            fontFamily: 'Cinzel, serif',
+            color: '#E5F8FF',
+            textShadow: '0 0 24px rgba(34,211,238,0.45), 0 2px 8px rgba(0,0,0,0.8)',
+          }}
+        >
+          Galaxy Explorer
+        </h1>
+        <p className="mt-2 text-xs sm:text-sm text-muted-foreground/90 max-w-md mx-auto">
+          Step inside the solar system. Every planet, every moon, every story.
+        </p>
+      </motion.div>
+
+      {/* Hint chip (top-left) */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
         className="absolute top-4 left-4 z-20"
       >
-        <div className="glass-cosmic rounded-xl px-5 py-3">
+        <div className="glass-cosmic rounded-xl px-3 py-2 border" style={{ borderColor: 'rgba(34,211,238,0.25)' }}>
           <div className="flex items-center gap-2">
-            <Globe className="w-5 h-5 text-primary" />
-            <h1 className="text-lg font-bold text-foreground">Galaxy Explorer</h1>
+            <Globe className="w-4 h-4" style={{ color: '#22D3EE' }} />
+            <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
+              Click · Scroll · Drag
+            </span>
           </div>
-          <p className="text-xs text-muted-foreground mt-1">Click any planet or moon • Scroll to zoom • Drag to rotate</p>
         </div>
       </motion.div>
+
+      {/* Atmospheric cyan vignette */}
+      <div
+        className="pointer-events-none absolute inset-0 z-10"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 0%, rgba(34,211,238,0.10), transparent 55%), radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.12), transparent 60%)',
+        }}
+      />
+
 
       {/* Echo Tour Button / Controls */}
       <motion.div
