@@ -89,17 +89,74 @@ export function OrbReportPage() {
 
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12">
-      <motion.h1
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="text-5xl font-bold text-center mb-4"
-      >
-        ORB SIGHTINGS LOG
-      </motion.h1>
-      <p className="text-center text-muted-foreground mb-12">
-        Report what you saw. Chris Bledsoe orbs. New Jersey orbs. Any orb activity.
-      </p>
+    <div className="relative">
+      {/* Cinematic hero */}
+      <section className="relative overflow-hidden border-b border-border/40">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse at 50% 0%, rgba(16,185,129,0.20), transparent 55%), radial-gradient(circle at 20% 80%, rgba(16,185,129,0.10), transparent 50%), linear-gradient(180deg, rgba(5,3,13,0) 0%, hsl(var(--background)) 100%)',
+          }}
+        />
+        {/* Floating orbs */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[
+            { left: '12%', top: '30%', size: 6, delay: 0 },
+            { left: '78%', top: '20%', size: 4, delay: 1.5 },
+            { left: '55%', top: '60%', size: 8, delay: 0.8 },
+            { left: '30%', top: '70%', size: 5, delay: 2.2 },
+            { left: '88%', top: '55%', size: 5, delay: 3 },
+          ].map((o, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                left: o.left,
+                top: o.top,
+                width: o.size,
+                height: o.size,
+                background: '#10b981',
+                boxShadow: '0 0 16px #10b981, 0 0 32px rgba(16,185,129,0.6)',
+              }}
+              animate={{ y: [0, -14, 0], opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 4 + i, repeat: Infinity, delay: o.delay, ease: 'easeInOut' }}
+            />
+          ))}
+        </div>
+
+        <div className="relative max-w-2xl mx-auto px-4 pt-20 pb-12 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            <div
+              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.5em] mb-4"
+              style={{ color: '#10b981' }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: '#10b981', boxShadow: '0 0 8px #10b981' }} />
+              Citizen Reporting Channel
+            </div>
+            <motion.h1
+              className="text-5xl sm:text-6xl mb-4 leading-tight"
+              style={{
+                fontFamily: 'Cinzel, serif',
+                color: '#E5F8FF',
+                textShadow: '0 0 28px rgba(16,185,129,0.4), 0 2px 12px rgba(0,0,0,0.7)',
+              }}
+            >
+              Orb Sightings Log
+            </motion.h1>
+            <p className="text-muted-foreground text-base sm:text-lg max-w-lg mx-auto">
+              Report what you saw. Bledsoe orbs. New Jersey swarms. Backyard flickers. Every sighting feeds the archive.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="max-w-2xl mx-auto px-4 py-12">
+
 
       {submitted ? (
         <motion.div
