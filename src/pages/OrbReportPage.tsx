@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Loader2, Lock } from 'lucide-react';
 import { z } from 'zod';
 import { toast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import type { User } from '@supabase/supabase-js';
+
 
 
 const orbSchema = z.object({
@@ -32,9 +35,26 @@ export function OrbReportPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
+
+  useEffect(() => {
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user ?? null);
+      setAuthChecked(true);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) {
+      toast({ title: 'Sign in required', description: 'Log in to submit a sighting.', variant: 'destructive' });
+      return;
+    }
     const result = orbSchema.safeParse(form);
     if (!result.success) {
       toast({
@@ -46,6 +66,7 @@ export function OrbReportPage() {
     }
     setSubmitting(true);
     const { error } = await supabase.from('orb_sightings').insert({
+      user_id: user.id,
       location: result.data.location,
       sighting_date: result.data.date,
       description: result.data.description,
@@ -64,6 +85,7 @@ export function OrbReportPage() {
     setForm({ location: '', date: '', description: '', email: '' });
     setTimeout(() => setSubmitted(false), 5000);
   };
+
 
 
   return (
