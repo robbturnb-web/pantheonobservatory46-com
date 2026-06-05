@@ -1,6 +1,7 @@
 import { useState, Suspense, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { Globe, MessageCircle, Play, Square, SkipForward } from 'lucide-react';
+import { HeroSection } from '../components/HeroSection';
 import { SolarSystem } from '../components/galaxy/SolarSystem';
 import { PlanetInfo } from '../components/galaxy/PlanetInfo';
 import { planets, tourNarration, type Planet, type Moon } from '../data/planets';

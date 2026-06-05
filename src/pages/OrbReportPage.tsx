@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { HeroSection } from '../components/HeroSection';
 import { Send, Loader2, Lock } from 'lucide-react';
 import { z } from 'zod';
 import { toast } from '@/hooks/use-toast';
