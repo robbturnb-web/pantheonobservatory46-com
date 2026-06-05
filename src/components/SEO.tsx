@@ -21,7 +21,9 @@ type SEOProps = {
  * Pair with the sitewide head in index.html (which provides social-crawler fallbacks).
  */
 export function SEO({ title, description, path, canonical, schema, noindex, image }: SEOProps) {
-  const url = canonical ?? `${SITE}${path ?? '/'}`;
+  const url = canonical
+    ? (canonical.startsWith('http') ? canonical : `${SITE}${canonical}`)
+    : `${SITE}${path ?? '/'}`;
   const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
   return (
