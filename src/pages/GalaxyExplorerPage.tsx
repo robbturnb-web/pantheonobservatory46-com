@@ -80,33 +80,14 @@ export function GalaxyExplorerPage() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Cinematic title overlay (top-center) */}
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: 'easeOut' }}
-        className="pointer-events-none absolute top-6 left-1/2 -translate-x-1/2 z-20 text-center px-4"
-      >
-        <div
-          className="text-[10px] uppercase tracking-[0.5em] mb-2"
-          style={{ color: '#22D3EE', textShadow: '0 0 12px rgba(34,211,238,0.6)' }}
-        >
-          Cosmos · Realm of Stars
-        </div>
-        <h1
-          className="font-serif text-4xl sm:text-5xl md:text-6xl tracking-wide"
-          style={{
-            fontFamily: 'Cinzel, serif',
-            color: '#E5F8FF',
-            textShadow: '0 0 24px rgba(34,211,238,0.45), 0 2px 8px rgba(0,0,0,0.8)',
-          }}
-        >
-          Galaxy Explorer
-        </h1>
-        <p className="mt-2 text-xs sm:text-sm text-muted-foreground/90 max-w-md mx-auto">
-          Step inside the solar system. Every planet, every moon, every story.
-        </p>
-      </motion.div>
+      {/* Cinematic title overlay */}
+      <HeroSection
+        variant="overlay"
+        label="Cosmos · Realm of Stars"
+        title="Galaxy Explorer"
+        tagline="Step inside the solar system. Every planet, every moon, every story."
+        accent="#22D3EE"
+      />
 
       {/* Hint chip (top-left) */}
       <motion.div
