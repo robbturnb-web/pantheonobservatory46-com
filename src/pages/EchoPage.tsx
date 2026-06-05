@@ -6,6 +6,7 @@ import { useEchoVoice } from '@/hooks/use-echo-voice';
 import { EchoBubble } from '@/components/echo/EchoBubble';
 import { EchoTypingIndicator } from '@/components/echo/EchoTypingIndicator';
 import { EchoOrb } from '@/components/echo/EchoOrb';
+import { SEO } from '@/components/SEO';
 
 const SUGGESTED_PROMPTS = [
   'What happened in the Tic Tac encounter?',
@@ -58,6 +59,21 @@ export function EchoPage() {
   const echoState = loading ? 'thinking' : voice.listening ? 'listening' : 'idle';
 
   return (
+    <>
+      <SEO
+        title="Echo — Pantheon's Live Intelligence AI"
+        description="Echo is Pantheon's always-on AI: a memory-driven thinking partner for UAP, mythology, consciousness, and disclosure. Ask anything in natural language."
+        canonical="/echo"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: 'Echo',
+          applicationCategory: 'AI Assistant',
+          operatingSystem: 'Web',
+          description: 'Memory-driven AI assistant for cosmic disclosure, UAP research, and consciousness studies.',
+          url: 'https://pantheonobservatory46-com.lovable.app/echo',
+        }}
+      />
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
       {/* Identity */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6 text-center">

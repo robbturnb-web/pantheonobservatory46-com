@@ -31,6 +31,7 @@ import silhouetteMale from '@/assets/missing/silhouette-male.jpg';
 import silhouetteFemale from '@/assets/missing/silhouette-female.jpg';
 import silhouetteMilitary from '@/assets/missing/silhouette-military.jpg';
 import heroLab from '@/assets/missing/hero-empty-lab.jpg';
+import { SEO } from '@/components/SEO';
 
 const portraitMap = {
   male: silhouetteMale,
@@ -124,8 +125,19 @@ export function MissingPage() {
   };
 
   return (
-    // Page-scoped editorial light-paper theme. Forces light surfaces & ink text
-    // regardless of the global dark cosmic theme.
+    <>
+      <SEO
+        title="The Missing — Scientists & Insiders Who Vanished | Pantheon"
+        description="A forensic registry of physicists, aerospace insiders, and UAP-adjacent researchers who disappeared or died under suspicious circumstances. Cases, patterns, and the historical precedent."
+        canonical="/missing"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'The Missing',
+          description: 'Registry of vanished scientists and insiders connected to UAP and black programs.',
+          url: 'https://pantheonobservatory46-com.lovable.app/missing',
+        }}
+      />
     <div
       className="missing-page font-serif"
       style={{

@@ -271,6 +271,7 @@ export function OrbReportPage() {
       )}
       </div>
     </div>
+    </>
   );
 }
 
