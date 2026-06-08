@@ -4,6 +4,7 @@ import { X, Skull, AlertTriangle, Eye, Flame } from 'lucide-react';
 import { shadowGods, SHADOW_LORE, type ShadowGod } from '@/data/shadow-gods';
 import { RankUnlock } from '@/components/RankUnlock';
 import { ShadowAtmosphere } from '@/components/shadow/ShadowAtmosphere';
+import { SEO } from '@/components/SEO';
 
 function ShadowGodModal({ god, onClose }: { god: ShadowGod; onClose: () => void }) {
   return (
@@ -170,6 +171,13 @@ export function ShadowPantheonPage() {
   const [selected, setSelected] = useState<ShadowGod | null>(null);
 
   return (
+    <>
+    <SEO
+      title="Shadow Pantheon — The Forgotten & Forbidden Gods | Pantheon"
+      description={`${shadowGods.length} suppressed, exiled, or demonized deities — the dark archetypes the official pantheons buried. Holographic dossiers with full lore.`}
+      path="/shadow-pantheon"
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Shadow Pantheon', url:'https://pantheonobservatory46-com.lovable.app/shadow-pantheon', numberOfItems: shadowGods.length }}
+    />
     <div className="min-h-screen relative">
       {/* Holographic atmosphere — scoped to this page only */}
       <ShadowAtmosphere />
@@ -276,5 +284,6 @@ export function ShadowPantheonPage() {
         {selected && <ShadowGodModal god={selected} onClose={() => setSelected(null)} />}
       </AnimatePresence>
     </div>
+    </>
   );
 }

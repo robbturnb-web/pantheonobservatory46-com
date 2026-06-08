@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { timelineEntries, type TimelineEntry } from '../data/timeline';
 import { ExternalLink } from 'lucide-react';
+import { SEO } from '@/components/SEO';
 
 const categories = [
   { key: 'all', label: 'All Eras' },
@@ -27,6 +28,13 @@ export function TimelinePage() {
   let lastCategory = '';
 
   return (
+    <>
+    <SEO
+      title="UAP & Disclosure Timeline — Ancient to Present | Pantheon"
+      description={`${timelineEntries.length} pivotal moments from ancient sightings to congressional hearings — the full disclosure arc, filterable by era.`}
+      path="/timeline"
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Disclosure Timeline', url:'https://pantheonobservatory46-com.lovable.app/timeline', numberOfItems: timelineEntries.length }}
+    />
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Cosmic Timeline</h1>
@@ -121,5 +129,6 @@ export function TimelinePage() {
         </AnimatePresence>
       </div>
     </div>
+    </>
   );
 }

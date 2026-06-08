@@ -1,9 +1,17 @@
 import { DossierPageLayout } from '@/components/dossier/DossierPageLayout';
 import { crashRetrievalEntries, crashRetrievalCategories } from '@/data/crash-retrieval';
 import { pageThemes } from '@/lib/page-themes';
+import { SEO } from '@/components/SEO';
 
 export function CrashRetrievalPage() {
   return (
+    <>
+    <SEO
+      title="Crash Retrieval Files — Roswell to 2023 Hearings | Pantheon"
+      description="Recovered fragments, witness affidavits, Special Access Program leaks, and reverse-engineering testimony. Each entry weighted by confidence with both sides on record."
+      path="/crash-retrieval"
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Crash Retrieval Archive', url:'https://pantheonobservatory46-com.lovable.app/crash-retrieval', numberOfItems: crashRetrievalEntries.length }}
+    />
     <DossierPageLayout
       theme={pageThemes.crash}
       entries={crashRetrievalEntries}
@@ -18,5 +26,6 @@ export function CrashRetrievalPage() {
         </p>
       }
     />
+    </>
   );
 }

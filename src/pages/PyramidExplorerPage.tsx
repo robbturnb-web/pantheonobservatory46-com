@@ -4,11 +4,19 @@ import { Pyramid } from 'lucide-react';
 import { PyramidScene } from '../components/pyramid/PyramidScene';
 import { PyramidInfo } from '../components/pyramid/PyramidInfo';
 import type { Pyramid as PyramidType } from '../data/pyramids';
+import { SEO } from '@/components/SEO';
 
 export function PyramidExplorerPage() {
   const [selectedPyramid, setSelectedPyramid] = useState<PyramidType | null>(null);
 
   return (
+    <>
+    <SEO
+      title="Pyramid Explorer — Stellar Alignments in 3D | Pantheon"
+      description="Interactive 3D survey of the world's pyramids and their stellar alignments. Click any monument, drag to rotate, decode the sky map the ancients carved in stone."
+      path="/pyramids"
+      schema={{ '@context':'https://schema.org','@type':'WebPage', name:'Pyramid Explorer', url:'https://pantheonobservatory46-com.lovable.app/pyramids' }}
+    />
     <div className="min-h-screen relative">
       {/* Header */}
       <motion.div
@@ -39,5 +47,6 @@ export function PyramidExplorerPage() {
         </Suspense>
       </div>
     </div>
+    </>
   );
 }

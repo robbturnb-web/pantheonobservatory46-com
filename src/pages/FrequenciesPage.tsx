@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Radio, ExternalLink, ChevronDown, ChevronUp, Youtube } from 'lucide-react';
 import { creators, allTopics, type Topic, type Rating } from '@/data/frequencies';
 import { VideoEmbed } from '@/components/VideoEmbed';
+import { SEO } from '@/components/SEO';
 
 const ratingDot = (rating: Rating) => {
   if (rating === 'GREEN') return 'bg-accent-neon shadow-[0_0_8px_hsl(var(--accent-neon))]';
@@ -22,6 +23,13 @@ export function FrequenciesPage() {
   });
 
   return (
+    <>
+    <SEO
+      title="Frequencies — Curated UAP & Consciousness Channels | Pantheon"
+      description={`${creators.length} researchers and creators rated for sourcing rigor. Filter by topic and reliability to find the signal beneath the noise.`}
+      path="/frequencies"
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Frequencies', url:'https://pantheonobservatory46-com.lovable.app/frequencies', numberOfItems: creators.length }}
+    />
     <div className="max-w-6xl mx-auto px-4 py-12">
       {/* HERO */}
       <motion.div
@@ -168,5 +176,6 @@ export function FrequenciesPage() {
         )}
       </div>
     </div>
+    </>
   );
 }
