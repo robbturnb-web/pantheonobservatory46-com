@@ -1,5 +1,6 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 import { WebbHeroImage } from '@/components/jwst/WebbHeroImage';
