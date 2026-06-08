@@ -269,5 +269,6 @@ export function TelescopePage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
