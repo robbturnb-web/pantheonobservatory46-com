@@ -5,6 +5,7 @@ import { Telescope as TelescopeIcon, ChevronDown, ChevronUp, Sparkles, Info, Arr
 import { EvidenceBadge } from '../components/EvidenceBadge';
 import { telescopes } from '../data/telescopes';
 import jwstImg from '../assets/telescopes/jwst.jpg';
+import { SEO } from '@/components/SEO';
 
 const upcomingScopes = [
   { name: 'Vera C. Rubin Observatory', blurb: 'LSST · 10-year survey of the entire southern sky', status: 'First Light 2025' },
