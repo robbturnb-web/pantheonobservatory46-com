@@ -24,6 +24,19 @@ export function TelescopePage() {
   const filtered = typeFilter === 'all' ? others : others.filter(t => t.type === typeFilter);
 
   return (
+    <>
+    <SEO
+      title="The Observatory — Every Telescope Humanity Has Built | Pantheon"
+      description={`From Arecibo's lost dish to Webb's gold hexagons — ${telescopes.length} major telescopes, their key discoveries, and what comes next (Rubin, Roman, ELT).`}
+      path="/telescopes"
+      schema={{
+        '@context':'https://schema.org','@type':'CollectionPage',
+        name:'The Pantheon Observatory',
+        url:'https://pantheonobservatory46-com.lovable.app/telescopes',
+        numberOfItems: telescopes.length,
+        hasPart: telescopes.slice(0, 8).map(t => ({ '@type':'Observatory', name: t.name }))
+      }}
+    />
     <div className="min-h-screen py-16 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Realm header */}
