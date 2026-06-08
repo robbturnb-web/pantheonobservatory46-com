@@ -1,9 +1,17 @@
 import { DossierPageLayout } from '@/components/dossier/DossierPageLayout';
 import { aaroEntries, aaroCategories } from '@/data/aaro';
 import { pageThemes } from '@/lib/page-themes';
+import { SEO } from '@/components/SEO';
 
 export function AaroWatchPage() {
   return (
+    <>
+    <SEO
+      title="AARO Watch — Pentagon UAP Office Lineage | Pantheon"
+      description="AATIP to UAPTF to AOIMSG to AARO — every annual report, leadership change, and congressional hearing tracked. Where AARO contradicts whistleblowers, both records appear."
+      path="/aaro"
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'AARO Watch', url:'https://pantheonobservatory46-com.lovable.app/aaro', numberOfItems: aaroEntries.length }}
+    />
     <DossierPageLayout
       theme={pageThemes.aaro}
       entries={aaroEntries}
@@ -19,5 +27,6 @@ export function AaroWatchPage() {
         </p>
       }
     />
+    </>
   );
 }

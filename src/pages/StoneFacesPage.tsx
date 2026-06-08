@@ -1,9 +1,17 @@
 import { DossierPageLayout } from '@/components/dossier/DossierPageLayout';
 import { stoneFacesEntries, stoneFacesCategories } from '@/data/stone-faces';
 import { pageThemes } from '@/lib/page-themes';
+import { SEO } from '@/components/SEO';
 
 export function StoneFacesPage() {
   return (
+    <>
+    <SEO
+      title="Stone Faces — Megalithic Sites the Textbook Can't Explain | Pantheon"
+      description="Göbekli Tepe, Puma Punku, Baalbek and seven more dig sites pairing field record with contested chronology. The excavations rewriting the human timeline."
+      path="/stone-faces"
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Stone Faces Archive', url:'https://pantheonobservatory46-com.lovable.app/stone-faces', numberOfItems: stoneFacesEntries.length }}
+    />
     <DossierPageLayout
       theme={pageThemes.stoneFaces}
       entries={stoneFacesEntries}
@@ -18,5 +26,6 @@ export function StoneFacesPage() {
         </p>
       }
     />
+    </>
   );
 }
