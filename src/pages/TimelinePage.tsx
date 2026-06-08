@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { timelineEntries, type TimelineEntry } from '../data/timeline';
 import { ExternalLink } from 'lucide-react';
+import { SEO } from '@/components/SEO';
 
 const categories = [
   { key: 'all', label: 'All Eras' },
