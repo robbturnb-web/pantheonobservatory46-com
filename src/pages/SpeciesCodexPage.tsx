@@ -368,6 +368,7 @@ export function SpeciesCodexPage() {
         </div>
       )}
     </div>
+    </>
   );
 }
 
@@ -377,6 +378,5 @@ function Field({ label, value }: { label: string; value: string }) {
       <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{label}</div>
       <p className="text-foreground leading-relaxed">{value}</p>
     </div>
-    </>
   );
 }
