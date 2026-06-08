@@ -113,6 +113,7 @@ export function JWSTPage() {
 
       <FindingModal finding={openFinding} onClose={() => setOpenFinding(null)} />
     </div>
+    </>
   );
 }
 
