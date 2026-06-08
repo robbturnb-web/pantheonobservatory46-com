@@ -28,40 +28,27 @@ export function JWSTPage() {
   const [openFinding, setOpenFinding] = useState<JwstFinding | null>(null);
   const { trackVaultOpen } = useEchoXp();
 
-  useEffect(() => {
-    document.title = 'James Webb Space Telescope · Pantheon Observatory';
-    const desc =
-      'The cinematic mission console for the James Webb Space Telescope — interactive 3D model, 25 hand-curated findings, "Why only Webb" comparisons, daily mission updates.';
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute('content', desc);
-    else {
-      const m = document.createElement('meta');
-      m.name = 'description';
-      m.content = desc;
-      document.head.appendChild(m);
-    }
-
-    const ld = document.createElement('script');
-    ld.type = 'application/ld+json';
-    ld.text = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Observatory',
-      name: 'James Webb Space Telescope — Pantheon Mission Flagship',
-      description: desc,
-      about: 'James Webb Space Telescope',
-      publisher: { '@type': 'Organization', name: 'Pantheon Observatory' },
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Webb%27s_First_Deep_Field.jpg/1280px-Webb%27s_First_Deep_Field.jpg",
-    });
-    document.head.appendChild(ld);
-    return () => { document.head.removeChild(ld); };
-  }, []);
-
   const handleOpen = (f: JwstFinding) => {
     setOpenFinding(f);
     trackVaultOpen(`jwst-${f.id}`);
   };
 
   return (
+    <>
+    <SEO
+      title="James Webb Space Telescope · Pantheon Mission Console"
+      description='The cinematic mission console for JWST — interactive 3D model, 25 curated findings, "Why only Webb" comparisons, daily updates from L2.'
+      path="/jwst"
+      image="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Webb%27s_First_Deep_Field.jpg/1280px-Webb%27s_First_Deep_Field.jpg"
+      schema={{
+        '@context':'https://schema.org','@type':'Observatory',
+        name:'James Webb Space Telescope — Pantheon Mission Flagship',
+        description:'The cinematic mission console for JWST — interactive 3D model, 25 curated findings, daily updates from L2.',
+        about:'James Webb Space Telescope',
+        publisher:{ '@type':'Organization', name:'Pantheon Observatory' },
+        image:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Webb%27s_First_Deep_Field.jpg/1280px-Webb%27s_First_Deep_Field.jpg',
+      }}
+    />
     <div className="relative min-h-screen -mt-16" style={{ background: 'linear-gradient(180deg, #05030d 0%, #0a0420 45%, #03020a 100%)' }}>
       <JwstSubNav />
 
