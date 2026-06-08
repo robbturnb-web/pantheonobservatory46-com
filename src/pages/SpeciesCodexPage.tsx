@@ -16,6 +16,7 @@ import { uapCases } from '../data/uap-cases';
 import { whistleblowers } from '../data/whistleblowers';
 import { Link } from 'react-router-dom';
 import { useEchoXp } from '../hooks/use-echo-xp';
+import { SEO } from '@/components/SEO';
 
 type ClassFilter = 'All' | SpeciesClassification;
 type ThreatFilter = 'All' | ThreatLevel;
@@ -68,6 +69,13 @@ export function SpeciesCodexPage() {
   }, [classFilter, threatFilter]);
 
   return (
+    <>
+    <SEO
+      title="Species Codex — Cataloging the Non-Human | Pantheon"
+      description={`${allSpecies.length} reported non-human species — biological, interdimensional, synthetic. Threat-graded, evidence-graded, witness-cross-referenced.`}
+      path="/species"
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Species Codex', url:'https://pantheonobservatory46-com.lovable.app/species', numberOfItems: allSpecies.length }}
+    />
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       {/* Hero */}
       <motion.div
@@ -369,5 +377,6 @@ function Field({ label, value }: { label: string; value: string }) {
       <div className="text-xs uppercase tracking-widest text-muted-foreground mb-1">{label}</div>
       <p className="text-foreground leading-relaxed">{value}</p>
     </div>
+    </>
   );
 }
