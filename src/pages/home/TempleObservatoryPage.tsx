@@ -460,6 +460,29 @@ function FlareClassBar({ current }: { current: string }) {
 
 /* ───────────── ACTIVITY PANELS ───────────── */
 function ActivityPanels() {
+  const quakes = useEarthquakes();
+  const q = quakes.data?.value;
+  const qOk = quakes.data?.ok ?? false;
+
+  // Region tags pulled from the latest 4 distinct places in the live feed
+  const regions = q
+    ? Array.from(
+        new Set(
+          q.latest
+            .map((f) => {
+              const m = /(?:of|near)\s+(.+)$/i.exec(f.place);
+              return (m?.[1] ?? f.place).split(',').pop()?.trim() ?? f.place;
+            })
+            .filter(Boolean),
+        ),
+      ).slice(0, 4)
+    : [];
+
+  // Sparkline of latest magnitudes (chronological)
+  const spark = q && q.latest.length > 0
+    ? q.latest.slice().sort((a, b) => a.time - b.time).map((f) => f.mag)
+    : [];
+
   return (
     <section className="relative px-4 sm:px-8 pb-6">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-4">
@@ -468,45 +491,93 @@ function ActivityPanels() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(220,38,38,0.18),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start justify-between mb-3">
             <div>
-              <div className="text-[10px] uppercase tracking-[3px] text-red-300/80 mb-1">Earth Activity · Latest Reported</div>
-              <div className="flex items-baseline gap-3">
-                <span className="text-4xl font-black text-red-400">5</span>
-                <span className="text-xs uppercase tracking-[2px] text-white/50">Events</span>
-                <span className="text-[10px] uppercase tracking-[2px] text-white/40">Highest M<span className="text-red-300 font-bold">5.3</span></span>
+              <div className="text-[10px] uppercase tracking-[3px] text-red-300/80 mb-1">
+                Earth Activity · Last 24h (USGS)
               </div>
+              <div className="flex items-baseline gap-3 flex-wrap">
+                <span className="text-4xl font-black text-red-400">
+                  {qOk && q ? q.count24h : '—'}
+                </span>
+                <span className="text-xs uppercase tracking-[2px] text-white/50">Events</span>
+                {qOk && q?.highest && (
+                  <span className="text-[10px] uppercase tracking-[2px] text-white/40">
+                    Highest M
+                    <span className="text-red-300 font-bold">{q.highest.mag.toFixed(1)}</span>
+                  </span>
+                )}
+              </div>
+              {qOk && q?.highest && (
+                <a
+                  href={q.highest.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-[10px] text-red-200/80 mt-1 hover:underline truncate max-w-xs"
+                >
+                  {q.highest.place}
+                </a>
+              )}
             </div>
             <AlertTriangle className="w-5 h-5 text-red-400" />
           </div>
-          {/* Mini activity chart */}
-          <Sparkline color="#ef4444" data={[2, 3, 2.4, 4, 3.2, 5.3, 4.6, 3.8, 4.2, 5, 4.4, 3.6, 4.8, 5.1, 4.2]} />
-          <div className="relative flex flex-wrap gap-1.5 mt-3">
-            {['China', 'Revilla Gigedo Is.', 'Pacific Rim', 'Sumatra'].map((t) => (
-              <span key={t} className="text-[9px] uppercase tracking-[2px] px-2 py-0.5 rounded-full border border-red-400/30 text-red-200 bg-red-500/10">
-                {t}
-              </span>
-            ))}
-          </div>
+          {spark.length > 1 ? (
+            <Sparkline color="#ef4444" data={spark} />
+          ) : (
+            <div className="h-12 flex items-center text-[10px] uppercase tracking-[2px] text-white/35">
+              {quakes.loading ? 'Connecting…' : 'No recent data'}
+            </div>
+          )}
+          {regions.length > 0 && (
+            <div className="relative flex flex-wrap gap-1.5 mt-3">
+              {regions.map((t) => (
+                <span
+                  key={t}
+                  className="text-[9px] uppercase tracking-[2px] px-2 py-0.5 rounded-full border border-red-400/30 text-red-200 bg-red-500/10"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
+          <LiveDataFooter
+            source={quakes.data?.source ?? null}
+            fetchedAt={quakes.data?.fetchedAt}
+            ok={qOk}
+            error={quakes.data?.error}
+            loading={quakes.loading}
+            onRefresh={quakes.refresh}
+          />
         </div>
 
-        {/* Anomalous Activity */}
+        {/* Anomalous Activity — community-sourced, no fake metrics */}
         <div className="relative rounded-xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950/40 to-black/70 backdrop-blur-xl p-5 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.18),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start justify-between mb-3">
-            <div className="text-[10px] uppercase tracking-[3px] text-emerald-300/80">Anomalous Activity · Latest Reported</div>
+            <div className="text-[10px] uppercase tracking-[3px] text-emerald-300/80">
+              Anomalous Reports · Community Submissions
+            </div>
             <Sparkles className="w-5 h-5 text-emerald-400" />
           </div>
-          <div className="relative grid grid-cols-2 gap-3 mb-3">
-            <Stat label="UAP Reports" value="5" delta="+12%" sub="3 high cred" />
-            <Stat label="USO Reports" value="4" delta="+3%"  sub="Coastal" />
+          <p className="relative text-[11px] text-white/65 leading-snug mb-3">
+            Pantheon does not publish a fake UAP counter. Sightings are
+            user-submitted, reviewed by mods, and surfaced once verified
+            against a credible source.
+          </p>
+          <div className="relative flex flex-wrap gap-2">
+            <Link
+              to="/orb-report"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-emerald-400/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-200 text-[10px] uppercase tracking-[2px] font-bold transition-colors"
+            >
+              Submit a sighting <ChevronRight className="w-3 h-3" />
+            </Link>
+            <Link
+              to="/uap"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-white/15 bg-white/5 hover:bg-white/10 text-white/80 text-[10px] uppercase tracking-[2px] font-bold transition-colors"
+            >
+              Documented UAP cases <ChevronRight className="w-3 h-3" />
+            </Link>
           </div>
-          {/* Correlation engine */}
-          <div className="relative rounded-lg border border-white/10 bg-black/40 p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <Zap className="w-3.5 h-3.5 text-[#c77dff]" />
-              <span className="text-[10px] uppercase tracking-[3px] text-white/70 font-semibold">Correlation Engine</span>
-            </div>
-            <CorrelationRow grade="MED" text="Solar flare + seismic cluster · 63% prob next 48h" />
-            <CorrelationRow grade="MED" text="UAP cluster near western US military range" />
+          <div className="mt-3 text-[9px] uppercase tracking-[2px] text-white/40">
+            Source · Pantheon community vault · pending review
           </div>
         </div>
       </div>
