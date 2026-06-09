@@ -249,7 +249,7 @@ export function StarSeedTerminalPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  onSubmit={form.handleSubmit(onSubmit)}
+                  onSubmit={form.handleSubmit(onSubmit, onInvalid)}
                   className="space-y-4"
                 >
                   <div className="flex items-center justify-between gap-2 mb-4">
