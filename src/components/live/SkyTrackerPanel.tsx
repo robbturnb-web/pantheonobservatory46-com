@@ -111,6 +111,9 @@ export function SkyTrackerPanel() {
             <LiveDataFooter
               source={iss.data?.source ?? null}
               fetchedAt={iss.data?.fetchedAt}
+              stale={iss.data?.stale}
+              cacheAge={iss.data?.cacheAge}
+              lastSuccessAt={iss.data?.lastSuccessAt}
               ok={iss.data?.ok ?? false}
               error={iss.data?.error}
               loading={iss.loading}
@@ -160,6 +163,9 @@ export function SkyTrackerPanel() {
             <LiveDataFooter
               source={lunar.data?.source ?? null}
               fetchedAt={lunar.data?.fetchedAt}
+              stale={lunar.data?.stale}
+              cacheAge={lunar.data?.cacheAge}
+              lastSuccessAt={lunar.data?.lastSuccessAt}
               ok={lunar.data?.ok ?? false}
               error={lunar.data?.error}
               loading={lunar.loading}
@@ -233,6 +239,9 @@ export function SkyTrackerPanel() {
             <LiveDataFooter
               source={meteors.data?.source ?? null}
               fetchedAt={meteors.data?.fetchedAt}
+              stale={meteors.data?.stale}
+              cacheAge={meteors.data?.cacheAge}
+              lastSuccessAt={meteors.data?.lastSuccessAt}
               ok={meteors.data?.ok ?? false}
               error={meteors.data?.error}
               loading={meteors.loading}
