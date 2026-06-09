@@ -319,42 +319,6 @@ export type Database = {
         }
         Relationships: []
       }
-      glyph_submissions: {
-        Row: {
-          ai_interpretation: string | null
-          created_at: string
-          culture_tags: string[]
-          drawn_svg: string | null
-          id: string
-          image_url: string | null
-          status: string
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          ai_interpretation?: string | null
-          created_at?: string
-          culture_tags?: string[]
-          drawn_svg?: string | null
-          id?: string
-          image_url?: string | null
-          status?: string
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          ai_interpretation?: string | null
-          created_at?: string
-          culture_tags?: string[]
-          drawn_svg?: string | null
-          id?: string
-          image_url?: string | null
-          status?: string
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
       observer_files: {
         Row: {
           bio: string | null
@@ -525,27 +489,6 @@ export type Database = {
           sighting_date?: string | null
           status?: string | null
           user_id?: string | null
-        }
-        Relationships: []
-      }
-      public_glyphs: {
-        Row: {
-          created_at: string | null
-          culture_tags: string[] | null
-          id: string | null
-          image_url: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          culture_tags?: string[] | null
-          id?: string | null
-          image_url?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          culture_tags?: string[] | null
-          id?: string | null
-          image_url?: string | null
         }
         Relationships: []
       }
