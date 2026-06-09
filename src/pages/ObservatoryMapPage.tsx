@@ -219,7 +219,7 @@ export function ObservatoryMapPage() {
               rel="noopener noreferrer"
               className={`px-2 py-1 rounded border transition ${
                 active[l.id]
-                  ? `border-${l.accent}/40 text-foreground/90 hover:border-${l.accent}`
+                  ? `${l.classes.sourceBorder} text-foreground/90`
                   : 'border-primary/15 text-muted-foreground hover:text-foreground/80'
               }`}
             >
