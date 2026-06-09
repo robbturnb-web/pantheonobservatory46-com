@@ -61,6 +61,7 @@ const SearchPage = lazy(() => import('./pages/SearchPage').then(m => ({ default:
 const LegislationPage = lazy(() => import('./pages/LegislationPage').then(m => ({ default: m.LegislationPage })));
 const ObservatoryMapPage = lazy(() => import('./pages/ObservatoryMapPage').then(m => ({ default: m.ObservatoryMapPage })));
 const DisclosureCommandPage = lazy(() => import('./pages/DisclosureCommandPage').then(m => ({ default: m.DisclosureCommandPage })));
+const DailyBriefingPage = lazy(() => import('./pages/DailyBriefingPage').then(m => ({ default: m.DailyBriefingPage })));
 const DiagnosticsPage = lazy(() => import('./pages/DiagnosticsPage'));
 
 
