@@ -18,7 +18,7 @@ import {
   useEarthquakes, useKp, useFlare, useSolarWind, useCMEs,
   useFlareEvents, useGSTs, useSwpcAlerts, useISS, useNwsAlerts,
 } from '@/hooks/use-live-data';
-import { legislation, STATUS_LABEL, STATUS_TONE, type LegislationItem } from '@/data/legislation';
+import { legislation, STATUS_LABEL, type LegislationItem } from '@/data/legislation';
 import { aaroEntries } from '@/data/aaro';
 
 type SignalTone = 'calm' | 'watch' | 'warning' | 'severe';
