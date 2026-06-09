@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import {
   Home, Eye, Mountain, Brain, Satellite, Folder, Bot, Settings,
   Sun, Volume2, Radio, Flame, Activity, AlertTriangle, ChevronRight,
-  MapPin, Lock, Telescope, Sparkles, Zap, Waves, Film,
+  Lock, Telescope, Sparkles, Zap, Waves, Film,
   Shield, Skull, Plane, Mountain as MountainIcon, Users, Radio as RadioIcon, Globe,
 } from 'lucide-react';
 
