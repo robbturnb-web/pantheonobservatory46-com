@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { vaultSlots, daysOverdue } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
-import { DailyPulseCard } from '@/components/cosmos/DailyPulseCard';
+
 import silhouetteMale from '@/assets/missing/silhouette-male.jpg';
 import silhouetteFemale from '@/assets/missing/silhouette-female.jpg';
 import silhouetteMilitary from '@/assets/missing/silhouette-military.jpg';
@@ -107,12 +107,6 @@ function AnimatedCounter({ value, duration = 1800 }: { value: number; duration?:
 export function HomeLowerSections() {
   return (
     <>
-      {/* DAILY PULSE */}
-      <section className="px-4 pb-4 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <DailyPulseCard />
-        </div>
-      </section>
 
       {/* STATS */}
       <section className="py-16 px-4 relative z-10">

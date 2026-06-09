@@ -96,7 +96,7 @@ export default function App() {
               <Route path="/orb-report" element={<OrbReportPage />} />
               <Route path="/the-46" element={<The46Page />} />
               <Route path="/codex" element={<CodexPage />} />
-              <Route path="/video-vault" element={<The46Page />} />
+              
               <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
               <Route path="/frequencies" element={<FrequenciesPage />} />
               <Route path="/species" element={<SpeciesCodexPage />} />
@@ -123,7 +123,7 @@ export default function App() {
               <Route path="/experts/:slug" element={<ExpertProfilePage />} />
               <Route path="/style-guide" element={<StyleGuidePage />} />
               <Route path="/documentaries" element={<DocumentariesPage />} />
-              <Route path="/corbell" element={<JeremyCorbellPage />} />
+              
               <Route path="/jeremy-corbell" element={<JeremyCorbellPage />} />
               <Route path="/brazil" element={<BrazilPage />} />
               <Route path="/jwst" element={<JWSTPage />} />
