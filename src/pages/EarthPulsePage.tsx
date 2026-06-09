@@ -70,7 +70,7 @@ const MODAL_DATA: Record<string, ModalEntry> = {
     seeker:
       'Comet C/2026 A1 (MAPS) — a Kreutz-family sungrazer with perihelion in April 2026 — passes through a period of recorded X-class solar activity. Stefan Burns links the window to a spike in orb sightings and seismic micro-swarms.',
     oracle:
-      'Correlation engine (rolling 30-day): Solar X-class events ↔ global M5+ quakes (+18% above baseline) ↔ UAP reports (+12%). Watch for compounded effects on the geomagnetic Kp index in the next 72h.',
+      'Pantheon does not publish a fabricated correlation score. Verified inputs: NOAA SWPC GOES X-ray flux + planetary Kp index, USGS earthquake feed, and curated open-source UAP report logs. Cross-reference the live Observatory dashboard for the current readings.',
     cta: { label: 'Open Cosmos Pulse archive', to: '/earth-pulse#live' },
     xpReason: 'Solar pulse dossier opened',
   },
@@ -82,7 +82,7 @@ const MODAL_DATA: Record<string, ModalEntry> = {
     seeker:
       'A multi-body alignment focal point passes through Earth during the April 17–23 window. Researchers track gravitational and electromagnetic resonance across the inner planets.',
     oracle:
-      'Cross-referenced with Schumann amplitude spikes and Stefan Burns geomagnetic logs — three of the last four similar alignments coincided with measurable consciousness-field anomalies.',
+      'Pantheon does not assert a measured consciousness-field correlation. The dossier links peer observations (Schumann amplitude logs, geomagnetic Kp from NOAA SWPC) so you can compare alignment windows against the verified record yourself.',
     cta: { label: 'See planetary monitor', to: '/galaxy' },
     xpReason: 'Planetary geometry dossier opened',
   },
@@ -182,7 +182,7 @@ export function EarthPulsePage() {
         chip: 'HIGH · SOLAR',
         chipTone: 'bg-[#ff3366]/90 text-white',
         title: 'Solar Flare + Comet MAPS Update',
-        sub: 'X-class activity + C/2026 A1 sungrazer · Stefan Burns seismic correlation active.',
+        sub: 'X-class activity + C/2026 A1 sungrazer · curated commentary, not a live correlation score.',
         bg: SDO_URL('193', bust),
       },
       {
@@ -343,12 +343,17 @@ export function EarthPulsePage() {
 
             {/* Curated pulse updates */}
             <section aria-labelledby="updates-heading" className="space-y-4">
-              <h2
-                id="updates-heading"
-                className="text-sm font-semibold uppercase tracking-[0.25em] text-accent-neon"
-              >
-                Curated field updates
-              </h2>
+              <div className="flex items-baseline justify-between gap-3 flex-wrap">
+                <h2
+                  id="updates-heading"
+                  className="text-sm font-semibold uppercase tracking-[0.25em] text-accent-neon"
+                >
+                  Curated field updates
+                </h2>
+                <span className="text-[10px] uppercase tracking-[2px] text-amber-300/80 border border-amber-400/30 bg-amber-500/10 rounded-full px-2 py-0.5">
+                  Editorial commentary · not a live API feed
+                </span>
+              </div>
               {pulseUpdates.map((update, i) => {
                 const Icon = categoryIcon(update.category);
                 return (
