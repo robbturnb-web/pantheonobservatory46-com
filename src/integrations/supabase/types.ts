@@ -654,6 +654,36 @@ export type Database = {
       }
     }
     Views: {
+      orb_sightings_public: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string | null
+          location: string | null
+          sighting_date: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          location?: string | null
+          sighting_date?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string | null
+          location?: string | null
+          sighting_date?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       public_glyphs: {
         Row: {
           created_at: string | null
