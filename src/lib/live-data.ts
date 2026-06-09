@@ -60,7 +60,7 @@ const USGS_SOURCE = {
 export async function fetchEarthquakes(): Promise<LiveResult<QuakeSummary>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const r = await fetch(USGS_SOURCE.url, { cache: 'no-store' });
+    const r = await proxyFetch('earthquakes');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const json = await r.json();
     const features: QuakeFeature[] = (json.features ?? [])
@@ -109,7 +109,7 @@ function kpStorm(k: number): KpReading['stormLevel'] {
 export async function fetchKp(): Promise<LiveResult<KpReading>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const r = await fetch(KP_SOURCE.url, { cache: 'no-store' });
+    const r = await proxyFetch('kp');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const arr = await r.json();
     const last = arr?.[arr.length - 1];
@@ -149,7 +149,7 @@ function fluxToClass(flux: number): string {
 export async function fetchFlare(): Promise<LiveResult<FlareReading>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const r = await fetch(FLARE_SOURCE.url, { cache: 'no-store' });
+    const r = await proxyFetch('flare');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const arr = await r.json();
     // Short channel (0.05-0.4 nm) is the flare-class channel
@@ -177,7 +177,7 @@ export interface WindReading { speedKmS: number; observedAt: string }
 export async function fetchSolarWind(): Promise<LiveResult<WindReading>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const r = await fetch(WIND_SOURCE.url, { cache: 'no-store' });
+    const r = await proxyFetch('solarwind');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const json = await r.json();
     const speed = Number(json.WindSpeed);
@@ -212,8 +212,7 @@ export async function fetchMarine(
 ): Promise<LiveResult<MarineReading>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&current=wave_height,wave_direction,wave_period`;
-    const r = await fetch(url, { cache: 'no-store' });
+    const r = await proxyFetch('marine', { lat: String(lat), lon: String(lon) });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const json = await r.json();
     const c = json.current;
@@ -302,8 +301,7 @@ export interface CmeSummary { count7d: number; latest: CmeEvent[]; fastest: CmeE
 export async function fetchCMEs(): Promise<LiveResult<CmeSummary>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const url = `https://api.nasa.gov/DONKI/CME?startDate=${isoDaysAgo(7)}&endDate=${isoDaysAgo(0)}&api_key=${DONKI_KEY}`;
-    const r = await fetch(url, { cache: 'no-store' });
+    const r = await proxyFetch('cme');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const arr = await r.json();
     const events: CmeEvent[] = (arr ?? []).map((e: any) => {
@@ -350,8 +348,7 @@ function flareClassRank(c: string): number {
 export async function fetchFlareEvents(): Promise<LiveResult<FlareEventSummary>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const url = `https://api.nasa.gov/DONKI/FLR?startDate=${isoDaysAgo(7)}&endDate=${isoDaysAgo(0)}&api_key=${DONKI_KEY}`;
-    const r = await fetch(url, { cache: 'no-store' });
+    const r = await proxyFetch('flr');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const arr = await r.json();
     const events: FlareEvent[] = (arr ?? []).map((e: any) => ({
@@ -385,8 +382,7 @@ export interface GstSummary { count7d: number; latest: GstEvent[]; strongest: Gs
 export async function fetchGSTs(): Promise<LiveResult<GstSummary>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const url = `https://api.nasa.gov/DONKI/GST?startDate=${isoDaysAgo(7)}&endDate=${isoDaysAgo(0)}&api_key=${DONKI_KEY}`;
-    const r = await fetch(url, { cache: 'no-store' });
+    const r = await proxyFetch('gst');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const arr = await r.json();
     const events: GstEvent[] = (arr ?? []).map((e: any) => {
@@ -422,7 +418,7 @@ export interface SwpcAlert {
 export async function fetchSwpcAlerts(): Promise<LiveResult<SwpcAlert[]>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const r = await fetch(SWPC_ALERT_SOURCE.url, { cache: 'no-store' });
+    const r = await proxyFetch('alerts');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const arr = await r.json();
     const cutoff = Date.now() - 24 * 3600_000;
@@ -461,7 +457,7 @@ export interface IssReading {
 export async function fetchISS(): Promise<LiveResult<IssReading>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const r = await fetch('https://api.wheretheiss.at/v1/satellites/25544', { cache: 'no-store' });
+    const r = await proxyFetch('iss');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const json = await r.json();
     if (!Number.isFinite(json?.latitude)) throw new Error('no telemetry');
@@ -615,10 +611,7 @@ export interface NwsSummary {
 export async function fetchNwsAlerts(): Promise<LiveResult<NwsSummary>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const r = await fetch(
-      'https://api.weather.gov/alerts/active?status=actual&severity=Severe,Extreme&limit=200',
-      { cache: 'no-store', headers: { Accept: 'application/geo+json' } },
-    );
+    const r = await proxyFetch('nws');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const json = await r.json();
     const features = (json?.features ?? []) as any[];
