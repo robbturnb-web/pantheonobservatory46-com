@@ -18,6 +18,7 @@ import {
   fetchISS,
   fetchLunarCalendar,
   fetchMeteorShowers,
+  fetchNwsAlerts,
   type LiveResult,
   type QuakeSummary,
   type KpReading,
@@ -32,6 +33,7 @@ import {
   type IssReading,
   type LunarCalendar,
   type MeteorSummary,
+  type NwsSummary,
 } from '@/lib/live-data';
 
 interface State<T> {
