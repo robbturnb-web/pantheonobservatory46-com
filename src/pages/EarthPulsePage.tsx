@@ -182,7 +182,7 @@ export function EarthPulsePage() {
         chip: 'HIGH · SOLAR',
         chipTone: 'bg-[#ff3366]/90 text-white',
         title: 'Solar Flare + Comet MAPS Update',
-        sub: 'X-class activity + C/2026 A1 sungrazer · Stefan Burns seismic correlation active.',
+        sub: 'X-class activity + C/2026 A1 sungrazer · curated commentary, not a live correlation score.',
         bg: SDO_URL('193', bust),
       },
       {
