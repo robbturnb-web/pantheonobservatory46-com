@@ -46,7 +46,7 @@ export function WhistleblowerVaultPage() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Whistleblower Vault — Disclosure Testimony Archive | Pantheon"
+        title="Whistleblower Vault — UAP Disclosure Testimony"
         description="Evidence-graded profiles of those who risked everything to disclose UAP, aerospace, and intelligence programs — and the forensic registry of suspicious deaths."
         canonical="/whistleblowers"
         schema={{
