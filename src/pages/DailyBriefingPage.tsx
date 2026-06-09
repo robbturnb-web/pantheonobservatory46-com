@@ -440,6 +440,14 @@ export function DailyBriefingPage() {
           </span>
           <span className="h-px flex-1 bg-realm-observatory/30" />
           <button
+            onClick={exportPdf}
+            disabled={exporting || items.length === 0}
+            className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-realm-observatory font-mono transition disabled:opacity-40"
+          >
+            <Download className={`w-3 h-3 ${exporting ? 'animate-pulse' : ''}`} />
+            {exporting ? 'Exporting…' : 'Export PDF'}
+          </button>
+          <button
             onClick={refreshAll}
             className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground font-mono transition"
           >
