@@ -278,10 +278,10 @@ export function DailyBriefingPage() {
         id: 'iss-now',
         domain: 'orbital',
         tone: 'calm',
-        title: `ISS over ${i.lat.toFixed(1)}°, ${i.lon.toFixed(1)}°`,
+        title: `ISS over ${i.latitude.toFixed(1)}°, ${i.longitude.toFixed(1)}°`,
         body: `Altitude ${i.altitudeKm?.toFixed(0) ?? '—'} km · velocity ${i.velocityKmH?.toFixed(0) ?? '—'} km/h.`,
         href: '/observatory',
-        timestamp: new Date(i.timestamp * 1000).toISOString(),
+        timestamp: i.observedAt,
         icon: Satellite,
       });
     }
