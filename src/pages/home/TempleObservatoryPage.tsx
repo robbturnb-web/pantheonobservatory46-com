@@ -1085,6 +1085,7 @@ export function TempleObservatoryPage() {
             <Hero kp={kp} kpOk={kpOk} flareClass={flareClass} flareOk={flareOk} utc={utc} />
             <ActivityPanels />
             <LiveCosmicFeed utc={utc} />
+            <SolarEventsPanel />
             <CorePortals />
             <TheGodsReturn />
             <SdoLiveImagery utc={utc} />
