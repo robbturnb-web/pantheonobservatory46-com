@@ -184,10 +184,10 @@ function Sidebar() {
 }
 
 /* ───────────── KP GAUGE ───────────── */
-function KpGauge({ kp }: { kp: number }) {
+function KpGauge({ kp }: { kp: number | null }) {
   // Semi-circle gauge 0..9 → arc 180deg from -180 to 0
   const max = 9;
-  const ratio = Math.min(Math.max(kp / max, 0), 1);
+  const ratio = kp == null ? 0 : Math.min(Math.max(kp / max, 0), 1);
   const radius = 110;
   const circumference = Math.PI * radius;
   const dash = circumference * ratio;
@@ -240,9 +240,11 @@ function KpGauge({ kp }: { kp: number }) {
       </svg>
       {/* Center readout */}
       <div className="absolute inset-x-0 bottom-3 text-center">
-        <div className="text-[9px] uppercase tracking-[3px] text-white/50">Geomagnetic Index · Simulated</div>
+        <div className="text-[9px] uppercase tracking-[3px] text-white/50">
+          {kp == null ? 'Geomagnetic Index · Connecting…' : 'Geomagnetic Index · NOAA SWPC'}
+        </div>
         <div className="text-5xl font-black bg-gradient-to-r from-[#c77dff] to-[#fde68a] bg-clip-text text-transparent leading-none mt-1">
-          Kp {kp.toFixed(1)}
+          {kp == null ? 'Kp —' : `Kp ${kp.toFixed(1)}`}
         </div>
       </div>
       {/* End labels */}
