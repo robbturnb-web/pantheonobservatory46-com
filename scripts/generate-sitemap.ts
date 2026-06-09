@@ -65,9 +65,11 @@ const entries: SitemapEntry[] = [
   // Community & people
   { path: "/builders", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/experts", changefreq: "weekly", priority: "0.7", lastmod: today },
-  // Other
+  // Search & other
+  { path: "/search", changefreq: "weekly", priority: "0.5", lastmod: today },
   { path: "/video-vault", changefreq: "weekly", priority: "0.6", lastmod: today },
   { path: "/style-guide", changefreq: "monthly", priority: "0.3", lastmod: today },
+
 ];
 
 function generateSitemap(entries: SitemapEntry[]) {

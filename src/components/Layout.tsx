@@ -12,6 +12,8 @@ import { Walkthrough } from './Walkthrough';
 import { ErrorBoundary } from './ErrorBoundary';
 import { AudioPlayer } from './AudioPlayer';
 import { useEchoXp } from '@/hooks/use-echo-xp';
+import { SearchProvider } from './search/SearchProvider';
+
 
 const pageVariants = {
   initial: { opacity: 0, y: 20, scale: 0.98, filter: 'blur(8px)' },
@@ -35,36 +37,39 @@ export function Layout() {
   }, [location.pathname, trackPageVisit]);
 
   return (
-    <div className="min-h-screen relative cinematic-letterbox">
-      <div className="cinematic-vignette" />
-      <div className="ambient-flicker">
-        <BackgroundManager />
+    <SearchProvider>
+      <div className="min-h-screen relative cinematic-letterbox">
+        <div className="cinematic-vignette" />
+        <div className="ambient-flicker">
+          <BackgroundManager />
+        </div>
+        <CosmicCursorTrail />
+        <CometTrails />
+        <SpaceshipFlyby />
+        {/* Home renders its own Temple Observatory top nav + sidebar */}
+        {!isHome && <Navbar />}
+        <XPBar />
+        <AudioPlayer />
+        <Walkthrough />
+        <main className={`${isHome ? '' : 'pt-16'} min-h-screen`}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={pageVariants}
+              transition={pageTransition}
+            >
+              <ErrorBoundary key={location.pathname}>
+                <Outlet />
+              </ErrorBoundary>
+            </motion.div>
+          </AnimatePresence>
+        </main>
+        {!isHome && <PantheonFooter />}
       </div>
-      <CosmicCursorTrail />
-      <CometTrails />
-      <SpaceshipFlyby />
-      {/* Home renders its own Temple Observatory top nav + sidebar */}
-      {!isHome && <Navbar />}
-      <XPBar />
-      <AudioPlayer />
-      <Walkthrough />
-      <main className={`${isHome ? '' : 'pt-16'} min-h-screen`}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={location.pathname}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            variants={pageVariants}
-            transition={pageTransition}
-          >
-            <ErrorBoundary key={location.pathname}>
-              <Outlet />
-            </ErrorBoundary>
-          </motion.div>
-        </AnimatePresence>
-      </main>
-      {!isHome && <PantheonFooter />}
-    </div>
+    </SearchProvider>
   );
 }
+

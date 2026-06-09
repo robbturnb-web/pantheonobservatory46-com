@@ -15,6 +15,8 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 import { PantheonWordmark } from './Wordmark';
+import { SearchTrigger } from './search/SearchTrigger';
+
 
 interface NavLink {
   to: string;
@@ -201,15 +203,19 @@ export function Navbar() {
             )}
           </div>
 
-          <button
-            className="lg:hidden text-foreground p-2"
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          <div className="flex items-center gap-2">
+            <SearchTrigger />
+            <button
+              className="lg:hidden text-foreground p-2"
+              onClick={() => setOpen(!open)}
+              aria-label="Toggle menu"
+            >
+              {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
+
 
       {/* Desktop mega-menu panel */}
       <AnimatePresence>
