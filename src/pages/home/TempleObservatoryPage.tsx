@@ -342,22 +342,33 @@ interface HeroLiveProps {
   utc: Date;
 }
 function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
+  // Derive a real "uplink" status from live source health — never a fake "nominal".
+  const okCount = (kpOk ? 1 : 0) + (flareOk ? 1 : 0);
+  const connecting = kp == null && flareClass == null;
+  const status = connecting
+    ? { label: 'Establishing Uplink', tone: 'text-cyan-300', dot: 'bg-cyan-400' }
+    : okCount === 2
+      ? { label: 'All Sources Verified', tone: 'text-signal-online', dot: 'bg-signal-online' }
+      : okCount === 1
+        ? { label: 'Partial Uplink', tone: 'text-amber-300', dot: 'bg-amber-400' }
+        : { label: 'Sources Offline', tone: 'text-red-300', dot: 'bg-red-400' };
   return (
     <section className="relative px-4 sm:px-8 pt-8 pb-6">
       {/* Subtitle row */}
       <div className="flex flex-wrap items-center justify-center gap-3 text-[10px] uppercase tracking-[3px] text-white/55 mb-3">
-        <span className="flex items-center gap-1.5 text-emerald-300">
+        <span className={`flex items-center gap-1.5 ${status.tone}`}>
           <span className="relative flex w-1.5 h-1.5">
-            <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
-            <span className="relative rounded-full w-1.5 h-1.5 bg-emerald-400" />
+            <span className={`absolute inset-0 rounded-full ${status.dot} animate-ping opacity-75`} />
+            <span className={`relative rounded-full w-1.5 h-1.5 ${status.dot}`} />
           </span>
-          All Systems Nominal
+          {status.label}
         </span>
         <span className="hidden sm:inline">·</span>
         <span>Realm: <span className="text-[#c77dff]">The Observatory</span></span>
         <span className="hidden sm:inline">·</span>
         <span className="font-mono text-white/70">Live Sync {utc.toISOString().slice(11, 19)} UTC</span>
       </div>
+
 
       {/* Title */}
       <h1 className="text-center font-black tracking-[1px] leading-none">
@@ -591,29 +602,10 @@ function ActivityPanels() {
   );
 }
 
-function Stat({ label, value, delta, sub }: { label: string; value: string; delta: string; sub: string }) {
-  return (
-    <div className="rounded-lg border border-emerald-400/20 bg-emerald-500/5 p-3">
-      <div className="text-[9px] uppercase tracking-[2px] text-emerald-200/70 mb-1">{label}</div>
-      <div className="flex items-baseline gap-2">
-        <span className="text-2xl font-black text-emerald-300">{value}</span>
-        <span className="text-[10px] font-bold text-emerald-400">{delta}</span>
-      </div>
-      <div className="text-[9px] uppercase tracking-[2px] text-white/40 mt-0.5">{sub}</div>
-    </div>
-  );
-}
+// Stat and CorrelationRow components were removed in the Phase 1 data-integrity
+// pass — they templated fabricated deltas and grade rows that no longer appear
+// on the dashboard. All current panels render only verified live values.
 
-function CorrelationRow({ grade, text }: { grade: string; text: string }) {
-  return (
-    <div className="flex items-start gap-2 py-1">
-      <span className="shrink-0 mt-0.5 text-[8.5px] font-bold px-1.5 py-0.5 rounded-sm bg-amber-500/20 text-amber-300 border border-amber-500/40 tracking-[1px]">
-        {grade}
-      </span>
-      <span className="text-[11px] text-white/75 leading-snug">{text}</span>
-    </div>
-  );
-}
 
 function Sparkline({ data, color }: { data: number[]; color: string }) {
   const max = Math.max(...data);
