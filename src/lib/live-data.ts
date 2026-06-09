@@ -263,6 +263,172 @@ export async function fetchMoon(): Promise<LiveResult<MoonReading>> {
   return { ok: true, source: MOON_SOURCE, fetchedAt, value: phaseAt(new Date()) };
 }
 
+/* ─────────── NASA DONKI · CME · FLR · GST (last 7 days) ─────────── */
+const DONKI_KEY = 'DEMO_KEY'; // rate-limited (30/h, 50/day); swap for api.nasa.gov key later
+
+function isoDaysAgo(n: number) {
+  return new Date(Date.now() - n * 86_400_000).toISOString().slice(0, 10);
+}
+
+export interface CmeEvent {
+  id: string;
+  startTime: string;
+  speedKmS: number | null;
+  type: string | null;
+  note: string;
+  link: string;
+}
+const CME_SOURCE = {
+  label: 'NASA DONKI · Coronal Mass Ejections',
+  url: 'https://kauai.ccmc.gsfc.nasa.gov/DONKI/',
+};
+export interface CmeSummary { count7d: number; latest: CmeEvent[]; fastest: CmeEvent | null }
+export async function fetchCMEs(): Promise<LiveResult<CmeSummary>> {
+  const fetchedAt = new Date().toISOString();
+  try {
+    const url = `https://api.nasa.gov/DONKI/CME?startDate=${isoDaysAgo(7)}&endDate=${isoDaysAgo(0)}&api_key=${DONKI_KEY}`;
+    const r = await fetch(url, { cache: 'no-store' });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const arr = await r.json();
+    const events: CmeEvent[] = (arr ?? []).map((e: any) => {
+      const analysis = Array.isArray(e.cmeAnalyses) && e.cmeAnalyses.length ? e.cmeAnalyses[0] : null;
+      return {
+        id: e.activityID,
+        startTime: e.startTime,
+        speedKmS: analysis?.speed ?? null,
+        type: analysis?.type ?? null,
+        note: (e.note ?? '').slice(0, 220),
+        link: e.link ?? 'https://kauai.ccmc.gsfc.nasa.gov/DONKI/',
+      };
+    });
+    events.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
+    const fastest = events
+      .filter((e) => Number.isFinite(e.speedKmS as number))
+      .sort((a, b) => (b.speedKmS ?? 0) - (a.speedKmS ?? 0))[0] ?? null;
+    return { ok: true, source: CME_SOURCE, fetchedAt, value: { count7d: events.length, latest: events.slice(0, 6), fastest } };
+  } catch (e: any) {
+    return { ok: false, source: CME_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  }
+}
+
+export interface FlareEvent {
+  id: string;
+  class: string;
+  beginTime: string;
+  peakTime: string | null;
+  sourceLocation: string | null;
+  activeRegion: string | null;
+  link: string;
+}
+const FLR_SOURCE = {
+  label: 'NASA DONKI · Solar Flare Events',
+  url: 'https://kauai.ccmc.gsfc.nasa.gov/DONKI/',
+};
+export interface FlareEventSummary { count7d: number; strongest: FlareEvent | null; latest: FlareEvent[] }
+function flareClassRank(c: string): number {
+  const letter = c?.charAt(0)?.toUpperCase() ?? 'A';
+  const mag = parseFloat(c?.slice(1)) || 0;
+  const base = ({ A: 0, B: 1, C: 2, M: 3, X: 4 } as Record<string, number>)[letter] ?? 0;
+  return base * 10 + Math.min(mag, 9.9);
+}
+export async function fetchFlareEvents(): Promise<LiveResult<FlareEventSummary>> {
+  const fetchedAt = new Date().toISOString();
+  try {
+    const url = `https://api.nasa.gov/DONKI/FLR?startDate=${isoDaysAgo(7)}&endDate=${isoDaysAgo(0)}&api_key=${DONKI_KEY}`;
+    const r = await fetch(url, { cache: 'no-store' });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const arr = await r.json();
+    const events: FlareEvent[] = (arr ?? []).map((e: any) => ({
+      id: e.flrID,
+      class: e.classType ?? '—',
+      beginTime: e.beginTime,
+      peakTime: e.peakTime ?? null,
+      sourceLocation: e.sourceLocation ?? null,
+      activeRegion: e.activeRegionNum ? `AR${e.activeRegionNum}` : null,
+      link: e.link ?? 'https://kauai.ccmc.gsfc.nasa.gov/DONKI/',
+    }));
+    events.sort((a, b) => new Date(b.beginTime).getTime() - new Date(a.beginTime).getTime());
+    const strongest = events.slice().sort((a, b) => flareClassRank(b.class) - flareClassRank(a.class))[0] ?? null;
+    return { ok: true, source: FLR_SOURCE, fetchedAt, value: { count7d: events.length, strongest, latest: events.slice(0, 6) } };
+  } catch (e: any) {
+    return { ok: false, source: FLR_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  }
+}
+
+export interface GstEvent {
+  id: string;
+  startTime: string;
+  maxKp: number | null;
+  link: string;
+}
+const GST_SOURCE = {
+  label: 'NASA DONKI · Geomagnetic Storms',
+  url: 'https://kauai.ccmc.gsfc.nasa.gov/DONKI/',
+};
+export interface GstSummary { count7d: number; latest: GstEvent[]; strongest: GstEvent | null }
+export async function fetchGSTs(): Promise<LiveResult<GstSummary>> {
+  const fetchedAt = new Date().toISOString();
+  try {
+    const url = `https://api.nasa.gov/DONKI/GST?startDate=${isoDaysAgo(7)}&endDate=${isoDaysAgo(0)}&api_key=${DONKI_KEY}`;
+    const r = await fetch(url, { cache: 'no-store' });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const arr = await r.json();
+    const events: GstEvent[] = (arr ?? []).map((e: any) => {
+      const maxKp = Array.isArray(e.allKpIndex) && e.allKpIndex.length
+        ? Math.max(...e.allKpIndex.map((k: any) => Number(k.kpIndex) || 0))
+        : null;
+      return {
+        id: e.gstID,
+        startTime: e.startTime,
+        maxKp,
+        link: e.link ?? 'https://kauai.ccmc.gsfc.nasa.gov/DONKI/',
+      };
+    });
+    events.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
+    const strongest = events.slice().sort((a, b) => (b.maxKp ?? 0) - (a.maxKp ?? 0))[0] ?? null;
+    return { ok: true, source: GST_SOURCE, fetchedAt, value: { count7d: events.length, latest: events.slice(0, 6), strongest } };
+  } catch (e: any) {
+    return { ok: false, source: GST_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  }
+}
+
+/* ─────────── NOAA SWPC active alerts (last 24h) ─────────── */
+const SWPC_ALERT_SOURCE = {
+  label: 'NOAA SWPC · Space Weather Alerts',
+  url: 'https://services.swpc.noaa.gov/products/alerts.json',
+};
+export interface SwpcAlert {
+  serial: string;
+  issued: string;
+  message: string;
+  productId: string;
+}
+export async function fetchSwpcAlerts(): Promise<LiveResult<SwpcAlert[]>> {
+  const fetchedAt = new Date().toISOString();
+  try {
+    const r = await fetch(SWPC_ALERT_SOURCE.url, { cache: 'no-store' });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const arr = await r.json();
+    const cutoff = Date.now() - 24 * 3600_000;
+    const items: SwpcAlert[] = (arr ?? [])
+      .filter((a: any) => {
+        const t = Date.parse((a.issue_datetime ?? '').replace(' ', 'T') + 'Z');
+        return Number.isFinite(t) && t >= cutoff;
+      })
+      .map((a: any) => ({
+        serial: a.serial_number ?? String(a.product_id),
+        issued: (a.issue_datetime ?? '').replace(' ', 'T') + 'Z',
+        message: String(a.message ?? '').slice(0, 600),
+        productId: a.product_id ?? '',
+      }))
+      .sort((a: SwpcAlert, b: SwpcAlert) => new Date(b.issued).getTime() - new Date(a.issued).getTime())
+      .slice(0, 8);
+    return { ok: true, source: SWPC_ALERT_SOURCE, fetchedAt, value: items };
+  } catch (e: any) {
+    return { ok: false, source: SWPC_ALERT_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  }
+}
+
 /* ─────────── helpers ─────────── */
 export function timeAgo(iso: string): string {
   const d = (Date.now() - new Date(iso).getTime()) / 1000;

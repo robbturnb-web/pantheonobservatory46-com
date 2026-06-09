@@ -32,6 +32,7 @@ import {
   useMoon,
 } from '@/hooks/use-live-data';
 import { LiveDataFooter } from '@/components/live/LiveDataFooter';
+import { SolarEventsPanel } from '@/components/live/SolarEventsPanel';
 import { timeAgo } from '@/lib/live-data';
 
 /* ─────────────────────────────────────────────────────────────────
@@ -1084,6 +1085,7 @@ export function TempleObservatoryPage() {
             <Hero kp={kp} kpOk={kpOk} flareClass={flareClass} flareOk={flareOk} utc={utc} />
             <ActivityPanels />
             <LiveCosmicFeed utc={utc} />
+            <SolarEventsPanel />
             <CorePortals />
             <TheGodsReturn />
             <SdoLiveImagery utc={utc} />
