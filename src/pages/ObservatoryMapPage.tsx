@@ -19,7 +19,14 @@ interface LayerDef {
   label: string;
   sublabel: string;
   icon: typeof Activity;
-  accent: string;          // border + dot color when active
+  /** Static Tailwind classes (JIT-safe). */
+  classes: {
+    border: string;   // when active
+    bg: string;
+    dot: string;
+    text: string;
+    sourceBorder: string;
+  };
   source: string;
   sourceUrl: string;
 }
@@ -30,7 +37,13 @@ const LAYERS: LayerDef[] = [
     label: 'Seismic',
     sublabel: 'USGS · M4.5+ · 7d',
     icon: Activity,
-    accent: 'signal-online',
+    classes: {
+      border: 'border-signal-online/60',
+      bg: 'bg-signal-online/5',
+      dot: 'bg-signal-online',
+      text: 'text-signal-online',
+      sourceBorder: 'border-signal-online/40 hover:border-signal-online',
+    },
     source: 'USGS',
     sourceUrl: 'https://earthquake.usgs.gov',
   },
@@ -39,7 +52,13 @@ const LAYERS: LayerDef[] = [
     label: 'ISS Trace',
     sublabel: 'wheretheiss.at · live',
     icon: Satellite,
-    accent: 'realm-cosmos',
+    classes: {
+      border: 'border-realm-cosmos/60',
+      bg: 'bg-realm-cosmos/5',
+      dot: 'bg-realm-cosmos',
+      text: 'text-realm-cosmos',
+      sourceBorder: 'border-realm-cosmos/40 hover:border-realm-cosmos',
+    },
     source: 'WhereTheISS.at',
     sourceUrl: 'https://wheretheiss.at',
   },
@@ -48,7 +67,13 @@ const LAYERS: LayerDef[] = [
     label: 'NWS Storms',
     sublabel: 'NOAA NWS · severe/extreme',
     icon: CloudLightning,
-    accent: 'amber-500',
+    classes: {
+      border: 'border-amber-500/60',
+      bg: 'bg-amber-500/5',
+      dot: 'bg-amber-500',
+      text: 'text-amber-500',
+      sourceBorder: 'border-amber-500/40 hover:border-amber-500',
+    },
     source: 'NOAA NWS',
     sourceUrl: 'https://www.weather.gov',
   },
@@ -57,7 +82,13 @@ const LAYERS: LayerDef[] = [
     label: 'Solar Activity',
     sublabel: 'SWPC Kp · subsolar point',
     icon: Sun,
-    accent: 'realm-gods',
+    classes: {
+      border: 'border-realm-gods/60',
+      bg: 'bg-realm-gods/5',
+      dot: 'bg-realm-gods',
+      text: 'text-realm-gods',
+      sourceBorder: 'border-realm-gods/40 hover:border-realm-gods',
+    },
     source: 'NOAA SWPC',
     sourceUrl: 'https://www.swpc.noaa.gov',
   },
