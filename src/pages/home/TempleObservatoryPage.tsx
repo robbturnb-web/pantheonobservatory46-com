@@ -1089,6 +1089,7 @@ export function TempleObservatoryPage() {
             <LiveCosmicFeed utc={utc} />
             <SolarEventsPanel />
             <SkyTrackerPanel />
+            <WeatherStormPanel />
             <CorePortals />
             <TheGodsReturn />
             <SdoLiveImagery utc={utc} />
