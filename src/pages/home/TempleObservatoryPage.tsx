@@ -34,6 +34,7 @@ import {
 import { LiveDataFooter } from '@/components/live/LiveDataFooter';
 import { SolarEventsPanel } from '@/components/live/SolarEventsPanel';
 import { SkyTrackerPanel } from '@/components/live/SkyTrackerPanel';
+import { WeatherStormPanel } from '@/components/live/WeatherStormPanel';
 import { timeAgo } from '@/lib/live-data';
 
 /* ─────────────────────────────────────────────────────────────────
@@ -1088,6 +1089,7 @@ export function TempleObservatoryPage() {
             <LiveCosmicFeed utc={utc} />
             <SolarEventsPanel />
             <SkyTrackerPanel />
+            <WeatherStormPanel />
             <CorePortals />
             <TheGodsReturn />
             <SdoLiveImagery utc={utc} />

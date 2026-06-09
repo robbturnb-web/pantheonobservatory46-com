@@ -556,6 +556,87 @@ export async function fetchMeteorShowers(): Promise<LiveResult<MeteorSummary>> {
   };
 }
 
+/* ─────────── NWS active severe / extreme weather alerts (US) ─────────── */
+const NWS_SOURCE = {
+  label: 'NOAA NWS · Active Severe/Extreme Alerts',
+  url: 'https://api.weather.gov/alerts/active',
+};
+export type NwsCategory =
+  | 'Tropical'
+  | 'Tornado'
+  | 'Thunderstorm'
+  | 'Flood'
+  | 'Winter'
+  | 'Fire'
+  | 'Heat'
+  | 'Other';
+export interface NwsAlert {
+  id: string;
+  event: string;
+  severity: string;
+  area: string;
+  headline: string;
+  sent: string;
+  category: NwsCategory;
+  url: string;
+}
+function classifyNws(event: string): NwsCategory {
+  const e = event.toLowerCase();
+  if (e.includes('hurricane') || e.includes('tropical') || e.includes('storm surge') || e.includes('typhoon')) return 'Tropical';
+  if (e.includes('tornado')) return 'Tornado';
+  if (e.includes('thunderstorm')) return 'Thunderstorm';
+  if (e.includes('flood') || e.includes('flash flood')) return 'Flood';
+  if (e.includes('winter') || e.includes('blizzard') || e.includes('ice') || e.includes('snow')) return 'Winter';
+  if (e.includes('fire') || e.includes('red flag')) return 'Fire';
+  if (e.includes('heat')) return 'Heat';
+  return 'Other';
+}
+export interface NwsSummary {
+  total: number;
+  byCategory: Record<NwsCategory, number>;
+  latest: NwsAlert[];
+}
+export async function fetchNwsAlerts(): Promise<LiveResult<NwsSummary>> {
+  const fetchedAt = new Date().toISOString();
+  try {
+    const r = await fetch(
+      'https://api.weather.gov/alerts/active?status=actual&severity=Severe,Extreme&limit=200',
+      { cache: 'no-store', headers: { Accept: 'application/geo+json' } },
+    );
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const json = await r.json();
+    const features = (json?.features ?? []) as any[];
+    const alerts: NwsAlert[] = features
+      .map((f) => {
+        const p = f?.properties ?? {};
+        return {
+          id: String(f.id ?? p.id ?? Math.random()),
+          event: String(p.event ?? 'Alert'),
+          severity: String(p.severity ?? 'Unknown'),
+          area: String(p.areaDesc ?? '').split(';')[0].trim(),
+          headline: String(p.headline ?? p.event ?? '').slice(0, 200),
+          sent: String(p.sent ?? p.effective ?? fetchedAt),
+          category: classifyNws(String(p.event ?? '')),
+          url: String(p.uri ?? p['@id'] ?? 'https://www.weather.gov/'),
+        } as NwsAlert;
+      })
+      .sort((a, b) => new Date(b.sent).getTime() - new Date(a.sent).getTime());
+    const byCategory: Record<NwsCategory, number> = {
+      Tropical: 0, Tornado: 0, Thunderstorm: 0, Flood: 0, Winter: 0, Fire: 0, Heat: 0, Other: 0,
+    };
+    for (const a of alerts) byCategory[a.category] += 1;
+    return {
+      ok: true,
+      source: NWS_SOURCE,
+      fetchedAt,
+      value: { total: alerts.length, byCategory, latest: alerts.slice(0, 10) },
+    };
+  } catch (e: any) {
+    return { ok: false, source: NWS_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  }
+}
+
+
 
 /* ─────────── helpers ─────────── */
 export function timeAgo(iso: string): string {
