@@ -143,19 +143,17 @@ export async function saveStarSeed(seed: StarSeedId): Promise<'saved' | 'guest' 
   const uid = userData.user?.id;
   if (!uid) return 'guest';
 
-  const { data: updated, error: updateError } = await supabase
-    .from('observer_files')
-    .update({ starseed_archetype: seed })
-    .eq('user_id', uid)
-    .select('user_id')
-    .maybeSingle();
-
-  if (updateError) return 'failed';
-  if (updated) return 'saved';
-
+  // Upsert covers both the "trigger already created the row" and "row missing" cases.
   const { error } = await supabase
     .from('observer_files')
-    .insert({ user_id: uid, codename: 'Observer-0046', starseed_archetype: seed });
+    .upsert(
+      { user_id: uid, codename: 'Observer-0046', starseed_archetype: seed },
+      { onConflict: 'user_id' },
+    );
 
-  return error ? 'failed' : 'saved';
+  if (error) {
+    console.error('[saveStarSeed] failed', error);
+    return 'failed';
+  }
+  return 'saved';
 }

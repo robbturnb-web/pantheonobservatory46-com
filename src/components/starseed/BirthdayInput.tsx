@@ -1,25 +1,21 @@
-import { useRef, useEffect, type ChangeEvent, type KeyboardEvent, type ClipboardEvent } from 'react';
+import { useEffect, useState, type ChangeEvent, type ClipboardEvent, type KeyboardEvent } from 'react';
 
 /**
- * BirthdayInput — three auto-advancing typed fields (MM / DD / YYYY).
+ * BirthdayInput — three controlled fields (MM / DD / YYYY).
  *
- * Fixes the mobile native date picker pain of scrolling back to 1990.
- * Emits an ISO `YYYY-MM-DD` string via onChange whenever all three fields
- * form a valid date; otherwise emits an empty string.
+ * Mobile-safe: fully controlled, no ref games. Auto-advance is gentle:
+ * only when the value is unambiguously full (2 digits for month/day, 4 for year).
+ * Emits ISO `YYYY-MM-DD` once the full date is valid; otherwise emits ''.
  */
 export interface BirthdayInputProps {
-  /** ISO YYYY-MM-DD value (or '' for empty). */
   value: string;
   onChange: (iso: string) => void;
   accentColor?: string;
   error?: string;
 }
 
-function clamp(n: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, n));
-}
-
 function isValidDate(y: number, m: number, d: number): boolean {
+  if (!Number.isFinite(y) || !Number.isFinite(m) || !Number.isFinite(d)) return false;
   if (y < 1900 || y > new Date().getFullYear()) return false;
   if (m < 1 || m > 12) return false;
   if (d < 1 || d > 31) return false;
@@ -33,104 +29,87 @@ function parseIso(iso: string): { m: string; d: string; y: string } {
   return { y: match[1], m: match[2], d: match[3] };
 }
 
+function digits(s: string, max: number) {
+  return s.replace(/\D/g, '').slice(0, max);
+}
+
 export function BirthdayInput({ value, onChange, accentColor = '#22d3ee', error }: BirthdayInputProps) {
-  const parsed = parseIso(value);
-  const monthRef = useRef<HTMLInputElement>(null);
-  const dayRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
+  const initial = parseIso(value);
+  const [m, setM] = useState(initial.m);
+  const [d, setD] = useState(initial.d);
+  const [y, setY] = useState(initial.y);
 
-  const monthVal = useRef(parsed.m);
-  const dayVal = useRef(parsed.d);
-  const yearVal = useRef(parsed.y);
-
-  // Sync external value back if it changed (e.g. reset)
+  // Sync if parent resets the value
   useEffect(() => {
     const p = parseIso(value);
-    if (monthRef.current && monthRef.current.value !== p.m) monthRef.current.value = p.m;
-    if (dayRef.current && dayRef.current.value !== p.d) dayRef.current.value = p.d;
-    if (yearRef.current && yearRef.current.value !== p.y) yearRef.current.value = p.y;
-    monthVal.current = p.m;
-    dayVal.current = p.d;
-    yearVal.current = p.y;
+    if (value === '' && (m || d || y)) return; // don't wipe user mid-edit on transient ''
+    if (p.m !== m) setM(p.m);
+    if (p.d !== d) setD(p.d);
+    if (p.y !== y) setY(p.y);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
-  const emit = () => {
-    const y = parseInt(yearVal.current, 10);
-    const m = parseInt(monthVal.current, 10);
-    const d = parseInt(dayVal.current, 10);
-    if (
-      yearVal.current.length === 4 &&
-      monthVal.current.length >= 1 &&
-      dayVal.current.length >= 1 &&
-      isValidDate(y, m, d)
-    ) {
-      const iso = `${y.toString().padStart(4, '0')}-${m.toString().padStart(2, '0')}-${d
-        .toString()
-        .padStart(2, '0')}`;
-      onChange(iso);
-    } else {
+  // Emit ISO whenever the three fields form a valid date.
+  useEffect(() => {
+    const ny = parseInt(y, 10);
+    const nm = parseInt(m, 10);
+    const nd = parseInt(d, 10);
+    if (y.length === 4 && m.length >= 1 && d.length >= 1 && isValidDate(ny, nm, nd)) {
+      const iso = `${ny.toString().padStart(4, '0')}-${nm.toString().padStart(2, '0')}-${nd.toString().padStart(2, '0')}`;
+      if (iso !== value) onChange(iso);
+    } else if (value !== '') {
       onChange('');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [m, d, y]);
+
+  const focusNext = (id: string) => {
+    const el = document.getElementById(id) as HTMLInputElement | null;
+    el?.focus();
+    el?.select();
   };
 
   const handleMonth = (e: ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value.replace(/\D/g, '').slice(0, 2);
-    e.target.value = raw;
-    monthVal.current = raw;
-    // Auto-advance: definitive 2-digit, or any value >1 (e.g. "3" can't precede another digit to stay <=12)
-    if (raw.length === 2 || (raw.length === 1 && parseInt(raw, 10) > 1)) {
-      dayRef.current?.focus();
-    }
-    emit();
+    const raw = digits(e.target.value, 2);
+    setM(raw);
+    if (raw.length === 2) focusNext('bday-day');
   };
 
   const handleDay = (e: ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value.replace(/\D/g, '').slice(0, 2);
-    e.target.value = raw;
-    dayVal.current = raw;
-    if (raw.length === 2 || (raw.length === 1 && parseInt(raw, 10) > 3)) {
-      yearRef.current?.focus();
-    }
-    emit();
+    const raw = digits(e.target.value, 2);
+    setD(raw);
+    if (raw.length === 2) focusNext('bday-year');
   };
 
   const handleYear = (e: ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value.replace(/\D/g, '').slice(0, 4);
-    e.target.value = raw;
-    yearVal.current = raw;
-    emit();
+    setY(digits(e.target.value, 4));
   };
 
-  const handleBackspace = (ref: React.RefObject<HTMLInputElement>) =>
-    (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Backspace' && e.currentTarget.value === '' && ref.current) {
-        ref.current.focus();
-      }
-    };
+  const handleKey = (prevId: string | null) => (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && e.currentTarget.value === '' && prevId) {
+      e.preventDefault();
+      focusNext(prevId);
+    }
+  };
 
   const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
-    const text = e.clipboardData.getData('text');
-    // Accept MM/DD/YYYY, M/D/YYYY, YYYY-MM-DD
-    const slash = text.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    const text = e.clipboardData.getData('text').trim();
+    const slash = text.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
     const iso = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
     if (slash || iso) {
       e.preventDefault();
-      const m = clamp(parseInt(slash ? slash[1] : iso![2], 10), 1, 12);
-      const d = clamp(parseInt(slash ? slash[2] : iso![3], 10), 1, 31);
-      const y = clamp(parseInt(slash ? slash[3] : iso![1], 10), 1900, new Date().getFullYear());
-      if (monthRef.current) monthRef.current.value = m.toString().padStart(2, '0');
-      if (dayRef.current) dayRef.current.value = d.toString().padStart(2, '0');
-      if (yearRef.current) yearRef.current.value = y.toString();
-      monthVal.current = m.toString().padStart(2, '0');
-      dayVal.current = d.toString().padStart(2, '0');
-      yearVal.current = y.toString();
-      emit();
-      yearRef.current?.blur();
+      const pm = (slash ? slash[1] : iso![2]).padStart(2, '0');
+      const pd = (slash ? slash[2] : iso![3]).padStart(2, '0');
+      const py = slash ? slash[3] : iso![1];
+      setM(pm);
+      setD(pd);
+      setY(py);
     }
   };
 
   const cellClass =
     'bg-black/40 border rounded-md px-2 py-3 text-center font-mono text-lg tracking-widest text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-colors';
+  const borderStyle = { borderColor: `${accentColor}55` };
 
   return (
     <div className="space-y-1.5">
@@ -138,57 +117,60 @@ export function BirthdayInput({ value, onChange, accentColor = '#22d3ee', error 
         <div className="flex flex-col">
           <span className="text-[9px] uppercase tracking-[3px] text-muted-foreground mb-1 font-mono">Month</span>
           <input
-            ref={monthRef}
+            id="bday-month"
             type="text"
             inputMode="numeric"
             pattern="[0-9]*"
             placeholder="MM"
             maxLength={2}
-            defaultValue={parsed.m}
+            value={m}
             onChange={handleMonth}
             className={cellClass}
-            style={{ borderColor: `${accentColor}55` }}
+            style={borderStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = accentColor)}
             onBlur={(e) => (e.currentTarget.style.borderColor = `${accentColor}55`)}
             aria-label="Birth month"
+            autoComplete="bday-month"
           />
         </div>
         <div className="flex flex-col">
           <span className="text-[9px] uppercase tracking-[3px] text-muted-foreground mb-1 font-mono">Day</span>
           <input
-            ref={dayRef}
+            id="bday-day"
             type="text"
             inputMode="numeric"
             pattern="[0-9]*"
             placeholder="DD"
             maxLength={2}
-            defaultValue={parsed.d}
+            value={d}
             onChange={handleDay}
-            onKeyDown={handleBackspace(monthRef)}
+            onKeyDown={handleKey('bday-month')}
             className={cellClass}
-            style={{ borderColor: `${accentColor}55` }}
+            style={borderStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = accentColor)}
             onBlur={(e) => (e.currentTarget.style.borderColor = `${accentColor}55`)}
             aria-label="Birth day"
+            autoComplete="bday-day"
           />
         </div>
         <div className="flex flex-col">
           <span className="text-[9px] uppercase tracking-[3px] text-muted-foreground mb-1 font-mono">Year</span>
           <input
-            ref={yearRef}
+            id="bday-year"
             type="text"
             inputMode="numeric"
             pattern="[0-9]*"
             placeholder="YYYY"
             maxLength={4}
-            defaultValue={parsed.y}
+            value={y}
             onChange={handleYear}
-            onKeyDown={handleBackspace(dayRef)}
+            onKeyDown={handleKey('bday-day')}
             className={cellClass}
-            style={{ borderColor: `${accentColor}55` }}
+            style={borderStyle}
             onFocus={(e) => (e.currentTarget.style.borderColor = accentColor)}
             onBlur={(e) => (e.currentTarget.style.borderColor = `${accentColor}55`)}
             aria-label="Birth year"
+            autoComplete="bday-year"
           />
         </div>
       </div>
