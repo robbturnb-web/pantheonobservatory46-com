@@ -168,20 +168,20 @@ export function ObservatoryMapPage() {
                 aria-pressed={on}
                 className={`text-left p-3 rounded-lg border transition backdrop-blur ${
                   on
-                    ? `border-${l.accent}/60 bg-${l.accent}/5`
+                    ? `${l.classes.border} ${l.classes.bg}`
                     : 'border-primary/15 bg-card/40 hover:border-primary/30'
                 }`}
               >
                 <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-mono flex items-center gap-2">
                   <span
                     className={`w-1.5 h-1.5 rounded-full ${
-                      on ? `bg-${l.accent} animate-pulse` : 'bg-muted-foreground/40'
+                      on ? `${l.classes.dot} animate-pulse` : 'bg-muted-foreground/40'
                     }`}
                   />
                   {on ? l.sublabel : 'Disabled'}
                 </p>
                 <p className="text-sm text-foreground mt-1 flex items-center gap-2">
-                  <Icon className={`w-3.5 h-3.5 ${on ? `text-${l.accent}` : 'text-muted-foreground/60'}`} />
+                  <Icon className={`w-3.5 h-3.5 ${on ? l.classes.text : 'text-muted-foreground/60'}`} />
                   {l.label}
                   {on && count !== null && (
                     <span className="text-muted-foreground font-mono text-xs">· {count}</span>
