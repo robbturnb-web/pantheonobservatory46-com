@@ -429,6 +429,134 @@ export async function fetchSwpcAlerts(): Promise<LiveResult<SwpcAlert[]>> {
   }
 }
 
+/* ─────────── ISS live position (Where The ISS At?) ─────────── */
+const ISS_SOURCE = {
+  label: 'Where The ISS At? · Live ISS Telemetry',
+  url: 'https://wheretheiss.at/',
+};
+export interface IssReading {
+  latitude: number;
+  longitude: number;
+  altitudeKm: number;
+  velocityKmH: number;
+  visibility: string;
+  observedAt: string; // ISO
+}
+export async function fetchISS(): Promise<LiveResult<IssReading>> {
+  const fetchedAt = new Date().toISOString();
+  try {
+    const r = await fetch('https://api.wheretheiss.at/v1/satellites/25544', { cache: 'no-store' });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const json = await r.json();
+    if (!Number.isFinite(json?.latitude)) throw new Error('no telemetry');
+    return {
+      ok: true,
+      source: ISS_SOURCE,
+      fetchedAt,
+      value: {
+        latitude: Number(json.latitude),
+        longitude: Number(json.longitude),
+        altitudeKm: Number(json.altitude),
+        velocityKmH: Number(json.velocity),
+        visibility: String(json.visibility ?? 'unknown'),
+        observedAt: new Date((Number(json.timestamp) || Date.now() / 1000) * 1000).toISOString(),
+      },
+    };
+  } catch (e: any) {
+    return { ok: false, source: ISS_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  }
+}
+
+/* ─────────── Lunar calendar (next 4 principal phases, computed) ─────────── */
+const LUNAR_CAL_SOURCE = {
+  label: 'Computed · Synodic Cycle (NASA reference epoch)',
+  url: 'https://svs.gsfc.nasa.gov/Gallery/moonphase.html',
+};
+export interface LunarPhaseEvent {
+  phase: 'New Moon' | 'First Quarter' | 'Full Moon' | 'Last Quarter';
+  iso: string;
+}
+export interface LunarCalendar {
+  current: MoonReading;
+  upcoming: LunarPhaseEvent[]; // next 4 principal phases, chronological
+}
+function nextPhaseAfter(date: Date, targetAge: number): Date {
+  // Solve: ((date+Δ - epoch) / day) mod SYNODIC == targetAge
+  const days = (date.getTime() - KNOWN_NEW_MOON) / 86_400_000;
+  const age = ((days % SYNODIC) + SYNODIC) % SYNODIC;
+  const delta = (targetAge - age + SYNODIC) % SYNODIC;
+  return new Date(date.getTime() + delta * 86_400_000);
+}
+export async function fetchLunarCalendar(): Promise<LiveResult<LunarCalendar>> {
+  const fetchedAt = new Date().toISOString();
+  const now = new Date();
+  const current = phaseAt(now);
+  const targets: { phase: LunarPhaseEvent['phase']; age: number }[] = [
+    { phase: 'New Moon', age: 0 },
+    { phase: 'First Quarter', age: SYNODIC * 0.25 },
+    { phase: 'Full Moon', age: SYNODIC * 0.5 },
+    { phase: 'Last Quarter', age: SYNODIC * 0.75 },
+  ];
+  const upcoming = targets
+    .map((t) => ({ phase: t.phase, iso: nextPhaseAfter(now, t.age).toISOString() }))
+    .sort((a, b) => new Date(a.iso).getTime() - new Date(b.iso).getTime());
+  return { ok: true, source: LUNAR_CAL_SOURCE, fetchedAt, value: { current, upcoming } };
+}
+
+/* ─────────── Meteor showers (IMO published calendar 2026) ─────────── */
+const METEOR_SOURCE = {
+  label: 'IMO · Published Annual Meteor Shower Calendar',
+  url: 'https://www.imo.net/files/meteor-shower/cal2026.pdf',
+};
+export interface MeteorShower {
+  code: string;
+  name: string;
+  peakIso: string; // peak date (UTC midnight reference)
+  activeFrom: string;
+  activeTo: string;
+  zhr: number; // zenithal hourly rate at peak
+  parent: string; // parent body
+}
+// Source: International Meteor Organization 2026 calendar (imo.net). ZHR is
+// the published estimate, not a live measurement.
+const METEOR_SHOWERS_2026: MeteorShower[] = [
+  { code: 'QUA', name: 'Quadrantids',          peakIso: '2026-01-03', activeFrom: '2025-12-26', activeTo: '2026-01-12', zhr: 120, parent: '2003 EH1' },
+  { code: 'LYR', name: 'Lyrids',               peakIso: '2026-04-22', activeFrom: '2026-04-14', activeTo: '2026-04-30', zhr: 18,  parent: 'C/1861 G1 Thatcher' },
+  { code: 'ETA', name: 'Eta Aquariids',        peakIso: '2026-05-06', activeFrom: '2026-04-19', activeTo: '2026-05-28', zhr: 50,  parent: '1P/Halley' },
+  { code: 'SDA', name: 'Southern δ Aquariids', peakIso: '2026-07-30', activeFrom: '2026-07-12', activeTo: '2026-08-23', zhr: 25,  parent: '96P/Machholz' },
+  { code: 'PER', name: 'Perseids',             peakIso: '2026-08-12', activeFrom: '2026-07-17', activeTo: '2026-08-24', zhr: 100, parent: '109P/Swift-Tuttle' },
+  { code: 'DRA', name: 'Draconids',            peakIso: '2026-10-08', activeFrom: '2026-10-06', activeTo: '2026-10-10', zhr: 10,  parent: '21P/Giacobini-Zinner' },
+  { code: 'ORI', name: 'Orionids',             peakIso: '2026-10-21', activeFrom: '2026-10-02', activeTo: '2026-11-07', zhr: 20,  parent: '1P/Halley' },
+  { code: 'LEO', name: 'Leonids',              peakIso: '2026-11-17', activeFrom: '2026-11-06', activeTo: '2026-11-30', zhr: 15,  parent: '55P/Tempel-Tuttle' },
+  { code: 'GEM', name: 'Geminids',             peakIso: '2026-12-14', activeFrom: '2026-12-04', activeTo: '2026-12-20', zhr: 150, parent: '3200 Phaethon' },
+  { code: 'URS', name: 'Ursids',               peakIso: '2026-12-22', activeFrom: '2026-12-17', activeTo: '2026-12-26', zhr: 10,  parent: '8P/Tuttle' },
+];
+export interface MeteorSummary {
+  active: MeteorShower[];
+  upcoming: MeteorShower[];
+  next: MeteorShower | null;
+}
+export async function fetchMeteorShowers(): Promise<LiveResult<MeteorSummary>> {
+  const fetchedAt = new Date().toISOString();
+  const now = Date.now();
+  const active = METEOR_SHOWERS_2026.filter((s) => {
+    const a = Date.parse(s.activeFrom);
+    const b = Date.parse(s.activeTo) + 86_400_000;
+    return now >= a && now <= b;
+  });
+  const upcoming = METEOR_SHOWERS_2026
+    .filter((s) => Date.parse(s.peakIso) >= now)
+    .sort((a, b) => Date.parse(a.peakIso) - Date.parse(b.peakIso))
+    .slice(0, 5);
+  return {
+    ok: true,
+    source: METEOR_SOURCE,
+    fetchedAt,
+    value: { active, upcoming, next: upcoming[0] ?? null },
+  };
+}
+
+
 /* ─────────── helpers ─────────── */
 export function timeAgo(iso: string): string {
   const d = (Date.now() - new Date(iso).getTime()) / 1000;
