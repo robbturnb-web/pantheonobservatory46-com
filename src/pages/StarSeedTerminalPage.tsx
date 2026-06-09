@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { toast } from 'sonner';
 import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle, Save, CheckCircle2, Orbit, Satellite } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { classifyStarSeed, type NatalChart, type ZodiacSign } from '@/lib/star-seed-classifier';
@@ -103,14 +104,19 @@ export function StarSeedTerminalPage() {
       setPhase('revealed');
 
       setSaveStatus('saving');
+      const saveToast = toast.loading('Archiving star-seed to your observer file…');
       const saved = await saveStarSeed(classification.seed);
       console.log('[StarSeed] save result', saved);
+      toast.dismiss(saveToast);
       if (saved === 'saved') {
+        toast.success('Star-seed saved to your observer file.');
         setSavedSeed(classification.seed);
         setSaveStatus('saved');
       } else if (saved === 'guest') {
+        toast('Sign in to permanently save your star-seed.', { icon: <Orbit className="w-4 h-4" /> });
         setSaveStatus('guest');
       } else {
+        toast.error('Could not save star-seed. Please try again.');
         setSaveStatus('idle');
       }
 
