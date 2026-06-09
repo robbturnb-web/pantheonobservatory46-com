@@ -56,6 +56,8 @@ const BrazilPage = lazy(() => import('./pages/BrazilPage').then(m => ({ default:
 const JWSTPage = lazy(() => import('./pages/JWSTPage').then(m => ({ default: m.JWSTPage })));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const CodexPage = lazy(() => import('./pages/CodexPage'));
+const SearchPage = lazy(() => import('./pages/SearchPage').then(m => ({ default: m.SearchPage })));
+
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
 function RouteLoader() {
@@ -124,10 +126,12 @@ export default function App() {
               <Route path="/jeremy-corbell" element={<JeremyCorbellPage />} />
               <Route path="/brazil" element={<BrazilPage />} />
               <Route path="/jwst" element={<JWSTPage />} />
+              <Route path="/search" element={<SearchPage />} />
               <Route path="/community" element={<Navigate to="/echoverse" replace />} />
               <Route path="/index" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />
             </Route>
+
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
           </Routes>

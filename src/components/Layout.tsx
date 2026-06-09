@@ -12,6 +12,8 @@ import { Walkthrough } from './Walkthrough';
 import { ErrorBoundary } from './ErrorBoundary';
 import { AudioPlayer } from './AudioPlayer';
 import { useEchoXp } from '@/hooks/use-echo-xp';
+import { SearchProvider } from './search/SearchProvider';
+
 
 const pageVariants = {
   initial: { opacity: 0, y: 20, scale: 0.98, filter: 'blur(8px)' },
