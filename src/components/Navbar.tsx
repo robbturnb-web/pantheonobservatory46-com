@@ -55,6 +55,7 @@ const categories: NavCategory[] = [
       { to: '/uap', label: 'UAP Catalog' },
       { to: '/aaro', label: 'AARO Watch' },
       { to: '/crash-retrieval', label: 'Crash Retrieval' },
+      { to: '/legislation', label: 'Legislation Tracker' },
       { to: '/black-programs', label: 'Black Programs' },
       { to: '/timeline', label: 'Disclosure Timeline' },
       { to: '/whistleblowers', label: 'Whistleblower Vault' },
