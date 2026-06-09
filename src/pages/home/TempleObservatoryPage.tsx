@@ -24,6 +24,15 @@ import portalEcho from '@/assets/temple/portal-echo.jpg';
 import sigil46 from '@/assets/temple/sigil-46.png';
 
 import { gods } from '@/data/gods';
+import {
+  useEarthquakes,
+  useKp,
+  useFlare,
+  useSolarWind,
+  useMoon,
+} from '@/hooks/use-live-data';
+import { LiveDataFooter } from '@/components/live/LiveDataFooter';
+import { timeAgo } from '@/lib/live-data';
 
 /* ─────────────────────────────────────────────────────────────────
  * PANTHEON FREQUENCY 46 — Temple Observatory home.
