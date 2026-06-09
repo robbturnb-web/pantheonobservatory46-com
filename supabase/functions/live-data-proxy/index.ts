@@ -22,7 +22,7 @@ const SOURCES: Record<string, SourceFn> = {
   alerts: () => ({ url: 'https://services.swpc.noaa.gov/products/alerts.json' }),
   iss: () => ({ url: 'https://api.wheretheiss.at/v1/satellites/25544' }),
   nws: () => ({
-    url: 'https://api.weather.gov/alerts/active?status=actual&severity=Severe,Extreme&limit=200',
+    url: 'https://api.weather.gov/alerts/active?status=actual&severity=Severe,Extreme',
     headers: { Accept: 'application/geo+json', 'User-Agent': 'Pantheon Observatory (pantheonobservatory46.com)' },
   }),
   marine: (p) => {
