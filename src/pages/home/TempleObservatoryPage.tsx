@@ -602,29 +602,10 @@ function ActivityPanels() {
   );
 }
 
-function Stat({ label, value, delta, sub }: { label: string; value: string; delta: string; sub: string }) {
-  return (
-    <div className="rounded-lg border border-emerald-400/20 bg-emerald-500/5 p-3">
-      <div className="text-[9px] uppercase tracking-[2px] text-emerald-200/70 mb-1">{label}</div>
-      <div className="flex items-baseline gap-2">
-        <span className="text-2xl font-black text-emerald-300">{value}</span>
-        <span className="text-[10px] font-bold text-emerald-400">{delta}</span>
-      </div>
-      <div className="text-[9px] uppercase tracking-[2px] text-white/40 mt-0.5">{sub}</div>
-    </div>
-  );
-}
+// Stat and CorrelationRow components were removed in the Phase 1 data-integrity
+// pass — they templated fabricated deltas and grade rows that no longer appear
+// on the dashboard. All current panels render only verified live values.
 
-function CorrelationRow({ grade, text }: { grade: string; text: string }) {
-  return (
-    <div className="flex items-start gap-2 py-1">
-      <span className="shrink-0 mt-0.5 text-[8.5px] font-bold px-1.5 py-0.5 rounded-sm bg-amber-500/20 text-amber-300 border border-amber-500/40 tracking-[1px]">
-        {grade}
-      </span>
-      <span className="text-[11px] text-white/75 leading-snug">{text}</span>
-    </div>
-  );
-}
 
 function Sparkline({ data, color }: { data: number[]; color: string }) {
   const max = Math.max(...data);
