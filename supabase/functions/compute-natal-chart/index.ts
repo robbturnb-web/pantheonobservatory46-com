@@ -184,7 +184,20 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
-    const { date, time, lat, lon, tzOffsetMinutes } = parsed.data;
+    const { date, time, city, lookupOnly } = parsed.data;
+    const place = city ? await resolveBirthPlace(city) : null;
+    if (lookupOnly && place) {
+      return new Response(JSON.stringify({ place }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      });
+    }
+
+    const lat = place?.latitude ?? parsed.data.lat!;
+    const lon = place?.longitude ?? parsed.data.lon!;
+    const tzOffsetMinutes = place
+      ? await resolveTimezoneOffsetMinutes(place, date)
+      : parsed.data.tzOffsetMinutes!;
 
     // Compose the birth moment as a UTC Date.
     const [year, month, day] = date.split("-").map(Number);
@@ -214,7 +227,7 @@ serve(async (req) => {
       utc: birth.toISOString(),
     };
 
-    return new Response(JSON.stringify({ chart }), {
+    return new Response(JSON.stringify({ chart, ...(place ? { place } : {}) }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
