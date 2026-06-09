@@ -1,5 +1,6 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { SEO } from '@/components/SEO';
+import { EarthquakeLayer } from '@/components/observatory/EarthquakeLayer';
 
 const ObservatoryGlobe = lazy(() =>
   import('@/components/observatory/ObservatoryGlobe').then(m => ({
@@ -8,6 +9,9 @@ const ObservatoryGlobe = lazy(() =>
 );
 
 export function ObservatoryMapPage() {
+  const [seismicOn, setSeismicOn] = useState(true);
+  const [quakeCount, setQuakeCount] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
@@ -26,8 +30,8 @@ export function ObservatoryMapPage() {
           Pantheon Observatory <span className="text-realm-observatory">Globe</span>
         </h1>
         <p className="text-muted-foreground max-w-2xl mb-8">
-          The living planetary view. Data layers — seismic, solar, ISS, UAP, ancient
-          sites, ley lines — activate in upcoming phases. This shell is the canvas.
+          The living planetary view. Seismic layer is live — solar, ISS, UAP, and
+          ancient sites activate in upcoming phases.
         </p>
 
         <Suspense
@@ -42,12 +46,35 @@ export function ObservatoryMapPage() {
             </div>
           }
         >
-          <ObservatoryGlobe className="relative w-full h-[70vh] min-h-[520px] rounded-2xl overflow-hidden border border-realm-observatory/30 bg-[#05030D] shadow-[0_0_60px_-15px_hsl(var(--primary)/0.4)]" />
+          <ObservatoryGlobe className="relative w-full h-[70vh] min-h-[520px] rounded-2xl overflow-hidden border border-realm-observatory/30 bg-[#05030D] shadow-[0_0_60px_-15px_hsl(var(--primary)/0.4)]">
+            {seismicOn && <EarthquakeLayer onCount={setQuakeCount} />}
+          </ObservatoryGlobe>
         </Suspense>
 
         <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+          <button
+            onClick={() => setSeismicOn(s => !s)}
+            className={`text-left p-3 rounded-lg border transition ${
+              seismicOn
+                ? 'border-signal-online/50 bg-signal-online/5'
+                : 'border-primary/15 bg-card/40 hover:border-primary/30'
+            } backdrop-blur`}
+          >
+            <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-mono flex items-center gap-2">
+              <span
+                className={`w-1.5 h-1.5 rounded-full ${
+                  seismicOn ? 'bg-signal-online animate-pulse' : 'bg-muted-foreground/40'
+                }`}
+              />
+              {seismicOn ? 'Live · M4.5+ · 7d' : 'Disabled'}
+            </p>
+            <p className="text-sm text-foreground mt-1">
+              Seismic Layer {quakeCount !== null && seismicOn && (
+                <span className="text-muted-foreground font-mono text-xs">· {quakeCount}</span>
+              )}
+            </p>
+          </button>
           {[
-            { label: 'Seismic Layer', status: 'Phase 3.1' },
             { label: 'Solar Storms', status: 'Phase 3.2' },
             { label: 'ISS Trace', status: 'Phase 3.3' },
             { label: 'Ancient Sites', status: 'Phase 3.4' },
@@ -62,6 +89,23 @@ export function ObservatoryMapPage() {
               <p className="text-sm text-foreground mt-1">{l.label}</p>
             </div>
           ))}
+        </div>
+
+        {/* Magnitude legend */}
+        <div className="mt-4 flex flex-wrap items-center gap-4 text-[10px] uppercase tracking-[0.18em] font-mono text-muted-foreground">
+          <span>Magnitude</span>
+          {[
+            { c: '#22D3EE', l: 'M4.5–5' },
+            { c: '#F59E0B', l: 'M5–6' },
+            { c: '#F97316', l: 'M6–7' },
+            { c: '#DC2626', l: 'M7+' },
+          ].map(s => (
+            <span key={s.l} className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full" style={{ background: s.c }} />
+              {s.l}
+            </span>
+          ))}
+          <span className="ml-auto">Source · USGS</span>
         </div>
       </section>
     </div>
