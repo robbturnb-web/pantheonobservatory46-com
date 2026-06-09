@@ -25,12 +25,24 @@ const BodySchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "date must be YYYY-MM-DD"),
   /** 24h time HH:MM (local at birthplace) */
   time: z.string().regex(/^\d{2}:\d{2}$/, "time must be HH:MM"),
+  /** Birth city, resolved server-side to avoid browser/network blocking. */
+  city: z.string().trim().min(2).max(120).optional(),
+  lookupOnly: z.boolean().optional(),
   /** Latitude in degrees, -90..90 */
-  lat: z.number().min(-90).max(90),
+  lat: z.number().min(-90).max(90).optional(),
   /** Longitude in degrees, -180..180 */
-  lon: z.number().min(-180).max(180),
+  lon: z.number().min(-180).max(180).optional(),
   /** Timezone offset in minutes from UTC (e.g. -300 for EST). */
-  tzOffsetMinutes: z.number().int().min(-14 * 60).max(14 * 60),
+  tzOffsetMinutes: z.number().int().min(-14 * 60).max(14 * 60).optional(),
+}).superRefine((value, ctx) => {
+  if (value.city) return;
+  if (typeof value.lat !== "number" || typeof value.lon !== "number" || typeof value.tzOffsetMinutes !== "number") {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Provide either city or lat/lon/tzOffsetMinutes",
+      path: ["city"],
+    });
+  }
 });
 
 const ZODIAC = [
@@ -45,6 +57,24 @@ interface PlanetPosition {
   degree: number;
 }
 
+interface BirthPlace {
+  name: string;
+  country: string;
+  latitude: number;
+  longitude: number;
+  timezone: string;
+}
+
+const FALLBACK_PLACES: Record<string, BirthPlace> = {
+  "los angeles": { name: "Los Angeles", country: "United States", latitude: 34.05223, longitude: -118.24368, timezone: "America/Los_Angeles" },
+  "new york": { name: "New York", country: "United States", latitude: 40.71427, longitude: -74.00597, timezone: "America/New_York" },
+  "miami": { name: "Miami", country: "United States", latitude: 25.77427, longitude: -80.19366, timezone: "America/New_York" },
+  "chicago": { name: "Chicago", country: "United States", latitude: 41.85003, longitude: -87.65005, timezone: "America/Chicago" },
+  "london": { name: "London", country: "United Kingdom", latitude: 51.50853, longitude: -0.12574, timezone: "Europe/London" },
+  "paris": { name: "Paris", country: "France", latitude: 48.85341, longitude: 2.3488, timezone: "Europe/Paris" },
+  "tokyo": { name: "Tokyo", country: "Japan", latitude: 35.6895, longitude: 139.69171, timezone: "Asia/Tokyo" },
+};
+
 function longitudeToSign(longitude: number): PlanetPosition {
   const normalized = ((longitude % 360) + 360) % 360;
   const signIndex = Math.floor(normalized / 30);
@@ -53,6 +83,53 @@ function longitudeToSign(longitude: number): PlanetPosition {
     sign: ZODIAC[signIndex],
     degree: normalized - signIndex * 30,
   };
+}
+
+function normalizeCity(city: string): string {
+  return city.trim().toLowerCase().replace(/,.*$/, "").replace(/\s+/g, " ");
+}
+
+async function resolveBirthPlace(city: string): Promise<BirthPlace> {
+  const normalized = normalizeCity(city);
+  const fallback = FALLBACK_PLACES[normalized];
+
+  try {
+    const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`;
+    const geoResp = await fetch(geoUrl);
+    if (!geoResp.ok) throw new Error("City lookup failed");
+    const geoJson = await geoResp.json();
+    const place = geoJson?.results?.[0];
+    if (place) {
+      return {
+        name: place.name,
+        country: place.country,
+        latitude: place.latitude,
+        longitude: place.longitude,
+        timezone: place.timezone,
+      };
+    }
+  } catch (err) {
+    console.warn("[compute-natal-chart] city lookup fallback", err instanceof Error ? err.message : err);
+  }
+
+  if (fallback) return fallback;
+  throw new Error(`Could not locate "${city}". Try the nearest major city.`);
+}
+
+async function resolveTimezoneOffsetMinutes(place: BirthPlace, date: string): Promise<number> {
+  try {
+    const tzUrl = `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&timezone=${encodeURIComponent(place.timezone)}&start_date=${date}&end_date=${date}&hourly=temperature_2m`;
+    const tzResp = await fetch(tzUrl);
+    if (!tzResp.ok) throw new Error("Timezone lookup failed");
+    const tzJson = await tzResp.json();
+    if (typeof tzJson?.utc_offset_seconds === "number") {
+      return Math.round(tzJson.utc_offset_seconds / 60);
+    }
+  } catch (err) {
+    console.warn("[compute-natal-chart] timezone fallback", err instanceof Error ? err.message : err);
+  }
+
+  return 0;
 }
 
 /**
@@ -107,7 +184,20 @@ serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
     }
-    const { date, time, lat, lon, tzOffsetMinutes } = parsed.data;
+    const { date, time, city, lookupOnly } = parsed.data;
+    const place = city ? await resolveBirthPlace(city) : null;
+    if (lookupOnly && place) {
+      return new Response(JSON.stringify({ place }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      });
+    }
+
+    const lat = place?.latitude ?? parsed.data.lat!;
+    const lon = place?.longitude ?? parsed.data.lon!;
+    const tzOffsetMinutes = place
+      ? await resolveTimezoneOffsetMinutes(place, date)
+      : parsed.data.tzOffsetMinutes!;
 
     // Compose the birth moment as a UTC Date.
     const [year, month, day] = date.split("-").map(Number);
@@ -137,7 +227,7 @@ serve(async (req) => {
       utc: birth.toISOString(),
     };
 
-    return new Response(JSON.stringify({ chart }), {
+    return new Response(JSON.stringify({ chart, ...(place ? { place } : {}) }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
       status: 200,
     });
