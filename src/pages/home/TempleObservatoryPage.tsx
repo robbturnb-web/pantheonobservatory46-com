@@ -950,17 +950,34 @@ function SdoLiveImagery({ utc }: { utc: Date }) {
 }
 
 /* ───────────── TRANSMISSIONS TICKER ───────────── */
-const TRANSMISSIONS = [
-  { icon: Flame,    color: 'text-[#ffd700]',   text: 'M2.4 solar flare · AR 3517 · 12 min ago' },
-  { icon: Eye,      color: 'text-emerald-300', text: 'UAP cluster · western US military range · high cred' },
-  { icon: Mountain, color: 'text-red-400',     text: 'M5.3 quake · Revilla Gigedo Islands · USGS' },
-  { icon: Waves,    color: 'text-cyan-300',    text: 'USO ping · Pacific coastal grid · 3 reports' },
-  { icon: Sparkles, color: 'text-[#c77dff]',   text: 'Codex 46 slot rotation queued · awaiting auth' },
-  { icon: Telescope,color: 'text-cyan-300',    text: 'JWST mid-IR pass · cluster IC 2944 archived' },
-  { icon: Activity, color: 'text-amber-300',   text: 'Schumann resonance spike · 7.83 → 8.21 Hz' },
-];
-
+interface TickerItem { icon: typeof Sun; color: string; text: string }
 function TransmissionsTicker() {
+  const flare = useFlare();
+  const kp = useKp();
+  const wind = useSolarWind();
+  const quakes = useEarthquakes();
+  const moon = useMoon();
+
+  const items: TickerItem[] = [];
+  if (flare.data?.ok && flare.data.value)
+    items.push({ icon: Flame, color: 'text-[#ffd700]', text: `Flare ${flare.data.value.class} · NOAA SWPC · ${timeAgo(flare.data.value.observedAt)}` });
+  if (kp.data?.ok && kp.data.value)
+    items.push({ icon: Activity, color: 'text-[#c77dff]', text: `Kp ${kp.data.value.kp.toFixed(1)} · ${kp.data.value.stormLevel} · NOAA SWPC` });
+  if (wind.data?.ok && wind.data.value)
+    items.push({ icon: Waves, color: 'text-cyan-300', text: `Solar wind ${Math.round(wind.data.value.speedKmS)} km/s · L1 · ${timeAgo(wind.data.value.observedAt)}` });
+  if (quakes.data?.ok && quakes.data.value?.highest) {
+    const h = quakes.data.value.highest;
+    items.push({ icon: Mountain, color: 'text-red-400', text: `M${h.mag.toFixed(1)} · ${h.place} · USGS · ${timeAgo(new Date(h.time).toISOString())}` });
+  }
+  if (quakes.data?.ok && quakes.data.value)
+    items.push({ icon: Mountain, color: 'text-red-300', text: `${quakes.data.value.count24h} earthquakes in last 24h · USGS` });
+  if (moon.data?.value)
+    items.push({ icon: Sparkles, color: 'text-cyan-200', text: `Moon · ${moon.data.value.phaseName} · ${Math.round(moon.data.value.illumination * 100)}% illuminated` });
+
+  const display = items.length > 0
+    ? items
+    : [{ icon: Radio, color: 'text-white/60', text: 'Connecting to live feeds…' } as TickerItem];
+
   return (
     <section className="relative border-y border-[#a020f0]/30 bg-black/80 backdrop-blur-xl overflow-hidden">
       <div className="flex items-center">
@@ -973,7 +990,7 @@ function TransmissionsTicker() {
         </div>
         <div className="flex-1 overflow-hidden py-2.5">
           <div className="flex gap-10 whitespace-nowrap animate-[ticker_60s_linear_infinite]">
-            {[...TRANSMISSIONS, ...TRANSMISSIONS].map((t, i) => (
+            {[...display, ...display].map((t, i) => (
               <span key={i} className="flex items-center gap-2 text-[11px] text-white/80">
                 <t.icon className={`w-3.5 h-3.5 ${t.color}`} />
                 <span>{t.text}</span>
