@@ -82,7 +82,7 @@ const MODAL_DATA: Record<string, ModalEntry> = {
     seeker:
       'A multi-body alignment focal point passes through Earth during the April 17–23 window. Researchers track gravitational and electromagnetic resonance across the inner planets.',
     oracle:
-      'Cross-referenced with Schumann amplitude spikes and Stefan Burns geomagnetic logs — three of the last four similar alignments coincided with measurable consciousness-field anomalies.',
+      'Pantheon does not assert a measured consciousness-field correlation. The dossier links peer observations (Schumann amplitude logs, geomagnetic Kp from NOAA SWPC) so you can compare alignment windows against the verified record yourself.',
     cta: { label: 'See planetary monitor', to: '/galaxy' },
     xpReason: 'Planetary geometry dossier opened',
   },
