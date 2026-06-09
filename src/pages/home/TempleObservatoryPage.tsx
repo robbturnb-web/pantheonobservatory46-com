@@ -630,43 +630,113 @@ function Sparkline({ data, color }: { data: number[]; color: string }) {
 }
 
 /* ───────────── LIVE COSMIC FEED 2x2 ───────────── */
-interface FeedCard { img: string; kind: string; tone: string; live: string; title: string; meta: string }
-const FEED_CARDS: FeedCard[] = [
-  { img: feedSolar, kind: 'Solar Storm',  tone: 'text-[#ffd700]',   live: 'M2.4',     title: 'Active region 3517 erupts', meta: 'GOES-16 · 14:25 UTC' },
-  { img: feedUap,   kind: 'UAP Sighting', tone: 'text-emerald-300', live: 'REPORTED', title: 'Jellyfish anomaly · Iraq',   meta: 'FLIR · declassified' },
-  { img: feedQuake, kind: 'Earthquake',   tone: 'text-red-400',     live: 'M5.3',     title: 'Revilla Gigedo Islands',     meta: 'USGS · 12 min ago' },
-  { img: portalEcho,kind: 'Echo Signal',  tone: 'text-cyan-300',    live: 'ONLINE',   title: 'Codex 46 transmission',      meta: 'AI cluster online' },
-];
-
 function LiveCosmicFeed({ utc }: { utc: Date }) {
+  const flare = useFlare();
+  const wind = useSolarWind();
+  const quakes = useEarthquakes();
+  const moon = useMoon();
+
+  const cards = [
+    {
+      key: 'solar',
+      img: feedSolar,
+      kind: 'Solar X-ray Flux',
+      tone: 'text-[#ffd700]',
+      value: flare.data?.value?.class ?? (flare.loading ? '…' : 'N/A'),
+      title: flare.data?.ok
+        ? `Current GOES short-channel class · ${flare.data.value!.class}`
+        : flare.loading
+          ? 'Connecting to NOAA SWPC…'
+          : 'Source unavailable',
+      footer: flare.data,
+      onRefresh: flare.refresh,
+      ok: flare.data?.ok ?? false,
+      loading: flare.loading,
+    },
+    {
+      key: 'wind',
+      img: feedSolar,
+      kind: 'Solar Wind',
+      tone: 'text-[#c77dff]',
+      value: wind.data?.ok ? `${Math.round(wind.data.value!.speedKmS)} km/s` : (wind.loading ? '…' : 'N/A'),
+      title: wind.data?.ok
+        ? `Speed at L1 · observed ${timeAgo(wind.data.value!.observedAt)}`
+        : wind.loading
+          ? 'Connecting to NOAA SWPC…'
+          : 'Source unavailable',
+      footer: wind.data,
+      onRefresh: wind.refresh,
+      ok: wind.data?.ok ?? false,
+      loading: wind.loading,
+    },
+    {
+      key: 'quake',
+      img: feedQuake,
+      kind: 'Strongest Quake · 24h',
+      tone: 'text-red-400',
+      value: quakes.data?.value?.highest ? `M${quakes.data.value.highest.mag.toFixed(1)}` : (quakes.loading ? '…' : 'N/A'),
+      title: quakes.data?.value?.highest
+        ? quakes.data.value.highest.place
+        : quakes.loading
+          ? 'Connecting to USGS…'
+          : 'Source unavailable',
+      footer: quakes.data,
+      onRefresh: quakes.refresh,
+      ok: quakes.data?.ok ?? false,
+      loading: quakes.loading,
+    },
+    {
+      key: 'moon',
+      img: portalEcho,
+      kind: 'Moon Phase',
+      tone: 'text-cyan-300',
+      value: moon.data?.value
+        ? `${Math.round(moon.data.value.illumination * 100)}%`
+        : '…',
+      title: moon.data?.value
+        ? `${moon.data.value.phaseName} · next full ${new Date(moon.data.value.nextFullMoon).toUTCString().slice(5, 16)}`
+        : 'Computing phase…',
+      footer: moon.data,
+      onRefresh: moon.refresh,
+      ok: moon.data?.ok ?? false,
+      loading: moon.loading,
+    },
+  ];
+
   return (
     <section className="relative px-4 sm:px-8 pb-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading icon={Radio} label="Live Cosmic Feed" sub="Real-time signal across all four watch domains" />
+        <SectionHeading icon={Radio} label="Live Cosmic Feed" sub="Real APIs only · NOAA · USGS · synodic cycle" />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {FEED_CARDS.map((c, i) => (
+          {cards.map((c, i) => (
             <motion.article
-              key={c.kind}
+              key={c.key}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 + i * 0.08 }}
               className="group relative rounded-xl overflow-hidden border border-white/10 bg-black/60 backdrop-blur-xl hover:border-[#a020f0]/50 transition-colors"
             >
               <div className="relative h-36 overflow-hidden">
-                <img src={c.img} alt={c.title} loading="lazy" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[1.4s]" />
+                <img src={c.img} alt={c.kind} loading="lazy" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[1.4s]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                {/* Kind tag (top-left, replaces decorative LIVE badge) */}
                 <div className="absolute top-2 left-2 px-2 py-0.5 rounded-sm bg-black/80 backdrop-blur text-[9px] uppercase tracking-[2px] text-white/85 border border-white/15 font-bold">
                   {c.kind}
                 </div>
-                {/* Big value bottom-right */}
                 <div className={`absolute bottom-2 right-3 text-2xl font-black ${c.tone}`} style={{ textShadow: '0 0 12px currentColor' }}>
-                  {c.live}
+                  {c.value}
                 </div>
               </div>
               <div className="p-3.5">
-                <h3 className="text-sm font-bold text-white leading-tight">{c.title}</h3>
-                <div className="text-[10px] uppercase tracking-[2px] text-white/45 mt-1.5 font-mono">{c.meta}</div>
+                <h3 className="text-sm font-bold text-white leading-tight line-clamp-2">{c.title}</h3>
+                <LiveDataFooter
+                  source={c.footer?.source ?? null}
+                  fetchedAt={c.footer?.fetchedAt}
+                  ok={c.ok}
+                  error={c.footer?.error}
+                  loading={c.loading}
+                  onRefresh={c.onRefresh}
+                  compact
+                />
               </div>
             </motion.article>
           ))}
