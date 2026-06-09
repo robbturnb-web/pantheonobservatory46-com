@@ -1,0 +1,73 @@
+# Pantheon Observatory
+
+> A cinematic cosmic operating system — a living archive of UAP cases, whistleblower testimony, ancient mythology, consciousness research, and disclosure. Includes Echo, an AI thinking partner, and a sitewide search across every dossier.
+
+Pantheon Observatory ("Pantheon Frequency 46") is a curated, evidence-graded archive. Every dossier separates the verified record from the contested claims and lists primary sources. Realms include Disclosure / UAP, Cosmos, Consciousness, Mythology, Earth & Ancient, Echo AI, and the Observatory itself.
+
+## Pages
+
+- [Home](/): Temple Observatory — live solar weather, Earth + anomalous activity, the 12-god compass.
+- [Search](/search): Sitewide search across every dossier, expert, and finding.
+- [Echo AI](/echo): Conversational AI partner trained on the Pantheon archive.
+- [The 46](/the-46): Vault of flagship drops, defiance modules, and skeptic spotlights.
+- [Codex](/codex): Master index of realms and dossiers.
+
+## Disclosure & UAP
+
+- [UAP Cases](/uap): Verified UAP encounters — Nimitz, Gimbal, Aguadilla, and more.
+- [Whistleblower Vault](/whistleblowers): Testimony archive with evidence grades and suspicious-death tracking.
+- [AARO Watch](/aaro): Pentagon's All-domain Anomaly Resolution Office — filings, leadership, public record.
+- [Crash Retrieval](/crash-retrieval): Alleged recovered craft and biologics — claim, counterweight, status.
+- [Black Programs](/black-programs): Compartmentalized aerospace and SAP history.
+- [Underground Bases](/underground): DUMBs and the verified vs. claimed record.
+- [Entity Encounters](/encounters): Witness testimony of non-human intelligences.
+- [Missing Scientists](/missing): Unexplained deaths in physics, biotech, and aerospace.
+- [Orb Report](/orb-report): The orb phenomenon — sightings, footage, analysis.
+- [Brazil Wave](/brazil): Operation Saucer, Colares, and the Brazilian UAP record.
+- [Jeremy Corbell](/corbell): Investigative journalist dossier and releases.
+- [Documentaries](/documentaries): Curated long-form films.
+
+## Cosmos & Observatory
+
+- [Galaxy Explorer](/galaxy): Interactive solar system with live solar flares.
+- [Telescopes](/telescopes): JWST, Hubble, ground arrays — capabilities and live feeds.
+- [JWST](/jwst): Daily findings, deep-field hero, instruments deep-dive.
+- [Galactic Federation](/federation): Alleged interstellar councils — claim vs. counterweight.
+- [Species Codex](/species): Reported non-human intelligences.
+- [Extinct Species](/extinct): Megafauna and lost biological lineages.
+- [Star Seed Terminal](/star-seed): Natal-chart archetype classifier.
+
+## Consciousness & Mythology
+
+- [Gods](/gods): Cross-pantheon archive of deities and their primary myths.
+- [Shadow Pantheon](/shadow-pantheon): Adversarial and chthonic figures.
+- [Consciousness](/consciousness): Gateway Process, OBEs, NDEs, remote viewing.
+- [Frequencies](/frequencies): Solfeggio, Schumann resonance, and the audio research record.
+- [Signals](/signals): SETI candidates, WOW! signal, fast radio bursts.
+- [Origin Chamber](/origin): Cosmogony and human origin theories.
+
+## Earth & Ancient
+
+- [Timeline](/timeline): Master timeline of disclosure events and anomalies.
+- [Earth Pulse](/earth-pulse): Live geomagnetic and seismic activity.
+- [Pyramids](/pyramids): Engineering, alignment, and the open questions.
+- [Antarctica](/antarctica): Operation Highjump, Lake Vostok, and unexplained deaths.
+- [Atlantis](/atlantis): Plato's account and candidate submerged sites.
+- [Stone Faces](/stone-faces): Megalithic sculpture across continents.
+- [Glyphs](/glyphs): Twelve scripts from cuneiform to crop circles.
+- [Elements Lab](/elements): Periodic table interactive and exotic-element research.
+- [CERN](/cern): LHC physics, Mandela Effect folklore, and the FCC roadmap.
+- [Rubik's Cube](/rubiks-cube): Symbolism, math, and culture dossier.
+- [Builders Arena](/builders): Engineering analysis of impossible builds.
+
+## People & Community
+
+- [Experts Index](/experts): Researchers, physicists, and disclosure figures.
+- [Stefan Burns](/experts/stefan-burns): Geophysicist and UAP researcher.
+- [Echoverse](/echoverse): Community channels and testimony feed.
+
+## Optional
+
+- [Sanctuary · 46](/46): Manifesto, numerology codex, oracle console.
+- [Video Vault](/video-vault): Long-form video archive.
+- [Style Guide](/style-guide): Living design-token reference.

@@ -65,6 +65,7 @@ const entries: SitemapEntry[] = [
   // Community & people
   { path: "/builders", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/experts", changefreq: "weekly", priority: "0.7", lastmod: today },
+  { path: "/experts/stefan-burns", changefreq: "monthly", priority: "0.5", lastmod: today },
   // Search & other
   { path: "/search", changefreq: "weekly", priority: "0.5", lastmod: today },
   { path: "/video-vault", changefreq: "weekly", priority: "0.6", lastmod: today },
