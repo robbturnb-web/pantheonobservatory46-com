@@ -15,6 +15,9 @@ import {
   fetchFlareEvents,
   fetchGSTs,
   fetchSwpcAlerts,
+  fetchISS,
+  fetchLunarCalendar,
+  fetchMeteorShowers,
   type LiveResult,
   type QuakeSummary,
   type KpReading,
@@ -26,6 +29,9 @@ import {
   type FlareEventSummary,
   type GstSummary,
   type SwpcAlert,
+  type IssReading,
+  type LunarCalendar,
+  type MeteorSummary,
 } from '@/lib/live-data';
 
 interface State<T> {
