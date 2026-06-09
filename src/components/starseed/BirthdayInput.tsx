@@ -12,7 +12,9 @@ export interface BirthdayInputProps {
   onChange: (iso: string) => void;
   accentColor?: string;
   error?: string;
+  disabled?: boolean;
 }
+
 
 function isValidDate(y: number, m: number, d: number): boolean {
   if (!Number.isFinite(y) || !Number.isFinite(m) || !Number.isFinite(d)) return false;
@@ -33,7 +35,7 @@ function digits(s: string, max: number) {
   return s.replace(/\D/g, '').slice(0, max);
 }
 
-export function BirthdayInput({ value, onChange, accentColor = '#22d3ee', error }: BirthdayInputProps) {
+export function BirthdayInput({ value, onChange, accentColor = '#22d3ee', error, disabled }: BirthdayInputProps) {
   const initial = parseIso(value);
   const [m, setM] = useState(initial.m);
   const [d, setD] = useState(initial.d);
@@ -131,6 +133,7 @@ export function BirthdayInput({ value, onChange, accentColor = '#22d3ee', error 
             onBlur={(e) => (e.currentTarget.style.borderColor = `${accentColor}55`)}
             aria-label="Birth month"
             autoComplete="bday-month"
+            disabled={disabled}
           />
         </div>
         <div className="flex flex-col">
@@ -151,6 +154,7 @@ export function BirthdayInput({ value, onChange, accentColor = '#22d3ee', error 
             onBlur={(e) => (e.currentTarget.style.borderColor = `${accentColor}55`)}
             aria-label="Birth day"
             autoComplete="bday-day"
+            disabled={disabled}
           />
         </div>
         <div className="flex flex-col">
@@ -171,6 +175,7 @@ export function BirthdayInput({ value, onChange, accentColor = '#22d3ee', error 
             onBlur={(e) => (e.currentTarget.style.borderColor = `${accentColor}55`)}
             aria-label="Birth year"
             autoComplete="bday-year"
+            disabled={disabled}
           />
         </div>
       </div>

@@ -277,6 +277,7 @@ export function StarSeedTerminalPage() {
                       {...form.register('name')}
                       placeholder="Your name"
                       className="hud-input"
+                      disabled={form.formState.isSubmitting}
                     />
                   </Field>
 
@@ -285,7 +286,7 @@ export function StarSeedTerminalPage() {
                       control={form.control}
                       name="date"
                       render={({ field }) => (
-                        <BirthdayInput value={field.value} onChange={field.onChange} />
+                        <BirthdayInput value={field.value} onChange={field.onChange} disabled={form.formState.isSubmitting} />
                       )}
                     />
                   </Field>
@@ -295,6 +296,7 @@ export function StarSeedTerminalPage() {
                       type="time"
                       {...form.register('time')}
                       className="hud-input"
+                      disabled={form.formState.isSubmitting}
                     />
                   </Field>
 
@@ -308,15 +310,21 @@ export function StarSeedTerminalPage() {
                       {...form.register('city')}
                       placeholder="e.g. Los Angeles"
                       className="hud-input"
+                      disabled={form.formState.isSubmitting}
                     />
                   </Field>
 
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[3px] hover:bg-primary/90 transition-colors mt-2"
+                    disabled={form.formState.isSubmitting}
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-primary text-primary-foreground text-sm font-bold uppercase tracking-[3px] hover:bg-primary/90 transition-colors mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <Radar className="w-4 h-4" />
-                    Initiate Scan
+                    {form.formState.isSubmitting ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Radar className="w-4 h-4" />
+                    )}
+                    {form.formState.isSubmitting ? 'Scanning…' : 'Initiate Scan'}
                   </button>
                 </motion.form>
               )}
@@ -532,7 +540,8 @@ export function StarSeedTerminalPage() {
 
                   <button
                     onClick={reset}
-                    className="mt-6 text-xs uppercase tracking-[3px] text-muted-foreground hover:text-foreground transition-colors"
+                    disabled={saveStatus === 'saving'}
+                    className="mt-6 text-xs uppercase tracking-[3px] text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     ← Scan Another Subject
                   </button>
