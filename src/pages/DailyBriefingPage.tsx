@@ -124,9 +124,8 @@ export function DailyBriefingPage() {
           tone,
           title: `M${mag.toFixed(1)} — ${top.place ?? 'Unknown region'}`,
           body: `Largest event in the last 24 h. ${v.count24h} earthquakes total ≥ M2.5.`,
-          meta: `Depth ${top.depthKm?.toFixed(0) ?? '—'} km`,
           href: '/observatory',
-          timestamp: top.timeIso ?? eq.data.fetchedAt,
+          timestamp: top.time ? new Date(top.time).toISOString() : eq.data.fetchedAt,
           icon: Waves,
         });
       }
