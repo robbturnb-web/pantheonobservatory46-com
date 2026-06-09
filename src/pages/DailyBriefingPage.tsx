@@ -6,12 +6,12 @@
  * AARO lineage) into a single dated snapshot a visitor can open every
  * morning. Pure client composition — no new edge function.
  */
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Activity, AlertTriangle, Radio, Sun, Waves, Wind, Satellite,
   Gavel, ScrollText, FileText, Building2, Users, Radar,
-  Cloud, RefreshCw, ChevronRight, CalendarDays,
+  Cloud, RefreshCw, ChevronRight, CalendarDays, Download,
 } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import {
