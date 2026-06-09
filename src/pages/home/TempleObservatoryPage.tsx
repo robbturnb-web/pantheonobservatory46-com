@@ -62,7 +62,7 @@ const TABS: { to: string; label: string }[] = [
   { to: '/echo',          label: 'Echo AI' },
 ];
 
-function TopNav({ kp }: { kp: number }) {
+function TopNav({ kp }: { kp: number | null }) {
   const { pathname } = useLocation();
   return (
     <header className="sticky top-0 z-40 border-b border-[#a020f0]/30 bg-[#0a0a1f]/85 backdrop-blur-xl">
