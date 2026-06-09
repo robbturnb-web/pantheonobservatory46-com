@@ -5,6 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { toast } from 'sonner';
+import { Loader2, Radar, ArrowLeft, Sparkles, AlertTriangle, Save, CheckCircle2, Orbit, Satellite } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { classifyStarSeed, type NatalChart, type ZodiacSign } from '@/lib/star-seed-classifier';
 import { starSeeds, type StarSeedId } from '@/data/star-seeds';
