@@ -343,12 +343,17 @@ export function EarthPulsePage() {
 
             {/* Curated pulse updates */}
             <section aria-labelledby="updates-heading" className="space-y-4">
-              <h2
-                id="updates-heading"
-                className="text-sm font-semibold uppercase tracking-[0.25em] text-accent-neon"
-              >
-                Curated field updates
-              </h2>
+              <div className="flex items-baseline justify-between gap-3 flex-wrap">
+                <h2
+                  id="updates-heading"
+                  className="text-sm font-semibold uppercase tracking-[0.25em] text-accent-neon"
+                >
+                  Curated field updates
+                </h2>
+                <span className="text-[10px] uppercase tracking-[2px] text-amber-300/80 border border-amber-400/30 bg-amber-500/10 rounded-full px-2 py-0.5">
+                  Editorial commentary · not a live API feed
+                </span>
+              </div>
               {pulseUpdates.map((update, i) => {
                 const Icon = categoryIcon(update.category);
                 return (
