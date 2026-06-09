@@ -111,7 +111,9 @@ function TopNav({ kp }: { kp: number | null }) {
           </div>
           <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#a020f0]/40 bg-[#a020f0]/10">
             <span className="text-[9px] uppercase tracking-[2px] text-white/60">Kp</span>
-            <span className="text-[11px] font-bold text-[#c77dff] font-mono">{kp.toFixed(1)}</span>
+            <span className="text-[11px] font-bold text-[#c77dff] font-mono">
+              {kp == null ? '—' : kp.toFixed(1)}
+            </span>
           </div>
           <button className="hidden md:flex items-center gap-1 px-2 py-1 rounded-md border border-white/10 text-[10px] uppercase tracking-[2px] text-white/70 hover:text-white hover:border-white/30 transition-colors">
             <Radio className="w-3 h-3" /> Feed
