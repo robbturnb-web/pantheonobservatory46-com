@@ -32,6 +32,7 @@ import {
   useMoon,
 } from '@/hooks/use-live-data';
 import { LiveDataFooter } from '@/components/live/LiveDataFooter';
+import { SolarEventsPanel } from '@/components/live/SolarEventsPanel';
 import { timeAgo } from '@/lib/live-data';
 
 /* ─────────────────────────────────────────────────────────────────
