@@ -70,7 +70,7 @@ const MODAL_DATA: Record<string, ModalEntry> = {
     seeker:
       'Comet C/2026 A1 (MAPS) — a Kreutz-family sungrazer with perihelion in April 2026 — passes through a period of recorded X-class solar activity. Stefan Burns links the window to a spike in orb sightings and seismic micro-swarms.',
     oracle:
-      'Correlation engine (rolling 30-day): Solar X-class events ↔ global M5+ quakes (+18% above baseline) ↔ UAP reports (+12%). Watch for compounded effects on the geomagnetic Kp index in the next 72h.',
+      'Pantheon does not publish a fabricated correlation score. Verified inputs: NOAA SWPC GOES X-ray flux + planetary Kp index, USGS earthquake feed, and curated open-source UAP report logs. Cross-reference the live Observatory dashboard for the current readings.',
     cta: { label: 'Open Cosmos Pulse archive', to: '/earth-pulse#live' },
     xpReason: 'Solar pulse dossier opened',
   },
