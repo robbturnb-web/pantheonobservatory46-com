@@ -7,11 +7,3 @@ project_id = "jsmndieejtfemhfldiza"
     verify_jwt = true
   [functions.echo-chat]
     verify_jwt = true
-  [functions.daily-cosmos-pulse]
-    verify_jwt = false
-  [functions.glyph-decode]
-    verify_jwt = true
-  [functions.atlas-tracker]
-    verify_jwt = false
-  [functions.stefan-locator]
-    verify_jwt = false
