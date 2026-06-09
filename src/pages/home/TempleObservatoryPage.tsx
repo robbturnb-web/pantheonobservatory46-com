@@ -1025,7 +1025,12 @@ function SectionHeading({ icon: Icon, label, sub }: { icon: typeof Sun; label: s
 /* ───────────── PAGE ───────────── */
 export function TempleObservatoryPage() {
   const utc = useUtcClock();
-  const kp = 4.6;
+  const kpLive = useKp();
+  const flareLive = useFlare();
+  const kp = kpLive.data?.value?.kp ?? null;
+  const kpOk = kpLive.data?.ok ?? false;
+  const flareClass = flareLive.data?.value?.class ?? null;
+  const flareOk = flareLive.data?.ok ?? false;
 
   return (
     <div className="relative min-h-screen text-white" style={{ background: 'radial-gradient(ellipse at top, #1a1038 0%, #0a0a1f 45%, #05030d 100%)' }}>
