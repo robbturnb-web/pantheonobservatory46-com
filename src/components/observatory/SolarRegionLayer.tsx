@@ -55,7 +55,7 @@ export function SolarRegionLayer({ radius = 1, refreshMs = 60_000, onActivity }:
       if (!alive) return;
       const kpVal = k.ok ? k.value.kp : null;
       setKp(kpVal);
-      setFlareClass(f.ok ? f.value.classLetter : null);
+      setFlareClass(f.ok ? f.value.class : null);
       if (kpVal === null) onActivity?.('unknown');
       else if (kpVal >= 5) onActivity?.('storm');
       else if (kpVal >= 4) onActivity?.('unsettled');
