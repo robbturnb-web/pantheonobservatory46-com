@@ -1081,7 +1081,7 @@ export function TempleObservatoryPage() {
         <div className="flex">
           <Sidebar />
           <main className="flex-1 min-w-0">
-            <Hero kp={kp} utc={utc} />
+            <Hero kp={kp} kpOk={kpOk} flareClass={flareClass} flareOk={flareOk} utc={utc} />
             <ActivityPanels />
             <LiveCosmicFeed utc={utc} />
             <CorePortals />
