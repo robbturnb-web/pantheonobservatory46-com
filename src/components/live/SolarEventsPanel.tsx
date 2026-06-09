@@ -89,6 +89,9 @@ export function SolarEventsPanel() {
             <LiveDataFooter
               source={cmes.data?.source ?? null}
               fetchedAt={cmes.data?.fetchedAt}
+              stale={cmes.data?.stale}
+              cacheAge={cmes.data?.cacheAge}
+              lastSuccessAt={cmes.data?.lastSuccessAt}
               ok={cmes.data?.ok ?? false}
               error={cmes.data?.error}
               loading={cmes.loading}
@@ -153,6 +156,9 @@ export function SolarEventsPanel() {
             <LiveDataFooter
               source={flares.data?.source ?? null}
               fetchedAt={flares.data?.fetchedAt}
+              stale={flares.data?.stale}
+              cacheAge={flares.data?.cacheAge}
+              lastSuccessAt={flares.data?.lastSuccessAt}
               ok={flares.data?.ok ?? false}
               error={flares.data?.error}
               loading={flares.loading}
@@ -210,6 +216,9 @@ export function SolarEventsPanel() {
             <LiveDataFooter
               source={gsts.data?.source ?? null}
               fetchedAt={gsts.data?.fetchedAt}
+              stale={gsts.data?.stale}
+              cacheAge={gsts.data?.cacheAge}
+              lastSuccessAt={gsts.data?.lastSuccessAt}
               ok={gsts.data?.ok ?? false}
               error={gsts.data?.error}
               loading={gsts.loading}
@@ -291,6 +300,9 @@ export function SolarEventsPanel() {
           <LiveDataFooter
             source={alerts.data?.source ?? null}
             fetchedAt={alerts.data?.fetchedAt}
+            stale={alerts.data?.stale}
+            cacheAge={alerts.data?.cacheAge}
+            lastSuccessAt={alerts.data?.lastSuccessAt}
             ok={alerts.data?.ok ?? false}
             error={alerts.data?.error}
             loading={alerts.loading}

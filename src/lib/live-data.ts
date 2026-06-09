@@ -19,13 +19,41 @@ const PROXY_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
 /**
  * Fetch a whitelisted upstream source via the Pantheon edge proxy.
  * The proxy adds 15-minute server-side caching, serves stale on upstream
- * failure, and bypasses browser-side CORS/CSP/network blocks.
+ * failure, and bypasses browser-side CORS/CSP/network blocks. Cache state
+ * is read from `X-Pantheon-Cache` (HIT|MISS|STALE) and exposed on the
+ * returned Response as `.proxyMeta` so each fetcher can mark its result
+ * as fresh / cached / stale and surface a real "last successful fetch".
  */
-async function proxyFetch(source: string, params: Record<string, string> = {}): Promise<Response> {
+export interface ProxyMeta {
+  /** true when proxy served cached data because upstream just failed */
+  stale: boolean;
+  /** age of the cached payload in seconds, when HIT or STALE */
+  cacheAge: number | null;
+  /** ISO timestamp of the last successful upstream fetch (when known) */
+  lastSuccessAt: string | null;
+}
+type ProxyResponse = Response & { proxyMeta: ProxyMeta };
+
+async function proxyFetch(source: string, params: Record<string, string> = {}): Promise<ProxyResponse> {
   const q = new URLSearchParams({ source, ...params });
-  return fetch(`${PROXY_BASE}?${q.toString()}`, {
+  const res = (await fetch(`${PROXY_BASE}?${q.toString()}`, {
     headers: { apikey: PROXY_KEY, Authorization: `Bearer ${PROXY_KEY}` },
-  });
+  })) as ProxyResponse;
+  const cache = res.headers.get('X-Pantheon-Cache');
+  const ageStr = res.headers.get('X-Pantheon-Cache-Age');
+  const age = ageStr != null ? Number(ageStr) : NaN;
+  const cached = cache === 'HIT' || cache === 'STALE';
+  res.proxyMeta = {
+    stale: cache === 'STALE',
+    cacheAge: cached && Number.isFinite(age) ? age : null,
+    lastSuccessAt:
+      cached && Number.isFinite(age)
+        ? new Date(Date.now() - age * 1000).toISOString()
+        : cache === 'MISS'
+          ? new Date().toISOString()
+          : null,
+  };
+  return res;
 }
 
 export interface LiveResult<T> {
@@ -34,7 +62,14 @@ export interface LiveResult<T> {
   source: { label: string; url: string };
   fetchedAt: string;
   error?: string;
+  /** true if data was served from the proxy cache after upstream failed */
+  stale?: boolean;
+  /** age of cached payload in seconds, when proxy served cached data */
+  cacheAge?: number | null;
+  /** ISO of last verified upstream success (defaults to fetchedAt on MISS) */
+  lastSuccessAt?: string | null;
 }
+
 
 
 /* ─────────── USGS earthquakes (last 24h, all magnitudes) ─────────── */
@@ -62,6 +97,7 @@ export async function fetchEarthquakes(): Promise<LiveResult<QuakeSummary>> {
   try {
     const r = await proxyFetch('earthquakes');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const json = await r.json();
     const features: QuakeFeature[] = (json.features ?? [])
       .filter((f: any) => typeof f?.properties?.mag === 'number')
@@ -76,7 +112,7 @@ export async function fetchEarthquakes(): Promise<LiveResult<QuakeSummary>> {
     features.sort((a, b) => b.time - a.time);
     const highest = features.slice().sort((a, b) => b.mag - a.mag)[0] ?? null;
     return {
-      ok: true,
+      ok: true, ...__m,
       source: USGS_SOURCE,
       fetchedAt,
       value: { count24h: features.length, highest, latest: features.slice(0, 8) },
@@ -111,13 +147,14 @@ export async function fetchKp(): Promise<LiveResult<KpReading>> {
   try {
     const r = await proxyFetch('kp');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const arr = await r.json();
     const last = arr?.[arr.length - 1];
     if (!last) throw new Error('empty feed');
     const kp = Number(last.kp_index ?? last.estimated_kp ?? last.kp);
     if (!Number.isFinite(kp)) throw new Error('no Kp value');
     return {
-      ok: true,
+      ok: true, ...__m,
       source: KP_SOURCE,
       fetchedAt,
       value: { kp, stormLevel: kpStorm(kp), observedAt: last.time_tag ?? fetchedAt },
@@ -151,6 +188,7 @@ export async function fetchFlare(): Promise<LiveResult<FlareReading>> {
   try {
     const r = await proxyFetch('flare');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const arr = await r.json();
     // Short channel (0.05-0.4 nm) is the flare-class channel
     const shortWave = (arr ?? []).filter((d: any) => d.energy === '0.05-0.4nm');
@@ -158,7 +196,7 @@ export async function fetchFlare(): Promise<LiveResult<FlareReading>> {
     if (!last) throw new Error('no flare data');
     const flux = Number(last.flux);
     return {
-      ok: true,
+      ok: true, ...__m,
       source: FLARE_SOURCE,
       fetchedAt,
       value: { class: fluxToClass(flux), flux, observedAt: last.time_tag ?? fetchedAt },
@@ -179,11 +217,12 @@ export async function fetchSolarWind(): Promise<LiveResult<WindReading>> {
   try {
     const r = await proxyFetch('solarwind');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const json = await r.json();
     const speed = Number(json.WindSpeed);
     if (!Number.isFinite(speed)) throw new Error('no wind speed');
     return {
-      ok: true,
+      ok: true, ...__m,
       source: WIND_SOURCE,
       fetchedAt,
       value: { speedKmS: speed, observedAt: json.TimeStamp ?? fetchedAt },
@@ -214,11 +253,12 @@ export async function fetchMarine(
   try {
     const r = await proxyFetch('marine', { lat: String(lat), lon: String(lon) });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const json = await r.json();
     const c = json.current;
     if (!c) throw new Error('no marine current');
     return {
-      ok: true,
+      ok: true, ...__m,
       source: MARINE_SOURCE,
       fetchedAt,
       value: {
@@ -303,6 +343,7 @@ export async function fetchCMEs(): Promise<LiveResult<CmeSummary>> {
   try {
     const r = await proxyFetch('cme');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const arr = await r.json();
     const events: CmeEvent[] = (arr ?? []).map((e: any) => {
       const analysis = Array.isArray(e.cmeAnalyses) && e.cmeAnalyses.length ? e.cmeAnalyses[0] : null;
@@ -319,7 +360,7 @@ export async function fetchCMEs(): Promise<LiveResult<CmeSummary>> {
     const fastest = events
       .filter((e) => Number.isFinite(e.speedKmS as number))
       .sort((a, b) => (b.speedKmS ?? 0) - (a.speedKmS ?? 0))[0] ?? null;
-    return { ok: true, source: CME_SOURCE, fetchedAt, value: { count7d: events.length, latest: events.slice(0, 6), fastest } };
+    return { ok: true, ...__m, source: CME_SOURCE, fetchedAt, value: { count7d: events.length, latest: events.slice(0, 6), fastest } };
   } catch (e: any) {
     return { ok: false, source: CME_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
   }
@@ -350,6 +391,7 @@ export async function fetchFlareEvents(): Promise<LiveResult<FlareEventSummary>>
   try {
     const r = await proxyFetch('flr');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const arr = await r.json();
     const events: FlareEvent[] = (arr ?? []).map((e: any) => ({
       id: e.flrID,
@@ -362,7 +404,7 @@ export async function fetchFlareEvents(): Promise<LiveResult<FlareEventSummary>>
     }));
     events.sort((a, b) => new Date(b.beginTime).getTime() - new Date(a.beginTime).getTime());
     const strongest = events.slice().sort((a, b) => flareClassRank(b.class) - flareClassRank(a.class))[0] ?? null;
-    return { ok: true, source: FLR_SOURCE, fetchedAt, value: { count7d: events.length, strongest, latest: events.slice(0, 6) } };
+    return { ok: true, ...__m, source: FLR_SOURCE, fetchedAt, value: { count7d: events.length, strongest, latest: events.slice(0, 6) } };
   } catch (e: any) {
     return { ok: false, source: FLR_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
   }
@@ -384,6 +426,7 @@ export async function fetchGSTs(): Promise<LiveResult<GstSummary>> {
   try {
     const r = await proxyFetch('gst');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const arr = await r.json();
     const events: GstEvent[] = (arr ?? []).map((e: any) => {
       const maxKp = Array.isArray(e.allKpIndex) && e.allKpIndex.length
@@ -398,7 +441,7 @@ export async function fetchGSTs(): Promise<LiveResult<GstSummary>> {
     });
     events.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
     const strongest = events.slice().sort((a, b) => (b.maxKp ?? 0) - (a.maxKp ?? 0))[0] ?? null;
-    return { ok: true, source: GST_SOURCE, fetchedAt, value: { count7d: events.length, latest: events.slice(0, 6), strongest } };
+    return { ok: true, ...__m, source: GST_SOURCE, fetchedAt, value: { count7d: events.length, latest: events.slice(0, 6), strongest } };
   } catch (e: any) {
     return { ok: false, source: GST_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
   }
@@ -420,6 +463,7 @@ export async function fetchSwpcAlerts(): Promise<LiveResult<SwpcAlert[]>> {
   try {
     const r = await proxyFetch('alerts');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const arr = await r.json();
     const cutoff = Date.now() - 24 * 3600_000;
     const items: SwpcAlert[] = (arr ?? [])
@@ -435,7 +479,7 @@ export async function fetchSwpcAlerts(): Promise<LiveResult<SwpcAlert[]>> {
       }))
       .sort((a: SwpcAlert, b: SwpcAlert) => new Date(b.issued).getTime() - new Date(a.issued).getTime())
       .slice(0, 8);
-    return { ok: true, source: SWPC_ALERT_SOURCE, fetchedAt, value: items };
+    return { ok: true, ...__m, source: SWPC_ALERT_SOURCE, fetchedAt, value: items };
   } catch (e: any) {
     return { ok: false, source: SWPC_ALERT_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
   }
@@ -459,10 +503,11 @@ export async function fetchISS(): Promise<LiveResult<IssReading>> {
   try {
     const r = await proxyFetch('iss');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const json = await r.json();
     if (!Number.isFinite(json?.latitude)) throw new Error('no telemetry');
     return {
-      ok: true,
+      ok: true, ...__m,
       source: ISS_SOURCE,
       fetchedAt,
       value: {
@@ -613,6 +658,7 @@ export async function fetchNwsAlerts(): Promise<LiveResult<NwsSummary>> {
   try {
     const r = await proxyFetch('nws');
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    const __m = r.proxyMeta;
     const json = await r.json();
     const features = (json?.features ?? []) as any[];
     const alerts: NwsAlert[] = features
@@ -635,7 +681,7 @@ export async function fetchNwsAlerts(): Promise<LiveResult<NwsSummary>> {
     };
     for (const a of alerts) byCategory[a.category] += 1;
     return {
-      ok: true,
+      ok: true, ...__m,
       source: NWS_SOURCE,
       fetchedAt,
       value: { total: alerts.length, byCategory, latest: alerts.slice(0, 10) },

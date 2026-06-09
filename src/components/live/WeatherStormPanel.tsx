@@ -107,6 +107,9 @@ export function WeatherStormPanel() {
             <LiveDataFooter
               source={alerts.data?.source ?? null}
               fetchedAt={alerts.data?.fetchedAt}
+              stale={alerts.data?.stale}
+              cacheAge={alerts.data?.cacheAge}
+              lastSuccessAt={alerts.data?.lastSuccessAt}
               ok={alerts.data?.ok ?? false}
               error={alerts.data?.error}
               loading={alerts.loading}

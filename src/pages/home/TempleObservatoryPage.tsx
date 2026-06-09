@@ -544,6 +544,9 @@ function ActivityPanels() {
           <LiveDataFooter
             source={quakes.data?.source ?? null}
             fetchedAt={quakes.data?.fetchedAt}
+            stale={quakes.data?.stale}
+            cacheAge={quakes.data?.cacheAge}
+            lastSuccessAt={quakes.data?.lastSuccessAt}
             ok={qOk}
             error={quakes.data?.error}
             loading={quakes.loading}
@@ -734,6 +737,9 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
                 <LiveDataFooter
                   source={c.footer?.source ?? null}
                   fetchedAt={c.footer?.fetchedAt}
+                  stale={c.footer?.stale}
+                  cacheAge={c.footer?.cacheAge}
+                  lastSuccessAt={c.footer?.lastSuccessAt}
                   ok={c.ok}
                   error={c.footer?.error}
                   loading={c.loading}
