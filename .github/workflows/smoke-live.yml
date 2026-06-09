@@ -1,0 +1,73 @@
+name: Live Smoke Test
+
+on:
+  # Run after each deploy. The Lovable publish flow updates the published URL,
+  # so we re-check on a short cron and allow manual dispatch right after publish.
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Override target base URL (defaults to production)"
+        required: false
+        default: ""
+  # Also run on pushes to main so a code change that breaks the live site
+  # is caught as soon as the deploy lands.
+  push:
+    branches: [main]
+
+concurrency:
+  group: smoke-live-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: Live site smoke test
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('bun.lock', 'package.json') }}
+          restore-keys: pw-${{ runner.os }}-
+
+      - name: Install Playwright Chromium
+        run: bunx playwright install --with-deps chromium
+
+      - name: Wait for deploy to settle
+        if: github.event_name == 'push'
+        run: sleep 90
+
+      - name: Run smoke tests
+        env:
+          SMOKE_BASE_URL: ${{ github.event.inputs.base_url || 'https://pantheonobservatory46.com' }}
+        run: bunx playwright test --config=playwright.smoke.config.ts
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-playwright-report
+          path: playwright-report
+          retention-days: 14
+
+      - name: Upload failure traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-results
+          path: test-results
+          retention-days: 14
