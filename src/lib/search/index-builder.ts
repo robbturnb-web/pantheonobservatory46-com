@@ -100,11 +100,12 @@ async function pushDossiers(docs: SearchDoc[]) {
     ['cern', () => import('@/data/cern').then((m) => m.cernEntries)],
     ['crash-retrieval', () => import('@/data/crash-retrieval').then((m) => m.crashRetrievalEntries)],
     ['entity-encounters', () => import('@/data/entity-encounters').then((m) => m.entityEncounterEntries)],
-    ['extinct-species', () => import('@/data/extinct-species').then((m) => m.extinctSpeciesEntries)],
+    ['extinct-species', () => import('@/data/extinct-species').then((m) => m.extinctEntries)],
     ['federation', () => import('@/data/federation').then((m) => m.federationEntries)],
-    ['glyphs-dossier', () => import('@/data/glyphs-dossier').then((m) => m.glyphsDossierEntries)],
+    ['glyphs-dossier', () => import('@/data/glyphs-dossier').then((m) => m.glyphsEntries)],
     ['stone-faces', () => import('@/data/stone-faces').then((m) => m.stoneFacesEntries)],
-    ['underground-bases', () => import('@/data/underground-bases').then((m) => m.undergroundBasesEntries)],
+    ['underground-bases', () => import('@/data/underground-bases').then((m) => m.undergroundBaseEntries)],
+
   ] as const;
 
   const results = await Promise.allSettled(loaders.map(([, fn]) => fn()));
