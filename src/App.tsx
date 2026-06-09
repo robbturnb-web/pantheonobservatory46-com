@@ -138,6 +138,8 @@ export default function App() {
               <Route path="/observatory" element={<ObservatoryMapPage />} />
               <Route path="/observatory/map" element={<ObservatoryMapPage />} />
               <Route path="/disclosure" element={<DisclosureCommandPage />} />
+              <Route path="/briefing" element={<DailyBriefingPage />} />
+              <Route path="/daily" element={<Navigate to="/briefing" replace />} />
               <Route path="/diagnostics" element={<DiagnosticsPage />} />
               <Route path="/community" element={<Navigate to="/echoverse" replace />} />
               <Route path="/index" element={<Navigate to="/" replace />} />
