@@ -85,6 +85,53 @@ function longitudeToSign(longitude: number): PlanetPosition {
   };
 }
 
+function normalizeCity(city: string): string {
+  return city.trim().toLowerCase().replace(/,.*$/, "").replace(/\s+/g, " ");
+}
+
+async function resolveBirthPlace(city: string): Promise<BirthPlace> {
+  const normalized = normalizeCity(city);
+  const fallback = FALLBACK_PLACES[normalized];
+
+  try {
+    const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`;
+    const geoResp = await fetch(geoUrl);
+    if (!geoResp.ok) throw new Error("City lookup failed");
+    const geoJson = await geoResp.json();
+    const place = geoJson?.results?.[0];
+    if (place) {
+      return {
+        name: place.name,
+        country: place.country,
+        latitude: place.latitude,
+        longitude: place.longitude,
+        timezone: place.timezone,
+      };
+    }
+  } catch (err) {
+    console.warn("[compute-natal-chart] city lookup fallback", err instanceof Error ? err.message : err);
+  }
+
+  if (fallback) return fallback;
+  throw new Error(`Could not locate "${city}". Try the nearest major city.`);
+}
+
+async function resolveTimezoneOffsetMinutes(place: BirthPlace, date: string): Promise<number> {
+  try {
+    const tzUrl = `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&timezone=${encodeURIComponent(place.timezone)}&start_date=${date}&end_date=${date}&hourly=temperature_2m`;
+    const tzResp = await fetch(tzUrl);
+    if (!tzResp.ok) throw new Error("Timezone lookup failed");
+    const tzJson = await tzResp.json();
+    if (typeof tzJson?.utc_offset_seconds === "number") {
+      return Math.round(tzJson.utc_offset_seconds / 60);
+    }
+  } catch (err) {
+    console.warn("[compute-natal-chart] timezone fallback", err instanceof Error ? err.message : err);
+  }
+
+  return 0;
+}
+
 /**
  * Convert a body's geocentric vector to true ecliptic longitude of date.
  */
