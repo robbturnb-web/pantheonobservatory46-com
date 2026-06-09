@@ -42,6 +42,7 @@ interface TimezoneApiResponse {
 
 interface NatalChartResponse {
   chart?: NatalChart;
+  place?: BirthPlace;
   error?: string;
 }
 
@@ -58,56 +59,44 @@ function isNatalChartResponse(value: unknown): value is NatalChartResponse {
 }
 
 export async function resolveBirthPlace(city: string): Promise<BirthPlace> {
-  const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
-    city,
-  )}&count=1&language=en&format=json`;
+  const { data, error } = await supabase.functions.invoke('compute-natal-chart', {
+    body: {
+      date: '2000-01-01',
+      time: '12:00',
+      city,
+      lookupOnly: true,
+    },
+  });
 
-  const geoResp = await fetch(geoUrl);
-  if (!geoResp.ok) throw new Error('City lookup failed. Try the closest major city.');
+  if (error) throw new Error(error.message || 'City lookup failed. Try the closest major city.');
+  if (!isNatalChartResponse(data) || !data.place) {
+    throw new Error(`Could not locate "${city}". Try the nearest major city.`);
+  }
 
-  const geoJson: unknown = await geoResp.json();
-  if (!isGeocodeApiResponse(geoJson)) throw new Error('City lookup returned an unreadable signal.');
-
-  const place = geoJson.results?.[0];
-  if (!place) throw new Error(`Could not locate "${city}". Try the nearest major city.`);
-
-  return place;
+  return data.place;
 }
 
 export async function resolveTimezoneOffsetMinutes(place: BirthPlace, date: string): Promise<number> {
-  const tzUrl = `https://api.open-meteo.com/v1/forecast?latitude=${place.latitude}&longitude=${place.longitude}&timezone=${encodeURIComponent(
-    place.timezone,
-  )}&start_date=${date}&end_date=${date}&hourly=temperature_2m`;
-
-  const tzResp = await fetch(tzUrl);
-  if (!tzResp.ok) return 0;
-
-  const tzJson: unknown = await tzResp.json();
-  if (!isTimezoneApiResponse(tzJson)) return 0;
-
-  return Math.round((tzJson.utc_offset_seconds ?? 0) / 60);
+  const timezoneOffset = new Date(`${date}T12:00:00Z`).getTimezoneOffset();
+  void place;
+  return -timezoneOffset;
 }
 
 export async function computeNatalChart({ date, time, city }: ChartRequest): Promise<{ chart: NatalChart; place: BirthPlace }> {
-  const place = await resolveBirthPlace(city);
-  const tzOffsetMinutes = await resolveTimezoneOffsetMinutes(place, date);
-
   const { data, error } = await supabase.functions.invoke('compute-natal-chart', {
     body: {
       date,
       time,
-      lat: place.latitude,
-      lon: place.longitude,
-      tzOffsetMinutes,
+      city,
     },
   });
 
   if (error) throw new Error(error.message || 'Chart engine returned an error.');
-  if (!isNatalChartResponse(data) || !data.chart) {
+  if (!isNatalChartResponse(data) || !data.chart || !data.place) {
     throw new Error('Chart engine returned an unreadable signal.');
   }
 
-  return { chart: data.chart, place };
+  return { chart: data.chart, place: data.place };
 }
 
 export async function computeCurrentSkyChart(): Promise<NatalChart> {
