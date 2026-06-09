@@ -33,6 +33,7 @@ import {
 } from '@/hooks/use-live-data';
 import { LiveDataFooter } from '@/components/live/LiveDataFooter';
 import { SolarEventsPanel } from '@/components/live/SolarEventsPanel';
+import { SkyTrackerPanel } from '@/components/live/SkyTrackerPanel';
 import { timeAgo } from '@/lib/live-data';
 
 /* ─────────────────────────────────────────────────────────────────
@@ -1086,6 +1087,7 @@ export function TempleObservatoryPage() {
             <ActivityPanels />
             <LiveCosmicFeed utc={utc} />
             <SolarEventsPanel />
+            <SkyTrackerPanel />
             <CorePortals />
             <TheGodsReturn />
             <SdoLiveImagery utc={utc} />

@@ -15,6 +15,9 @@ import {
   fetchFlareEvents,
   fetchGSTs,
   fetchSwpcAlerts,
+  fetchISS,
+  fetchLunarCalendar,
+  fetchMeteorShowers,
   type LiveResult,
   type QuakeSummary,
   type KpReading,
@@ -26,6 +29,9 @@ import {
   type FlareEventSummary,
   type GstSummary,
   type SwpcAlert,
+  type IssReading,
+  type LunarCalendar,
+  type MeteorSummary,
 } from '@/lib/live-data';
 
 interface State<T> {
@@ -69,3 +75,8 @@ export const useCMEs = () => useLive<CmeSummary>(fetchCMEs, 30 * 60_000);
 export const useFlareEvents = () => useLive<FlareEventSummary>(fetchFlareEvents, 30 * 60_000);
 export const useGSTs = () => useLive<GstSummary>(fetchGSTs, 30 * 60_000);
 export const useSwpcAlerts = () => useLive<SwpcAlert[]>(fetchSwpcAlerts, 10 * 60_000);
+// ISS telemetry updates every ~5s upstream; we refresh every 15s for the dashboard
+export const useISS = () => useLive<IssReading>(fetchISS, 15_000);
+// Lunar calendar + meteor shower schedule are deterministic — refresh hourly
+export const useLunarCalendar = () => useLive<LunarCalendar>(fetchLunarCalendar, 60 * 60_000);
+export const useMeteorShowers = () => useLive<MeteorSummary>(fetchMeteorShowers, 60 * 60_000);
