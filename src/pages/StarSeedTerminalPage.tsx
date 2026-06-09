@@ -72,11 +72,11 @@ export function StarSeedTerminalPage() {
 
 
   const onSubmit = async (values: FormValues) => {
+    console.log('[StarSeed] submit values', values);
     setError(null);
     setPhase('scanning');
     setScanIdx(0);
 
-    // Animate scan readouts
     const scanTimer = window.setInterval(() => {
       setScanIdx((i) => Math.min(i + 1, SCAN_LINES.length - 1));
     }, 700);
@@ -88,11 +88,9 @@ export function StarSeedTerminalPage() {
         time: parsedValues.time,
         city: parsedValues.city,
       });
+      console.log('[StarSeed] chart ok', { place: place.name });
 
-      // 4. Classify
       const classification = classifyStarSeed(chart);
-
-      // Hold the final scan line for dramatic effect
       await new Promise((r) => window.setTimeout(r, 1400));
 
       setResult({
@@ -106,6 +104,7 @@ export function StarSeedTerminalPage() {
 
       setSaveStatus('saving');
       const saved = await saveStarSeed(classification.seed);
+      console.log('[StarSeed] save result', saved);
       if (saved === 'saved') {
         setSavedSeed(classification.seed);
         setSaveStatus('saved');
@@ -116,11 +115,20 @@ export function StarSeedTerminalPage() {
       }
 
     } catch (e) {
+      console.error('[StarSeed] scan failed', e);
       setError(e instanceof Error ? e.message : 'The Star Seed scan hit interference. Check the city, date, and time, then run it again.');
       setPhase('error');
     } finally {
       window.clearInterval(scanTimer);
     }
+  };
+
+  // Surface validation errors (e.g. invalid date/time/city) instead of silently doing nothing.
+  const onInvalid = (errors: Record<string, { message?: string }>) => {
+    console.warn('[StarSeed] validation errors', errors);
+    const first = Object.values(errors).find((e) => e?.message)?.message;
+    setError(first ?? 'Please fill in name, date of birth, time, and city before scanning.');
+    setPhase('error');
   };
 
   const reset = () => {
@@ -241,7 +249,7 @@ export function StarSeedTerminalPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  onSubmit={form.handleSubmit(onSubmit)}
+                  onSubmit={form.handleSubmit(onSubmit, onInvalid)}
                   className="space-y-4"
                 >
                   <div className="flex items-center justify-between gap-2 mb-4">
