@@ -103,7 +103,7 @@ function TopNav({ kp }: { kp: number }) {
           <button className="hidden md:flex items-center gap-1 px-2 py-1 rounded-md border border-white/10 text-[10px] uppercase tracking-[2px] text-white/70 hover:text-white hover:border-white/30 transition-colors">
             <Radio className="w-3 h-3" /> Feed
           </button>
-          <button type="button" aria-label="Toggle audio" className="w-8 h-8 flex items-center justify-center rounded-md border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-colors">
+          <button className="w-8 h-8 flex items-center justify-center rounded-md border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-colors">
             <Volume2 className="w-3.5 h-3.5" />
           </button>
           <Link to="/profile" className="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-[#a020f0] to-[#7209b7] text-white text-xs font-bold border border-[#c77dff]/50 shadow-[0_0_12px_-2px_rgba(199,125,255,0.7)]">
@@ -438,7 +438,7 @@ function ActivityPanels() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(220,38,38,0.18),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start justify-between mb-3">
             <div>
-              <h2 className="text-[10px] uppercase tracking-[3px] text-red-300/80 mb-1">Earth Activity · 24H</h2>
+              <div className="text-[10px] uppercase tracking-[3px] text-red-300/80 mb-1">Earth Activity · 24H</div>
               <div className="flex items-baseline gap-3">
                 <span className="text-4xl font-black text-red-400">5</span>
                 <span className="text-xs uppercase tracking-[2px] text-white/50">Events</span>
@@ -462,7 +462,7 @@ function ActivityPanels() {
         <div className="relative rounded-xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950/40 to-black/70 backdrop-blur-xl p-5 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.18),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start justify-between mb-3">
-            <h2 className="text-[10px] uppercase tracking-[3px] text-emerald-300/80">Anomalous Activity · 24H</h2>
+            <div className="text-[10px] uppercase tracking-[3px] text-emerald-300/80">Anomalous Activity · 24H</div>
             <Sparkles className="w-5 h-5 text-emerald-400" />
           </div>
           <div className="relative grid grid-cols-2 gap-3 mb-3">

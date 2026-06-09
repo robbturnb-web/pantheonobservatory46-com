@@ -289,7 +289,7 @@ export function StyleGuidePage() {
           <p className="text-clarity-gray mb-10">Space Grotesk hierarchy with neon accents.</p>
           <div className="space-y-6 rounded-lg border border-mystic/30 bg-space-navy/60 p-8">
             <div className="flex items-baseline justify-between gap-4 flex-wrap">
-              <p className="text-5xl font-bold" role="heading" aria-level={1}>H1 · Cosmic Title</p>
+              <h1 className="text-5xl font-bold">H1 · Cosmic Title</h1>
               <ClassChip value="text-5xl font-bold" />
             </div>
             <div className="flex items-baseline justify-between gap-4 flex-wrap">

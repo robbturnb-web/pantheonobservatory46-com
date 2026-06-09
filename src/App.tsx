@@ -57,6 +57,7 @@ const JWSTPage = lazy(() => import('./pages/JWSTPage').then(m => ({ default: m.J
 const NotFound = lazy(() => import('./pages/NotFound'));
 const CodexPage = lazy(() => import('./pages/CodexPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage').then(m => ({ default: m.SearchPage })));
+const LegislationPage = lazy(() => import('./pages/LegislationPage').then(m => ({ default: m.LegislationPage })));
 
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
@@ -127,6 +128,7 @@ export default function App() {
               <Route path="/brazil" element={<BrazilPage />} />
               <Route path="/jwst" element={<JWSTPage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/legislation" element={<LegislationPage />} />
               <Route path="/community" element={<Navigate to="/echoverse" replace />} />
               <Route path="/index" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />

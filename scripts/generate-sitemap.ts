@@ -33,6 +33,7 @@ const entries: SitemapEntry[] = [
   { path: "/encounters", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/underground", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/corbell", changefreq: "weekly", priority: "0.6", lastmod: today },
+  { path: "/legislation", changefreq: "weekly", priority: "0.8", lastmod: today },
   { path: "/jeremy-corbell", changefreq: "weekly", priority: "0.6", lastmod: today },
   { path: "/brazil", changefreq: "weekly", priority: "0.6", lastmod: today },
   { path: "/documentaries", changefreq: "weekly", priority: "0.7", lastmod: today },

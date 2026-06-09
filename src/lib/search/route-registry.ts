@@ -83,6 +83,7 @@ export const ROUTES: RouteRecord[] = [
   { route: '/missing', title: 'Missing Scientists', summary: 'Suspicious deaths in the disclosure-adjacent scientific community.', realm: 'disclosure' },
   { route: '/orb-report', title: 'Orb Report', summary: 'Orb-class UAP observations and patterns.', realm: 'disclosure' },
   { route: '/documentaries', title: 'Documentaries', summary: 'Curated disclosure documentary library.', realm: 'disclosure' },
+  { route: '/legislation', title: 'UAP Disclosure Legislation Tracker', summary: 'Schumer-Rounds UAP Disclosure Act, NDAA amendments, AARO mandates, House Task Force hearings.', realm: 'disclosure', keywords: 'ufo news uap disclosure act schumer rounds ndaa congress hearing grusch luna burchett aaro pub. l.' },
 
   // Ancient
   { route: '/atlantis', title: 'Atlantis', summary: "Plato's account and nine candidate submerged sites.", realm: 'ancient' },

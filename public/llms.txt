@@ -15,6 +15,7 @@ Pantheon Observatory ("Pantheon Frequency 46") is a curated, evidence-graded arc
 ## Disclosure & UAP
 
 - [UAP Cases](/uap): Verified UAP encounters — Nimitz, Gimbal, Aguadilla, and more.
+- [Legislation Tracker](/legislation): U.S. UAP disclosure bills, NDAA amendments, AARO mandates, and congressional hearings, sourced to congress.gov and AARO.
 - [Whistleblower Vault](/whistleblowers): Testimony archive with evidence grades and suspicious-death tracking.
 - [AARO Watch](/aaro): Pentagon's All-domain Anomaly Resolution Office — filings, leadership, public record.
 - [Crash Retrieval](/crash-retrieval): Alleged recovered craft and biologics — claim, counterweight, status.
