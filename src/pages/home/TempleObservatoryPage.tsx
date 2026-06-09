@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 import {
   Home, Eye, Mountain, Brain, Satellite, Folder, Bot, Settings,
   Sun, Volume2, Radio, Flame, Activity, AlertTriangle, ChevronRight,
-  MapPin, Lock, Telescope, Sparkles, Zap, Waves, Film,
+  Lock, Telescope, Sparkles, Zap, Waves, Film,
   Shield, Skull, Plane, Mountain as MountainIcon, Users, Radio as RadioIcon, Globe,
 } from 'lucide-react';
 
@@ -54,6 +54,7 @@ const TABS: { to: string; label: string }[] = [
 ];
 
 function TopNav({ kp }: { kp: number }) {
+  const { pathname } = useLocation();
   return (
     <header className="sticky top-0 z-40 border-b border-[#a020f0]/30 bg-[#0a0a1f]/85 backdrop-blur-xl">
       {/* Subtle purple top glow */}
@@ -73,20 +74,23 @@ function TopNav({ kp }: { kp: number }) {
 
         {/* Tabs */}
         <nav className="hidden md:flex items-center gap-0.5 mx-auto">
-          {TABS.map((t, i) => (
-            <Link
-              key={t.to}
-              to={t.to}
-              className={`relative px-3 py-1.5 rounded-md text-[11px] uppercase tracking-[2.5px] font-semibold transition-colors ${
-                i === 0 ? 'text-white bg-white/5' : 'text-white/60 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              {t.label}
-              {i === 0 && (
-                <span className="absolute inset-x-2 -bottom-0.5 h-px bg-gradient-to-r from-transparent via-[#a020f0] to-transparent" />
-              )}
-            </Link>
-          ))}
+          {TABS.map((t) => {
+            const isActive = t.to === '/' ? pathname === '/' : pathname.startsWith(t.to);
+            return (
+              <Link
+                key={t.to}
+                to={t.to}
+                className={`relative px-3 py-1.5 rounded-md text-[11px] uppercase tracking-[2.5px] font-semibold transition-colors ${
+                  isActive ? 'text-white bg-white/5' : 'text-white/60 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {t.label}
+                {isActive && (
+                  <span className="absolute inset-x-2 -bottom-0.5 h-px bg-gradient-to-r from-transparent via-[#a020f0] to-transparent" />
+                )}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right cluster */}
@@ -139,11 +143,11 @@ const SIDE_ITEMS: SideItem[] = [
 
 
 function Sidebar() {
-  const active = '/';
+  const { pathname } = useLocation();
   return (
     <aside className="hidden lg:flex shrink-0 w-[84px] flex-col items-center py-4 gap-0.5 border-r border-[#a020f0]/20 bg-[#0a0a1f]/85 backdrop-blur-xl max-h-screen sticky top-14 overflow-y-auto scrollbar-thin">
       {SIDE_ITEMS.map((item) => {
-        const isActive = item.to === active && item.label === 'Home';
+        const isActive = item.to === '/' ? pathname === '/' : pathname.startsWith(item.to);
         return (
           <Link
             key={item.label}
@@ -225,7 +229,7 @@ function KpGauge({ kp }: { kp: number }) {
       </svg>
       {/* Center readout */}
       <div className="absolute inset-x-0 bottom-3 text-center">
-        <div className="text-[9px] uppercase tracking-[3px] text-white/50">Geomagnetic Index</div>
+        <div className="text-[9px] uppercase tracking-[3px] text-white/50">Geomagnetic Index · Simulated</div>
         <div className="text-5xl font-black bg-gradient-to-r from-[#c77dff] to-[#fde68a] bg-clip-text text-transparent leading-none mt-1">
           Kp {kp.toFixed(1)}
         </div>
@@ -290,7 +294,7 @@ function PantheonCompass() {
         return (
           <Link
             key={g.id}
-            to="/gods"
+            to={`/gods/${g.id}`}
             title={`${g.name} · ${g.pantheon}`}
             className="group absolute -translate-x-1/2 -translate-y-1/2"
             style={{ left: `${left}%`, top: `${top}%` }}
@@ -358,7 +362,7 @@ function Hero({ kp, utc }: { kp: number; utc: Date }) {
             </div>
           </div>
           <div className="hidden lg:block">
-            <div className="text-[10px] uppercase tracking-[3px] text-white/50 mb-2">Flare Class</div>
+            <div className="text-[10px] uppercase tracking-[3px] text-white/50 mb-2">Flare Class · Simulated</div>
             <FlareClassBar current="M2.4" />
           </div>
         </div>
@@ -438,7 +442,7 @@ function ActivityPanels() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(220,38,38,0.18),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start justify-between mb-3">
             <div>
-              <div className="text-[10px] uppercase tracking-[3px] text-red-300/80 mb-1">Earth Activity · 24H</div>
+              <div className="text-[10px] uppercase tracking-[3px] text-red-300/80 mb-1">Earth Activity · Latest Reported</div>
               <div className="flex items-baseline gap-3">
                 <span className="text-4xl font-black text-red-400">5</span>
                 <span className="text-xs uppercase tracking-[2px] text-white/50">Events</span>
@@ -462,7 +466,7 @@ function ActivityPanels() {
         <div className="relative rounded-xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950/40 to-black/70 backdrop-blur-xl p-5 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.18),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start justify-between mb-3">
-            <div className="text-[10px] uppercase tracking-[3px] text-emerald-300/80">Anomalous Activity · 24H</div>
+            <div className="text-[10px] uppercase tracking-[3px] text-emerald-300/80">Anomalous Activity · Latest Reported</div>
             <Sparkles className="w-5 h-5 text-emerald-400" />
           </div>
           <div className="relative grid grid-cols-2 gap-3 mb-3">
@@ -531,10 +535,10 @@ function Sparkline({ data, color }: { data: number[]; color: string }) {
 /* ───────────── LIVE COSMIC FEED 2x2 ───────────── */
 interface FeedCard { img: string; kind: string; tone: string; live: string; title: string; meta: string }
 const FEED_CARDS: FeedCard[] = [
-  { img: feedSolar, kind: 'Solar Storm',       tone: 'text-[#ffd700]', live: 'M2.4',     title: 'Active region 3517 erupts', meta: 'GOES-16 · 14:25 UTC' },
-  { img: feedUap,   kind: 'UAP Sighting',      tone: 'text-emerald-300', live: '0:90M', title: 'Jellyfish anomaly · Iraq',   meta: 'FLIR · declassified' },
-  { img: feedQuake, kind: 'Earthquake',        tone: 'text-red-400',   live: 'M5.3',    title: 'Revilla Gigedo Islands',     meta: 'USGS · 12 min ago' },
-  { img: portalEcho,kind: 'Echo Signal',       tone: 'text-cyan-300',  live: 'LIVE',    title: 'Codex 46 transmission',      meta: 'AI cluster online' },
+  { img: feedSolar, kind: 'Solar Storm',  tone: 'text-[#ffd700]',   live: 'M2.4',     title: 'Active region 3517 erupts', meta: 'GOES-16 · 14:25 UTC' },
+  { img: feedUap,   kind: 'UAP Sighting', tone: 'text-emerald-300', live: 'REPORTED', title: 'Jellyfish anomaly · Iraq',   meta: 'FLIR · declassified' },
+  { img: feedQuake, kind: 'Earthquake',   tone: 'text-red-400',     live: 'M5.3',     title: 'Revilla Gigedo Islands',     meta: 'USGS · 12 min ago' },
+  { img: portalEcho,kind: 'Echo Signal',  tone: 'text-cyan-300',    live: 'ONLINE',   title: 'Codex 46 transmission',      meta: 'AI cluster online' },
 ];
 
 function LiveCosmicFeed({ utc }: { utc: Date }) {
@@ -554,16 +558,8 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
               <div className="relative h-36 overflow-hidden">
                 <img src={c.img} alt={c.title} loading="lazy" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[1.4s]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                {/* Live badge */}
-                <div className="absolute top-2 left-2 flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-emerald-500/95 text-black text-[9px] font-black tracking-[1.5px] uppercase shadow-[0_0_12px_rgba(16,185,129,0.6)]">
-                  <span className="relative flex w-1.5 h-1.5">
-                    <span className="absolute inset-0 rounded-full bg-black animate-ping opacity-50" />
-                    <span className="relative rounded-full w-1.5 h-1.5 bg-black" />
-                  </span>
-                  Live
-                </div>
-                {/* Kind tag */}
-                <div className="absolute top-2 right-2 px-2 py-0.5 rounded-sm bg-black/70 backdrop-blur text-[9px] uppercase tracking-[2px] text-white/80 border border-white/15">
+                {/* Kind tag (top-left, replaces decorative LIVE badge) */}
+                <div className="absolute top-2 left-2 px-2 py-0.5 rounded-sm bg-black/80 backdrop-blur text-[9px] uppercase tracking-[2px] text-white/85 border border-white/15 font-bold">
                   {c.kind}
                 </div>
                 {/* Big value bottom-right */}
@@ -587,10 +583,6 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
               <span className="relative rounded-full w-1.5 h-1.5 bg-emerald-400" />
             </span>
             <span className="text-emerald-300 font-bold">Online</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-white/55">
-            <MapPin className="w-3 h-3 text-[#c77dff]" />
-            <span className="font-mono">40.8605° N · 76.7883° W</span>
           </div>
           <div className="flex items-center gap-1.5 text-white/55">
             <span className="text-[#ffd700] font-bold">Codex 46</span>
@@ -700,7 +692,7 @@ function TheGodsReturn() {
               transition={{ duration: 0.45, delay: i * 0.04 }}
             >
               <Link
-                to="/gods"
+                to={`/gods/${g.id}`}
                 className="group block relative rounded-xl overflow-hidden border border-[#a020f0]/25 bg-black/70 hover:border-[#ffd700]/50 transition-colors"
               >
                 <div className="relative aspect-[3/4] overflow-hidden">
@@ -752,7 +744,7 @@ function SdoLiveImagery({ utc }: { utc: Date }) {
   return (
     <section className="relative px-4 sm:px-8 pb-8">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading icon={Sun} label="SDO Live Imagery" sub="Solar Dynamics Observatory · refreshed automatically" />
+        <SectionHeading icon={Sun} label="SDO Reference Imagery" sub="Solar Dynamics Observatory · static reference panels (live API coming soon)" />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {SDO_IMAGES.map((img, i) => (
             <motion.div
@@ -770,8 +762,8 @@ function SdoLiveImagery({ utc }: { utc: Date }) {
                   <div className="absolute top-1/2 left-0 right-0 h-px bg-white/40" />
                   <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/40" />
                 </div>
-                <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-sm bg-black/70 text-[8.5px] uppercase tracking-[1.5px] text-emerald-300 border border-emerald-400/40 font-bold">
-                  LIVE
+                <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-sm bg-black/80 text-[8.5px] uppercase tracking-[1.5px] text-[#fde68a] border border-[#ffd700]/40 font-bold">
+                  NASA
                 </div>
               </div>
               <div className="p-2.5 bg-black/80 border-t border-white/10">

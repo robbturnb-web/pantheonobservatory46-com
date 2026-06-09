@@ -13,6 +13,7 @@ import { ResetPasswordPage } from './pages/ResetPasswordPage';
 const TimelinePage = lazy(() => import('./pages/TimelinePage').then(m => ({ default: m.TimelinePage })));
 const UAPPage = lazy(() => import('./pages/UAPPage').then(m => ({ default: m.UAPPage })));
 const GodsPage = lazy(() => import('./pages/GodsPage').then(m => ({ default: m.GodsPage })));
+const GodDetailPage = lazy(() => import('./pages/GodDetailPage').then(m => ({ default: m.GodDetailPage })));
 const ConsciousnessPage = lazy(() => import('./pages/ConsciousnessPage').then(m => ({ default: m.ConsciousnessPage })));
 const SignalsPage = lazy(() => import('./pages/SignalsPage').then(m => ({ default: m.SignalsPage })));
 const OriginChamberPage = lazy(() => import('./pages/OriginChamberPage').then(m => ({ default: m.OriginChamberPage })));
@@ -83,6 +84,7 @@ export default function App() {
               <Route path="/timeline" element={<TimelinePage />} />
               <Route path="/uap" element={<UAPPage />} />
               <Route path="/gods" element={<GodsPage />} />
+              <Route path="/gods/:id" element={<GodDetailPage />} />
               <Route path="/consciousness" element={<ConsciousnessPage />} />
               <Route path="/signals" element={<SignalsPage />} />
               <Route path="/origin" element={<OriginChamberPage />} />
