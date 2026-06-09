@@ -60,6 +60,7 @@ const CodexPage = lazy(() => import('./pages/CodexPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage').then(m => ({ default: m.SearchPage })));
 const LegislationPage = lazy(() => import('./pages/LegislationPage').then(m => ({ default: m.LegislationPage })));
 const ObservatoryMapPage = lazy(() => import('./pages/ObservatoryMapPage').then(m => ({ default: m.ObservatoryMapPage })));
+const DiagnosticsPage = lazy(() => import('./pages/DiagnosticsPage'));
 
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
@@ -134,6 +135,7 @@ export default function App() {
               <Route path="/legislation" element={<LegislationPage />} />
               <Route path="/observatory" element={<ObservatoryMapPage />} />
               <Route path="/observatory/map" element={<ObservatoryMapPage />} />
+              <Route path="/diagnostics" element={<DiagnosticsPage />} />
               <Route path="/community" element={<Navigate to="/echoverse" replace />} />
               <Route path="/index" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />
