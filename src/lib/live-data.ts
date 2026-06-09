@@ -13,6 +13,21 @@
  * labelled "Source unavailable" state when an upstream fails.
  */
 
+const PROXY_BASE = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/live-data-proxy`;
+const PROXY_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+
+/**
+ * Fetch a whitelisted upstream source via the Pantheon edge proxy.
+ * The proxy adds 15-minute server-side caching, serves stale on upstream
+ * failure, and bypasses browser-side CORS/CSP/network blocks.
+ */
+async function proxyFetch(source: string, params: Record<string, string> = {}): Promise<Response> {
+  const q = new URLSearchParams({ source, ...params });
+  return fetch(`${PROXY_BASE}?${q.toString()}`, {
+    headers: { apikey: PROXY_KEY, Authorization: `Bearer ${PROXY_KEY}` },
+  });
+}
+
 export interface LiveResult<T> {
   ok: boolean;
   value: T | null;
@@ -20,6 +35,7 @@ export interface LiveResult<T> {
   fetchedAt: string;
   error?: string;
 }
+
 
 /* ─────────── USGS earthquakes (last 24h, all magnitudes) ─────────── */
 export interface QuakeFeature {
