@@ -1,6 +1,10 @@
 import { lazy, Suspense, useState } from 'react';
+import { Activity, Satellite, CloudLightning, Sun } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { EarthquakeLayer } from '@/components/observatory/EarthquakeLayer';
+import { IssLayer } from '@/components/observatory/IssLayer';
+import { NwsStormLayer } from '@/components/observatory/NwsStormLayer';
+import { SolarRegionLayer } from '@/components/observatory/SolarRegionLayer';
 
 const ObservatoryGlobe = lazy(() =>
   import('@/components/observatory/ObservatoryGlobe').then(m => ({
@@ -8,9 +12,69 @@ const ObservatoryGlobe = lazy(() =>
   }))
 );
 
+type LayerId = 'seismic' | 'iss' | 'storms' | 'solar';
+
+interface LayerDef {
+  id: LayerId;
+  label: string;
+  sublabel: string;
+  icon: typeof Activity;
+  accent: string;          // border + dot color when active
+  source: string;
+  sourceUrl: string;
+}
+
+const LAYERS: LayerDef[] = [
+  {
+    id: 'seismic',
+    label: 'Seismic',
+    sublabel: 'USGS · M4.5+ · 7d',
+    icon: Activity,
+    accent: 'signal-online',
+    source: 'USGS',
+    sourceUrl: 'https://earthquake.usgs.gov',
+  },
+  {
+    id: 'iss',
+    label: 'ISS Trace',
+    sublabel: 'wheretheiss.at · live',
+    icon: Satellite,
+    accent: 'realm-cosmos',
+    source: 'WhereTheISS.at',
+    sourceUrl: 'https://wheretheiss.at',
+  },
+  {
+    id: 'storms',
+    label: 'NWS Storms',
+    sublabel: 'NOAA NWS · severe/extreme',
+    icon: CloudLightning,
+    accent: 'amber-500',
+    source: 'NOAA NWS',
+    sourceUrl: 'https://www.weather.gov',
+  },
+  {
+    id: 'solar',
+    label: 'Solar Activity',
+    sublabel: 'SWPC Kp · subsolar point',
+    icon: Sun,
+    accent: 'realm-gods',
+    source: 'NOAA SWPC',
+    sourceUrl: 'https://www.swpc.noaa.gov',
+  },
+];
+
 export function ObservatoryMapPage() {
-  const [seismicOn, setSeismicOn] = useState(true);
-  const [quakeCount, setQuakeCount] = useState<number | null>(null);
+  const [active, setActive] = useState<Record<LayerId, boolean>>({
+    seismic: true,
+    iss: true,
+    storms: true,
+    solar: false,
+  });
+  const [counts, setCounts] = useState<{ quakes: number | null; storms: number | null }>({
+    quakes: null, storms: null,
+  });
+
+  const toggle = (id: LayerId) => setActive(a => ({ ...a, [id]: !a[id] }));
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -30,8 +94,8 @@ export function ObservatoryMapPage() {
           Pantheon Observatory <span className="text-realm-observatory">Globe</span>
         </h1>
         <p className="text-muted-foreground max-w-2xl mb-8">
-          The living planetary view. Seismic layer is live — solar, ISS, UAP, and
-          ancient sites activate in upcoming phases.
+          The living planetary view. Toggle layers below to overlay seismic activity,
+          the ISS in real time, active severe-weather alerts, and the current solar zenith.
         </p>
 
         <Suspense
@@ -47,48 +111,54 @@ export function ObservatoryMapPage() {
           }
         >
           <ObservatoryGlobe className="relative w-full h-[70vh] min-h-[520px] rounded-2xl overflow-hidden border border-realm-observatory/30 bg-[#05030D] shadow-[0_0_60px_-15px_hsl(var(--primary)/0.4)]">
-            {seismicOn && <EarthquakeLayer onCount={setQuakeCount} />}
+            {active.seismic && (
+              <EarthquakeLayer onCount={(n) => setCounts(c => ({ ...c, quakes: n }))} />
+            )}
+            {active.iss && <IssLayer />}
+            {active.storms && (
+              <NwsStormLayer onCount={(n) => setCounts(c => ({ ...c, storms: n }))} />
+            )}
+            {active.solar && <SolarRegionLayer />}
           </ObservatoryGlobe>
         </Suspense>
 
+        {/* Layer toggle bar */}
         <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-          <button
-            onClick={() => setSeismicOn(s => !s)}
-            className={`text-left p-3 rounded-lg border transition ${
-              seismicOn
-                ? 'border-signal-online/50 bg-signal-online/5'
-                : 'border-primary/15 bg-card/40 hover:border-primary/30'
-            } backdrop-blur`}
-          >
-            <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-mono flex items-center gap-2">
-              <span
-                className={`w-1.5 h-1.5 rounded-full ${
-                  seismicOn ? 'bg-signal-online animate-pulse' : 'bg-muted-foreground/40'
+          {LAYERS.map(l => {
+            const on = active[l.id];
+            const Icon = l.icon;
+            const count =
+              l.id === 'seismic' ? counts.quakes :
+              l.id === 'storms' ? counts.storms : null;
+            return (
+              <button
+                key={l.id}
+                onClick={() => toggle(l.id)}
+                aria-pressed={on}
+                className={`text-left p-3 rounded-lg border transition backdrop-blur ${
+                  on
+                    ? `border-${l.accent}/60 bg-${l.accent}/5`
+                    : 'border-primary/15 bg-card/40 hover:border-primary/30'
                 }`}
-              />
-              {seismicOn ? 'Live · M4.5+ · 7d' : 'Disabled'}
-            </p>
-            <p className="text-sm text-foreground mt-1">
-              Seismic Layer {quakeCount !== null && seismicOn && (
-                <span className="text-muted-foreground font-mono text-xs">· {quakeCount}</span>
-              )}
-            </p>
-          </button>
-          {[
-            { label: 'Solar Storms', status: 'Phase 3.2' },
-            { label: 'ISS Trace', status: 'Phase 3.3' },
-            { label: 'Ancient Sites', status: 'Phase 3.4' },
-          ].map(l => (
-            <div
-              key={l.label}
-              className="p-3 rounded-lg border border-primary/15 bg-card/40 backdrop-blur"
-            >
-              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-mono">
-                {l.status}
-              </p>
-              <p className="text-sm text-foreground mt-1">{l.label}</p>
-            </div>
-          ))}
+              >
+                <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-mono flex items-center gap-2">
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      on ? `bg-${l.accent} animate-pulse` : 'bg-muted-foreground/40'
+                    }`}
+                  />
+                  {on ? l.sublabel : 'Disabled'}
+                </p>
+                <p className="text-sm text-foreground mt-1 flex items-center gap-2">
+                  <Icon className={`w-3.5 h-3.5 ${on ? `text-${l.accent}` : 'text-muted-foreground/60'}`} />
+                  {l.label}
+                  {on && count !== null && (
+                    <span className="text-muted-foreground font-mono text-xs">· {count}</span>
+                  )}
+                </p>
+              </button>
+            );
+          })}
         </div>
 
         {/* Magnitude legend */}
@@ -105,7 +175,26 @@ export function ObservatoryMapPage() {
               {s.l}
             </span>
           ))}
-          <span className="ml-auto">Source · USGS</span>
+        </div>
+
+        {/* Source attribution */}
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-[10px] uppercase tracking-[0.18em] font-mono">
+          <span className="text-muted-foreground">Sources</span>
+          {LAYERS.map(l => (
+            <a
+              key={l.id}
+              href={l.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`px-2 py-1 rounded border transition ${
+                active[l.id]
+                  ? `border-${l.accent}/40 text-foreground/90 hover:border-${l.accent}`
+                  : 'border-primary/15 text-muted-foreground hover:text-foreground/80'
+              }`}
+            >
+              {l.source}
+            </a>
+          ))}
         </div>
       </section>
     </div>
