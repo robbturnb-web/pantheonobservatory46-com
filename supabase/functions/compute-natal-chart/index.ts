@@ -25,12 +25,24 @@ const BodySchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "date must be YYYY-MM-DD"),
   /** 24h time HH:MM (local at birthplace) */
   time: z.string().regex(/^\d{2}:\d{2}$/, "time must be HH:MM"),
+  /** Birth city, resolved server-side to avoid browser/network blocking. */
+  city: z.string().trim().min(2).max(120).optional(),
+  lookupOnly: z.boolean().optional(),
   /** Latitude in degrees, -90..90 */
-  lat: z.number().min(-90).max(90),
+  lat: z.number().min(-90).max(90).optional(),
   /** Longitude in degrees, -180..180 */
-  lon: z.number().min(-180).max(180),
+  lon: z.number().min(-180).max(180).optional(),
   /** Timezone offset in minutes from UTC (e.g. -300 for EST). */
-  tzOffsetMinutes: z.number().int().min(-14 * 60).max(14 * 60),
+  tzOffsetMinutes: z.number().int().min(-14 * 60).max(14 * 60).optional(),
+}).superRefine((value, ctx) => {
+  if (value.city) return;
+  if (typeof value.lat !== "number" || typeof value.lon !== "number" || typeof value.tzOffsetMinutes !== "number") {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Provide either city or lat/lon/tzOffsetMinutes",
+      path: ["city"],
+    });
+  }
 });
 
 const ZODIAC = [
@@ -44,6 +56,24 @@ interface PlanetPosition {
   sign: string;
   degree: number;
 }
+
+interface BirthPlace {
+  name: string;
+  country: string;
+  latitude: number;
+  longitude: number;
+  timezone: string;
+}
+
+const FALLBACK_PLACES: Record<string, BirthPlace> = {
+  "los angeles": { name: "Los Angeles", country: "United States", latitude: 34.05223, longitude: -118.24368, timezone: "America/Los_Angeles" },
+  "new york": { name: "New York", country: "United States", latitude: 40.71427, longitude: -74.00597, timezone: "America/New_York" },
+  "miami": { name: "Miami", country: "United States", latitude: 25.77427, longitude: -80.19366, timezone: "America/New_York" },
+  "chicago": { name: "Chicago", country: "United States", latitude: 41.85003, longitude: -87.65005, timezone: "America/Chicago" },
+  "london": { name: "London", country: "United Kingdom", latitude: 51.50853, longitude: -0.12574, timezone: "Europe/London" },
+  "paris": { name: "Paris", country: "France", latitude: 48.85341, longitude: 2.3488, timezone: "Europe/Paris" },
+  "tokyo": { name: "Tokyo", country: "Japan", latitude: 35.6895, longitude: 139.69171, timezone: "Asia/Tokyo" },
+};
 
 function longitudeToSign(longitude: number): PlanetPosition {
   const normalized = ((longitude % 360) + 360) % 360;
