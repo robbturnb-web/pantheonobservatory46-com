@@ -82,3 +82,5 @@ export const useISS = () => useLive<IssReading>(fetchISS, 15_000);
 // Lunar calendar + meteor shower schedule are deterministic — refresh hourly
 export const useLunarCalendar = () => useLive<LunarCalendar>(fetchLunarCalendar, 60 * 60_000);
 export const useMeteorShowers = () => useLive<MeteorSummary>(fetchMeteorShowers, 60 * 60_000);
+// NWS active severe/extreme alerts — refresh every 5 min
+export const useNwsAlerts = () => useLive<NwsSummary>(fetchNwsAlerts, 5 * 60_000);
