@@ -24,6 +24,15 @@ import portalEcho from '@/assets/temple/portal-echo.jpg';
 import sigil46 from '@/assets/temple/sigil-46.png';
 
 import { gods } from '@/data/gods';
+import {
+  useEarthquakes,
+  useKp,
+  useFlare,
+  useSolarWind,
+  useMoon,
+} from '@/hooks/use-live-data';
+import { LiveDataFooter } from '@/components/live/LiveDataFooter';
+import { timeAgo } from '@/lib/live-data';
 
 /* ─────────────────────────────────────────────────────────────────
  * PANTHEON FREQUENCY 46 — Temple Observatory home.
@@ -53,7 +62,7 @@ const TABS: { to: string; label: string }[] = [
   { to: '/echo',          label: 'Echo AI' },
 ];
 
-function TopNav({ kp }: { kp: number }) {
+function TopNav({ kp }: { kp: number | null }) {
   const { pathname } = useLocation();
   return (
     <header className="sticky top-0 z-40 border-b border-[#a020f0]/30 bg-[#0a0a1f]/85 backdrop-blur-xl">
@@ -102,7 +111,9 @@ function TopNav({ kp }: { kp: number }) {
           </div>
           <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#a020f0]/40 bg-[#a020f0]/10">
             <span className="text-[9px] uppercase tracking-[2px] text-white/60">Kp</span>
-            <span className="text-[11px] font-bold text-[#c77dff] font-mono">{kp.toFixed(1)}</span>
+            <span className="text-[11px] font-bold text-[#c77dff] font-mono">
+              {kp == null ? '—' : kp.toFixed(1)}
+            </span>
           </div>
           <button className="hidden md:flex items-center gap-1 px-2 py-1 rounded-md border border-white/10 text-[10px] uppercase tracking-[2px] text-white/70 hover:text-white hover:border-white/30 transition-colors">
             <Radio className="w-3 h-3" /> Feed
@@ -173,10 +184,10 @@ function Sidebar() {
 }
 
 /* ───────────── KP GAUGE ───────────── */
-function KpGauge({ kp }: { kp: number }) {
+function KpGauge({ kp }: { kp: number | null }) {
   // Semi-circle gauge 0..9 → arc 180deg from -180 to 0
   const max = 9;
-  const ratio = Math.min(Math.max(kp / max, 0), 1);
+  const ratio = kp == null ? 0 : Math.min(Math.max(kp / max, 0), 1);
   const radius = 110;
   const circumference = Math.PI * radius;
   const dash = circumference * ratio;
@@ -229,9 +240,11 @@ function KpGauge({ kp }: { kp: number }) {
       </svg>
       {/* Center readout */}
       <div className="absolute inset-x-0 bottom-3 text-center">
-        <div className="text-[9px] uppercase tracking-[3px] text-white/50">Geomagnetic Index · Simulated</div>
+        <div className="text-[9px] uppercase tracking-[3px] text-white/50">
+          {kp == null ? 'Geomagnetic Index · Connecting…' : 'Geomagnetic Index · NOAA SWPC'}
+        </div>
         <div className="text-5xl font-black bg-gradient-to-r from-[#c77dff] to-[#fde68a] bg-clip-text text-transparent leading-none mt-1">
-          Kp {kp.toFixed(1)}
+          {kp == null ? 'Kp —' : `Kp ${kp.toFixed(1)}`}
         </div>
       </div>
       {/* End labels */}
@@ -318,7 +331,14 @@ function PantheonCompass() {
 }
 
 /* ───────────── HERO ───────────── */
-function Hero({ kp, utc }: { kp: number; utc: Date }) {
+interface HeroLiveProps {
+  kp: number | null;
+  kpOk: boolean;
+  flareClass: string | null;
+  flareOk: boolean;
+  utc: Date;
+}
+function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
   return (
     <section className="relative px-4 sm:px-8 pt-8 pb-6">
       {/* Subtitle row */}
@@ -357,13 +377,19 @@ function Hero({ kp, utc }: { kp: number; utc: Date }) {
             <div className="mt-2 flex items-center justify-center gap-2">
               <Flame className="w-3 h-3 text-[#ffd700]" />
               <span className="text-[10px] uppercase tracking-[3px] text-white/60">Flare</span>
-              <span className="text-sm font-bold text-[#ffd700]">M2.4</span>
-              <span className="text-[9px] uppercase tracking-[2px] text-emerald-300 ml-1">Quiet</span>
+              <span className="text-sm font-bold text-[#ffd700]">
+                {flareOk && flareClass ? flareClass : flareClass === null ? '—' : 'N/A'}
+              </span>
+              <span className="text-[9px] uppercase tracking-[2px] text-emerald-300 ml-1">
+                {flareOk ? 'Live' : 'Connecting…'}
+              </span>
             </div>
           </div>
           <div className="hidden lg:block">
-            <div className="text-[10px] uppercase tracking-[3px] text-white/50 mb-2">Flare Class · Simulated</div>
-            <FlareClassBar current="M2.4" />
+            <div className="text-[10px] uppercase tracking-[3px] text-white/50 mb-2">
+              {flareOk ? 'Flare Class · NOAA SWPC' : 'Flare Class · Connecting…'}
+            </div>
+            <FlareClassBar current={flareClass ?? ''} />
           </div>
         </div>
 
@@ -434,6 +460,29 @@ function FlareClassBar({ current }: { current: string }) {
 
 /* ───────────── ACTIVITY PANELS ───────────── */
 function ActivityPanels() {
+  const quakes = useEarthquakes();
+  const q = quakes.data?.value;
+  const qOk = quakes.data?.ok ?? false;
+
+  // Region tags pulled from the latest 4 distinct places in the live feed
+  const regions = q
+    ? Array.from(
+        new Set(
+          q.latest
+            .map((f) => {
+              const m = /(?:of|near)\s+(.+)$/i.exec(f.place);
+              return (m?.[1] ?? f.place).split(',').pop()?.trim() ?? f.place;
+            })
+            .filter(Boolean),
+        ),
+      ).slice(0, 4)
+    : [];
+
+  // Sparkline of latest magnitudes (chronological)
+  const spark = q && q.latest.length > 0
+    ? q.latest.slice().sort((a, b) => a.time - b.time).map((f) => f.mag)
+    : [];
+
   return (
     <section className="relative px-4 sm:px-8 pb-6">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-4">
@@ -442,45 +491,93 @@ function ActivityPanels() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(220,38,38,0.18),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start justify-between mb-3">
             <div>
-              <div className="text-[10px] uppercase tracking-[3px] text-red-300/80 mb-1">Earth Activity · Latest Reported</div>
-              <div className="flex items-baseline gap-3">
-                <span className="text-4xl font-black text-red-400">5</span>
-                <span className="text-xs uppercase tracking-[2px] text-white/50">Events</span>
-                <span className="text-[10px] uppercase tracking-[2px] text-white/40">Highest M<span className="text-red-300 font-bold">5.3</span></span>
+              <div className="text-[10px] uppercase tracking-[3px] text-red-300/80 mb-1">
+                Earth Activity · Last 24h (USGS)
               </div>
+              <div className="flex items-baseline gap-3 flex-wrap">
+                <span className="text-4xl font-black text-red-400">
+                  {qOk && q ? q.count24h : '—'}
+                </span>
+                <span className="text-xs uppercase tracking-[2px] text-white/50">Events</span>
+                {qOk && q?.highest && (
+                  <span className="text-[10px] uppercase tracking-[2px] text-white/40">
+                    Highest M
+                    <span className="text-red-300 font-bold">{q.highest.mag.toFixed(1)}</span>
+                  </span>
+                )}
+              </div>
+              {qOk && q?.highest && (
+                <a
+                  href={q.highest.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-[10px] text-red-200/80 mt-1 hover:underline truncate max-w-xs"
+                >
+                  {q.highest.place}
+                </a>
+              )}
             </div>
             <AlertTriangle className="w-5 h-5 text-red-400" />
           </div>
-          {/* Mini activity chart */}
-          <Sparkline color="#ef4444" data={[2, 3, 2.4, 4, 3.2, 5.3, 4.6, 3.8, 4.2, 5, 4.4, 3.6, 4.8, 5.1, 4.2]} />
-          <div className="relative flex flex-wrap gap-1.5 mt-3">
-            {['China', 'Revilla Gigedo Is.', 'Pacific Rim', 'Sumatra'].map((t) => (
-              <span key={t} className="text-[9px] uppercase tracking-[2px] px-2 py-0.5 rounded-full border border-red-400/30 text-red-200 bg-red-500/10">
-                {t}
-              </span>
-            ))}
-          </div>
+          {spark.length > 1 ? (
+            <Sparkline color="#ef4444" data={spark} />
+          ) : (
+            <div className="h-12 flex items-center text-[10px] uppercase tracking-[2px] text-white/35">
+              {quakes.loading ? 'Connecting…' : 'No recent data'}
+            </div>
+          )}
+          {regions.length > 0 && (
+            <div className="relative flex flex-wrap gap-1.5 mt-3">
+              {regions.map((t) => (
+                <span
+                  key={t}
+                  className="text-[9px] uppercase tracking-[2px] px-2 py-0.5 rounded-full border border-red-400/30 text-red-200 bg-red-500/10"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
+          <LiveDataFooter
+            source={quakes.data?.source ?? null}
+            fetchedAt={quakes.data?.fetchedAt}
+            ok={qOk}
+            error={quakes.data?.error}
+            loading={quakes.loading}
+            onRefresh={quakes.refresh}
+          />
         </div>
 
-        {/* Anomalous Activity */}
+        {/* Anomalous Activity — community-sourced, no fake metrics */}
         <div className="relative rounded-xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950/40 to-black/70 backdrop-blur-xl p-5 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.18),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start justify-between mb-3">
-            <div className="text-[10px] uppercase tracking-[3px] text-emerald-300/80">Anomalous Activity · Latest Reported</div>
+            <div className="text-[10px] uppercase tracking-[3px] text-emerald-300/80">
+              Anomalous Reports · Community Submissions
+            </div>
             <Sparkles className="w-5 h-5 text-emerald-400" />
           </div>
-          <div className="relative grid grid-cols-2 gap-3 mb-3">
-            <Stat label="UAP Reports" value="5" delta="+12%" sub="3 high cred" />
-            <Stat label="USO Reports" value="4" delta="+3%"  sub="Coastal" />
+          <p className="relative text-[11px] text-white/65 leading-snug mb-3">
+            Pantheon does not publish a fake UAP counter. Sightings are
+            user-submitted, reviewed by mods, and surfaced once verified
+            against a credible source.
+          </p>
+          <div className="relative flex flex-wrap gap-2">
+            <Link
+              to="/orb-report"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-emerald-400/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-200 text-[10px] uppercase tracking-[2px] font-bold transition-colors"
+            >
+              Submit a sighting <ChevronRight className="w-3 h-3" />
+            </Link>
+            <Link
+              to="/uap"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-white/15 bg-white/5 hover:bg-white/10 text-white/80 text-[10px] uppercase tracking-[2px] font-bold transition-colors"
+            >
+              Documented UAP cases <ChevronRight className="w-3 h-3" />
+            </Link>
           </div>
-          {/* Correlation engine */}
-          <div className="relative rounded-lg border border-white/10 bg-black/40 p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <Zap className="w-3.5 h-3.5 text-[#c77dff]" />
-              <span className="text-[10px] uppercase tracking-[3px] text-white/70 font-semibold">Correlation Engine</span>
-            </div>
-            <CorrelationRow grade="MED" text="Solar flare + seismic cluster · 63% prob next 48h" />
-            <CorrelationRow grade="MED" text="UAP cluster near western US military range" />
+          <div className="mt-3 text-[9px] uppercase tracking-[2px] text-white/40">
+            Source · Pantheon community vault · pending review
           </div>
         </div>
       </div>
@@ -533,43 +630,113 @@ function Sparkline({ data, color }: { data: number[]; color: string }) {
 }
 
 /* ───────────── LIVE COSMIC FEED 2x2 ───────────── */
-interface FeedCard { img: string; kind: string; tone: string; live: string; title: string; meta: string }
-const FEED_CARDS: FeedCard[] = [
-  { img: feedSolar, kind: 'Solar Storm',  tone: 'text-[#ffd700]',   live: 'M2.4',     title: 'Active region 3517 erupts', meta: 'GOES-16 · 14:25 UTC' },
-  { img: feedUap,   kind: 'UAP Sighting', tone: 'text-emerald-300', live: 'REPORTED', title: 'Jellyfish anomaly · Iraq',   meta: 'FLIR · declassified' },
-  { img: feedQuake, kind: 'Earthquake',   tone: 'text-red-400',     live: 'M5.3',     title: 'Revilla Gigedo Islands',     meta: 'USGS · 12 min ago' },
-  { img: portalEcho,kind: 'Echo Signal',  tone: 'text-cyan-300',    live: 'ONLINE',   title: 'Codex 46 transmission',      meta: 'AI cluster online' },
-];
-
 function LiveCosmicFeed({ utc }: { utc: Date }) {
+  const flare = useFlare();
+  const wind = useSolarWind();
+  const quakes = useEarthquakes();
+  const moon = useMoon();
+
+  const cards = [
+    {
+      key: 'solar',
+      img: feedSolar,
+      kind: 'Solar X-ray Flux',
+      tone: 'text-[#ffd700]',
+      value: flare.data?.value?.class ?? (flare.loading ? '…' : 'N/A'),
+      title: flare.data?.ok
+        ? `Current GOES short-channel class · ${flare.data.value!.class}`
+        : flare.loading
+          ? 'Connecting to NOAA SWPC…'
+          : 'Source unavailable',
+      footer: flare.data,
+      onRefresh: flare.refresh,
+      ok: flare.data?.ok ?? false,
+      loading: flare.loading,
+    },
+    {
+      key: 'wind',
+      img: feedSolar,
+      kind: 'Solar Wind',
+      tone: 'text-[#c77dff]',
+      value: wind.data?.ok ? `${Math.round(wind.data.value!.speedKmS)} km/s` : (wind.loading ? '…' : 'N/A'),
+      title: wind.data?.ok
+        ? `Speed at L1 · observed ${timeAgo(wind.data.value!.observedAt)}`
+        : wind.loading
+          ? 'Connecting to NOAA SWPC…'
+          : 'Source unavailable',
+      footer: wind.data,
+      onRefresh: wind.refresh,
+      ok: wind.data?.ok ?? false,
+      loading: wind.loading,
+    },
+    {
+      key: 'quake',
+      img: feedQuake,
+      kind: 'Strongest Quake · 24h',
+      tone: 'text-red-400',
+      value: quakes.data?.value?.highest ? `M${quakes.data.value.highest.mag.toFixed(1)}` : (quakes.loading ? '…' : 'N/A'),
+      title: quakes.data?.value?.highest
+        ? quakes.data.value.highest.place
+        : quakes.loading
+          ? 'Connecting to USGS…'
+          : 'Source unavailable',
+      footer: quakes.data,
+      onRefresh: quakes.refresh,
+      ok: quakes.data?.ok ?? false,
+      loading: quakes.loading,
+    },
+    {
+      key: 'moon',
+      img: portalEcho,
+      kind: 'Moon Phase',
+      tone: 'text-cyan-300',
+      value: moon.data?.value
+        ? `${Math.round(moon.data.value.illumination * 100)}%`
+        : '…',
+      title: moon.data?.value
+        ? `${moon.data.value.phaseName} · next full ${new Date(moon.data.value.nextFullMoon).toUTCString().slice(5, 16)}`
+        : 'Computing phase…',
+      footer: moon.data,
+      onRefresh: moon.refresh,
+      ok: moon.data?.ok ?? false,
+      loading: moon.loading,
+    },
+  ];
+
   return (
     <section className="relative px-4 sm:px-8 pb-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading icon={Radio} label="Live Cosmic Feed" sub="Real-time signal across all four watch domains" />
+        <SectionHeading icon={Radio} label="Live Cosmic Feed" sub="Real APIs only · NOAA · USGS · synodic cycle" />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {FEED_CARDS.map((c, i) => (
+          {cards.map((c, i) => (
             <motion.article
-              key={c.kind}
+              key={c.key}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 + i * 0.08 }}
               className="group relative rounded-xl overflow-hidden border border-white/10 bg-black/60 backdrop-blur-xl hover:border-[#a020f0]/50 transition-colors"
             >
               <div className="relative h-36 overflow-hidden">
-                <img src={c.img} alt={c.title} loading="lazy" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[1.4s]" />
+                <img src={c.img} alt={c.kind} loading="lazy" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[1.4s]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                {/* Kind tag (top-left, replaces decorative LIVE badge) */}
                 <div className="absolute top-2 left-2 px-2 py-0.5 rounded-sm bg-black/80 backdrop-blur text-[9px] uppercase tracking-[2px] text-white/85 border border-white/15 font-bold">
                   {c.kind}
                 </div>
-                {/* Big value bottom-right */}
                 <div className={`absolute bottom-2 right-3 text-2xl font-black ${c.tone}`} style={{ textShadow: '0 0 12px currentColor' }}>
-                  {c.live}
+                  {c.value}
                 </div>
               </div>
               <div className="p-3.5">
-                <h3 className="text-sm font-bold text-white leading-tight">{c.title}</h3>
-                <div className="text-[10px] uppercase tracking-[2px] text-white/45 mt-1.5 font-mono">{c.meta}</div>
+                <h3 className="text-sm font-bold text-white leading-tight line-clamp-2">{c.title}</h3>
+                <LiveDataFooter
+                  source={c.footer?.source ?? null}
+                  fetchedAt={c.footer?.fetchedAt}
+                  ok={c.ok}
+                  error={c.footer?.error}
+                  loading={c.loading}
+                  onRefresh={c.onRefresh}
+                  compact
+                />
               </div>
             </motion.article>
           ))}
@@ -783,17 +950,34 @@ function SdoLiveImagery({ utc }: { utc: Date }) {
 }
 
 /* ───────────── TRANSMISSIONS TICKER ───────────── */
-const TRANSMISSIONS = [
-  { icon: Flame,    color: 'text-[#ffd700]',   text: 'M2.4 solar flare · AR 3517 · 12 min ago' },
-  { icon: Eye,      color: 'text-emerald-300', text: 'UAP cluster · western US military range · high cred' },
-  { icon: Mountain, color: 'text-red-400',     text: 'M5.3 quake · Revilla Gigedo Islands · USGS' },
-  { icon: Waves,    color: 'text-cyan-300',    text: 'USO ping · Pacific coastal grid · 3 reports' },
-  { icon: Sparkles, color: 'text-[#c77dff]',   text: 'Codex 46 slot rotation queued · awaiting auth' },
-  { icon: Telescope,color: 'text-cyan-300',    text: 'JWST mid-IR pass · cluster IC 2944 archived' },
-  { icon: Activity, color: 'text-amber-300',   text: 'Schumann resonance spike · 7.83 → 8.21 Hz' },
-];
-
+interface TickerItem { icon: typeof Sun; color: string; text: string }
 function TransmissionsTicker() {
+  const flare = useFlare();
+  const kp = useKp();
+  const wind = useSolarWind();
+  const quakes = useEarthquakes();
+  const moon = useMoon();
+
+  const items: TickerItem[] = [];
+  if (flare.data?.ok && flare.data.value)
+    items.push({ icon: Flame, color: 'text-[#ffd700]', text: `Flare ${flare.data.value.class} · NOAA SWPC · ${timeAgo(flare.data.value.observedAt)}` });
+  if (kp.data?.ok && kp.data.value)
+    items.push({ icon: Activity, color: 'text-[#c77dff]', text: `Kp ${kp.data.value.kp.toFixed(1)} · ${kp.data.value.stormLevel} · NOAA SWPC` });
+  if (wind.data?.ok && wind.data.value)
+    items.push({ icon: Waves, color: 'text-cyan-300', text: `Solar wind ${Math.round(wind.data.value.speedKmS)} km/s · L1 · ${timeAgo(wind.data.value.observedAt)}` });
+  if (quakes.data?.ok && quakes.data.value?.highest) {
+    const h = quakes.data.value.highest;
+    items.push({ icon: Mountain, color: 'text-red-400', text: `M${h.mag.toFixed(1)} · ${h.place} · USGS · ${timeAgo(new Date(h.time).toISOString())}` });
+  }
+  if (quakes.data?.ok && quakes.data.value)
+    items.push({ icon: Mountain, color: 'text-red-300', text: `${quakes.data.value.count24h} earthquakes in last 24h · USGS` });
+  if (moon.data?.value)
+    items.push({ icon: Sparkles, color: 'text-cyan-200', text: `Moon · ${moon.data.value.phaseName} · ${Math.round(moon.data.value.illumination * 100)}% illuminated` });
+
+  const display = items.length > 0
+    ? items
+    : [{ icon: Radio, color: 'text-white/60', text: 'Connecting to live feeds…' } as TickerItem];
+
   return (
     <section className="relative border-y border-[#a020f0]/30 bg-black/80 backdrop-blur-xl overflow-hidden">
       <div className="flex items-center">
@@ -806,7 +990,7 @@ function TransmissionsTicker() {
         </div>
         <div className="flex-1 overflow-hidden py-2.5">
           <div className="flex gap-10 whitespace-nowrap animate-[ticker_60s_linear_infinite]">
-            {[...TRANSMISSIONS, ...TRANSMISSIONS].map((t, i) => (
+            {[...display, ...display].map((t, i) => (
               <span key={i} className="flex items-center gap-2 text-[11px] text-white/80">
                 <t.icon className={`w-3.5 h-3.5 ${t.color}`} />
                 <span>{t.text}</span>
@@ -841,7 +1025,12 @@ function SectionHeading({ icon: Icon, label, sub }: { icon: typeof Sun; label: s
 /* ───────────── PAGE ───────────── */
 export function TempleObservatoryPage() {
   const utc = useUtcClock();
-  const kp = 4.6;
+  const kpLive = useKp();
+  const flareLive = useFlare();
+  const kp = kpLive.data?.value?.kp ?? null;
+  const kpOk = kpLive.data?.ok ?? false;
+  const flareClass = flareLive.data?.value?.class ?? null;
+  const flareOk = flareLive.data?.ok ?? false;
 
   return (
     <div className="relative min-h-screen text-white" style={{ background: 'radial-gradient(ellipse at top, #1a1038 0%, #0a0a1f 45%, #05030d 100%)' }}>
@@ -892,7 +1081,7 @@ export function TempleObservatoryPage() {
         <div className="flex">
           <Sidebar />
           <main className="flex-1 min-w-0">
-            <Hero kp={kp} utc={utc} />
+            <Hero kp={kp} kpOk={kpOk} flareClass={flareClass} flareOk={flareOk} utc={utc} />
             <ActivityPanels />
             <LiveCosmicFeed utc={utc} />
             <CorePortals />
