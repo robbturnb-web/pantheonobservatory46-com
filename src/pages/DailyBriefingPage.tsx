@@ -6,12 +6,12 @@
  * AARO lineage) into a single dated snapshot a visitor can open every
  * morning. Pure client composition — no new edge function.
  */
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Activity, AlertTriangle, Radio, Sun, Waves, Wind, Satellite,
   Gavel, ScrollText, FileText, Building2, Users, Radar,
-  Cloud, RefreshCw, ChevronRight, CalendarDays,
+  Cloud, RefreshCw, ChevronRight, CalendarDays, Download,
 } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import {
@@ -339,6 +339,92 @@ export function DailyBriefingPage() {
 
   const loading = [eq, kp, flare, wind, nws, swpc].some((h) => h.loading && !h.data);
 
+  const [exporting, setExporting] = useState(false);
+  const exportPdf = async () => {
+    setExporting(true);
+    try {
+      const { default: jsPDF } = await import('jspdf');
+      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+      const pageW = doc.internal.pageSize.getWidth();
+      const pageH = doc.internal.pageSize.getHeight();
+      const margin = 40;
+      let y = margin;
+
+      const newPageIfNeeded = (need: number) => {
+        if (y + need > pageH - margin) { doc.addPage(); y = margin; }
+      };
+
+      // Title
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
+      doc.text('Pantheon Frequency 46 — Daily Briefing', margin, y); y += 24;
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(110);
+      doc.text(today, margin, y); y += 20;
+      doc.setTextColor(0);
+
+      // Posture
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
+      doc.text(`Posture: ${TONE[posture].label}`, margin, y); y += 16;
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10);
+      doc.text(
+        `Severe: ${severeCount}   Warnings: ${warningCount}   Watch: ${watchCount}   Nominal: ${items.length - severeCount - warningCount - watchCount}`,
+        margin, y,
+      );
+      y += 18;
+      doc.text(`Filter: ${FILTERS.find((f) => f.id === filter)?.label}   ·   ${filtered.length} entries`, margin, y);
+      y += 22;
+
+      // Divider
+      doc.setDrawColor(200); doc.line(margin, y, pageW - margin, y); y += 18;
+
+      // Items
+      for (const it of filtered) {
+        const dm = DOMAIN_META[it.domain];
+        const tone = TONE[it.tone];
+        const headerLine = `[${dm.label.toUpperCase()} · ${tone.label.toUpperCase()}]  ${fmtTime(it.timestamp)}`;
+        const titleLines = doc.splitTextToSize(it.title, pageW - margin * 2);
+        const bodyLines  = doc.splitTextToSize(it.body, pageW - margin * 2);
+        const metaLines  = it.meta ? doc.splitTextToSize(it.meta, pageW - margin * 2) : [];
+        const linkLines  = it.href ? doc.splitTextToSize(it.href, pageW - margin * 2) : [];
+        const need = 14 + titleLines.length * 14 + bodyLines.length * 12 +
+                     metaLines.length * 11 + linkLines.length * 11 + 14;
+        newPageIfNeeded(need);
+
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(8); doc.setTextColor(110);
+        doc.text(headerLine, margin, y); y += 12;
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(11); doc.setTextColor(0);
+        doc.text(titleLines, margin, y); y += titleLines.length * 13;
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(60);
+        doc.text(bodyLines, margin, y); y += bodyLines.length * 12;
+        if (metaLines.length) {
+          doc.setFontSize(8); doc.setTextColor(130);
+          doc.text(metaLines, margin, y); y += metaLines.length * 10;
+        }
+        if (linkLines.length) {
+          doc.setFontSize(8); doc.setTextColor(80, 80, 180);
+          doc.text(linkLines, margin, y); y += linkLines.length * 10;
+        }
+        doc.setTextColor(0);
+        y += 10;
+        doc.setDrawColor(230); doc.line(margin, y - 4, pageW - margin, y - 4);
+      }
+
+      // Footer page numbers
+      const pageCount = doc.getNumberOfPages();
+      for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(140);
+        doc.text(`Pantheon Frequency 46  ·  pantheonobservatory46.com  ·  Page ${i} / ${pageCount}`,
+          pageW / 2, pageH - 20, { align: 'center' });
+      }
+
+      const stamp = new Date().toISOString().slice(0, 10);
+      doc.save(`pantheon-daily-briefing-${stamp}.pdf`);
+    } finally {
+      setExporting(false);
+    }
+  };
+
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
@@ -353,6 +439,14 @@ export function DailyBriefingPage() {
             Phase 2 · Daily Briefing
           </span>
           <span className="h-px flex-1 bg-realm-observatory/30" />
+          <button
+            onClick={exportPdf}
+            disabled={exporting || items.length === 0}
+            className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-realm-observatory font-mono transition disabled:opacity-40"
+          >
+            <Download className={`w-3 h-3 ${exporting ? 'animate-pulse' : ''}`} />
+            {exporting ? 'Exporting…' : 'Export PDF'}
+          </button>
           <button
             onClick={refreshAll}
             className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground font-mono transition"
