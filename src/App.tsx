@@ -60,6 +60,7 @@ const CodexPage = lazy(() => import('./pages/CodexPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage').then(m => ({ default: m.SearchPage })));
 const LegislationPage = lazy(() => import('./pages/LegislationPage').then(m => ({ default: m.LegislationPage })));
 const ObservatoryMapPage = lazy(() => import('./pages/ObservatoryMapPage').then(m => ({ default: m.ObservatoryMapPage })));
+const DisclosureCommandPage = lazy(() => import('./pages/DisclosureCommandPage').then(m => ({ default: m.DisclosureCommandPage })));
 const DiagnosticsPage = lazy(() => import('./pages/DiagnosticsPage'));
 
 
@@ -135,6 +136,7 @@ export default function App() {
               <Route path="/legislation" element={<LegislationPage />} />
               <Route path="/observatory" element={<ObservatoryMapPage />} />
               <Route path="/observatory/map" element={<ObservatoryMapPage />} />
+              <Route path="/disclosure" element={<DisclosureCommandPage />} />
               <Route path="/diagnostics" element={<DiagnosticsPage />} />
               <Route path="/community" element={<Navigate to="/echoverse" replace />} />
               <Route path="/index" element={<Navigate to="/" replace />} />
