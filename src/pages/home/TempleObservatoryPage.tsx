@@ -331,7 +331,14 @@ function PantheonCompass() {
 }
 
 /* ───────────── HERO ───────────── */
-function Hero({ kp, utc }: { kp: number; utc: Date }) {
+interface HeroLiveProps {
+  kp: number | null;
+  kpOk: boolean;
+  flareClass: string | null;
+  flareOk: boolean;
+  utc: Date;
+}
+function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
   return (
     <section className="relative px-4 sm:px-8 pt-8 pb-6">
       {/* Subtitle row */}
@@ -370,13 +377,19 @@ function Hero({ kp, utc }: { kp: number; utc: Date }) {
             <div className="mt-2 flex items-center justify-center gap-2">
               <Flame className="w-3 h-3 text-[#ffd700]" />
               <span className="text-[10px] uppercase tracking-[3px] text-white/60">Flare</span>
-              <span className="text-sm font-bold text-[#ffd700]">M2.4</span>
-              <span className="text-[9px] uppercase tracking-[2px] text-emerald-300 ml-1">Quiet</span>
+              <span className="text-sm font-bold text-[#ffd700]">
+                {flareOk && flareClass ? flareClass : flareClass === null ? '—' : 'N/A'}
+              </span>
+              <span className="text-[9px] uppercase tracking-[2px] text-emerald-300 ml-1">
+                {flareOk ? 'Live' : 'Connecting…'}
+              </span>
             </div>
           </div>
           <div className="hidden lg:block">
-            <div className="text-[10px] uppercase tracking-[3px] text-white/50 mb-2">Flare Class · Simulated</div>
-            <FlareClassBar current="M2.4" />
+            <div className="text-[10px] uppercase tracking-[3px] text-white/50 mb-2">
+              {flareOk ? 'Flare Class · NOAA SWPC' : 'Flare Class · Connecting…'}
+            </div>
+            <FlareClassBar current={flareClass ?? ''} />
           </div>
         </div>
 
