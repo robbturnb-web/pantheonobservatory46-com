@@ -11,6 +11,10 @@ import {
   fetchSolarWind,
   fetchMarine,
   fetchMoon,
+  fetchCMEs,
+  fetchFlareEvents,
+  fetchGSTs,
+  fetchSwpcAlerts,
   type LiveResult,
   type QuakeSummary,
   type KpReading,
@@ -18,6 +22,10 @@ import {
   type WindReading,
   type MarineReading,
   type MoonReading,
+  type CmeSummary,
+  type FlareEventSummary,
+  type GstSummary,
+  type SwpcAlert,
 } from '@/lib/live-data';
 
 interface State<T> {
@@ -56,3 +64,8 @@ export const useFlare = () => useLive<FlareReading>(fetchFlare, 5 * 60_000);
 export const useSolarWind = () => useLive<WindReading>(fetchSolarWind, 5 * 60_000);
 export const useMarine = () => useLive<MarineReading>(fetchMarine, 15 * 60_000);
 export const useMoon = () => useLive<MoonReading>(fetchMoon, 60 * 60_000);
+// DONKI is rate-limited under DEMO_KEY → 30 min cadence
+export const useCMEs = () => useLive<CmeSummary>(fetchCMEs, 30 * 60_000);
+export const useFlareEvents = () => useLive<FlareEventSummary>(fetchFlareEvents, 30 * 60_000);
+export const useGSTs = () => useLive<GstSummary>(fetchGSTs, 30 * 60_000);
+export const useSwpcAlerts = () => useLive<SwpcAlert[]>(fetchSwpcAlerts, 10 * 60_000);
