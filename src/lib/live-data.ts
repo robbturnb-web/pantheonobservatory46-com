@@ -19,13 +19,41 @@ const PROXY_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
 /**
  * Fetch a whitelisted upstream source via the Pantheon edge proxy.
  * The proxy adds 15-minute server-side caching, serves stale on upstream
- * failure, and bypasses browser-side CORS/CSP/network blocks.
+ * failure, and bypasses browser-side CORS/CSP/network blocks. Cache state
+ * is read from `X-Pantheon-Cache` (HIT|MISS|STALE) and exposed on the
+ * returned Response as `.proxyMeta` so each fetcher can mark its result
+ * as fresh / cached / stale and surface a real "last successful fetch".
  */
-async function proxyFetch(source: string, params: Record<string, string> = {}): Promise<Response> {
+export interface ProxyMeta {
+  /** true when proxy served cached data because upstream just failed */
+  stale: boolean;
+  /** age of the cached payload in seconds, when HIT or STALE */
+  cacheAge: number | null;
+  /** ISO timestamp of the last successful upstream fetch (when known) */
+  lastSuccessAt: string | null;
+}
+type ProxyResponse = Response & { proxyMeta: ProxyMeta };
+
+async function proxyFetch(source: string, params: Record<string, string> = {}): Promise<ProxyResponse> {
   const q = new URLSearchParams({ source, ...params });
-  return fetch(`${PROXY_BASE}?${q.toString()}`, {
+  const res = (await fetch(`${PROXY_BASE}?${q.toString()}`, {
     headers: { apikey: PROXY_KEY, Authorization: `Bearer ${PROXY_KEY}` },
-  });
+  })) as ProxyResponse;
+  const cache = res.headers.get('X-Pantheon-Cache');
+  const ageStr = res.headers.get('X-Pantheon-Cache-Age');
+  const age = ageStr != null ? Number(ageStr) : NaN;
+  const cached = cache === 'HIT' || cache === 'STALE';
+  res.proxyMeta = {
+    stale: cache === 'STALE',
+    cacheAge: cached && Number.isFinite(age) ? age : null,
+    lastSuccessAt:
+      cached && Number.isFinite(age)
+        ? new Date(Date.now() - age * 1000).toISOString()
+        : cache === 'MISS'
+          ? new Date().toISOString()
+          : null,
+  };
+  return res;
 }
 
 export interface LiveResult<T> {
@@ -34,7 +62,14 @@ export interface LiveResult<T> {
   source: { label: string; url: string };
   fetchedAt: string;
   error?: string;
+  /** true if data was served from the proxy cache after upstream failed */
+  stale?: boolean;
+  /** age of cached payload in seconds, when proxy served cached data */
+  cacheAge?: number | null;
+  /** ISO of last verified upstream success (defaults to fetchedAt on MISS) */
+  lastSuccessAt?: string | null;
 }
+
 
 
 /* ─────────── USGS earthquakes (last 24h, all magnitudes) ─────────── */
