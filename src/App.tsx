@@ -63,6 +63,15 @@ const ObservatoryMapPage = lazy(() => import('./pages/ObservatoryMapPage').then(
 const DisclosureCommandPage = lazy(() => import('./pages/DisclosureCommandPage').then(m => ({ default: m.DisclosureCommandPage })));
 const DailyBriefingPage = lazy(() => import('./pages/DailyBriefingPage').then(m => ({ default: m.DailyBriefingPage })));
 const DiagnosticsPage = lazy(() => import('./pages/DiagnosticsPage'));
+const LiveFeedsPage = lazy(() => import('./pages/LiveFeedsPage').then(m => ({ default: m.LiveFeedsPage })));
+const MissionsPage = lazy(() => import('./pages/MissionsPage').then(m => ({ default: m.MissionsPage })));
+const SourcesPage = lazy(() => import('./pages/SourcesPage').then(m => ({ default: m.SourcesPage })));
+const PrivacyPage = lazy(() => import('./pages/legal/PrivacyPage').then(m => ({ default: m.PrivacyPage })));
+const TermsPage = lazy(() => import('./pages/legal/TermsPage').then(m => ({ default: m.TermsPage })));
+const DisclaimerPage = lazy(() => import('./pages/legal/DisclaimerPage').then(m => ({ default: m.DisclaimerPage })));
+const ContactPage = lazy(() => import('./pages/legal/ContactPage').then(m => ({ default: m.ContactPage })));
+const AboutPage = lazy(() => import('./pages/legal/AboutPage').then(m => ({ default: m.AboutPage })));
+const DebugChecklistPage = lazy(() => import('./pages/DebugChecklistPage').then(m => ({ default: m.DebugChecklistPage })));
 
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
