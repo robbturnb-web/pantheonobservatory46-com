@@ -18,6 +18,18 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
+
+const FILENAME_PREFIX_MAX = 64;
+const FILENAME_PREFIX_PATTERN = /^[a-zA-Z0-9-_ ]+$/;
+
+function validateFilenamePrefix(raw: string): string | null {
+  const trimmed = raw.trim();
+  if (!trimmed) return 'Filename prefix cannot be empty.';
+  if (trimmed.length > FILENAME_PREFIX_MAX) return `Keep it under ${FILENAME_PREFIX_MAX} characters (currently ${trimmed.length}).`;
+  if (!FILENAME_PREFIX_PATTERN.test(trimmed)) return 'Only letters, numbers, spaces, hyphens, and underscores are allowed.';
+  return null;
+}
 import {
   useEarthquakes, useKp, useFlare, useSolarWind, useCMEs,
   useFlareEvents, useGSTs, useSwpcAlerts, useISS, useNwsAlerts,
@@ -349,7 +361,14 @@ export function DailyBriefingPage() {
   const [includeCoverTitle, setIncludeCoverTitle] = useState(true);
   const [filenamePrefix, setFilenamePrefix] = useState('pantheon-daily-briefing');
 
+  const filenameError = validateFilenamePrefix(filenamePrefix);
+
   const exportPdf = async () => {
+    const err = validateFilenamePrefix(filenamePrefix);
+    if (err) {
+      toast.error('Invalid filename prefix', { description: err });
+      return;
+    }
     setExporting(true);
     try {
       const { default: jsPDF } = await import('jspdf');
@@ -485,14 +504,28 @@ export function DailyBriefingPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="filename-prefix" className="text-xs text-foreground">Filename Prefix</Label>
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="filename-prefix" className="text-xs text-foreground">Filename Prefix</Label>
+                    <span className={`text-[10px] font-mono ${filenamePrefix.trim().length > FILENAME_PREFIX_MAX ? 'text-destructive' : 'text-muted-foreground'}`}>
+                      {filenamePrefix.trim().length}/{FILENAME_PREFIX_MAX}
+                    </span>
+                  </div>
                   <Input
                     id="filename-prefix"
                     value={filenamePrefix}
                     onChange={(e) => setFilenamePrefix(e.target.value)}
                     placeholder="e.g. briefing-snapshot"
-                    className="h-8 text-xs bg-background border-border/40"
+                    maxLength={FILENAME_PREFIX_MAX + 20}
+                    aria-invalid={!!filenameError}
+                    aria-describedby="filename-prefix-help"
+                    className={`h-8 text-xs bg-background ${filenameError ? 'border-destructive/70 focus-visible:ring-destructive/40' : 'border-border/40'}`}
                   />
+                  <p
+                    id="filename-prefix-help"
+                    className={`text-[10px] font-mono ${filenameError ? 'text-destructive' : 'text-muted-foreground'}`}
+                  >
+                    {filenameError ?? 'Letters, numbers, spaces, hyphens, underscores.'}
+                  </p>
                 </div>
                 <div className="flex items-center justify-between">
                   <Label htmlFor="cover-title" className="text-xs text-foreground cursor-pointer">Cover Title</Label>
@@ -507,7 +540,8 @@ export function DailyBriefingPage() {
           </Popover>
           <button
             onClick={exportPdf}
-            disabled={exporting || items.length === 0}
+            disabled={exporting || items.length === 0 || !!filenameError}
+            title={filenameError ?? undefined}
             className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-realm-observatory font-mono transition disabled:opacity-40"
           >
             <Download className={`w-3 h-3 ${exporting ? 'animate-pulse' : ''}`} />
