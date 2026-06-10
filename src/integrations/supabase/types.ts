@@ -358,6 +358,48 @@ export type Database = {
         }
         Relationships: []
       }
+      link_health: {
+        Row: {
+          created_at: string
+          http_status: number | null
+          id: string
+          last_checked_at: string
+          last_error: string | null
+          link_type: string
+          ok: boolean
+          response_time_ms: number | null
+          source_page: string | null
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          http_status?: number | null
+          id?: string
+          last_checked_at?: string
+          last_error?: string | null
+          link_type?: string
+          ok?: boolean
+          response_time_ms?: number | null
+          source_page?: string | null
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          http_status?: number | null
+          id?: string
+          last_checked_at?: string
+          last_error?: string | null
+          link_type?: string
+          ok?: boolean
+          response_time_ms?: number | null
+          source_page?: string | null
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       observer_files: {
         Row: {
           bio: string | null
