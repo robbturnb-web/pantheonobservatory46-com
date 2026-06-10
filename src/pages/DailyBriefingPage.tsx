@@ -11,9 +11,12 @@ import { Link } from 'react-router-dom';
 import {
   Activity, AlertTriangle, Radio, Sun, Waves, Wind, Satellite,
   Gavel, ScrollText, FileText, Building2, Users, Radar,
-  Cloud, RefreshCw, ChevronRight, CalendarDays, Download,
+  Cloud, RefreshCw, ChevronRight, CalendarDays, Download, Settings,
 } from 'lucide-react';
 import { SEO } from '@/components/SEO';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import {
   useEarthquakes, useKp, useFlare, useSolarWind, useCMEs,
   useFlareEvents, useGSTs, useSwpcAlerts, useISS, useNwsAlerts,
@@ -340,11 +343,16 @@ export function DailyBriefingPage() {
   const loading = [eq, kp, flare, wind, nws, swpc].some((h) => h.loading && !h.data);
 
   const [exporting, setExporting] = useState(false);
+  const [pageSize, setPageSize] = useState<'a4' | 'letter'>('a4');
+  const [includePageNumbers, setIncludePageNumbers] = useState(true);
+  const [includeCoverTitle, setIncludeCoverTitle] = useState(true);
+
   const exportPdf = async () => {
     setExporting(true);
     try {
       const { default: jsPDF } = await import('jspdf');
-      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+      const format = pageSize === 'letter' ? 'letter' : 'a4';
+      const doc = new jsPDF({ unit: 'pt', format });
       const pageW = doc.internal.pageSize.getWidth();
       const pageH = doc.internal.pageSize.getHeight();
       const margin = 40;
@@ -354,12 +362,14 @@ export function DailyBriefingPage() {
         if (y + need > pageH - margin) { doc.addPage(); y = margin; }
       };
 
-      // Title
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
-      doc.text('Pantheon Frequency 46 — Daily Briefing', margin, y); y += 24;
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(110);
-      doc.text(today, margin, y); y += 20;
-      doc.setTextColor(0);
+      if (includeCoverTitle) {
+        // Title
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
+        doc.text('Pantheon Frequency 46 — Daily Briefing', margin, y); y += 24;
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(110);
+        doc.text(today, margin, y); y += 20;
+        doc.setTextColor(0);
+      }
 
       // Posture
       doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
@@ -370,7 +380,7 @@ export function DailyBriefingPage() {
         margin, y,
       );
       y += 18;
-      doc.text(`Filter: ${FILTERS.find((f) => f.id === filter)?.label}   ·   ${filtered.length} entries`, margin, y);
+      doc.text(`Filter: ${FILTERS.find((f) => f.id === filter)?.label}   \u00B7   ${filtered.length} entries`, margin, y);
       y += 22;
 
       // Divider
@@ -380,7 +390,7 @@ export function DailyBriefingPage() {
       for (const it of filtered) {
         const dm = DOMAIN_META[it.domain];
         const tone = TONE[it.tone];
-        const headerLine = `[${dm.label.toUpperCase()} · ${tone.label.toUpperCase()}]  ${fmtTime(it.timestamp)}`;
+        const headerLine = `[${dm.label.toUpperCase()} \u00B7 ${tone.label.toUpperCase()}]  ${fmtTime(it.timestamp)}`;
         const titleLines = doc.splitTextToSize(it.title, pageW - margin * 2);
         const bodyLines  = doc.splitTextToSize(it.body, pageW - margin * 2);
         const metaLines  = it.meta ? doc.splitTextToSize(it.meta, pageW - margin * 2) : [];
@@ -409,12 +419,14 @@ export function DailyBriefingPage() {
       }
 
       // Footer page numbers
-      const pageCount = doc.getNumberOfPages();
-      for (let i = 1; i <= pageCount; i++) {
-        doc.setPage(i);
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(140);
-        doc.text(`Pantheon Frequency 46  ·  pantheonobservatory46.com  ·  Page ${i} / ${pageCount}`,
-          pageW / 2, pageH - 20, { align: 'center' });
+      if (includePageNumbers) {
+        const pageCount = doc.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+          doc.setPage(i);
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(140);
+          doc.text(`Pantheon Frequency 46  \u00B7  pantheonobservatory46.com  \u00B7  Page ${i} / ${pageCount}`,
+            pageW / 2, pageH - 20, { align: 'center' });
+        }
       }
 
       const stamp = new Date().toISOString().slice(0, 10);
@@ -439,6 +451,47 @@ export function DailyBriefingPage() {
             Phase 2 · Daily Briefing
           </span>
           <span className="h-px flex-1 bg-realm-observatory/30" />
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-realm-observatory font-mono transition"
+              >
+                <Settings className="w-3 h-3" />
+                Export Settings
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-64 bg-card border-border/60 backdrop-blur">
+              <div className="space-y-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-mono">Export Settings</div>
+                <div className="space-y-2">
+                  <Label className="text-xs text-foreground">Page Size</Label>
+                  <div className="flex gap-2">
+                    {(['a4', 'letter'] as const).map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => setPageSize(s)}
+                        className={`flex-1 px-2 py-1 rounded-md border text-[10px] uppercase tracking-wider font-mono transition ${
+                          pageSize === s
+                            ? 'border-realm-observatory bg-realm-observatory/20 text-realm-observatory'
+                            : 'border-border/40 text-muted-foreground hover:text-foreground hover:border-border'
+                        }`}
+                      >
+                        {s === 'a4' ? 'A4' : 'Letter'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="cover-title" className="text-xs text-foreground cursor-pointer">Cover Title</Label>
+                  <Switch id="cover-title" checked={includeCoverTitle} onCheckedChange={setIncludeCoverTitle} />
+                </div>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="page-numbers" className="text-xs text-foreground cursor-pointer">Page Numbers</Label>
+                  <Switch id="page-numbers" checked={includePageNumbers} onCheckedChange={setIncludePageNumbers} />
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
           <button
             onClick={exportPdf}
             disabled={exporting || items.length === 0}
