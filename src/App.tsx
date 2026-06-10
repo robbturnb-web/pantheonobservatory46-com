@@ -79,6 +79,7 @@ const ContentManagerPage = lazy(() => import('./pages/admin/ContentManagerPage')
 const RoadmapPage = lazy(() => import('./pages/admin/RoadmapPage'));
 const ChangelogPage = lazy(() => import('./pages/admin/ChangelogPage'));
 const SystemStatusPage = lazy(() => import('./pages/admin/SystemStatusPage'));
+const BriefingComposerPage = lazy(() => import('./pages/admin/BriefingComposerPage'));
 const PyramidScannerPage = lazy(() => import('./pages/PyramidScannerPage'));
 
 
