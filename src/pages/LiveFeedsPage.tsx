@@ -49,7 +49,7 @@ export function LiveFeedsPage() {
                 {kp.data?.value?.kp?.toFixed(2) ?? '—'}
               </p>
               <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
-                {kp.data?.value?.storm ?? 'no data'}
+                {kp.data?.value?.stormLevel ?? 'no data'}
               </p>
             </div>
           </LiveFeedCard>
@@ -94,10 +94,10 @@ export function LiveFeedsPage() {
           >
             <div className="space-y-1">
               <p className="text-2xl font-semibold text-foreground">
-                {wind.data?.value?.speed ? `${Math.round(wind.data.value.speed)} km/s` : '—'}
+                {wind.data?.value?.speedKmS ? `${Math.round(wind.data.value.speedKmS)} km/s` : '—'}
               </p>
               <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground">
-                density {wind.data?.value?.density?.toFixed(1) ?? '—'}
+                density {wind.data?.Number(wind.data?.value?.observedAt ? new Date(wind.data.value.observedAt).getTime() : 0) ? "" : ""}
               </p>
             </div>
           </LiveFeedCard>
@@ -137,7 +137,7 @@ export function LiveFeedsPage() {
             onRefresh={nws.refresh}
           >
             <p className="text-3xl font-semibold text-foreground">
-              {nws.data?.value?.count ?? '—'}
+              {nws.data?.value?.total ?? '—'}
             </p>
             <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
               active alerts
