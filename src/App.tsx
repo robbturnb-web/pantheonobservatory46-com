@@ -81,6 +81,7 @@ const ChangelogPage = lazy(() => import('./pages/admin/ChangelogPage'));
 const SystemStatusPage = lazy(() => import('./pages/admin/SystemStatusPage'));
 const BriefingComposerPage = lazy(() => import('./pages/admin/BriefingComposerPage'));
 const PyramidScannerPage = lazy(() => import('./pages/PyramidScannerPage'));
+const LinkScannerPage = lazy(() => import('./pages/admin/LinkScannerPage'));
 
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
@@ -166,6 +167,7 @@ export default function App() {
               <Route path="/source-manager" element={<AdminRoute><SourceManagerPage /></AdminRoute>} />
               <Route path="/content-manager" element={<AdminRoute><ContentManagerPage /></AdminRoute>} />
               <Route path="/admin/briefing" element={<AdminRoute><BriefingComposerPage /></AdminRoute>} />
+              <Route path="/admin/link-scanner" element={<AdminRoute><LinkScannerPage /></AdminRoute>} />
               <Route path="/daily" element={<Navigate to="/briefing" replace />} />
               <Route path="/diagnostics" element={<AdminRoute><DiagnosticsPage /></AdminRoute>} />
               <Route path="/style-guide" element={<AdminRoute><StyleGuidePage /></AdminRoute>} />
