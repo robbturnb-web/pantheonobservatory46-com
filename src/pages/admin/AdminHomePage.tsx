@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
-import { Shield, Activity, Database, FileText, Map, Pyramid, Newspaper, GitBranch, Heart } from 'lucide-react';
+import { Shield, Activity, Database, FileText, Map, Pyramid, Newspaper, GitBranch, Heart, Link2 } from 'lucide-react';
 
 const TILES = [
   { to: '/diagnostics', icon: Activity, title: 'Live Diagnostics', desc: 'Edge function + live-data health' },
+  { to: '/admin/link-scanner', icon: Link2, title: 'Link Scanner', desc: 'Crawl every tracked URL' },
   { to: '/source-manager', icon: Database, title: 'Source Manager', desc: 'Verify every external URL' },
   { to: '/content-manager', icon: FileText, title: 'Content Manager', desc: 'Vault, experts, YouTube' },
   { to: '/observatory', icon: Map, title: 'Observatory Map', desc: 'Global live event globe' },
