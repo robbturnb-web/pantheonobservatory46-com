@@ -46,10 +46,10 @@ export function LiveFeedsPage() {
           >
             <div>
               <p className="text-3xl font-semibold text-foreground">
-                {kp.data?.data?.kp?.toFixed(2) ?? '—'}
+                {kp.data?.value?.kp?.toFixed(2) ?? '—'}
               </p>
               <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
-                {kp.data?.data?.storm ?? 'no data'}
+                {kp.data?.value?.storm ?? 'no data'}
               </p>
             </div>
           </LiveFeedCard>
@@ -70,7 +70,7 @@ export function LiveFeedsPage() {
           >
             <div>
               <p className="text-3xl font-semibold text-foreground">
-                {flare.data?.data?.class ?? '—'}
+                {flare.data?.value?.class ?? '—'}
               </p>
               <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
                 peak class
@@ -94,10 +94,10 @@ export function LiveFeedsPage() {
           >
             <div className="space-y-1">
               <p className="text-2xl font-semibold text-foreground">
-                {wind.data?.data?.speed ? `${Math.round(wind.data.data.speed)} km/s` : '—'}
+                {wind.data?.value?.speed ? `${Math.round(wind.data.data.speed)} km/s` : '—'}
               </p>
               <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground">
-                density {wind.data?.data?.density?.toFixed(1) ?? '—'}
+                density {wind.data?.value?.density?.toFixed(1) ?? '—'}
               </p>
             </div>
           </LiveFeedCard>
@@ -117,8 +117,8 @@ export function LiveFeedsPage() {
             onRefresh={iss.refresh}
           >
             <div className="font-mono text-xs text-foreground/90 space-y-0.5">
-              <div>lat {iss.data?.data?.latitude?.toFixed(2) ?? '—'}</div>
-              <div>lon {iss.data?.data?.longitude?.toFixed(2) ?? '—'}</div>
+              <div>lat {iss.data?.value?.latitude?.toFixed(2) ?? '—'}</div>
+              <div>lon {iss.data?.value?.longitude?.toFixed(2) ?? '—'}</div>
             </div>
           </LiveFeedCard>
 
@@ -137,7 +137,7 @@ export function LiveFeedsPage() {
             onRefresh={nws.refresh}
           >
             <p className="text-3xl font-semibold text-foreground">
-              {nws.data?.data?.count ?? '—'}
+              {nws.data?.value?.count ?? '—'}
             </p>
             <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
               active alerts
