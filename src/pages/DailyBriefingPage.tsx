@@ -347,6 +347,7 @@ export function DailyBriefingPage() {
   const [pageSize, setPageSize] = useState<'a4' | 'letter'>('a4');
   const [includePageNumbers, setIncludePageNumbers] = useState(true);
   const [includeCoverTitle, setIncludeCoverTitle] = useState(true);
+  const [filenamePrefix, setFilenamePrefix] = useState('pantheon-daily-briefing');
 
   const exportPdf = async () => {
     setExporting(true);
