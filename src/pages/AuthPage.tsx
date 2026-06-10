@@ -204,6 +204,17 @@ export function AuthPage() {
                 {oauthLoading ? 'Redirecting…' : 'Continue with Google'}
               </button>
 
+              <button
+                type="button"
+                onClick={handleApple}
+                disabled={oauthLoading || loading}
+                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-black text-white font-semibold hover:bg-black/90 transition-colors disabled:opacity-50 mb-4 border border-white/10"
+              >
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M16.365 1.43c0 1.14-.413 2.21-1.24 3.21-1 1.19-2.22 1.88-3.55 1.78-.02-1.12.45-2.27 1.27-3.22.96-1.11 2.36-1.83 3.52-1.77zM20.5 17.27c-.59 1.34-.87 1.94-1.63 3.13-1.06 1.65-2.55 3.71-4.39 3.73-1.64.02-2.06-1.07-4.28-1.06-2.22.01-2.69 1.08-4.33 1.06-1.84-.02-3.25-1.88-4.31-3.53C-1.55 17.06-1.92 11.32 1.74 8.59c1.3-.96 3-1.55 4.5-1.55 1.84 0 3 1.01 4.52 1.01 1.47 0 2.36-1.02 4.49-1.02 1.3 0 2.69.71 3.68 1.93-3.23 1.77-2.71 6.39.57 8.31z" />
+                </svg>
+                {oauthLoading ? 'Redirecting…' : 'Continue with Apple'}
+
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-px flex-1 bg-border" />
                 <span className="text-xs text-muted-foreground uppercase tracking-widest">or</span>
