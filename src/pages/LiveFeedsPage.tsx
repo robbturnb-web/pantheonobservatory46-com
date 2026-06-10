@@ -94,7 +94,7 @@ export function LiveFeedsPage() {
           >
             <div className="space-y-1">
               <p className="text-2xl font-semibold text-foreground">
-                {wind.data?.value?.speed ? `${Math.round(wind.data.data.speed)} km/s` : '—'}
+                {wind.data?.value?.speed ? `${Math.round(wind.data.value.speed)} km/s` : '—'}
               </p>
               <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground">
                 density {wind.data?.value?.density?.toFixed(1) ?? '—'}
