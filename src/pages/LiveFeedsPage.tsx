@@ -97,7 +97,7 @@ export function LiveFeedsPage() {
                 {wind.data?.value?.speedKmS ? `${Math.round(wind.data.value.speedKmS)} km/s` : '—'}
               </p>
               <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground">
-                density {wind.data?.Number(wind.data?.value?.observedAt ? new Date(wind.data.value.observedAt).getTime() : 0) ? "" : ""}
+                solar wind speed
               </p>
             </div>
           </LiveFeedCard>
