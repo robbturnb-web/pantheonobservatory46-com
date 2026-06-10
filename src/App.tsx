@@ -150,6 +150,15 @@ export default function App() {
               <Route path="/briefing" element={<DailyBriefingPage />} />
               <Route path="/daily" element={<Navigate to="/briefing" replace />} />
               <Route path="/diagnostics" element={<DiagnosticsPage />} />
+              <Route path="/live-feeds" element={<LiveFeedsPage />} />
+              <Route path="/missions" element={<MissionsPage />} />
+              <Route path="/sources" element={<SourcesPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/disclaimer" element={<DisclaimerPage />} />
+              <Route path="/debug-checklist" element={<DebugChecklistPage />} />
               <Route path="/community" element={<Navigate to="/echoverse" replace />} />
               <Route path="/index" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />
