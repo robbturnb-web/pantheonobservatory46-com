@@ -103,9 +103,11 @@ describe('assertValidFilenamePrefix', () => {
 
   // ── Error type specificity ───────────────────────────────────────
   it('always throws FilenamePrefixError, not generic Error', () => {
-    expect(() => assertValidFilenamePrefix('')).toThrowError(
-      (err: unknown) => err instanceof FilenamePrefixError
-    );
+    try {
+      assertValidFilenamePrefix('');
+    } catch (err) {
+      expect(err).toBeInstanceOf(FilenamePrefixError);
+    }
   });
 
   it('sets error name to FilenamePrefixError', () => {
