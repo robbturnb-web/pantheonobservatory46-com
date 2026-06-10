@@ -454,8 +454,9 @@ export function DailyBriefingPage() {
       }
 
       const stamp = new Date().toISOString().slice(0, 10);
-      const safePrefix = filenamePrefix.trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-_]/g, '');
-      doc.save(`${safePrefix || 'briefing'}-${stamp}.pdf`);
+      const safePrefix = sanitizeFilenamePrefix(validatedPrefix);
+      doc.save(`${safePrefix}-${stamp}.pdf`);
+
     } finally {
       setExporting(false);
     }
