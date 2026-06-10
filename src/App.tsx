@@ -165,6 +165,7 @@ export default function App() {
               <Route path="/admin" element={<AdminRoute><AdminHomePage /></AdminRoute>} />
               <Route path="/source-manager" element={<AdminRoute><SourceManagerPage /></AdminRoute>} />
               <Route path="/content-manager" element={<AdminRoute><ContentManagerPage /></AdminRoute>} />
+              <Route path="/admin/briefing" element={<AdminRoute><BriefingComposerPage /></AdminRoute>} />
               <Route path="/daily" element={<Navigate to="/briefing" replace />} />
               <Route path="/diagnostics" element={<AdminRoute><DiagnosticsPage /></AdminRoute>} />
               <Route path="/style-guide" element={<AdminRoute><StyleGuidePage /></AdminRoute>} />
