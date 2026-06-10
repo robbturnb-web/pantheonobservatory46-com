@@ -16,6 +16,16 @@
     <meta name="author" content="Pantheon Observatory" />
     <!-- Canonical handled per-route via react-helmet-async (src/components/SEO.tsx) -->
 
+    <!-- PWA · installable home-screen app (no service worker; offline disabled) -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#7C3AED" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Pantheon 46" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Single combined font request (Space Grotesk + Space Mono + Bagel Fat One) preloaded for faster first paint -->
