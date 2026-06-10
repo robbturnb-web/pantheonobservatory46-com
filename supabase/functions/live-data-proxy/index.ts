@@ -100,7 +100,7 @@ Deno.serve(async (req) => {
       }
       return new Response(
         JSON.stringify({ error: 'upstream error', status: r.status, body: text.slice(0, 500) }),
-        { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json', 'X-Pantheon-Upstream-Status': String(r.status), 'X-Pantheon-Fallback': '1' } },
       );
     }
     cache.set(cacheKey, { body: text, fetchedAt: now, upstreamStatus: r.status });
@@ -126,7 +126,7 @@ Deno.serve(async (req) => {
     }
     return new Response(
       JSON.stringify({ error: 'fetch failed', message: (e as Error).message }),
-      { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json', 'X-Pantheon-Fallback': '1' } },
     );
   }
 });
