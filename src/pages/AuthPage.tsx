@@ -43,22 +43,23 @@ export function AuthPage() {
     return () => subscription.subscription.unsubscribe();
   }, [navigate, redirectTo]);
 
-  const handleGoogle = async () => {
+  const handleOAuth = async (provider: 'google' | 'apple') => {
     setOauthLoading(true);
     try {
-      const result = await lovable.auth.signInWithOAuth('google', {
+      const result = await lovable.auth.signInWithOAuth(provider, {
         redirect_uri: window.location.origin,
       });
       if (result.error) {
-        toast({ title: 'Google sign-in failed', description: String(result.error), variant: 'destructive' });
+        toast({ title: `${provider === 'google' ? 'Google' : 'Apple'} sign-in failed`, description: String(result.error), variant: 'destructive' });
       }
-      // If redirected, browser will navigate. Otherwise onAuthStateChange handles success.
     } catch (e: any) {
-      toast({ title: 'Google sign-in failed', description: e?.message ?? 'Unknown error', variant: 'destructive' });
+      toast({ title: `${provider === 'google' ? 'Google' : 'Apple'} sign-in failed`, description: e?.message ?? 'Unknown error', variant: 'destructive' });
     } finally {
       setOauthLoading(false);
     }
   };
+  const handleGoogle = () => handleOAuth('google');
+  const handleApple = () => handleOAuth('apple');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
