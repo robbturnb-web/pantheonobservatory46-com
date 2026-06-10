@@ -110,6 +110,45 @@ export type Database = {
         }
         Relationships: []
       }
+      disclosure_briefings: {
+        Row: {
+          briefing_date: string
+          created_at: string
+          evidence_grade: string
+          headline: string
+          id: string
+          published: boolean
+          sources: Json
+          summary: string
+          tags: string[]
+          updated_at: string
+        }
+        Insert: {
+          briefing_date: string
+          created_at?: string
+          evidence_grade?: string
+          headline: string
+          id?: string
+          published?: boolean
+          sources?: Json
+          summary: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Update: {
+          briefing_date?: string
+          created_at?: string
+          evidence_grade?: string
+          headline?: string
+          id?: string
+          published?: boolean
+          sources?: Json
+          summary?: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       echo_xp: {
         Row: {
           created_at: string
@@ -415,6 +454,48 @@ export type Database = {
         }
         Relationships: []
       }
+      source_health: {
+        Row: {
+          category: string
+          created_at: string
+          error_message: string | null
+          http_status: number | null
+          id: string
+          last_checked_at: string | null
+          response_time_ms: number | null
+          source_name: string
+          updated_at: string
+          url: string
+          verification_status: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          error_message?: string | null
+          http_status?: number | null
+          id?: string
+          last_checked_at?: string | null
+          response_time_ms?: number | null
+          source_name: string
+          updated_at?: string
+          url: string
+          verification_status?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          error_message?: string | null
+          http_status?: number | null
+          id?: string
+          last_checked_at?: string | null
+          response_time_ms?: number | null
+          source_name?: string
+          updated_at?: string
+          url?: string
+          verification_status?: string
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string
@@ -436,6 +517,33 @@ export type Database = {
           id?: string
           metadata?: Json | null
           reason?: string
+        }
+        Relationships: []
+      }
+      system_status_events: {
+        Row: {
+          component: string
+          created_at: string
+          id: string
+          message: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          component: string
+          created_at?: string
+          id?: string
+          message?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          component?: string
+          created_at?: string
+          id?: string
+          message?: string | null
+          status?: string
+          updated_at?: string
         }
         Relationships: []
       }
