@@ -9,6 +9,8 @@ const navGroups = [
       { to: '/timeline', label: 'Cosmic Timeline' },
       { to: '/uap', label: 'UAP Case Files' },
       { to: '/gods', label: 'Gods & Archetypes' },
+      { to: '/live-feeds', label: 'Live Feeds' },
+      { to: '/missions', label: 'Missions' },
     ],
   },
   {
@@ -18,6 +20,17 @@ const navGroups = [
       { to: '/signals', label: 'Signal Watch' },
       { to: '/origin', label: 'Origin Chamber' },
       { to: '/echo', label: 'Echo AI' },
+      { to: '/sources', label: 'Facts vs Speculation' },
+    ],
+  },
+  {
+    title: 'Platform',
+    links: [
+      { to: '/about', label: 'About' },
+      { to: '/contact', label: 'Contact' },
+      { to: '/privacy', label: 'Privacy' },
+      { to: '/terms', label: 'Terms' },
+      { to: '/disclaimer', label: 'Disclaimer' },
     ],
   },
 ];
