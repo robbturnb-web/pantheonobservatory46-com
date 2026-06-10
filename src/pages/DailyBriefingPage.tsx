@@ -20,16 +20,14 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 
-const FILENAME_PREFIX_MAX = 64;
-const FILENAME_PREFIX_PATTERN = /^[a-zA-Z0-9-_ ]+$/;
+import {
+  FILENAME_PREFIX_MAX,
+  FilenamePrefixError,
+  assertValidFilenamePrefix,
+  sanitizeFilenamePrefix,
+  validateFilenamePrefix,
+} from '@/lib/filename-prefix';
 
-function validateFilenamePrefix(raw: string): string | null {
-  const trimmed = raw.trim();
-  if (!trimmed) return 'Filename prefix cannot be empty.';
-  if (trimmed.length > FILENAME_PREFIX_MAX) return `Keep it under ${FILENAME_PREFIX_MAX} characters (currently ${trimmed.length}).`;
-  if (!FILENAME_PREFIX_PATTERN.test(trimmed)) return 'Only letters, numbers, spaces, hyphens, and underscores are allowed.';
-  return null;
-}
 import {
   useEarthquakes, useKp, useFlare, useSolarWind, useCMEs,
   useFlareEvents, useGSTs, useSwpcAlerts, useISS, useNwsAlerts,
