@@ -343,11 +343,16 @@ export function DailyBriefingPage() {
   const loading = [eq, kp, flare, wind, nws, swpc].some((h) => h.loading && !h.data);
 
   const [exporting, setExporting] = useState(false);
+  const [pageSize, setPageSize] = useState<'a4' | 'letter'>('a4');
+  const [includePageNumbers, setIncludePageNumbers] = useState(true);
+  const [includeCoverTitle, setIncludeCoverTitle] = useState(true);
+
   const exportPdf = async () => {
     setExporting(true);
     try {
       const { default: jsPDF } = await import('jspdf');
-      const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+      const format = pageSize === 'letter' ? 'letter' : 'a4';
+      const doc = new jsPDF({ unit: 'pt', format });
       const pageW = doc.internal.pageSize.getWidth();
       const pageH = doc.internal.pageSize.getHeight();
       const margin = 40;
@@ -357,12 +362,14 @@ export function DailyBriefingPage() {
         if (y + need > pageH - margin) { doc.addPage(); y = margin; }
       };
 
-      // Title
-      doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
-      doc.text('Pantheon Frequency 46 — Daily Briefing', margin, y); y += 24;
-      doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(110);
-      doc.text(today, margin, y); y += 20;
-      doc.setTextColor(0);
+      if (includeCoverTitle) {
+        // Title
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(22);
+        doc.text('Pantheon Frequency 46 — Daily Briefing', margin, y); y += 24;
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(110);
+        doc.text(today, margin, y); y += 20;
+        doc.setTextColor(0);
+      }
 
       // Posture
       doc.setFont('helvetica', 'bold'); doc.setFontSize(12);
@@ -373,7 +380,7 @@ export function DailyBriefingPage() {
         margin, y,
       );
       y += 18;
-      doc.text(`Filter: ${FILTERS.find((f) => f.id === filter)?.label}   ·   ${filtered.length} entries`, margin, y);
+      doc.text(`Filter: ${FILTERS.find((f) => f.id === filter)?.label}   \u00B7   ${filtered.length} entries`, margin, y);
       y += 22;
 
       // Divider
@@ -383,7 +390,7 @@ export function DailyBriefingPage() {
       for (const it of filtered) {
         const dm = DOMAIN_META[it.domain];
         const tone = TONE[it.tone];
-        const headerLine = `[${dm.label.toUpperCase()} · ${tone.label.toUpperCase()}]  ${fmtTime(it.timestamp)}`;
+        const headerLine = `[${dm.label.toUpperCase()} \u00B7 ${tone.label.toUpperCase()}]  ${fmtTime(it.timestamp)}`;
         const titleLines = doc.splitTextToSize(it.title, pageW - margin * 2);
         const bodyLines  = doc.splitTextToSize(it.body, pageW - margin * 2);
         const metaLines  = it.meta ? doc.splitTextToSize(it.meta, pageW - margin * 2) : [];
@@ -412,12 +419,14 @@ export function DailyBriefingPage() {
       }
 
       // Footer page numbers
-      const pageCount = doc.getNumberOfPages();
-      for (let i = 1; i <= pageCount; i++) {
-        doc.setPage(i);
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(140);
-        doc.text(`Pantheon Frequency 46  ·  pantheonobservatory46.com  ·  Page ${i} / ${pageCount}`,
-          pageW / 2, pageH - 20, { align: 'center' });
+      if (includePageNumbers) {
+        const pageCount = doc.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+          doc.setPage(i);
+          doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(140);
+          doc.text(`Pantheon Frequency 46  \u00B7  pantheonobservatory46.com  \u00B7  Page ${i} / ${pageCount}`,
+            pageW / 2, pageH - 20, { align: 'center' });
+        }
       }
 
       const stamp = new Date().toISOString().slice(0, 10);
