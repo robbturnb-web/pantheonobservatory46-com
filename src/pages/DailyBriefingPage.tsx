@@ -362,13 +362,18 @@ export function DailyBriefingPage() {
   const filenameError = validateFilenamePrefix(filenamePrefix);
 
   const exportPdf = async () => {
-    const err = validateFilenamePrefix(filenamePrefix);
-    if (err) {
-      toast.error('Invalid filename prefix', { description: err });
+    // Authoritative guard — runs even if the UI control is bypassed.
+    let validatedPrefix: string;
+    try {
+      validatedPrefix = assertValidFilenamePrefix(filenamePrefix);
+    } catch (e) {
+      const msg = e instanceof FilenamePrefixError ? e.message : 'Invalid filename prefix.';
+      toast.error('Invalid filename prefix', { description: msg });
       return;
     }
     setExporting(true);
     try {
+
       const { default: jsPDF } = await import('jspdf');
       const format = pageSize === 'letter' ? 'letter' : 'a4';
       const doc = new jsPDF({ unit: 'pt', format });
