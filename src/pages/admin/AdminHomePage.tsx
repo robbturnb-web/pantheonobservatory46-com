@@ -19,14 +19,14 @@ export default function AdminHomePage() {
   return (
     <>
       <SEO title="Command Center — Pantheon" description="Admin command center for Pantheon Frequency 46." />
-      <div className="container mx-auto px-4 py-12 max-w-6xl">
-        <header className="mb-10 flex items-center gap-4">
-          <div className="p-3 rounded-2xl bg-primary/10 border border-primary/30">
-            <Shield className="w-7 h-7 text-primary" />
+      <div className="container mx-auto px-4 py-8 sm:py-12 max-w-6xl">
+        <header className="mb-8 sm:mb-10 flex items-center gap-3 sm:gap-4">
+          <div className="p-2.5 sm:p-3 rounded-2xl bg-primary/10 border border-primary/30 shrink-0">
+            <Shield className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
           </div>
-          <div>
-            <h1 className="font-display text-4xl tracking-tight">Command Center</h1>
-            <p className="text-sm text-muted-foreground mt-1">Admin clearance verified.</p>
+          <div className="min-w-0">
+            <h1 className="font-display text-2xl sm:text-4xl tracking-tight truncate">Command Center</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Admin clearance verified.</p>
           </div>
         </header>
 

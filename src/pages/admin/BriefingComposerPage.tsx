@@ -168,9 +168,9 @@ export default function BriefingComposerPage() {
         ) : (
           <div className="space-y-3">
             {rows.map((b) => (
-              <div key={b.id} className="p-4 rounded-xl border border-border bg-card/30 flex items-start gap-4">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+              <div key={b.id} className="p-4 rounded-xl border border-border bg-card/30 flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                <div className="flex-1 min-w-0 w-full">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1 flex-wrap">
                     <span className="font-mono">{b.briefing_date}</span>
                     <span>·</span>
                     <span className="font-mono">Grade {b.evidence_grade}</span>
@@ -179,10 +179,10 @@ export default function BriefingComposerPage() {
                       {b.published ? 'Published' : 'Draft'}
                     </span>
                   </div>
-                  <div className="font-medium truncate">{b.headline}</div>
+                  <div className="font-medium break-words">{b.headline}</div>
                   <div className="text-sm text-muted-foreground line-clamp-2 mt-1">{b.summary}</div>
                 </div>
-                <div className="flex flex-col gap-1 shrink-0">
+                <div className="flex flex-row sm:flex-col gap-1 shrink-0 w-full sm:w-auto justify-end">
                   <Button size="sm" variant="ghost" onClick={() => edit(b)}>Edit</Button>
                   <Button size="sm" variant="ghost" onClick={() => togglePublish(b)}>
                     {b.published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}

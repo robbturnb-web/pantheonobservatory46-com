@@ -55,15 +55,15 @@ export default function SourceManagerPage() {
   return (
     <>
       <SEO title="Source Manager — Pantheon" description="Verify every external data source in the Pantheon archive." />
-      <div className="container mx-auto px-4 py-10 max-w-7xl">
-        <header className="flex items-center justify-between mb-6 gap-4 flex-wrap">
-          <div>
-            <h1 className="font-display text-3xl">Source Manager</h1>
-            <p className="text-sm text-muted-foreground mt-1">
+      <div className="container mx-auto px-4 py-8 sm:py-10 max-w-7xl">
+        <header className="flex items-start sm:items-center justify-between mb-6 gap-3 flex-col sm:flex-row">
+          <div className="min-w-0">
+            <h1 className="font-display text-2xl sm:text-3xl">Source Manager</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">
               {rows.length} sources tracked · {rows.filter((r) => r.verification_status === 'verified').length} verified
             </p>
           </div>
-          <Button onClick={runCheck} disabled={checking}>
+          <Button onClick={runCheck} disabled={checking} size="sm" className="w-full sm:w-auto">
             <RefreshCw className={`w-4 h-4 mr-2 ${checking ? 'animate-spin' : ''}`} />
             {checking ? 'Checking…' : 'Run Health Check'}
           </Button>
