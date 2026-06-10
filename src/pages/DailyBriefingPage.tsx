@@ -17,6 +17,7 @@ import { SEO } from '@/components/SEO';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import {
   useEarthquakes, useKp, useFlare, useSolarWind, useCMEs,
   useFlareEvents, useGSTs, useSwpcAlerts, useISS, useNwsAlerts,
@@ -346,6 +347,7 @@ export function DailyBriefingPage() {
   const [pageSize, setPageSize] = useState<'a4' | 'letter'>('a4');
   const [includePageNumbers, setIncludePageNumbers] = useState(true);
   const [includeCoverTitle, setIncludeCoverTitle] = useState(true);
+  const [filenamePrefix, setFilenamePrefix] = useState('pantheon-daily-briefing');
 
   const exportPdf = async () => {
     setExporting(true);
@@ -430,7 +432,8 @@ export function DailyBriefingPage() {
       }
 
       const stamp = new Date().toISOString().slice(0, 10);
-      doc.save(`pantheon-daily-briefing-${stamp}.pdf`);
+      const safePrefix = filenamePrefix.trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-_]/g, '');
+      doc.save(`${safePrefix || 'briefing'}-${stamp}.pdf`);
     } finally {
       setExporting(false);
     }
@@ -480,6 +483,16 @@ export function DailyBriefingPage() {
                       </button>
                     ))}
                   </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="filename-prefix" className="text-xs text-foreground">Filename Prefix</Label>
+                  <Input
+                    id="filename-prefix"
+                    value={filenamePrefix}
+                    onChange={(e) => setFilenamePrefix(e.target.value)}
+                    placeholder="e.g. briefing-snapshot"
+                    className="h-8 text-xs bg-background border-border/40"
+                  />
                 </div>
                 <div className="flex items-center justify-between">
                   <Label htmlFor="cover-title" className="text-xs text-foreground cursor-pointer">Cover Title</Label>
