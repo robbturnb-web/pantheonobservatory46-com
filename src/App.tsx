@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Toaster } from './components/ui/toaster';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { AdminRoute } from './components/AdminRoute';
 
 // Eager: critical entry routes (no need to lazy-load)
 import { HomePage } from './pages/HomePage';
@@ -72,6 +73,13 @@ const DisclaimerPage = lazy(() => import('./pages/legal/DisclaimerPage').then(m 
 const ContactPage = lazy(() => import('./pages/legal/ContactPage').then(m => ({ default: m.ContactPage })));
 const AboutPage = lazy(() => import('./pages/legal/AboutPage').then(m => ({ default: m.AboutPage })));
 const DebugChecklistPage = lazy(() => import('./pages/DebugChecklistPage').then(m => ({ default: m.DebugChecklistPage })));
+const AdminHomePage = lazy(() => import('./pages/admin/AdminHomePage'));
+const SourceManagerPage = lazy(() => import('./pages/admin/SourceManagerPage'));
+const ContentManagerPage = lazy(() => import('./pages/admin/ContentManagerPage'));
+const RoadmapPage = lazy(() => import('./pages/admin/RoadmapPage'));
+const ChangelogPage = lazy(() => import('./pages/admin/ChangelogPage'));
+const SystemStatusPage = lazy(() => import('./pages/admin/SystemStatusPage'));
+const PyramidScannerPage = lazy(() => import('./pages/PyramidScannerPage'));
 
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
@@ -136,7 +144,7 @@ export default function App() {
               <Route path="/elements" element={<ElementsLabPage />} />
               <Route path="/experts" element={<ExpertsIndexPage />} />
               <Route path="/experts/:slug" element={<ExpertProfilePage />} />
-              <Route path="/style-guide" element={<StyleGuidePage />} />
+              {/* style-guide moved to admin gate below */}
               <Route path="/documentaries" element={<DocumentariesPage />} />
               
               <Route path="/jeremy-corbell" element={<JeremyCorbellPage />} />
@@ -145,11 +153,20 @@ export default function App() {
               <Route path="/search" element={<SearchPage />} />
               <Route path="/legislation" element={<LegislationPage />} />
               <Route path="/observatory" element={<ObservatoryMapPage />} />
-              <Route path="/observatory/map" element={<ObservatoryMapPage />} />
+              <Route path="/observatory/map" element={<Navigate to="/observatory" replace />} />
               <Route path="/disclosure" element={<DisclosureCommandPage />} />
               <Route path="/briefing" element={<DailyBriefingPage />} />
+              <Route path="/pyramids/scanner" element={<PyramidScannerPage />} />
+              <Route path="/roadmap" element={<RoadmapPage />} />
+              <Route path="/changelog" element={<ChangelogPage />} />
+              <Route path="/system-status" element={<SystemStatusPage />} />
+              {/* Admin-only routes */}
+              <Route path="/admin" element={<AdminRoute><AdminHomePage /></AdminRoute>} />
+              <Route path="/source-manager" element={<AdminRoute><SourceManagerPage /></AdminRoute>} />
+              <Route path="/content-manager" element={<AdminRoute><ContentManagerPage /></AdminRoute>} />
               <Route path="/daily" element={<Navigate to="/briefing" replace />} />
-              <Route path="/diagnostics" element={<DiagnosticsPage />} />
+              <Route path="/diagnostics" element={<AdminRoute><DiagnosticsPage /></AdminRoute>} />
+              <Route path="/style-guide" element={<AdminRoute><StyleGuidePage /></AdminRoute>} />
               <Route path="/live-feeds" element={<LiveFeedsPage />} />
               <Route path="/missions" element={<MissionsPage />} />
               <Route path="/sources" element={<SourcesPage />} />
@@ -158,7 +175,7 @@ export default function App() {
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/disclaimer" element={<DisclaimerPage />} />
-              <Route path="/debug-checklist" element={<DebugChecklistPage />} />
+              <Route path="/debug-checklist" element={<AdminRoute><DebugChecklistPage /></AdminRoute>} />
               <Route path="/community" element={<Navigate to="/echoverse" replace />} />
               <Route path="/index" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />
