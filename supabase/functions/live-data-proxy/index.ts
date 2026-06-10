@@ -81,7 +81,7 @@ Deno.serve(async (req) => {
   const { url: upstream, headers } = factory(url.searchParams);
   try {
     const ctrl = new AbortController();
-    const timeout = setTimeout(() => ctrl.abort(), 12_000);
+    const timeout = setTimeout(() => ctrl.abort(), 7_000);
     const r = await fetch(upstream, { headers, signal: ctrl.signal });
     clearTimeout(timeout);
     const text = await r.text();
