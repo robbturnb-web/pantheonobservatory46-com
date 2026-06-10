@@ -12,6 +12,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Activity, RefreshCw, CheckCircle2, XCircle, ExternalLink, Loader2 } from 'lucide-react';
+import { PlatformTotals } from '@/components/diagnostics/PlatformTotals';
 
 interface Endpoint {
   id: string;
@@ -256,6 +257,10 @@ export default function DiagnosticsPage() {
                 <span className="text-rose-400 font-bold">{failCount}</span> offline ·{' '}
                 {ENDPOINTS.length} total
               </div>
+            </div>
+
+            <div className="mt-8">
+              <PlatformTotals />
             </div>
           </motion.div>
         </section>
