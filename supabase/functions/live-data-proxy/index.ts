@@ -79,14 +79,36 @@ Deno.serve(async (req) => {
   }
 
   const { url: upstream, headers } = factory(url.searchParams);
+  // List-shaped sources should fall back to [] so client array ops don't crash.
+  const listShaped = source === 'cme' || source === 'flr' || source === 'gst'
+    || source === 'alerts' || source === 'earthquakes';
+  const emptyFallback = listShaped ? '[]' : '{}';
+  // DONKI endpoints are slow; give them more time before aborting.
+  const slowUpstream = source === 'cme' || source === 'flr' || source === 'gst' || source === 'nws';
+  const timeoutMs = slowUpstream ? 12_000 : 6_000;
+
+  const respondFallback = (extra: Record<string, string> = {}) =>
+    new Response(emptyFallback, {
+      status: 200,
+      headers: {
+        ...corsHeaders,
+        'Content-Type': 'application/json',
+        'X-Pantheon-Fallback': '1',
+        ...extra,
+      },
+    });
+
   try {
     const ctrl = new AbortController();
-    const timeout = setTimeout(() => ctrl.abort(), 7_000);
-    const r = await fetch(upstream, { headers, signal: ctrl.signal });
-    clearTimeout(timeout);
+    const timeout = setTimeout(() => ctrl.abort(), timeoutMs);
+    let r: Response;
+    try {
+      r = await fetch(upstream, { headers, signal: ctrl.signal });
+    } finally {
+      clearTimeout(timeout);
+    }
     const text = await r.text();
     if (!r.ok) {
-      // Serve stale on upstream failure if available
       if (hit) {
         return new Response(hit.body, {
           headers: {
@@ -98,10 +120,7 @@ Deno.serve(async (req) => {
           },
         });
       }
-      return new Response(
-        JSON.stringify({ error: 'upstream error', status: r.status, body: text.slice(0, 500) }),
-        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json', 'X-Pantheon-Upstream-Status': String(r.status), 'X-Pantheon-Fallback': '1' } },
-      );
+      return respondFallback({ 'X-Pantheon-Upstream-Status': String(r.status) });
     }
     cache.set(cacheKey, { body: text, fetchedAt: now, upstreamStatus: r.status });
     return new Response(text, {
@@ -124,9 +143,6 @@ Deno.serve(async (req) => {
         },
       });
     }
-    return new Response(
-      JSON.stringify({ error: 'fetch failed', message: (e as Error).message }),
-      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json', 'X-Pantheon-Fallback': '1' } },
-    );
+    return respondFallback({ 'X-Pantheon-Error': (e as Error).message.slice(0, 120) });
   }
 });
