@@ -540,7 +540,8 @@ export function DailyBriefingPage() {
           </Popover>
           <button
             onClick={exportPdf}
-            disabled={exporting || items.length === 0}
+            disabled={exporting || items.length === 0 || !!filenameError}
+            title={filenameError ?? undefined}
             className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-realm-observatory font-mono transition disabled:opacity-40"
           >
             <Download className={`w-3 h-3 ${exporting ? 'animate-pulse' : ''}`} />
