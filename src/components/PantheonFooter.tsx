@@ -9,6 +9,8 @@ const navGroups = [
       { to: '/timeline', label: 'Cosmic Timeline' },
       { to: '/uap', label: 'UAP Case Files' },
       { to: '/gods', label: 'Gods & Archetypes' },
+      { to: '/live-feeds', label: 'Live Feeds' },
+      { to: '/missions', label: 'Missions' },
     ],
   },
   {
@@ -18,6 +20,17 @@ const navGroups = [
       { to: '/signals', label: 'Signal Watch' },
       { to: '/origin', label: 'Origin Chamber' },
       { to: '/echo', label: 'Echo AI' },
+      { to: '/sources', label: 'Facts vs Speculation' },
+    ],
+  },
+  {
+    title: 'Platform',
+    links: [
+      { to: '/about', label: 'About' },
+      { to: '/contact', label: 'Contact' },
+      { to: '/privacy', label: 'Privacy' },
+      { to: '/terms', label: 'Terms' },
+      { to: '/disclaimer', label: 'Disclaimer' },
     ],
   },
 ];
@@ -28,8 +41,8 @@ export function PantheonFooter() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
-          <div className="md:col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4" style={{ color: '#a78bfa' }}>
+          <div className="md:col-span-1">
+            <Link to="/" className="flex items-center gap-2 mb-4 text-primary">
               <Eye className="w-6 h-6" />
               <PantheonWordmark size="md" />
             </Link>
