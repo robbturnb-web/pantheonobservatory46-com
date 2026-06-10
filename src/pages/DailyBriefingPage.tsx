@@ -504,14 +504,28 @@ export function DailyBriefingPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="filename-prefix" className="text-xs text-foreground">Filename Prefix</Label>
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="filename-prefix" className="text-xs text-foreground">Filename Prefix</Label>
+                    <span className={`text-[10px] font-mono ${filenamePrefix.trim().length > FILENAME_PREFIX_MAX ? 'text-destructive' : 'text-muted-foreground'}`}>
+                      {filenamePrefix.trim().length}/{FILENAME_PREFIX_MAX}
+                    </span>
+                  </div>
                   <Input
                     id="filename-prefix"
                     value={filenamePrefix}
                     onChange={(e) => setFilenamePrefix(e.target.value)}
                     placeholder="e.g. briefing-snapshot"
-                    className="h-8 text-xs bg-background border-border/40"
+                    maxLength={FILENAME_PREFIX_MAX + 20}
+                    aria-invalid={!!filenameError}
+                    aria-describedby="filename-prefix-help"
+                    className={`h-8 text-xs bg-background ${filenameError ? 'border-destructive/70 focus-visible:ring-destructive/40' : 'border-border/40'}`}
                   />
+                  <p
+                    id="filename-prefix-help"
+                    className={`text-[10px] font-mono ${filenameError ? 'text-destructive' : 'text-muted-foreground'}`}
+                  >
+                    {filenameError ?? 'Letters, numbers, spaces, hyphens, underscores.'}
+                  </p>
                 </div>
                 <div className="flex items-center justify-between">
                   <Label htmlFor="cover-title" className="text-xs text-foreground cursor-pointer">Cover Title</Label>
