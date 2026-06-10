@@ -42,7 +42,7 @@ export function PantheonFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-1">
-            <div className="grid grid-cols-4 md:grid-cols-1 gap-6">
+            <Link to="/" className="flex items-center gap-2 mb-4 text-primary">
               <Eye className="w-6 h-6" />
               <PantheonWordmark size="md" />
             </Link>
