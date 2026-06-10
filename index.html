@@ -7,7 +7,7 @@
     <!-- Security headers (balanced defaults). Servers/CDN can override
          with stronger header-based versions; meta tags are the safe
          baseline that ships with the static bundle. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.gpteng.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https://*.supabase.co https://*.lovable.app https://storage.googleapis.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.lovable.dev https://cdn.gpteng.co; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.gpteng.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https://*.supabase.co https://*.lovable.app https://storage.googleapis.com; frame-src https://www.youtube-nocookie.com https://www.youtube.com https://player.vimeo.com; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.lovable.dev https://cdn.gpteng.co https://earthquake.usgs.gov https://services.swpc.noaa.gov https://api.nasa.gov https://api.wheretheiss.at https://api.weather.gov https://api.open-meteo.com https://marine-api.open-meteo.com https://api.farmsense.net; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -15,6 +15,16 @@
     <meta name="description" content="A cinematic cosmic operating system. UAP cases, ancient mythology, consciousness research, live solar weather, and Echo AI — all in one observatory. Frequency 46." />
     <meta name="author" content="Pantheon Observatory" />
     <!-- Canonical handled per-route via react-helmet-async (src/components/SEO.tsx) -->
+
+    <!-- PWA · installable home-screen app (no service worker; offline disabled) -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#7C3AED" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Pantheon 46" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

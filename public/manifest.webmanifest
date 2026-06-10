@@ -1,0 +1,17 @@
+{
+  "name": "Pantheon Observatory · Frequency 46",
+  "short_name": "Pantheon 46",
+  "description": "Cinematic cosmic operating system — UAP, mythology, consciousness, live cosmos, and Echo AI.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#05030D",
+  "theme_color": "#7C3AED",
+  "categories": ["education", "news", "reference", "lifestyle"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
