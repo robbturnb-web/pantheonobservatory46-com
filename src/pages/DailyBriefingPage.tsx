@@ -14,6 +14,7 @@ import {
   Cloud, RefreshCw, ChevronRight, CalendarDays, Download, Settings,
 } from 'lucide-react';
 import { SEO } from '@/components/SEO';
+import { CuratorNote } from '@/components/briefing/CuratorNote';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
@@ -471,6 +472,7 @@ export function DailyBriefingPage() {
       />
 
       <section className="container mx-auto px-4 pt-24 pb-8">
+        <CuratorNote />
         {/* Header */}
         <div className="flex items-center gap-3 mb-3">
           <span className="text-[10px] uppercase tracking-[0.3em] text-realm-observatory font-mono">
