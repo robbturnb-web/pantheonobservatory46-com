@@ -484,6 +484,16 @@ export function DailyBriefingPage() {
                     ))}
                   </div>
                 </div>
+                <div className="space-y-2">
+                  <Label htmlFor="filename-prefix" className="text-xs text-foreground">Filename Prefix</Label>
+                  <Input
+                    id="filename-prefix"
+                    value={filenamePrefix}
+                    onChange={(e) => setFilenamePrefix(e.target.value)}
+                    placeholder="e.g. briefing-snapshot"
+                    className="h-8 text-xs bg-background border-border/40"
+                  />
+                </div>
                 <div className="flex items-center justify-between">
                   <Label htmlFor="cover-title" className="text-xs text-foreground cursor-pointer">Cover Title</Label>
                   <Switch id="cover-title" checked={includeCoverTitle} onCheckedChange={setIncludeCoverTitle} />
