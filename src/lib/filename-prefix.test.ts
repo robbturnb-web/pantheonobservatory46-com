@@ -45,8 +45,16 @@ describe('assertValidFilenamePrefix', () => {
     expect(() => assertValidFilenamePrefix('')).toThrow(FilenamePrefixError);
   });
 
-  it('throws for whitespace-only string', () => {
+  it('throws for whitespace-only string (spaces)', () => {
     expect(() => assertValidFilenamePrefix('   ')).toThrow(FilenamePrefixError);
+  });
+
+  it('throws for whitespace-only string (tabs)', () => {
+    expect(() => assertValidFilenamePrefix('\t\t\t')).toThrow(FilenamePrefixError);
+  });
+
+  it('throws for mixed whitespace-only string (spaces + tabs + newlines)', () => {
+    expect(() => assertValidFilenamePrefix(' \t\n\r ')).toThrow(FilenamePrefixError);
   });
 
   it('includes "cannot be empty" in the error message for empty input', () => {
