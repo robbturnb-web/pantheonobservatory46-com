@@ -20,16 +20,14 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 
-const FILENAME_PREFIX_MAX = 64;
-const FILENAME_PREFIX_PATTERN = /^[a-zA-Z0-9-_ ]+$/;
+import {
+  FILENAME_PREFIX_MAX,
+  FilenamePrefixError,
+  assertValidFilenamePrefix,
+  sanitizeFilenamePrefix,
+  validateFilenamePrefix,
+} from '@/lib/filename-prefix';
 
-function validateFilenamePrefix(raw: string): string | null {
-  const trimmed = raw.trim();
-  if (!trimmed) return 'Filename prefix cannot be empty.';
-  if (trimmed.length > FILENAME_PREFIX_MAX) return `Keep it under ${FILENAME_PREFIX_MAX} characters (currently ${trimmed.length}).`;
-  if (!FILENAME_PREFIX_PATTERN.test(trimmed)) return 'Only letters, numbers, spaces, hyphens, and underscores are allowed.';
-  return null;
-}
 import {
   useEarthquakes, useKp, useFlare, useSolarWind, useCMEs,
   useFlareEvents, useGSTs, useSwpcAlerts, useISS, useNwsAlerts,
@@ -364,13 +362,18 @@ export function DailyBriefingPage() {
   const filenameError = validateFilenamePrefix(filenamePrefix);
 
   const exportPdf = async () => {
-    const err = validateFilenamePrefix(filenamePrefix);
-    if (err) {
-      toast.error('Invalid filename prefix', { description: err });
+    // Authoritative guard — runs even if the UI control is bypassed.
+    let validatedPrefix: string;
+    try {
+      validatedPrefix = assertValidFilenamePrefix(filenamePrefix);
+    } catch (e) {
+      const msg = e instanceof FilenamePrefixError ? e.message : 'Invalid filename prefix.';
+      toast.error('Invalid filename prefix', { description: msg });
       return;
     }
     setExporting(true);
     try {
+
       const { default: jsPDF } = await import('jspdf');
       const format = pageSize === 'letter' ? 'letter' : 'a4';
       const doc = new jsPDF({ unit: 'pt', format });
@@ -451,8 +454,9 @@ export function DailyBriefingPage() {
       }
 
       const stamp = new Date().toISOString().slice(0, 10);
-      const safePrefix = filenamePrefix.trim().replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-_]/g, '');
-      doc.save(`${safePrefix || 'briefing'}-${stamp}.pdf`);
+      const safePrefix = sanitizeFilenamePrefix(validatedPrefix);
+      doc.save(`${safePrefix}-${stamp}.pdf`);
+
     } finally {
       setExporting(false);
     }
