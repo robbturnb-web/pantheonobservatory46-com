@@ -361,7 +361,14 @@ export function DailyBriefingPage() {
   const [includeCoverTitle, setIncludeCoverTitle] = useState(true);
   const [filenamePrefix, setFilenamePrefix] = useState('pantheon-daily-briefing');
 
+  const filenameError = validateFilenamePrefix(filenamePrefix);
+
   const exportPdf = async () => {
+    const err = validateFilenamePrefix(filenamePrefix);
+    if (err) {
+      toast.error('Invalid filename prefix', { description: err });
+      return;
+    }
     setExporting(true);
     try {
       const { default: jsPDF } = await import('jspdf');
