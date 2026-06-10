@@ -471,14 +471,14 @@ export function DailyBriefingPage() {
         description="One snapshot every morning: seismic, solar, geomagnetic, weather, orbital, and disclosure signals composed into a single command-ready briefing."
       />
 
-      <section className="container mx-auto px-4 pt-24 pb-8">
+      <section className="container mx-auto px-4 pt-20 sm:pt-24 pb-8">
         <CuratorNote />
         {/* Header */}
-        <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center gap-3 mb-3 flex-wrap">
           <span className="text-[10px] uppercase tracking-[0.3em] text-realm-observatory font-mono">
             Phase 2 · Daily Briefing
           </span>
-          <span className="h-px flex-1 bg-realm-observatory/30" />
+          <span className="hidden sm:block h-px flex-1 bg-realm-observatory/30" />
           <Popover>
             <PopoverTrigger asChild>
               <button
@@ -562,8 +562,8 @@ export function DailyBriefingPage() {
           </button>
         </div>
 
-        <div className="flex items-start justify-between gap-6 flex-wrap mb-3">
-          <h1 className="font-display text-4xl md:text-6xl text-foreground">
+        <div className="flex items-start justify-between gap-4 flex-wrap mb-3">
+          <h1 className="font-display text-3xl sm:text-5xl md:text-6xl text-foreground break-words">
             Daily <span className="text-realm-observatory">Briefing</span>
           </h1>
           <div className={`px-4 py-2 rounded-xl border ${TONE[posture].border} ${TONE[posture].bg} backdrop-blur`}>
