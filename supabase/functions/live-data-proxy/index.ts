@@ -126,7 +126,7 @@ Deno.serve(async (req) => {
     }
     return new Response(
       JSON.stringify({ error: 'fetch failed', message: (e as Error).message }),
-      { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json', 'X-Pantheon-Fallback': '1' } },
     );
   }
 });
