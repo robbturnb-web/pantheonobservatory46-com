@@ -451,6 +451,47 @@ export function DailyBriefingPage() {
             Phase 2 · Daily Briefing
           </span>
           <span className="h-px flex-1 bg-realm-observatory/30" />
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-realm-observatory font-mono transition"
+              >
+                <Settings className="w-3 h-3" />
+                Export Settings
+              </button>
+            </PopoverTrigger>
+            <PopoverContent className="w-64 bg-card border-border/60 backdrop-blur">
+              <div className="space-y-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-mono">Export Settings</div>
+                <div className="space-y-2">
+                  <Label className="text-xs text-foreground">Page Size</Label>
+                  <div className="flex gap-2">
+                    {(['a4', 'letter'] as const).map((s) => (
+                      <button
+                        key={s}
+                        onClick={() => setPageSize(s)}
+                        className={`flex-1 px-2 py-1 rounded-md border text-[10px] uppercase tracking-wider font-mono transition ${
+                          pageSize === s
+                            ? 'border-realm-observatory bg-realm-observatory/20 text-realm-observatory'
+                            : 'border-border/40 text-muted-foreground hover:text-foreground hover:border-border'
+                        }`}
+                      >
+                        {s === 'a4' ? 'A4' : 'Letter'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="cover-title" className="text-xs text-foreground cursor-pointer">Cover Title</Label>
+                  <Switch id="cover-title" checked={includeCoverTitle} onCheckedChange={setIncludeCoverTitle} />
+                </div>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="page-numbers" className="text-xs text-foreground cursor-pointer">Page Numbers</Label>
+                  <Switch id="page-numbers" checked={includePageNumbers} onCheckedChange={setIncludePageNumbers} />
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
           <button
             onClick={exportPdf}
             disabled={exporting || items.length === 0}
