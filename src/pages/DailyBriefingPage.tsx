@@ -11,9 +11,12 @@ import { Link } from 'react-router-dom';
 import {
   Activity, AlertTriangle, Radio, Sun, Waves, Wind, Satellite,
   Gavel, ScrollText, FileText, Building2, Users, Radar,
-  Cloud, RefreshCw, ChevronRight, CalendarDays, Download,
+  Cloud, RefreshCw, ChevronRight, CalendarDays, Download, Settings,
 } from 'lucide-react';
 import { SEO } from '@/components/SEO';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import {
   useEarthquakes, useKp, useFlare, useSolarWind, useCMEs,
   useFlareEvents, useGSTs, useSwpcAlerts, useISS, useNwsAlerts,
