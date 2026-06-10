@@ -144,7 +144,7 @@ export default function App() {
               <Route path="/elements" element={<ElementsLabPage />} />
               <Route path="/experts" element={<ExpertsIndexPage />} />
               <Route path="/experts/:slug" element={<ExpertProfilePage />} />
-              <Route path="/style-guide" element={<StyleGuidePage />} />
+              {/* style-guide moved to admin gate below */}
               <Route path="/documentaries" element={<DocumentariesPage />} />
               
               <Route path="/jeremy-corbell" element={<JeremyCorbellPage />} />
@@ -175,7 +175,7 @@ export default function App() {
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/disclaimer" element={<DisclaimerPage />} />
-              <Route path="/debug-checklist" element={<DebugChecklistPage />} />
+              <Route path="/debug-checklist" element={<AdminRoute><DebugChecklistPage /></AdminRoute>} />
               <Route path="/community" element={<Navigate to="/echoverse" replace />} />
               <Route path="/index" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />
