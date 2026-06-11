@@ -298,6 +298,13 @@ export function HomeLowerSections() {
         </div>
       </section>
 
+      {/* PANTHEON PATH (XP teaser) */}
+      <PantheonPathTeaser />
+
+      {/* SOURCE INTEGRITY */}
+      <SourceIntegrity />
+
+
       {/* TRANSMISSIONS */}
       <div className="relative z-10">
         <VideoStrip title="Latest Transmissions" subtitle="Fresh signal from the creators we track." limit={3} />
