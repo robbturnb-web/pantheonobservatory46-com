@@ -109,10 +109,10 @@ export function LiveFeedsPage() {
             refreshing={quakes.loading}
           >
             <p className="text-3xl font-black text-foreground">
-              {quakes.data?.value?.significant ?? '—'}
+              {quakes.data?.value?.count24h ?? '—'}
             </p>
             <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
-              significant events · 24h
+              events · 24h · max M {quakes.data?.value?.highest?.mag?.toFixed(1) ?? '—'}
             </p>
           </LivePanel>
 
