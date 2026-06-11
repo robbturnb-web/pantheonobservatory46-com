@@ -1,8 +1,12 @@
 import { SEO } from '@/components/SEO';
 import { LivePanel } from '@/components/command/LivePanel';
-import { useKp, useFlare, useISS, useEarthquakes, useNwsAlerts } from '@/hooks/use-live-data';
+import { LiveChamber } from '@/components/command/LiveChamber';
+import {
+  useKp, useFlare, useISS, useEarthquakes, useNwsAlerts,
+} from '@/hooks/use-live-data';
 import {
   Sun, Wind, Satellite, Eye, Activity, Telescope, Radio,
+  Flame, Globe2, CloudLightning, ScanEye, BookOpenCheck,
 } from 'lucide-react';
 
 export function LiveFeedsPage() {
@@ -13,90 +17,77 @@ export function LiveFeedsPage() {
   const nws = useNwsAlerts();
 
   const statusOf = <T,>(r: { data: { ok: boolean; stale?: boolean } | null }) =>
-    r.data?.ok ? (r.data.stale ? 'cached' as const : 'live' as const) : 'pending' as const;
+    r.data?.ok ? (r.data.stale ? ('cached' as const) : ('live' as const)) : ('pending' as const);
 
   return (
     <>
       <SEO
-        title="Live Intelligence Hub · Pantheon Observatory 46"
-        description="Solar activity, space weather, ISS tracking, UAP disclosure, earthquake watch, interstellar objects, and weekly mystery signals."
+        title="Live Cosmic Feed · Pantheon Observatory 46"
+        description="Themed live intelligence chambers — Solar, Seismic, Orbital, Atmospheric, Anomaly, and the Codex Vault."
       />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-        <header className="mb-8 sm:mb-10">
-          <p className="text-[10px] uppercase tracking-[4px] text-primary">Live Intelligence Hub</p>
-          <h1 className="text-3xl sm:text-4xl font-black text-foreground mt-2 tracking-tight">
-            Cosmic Command · Live
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-8 sm:space-y-10">
+        <header className="text-center sm:text-left animate-fade-in">
+          <p className="text-[10px] uppercase tracking-[4px] text-primary">Live Cosmic Feed · V2</p>
+          <h1 className="text-3xl sm:text-5xl font-black text-foreground mt-2 tracking-tight">
+            Cosmic Command Chambers
           </h1>
-          <p className="text-sm text-muted-foreground mt-3 max-w-2xl leading-relaxed">
-            Real-time solar, orbital, and geologic intelligence. When an upstream API is offline we say so —
-            we never fabricate readings.
+          <p className="text-sm text-muted-foreground mt-3 max-w-2xl mx-auto sm:mx-0 leading-relaxed">
+            Each chamber is a distinct environment — solar fire, tectonic pulse, orbital sweep, atmospheric flash,
+            anomaly grid, and the golden codex vault. When upstream APIs are offline we say so. We never fabricate readings.
           </p>
         </header>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <LivePanel
-            title="Solar Activity"
-            description="GOES X-ray flare class — last 24 hours."
-            Icon={Sun}
-            accent="text-amber-300"
-            status={statusOf(flare)}
-            sourceUrl="https://www.swpc.noaa.gov/products/goes-x-ray-flux"
-            sourceLabel="NOAA SWPC · GOES"
-            onRefresh={flare.refresh}
-            refreshing={flare.loading}
-          >
-            <p className="text-3xl font-black text-foreground">{flare.data?.value?.class ?? '—'}</p>
-            <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">peak class</p>
-          </LivePanel>
+        {/* SOLAR */}
+        <LiveChamber
+          title="Solar Observatory"
+          subtitle="Flare class · geomagnetic Kp · solar wind regime"
+          Icon={Flame}
+          theme="solar"
+          status={statusOf(flare)}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <LivePanel
+              title="Solar Activity"
+              description="GOES X-ray flare class — last 24 hours."
+              Icon={Sun}
+              accent="text-amber-300"
+              status={statusOf(flare)}
+              sourceUrl="https://www.swpc.noaa.gov/products/goes-x-ray-flux"
+              sourceLabel="NOAA SWPC · GOES"
+              onRefresh={flare.refresh}
+              refreshing={flare.loading}
+            >
+              <p className="text-3xl font-black text-foreground">{flare.data?.value?.class ?? '—'}</p>
+              <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">peak class</p>
+            </LivePanel>
 
-          <LivePanel
-            title="Space Weather"
-            description="Planetary geomagnetic Kp index, 3-hour cadence."
-            Icon={Wind}
-            accent="text-primary"
-            status={statusOf(kp)}
-            sourceUrl="https://www.swpc.noaa.gov/products/planetary-k-index"
-            sourceLabel="NOAA SWPC · Kp"
-            onRefresh={kp.refresh}
-            refreshing={kp.loading}
-          >
-            <p className="text-3xl font-black text-foreground">{kp.data?.value?.kp?.toFixed(2) ?? '—'}</p>
-            <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
-              {kp.data?.value?.stormLevel ?? 'no data'}
-            </p>
-          </LivePanel>
+            <LivePanel
+              title="Space Weather"
+              description="Planetary geomagnetic Kp index, 3-hour cadence."
+              Icon={Wind}
+              accent="text-amber-200"
+              status={statusOf(kp)}
+              sourceUrl="https://www.swpc.noaa.gov/products/planetary-k-index"
+              sourceLabel="NOAA SWPC · Kp"
+              onRefresh={kp.refresh}
+              refreshing={kp.loading}
+            >
+              <p className="text-3xl font-black text-foreground">{kp.data?.value?.kp?.toFixed(2) ?? '—'}</p>
+              <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
+                {kp.data?.value?.stormLevel ?? 'no data'}
+              </p>
+            </LivePanel>
+          </div>
+        </LiveChamber>
 
-          <LivePanel
-            title="ISS / Orbital Tracking"
-            description="International Space Station ground-track, ~15s refresh."
-            Icon={Satellite}
-            accent="text-cyan-300"
-            status={statusOf(iss)}
-            sourceUrl="https://spotthestation.nasa.gov/"
-            sourceLabel="NASA · Spot the Station"
-            onRefresh={iss.refresh}
-            refreshing={iss.loading}
-          >
-            <div className="font-mono text-sm text-foreground/90 space-y-0.5">
-              <div>lat {iss.data?.value?.latitude?.toFixed(2) ?? '—'}</div>
-              <div>lon {iss.data?.value?.longitude?.toFixed(2) ?? '—'}</div>
-            </div>
-          </LivePanel>
-
-          <LivePanel
-            title="UAP / Disclosure Watch"
-            description="Curated tracking of AARO, ODNI and Congressional UAP releases."
-            Icon={Eye}
-            accent="text-emerald-300"
-            status="manual"
-            sourceUrl="https://www.aaro.mil/"
-            sourceLabel="AARO · Official"
-          >
-            <p className="text-xs text-muted-foreground italic">
-              Manual update mode — curator reviews and posts verified document drops.
-            </p>
-          </LivePanel>
-
+        {/* SEISMIC */}
+        <LiveChamber
+          title="Planetary Monitoring Grid"
+          subtitle="Worldwide seismic activity and fault-line pulse"
+          Icon={Globe2}
+          theme="seismic"
+          status={statusOf(quakes)}
+        >
           <LivePanel
             title="Earthquake / Geology Watch"
             description="Significant seismic events worldwide, last 24h."
@@ -108,41 +99,63 @@ export function LiveFeedsPage() {
             onRefresh={quakes.refresh}
             refreshing={quakes.loading}
           >
-            <p className="text-3xl font-black text-foreground">
-              {quakes.data?.value?.count24h ?? '—'}
-            </p>
+            <p className="text-3xl font-black text-foreground">{quakes.data?.value?.count24h ?? '—'}</p>
             <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
               events · 24h · max M {quakes.data?.value?.highest?.mag?.toFixed(1) ?? '—'}
             </p>
           </LivePanel>
+        </LiveChamber>
 
-          <LivePanel
-            title="Interstellar Objects"
-            description="3I/ATLAS and other ISO tracking via JPL Horizons."
-            Icon={Telescope}
-            accent="text-fuchsia-300"
-            status="external"
-            sourceUrl="https://ssd.jpl.nasa.gov/horizons/"
-            sourceLabel="JPL Horizons"
-          >
-            <p className="text-xs text-foreground/80">
-              Track current ISO candidates via JPL — live feed pending integration.
-            </p>
-          </LivePanel>
+        {/* ORBITAL */}
+        <LiveChamber
+          title="Orbital Command Deck"
+          subtitle="ISS ground-track · interstellar object watch"
+          Icon={Satellite}
+          theme="orbital"
+          status={statusOf(iss)}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <LivePanel
+              title="ISS / Orbital Tracking"
+              description="International Space Station, ~15s refresh."
+              Icon={Satellite}
+              accent="text-cyan-300"
+              status={statusOf(iss)}
+              sourceUrl="https://spotthestation.nasa.gov/"
+              sourceLabel="NASA · Spot the Station"
+              onRefresh={iss.refresh}
+              refreshing={iss.loading}
+            >
+              <div className="font-mono text-sm text-foreground/90 space-y-0.5">
+                <div>lat {iss.data?.value?.latitude?.toFixed(2) ?? '—'}</div>
+                <div>lon {iss.data?.value?.longitude?.toFixed(2) ?? '—'}</div>
+              </div>
+            </LivePanel>
 
-          <LivePanel
-            title="Mystery Signal of the Week"
-            description="Curator-selected anomaly or signal under active observation."
-            Icon={Radio}
-            accent="text-amber-300"
-            status="manual"
-          >
-            <p className="text-sm font-semibold text-foreground">BLC1 · Proxima Centauri (revisited)</p>
-            <p className="text-[11px] text-muted-foreground mt-1">
-              Narrowband signal first reported 2019 — re-examination ongoing.
-            </p>
-          </LivePanel>
+            <LivePanel
+              title="Interstellar Objects"
+              description="3I/ATLAS and other ISO tracking via JPL Horizons."
+              Icon={Telescope}
+              accent="text-cyan-200"
+              status="external"
+              sourceUrl="https://ssd.jpl.nasa.gov/horizons/"
+              sourceLabel="JPL Horizons"
+            >
+              <p className="text-xs text-foreground/80">
+                Track current ISO candidates via JPL — live feed pending integration.
+              </p>
+            </LivePanel>
+          </div>
+        </LiveChamber>
 
+        {/* ATMOSPHERE */}
+        <LiveChamber
+          title="Atmospheric Intelligence"
+          subtitle="Severe weather and storm advisories"
+          Icon={CloudLightning}
+          theme="atmosphere"
+          status={statusOf(nws)}
+        >
           <LivePanel
             title="NWS · Active Severe Alerts"
             description="US National Weather Service severe/extreme advisories."
@@ -157,7 +170,76 @@ export function LiveFeedsPage() {
             <p className="text-3xl font-black text-foreground">{nws.data?.value?.total ?? '—'}</p>
             <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">active alerts</p>
           </LivePanel>
-        </section>
+        </LiveChamber>
+
+        {/* ANOMALY */}
+        <LiveChamber
+          title="Anomaly Detection Network"
+          subtitle="UAP disclosure · classified signal review"
+          Icon={ScanEye}
+          theme="anomaly"
+          status="manual"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <LivePanel
+              title="UAP / Disclosure Watch"
+              description="Curated tracking of AARO, ODNI and Congressional UAP releases."
+              Icon={Eye}
+              accent="text-emerald-300"
+              status="manual"
+              sourceUrl="https://www.aaro.mil/"
+              sourceLabel="AARO · Official"
+            >
+              <p className="text-xs text-muted-foreground italic">
+                Manual update mode — curator reviews and posts verified document drops.
+              </p>
+            </LivePanel>
+
+            <LivePanel
+              title="Mystery Signal of the Week"
+              description="Curator-selected anomaly under active observation."
+              Icon={Radio}
+              accent="text-emerald-200"
+              status="manual"
+            >
+              <p className="text-sm font-semibold text-foreground">BLC1 · Proxima Centauri (revisited)</p>
+              <p className="text-[11px] text-muted-foreground mt-1">
+                Narrowband signal first reported 2019 — re-examination ongoing.
+              </p>
+            </LivePanel>
+          </div>
+        </LiveChamber>
+
+        {/* CODEX */}
+        <LiveChamber
+          title="The Codex Vault"
+          subtitle="Pantheon's sacred archive · cross-discipline knowledge index"
+          Icon={BookOpenCheck}
+          theme="codex"
+          status="external"
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {[
+              { label: 'Gods · Mythology', href: '/gods' },
+              { label: 'Pyramids · Megaliths', href: '/pyramids' },
+              { label: 'Whistleblower Vault', href: '/whistleblowers' },
+              { label: 'Disclosure Command', href: '/disclosure' },
+              { label: 'Starseed Terminal', href: '/starseed' },
+              { label: 'Frequencies · 46', href: '/frequencies' },
+            ].map((x) => (
+              <a
+                key={x.href}
+                href={x.href}
+                className="group rounded-xl border border-amber-300/20 bg-black/40 px-4 py-3 text-sm text-amber-100/90 hover:border-amber-300/60 hover:bg-amber-300/10 transition-colors"
+              >
+                <span className="font-mono text-[10px] uppercase tracking-[2px] text-amber-300/70 block">
+                  Enter →
+                </span>
+                <span className="font-bold tracking-tight">{x.label}</span>
+              </a>
+            ))}
+          </div>
+        </LiveChamber>
       </main>
     </>
   );
