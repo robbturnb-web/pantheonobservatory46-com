@@ -534,6 +534,26 @@ body::after {
 }
 .hud-aberration { animation: hud-bracket-aberration 3s ease-in-out infinite; }
 
+/* Live Chamber ambient animations */
+@keyframes chamber-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+@keyframes chamber-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes chamber-flash {
+  0%, 92%, 100% { opacity: 0; }
+  94% { opacity: 0.8; }
+  96% { opacity: 0.2; }
+  98% { opacity: 0.6; }
+}
+@keyframes chamber-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
