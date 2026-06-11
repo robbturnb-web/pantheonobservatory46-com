@@ -1,52 +1,55 @@
 
-# Pantheon Frequency 46 — Stabilization Pass
+# Command Center + Live Intelligence Hub Upgrade
 
-This is a big multi-week scope. To deliver real quality (not a surface sweep), I'll execute it in clearly-bounded phases, one phase per turn, and report back between phases so you can steer. Doing all 8 phases in a single pass would mean shallow fixes everywhere and likely regressions across ~150 components — exactly what we want to avoid before GitHub + launch.
+The existing `TempleObservatoryPage` (1100 lines) already does most of the cosmic hero / live work. Rather than rewriting it, I'll add new polished sections **on top of** what's there and upgrade the `/live-feeds` page into the new "Live Intelligence Hub". All current content stays.
 
-## Execution Order
+## What gets built
 
-### Phase 1 — Full Audit (this pass, no code changes)
-Deliverables, written to `/mnt/documents/pantheon-audit.md`:
-- Route inventory vs `PRIMARY_NAV` / `App.tsx` (broken / missing / orphan routes)
-- Nav + sidebar + footer link check
-- YouTube inventory — flag every `__REPLACE_ME__` and unverified videoId
-- Live feed inventory (edge functions + `live-data.ts`) — real vs simulated, source, cadence
-- Placeholder/fake data scan (lorem, TODO, mock, "coming soon")
-- Console errors + network failures from current preview
-- Mobile audit at 384px (current viewport) + tablet + desktop snapshots of top 10 pages
-- Performance signals (LCP image, bundle hotspots)
-- Accessibility quick-pass (contrast tokens, icon-only buttons, single `<main>`)
+### 1. New reusable primitives (`src/components/command/`)
+- `CommandHeroBar.tsx` — animated status bar strip ("Signal Online · Archive Active · Live Feed Monitoring · Last Updated"). Uses existing `signal-online` token + live-data hooks.
+- `CommandCard.tsx` — glass card with holographic border + corner glow, icon, title, description, Explore button. Used everywhere.
+- `LivePanel.tsx` — panel with status badge, body slot, source link, "Refresh / Check Source" button. Shows "Live API connection pending" / "Manual update mode" when no data hook is wired.
+- `ClaimBadge.tsx` — FACT / THEORY / MYTH / SPECULATION badge (4 distinct styles, semantic tokens only). Replaces ad-hoc per-section variants.
 
-### Phase 2 — Critical Fixes
-Routing, broken buttons/links, dead videos, console errors, mobile overflow. Each fix tied to an audit line item. No redesigns.
+### 2. New homepage sections (appended via `HomeLowerSections.tsx`, no deletions)
+- **Command Dashboard** — 8-card grid (Gods, Starseed, Antarctica, Atlantis, UAP, Pyramids, Bloodline/RH → routes to `/species`, Live Hub). Routes to existing pages. Mobile: 1 col, sm: 2, lg: 4.
+- **Featured Mystery** — "The Lost Knowledge of the Pyramids" card with claim badges + Investigate (→ `/pyramids`) + Save (toast-only for now).
+- **Begin Your Pantheon Path** — 6 rank chips (Seeker → Ascendant) + XP action list. Links to `/profile`.
+- **Source Integrity** — 4 trust cards reusing `ClaimBadge` styles. Links to `/sources`.
 
-### Phase 3 — Live Data Truth Layer
-- Standardize every live card to show: source name, source URL, last-updated, status badge (Live / Delayed / Offline / Placeholder), error state
-- Replace simulated feeds where a real public endpoint exists (NASA, NOAA SWPC, USGS, ESA, ISS)
-- Anything still simulated gets an explicit "Demo data" pill — no exceptions
+### 3. Live Intelligence Hub (`/live-feeds` upgrade)
+Replace current `LiveFeedsPage` body with a 7-panel dashboard:
+Solar Activity · Space Weather (Kp) · ISS/Orbital · UAP Watch · Earthquake · Interstellar Objects · Mystery Signal of the Week.
+Wires existing `useKp`, `useFlare`, `useEarthquakes` hooks; panels without a hook show the honest "Live API connection pending" placeholder (never fake data).
 
-### Phase 4 — Link & Video Health
-- Extend `sourceHealthService.ts` with a real backend checker (edge function cron: HEAD checks + YouTube Data API `videos.list` for embeddable)
-- New `source_health` table (status, last_checked, http_status, kind)
-- Admin status panel reading from it
+### 4. Hero status bar
+Inject `CommandHeroBar` near top of the existing hero (no removal of current hero content). Title/subtitle copy stays; we already have "Enter Archive" CTA — add the secondary "View Live Intelligence" → `/live-feeds`.
 
-### Phase 5 — Mobile Readiness
-Systematic pass at 360 / 390 / 414 / 768 / 1024 / 1440. Fix overflow, tap targets ≥44px, sticky nav, modal sizing, image scaling. No horizontal scroll anywhere.
+### 5. Footer upgrade
+Extend `PantheonFooter.tsx` with the mission statement + disclaimer block + pantheonobservatory.com link. Keep existing nav links.
 
-### Phase 6 — Command Center
-New `/command-center` (admin-gated via `has_role('admin')`): site health, link health, video health, live feed status, API status, recent errors, mobile/perf scores, last audit timestamp. Built on Phase 4's tables.
+## What I will NOT touch
+- The Temple Observatory hero, KP gauge, compass, SDO imagery, transmissions ticker, sidebar — all preserved.
+- Existing routes, data files, edge functions.
+- Color/animation tokens (use `realm-*`, `signal-online`, `primary`, `accent` per project memory — no hardcoded hex in new components).
 
-### Phase 7 — XP & Profile Foundation
-Extend existing `echo_xp` schema with XP categories (knowledge / discovery / research), streaks, badge definitions table, user_badges table. Seed the 10 badges you listed. Upgrade ProfilePage to feel rewarding.
+## Mobile-first
+All grids `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`, tap targets ≥ 44px, panels stack vertically, no horizontal scroll, animations CSS-only (no heavy framer payloads on mobile).
 
-### Phase 8 — Final Report
-Honest written report at `/mnt/documents/pantheon-launch-report.md`: fixed / outstanding / real vs placeholder data / broken links + videos / ready features / next dev step.
+## Files created
+- `src/components/command/CommandHeroBar.tsx`
+- `src/components/command/CommandCard.tsx`
+- `src/components/command/LivePanel.tsx`
+- `src/components/command/ClaimBadge.tsx`
+- `src/components/command/CommandDashboard.tsx`
+- `src/components/command/FeaturedMystery.tsx`
+- `src/components/command/PantheonPathTeaser.tsx`
+- `src/components/command/SourceIntegrity.tsx`
 
-## What I need from you to start
+## Files edited
+- `src/components/home/HomeLowerSections.tsx` — append new sections
+- `src/pages/home/TempleObservatoryPage.tsx` — inject `CommandHeroBar` + secondary CTA only
+- `src/pages/LiveFeedsPage.tsx` — rebuild as Live Intelligence Hub
+- `src/components/PantheonFooter.tsx` — mission + disclaimer block
 
-Two quick confirmations:
-
-1. **Phase 1 first, alone?** I'll produce the audit report this turn with zero code changes, then you greenlight Phase 2. (Recommended — prevents wasted edits.)
-2. **Admin identity** for Phase 6: who is admin? I can either (a) seed your current logged-in user into `user_roles` as `admin`, or (b) you tell me an email to seed.
-
-If you'd rather I just charge through all 8 phases without checkpoints, say "no checkpoints, ship it" and I'll batch them — but expect rougher results and a much longer single turn.
+Estimated ~700 lines new code across 12 files, no deletions.
