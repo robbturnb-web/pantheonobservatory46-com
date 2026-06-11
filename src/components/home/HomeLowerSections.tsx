@@ -7,6 +7,11 @@ import {
 } from 'lucide-react';
 import { vaultSlots, daysOverdue } from '@/data/the-46';
 import { VideoStrip } from '@/components/VideoStrip';
+import { CommandHeroBar } from '@/components/command/CommandHeroBar';
+import { CommandDashboard } from '@/components/command/CommandDashboard';
+import { FeaturedMystery } from '@/components/command/FeaturedMystery';
+import { PantheonPathTeaser } from '@/components/command/PantheonPathTeaser';
+import { SourceIntegrity } from '@/components/command/SourceIntegrity';
 
 import silhouetteMale from '@/assets/missing/silhouette-male.jpg';
 import silhouetteFemale from '@/assets/missing/silhouette-female.jpg';
@@ -107,6 +112,14 @@ function AnimatedCounter({ value, duration = 1800 }: { value: number; duration?:
 export function HomeLowerSections() {
   return (
     <>
+      {/* COMMAND STATUS BAR */}
+      <CommandHeroBar />
+
+      {/* COMMAND DASHBOARD — 8-card portal grid */}
+      <CommandDashboard />
+
+      {/* FEATURED MYSTERY */}
+      <FeaturedMystery />
 
       {/* STATS */}
       <section className="py-16 px-4 relative z-10">
@@ -284,6 +297,13 @@ export function HomeLowerSections() {
           </div>
         </div>
       </section>
+
+      {/* PANTHEON PATH (XP teaser) */}
+      <PantheonPathTeaser />
+
+      {/* SOURCE INTEGRITY */}
+      <SourceIntegrity />
+
 
       {/* TRANSMISSIONS */}
       <div className="relative z-10">

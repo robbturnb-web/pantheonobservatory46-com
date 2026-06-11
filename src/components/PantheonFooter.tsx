@@ -37,8 +37,8 @@ const navGroups = [
 
 export function PantheonFooter() {
   return (
-    <footer className="border-t border-border mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <footer className="border-t border-border mt-20 bg-background/60 backdrop-blur-xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="md:col-span-1">
@@ -46,13 +46,18 @@ export function PantheonFooter() {
               <Eye className="w-6 h-6" />
               <PantheonWordmark size="md" />
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-              A knowledge platform exploring UAPs, ancient mysteries, consciousness research,
-              and the cosmic questions humanity has asked since the beginning.
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Pantheon Observatory 46 — a living archive of mythology, cosmic mysteries, disclosure,
+              ancient civilizations, and human awakening.
             </p>
-            <p className="text-xs text-muted-foreground mt-4">
-              Not affiliated with any government, military, or intelligence agency.
-            </p>
+            <a
+              href="https://pantheonobservatory.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-xs uppercase tracking-[2.5px] text-primary hover:text-primary/80 transition-colors"
+            >
+              pantheonobservatory.com →
+            </a>
           </div>
 
           {/* Nav groups */}
@@ -75,9 +80,19 @@ export function PantheonFooter() {
           ))}
         </div>
 
-        <div className="border-t border-border mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        {/* Disclaimer block */}
+        <div className="mt-10 rounded-xl border border-amber-400/20 bg-amber-400/5 p-4">
+          <p className="text-[10px] uppercase tracking-[3px] text-amber-300 font-bold mb-2">Disclaimer</p>
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            Pantheon is an educational and exploratory archive. Some topics include mythology, speculation,
+            and unresolved mysteries. Verified information and speculative content should remain clearly labeled.
+            Not affiliated with any government, military, or intelligence agency.
+          </p>
+        </div>
+
+        <div className="border-t border-border mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Pantheon Observatory · CC0 Public Domain
+            © {new Date().getFullYear()} Pantheon Observatory 46 · CC0 Public Domain
           </p>
           <p className="text-xs text-muted-foreground italic">
             "The truth is not a destination — it is a practice."

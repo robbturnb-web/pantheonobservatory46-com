@@ -1,172 +1,162 @@
 import { SEO } from '@/components/SEO';
-import { LiveFeedCard } from '@/components/feeds/LiveFeedCard';
-import { useKp, useFlare, useSolarWind, useISS, useNwsAlerts } from '@/hooks/use-live-data';
-import { NASA_PUBLIC_LINKS } from '@/services/nasa/nasaService';
-import { NOAA_PUBLIC_LINKS } from '@/services/noaa/noaaService';
+import { LivePanel } from '@/components/command/LivePanel';
+import { useKp, useFlare, useISS, useEarthquakes, useNwsAlerts } from '@/hooks/use-live-data';
+import {
+  Sun, Wind, Satellite, Eye, Activity, Telescope, Radio,
+} from 'lucide-react';
 
 export function LiveFeedsPage() {
   const kp = useKp();
   const flare = useFlare();
-  const wind = useSolarWind();
   const iss = useISS();
+  const quakes = useEarthquakes();
   const nws = useNwsAlerts();
+
+  const statusOf = <T,>(r: { data: { ok: boolean; stale?: boolean } | null }) =>
+    r.data?.ok ? (r.data.stale ? 'cached' as const : 'live' as const) : 'pending' as const;
 
   return (
     <>
       <SEO
-        title="Live Feeds · Pantheon Frequency 46"
-        description="Real-time space weather, ISS telemetry, NOAA alerts, and verified UAP source feeds."
+        title="Live Intelligence Hub · Pantheon Observatory 46"
+        description="Solar activity, space weather, ISS tracking, UAP disclosure, earthquake watch, interstellar objects, and weekly mystery signals."
       />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <header className="mb-10">
-          <p className="text-[10px] uppercase tracking-[3px] text-primary">Live Feeds</p>
-          <h1 className="text-3xl sm:text-4xl font-semibold text-foreground mt-2">
-            Pantheon Observatory · Live
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <header className="mb-8 sm:mb-10">
+          <p className="text-[10px] uppercase tracking-[4px] text-primary">Live Intelligence Hub</p>
+          <h1 className="text-3xl sm:text-4xl font-black text-foreground mt-2 tracking-tight">
+            Cosmic Command · Live
           </h1>
-          <p className="text-sm text-muted-foreground mt-3 max-w-2xl">
-            Honest, source-attributed live data. When an upstream API is offline we say so —
+          <p className="text-sm text-muted-foreground mt-3 max-w-2xl leading-relaxed">
+            Real-time solar, orbital, and geologic intelligence. When an upstream API is offline we say so —
             we never fabricate readings.
           </p>
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <LiveFeedCard
-            title="NOAA · Kp Index"
-            description="Planetary geomagnetic disturbance index, 3-hour cadence."
-            sourceLabel="NOAA SWPC"
-            sourceUrl={NOAA_PUBLIC_LINKS.swpc}
-            status={kp.data?.ok ? (kp.data.stale ? 'cached' : 'live') : 'unavailable'}
-            fetchedAt={kp.data?.fetchedAt ?? null}
-            loading={kp.loading}
-            stale={kp.data?.stale}
-            cacheAge={kp.data?.cacheAge}
-            lastSuccessAt={kp.data?.lastSuccessAt}
-            error={kp.data?.error ?? null}
-            onRefresh={kp.refresh}
-          >
-            <div>
-              <p className="text-3xl font-semibold text-foreground">
-                {kp.data?.value?.kp?.toFixed(2) ?? '—'}
-              </p>
-              <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
-                {kp.data?.value?.stormLevel ?? 'no data'}
-              </p>
-            </div>
-          </LiveFeedCard>
-
-          <LiveFeedCard
-            title="NASA · Solar X-Ray Flux"
+          <LivePanel
+            title="Solar Activity"
             description="GOES X-ray flare class — last 24 hours."
-            sourceLabel="NASA SDO / NOAA GOES"
-            sourceUrl={NASA_PUBLIC_LINKS.sdo}
-            status={flare.data?.ok ? (flare.data.stale ? 'cached' : 'live') : 'unavailable'}
-            fetchedAt={flare.data?.fetchedAt ?? null}
-            loading={flare.loading}
-            stale={flare.data?.stale}
-            cacheAge={flare.data?.cacheAge}
-            lastSuccessAt={flare.data?.lastSuccessAt}
-            error={flare.data?.error ?? null}
+            Icon={Sun}
+            accent="text-amber-300"
+            status={statusOf(flare)}
+            sourceUrl="https://www.swpc.noaa.gov/products/goes-x-ray-flux"
+            sourceLabel="NOAA SWPC · GOES"
             onRefresh={flare.refresh}
+            refreshing={flare.loading}
           >
-            <div>
-              <p className="text-3xl font-semibold text-foreground">
-                {flare.data?.value?.class ?? '—'}
-              </p>
-              <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
-                peak class
-              </p>
-            </div>
-          </LiveFeedCard>
+            <p className="text-3xl font-black text-foreground">{flare.data?.value?.class ?? '—'}</p>
+            <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">peak class</p>
+          </LivePanel>
 
-          <LiveFeedCard
-            title="NASA · Solar Wind"
-            description="ACE/DSCOVR plasma + magnetic field readings."
-            sourceLabel="NOAA SWPC"
-            sourceUrl={NOAA_PUBLIC_LINKS.swpc}
-            status={wind.data?.ok ? (wind.data.stale ? 'cached' : 'live') : 'unavailable'}
-            fetchedAt={wind.data?.fetchedAt ?? null}
-            loading={wind.loading}
-            stale={wind.data?.stale}
-            cacheAge={wind.data?.cacheAge}
-            lastSuccessAt={wind.data?.lastSuccessAt}
-            error={wind.data?.error ?? null}
-            onRefresh={wind.refresh}
+          <LivePanel
+            title="Space Weather"
+            description="Planetary geomagnetic Kp index, 3-hour cadence."
+            Icon={Wind}
+            accent="text-primary"
+            status={statusOf(kp)}
+            sourceUrl="https://www.swpc.noaa.gov/products/planetary-k-index"
+            sourceLabel="NOAA SWPC · Kp"
+            onRefresh={kp.refresh}
+            refreshing={kp.loading}
           >
-            <div className="space-y-1">
-              <p className="text-2xl font-semibold text-foreground">
-                {wind.data?.value?.speedKmS ? `${Math.round(wind.data.value.speedKmS)} km/s` : '—'}
-              </p>
-              <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground">
-                solar wind speed
-              </p>
-            </div>
-          </LiveFeedCard>
+            <p className="text-3xl font-black text-foreground">{kp.data?.value?.kp?.toFixed(2) ?? '—'}</p>
+            <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
+              {kp.data?.value?.stormLevel ?? 'no data'}
+            </p>
+          </LivePanel>
 
-          <LiveFeedCard
-            title="ISS · Live Telemetry"
-            description="International Space Station ground-track every 15 seconds."
-            sourceLabel="Open Notify"
-            sourceUrl={NASA_PUBLIC_LINKS.iss}
-            status={iss.data?.ok ? (iss.data.stale ? 'cached' : 'live') : 'unavailable'}
-            fetchedAt={iss.data?.fetchedAt ?? null}
-            loading={iss.loading}
-            stale={iss.data?.stale}
-            cacheAge={iss.data?.cacheAge}
-            lastSuccessAt={iss.data?.lastSuccessAt}
-            error={iss.data?.error ?? null}
+          <LivePanel
+            title="ISS / Orbital Tracking"
+            description="International Space Station ground-track, ~15s refresh."
+            Icon={Satellite}
+            accent="text-cyan-300"
+            status={statusOf(iss)}
+            sourceUrl="https://spotthestation.nasa.gov/"
+            sourceLabel="NASA · Spot the Station"
             onRefresh={iss.refresh}
+            refreshing={iss.loading}
           >
-            <div className="font-mono text-xs text-foreground/90 space-y-0.5">
+            <div className="font-mono text-sm text-foreground/90 space-y-0.5">
               <div>lat {iss.data?.value?.latitude?.toFixed(2) ?? '—'}</div>
               <div>lon {iss.data?.value?.longitude?.toFixed(2) ?? '—'}</div>
             </div>
-          </LiveFeedCard>
+          </LivePanel>
 
-          <LiveFeedCard
-            title="NWS · Active Severe Alerts"
-            description="US National Weather Service severe/extreme advisories."
-            sourceLabel="weather.gov"
-            sourceUrl={NOAA_PUBLIC_LINKS.weather}
-            status={nws.data?.ok ? (nws.data.stale ? 'cached' : 'live') : 'unavailable'}
-            fetchedAt={nws.data?.fetchedAt ?? null}
-            loading={nws.loading}
-            stale={nws.data?.stale}
-            cacheAge={nws.data?.cacheAge}
-            lastSuccessAt={nws.data?.lastSuccessAt}
-            error={nws.data?.error ?? null}
-            onRefresh={nws.refresh}
+          <LivePanel
+            title="UAP / Disclosure Watch"
+            description="Curated tracking of AARO, ODNI and Congressional UAP releases."
+            Icon={Eye}
+            accent="text-emerald-300"
+            status="manual"
+            sourceUrl="https://www.aaro.mil/"
+            sourceLabel="AARO · Official"
           >
-            <p className="text-3xl font-semibold text-foreground">
-              {nws.data?.value?.total ?? '—'}
+            <p className="text-xs text-muted-foreground italic">
+              Manual update mode — curator reviews and posts verified document drops.
+            </p>
+          </LivePanel>
+
+          <LivePanel
+            title="Earthquake / Geology Watch"
+            description="Significant seismic events worldwide, last 24h."
+            Icon={Activity}
+            accent="text-rose-300"
+            status={statusOf(quakes)}
+            sourceUrl="https://earthquake.usgs.gov/earthquakes/map/"
+            sourceLabel="USGS"
+            onRefresh={quakes.refresh}
+            refreshing={quakes.loading}
+          >
+            <p className="text-3xl font-black text-foreground">
+              {quakes.data?.value?.count24h ?? '—'}
             </p>
             <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
-              active alerts
+              events · 24h · max M {quakes.data?.value?.highest?.mag?.toFixed(1) ?? '—'}
             </p>
-          </LiveFeedCard>
+          </LivePanel>
 
-          <LiveFeedCard
-            title="SOHO · Solar Imagery"
-            description="Solar and Heliospheric Observatory — official ESA/NASA imagery."
-            sourceLabel="SOHO"
-            sourceUrl={NASA_PUBLIC_LINKS.soho}
+          <LivePanel
+            title="Interstellar Objects"
+            description="3I/ATLAS and other ISO tracking via JPL Horizons."
+            Icon={Telescope}
+            accent="text-fuchsia-300"
             status="external"
-          />
+            sourceUrl="https://ssd.jpl.nasa.gov/horizons/"
+            sourceLabel="JPL Horizons"
+          >
+            <p className="text-xs text-foreground/80">
+              Track current ISO candidates via JPL — live feed pending integration.
+            </p>
+          </LivePanel>
 
-          <LiveFeedCard
-            title="NASA · Near-Earth Objects"
-            description="Asteroid + comet flybys tracked by CNEOS."
-            sourceLabel="JPL CNEOS"
-            sourceUrl={NASA_PUBLIC_LINKS.neo}
-            status="external"
-          />
+          <LivePanel
+            title="Mystery Signal of the Week"
+            description="Curator-selected anomaly or signal under active observation."
+            Icon={Radio}
+            accent="text-amber-300"
+            status="manual"
+          >
+            <p className="text-sm font-semibold text-foreground">BLC1 · Proxima Centauri (revisited)</p>
+            <p className="text-[11px] text-muted-foreground mt-1">
+              Narrowband signal first reported 2019 — re-examination ongoing.
+            </p>
+          </LivePanel>
 
-          <LiveFeedCard
-            title="Official UAP Documents"
-            description="AARO, ODNI, and Congressional UAP releases."
-            sourceLabel="defense.gov · AARO"
-            sourceUrl="https://www.aaro.mil/"
-            status="external"
-          />
+          <LivePanel
+            title="NWS · Active Severe Alerts"
+            description="US National Weather Service severe/extreme advisories."
+            Icon={Activity}
+            accent="text-sky-300"
+            status={statusOf(nws)}
+            sourceUrl="https://www.weather.gov/"
+            sourceLabel="weather.gov"
+            onRefresh={nws.refresh}
+            refreshing={nws.loading}
+          >
+            <p className="text-3xl font-black text-foreground">{nws.data?.value?.total ?? '—'}</p>
+            <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">active alerts</p>
+          </LivePanel>
         </section>
       </main>
     </>
