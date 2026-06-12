@@ -1,6 +1,13 @@
 import { ExternalLink, RefreshCw, type LucideIcon } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { ReactNode } from 'react';
+
+const panelVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
 
 export type LiveStatus = 'live' | 'cached' | 'pending' | 'manual' | 'external';
 
