@@ -1,5 +1,7 @@
 import { type ReactNode } from 'react';
+import { motion, type Variants } from 'framer-motion';
 import { type LucideIcon } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
 
 export type ChamberTheme =
