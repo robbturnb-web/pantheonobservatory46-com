@@ -245,6 +245,8 @@ export function LiveFeedsPage() {
           </div>
         </LiveChamber>
       </main>
+      </MotionConfig>
+
     </>
   );
 }
