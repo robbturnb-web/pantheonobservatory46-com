@@ -99,7 +99,7 @@ export function LivePanel({
           {onRefresh ? 'Refresh' : 'Check Source'}
         </button>
       </footer>
-    </article>
+    </motion.article>
   );
 }
 
