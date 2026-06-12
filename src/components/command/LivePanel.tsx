@@ -1,6 +1,13 @@
 import { ExternalLink, RefreshCw, type LucideIcon } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { ReactNode } from 'react';
+
+const panelVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
 
 export type LiveStatus = 'live' | 'cached' | 'pending' | 'manual' | 'external';
 
@@ -31,7 +38,14 @@ export function LivePanel({
 }: LivePanelProps) {
   const s = STATUS[status];
   return (
-    <article className="relative rounded-2xl border border-white/10 bg-background/55 backdrop-blur-xl p-5 overflow-hidden transition-colors hover:border-primary/40">
+    <motion.article
+      variants={panelVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: '-40px' }}
+      className="relative rounded-2xl border border-white/10 bg-background/55 backdrop-blur-xl p-5 overflow-hidden transition-colors hover:border-primary/40"
+    >
+
       <span className="pointer-events-none absolute -top-px -left-px w-8 h-8 border-t border-l border-primary/40 rounded-tl-2xl" />
       <span className="pointer-events-none absolute -bottom-px -right-px w-8 h-8 border-b border-r border-primary/40 rounded-br-2xl" />
 
@@ -85,7 +99,7 @@ export function LivePanel({
           {onRefresh ? 'Refresh' : 'Check Source'}
         </button>
       </footer>
-    </article>
+    </motion.article>
   );
 }
 

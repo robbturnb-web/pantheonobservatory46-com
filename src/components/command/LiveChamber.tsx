@@ -1,5 +1,7 @@
 import { type ReactNode } from 'react';
+import { motion, type Variants } from 'framer-motion';
 import { type LucideIcon } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
 
 export type ChamberTheme =
@@ -149,6 +151,28 @@ const STATUS_LABEL: Record<NonNullable<LiveChamberProps['status']>, string> = {
   external: '◈ EXTERNAL',
 };
 
+const shellVariants: Variants = {
+  hidden: { opacity: 0, y: 32, filter: 'blur(12px)', scale: 0.98 },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    scale: 1,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+      when: 'beforeChildren',
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const childVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
 export function LiveChamber({
   title,
   subtitle,
@@ -160,19 +184,38 @@ export function LiveChamber({
 }: LiveChamberProps) {
   const t = THEMES[theme];
   return (
-    <section
+    <motion.section
+      variants={shellVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: '-80px' }}
       className={cn(
-        'relative rounded-3xl border bg-background/40 backdrop-blur-xl overflow-hidden animate-fade-in',
+        'relative rounded-3xl border bg-background/40 backdrop-blur-xl overflow-hidden',
         t.ring,
         t.glow,
         className,
       )}
     >
       <div className="absolute inset-0 pointer-events-none">{t.bg}</div>
+      <div
+        className={cn(
+          'pointer-events-none absolute inset-0 chamber-enter-glow',
+          t.accent,
+        )}
+        style={{
+          background:
+            'radial-gradient(circle at 50% 40%, currentColor, transparent 60%)',
+          mixBlendMode: 'screen',
+          opacity: 0,
+        }}
+      />
       <span className="pointer-events-none absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-current rounded-tl-3xl opacity-40" />
       <span className="pointer-events-none absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-current rounded-br-3xl opacity-40" />
 
-      <header className="relative z-10 flex items-start justify-between gap-3 px-5 sm:px-7 pt-5 sm:pt-6 pb-4 border-b border-white/5">
+      <motion.header
+        variants={childVariants}
+        className="relative z-10 flex items-start justify-between gap-3 px-5 sm:px-7 pt-5 sm:pt-6 pb-4 border-b border-white/5"
+      >
         <div className="flex items-center gap-3 min-w-0">
           {Icon && (
             <div className={cn('shrink-0 w-11 h-11 rounded-xl border border-white/10 bg-black/40 flex items-center justify-center', t.accent)}>
@@ -196,11 +239,14 @@ export function LiveChamber({
             {STATUS_LABEL[status]}
           </span>
         )}
-      </header>
+      </motion.header>
 
-      <div className="relative z-10 p-5 sm:p-6">{children}</div>
-    </section>
+      <motion.div variants={childVariants} className="relative z-10 p-5 sm:p-6">
+        {children}
+      </motion.div>
+    </motion.section>
   );
 }
+
 
 export default LiveChamber;

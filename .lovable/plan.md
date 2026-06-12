@@ -1,55 +1,45 @@
+# Chamber Entry Animations
 
-# Command Center + Live Intelligence Hub Upgrade
+Add smooth fade + slide reveals to each themed chamber on `/live-feeds`, with staggered timing so chambers cascade in as the user scrolls, and a soft cross-fade when content updates.
 
-The existing `TempleObservatoryPage` (1100 lines) already does most of the cosmic hero / live work. Rather than rewriting it, I'll add new polished sections **on top of** what's there and upgrade the `/live-feeds` page into the new "Live Intelligence Hub". All current content stays.
+## Approach
 
-## What gets built
+Use **Framer Motion** (already installed via `motion` in the project) with `whileInView` for scroll-triggered reveals. Keep all changes in presentation layer — no data/logic touched.
 
-### 1. New reusable primitives (`src/components/command/`)
-- `CommandHeroBar.tsx` — animated status bar strip ("Signal Online · Archive Active · Live Feed Monitoring · Last Updated"). Uses existing `signal-online` token + live-data hooks.
-- `CommandCard.tsx` — glass card with holographic border + corner glow, icon, title, description, Explore button. Used everywhere.
-- `LivePanel.tsx` — panel with status badge, body slot, source link, "Refresh / Check Source" button. Shows "Live API connection pending" / "Manual update mode" when no data hook is wired.
-- `ClaimBadge.tsx` — FACT / THEORY / MYTH / SPECULATION badge (4 distinct styles, semantic tokens only). Replaces ad-hoc per-section variants.
+## Changes
 
-### 2. New homepage sections (appended via `HomeLowerSections.tsx`, no deletions)
-- **Command Dashboard** — 8-card grid (Gods, Starseed, Antarctica, Atlantis, UAP, Pyramids, Bloodline/RH → routes to `/species`, Live Hub). Routes to existing pages. Mobile: 1 col, sm: 2, lg: 4.
-- **Featured Mystery** — "The Lost Knowledge of the Pyramids" card with claim badges + Investigate (→ `/pyramids`) + Save (toast-only for now).
-- **Begin Your Pantheon Path** — 6 rank chips (Seeker → Ascendant) + XP action list. Links to `/profile`.
-- **Source Integrity** — 4 trust cards reusing `ClaimBadge` styles. Links to `/sources`.
+### 1. `src/components/command/LiveChamber.tsx`
+- Wrap the root `<section>` in `motion.section`.
+- Replace static `animate-fade-in` class with motion variants:
+  - `initial`: `{ opacity: 0, y: 32, filter: 'blur(12px)', scale: 0.98 }`
+  - `whileInView`: `{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }`
+  - `viewport`: `{ once: true, margin: '-80px' }`
+  - `transition`: `{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }`
+- Add inner stagger: header and body wrapped in `motion.div` children of a `motion.div` parent with `staggerChildren: 0.12`, so the header fades in first, then the panel grid.
+- Add a one-shot theme-tinted glow pulse on entry (CSS keyframe `chamber-enter-glow` triggered via animation class for ~1.2s) so each chamber "ignites" in its accent color.
 
-### 3. Live Intelligence Hub (`/live-feeds` upgrade)
-Replace current `LiveFeedsPage` body with a 7-panel dashboard:
-Solar Activity · Space Weather (Kp) · ISS/Orbital · UAP Watch · Earthquake · Interstellar Objects · Mystery Signal of the Week.
-Wires existing `useKp`, `useFlare`, `useEarthquakes` hooks; panels without a hook show the honest "Live API connection pending" placeholder (never fake data).
+### 2. `src/components/command/LivePanel.tsx`
+- Wrap root card in `motion.div` with variants that inherit from parent stagger:
+  - `initial`: `{ opacity: 0, y: 16 }`
+  - `animate`: `{ opacity: 1, y: 0 }` (driven by parent `LiveChamber` stagger)
+  - `transition`: `{ duration: 0.5, ease: 'easeOut' }`
+- This makes panels inside a chamber cascade after the chamber shell reveals.
 
-### 4. Hero status bar
-Inject `CommandHeroBar` near top of the existing hero (no removal of current hero content). Title/subtitle copy stays; we already have "Enter Archive" CTA — add the secondary "View Live Intelligence" → `/live-feeds`.
+### 3. `src/index.css`
+- Add `@keyframes chamber-enter-glow` — a single-pass radial flash using `currentColor` opacity ramp (0 → 0.35 → 0), 1.2s, used as a one-shot overlay on chamber mount.
+- Respect `prefers-reduced-motion`: wrap new keyframes in a media query so motion is disabled and Framer Motion variants degrade (Framer respects it automatically when `MotionConfig reducedMotion="user"` is set).
 
-### 5. Footer upgrade
-Extend `PantheonFooter.tsx` with the mission statement + disclaimer block + pantheonobservatory.com link. Keep existing nav links.
+### 4. `src/pages/LiveFeedsPage.tsx`
+- Wrap the chamber list in `<MotionConfig reducedMotion="user">` from `framer-motion` so accessibility is honored globally on the page.
+- No structural changes; chambers continue to render in the same order.
 
-## What I will NOT touch
-- The Temple Observatory hero, KP gauge, compass, SDO imagery, transmissions ticker, sidebar — all preserved.
-- Existing routes, data files, edge functions.
-- Color/animation tokens (use `realm-*`, `signal-online`, `primary`, `accent` per project memory — no hardcoded hex in new components).
+## What stays the same
+- All data hooks, status badges, theme backgrounds, copy, routes.
+- Existing CSS chamber background animations (`chamber-pulse`, `chamber-sweep`, etc.) remain untouched.
+- No new dependencies — `framer-motion` already in `package.json` (used in `Layout.tsx`).
 
-## Mobile-first
-All grids `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`, tap targets ≥ 44px, panels stack vertically, no horizontal scroll, animations CSS-only (no heavy framer payloads on mobile).
-
-## Files created
-- `src/components/command/CommandHeroBar.tsx`
-- `src/components/command/CommandCard.tsx`
-- `src/components/command/LivePanel.tsx`
-- `src/components/command/ClaimBadge.tsx`
-- `src/components/command/CommandDashboard.tsx`
-- `src/components/command/FeaturedMystery.tsx`
-- `src/components/command/PantheonPathTeaser.tsx`
-- `src/components/command/SourceIntegrity.tsx`
-
-## Files edited
-- `src/components/home/HomeLowerSections.tsx` — append new sections
-- `src/pages/home/TempleObservatoryPage.tsx` — inject `CommandHeroBar` + secondary CTA only
-- `src/pages/LiveFeedsPage.tsx` — rebuild as Live Intelligence Hub
-- `src/components/PantheonFooter.tsx` — mission + disclaimer block
-
-Estimated ~700 lines new code across 12 files, no deletions.
+## Result
+- Each chamber slides up + de-blurs into view as the user scrolls.
+- Inner panels stagger in after the shell.
+- A subtle theme-colored glow pulse marks the entry.
+- Reduced-motion users get instant, non-animated reveals.
