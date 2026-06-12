@@ -1,5 +1,7 @@
 import { SEO } from '@/components/SEO';
+import { MotionConfig } from 'framer-motion';
 import { LivePanel } from '@/components/command/LivePanel';
+
 import { LiveChamber } from '@/components/command/LiveChamber';
 import {
   useKp, useFlare, useISS, useEarthquakes, useNwsAlerts,
