@@ -27,7 +27,9 @@ export function LiveFeedsPage() {
         title="Live Cosmic Feed · Pantheon Observatory 46"
         description="Themed live intelligence chambers — Solar, Seismic, Orbital, Atmospheric, Anomaly, and the Codex Vault."
       />
+      <MotionConfig reducedMotion="user">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-8 sm:space-y-10">
+
         <header className="text-center sm:text-left animate-fade-in">
           <p className="text-[10px] uppercase tracking-[4px] text-primary">Live Cosmic Feed · V2</p>
           <h1 className="text-3xl sm:text-5xl font-black text-foreground mt-2 tracking-tight">
