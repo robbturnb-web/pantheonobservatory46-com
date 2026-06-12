@@ -553,6 +553,18 @@ body::after {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+@keyframes chamber-enter-glow {
+  0% { opacity: 0; }
+  35% { opacity: 0.55; }
+  100% { opacity: 0; }
+}
+.chamber-enter-glow {
+  animation: chamber-enter-glow 1.2s ease-out 0.15s 1 both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chamber-enter-glow { animation: none; }
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
