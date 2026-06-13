@@ -53,6 +53,7 @@ export function LiveFeedsPage() {
           subtitle="Flare class · geomagnetic Kp · solar wind regime"
           Icon={Flame}
           theme="solar"
+          heroImage={solarHero}
           status={statusOf(flare)}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -96,6 +97,7 @@ export function LiveFeedsPage() {
           subtitle="Worldwide seismic activity and fault-line pulse"
           Icon={Globe2}
           theme="seismic"
+          heroImage={seismicHero}
           status={statusOf(quakes)}
         >
           <LivePanel
@@ -122,6 +124,7 @@ export function LiveFeedsPage() {
           subtitle="ISS ground-track · interstellar object watch"
           Icon={Satellite}
           theme="orbital"
+          heroImage={orbitalHero}
           status={statusOf(iss)}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -164,6 +167,7 @@ export function LiveFeedsPage() {
           subtitle="Severe weather and storm advisories"
           Icon={CloudLightning}
           theme="atmosphere"
+          heroImage={atmosphereHero}
           status={statusOf(nws)}
         >
           <LivePanel
@@ -188,6 +192,7 @@ export function LiveFeedsPage() {
           subtitle="UAP disclosure · classified signal review"
           Icon={ScanEye}
           theme="anomaly"
+          heroImage={anomalyHero}
           status="manual"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -226,6 +231,7 @@ export function LiveFeedsPage() {
           subtitle="Pantheon's sacred archive · cross-discipline knowledge index"
           Icon={BookOpenCheck}
           theme="codex"
+          heroImage={codexHero}
           status="external"
         >
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
