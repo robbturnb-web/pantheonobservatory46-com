@@ -180,6 +180,7 @@ export function LiveChamber({
   Icon,
   theme,
   status,
+  heroImage,
   children,
   className,
 }: LiveChamberProps) {
@@ -197,7 +198,21 @@ export function LiveChamber({
         className,
       )}
     >
-      <div className="absolute inset-0 pointer-events-none">{t.bg}</div>
+      {heroImage && (
+        <div className="absolute inset-0 pointer-events-none">
+          <img
+            src={heroImage}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            width={1536}
+            height={768}
+            className="absolute inset-0 w-full h-full object-cover opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background/95" />
+        </div>
+      )}
+      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-70">{t.bg}</div>
       <div
         className={cn(
           'pointer-events-none absolute inset-0 chamber-enter-glow',
