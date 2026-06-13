@@ -139,6 +139,7 @@ export interface LiveChamberProps {
   Icon?: LucideIcon;
   theme: ChamberTheme;
   status?: 'live' | 'pending' | 'manual' | 'cached' | 'external';
+  heroImage?: string;
   children: ReactNode;
   className?: string;
 }
