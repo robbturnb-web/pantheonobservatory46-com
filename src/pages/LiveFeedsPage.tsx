@@ -3,6 +3,12 @@ import { MotionConfig } from 'framer-motion';
 import { LivePanel } from '@/components/command/LivePanel';
 
 import { LiveChamber } from '@/components/command/LiveChamber';
+import solarHero from '@/assets/chambers/solar.jpg';
+import seismicHero from '@/assets/chambers/seismic.jpg';
+import orbitalHero from '@/assets/chambers/orbital.jpg';
+import atmosphereHero from '@/assets/chambers/atmosphere.jpg';
+import anomalyHero from '@/assets/chambers/anomaly.jpg';
+import codexHero from '@/assets/chambers/codex.jpg';
 import {
   useKp, useFlare, useISS, useEarthquakes, useNwsAlerts,
 } from '@/hooks/use-live-data';
