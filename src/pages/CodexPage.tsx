@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { BookOpen, Sparkles, Plus, Users, Building2, ArrowLeft } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import codexHero from '@/assets/codex/codex-hero.jpg';
+import { GoldParticles } from '@/components/codex/GoldParticles';
 
 interface CodexButton {
   to: string;
@@ -43,6 +44,7 @@ export default function CodexPage() {
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[120vw] h-[80vh] bg-[radial-gradient(ellipse_at_center,rgba(160,32,240,0.35),transparent_60%)]" />
           <div className="absolute top-1/3 -right-32 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(255,215,0,0.18),transparent_65%)] blur-2xl" />
           <div className="absolute bottom-0 -left-32 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(124,58,237,0.28),transparent_65%)] blur-3xl" />
+          <GoldParticles className="pointer-events-none absolute inset-0 w-full h-full opacity-80" density={70} />
         </div>
 
         <main className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pt-8 pb-32">
@@ -51,11 +53,11 @@ export default function CodexPage() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-center font-black tracking-[2px] leading-none text-4xl sm:text-6xl"
+            className="relative text-center font-black tracking-[2px] leading-none text-4xl sm:text-6xl"
             style={{ fontFamily: '"Cinzel", "Space Grotesk", serif' }}
           >
             <span
-              className="bg-gradient-to-b from-white via-[#fde68a] to-[#ffd700] bg-clip-text text-transparent"
+              className="codex-foil bg-gradient-to-b from-white via-[#fde68a] to-[#ffd700] bg-clip-text text-transparent"
               style={{ WebkitTextFillColor: 'transparent', textShadow: '0 0 40px rgba(255,215,0,0.35)' }}
             >
               THE 46 CODEX
