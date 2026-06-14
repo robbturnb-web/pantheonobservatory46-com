@@ -44,6 +44,7 @@ export default function CodexPage() {
           <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[120vw] h-[80vh] bg-[radial-gradient(ellipse_at_center,rgba(160,32,240,0.35),transparent_60%)]" />
           <div className="absolute top-1/3 -right-32 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(255,215,0,0.18),transparent_65%)] blur-2xl" />
           <div className="absolute bottom-0 -left-32 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(124,58,237,0.28),transparent_65%)] blur-3xl" />
+          <GoldParticles className="pointer-events-none absolute inset-0 w-full h-full opacity-80" density={70} />
         </div>
 
         <main className="relative z-10 mx-auto max-w-3xl px-4 sm:px-6 pt-8 pb-32">
