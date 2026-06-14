@@ -53,11 +53,11 @@ export default function CodexPage() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-center font-black tracking-[2px] leading-none text-4xl sm:text-6xl"
+            className="relative text-center font-black tracking-[2px] leading-none text-4xl sm:text-6xl"
             style={{ fontFamily: '"Cinzel", "Space Grotesk", serif' }}
           >
             <span
-              className="bg-gradient-to-b from-white via-[#fde68a] to-[#ffd700] bg-clip-text text-transparent"
+              className="codex-foil bg-gradient-to-b from-white via-[#fde68a] to-[#ffd700] bg-clip-text text-transparent"
               style={{ WebkitTextFillColor: 'transparent', textShadow: '0 0 40px rgba(255,215,0,0.35)' }}
             >
               THE 46 CODEX
