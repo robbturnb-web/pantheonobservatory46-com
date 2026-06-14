@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { BookOpen, Sparkles, Plus, Users, Building2, ArrowLeft } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import codexHero from '@/assets/codex/codex-hero.jpg';
+import { GoldParticles } from '@/components/codex/GoldParticles';
 
 interface CodexButton {
   to: string;
