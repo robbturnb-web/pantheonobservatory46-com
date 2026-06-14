@@ -565,6 +565,27 @@ body::after {
   .chamber-enter-glow { animation: none; }
 }
 
+/* Codex gold-foil shimmer sweep */
+.codex-foil {
+  background-size: 100% 100%, 200% 100%;
+  background-image:
+    linear-gradient(to bottom, #ffffff 0%, #fde68a 50%, #ffd700 100%),
+    linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.85) 50%, transparent 70%);
+  background-clip: text, text;
+  -webkit-background-clip: text;
+  background-repeat: no-repeat;
+  background-position: 0 0, -120% 0;
+  animation: codex-foil-sweep 6s ease-in-out 1.2s infinite;
+}
+@keyframes codex-foil-sweep {
+  0%, 18%   { background-position: 0 0, -120% 0; }
+  55%       { background-position: 0 0, 220% 0; }
+  100%      { background-position: 0 0, 220% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .codex-foil { animation: none; }
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
