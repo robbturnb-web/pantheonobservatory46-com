@@ -3,6 +3,9 @@ import { MotionConfig } from 'framer-motion';
 import { LivePanel } from '@/components/command/LivePanel';
 
 import { LiveChamber } from '@/components/command/LiveChamber';
+import { LiveImageInset } from '@/components/command/LiveImageInset';
+import { SeismicRibbon } from '@/components/command/SeismicRibbon';
+import { IssTrackStrip } from '@/components/command/IssTrackStrip';
 import solarHero from '@/assets/chambers/solar.jpg';
 import seismicHero from '@/assets/chambers/seismic.jpg';
 import orbitalHero from '@/assets/chambers/orbital.jpg';
