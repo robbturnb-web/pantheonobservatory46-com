@@ -59,6 +59,14 @@ export function LiveFeedsPage() {
           heroImage={solarHero}
           status={statusOf(flare)}
         >
+          <LiveImageInset
+            src="https://sdo.gsfc.nasa.gov/assets/img/latest/latest_512_0304.jpg"
+            alt="NASA Solar Dynamics Observatory — AIA 304 latest image of the Sun"
+            caption="SDO · AIA 304 · LIVE"
+            accentRing="ring-amber-300/50"
+            accentText="text-amber-200/80"
+            refreshMs={5 * 60_000}
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <LivePanel
               title="Solar Activity"
@@ -118,6 +126,7 @@ export function LiveFeedsPage() {
             <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
               events · 24h · max M {quakes.data?.value?.highest?.mag?.toFixed(1) ?? '—'}
             </p>
+            <SeismicRibbon quakes={quakes.data?.value?.latest ?? []} />
           </LivePanel>
         </LiveChamber>
 
@@ -146,6 +155,10 @@ export function LiveFeedsPage() {
                 <div>lat {iss.data?.value?.latitude?.toFixed(2) ?? '—'}</div>
                 <div>lon {iss.data?.value?.longitude?.toFixed(2) ?? '—'}</div>
               </div>
+              <IssTrackStrip
+                latitude={iss.data?.value?.latitude}
+                longitude={iss.data?.value?.longitude}
+              />
             </LivePanel>
 
             <LivePanel
@@ -173,6 +186,15 @@ export function LiveFeedsPage() {
           heroImage={atmosphereHero}
           status={statusOf(nws)}
         >
+          <LiveImageInset
+            src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/13/1250x750.jpg"
+            alt="NOAA GOES-16 Band 13 infrared satellite — latest CONUS image"
+            caption="GOES-16 · IR · LIVE"
+            accentRing="ring-sky-300/50"
+            accentText="text-sky-200/80"
+            shape="square"
+            refreshMs={5 * 60_000}
+          />
           <LivePanel
             title="NWS · Active Severe Alerts"
             description="US National Weather Service severe/extreme advisories."
