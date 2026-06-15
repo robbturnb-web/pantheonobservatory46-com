@@ -52,7 +52,7 @@ export const whistleblowers: Whistleblower[] = [
       { year: '2018', event: 'Featured in Jeremy Corbell documentary' },
     ],
     sources: [
-      { label: 'KLAS-TV Interview (1989)', url: 'https://www.youtube.com/watch?v=4UgBWzdjlBQ' },
+      { label: 'KLAS-TV Interview (1989)', url: 'https://www.youtube.com/watch?v=KjApDnCvh2c' },
       { label: 'Joe Rogan Experience #1315', url: 'https://www.youtube.com/watch?v=BEWz4SXfyCQ' },
       { label: 'Bob Lazar: Area 51 & Flying Saucers (2018)', url: 'https://www.imdb.com/title/tt9107368/' },
       { label: 'Element 115 — Wikipedia', url: 'https://en.wikipedia.org/wiki/Moscovium' },

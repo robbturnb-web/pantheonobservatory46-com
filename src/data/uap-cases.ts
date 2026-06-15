@@ -180,7 +180,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'Pentagon Official Release (April 2020)', url: 'https://www.defense.gov/News/Releases/Release/Article/2165713/' },
       { label: 'SCU GIMBAL Analysis', url: 'https://www.explorescu.org/post/gimbal-the-veritable-evidence' },
     ],
-    videos: [{ platform: 'youtube', id: 'MZJ97pmZGCo', title: 'Official GIMBAL Footage' }],
+    videos: [{ platform: 'youtube', id: 'QKHg-vnTFsM', title: 'Official GIMBAL Footage' }],
     timeline: [
       { year: 'Jan 21, 2015', description: 'East Coast ATFLIR captures rotating UAP' },
       { year: 'Dec 2017', description: 'Video leaked via TTSA' },
@@ -199,7 +199,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'Pentagon Release (April 2020)', url: 'https://www.defense.gov/News/Releases/Release/Article/2165713/' },
       { label: 'NYT — Wow What Is That?', url: 'https://www.nytimes.com/2019/05/26/us/politics/ufo-sightings-navy-pilots.html' },
     ],
-    videos: [{ platform: 'youtube', id: '7CnHnRyNuQI', title: 'Official GoFast Footage' }],
+    videos: [{ platform: 'youtube', id: 'wxVRg7LLaQA', title: 'Official GoFast Footage' }],
     timeline: [
       { year: '2014–2015', description: 'Repeated East Coast incursions during fleet exercises' },
       { year: 'April 2020', description: 'Officially declassified and released' },
@@ -216,7 +216,7 @@ export const uapCases: UAPCaseEnhanced[] = [
     sources: [
       { label: 'SCU Aguadilla Report (PDF)', url: 'https://www.explorescu.org/post/aguadilla-puerto-rico-2013' },
     ],
-    videos: [{ platform: 'youtube', id: '-AdaNRTbZ-c', title: 'CBP Thermal Footage Analysis' }],
+    videos: [{ platform: 'youtube', id: 'cuSZDrBDgb8', title: 'CBP Thermal Footage Analysis' }],
     timeline: [
       { year: 'April 25, 2013', description: 'CBP DHC-8 records object near Rafael Hernández Airport' },
       { year: '2015', description: 'Scientific Coalition for UAP Studies publishes detailed analysis' },
@@ -234,7 +234,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'John Callahan Disclosure Testimony', url: 'https://siriusdisclosure.com/witnesses/john-callahan/' },
       { label: 'FAA Documents (FOIA)', url: 'https://www.theblackvault.com/documentarchive/japan-airlines-flight-1628/' },
     ],
-    videos: [{ platform: 'youtube', id: '9Ngh5_8U2Xs', title: 'Captain Terauchi Account' }],
+    videos: [{ platform: 'youtube', id: 'TjsCvgqsie4', title: 'Captain Terauchi Account' }],
     timeline: [
       { year: 'Nov 17, 1986', description: 'JAL 1628 over Alaska reports two craft + mothership' },
       { year: '1987', description: 'FAA holds press conference; CIA quietly takes records' },
@@ -252,7 +252,7 @@ export const uapCases: UAPCaseEnhanced[] = [
     sources: [
       { label: 'Corbell / Knapp Release (Weaponized)', url: 'https://thedebrief.org/the-jellyfish-uap-video-explained/' },
     ],
-    videos: [{ platform: 'youtube', id: 'DPe7gK6Z3yo', title: 'Jellyfish UAP — Corbell / Knapp' }],
+    videos: [{ platform: 'youtube', id: 'aqsqcJ6DZsg', title: 'Jellyfish UAP — Corbell / Knapp' }],
     timeline: [
       { year: '2018', description: 'Footage filmed at a joint operating base in Iraq' },
       { year: '2023', description: 'Corbell and Knapp publish the video' },
@@ -271,7 +271,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'Robert Salas Press Conference (2010)', url: 'https://www.cnn.com/2010/US/09/27/ufo.nuclear.weapons/' },
       { label: 'Robert Hastings — UFOs and Nukes', url: 'http://www.ufohastings.com/' },
     ],
-    videos: [{ platform: 'youtube', id: '4M9hYjwI7Tc', title: 'UFOs and Nuclear Weapons — National Press Club' }],
+    videos: [{ platform: 'youtube', id: '3twCIdXmSP4', title: 'UFOs and Nuclear Weapons — National Press Club' }],
     timeline: [
       { year: 'Mar 16, 1967', description: 'Echo Flight ICBMs disabled during UAP overflight' },
       { year: '2010', description: 'Salas + 6 officers hold National Press Club briefing' },
@@ -291,7 +291,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'SOBEPS Report (Belgian Society)', url: 'https://en.wikipedia.org/wiki/Belgian_UFO_wave' },
       { label: 'Gen. De Brouwer — Leslie Kean book', url: 'https://www.amazon.com/dp/0307717089' },
     ],
-    videos: [{ platform: 'youtube', id: 'b9NQF3kqEwI', title: 'Belgian Wave — Documentary' }],
+    videos: [{ platform: 'youtube', id: 'aWbo0x1lJAk', title: 'Belgian Wave — Documentary' }],
     timeline: [
       { year: 'Nov 29, 1989', description: 'First mass sightings near Eupen, Belgium' },
       { year: 'Mar 30–31, 1990', description: 'F-16s scrambled; radar lock and FDR recording obtained' },
@@ -310,7 +310,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'Dr. John Mack Archive', url: 'https://johnemackinstitute.org/category/articles/ariel-school/' },
       { label: 'Randall Nickerson — Ariel Phenomenon (2022)', url: 'https://www.arielphenomenon.com/' },
     ],
-    videos: [{ platform: 'youtube', id: 'aT8u8mEbPnQ', title: 'Ariel School Trailer — Randall Nickerson' }],
+    videos: [{ platform: 'youtube', id: 'OnFI1dDG6ZI', title: 'Ariel School Trailer — Randall Nickerson' }],
     timeline: [
       { year: 'Sept 16, 1994', description: 'Landing observed by 62 students during recess' },
       { year: '1994', description: 'Dr. John Mack interviews witnesses on camera' },
@@ -367,7 +367,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'Night Siege — J. Allen Hynek, Imbrogno, Pratt', url: 'https://www.amazon.com/dp/1567180000' },
       { label: 'NUFORC NY Database', url: 'https://nuforc.org/webreports/ndxlNY.html' },
     ],
-    videos: [{ platform: 'youtube', id: 'X5J4VnSm6Lo', title: 'Hudson Valley Sightings Recap' }],
+    videos: [{ platform: 'youtube', id: 'd3YuV999Ab0', title: 'Hudson Valley Sightings Recap' }],
     timeline: [
       { year: 'Mar 17, 1983', description: 'Mass sighting over Yorktown, NY' },
       { year: '1984', description: 'Indian Point nuclear plant overflight reported' },
@@ -386,7 +386,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'MUFON Stephenville Radar Report', url: 'https://www.mufon.com/uploads/1/9/2/3/19236877/stephenvilleradarreport_-_07-07-08_redacted-vh.pdf' },
       { label: 'Larry Landsman Investigation', url: 'https://www.nytimes.com/2008/01/15/us/15ufo.html' },
     ],
-    videos: [{ platform: 'youtube', id: '4_-HxQ7L7Mk', title: 'Stephenville Lights Report' }],
+    videos: [{ platform: 'youtube', id: 'XNnSeAhYq1E', title: 'Stephenville Lights Report' }],
     timeline: [
       { year: 'Jan 8, 2008', description: 'Mass sightings near Stephenville and Dublin, TX' },
       { year: 'Feb 2008', description: 'Air Force reverses story, admits F-16 flights' },
@@ -405,7 +405,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'A. J. Gevaerd — Brazilian UFO Magazine', url: 'https://www.ufo.com.br/' },
       { label: 'Stanton Friedman investigation', url: 'https://stantonfriedman.com/' },
     ],
-    videos: [{ platform: 'youtube', id: 'RbR_6V3HHc8', title: 'Varginha — Documentary' }],
+    videos: [{ platform: 'youtube', id: 'E76kpPjxMcw', title: 'Varginha — Documentary' }],
     timeline: [
       { year: 'Jan 13, 1996', description: 'NORAD reportedly tracks object over southern Brazil' },
       { year: 'Jan 20, 1996', description: 'Three witnesses encounter entity in Varginha' },
@@ -446,7 +446,7 @@ export const uapCases: UAPCaseEnhanced[] = [
     ],
     videos: [
       { platform: 'youtube', id: 'KQ7Dw-739VY', title: 'Full July 2023 Hearing' },
-      { platform: 'youtube', id: 'JjGZGQpSk7E', title: 'Full Nov 2024 Hearing' },
+      { platform: 'youtube', id: 'kT2iWKZr0qA', title: 'Full Nov 2024 Hearing' },
     ],
     timeline: [
       { year: 'July 26, 2023', description: 'Grusch, Fravor, Graves testify under oath' },
@@ -487,7 +487,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'LA Times Original Photo + Coverage', url: 'https://www.latimes.com/visuals/photography/la-me-fw-archives-battle-la-20170224-htmlstory.html' },
       { label: 'Office of Air Force History', url: 'https://www.afhistory.af.mil/' },
     ],
-    videos: [{ platform: 'youtube', id: 'I_FzAVc6S2k', title: 'Battle of LA — Historical Footage' }],
+    videos: [{ platform: 'youtube', id: '5m7736RMBEg', title: 'Battle of LA — Historical Footage' }],
     timeline: [
       { year: 'Feb 24, 1942', description: 'Radar tracks object inbound from Pacific' },
       { year: 'Feb 25, 1942 (3:16 AM)', description: 'Anti-aircraft batteries open fire over LA' },
@@ -505,7 +505,7 @@ export const uapCases: UAPCaseEnhanced[] = [
       { label: 'Project Sign Original Files', url: 'https://www.cufon.org/cufon/projsign.htm' },
       { label: 'Air Materiel Command Memo', url: 'https://www.archives.gov/research/military/air-force/ufos' },
     ],
-    videos: [{ platform: 'youtube', id: 'cmL0VCb0NIs', title: 'WWII Foo Fighter Footage' }],
+    videos: [{ platform: 'youtube', id: 'SXGWuVglDTo', title: 'WWII Foo Fighter Footage' }],
     timeline: [
       { year: '1941', description: 'Earliest pilot reports over the Pacific' },
       { year: '1943–1944', description: 'Widespread sightings over European theater' },
@@ -560,12 +560,12 @@ export const uapCases: UAPCaseEnhanced[] = [
     officialExplanation: 'US government denies S-4 facility exists. Lazar\'s educational records and employment history have been disputed and partially confirmed depending on source.',
     alternativeExplanation: 'Lazar described stable Element 115 in 1989 — 14 years before it was synthesized. His description of "anti-gravity wave amplification" predated public scientific discussion of similar concepts. Story has remained consistent across 35+ years.',
     sources: [
-      { label: 'KLAS News Original Interview (1989)', url: 'https://www.youtube.com/watch?v=B-x9_4lXLJI' },
+      { label: 'KLAS News Original Interview (1989)', url: 'https://www.youtube.com/watch?v=KjApDnCvh2c' },
       { label: 'Lazar — Bob Lazar: Area 51 & Flying Saucers (Corbell, 2018)', url: 'https://www.imdb.com/title/tt8128376/' },
     ],
     videos: [
-      { platform: 'youtube', id: 'B-x9_4lXLJI', title: 'Original 1989 KLAS Interview' },
-      { platform: 'youtube', id: '7ZSdF6mUYn8', title: 'Bob Lazar on Joe Rogan' },
+      { platform: 'youtube', id: 'KjApDnCvh2c', title: 'Original 1989 KLAS Interview' },
+      { platform: 'youtube', id: 'BEWz4SXfyCQ', title: 'Bob Lazar on Joe Rogan' },
     ],
     timeline: [
       { year: '1988–1989', description: 'Lazar allegedly works at S-4 on craft propulsion' },

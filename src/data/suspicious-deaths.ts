@@ -336,7 +336,7 @@ export const suspiciousDeaths: SuspiciousDeath[] = [
     symbol: '⛏️',
     accentColor: '#a855f7',
     sources: [
-      { label: 'Phil Schneider final lecture (1995)', url: 'https://www.youtube.com/watch?v=AHHRfwGrmqs' },
+      { label: 'Phil Schneider final lecture (1995)', url: 'https://www.youtube.com/watch?v=WvJbwI7MX1g' },
     ],
   },
 
