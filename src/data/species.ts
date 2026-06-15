@@ -537,7 +537,7 @@ export const species: Species[] = [
     keyCases: [],
     keyWitnesses: [],
     sources: [
-      { label: 'Mexican Congress UAP Hearing (Sept 12, 2023)', url: 'https://www.youtube.com/watch?v=HvsOYNPAinM' },
+      { label: 'Mexican Congress UAP Hearing (Sept 12, 2023)', url: 'https://www.youtube.com/watch?v=AiXnkTgBem4' },
       { label: 'Jaime Maussan presentation archive', url: 'https://en.wikipedia.org/wiki/Nazca_mummies' },
     ],
     accentColor: '#ec4899',
