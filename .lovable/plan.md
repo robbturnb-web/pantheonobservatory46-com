@@ -1,69 +1,62 @@
-## Goal
+## Full-Site QA Sweep — Pantheon Observatory 46
 
-Turn the Solar, Orbital, Seismic, and Atmosphere chambers on `/live-feeds` from static themed cards into **live instruments** by layering real imagery and maps over the existing AI hero plates.
+Goal: run the live site through several focused passes and fix every broken visual, link, image, video, and piece of stale info before launch.
 
-## What ships
+### Pass 1 — Video integrity (highest priority)
+Every embedded video must play.
+- Inventory all video sources: `src/data/god-videos.ts`, `src/data/tiktok-voices.ts`, `src/data/documentaries.ts`, `src/data/jeremy-corbell.ts`, `src/data/creators.ts`, `src/data/the-46.ts`, plus anything in `src/data/youtube-resources.ts` and any inline `VideoEmbed` / `YouTubeResourceCard` usage.
+- Validate every YouTube ID with the oEmbed endpoint (`https://www.youtube.com/oembed?url=...`). Anything that 404s = dead → replace with a verified working video from the same creator/topic or remove.
+- Validate TikTok URLs return 200 (not deleted/private).
+- Flag any `needsRealId: true` placeholders and replace with real IDs.
+- Re-run validator until 100% pass.
 
-### 1. Solar Chamber → Live SDO sun disk
-- Add a circular inset (top-right of the chamber, ~180px) showing NASA SDO's latest AIA 304 (chromosphere, orange-red) image.
-- Source: `https://sdo.gsfc.nasa.gov/assets/img/latest/latest_512_0304.jpg` — public, no key, refreshed ~every 15 min upstream.
-- Soft cyan glow ring, "SDO · AIA 304 · LIVE" caption with timestamp.
-- Auto-refresh every 5 min via cache-busting query param.
+### Pass 2 — Links & routes
+- Crawl every internal `<Link>` / `href` for 404s against the route table in `src/App.tsx`.
+- Check external links (sources, citations, expert profiles, legislation, whistleblower refs) with HEAD requests; replace dead ones with Wayback or current equivalents.
+- Verify `public/sitemap.xml` matches actual routes.
 
-### 2. Orbital Chamber → Live ISS ground track
-- Replace the plain lat/lon text panel with a small (full-width, ~200px tall) world-map strip showing the ISS marker on its current position.
-- Use static Mapbox image API (no JS, no globe rendering) — single `<img>` with marker overlay. Falls back to a CSS world-map silhouette + dot if the Mapbox token is missing.
-- Reuses existing `useISS()` hook — no new data fetch.
-- Updates every 15s with the existing ISS polling.
+### Pass 3 — Images & media
+- Scan every `<img>`, `background-image`, and asset import for 404s.
+- Verify external image hosts (NASA, USGS, Wikimedia, etc.) still resolve.
+- Confirm fallbacks render (`ImageWithFallback`) and alt text is present for SEO/accessibility.
 
-### 3. Seismic Chamber → Pulsing quake markers strip
-- Add a horizontal "fault-line ribbon" below the count: a 100%-width SVG showing the last 24h of quakes as pulsing dots positioned by longitude, sized by magnitude, colored by depth.
-- Pure SVG, driven off existing `useEarthquakes()` data — no new APIs.
-- Strongest quake gets a larger crimson pulse animation.
+### Pass 4 — Live data feeds
+- Confirm Observatory globe layers still load: USGS quakes, NOAA SWPC solar, NWS storms, ISS API, Open-Meteo.
+- Check `live-data-proxy` edge function logs for errors.
+- Verify no lingering Google Maps calls.
 
-### 4. Atmosphere Chamber → NOAA GOES IR loop
-- Add an inset (same treatment as Solar) showing the latest GOES-East IR satellite snapshot.
-- Source: `https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/13/1250x750.jpg` — public, no key.
-- "GOES-16 · Band 13 IR · LIVE" caption.
+### Pass 5 — Visual / responsive QA
+- Browser pass at mobile (390), tablet (768), desktop (1440) on key pages: Home, Observatory, Codex, Gods, The46, Disclosure Command, Echoverse, Sanctuary, Frequencies, Daily Briefing, Profile.
+- Look for: overflow, clipped text, broken grids, missing realm-accent colors, contrast issues, animation jank.
 
-### 5. Shared `LiveImageInset` component
-- New `src/components/command/LiveImageInset.tsx` — reusable circular/rounded inset with:
-  - Image URL + alt
-  - Caption (source label)
-  - Auto-refresh interval (ms)
-  - Theme color (gold/cyan/sky) for the glow ring
-  - Loading shimmer + graceful fallback if the upstream image 404s
+### Pass 6 — Content & info accuracy
+- Spot-check dossiers (gods, UAP cases, whistleblowers, legislation, missing scientists) for typos, broken markdown, stale dates.
+- Verify evidence badges and trust tiers render correctly.
 
-## Technical details
+### Pass 7 — SEO & meta
+- Run `seo_chat--list_findings`, fix every failing item, mark fixed.
+- Verify `<title>`, meta description, OG tags, canonical, JSON-LD on each top route.
 
-### Files created
-- `src/components/command/LiveImageInset.tsx` — shared inset component
-- `src/components/command/SeismicRibbon.tsx` — SVG quake ribbon
-- `src/components/command/IssTrackStrip.tsx` — ISS mini-map strip
+### Deliverable per pass
+A short report listing: items checked, items broken, items fixed, items needing user decision (e.g. video has no good replacement → remove or substitute?).
 
-### Files edited
-- `src/components/command/LiveChamber.tsx` — add optional `topRightInset` slot rendered absolutely over the hero plate
-- `src/pages/LiveFeedsPage.tsx` — wire the four new visual components into their chambers
+### Technical approach
+- Build a Node validator script (`scripts/qa/`) for videos + links + images. Runs in batches with concurrency limits, outputs JSON + console summary.
+- Use `browser--view_preview` for visual passes with screenshots at each breakpoint.
+- Fix issues inline as they're found; re-run validator after each fix batch.
+- No business-logic changes — only data corrections, asset swaps, and presentation fixes.
 
-### No backend changes
-- All four image sources are public CDNs (NASA SDO, NOAA NESDIS) — no NASA key, no edge function, no secrets, no migrations.
-- Mapbox: optional. If a `VITE_MAPBOX_TOKEN` exists I'll use the static-image API; otherwise I render a clean SVG world silhouette with the ISS dot. Either way it ships.
+### Order of execution
+1. Videos (Pass 1) — biggest user-visible breakage
+2. Links + Images (Passes 2–3) in parallel
+3. Live data (Pass 4)
+4. Visual responsive (Pass 5)
+5. Content (Pass 6)
+6. SEO (Pass 7)
 
-### Performance
-- All four image inserts use `loading="lazy"` and `decoding="async"`.
-- Auto-refresh uses `setInterval` cleared on unmount; cache-buster appended only on refresh, not on initial mount, so the browser HTTP cache works.
-- Total added weight: ~3 small JPGs (~150KB combined), only loaded once a chamber scrolls into view.
+### Out of scope
+- New features, new pages, redesigns.
+- Backend schema changes.
+- Reconnecting Google Maps (already removed per your call).
 
-### Accessibility & motion
-- Pulse animations on the seismic ribbon respect `prefers-reduced-motion` (existing `MotionConfig reducedMotion="user"` already wraps the page).
-- All images have meaningful `alt` text describing the live source.
-
-## What stays the same
-
-- All existing data hooks, status badges, chamber themes, hero plates, copy, and routes.
-- Codex, Anomaly chambers — unchanged (no upstream live image source that fits).
-- Framer Motion stagger reveal continues to work; insets fade in with their parent chamber.
-
-## Result
-
-Solar gets a real sun. Orbital gets a real moving ISS. Seismic gets a real pulse from real quakes. Atmosphere gets a real satellite view. Zero new dependencies, zero new secrets, zero backend work — just the existing public NASA/NOAA endpoints and the data hooks already in the project.
+Approve and I'll start with Pass 1 (videos) and report back before moving to the next pass.
