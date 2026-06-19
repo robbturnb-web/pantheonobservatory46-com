@@ -84,7 +84,7 @@ Deno.serve(async (req) => {
     || source === 'alerts' || source === 'earthquakes';
   const emptyFallback = listShaped ? '[]' : '{}';
   // DONKI endpoints are slow; give them more time before aborting.
-  const slowUpstream = source === 'cme' || source === 'flr' || source === 'gst' || source === 'nws';
+  const slowUpstream = source === 'cme' || source === 'flr' || source === 'gst' || source === 'nws' || source === 'iss';
   const timeoutMs = slowUpstream ? 25_000 : 8_000;
 
   const respondFallback = (extra: Record<string, string> = {}) =>
