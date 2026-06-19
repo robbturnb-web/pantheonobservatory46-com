@@ -219,13 +219,25 @@ export async function fetchSolarWind(): Promise<LiveResult<WindReading>> {
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const __m = r.proxyMeta;
     const json = await r.json();
-    const speed = Number(json.WindSpeed);
+    // NOAA SWPC summary endpoint returns either:
+    //   { WindSpeed, TimeStamp }                     (legacy)
+    //   [{ proton_speed, time_tag }, ...]            (current)
+    let speed: number = NaN;
+    let observedAt: string = fetchedAt;
+    if (Array.isArray(json) && json.length > 0) {
+      const last = json[json.length - 1];
+      speed = Number(last?.proton_speed ?? last?.WindSpeed ?? last?.speed);
+      observedAt = last?.time_tag ?? last?.TimeStamp ?? fetchedAt;
+    } else if (json && typeof json === 'object') {
+      speed = Number((json as any).WindSpeed ?? (json as any).proton_speed ?? (json as any).speed);
+      observedAt = (json as any).TimeStamp ?? (json as any).time_tag ?? fetchedAt;
+    }
     if (!Number.isFinite(speed)) throw new Error('no wind speed');
     return {
       ok: true, ...__m,
       source: WIND_SOURCE,
       fetchedAt,
-      value: { speedKmS: speed, observedAt: json.TimeStamp ?? fetchedAt },
+      value: { speedKmS: speed, observedAt },
     };
   } catch (e: any) {
     return { ok: false, source: WIND_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
