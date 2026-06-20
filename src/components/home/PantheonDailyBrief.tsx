@@ -57,10 +57,13 @@ export function PantheonDailyBrief() {
   const myth = getTodaysSpotlight(mythologySpotlights);
   const mystery = getTodaysSpotlight(mysteryWatch);
 
-  const kpVal = kp.data?.data?.kp;
-  const quakeCount = quakes.data?.data?.events?.length ?? null;
-  const issLat = iss.data?.data?.latitude;
-  const issLon = iss.data?.data?.longitude;
+  const kpOk = kp.data?.ok === true;
+  const quakesOk = quakes.data?.ok === true;
+  const issOk = iss.data?.ok === true;
+  const kpVal = kp.data?.value?.kp;
+  const quakeCount = quakes.data?.value?.count24h ?? null;
+  const issLat = iss.data?.value?.latitude;
+  const issLon = iss.data?.value?.longitude;
 
   return (
     <section aria-labelledby="daily-brief-h" className="relative px-3 sm:px-6 py-10 sm:py-14">
