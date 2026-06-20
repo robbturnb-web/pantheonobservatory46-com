@@ -5,6 +5,7 @@ import { EarthquakeLayer } from '@/components/observatory/EarthquakeLayer';
 import { IssLayer } from '@/components/observatory/IssLayer';
 import { NwsStormLayer } from '@/components/observatory/NwsStormLayer';
 import { SolarRegionLayer } from '@/components/observatory/SolarRegionLayer';
+import { StaticAtlasPanel } from '@/components/observatory/StaticAtlasPanel';
 
 const ObservatoryGlobe = lazy(() =>
   import('@/components/observatory/ObservatoryGlobe').then(m => ({
@@ -227,6 +228,8 @@ export function ObservatoryMapPage() {
             </a>
           ))}
         </div>
+
+        <StaticAtlasPanel />
       </section>
     </div>
   );

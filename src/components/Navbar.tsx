@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 import { PantheonWordmark } from './Wordmark';
 import { SearchTrigger } from './search/SearchTrigger';
+import { BeginJourneyButton } from './BeginJourneyButton';
 
 
 interface NavLink {
@@ -71,12 +72,15 @@ const categories: NavCategory[] = [
     color: '#fbbf24',
     icon: Mountain,
     links: [
+      { to: '/ancient-tech', label: '★ Ancient Technologies' },
+      { to: '/lost-places', label: '★ Lost Places' },
       { to: '/atlantis', label: 'Atlantis' },
       { to: '/pyramids', label: 'Pyramid Interior' },
       { to: '/glyphs', label: 'Glyphs Codex' },
       { to: '/stone-faces', label: 'Stone Faces' },
       { to: '/gods', label: 'Pantheon of Gods' },
       { to: '/antarctica', label: 'Antarctica Files' },
+      { to: '/restricted', label: '★ Restricted Locations' },
     ],
   },
   {
@@ -98,6 +102,12 @@ const categories: NavCategory[] = [
     color: '#22d3ee',
     icon: Sparkles,
     links: [
+      { to: '/academy', label: '★ Pantheon Academy' },
+      { to: '/library', label: '★ Builder\'s Library' },
+      { to: '/human-potential', label: '★ Human Potential' },
+      { to: '/briefing', label: '★ Daily Brief' },
+      { to: '/observatory', label: '★ Observatory Map' },
+      { to: '/timeline', label: 'Timeline' },
       { to: '/federation', label: 'Galactic Federation' },
       { to: '/builders', label: "Builder's Arena" },
       { to: '/frequencies', label: 'Frequencies' },
@@ -205,6 +215,9 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
+            <div className="hidden md:block">
+              <BeginJourneyButton />
+            </div>
             <SearchTrigger />
             <button
               className="lg:hidden text-foreground p-2"
@@ -291,6 +304,9 @@ export function Navbar() {
             </div>
 
             <div className="relative px-3 py-4 space-y-2">
+              <div className="px-1 pb-1">
+                <BeginJourneyButton className="w-full justify-center" />
+              </div>
               <Link
                 to="/"
                 className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all border ${
