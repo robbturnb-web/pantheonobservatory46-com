@@ -158,6 +158,14 @@ export default function App() {
               <Route path="/observatory/map" element={<Navigate to="/observatory" replace />} />
               <Route path="/disclosure" element={<DisclosureCommandPage />} />
               <Route path="/briefing" element={<DailyBriefingPage />} />
+              <Route path="/ancient-tech" element={<AncientTechPage />} />
+              <Route path="/lost-places" element={<LostPlacesPage />} />
+              <Route path="/restricted" element={<RestrictedLocationsPage />} />
+              <Route path="/academy" element={<AcademyPage />} />
+              <Route path="/library" element={<BuildersLibraryPage />} />
+              <Route path="/human-potential" element={<HumanPotentialPage />} />
+              <Route path="/map" element={<Navigate to="/observatory" replace />} />
+              <Route path="/daily-brief" element={<Navigate to="/briefing" replace />} />
               <Route path="/pyramids/scanner" element={<PyramidScannerPage />} />
               <Route path="/roadmap" element={<RoadmapPage />} />
               <Route path="/changelog" element={<ChangelogPage />} />
