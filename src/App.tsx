@@ -82,6 +82,13 @@ const SystemStatusPage = lazy(() => import('./pages/admin/SystemStatusPage'));
 const BriefingComposerPage = lazy(() => import('./pages/admin/BriefingComposerPage'));
 const PyramidScannerPage = lazy(() => import('./pages/PyramidScannerPage'));
 const LinkScannerPage = lazy(() => import('./pages/admin/LinkScannerPage'));
+const AncientTechPage = lazy(() => import('./pages/AncientTechPage').then(m => ({ default: m.AncientTechPage })));
+const LostPlacesPage = lazy(() => import('./pages/LostPlacesPage').then(m => ({ default: m.LostPlacesPage })));
+const RestrictedLocationsPage = lazy(() => import('./pages/RestrictedLocationsPage').then(m => ({ default: m.RestrictedLocationsPage })));
+const AcademyPage = lazy(() => import('./pages/AcademyPage').then(m => ({ default: m.AcademyPage })));
+const BuildersLibraryPage = lazy(() => import('./pages/BuildersLibraryPage').then(m => ({ default: m.BuildersLibraryPage })));
+const HumanPotentialPage = lazy(() => import('./pages/HumanPotentialPage').then(m => ({ default: m.HumanPotentialPage })));
+
 
 
 /** Themed cosmic loader shown while a lazy route chunk downloads. */
