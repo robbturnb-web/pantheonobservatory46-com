@@ -304,6 +304,9 @@ export function Navbar() {
             </div>
 
             <div className="relative px-3 py-4 space-y-2">
+              <div className="px-1 pb-1">
+                <BeginJourneyButton className="w-full justify-center" />
+              </div>
               <Link
                 to="/"
                 className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all border ${
