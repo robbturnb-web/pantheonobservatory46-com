@@ -87,8 +87,8 @@ export function PantheonDailyBrief() {
             icon={Sun}
             accent="border-realm-gods/40 text-realm-gods"
             title="Solar Activity"
-            status={kp.data?.status === 'verified' ? 'Live' : 'Offline'}
-            statusOnline={kp.data?.status === 'verified'}
+            status={kpOk ? 'Live' : 'Offline'}
+            statusOnline={kpOk}
             summary={kpVal != null
               ? `Kp index ${kpVal.toFixed(1)} — ${kpVal < 4 ? 'quiet geomagnetic field' : kpVal < 5 ? 'unsettled' : 'storm conditions'}.`
               : 'Establishing uplink to NOAA SWPC…'}
@@ -99,8 +99,8 @@ export function PantheonDailyBrief() {
             icon={Activity}
             accent="border-signal-online/40 text-signal-online"
             title="Earth Pulse"
-            status={quakes.data?.status === 'verified' ? 'Live' : 'Offline'}
-            statusOnline={quakes.data?.status === 'verified'}
+            status={quakesOk ? 'Live' : 'Offline'}
+            statusOnline={quakesOk}
             summary={quakeCount != null
               ? `${quakeCount} M4.5+ seismic events in the last 7 days.`
               : 'Loading USGS earthquake feed…'}
@@ -111,8 +111,8 @@ export function PantheonDailyBrief() {
             icon={Satellite}
             accent="border-realm-cosmos/40 text-realm-cosmos"
             title="Space / Orbit"
-            status={iss.data?.status === 'verified' ? 'Live' : 'Offline'}
-            statusOnline={iss.data?.status === 'verified'}
+            status={issOk ? 'Live' : 'Offline'}
+            statusOnline={issOk}
             summary={issLat != null && issLon != null
               ? `ISS over ${issLat.toFixed(1)}°, ${issLon.toFixed(1)}° — 7.66 km/s orbital velocity.`
               : 'Locating International Space Station…'}
