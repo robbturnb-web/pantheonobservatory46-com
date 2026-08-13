@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, ExternalLink, MessageCircle } from 'lucide-react';
 import { gods } from '@/data/gods';
 import { SEO } from '@/components/SEO';
+import { getPantheonAccent, accentAlpha } from '@/lib/pantheon-colors';
 
 export function GodDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -26,6 +27,8 @@ export function GodDetailPage() {
       </div>
     );
   }
+
+  const accent = getPantheonAccent(god.pantheon);
 
   const askEchoPrompt = encodeURIComponent(
     `Tell me everything about ${god.name} from the ${god.pantheon} pantheon — origin, key myths, powers, and modern relevance.`
@@ -66,7 +69,8 @@ export function GodDetailPage() {
           {/* Back button */}
           <button
             onClick={() => navigate(-1)}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-white/10 bg-black/40 backdrop-blur text-sm text-white/70 hover:text-white hover:border-realm-gods/40 transition-colors mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-white/10 bg-black/40 backdrop-blur text-sm text-white/70 hover:text-white transition-colors mb-8"
+            style={{ borderColor: accentAlpha(accent, 0.25) }}
           >
             <ArrowLeft className="w-4 h-4" />
             Back
@@ -81,8 +85,8 @@ export function GodDetailPage() {
           >
             {god.image && (
               <div className="relative shrink-0">
-                <div className="absolute -inset-2 rounded-full bg-realm-gods/30 blur-2xl" aria-hidden />
-                <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-2 border-realm-gods/60 shadow-[0_0_40px_-5px_hsl(var(--realm-gods)/0.6)]">
+                <div className="absolute -inset-2 rounded-full blur-2xl" style={{ background: accentAlpha(accent, 0.35) }} aria-hidden />
+                <div className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-2" style={{ borderColor: accentAlpha(accent, 0.6), boxShadow: `0 0 40px -5px ${accentAlpha(accent, 0.6)}` }}>
                   <img src={god.image} alt={god.name} className="w-full h-full object-cover object-top" />
                 </div>
               </div>
@@ -94,8 +98,12 @@ export function GodDetailPage() {
                 {god.pantheon} Pantheon
               </div>
               <h1
-                className="font-cinzel text-4xl sm:text-6xl font-black leading-none mb-3 bg-gradient-to-b from-white via-[hsl(var(--realm-gods))] to-[#a8884a] bg-clip-text text-transparent"
-                style={{ WebkitTextFillColor: 'transparent', textShadow: '0 0 40px hsl(var(--realm-gods) / 0.4)' }}
+                className="font-cinzel text-4xl sm:text-6xl font-black leading-none mb-3 bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: `linear-gradient(to bottom, #ffffff, ${accent} 60%, ${accentAlpha(accent, 0.55)})`,
+                  WebkitTextFillColor: 'transparent',
+                  textShadow: `0 0 40px ${accentAlpha(accent, 0.4)}`,
+                }}
               >
                 {god.name}
               </h1>
@@ -105,12 +113,13 @@ export function GodDetailPage() {
 
           {/* Domains */}
           <section className="mb-8">
-            <h2 className="text-xs uppercase tracking-[3px] text-realm-gods/80 mb-3">Domains</h2>
+            <h2 className="text-xs uppercase tracking-[3px] mb-3" style={{ color: accentAlpha(accent, 0.85) }}>Domains</h2>
             <div className="flex flex-wrap gap-2">
               {god.domains.map((d) => (
                 <span
                   key={d}
-                  className="text-xs px-3 py-1.5 rounded-full bg-primary/15 border border-primary/30 text-primary-foreground/90"
+                  className="text-xs px-3 py-1.5 rounded-full border"
+                  style={{ backgroundColor: accentAlpha(accent, 0.12), borderColor: accentAlpha(accent, 0.35), color: accent }}
                 >
                   {d}
                 </span>
@@ -121,7 +130,7 @@ export function GodDetailPage() {
           {/* Atmospheric description */}
           {god.atmosphericDesc && (
             <section className="mb-8">
-              <blockquote className="border-l-2 border-realm-gods/60 pl-5 italic text-lg text-white/85 leading-relaxed">
+              <blockquote className="border-l-2 pl-5 italic text-lg text-white/85 leading-relaxed" style={{ borderColor: accentAlpha(accent, 0.6) }}>
                 {god.atmosphericDesc}
               </blockquote>
             </section>
@@ -130,7 +139,7 @@ export function GodDetailPage() {
           {/* Origin story */}
           {god.originStory && (
             <section className="mb-8 glass-cosmic rounded-xl p-6">
-              <h2 className="font-cinzel text-xl text-realm-gods mb-3">Origin</h2>
+              <h2 className="font-cinzel text-xl mb-3" style={{ color: accent }}>Origin</h2>
               <p className="text-white/80 leading-relaxed whitespace-pre-line">{god.originStory}</p>
             </section>
           )}
@@ -138,7 +147,7 @@ export function GodDetailPage() {
           {/* Key myths */}
           {god.keyMyths && god.keyMyths.length > 0 && (
             <section className="mb-8">
-              <h2 className="font-cinzel text-xl text-realm-gods mb-4">Key Myths</h2>
+              <h2 className="font-cinzel text-xl mb-4" style={{ color: accent }}>Key Myths</h2>
               <div className="space-y-4">
                 {god.keyMyths.map((m, i) => (
                   <div key={i} className="glass-cosmic rounded-xl p-5">
@@ -153,10 +162,10 @@ export function GodDetailPage() {
           {/* Powers & relics */}
           {god.powersAndRelics && god.powersAndRelics.length > 0 && (
             <section className="mb-8 glass-cosmic rounded-xl p-6">
-              <h2 className="font-cinzel text-xl text-realm-gods mb-3">Powers & Relics</h2>
+              <h2 className="font-cinzel text-xl mb-3" style={{ color: accent }}>Powers & Relics</h2>
               <ul className="space-y-1.5 text-white/80">
                 {god.powersAndRelics.map((p, i) => (
-                  <li key={i} className="flex gap-2"><span className="text-realm-gods">·</span>{p}</li>
+                  <li key={i} className="flex gap-2"><span style={{ color: accent }}>·</span>{p}</li>
                 ))}
               </ul>
             </section>
@@ -165,7 +174,7 @@ export function GodDetailPage() {
           {/* Modern relevance */}
           {god.modernRelevance && (
             <section className="mb-8 glass-cosmic rounded-xl p-6">
-              <h2 className="font-cinzel text-xl text-realm-gods mb-3">Modern Relevance</h2>
+              <h2 className="font-cinzel text-xl mb-3" style={{ color: accent }}>Modern Relevance</h2>
               <p className="text-white/80 leading-relaxed">{god.modernRelevance}</p>
             </section>
           )}
@@ -189,7 +198,7 @@ export function GodDetailPage() {
                       href={s.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-realm-gods hover:underline"
+                      className="inline-flex items-center gap-2 text-sm hover:underline" style={{ color: accent }}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       {s.label}
@@ -204,7 +213,8 @@ export function GodDetailPage() {
           <div className="text-center">
             <Link
               to={`/echo?q=${askEchoPrompt}`}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-primary/50 bg-primary/15 text-primary-foreground hover:bg-primary/25 transition-colors font-semibold uppercase tracking-[2px] text-sm"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-md border transition-colors font-semibold uppercase tracking-[2px] text-sm"
+              style={{ borderColor: accentAlpha(accent, 0.5), backgroundColor: accentAlpha(accent, 0.15), color: accent }}
             >
               <MessageCircle className="w-4 h-4" />
               Ask Echo about {god.name}

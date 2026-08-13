@@ -6,6 +6,7 @@ import { gods } from '../data/gods';
 import type { PantheonFilter } from '../types';
 import { SEO } from '@/components/SEO';
 import { HeroSection } from '@/components/HeroSection';
+import { getPantheonAccent, accentAlpha } from '@/lib/pantheon-colors';
 
 const filters: PantheonFilter[] = ['All', 'Greek', 'Norse', 'Egyptian', 'Hindu', 'Anunnaki', 'Starseed', 'Chinese', 'Japanese', 'Buddhist', 'Aztec', 'Mayan', 'Incan', 'Yoruba', 'Celtic', 'Slavic', 'Polynesian', 'Aboriginal', 'Native American', 'Zoroastrian', 'Islamic'];
 
@@ -38,15 +39,29 @@ export function GodsPage() {
       />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-wrap gap-2 mb-10">
-          {filters.map((f) => (
+          {filters.map((f) => {
+            const fAccent = f === 'All' ? '#D6B35A' : getPantheonAccent(f);
+            const active = filter === f;
+            return (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
-                filter === f
-                  ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
-                  : 'bg-secondary text-secondary-foreground hover:bg-accent'
-              }`}
+              aria-pressed={active}
+              className="px-5 py-2 rounded-full text-sm font-medium transition-all border"
+              style={
+                active
+                  ? {
+                      backgroundColor: accentAlpha(fAccent, 0.18),
+                      borderColor: fAccent,
+                      color: fAccent,
+                      boxShadow: `0 0 20px -6px ${accentAlpha(fAccent, 0.8)}`,
+                    }
+                  : {
+                      backgroundColor: accentAlpha(fAccent, 0.06),
+                      borderColor: accentAlpha(fAccent, 0.25),
+                      color: accentAlpha(fAccent, 0.85),
+                    }
+              }
             >
               {f}
               {f !== 'All' && (
@@ -55,12 +70,15 @@ export function GodsPage() {
                 </span>
               )}
             </button>
-          ))}
+            );
+          })}
         </div>
 
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <AnimatePresence mode="popLayout">
-            {filtered.map((god, i) => (
+            {filtered.map((god, i) => {
+              const accent = getPantheonAccent(god.pantheon);
+              return (
               <motion.div
                 key={god.id}
                 layout
@@ -72,12 +90,13 @@ export function GodsPage() {
               >
                 <div
                   className="hidden lg:block absolute -inset-2 rounded-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none blur-2xl"
-                  style={{ background: god.atmosphericBg }}
+                  style={{ background: `radial-gradient(circle at 50% 40%, ${accentAlpha(accent, 0.55)}, transparent 70%)` }}
                   aria-hidden
                 />
                 <Link
                   to={`/gods/${god.id}`}
-                  className="relative glass-cosmic rounded-xl overflow-hidden h-full block transition-all group-hover:scale-[1.02] lg:group-hover:shadow-[0_0_40px_-5px_hsl(var(--realm-gods)/0.5)]"
+                  className="relative glass-cosmic rounded-xl overflow-hidden h-full block transition-all group-hover:scale-[1.02]"
+                  style={{ boxShadow: `0 0 0 1px ${accentAlpha(accent, 0.18)}` }}
                 >
                   {god.image ? (
                     <div className="relative h-52 overflow-hidden">
@@ -88,7 +107,10 @@ export function GodsPage() {
                         className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(15,10,40,0.95)] via-[rgba(15,10,40,0.3)] to-transparent" />
-                      <div className="absolute top-2 left-2 text-[9px] uppercase tracking-[2px] px-2 py-0.5 rounded-sm bg-black/70 border border-realm-gods/40 text-realm-gods font-bold">
+                      <div
+                        className="absolute top-2 left-2 text-[9px] uppercase tracking-[2px] px-2 py-0.5 rounded-sm bg-black/70 border font-bold"
+                        style={{ borderColor: accentAlpha(accent, 0.45), color: accent }}
+                      >
                         {god.pantheon}
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -129,13 +151,17 @@ export function GodsPage() {
                         <span className="text-xs text-muted-foreground">+{god.domains.length - 3}</span>
                       )}
                     </div>
-                    <div className="inline-flex items-center gap-1 text-[10px] uppercase tracking-[2px] font-bold text-realm-gods group-hover:gap-2 transition-all">
+                    <div
+                      className="inline-flex items-center gap-1 text-[10px] uppercase tracking-[2px] font-bold group-hover:gap-2 transition-all"
+                      style={{ color: accent }}
+                    >
                       Open Dossier <ChevronRight className="w-3 h-3" />
                     </div>
                   </div>
                 </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </AnimatePresence>
         </motion.div>
       </div>
