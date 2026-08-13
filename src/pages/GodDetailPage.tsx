@@ -70,7 +70,7 @@ export function GodDetailPage() {
           <button
             onClick={() => navigate(-1)}
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-white/10 bg-black/40 backdrop-blur text-sm text-white/70 hover:text-white transition-colors mb-8"
-            style={{ ['--tw-accent' as string]: accent }}
+            style={{ borderColor: accentAlpha(accent, 0.25) }}
           >
             <ArrowLeft className="w-4 h-4" />
             Back
