@@ -39,15 +39,29 @@ export function GodsPage() {
       />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-wrap gap-2 mb-10">
-          {filters.map((f) => (
+          {filters.map((f) => {
+            const fAccent = f === 'All' ? '#D6B35A' : getPantheonAccent(f);
+            const active = filter === f;
+            return (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
-                filter === f
-                  ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
-                  : 'bg-secondary text-secondary-foreground hover:bg-accent'
-              }`}
+              aria-pressed={active}
+              className="px-5 py-2 rounded-full text-sm font-medium transition-all border"
+              style={
+                active
+                  ? {
+                      backgroundColor: accentAlpha(fAccent, 0.18),
+                      borderColor: fAccent,
+                      color: fAccent,
+                      boxShadow: `0 0 20px -6px ${accentAlpha(fAccent, 0.8)}`,
+                    }
+                  : {
+                      backgroundColor: accentAlpha(fAccent, 0.06),
+                      borderColor: accentAlpha(fAccent, 0.25),
+                      color: accentAlpha(fAccent, 0.85),
+                    }
+              }
             >
               {f}
               {f !== 'All' && (
@@ -56,7 +70,8 @@ export function GodsPage() {
                 </span>
               )}
             </button>
-          ))}
+            );
+          })}
         </div>
 
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
