@@ -16,6 +16,9 @@ const SOURCES: Record<string, SourceFn> = {
   earthquakes: () => ({
     url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson',
   }),
+  earthquakes_week: () => ({
+    url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson',
+  }),
   kp: () => ({ url: 'https://services.swpc.noaa.gov/json/planetary_k_index_1m.json' }),
   flare: () => ({ url: 'https://services.swpc.noaa.gov/json/goes/primary/xrays-1-day.json' }),
   solarwind: () => ({ url: 'https://services.swpc.noaa.gov/products/summary/solar-wind-speed.json' }),
@@ -81,7 +84,7 @@ Deno.serve(async (req) => {
   const { url: upstream, headers } = factory(url.searchParams);
   // List-shaped sources should fall back to [] so client array ops don't crash.
   const listShaped = source === 'cme' || source === 'flr' || source === 'gst'
-    || source === 'alerts' || source === 'earthquakes';
+    || source === 'alerts' || source === 'earthquakes' || source === 'earthquakes_week';
   const emptyFallback = listShaped ? '[]' : '{}';
   // DONKI endpoints are slow; give them more time before aborting.
   const slowUpstream = source === 'cme' || source === 'flr' || source === 'gst' || source === 'nws' || source === 'iss';
