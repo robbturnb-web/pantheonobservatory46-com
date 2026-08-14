@@ -68,6 +68,25 @@ export interface LiveResult<T> {
   cacheAge?: number | null;
   /** ISO of last verified upstream success (defaults to fetchedAt on MISS) */
   lastSuccessAt?: string | null;
+  /** true when upstream failed and we are showing the last verified reading */
+  degraded?: boolean;
+}
+
+/**
+ * Raw gateway read for non-hook consumers (3D globe layers).
+ * Always goes through the Pantheon Data Gateway — never the upstream directly.
+ */
+export async function fetchGatewayJson<T = any>(
+  source: string,
+  params: Record<string, string> = {},
+): Promise<T | null> {
+  try {
+    const r = await proxyFetch(source, params);
+    if (!r.ok) return null;
+    return (await r.json()) as T;
+  } catch {
+    return null;
+  }
 }
 
 
