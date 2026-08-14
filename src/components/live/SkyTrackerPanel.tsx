@@ -114,6 +114,7 @@ export function SkyTrackerPanel() {
               stale={iss.data?.stale}
               cacheAge={iss.data?.cacheAge}
               lastSuccessAt={iss.data?.lastSuccessAt}
+              degraded={iss.data?.degraded}
               ok={iss.data?.ok ?? false}
               error={iss.data?.error}
               loading={iss.loading}
@@ -166,6 +167,7 @@ export function SkyTrackerPanel() {
               stale={lunar.data?.stale}
               cacheAge={lunar.data?.cacheAge}
               lastSuccessAt={lunar.data?.lastSuccessAt}
+              degraded={lunar.data?.degraded}
               ok={lunar.data?.ok ?? false}
               error={lunar.data?.error}
               loading={lunar.loading}
@@ -242,6 +244,7 @@ export function SkyTrackerPanel() {
               stale={meteors.data?.stale}
               cacheAge={meteors.data?.cacheAge}
               lastSuccessAt={meteors.data?.lastSuccessAt}
+              degraded={meteors.data?.degraded}
               ok={meteors.data?.ok ?? false}
               error={meteors.data?.error}
               loading={meteors.loading}

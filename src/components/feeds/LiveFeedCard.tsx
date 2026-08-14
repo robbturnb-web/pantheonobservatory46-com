@@ -16,6 +16,7 @@ interface Props {
   stale?: boolean;
   cacheAge?: number | null;
   lastSuccessAt?: string | null;
+  degraded?: boolean;
   onRefresh?: () => void;
   /** Optional rendered live metric (number, chip, mini-chart). */
   children?: React.ReactNode;
@@ -33,6 +34,7 @@ export function LiveFeedCard({
   stale,
   cacheAge,
   lastSuccessAt,
+  degraded,
   onRefresh,
   children,
 }: Props) {
@@ -92,6 +94,7 @@ export function LiveFeedCard({
           stale={stale}
           cacheAge={cacheAge}
           lastSuccessAt={lastSuccessAt}
+          degraded={degraded}
           onRefresh={onRefresh}
         />
       )}

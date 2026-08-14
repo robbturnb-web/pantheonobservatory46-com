@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
+import { fetchGatewayJson } from '@/lib/live-data';
 
 /**
  * Phase 3.1 — Earthquake layer for the Observatory globe.
- * Pulls USGS M4.5+ past-7-days feed and renders magnitude-colored markers
- * on the globe surface with hover tooltips.
+ * Pulls USGS M4.5+ past-7-days feed **through the Pantheon Data Gateway**
+ * (edge proxy: cache + stale-serve + no browser CORS) and renders
+ * magnitude-colored markers on the globe surface with hover tooltips.
  */
 
-const FEED = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson';
 
 interface Quake {
   id: string;
@@ -58,9 +59,8 @@ export function EarthquakeLayer({ radius = 1.005, refreshMs = 5 * 60_000, onCoun
     let alive = true;
     const load = async () => {
       try {
-        const r = await fetch(FEED, { cache: 'no-store' });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        const json = await r.json();
+        const json = await fetchGatewayJson<any>('earthquakes_week');
+        if (!json) throw new Error('gateway unavailable');
         const list: Quake[] = (json.features ?? [])
           .filter((f: any) => typeof f?.properties?.mag === 'number')
           .map((f: any) => ({

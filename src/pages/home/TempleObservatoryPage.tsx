@@ -558,6 +558,7 @@ function ActivityPanels() {
             stale={quakes.data?.stale}
             cacheAge={quakes.data?.cacheAge}
             lastSuccessAt={quakes.data?.lastSuccessAt}
+            degraded={quakes.data?.degraded}
             ok={qOk}
             error={quakes.data?.error}
             loading={quakes.loading}
@@ -732,6 +733,7 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
                   stale={c.footer?.stale}
                   cacheAge={c.footer?.cacheAge}
                   lastSuccessAt={c.footer?.lastSuccessAt}
+                  degraded={c.footer?.degraded}
                   ok={c.ok}
                   error={c.footer?.error}
                   loading={c.loading}

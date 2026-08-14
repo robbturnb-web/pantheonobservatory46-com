@@ -20,6 +20,8 @@ interface Props {
   stale?: boolean;
   cacheAge?: number | null;
   lastSuccessAt?: string | null;
+  /** upstream failed; showing the last verified reading, retrying automatically */
+  degraded?: boolean;
   onRefresh?: () => void;
   compact?: boolean;
 }
@@ -33,6 +35,7 @@ export function LiveDataFooter({
   stale,
   cacheAge,
   lastSuccessAt,
+  degraded,
   onRefresh,
   compact,
 }: Props) {
@@ -47,6 +50,18 @@ export function LiveDataFooter({
     >
       {!source ? (
         <span className="text-white/45">Connecting…</span>
+      ) : degraded ? (
+        <a
+          href={source.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-amber-300 hover:text-amber-200"
+          title={`Upstream source is not responding. Showing last verified reading. ${error ?? ''}`}
+        >
+          <AlertTriangle className="w-3 h-3" />
+          <span className="font-bold">Degraded · Retrying</span>
+          <span className="text-white/55 normal-case tracking-normal">· {source.label}</span>
+        </a>
       ) : ok && stale ? (
         <a
           href={source.url}
@@ -97,7 +112,7 @@ export function LiveDataFooter({
 
       {verifiedAt ? (
         <span className="font-mono normal-case tracking-normal text-white/45">
-          {stale ? 'Last verified ' : ok ? 'Updated ' : 'Last verified '}
+          {degraded || stale ? 'Last verified ' : ok ? 'Updated ' : 'Last verified '}
           {timeAgo(verifiedAt)}
         </span>
       ) : fetchedAt ? (
@@ -106,7 +121,7 @@ export function LiveDataFooter({
         </span>
       ) : null}
 
-      {error && !stale && (
+      {error && !stale && !degraded && (
         <span className="text-amber-200/80 normal-case tracking-normal" title={error}>
           ({error})
         </span>

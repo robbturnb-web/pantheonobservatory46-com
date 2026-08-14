@@ -110,6 +110,7 @@ export function WeatherStormPanel() {
               stale={alerts.data?.stale}
               cacheAge={alerts.data?.cacheAge}
               lastSuccessAt={alerts.data?.lastSuccessAt}
+              degraded={alerts.data?.degraded}
               ok={alerts.data?.ok ?? false}
               error={alerts.data?.error}
               loading={alerts.loading}
