@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
+import { fetchGatewayJson } from '@/lib/live-data';
 
 interface StormMarker {
   id: string;
@@ -18,8 +19,6 @@ interface Props {
   onCount?: (n: number) => void;
 }
 
-const PROXY_URL =
-  'https://jsmndieejtfemhfldiza.supabase.co/functions/v1/live-data-proxy?source=nws';
 
 function latLonToVec3(lat: number, lon: number, r: number) {
   const phi = (90 - lat) * (Math.PI / 180);
@@ -66,9 +65,8 @@ export function NwsStormLayer({ radius = 1.006, refreshMs = 5 * 60_000, onCount 
     let alive = true;
     const load = async () => {
       try {
-        const r = await fetch(PROXY_URL);
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        const json = await r.json();
+        const json = await fetchGatewayJson<any>('nws');
+        if (!json) throw new Error('gateway unavailable');
         const features = (json?.features ?? []) as any[];
         const list: StormMarker[] = [];
         for (const f of features) {
