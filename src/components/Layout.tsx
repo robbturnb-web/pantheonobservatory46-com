@@ -6,14 +6,14 @@ import { PantheonFooter } from './PantheonFooter';
 import { BackgroundManager } from './BackgroundManager';
 import { CosmicCursorTrail } from './CosmicCursorTrail';
 import { CometTrails } from './cosmic/CometTrails';
-import { SpaceshipFlyby } from './cosmic/SpaceshipFlyby';
+import { SpaceshipFlyby } from './SpaceshipFlyby';
 import { XPBar } from './XPBar';
 import { Walkthrough } from './Walkthrough';
 import { ErrorBoundary } from './ErrorBoundary';
 import { AudioPlayer } from './AudioPlayer';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 import { SearchProvider } from './search/SearchProvider';
-
+import { ArchivePage } from '@/pages/ArchivePage';
 
 const pageVariants = {
   initial: { opacity: 0, y: 20, scale: 0.98, filter: 'blur(8px)' },
@@ -31,6 +31,7 @@ export function Layout() {
   const location = useLocation();
   const { trackPageVisit } = useEchoXp();
   const isHome = location.pathname === '/';
+  const isArchive = location.pathname === '/archive';
 
   useEffect(() => {
     trackPageVisit(location.pathname);
@@ -46,7 +47,6 @@ export function Layout() {
         <CosmicCursorTrail />
         <CometTrails />
         <SpaceshipFlyby />
-        {/* Home renders its own Temple Observatory top nav + sidebar */}
         {!isHome && <Navbar />}
         <XPBar />
         <AudioPlayer />
@@ -62,7 +62,7 @@ export function Layout() {
               transition={pageTransition}
             >
               <ErrorBoundary key={location.pathname}>
-                <Outlet />
+                {isArchive ? <ArchivePage /> : <Outlet />}
               </ErrorBoundary>
             </motion.div>
           </AnimatePresence>
@@ -72,4 +72,3 @@ export function Layout() {
     </SearchProvider>
   );
 }
-
