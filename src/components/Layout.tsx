@@ -6,7 +6,7 @@ import { PantheonFooter } from './PantheonFooter';
 import { BackgroundManager } from './BackgroundManager';
 import { CosmicCursorTrail } from './CosmicCursorTrail';
 import { CometTrails } from './cosmic/CometTrails';
-import { SpaceshipFlyby } from './SpaceshipFlyby';
+import { SpaceshipFlyby } from './cosmic/SpaceshipFlyby';
 import { XPBar } from './XPBar';
 import { Walkthrough } from './Walkthrough';
 import { ErrorBoundary } from './ErrorBoundary';
