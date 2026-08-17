@@ -14,6 +14,7 @@ export const PRIMARY_NAV: NavItem[] = [
   { to: '/', label: 'Home', group: 'core' },
   { to: '/live-feeds', label: 'Live Feeds', group: 'live' },
   { to: '/the-46', label: 'Archives', group: 'archive' },
+  { to: '/archive', label: 'My Archive', group: 'archive' },
   { to: '/star-seed', label: 'Starseed', group: 'core' },
   { to: '/gods', label: 'Pantheon / Gods', group: 'core' },
   { to: '/uap', label: 'UAP Disclosure', group: 'core' },
