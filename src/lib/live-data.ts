@@ -151,16 +151,6 @@ export interface KpReading {
   stormLevel: 'Quiet' | 'Unsettled' | 'Active' | 'Minor Storm' | 'Moderate Storm' | 'Strong Storm' | 'Severe Storm' | 'Extreme Storm';
   observedAt: string;
 }
-function kpStorm(k: number): KpReading['stormLevel'] {
-  if (k < 3) return 'Quiet';
-  if (k < 4) return 'Unsettled';
-  if (k < 5) return 'Active';
-  if (k < 6) return 'Minor Storm';
-  if (k < 7) return 'Moderate Storm';
-  if (k < 8) return 'Strong Storm';
-  if (k < 9) return 'Severe Storm';
-  return 'Extreme Storm';
-}
 /* ─────────── Normalized NOAA space-weather gateway route ───────────
  * One gateway call (`?source=space-weather`) returns Pantheon-owned shapes for
  * Kp, X-ray flare, solar wind and SWPC alerts. Upstream payload changes are
@@ -250,14 +240,6 @@ export interface FlareReading {
   class: string;
   flux: number;
   observedAt: string;
-}
-function fluxToClass(flux: number): string {
-  if (!Number.isFinite(flux) || flux <= 0) return 'A0.0';
-  if (flux >= 1e-4) return `X${(flux / 1e-4).toFixed(1)}`;
-  if (flux >= 1e-5) return `M${(flux / 1e-5).toFixed(1)}`;
-  if (flux >= 1e-6) return `C${(flux / 1e-6).toFixed(1)}`;
-  if (flux >= 1e-7) return `B${(flux / 1e-7).toFixed(1)}`;
-  return `A${(flux / 1e-8).toFixed(1)}`;
 }
 export function fetchFlare(): Promise<LiveResult<FlareReading>> {
   return spaceWeatherFeed<FlareReading>('flare', FLARE_SOURCE);
