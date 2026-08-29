@@ -10,6 +10,7 @@ import { SpaceshipFlyby } from './cosmic/SpaceshipFlyby';
 import { XPBar } from './XPBar';
 import { Walkthrough } from './Walkthrough';
 import { ErrorBoundary } from './ErrorBoundary';
+import { BackendStatusBanner } from './BackendStatusBanner';
 import { AudioPlayer } from './AudioPlayer';
 import { useEchoXp } from '@/hooks/use-echo-xp';
 import { SearchProvider } from './search/SearchProvider';
@@ -44,6 +45,7 @@ export function Layout() {
         <div className="ambient-flicker">
           <BackgroundManager />
         </div>
+        <BackendStatusBanner />
         <CosmicCursorTrail />
         <CometTrails />
         <SpaceshipFlyby />
