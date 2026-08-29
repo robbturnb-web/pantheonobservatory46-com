@@ -259,27 +259,8 @@ function fluxToClass(flux: number): string {
   if (flux >= 1e-7) return `B${(flux / 1e-7).toFixed(1)}`;
   return `A${(flux / 1e-8).toFixed(1)}`;
 }
-export async function fetchFlare(): Promise<LiveResult<FlareReading>> {
-  const fetchedAt = new Date().toISOString();
-  try {
-    const r = await proxyFetch('flare');
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const __m = r.proxyMeta;
-    const arr = await r.json();
-    // Short channel (0.05-0.4 nm) is the flare-class channel
-    const shortWave = (arr ?? []).filter((d: any) => d.energy === '0.05-0.4nm');
-    const last = shortWave[shortWave.length - 1];
-    if (!last) throw new Error('no flare data');
-    const flux = Number(last.flux);
-    return {
-      ok: true, ...__m,
-      source: FLARE_SOURCE,
-      fetchedAt,
-      value: { class: fluxToClass(flux), flux, observedAt: last.time_tag ?? fetchedAt },
-    };
-  } catch (e: any) {
-    return { ok: false, source: FLARE_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
-  }
+export function fetchFlare(): Promise<LiveResult<FlareReading>> {
+  return spaceWeatherFeed<FlareReading>('flare', FLARE_SOURCE);
 }
 
 /* ─────────── NOAA solar wind speed (latest reading) ─────────── */
@@ -288,36 +269,8 @@ const WIND_SOURCE = {
   url: 'https://services.swpc.noaa.gov/products/summary/solar-wind-speed.json',
 };
 export interface WindReading { speedKmS: number; observedAt: string }
-export async function fetchSolarWind(): Promise<LiveResult<WindReading>> {
-  const fetchedAt = new Date().toISOString();
-  try {
-    const r = await proxyFetch('solarwind');
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const __m = r.proxyMeta;
-    const json = await r.json();
-    // NOAA SWPC summary endpoint returns either:
-    //   { WindSpeed, TimeStamp }                     (legacy)
-    //   [{ proton_speed, time_tag }, ...]            (current)
-    let speed: number = NaN;
-    let observedAt: string = fetchedAt;
-    if (Array.isArray(json) && json.length > 0) {
-      const last = json[json.length - 1];
-      speed = Number(last?.proton_speed ?? last?.WindSpeed ?? last?.speed);
-      observedAt = last?.time_tag ?? last?.TimeStamp ?? fetchedAt;
-    } else if (json && typeof json === 'object') {
-      speed = Number((json as any).WindSpeed ?? (json as any).proton_speed ?? (json as any).speed);
-      observedAt = (json as any).TimeStamp ?? (json as any).time_tag ?? fetchedAt;
-    }
-    if (!Number.isFinite(speed)) throw new Error('no wind speed');
-    return {
-      ok: true, ...__m,
-      source: WIND_SOURCE,
-      fetchedAt,
-      value: { speedKmS: speed, observedAt },
-    };
-  } catch (e: any) {
-    return { ok: false, source: WIND_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
-  }
+export function fetchSolarWind(): Promise<LiveResult<WindReading>> {
+  return spaceWeatherFeed<WindReading>('solarwind', WIND_SOURCE);
 }
 
 /* ─────────── Open-Meteo marine (Pacific reference point) ─────────── */
@@ -546,31 +499,8 @@ export interface SwpcAlert {
   message: string;
   productId: string;
 }
-export async function fetchSwpcAlerts(): Promise<LiveResult<SwpcAlert[]>> {
-  const fetchedAt = new Date().toISOString();
-  try {
-    const r = await proxyFetch('alerts');
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const __m = r.proxyMeta;
-    const arr = await r.json();
-    const cutoff = Date.now() - 24 * 3600_000;
-    const items: SwpcAlert[] = (arr ?? [])
-      .filter((a: any) => {
-        const t = Date.parse((a.issue_datetime ?? '').replace(' ', 'T') + 'Z');
-        return Number.isFinite(t) && t >= cutoff;
-      })
-      .map((a: any) => ({
-        serial: a.serial_number ?? String(a.product_id),
-        issued: (a.issue_datetime ?? '').replace(' ', 'T') + 'Z',
-        message: String(a.message ?? '').slice(0, 600),
-        productId: a.product_id ?? '',
-      }))
-      .sort((a: SwpcAlert, b: SwpcAlert) => new Date(b.issued).getTime() - new Date(a.issued).getTime())
-      .slice(0, 8);
-    return { ok: true, ...__m, source: SWPC_ALERT_SOURCE, fetchedAt, value: items };
-  } catch (e: any) {
-    return { ok: false, source: SWPC_ALERT_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
-  }
+export function fetchSwpcAlerts(): Promise<LiveResult<SwpcAlert[]>> {
+  return spaceWeatherFeed<SwpcAlert[]>('alerts', SWPC_ALERT_SOURCE);
 }
 
 /* ─────────── ISS live position (Where The ISS At?) ─────────── */
