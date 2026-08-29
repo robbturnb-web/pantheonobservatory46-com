@@ -20,7 +20,7 @@ export function BackendStatusBanner() {
       <div
         role="status"
         aria-live="polite"
-        className="pointer-events-auto mx-auto max-w-5xl rounded-xl border border-realm-blackops/50 bg-background/90 backdrop-blur-xl shadow-[0_0_40px_-12px_hsl(var(--destructive)/0.5)]"
+        className="pointer-events-auto mx-auto max-w-5xl rounded-xl border border-destructive/50 bg-background/90 backdrop-blur-xl shadow-[0_0_40px_-12px_hsl(var(--destructive)/0.5)]"
       >
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 px-4 py-3">
           <div className="flex items-start gap-3 flex-1">
