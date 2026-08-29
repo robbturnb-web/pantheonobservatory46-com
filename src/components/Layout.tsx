@@ -45,6 +45,7 @@ export function Layout() {
         <div className="ambient-flicker">
           <BackgroundManager />
         </div>
+        <BackendStatusBanner />
         <CosmicCursorTrail />
         <CometTrails />
         <SpaceshipFlyby />
