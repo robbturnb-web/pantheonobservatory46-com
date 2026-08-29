@@ -161,27 +161,84 @@ function kpStorm(k: number): KpReading['stormLevel'] {
   if (k < 9) return 'Severe Storm';
   return 'Extreme Storm';
 }
-export async function fetchKp(): Promise<LiveResult<KpReading>> {
+/* ─────────── Normalized NOAA space-weather gateway route ───────────
+ * One gateway call (`?source=space-weather`) returns Pantheon-owned shapes for
+ * Kp, X-ray flare, solar wind and SWPC alerts. Upstream payload changes are
+ * absorbed server-side, so the frontend never parses NOAA JSON again. */
+interface FeedEnvelope<T> {
+  ok: boolean;
+  value: T | null;
+  error?: string;
+  cacheState?: string;
+  cacheAge?: number | null;
+  upstreamStatus?: string;
+}
+interface SpaceWeatherPayload {
+  generatedAt: string;
+  kp: FeedEnvelope<KpReading>;
+  flare: FeedEnvelope<FlareReading>;
+  solarwind: FeedEnvelope<WindReading>;
+  alerts: FeedEnvelope<SwpcAlert[]>;
+}
+
+let swCache: { at: number; promise: Promise<SpaceWeatherPayload> } | null = null;
+const SW_MEMO_MS = 30_000;
+
+function fetchSpaceWeather(): Promise<SpaceWeatherPayload> {
+  if (swCache && Date.now() - swCache.at < SW_MEMO_MS) return swCache.promise;
+  const promise = (async () => {
+    const res = await fetch(`${PROXY_BASE}?source=space-weather`, {
+      headers: { apikey: PROXY_KEY, Authorization: `Bearer ${PROXY_KEY}` },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return (await res.json()) as SpaceWeatherPayload;
+  })();
+  swCache = { at: Date.now(), promise };
+  promise.catch(() => {
+    swCache = null;
+  });
+  return promise;
+}
+
+function envelopeToResult<T>(
+  feed: FeedEnvelope<T> | undefined,
+  source: { label: string; url: string },
+  fetchedAt: string,
+): LiveResult<T> {
+  if (!feed || !feed.ok || feed.value == null) {
+    return { ok: false, source, fetchedAt, value: null, error: feed?.error ?? 'feed unavailable' };
+  }
+  const cached = feed.cacheState === 'HIT' || feed.cacheState === 'STALE';
+  const age = typeof feed.cacheAge === 'number' ? feed.cacheAge : null;
+  return {
+    ok: true,
+    source,
+    fetchedAt,
+    value: feed.value,
+    stale: feed.cacheState === 'STALE',
+    cacheAge: cached ? age : null,
+    lastSuccessAt:
+      cached && age != null ? new Date(Date.now() - age * 1000).toISOString() : fetchedAt,
+  };
+}
+
+async function spaceWeatherFeed<T>(
+  key: 'kp' | 'flare' | 'solarwind' | 'alerts',
+  source: { label: string; url: string },
+): Promise<LiveResult<T>> {
   const fetchedAt = new Date().toISOString();
   try {
-    const r = await proxyFetch('kp');
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    const __m = r.proxyMeta;
-    const arr = await r.json();
-    const last = arr?.[arr.length - 1];
-    if (!last) throw new Error('empty feed');
-    const kp = Number(last.kp_index ?? last.estimated_kp ?? last.kp);
-    if (!Number.isFinite(kp)) throw new Error('no Kp value');
-    return {
-      ok: true, ...__m,
-      source: KP_SOURCE,
-      fetchedAt,
-      value: { kp, stormLevel: kpStorm(kp), observedAt: last.time_tag ?? fetchedAt },
-    };
+    const payload = await fetchSpaceWeather();
+    return envelopeToResult<T>(payload[key] as FeedEnvelope<T>, source, fetchedAt);
   } catch (e: any) {
-    return { ok: false, source: KP_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+    return { ok: false, source, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
   }
 }
+
+export function fetchKp(): Promise<LiveResult<KpReading>> {
+  return spaceWeatherFeed<KpReading>('kp', KP_SOURCE);
+}
+
 
 /* ─────────── NOAA SWPC GOES X-ray flares (last 24h) ─────────── */
 const FLARE_SOURCE = {
