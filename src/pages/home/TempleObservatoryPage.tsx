@@ -381,6 +381,14 @@ function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
       <div className="text-center mt-2 text-[10px] uppercase tracking-[6px] text-white/45">
         Pantheon · Frequency 46 · The Twelve Return
       </div>
+      <p className="mx-auto mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-white/70">
+        Evidence-led research into the cosmos and the unexplained — every entry labelled
+        <span className="text-[#fde68a]"> fact</span>,
+        <span className="text-[#c77dff]"> theory</span>,
+        <span className="text-[#22d3ee]"> belief</span>, or
+        <span className="text-white/85"> unexplained</span>, with sources you can check.
+      </p>
+
 
       {/* Central stage: KP / Compass / CTAs */}
       <div className="relative mt-8 grid lg:grid-cols-[260px_1fr_220px] gap-8 items-center max-w-6xl mx-auto">
