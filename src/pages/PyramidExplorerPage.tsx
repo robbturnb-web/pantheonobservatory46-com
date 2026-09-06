@@ -15,7 +15,7 @@ export function PyramidExplorerPage() {
       title="Pyramid Explorer — Stellar Alignments in 3D | Pantheon"
       description="Interactive 3D survey of the world's pyramids and their stellar alignments. Click any monument, drag to rotate, decode the sky map the ancients carved in stone."
       path="/pyramids"
-      schema={{ '@context':'https://schema.org','@type':'WebPage', name:'Pyramid Explorer', url:'https://pantheonobservatory46-com.lovable.app/pyramids' }}
+      schema={{ '@context':'https://schema.org','@type':'WebPage', name:'Pyramid Explorer', url:'https://pantheonobservatory46.com/pyramids' }}
     />
     <div className="min-h-screen relative">
       {/* Header */}

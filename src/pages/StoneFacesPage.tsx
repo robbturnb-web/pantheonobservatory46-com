@@ -10,7 +10,7 @@ export function StoneFacesPage() {
       title="Stone Faces — Megalithic Sites the Textbook Can't Explain | Pantheon"
       description="Göbekli Tepe, Puma Punku, Baalbek and seven more dig sites pairing field record with contested chronology. The excavations rewriting the human timeline."
       path="/stone-faces"
-      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Stone Faces Archive', url:'https://pantheonobservatory46-com.lovable.app/stone-faces', numberOfItems: stoneFacesEntries.length }}
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Stone Faces Archive', url:'https://pantheonobservatory46.com/stone-faces', numberOfItems: stoneFacesEntries.length }}
     />
     <DossierPageLayout
       theme={pageThemes.stoneFaces}

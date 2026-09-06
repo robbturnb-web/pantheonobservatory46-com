@@ -10,7 +10,7 @@ export function CrashRetrievalPage() {
       title="Crash Retrieval Files — Roswell to 2023 Hearings | Pantheon"
       description="Recovered fragments, witness affidavits, Special Access Program leaks, and reverse-engineering testimony. Each entry weighted by confidence with both sides on record."
       path="/crash-retrieval"
-      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Crash Retrieval Archive', url:'https://pantheonobservatory46-com.lovable.app/crash-retrieval', numberOfItems: crashRetrievalEntries.length }}
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Crash Retrieval Archive', url:'https://pantheonobservatory46.com/crash-retrieval', numberOfItems: crashRetrievalEntries.length }}
     />
     <DossierPageLayout
       theme={pageThemes.crash}

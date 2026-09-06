@@ -84,7 +84,7 @@ export function The46Page() {
           '@type': 'CollectionPage',
           name: 'The 46 — Pending Disclosure Vault',
           description: 'The 46-slot vault of pending UAP disclosure files and released material.',
-          url: 'https://pantheonobservatory46-com.lovable.app/the-46',
+          url: 'https://pantheonobservatory46.com/the-46',
         }}
       />
 

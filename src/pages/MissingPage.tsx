@@ -135,7 +135,7 @@ export function MissingPage() {
           '@type': 'CollectionPage',
           name: 'The Missing',
           description: 'Registry of vanished scientists and insiders connected to UAP and black programs.',
-          url: 'https://pantheonobservatory46-com.lovable.app/missing',
+          url: 'https://pantheonobservatory46.com/missing',
         }}
       />
     <div

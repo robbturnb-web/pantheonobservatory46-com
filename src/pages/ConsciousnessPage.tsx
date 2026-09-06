@@ -20,7 +20,7 @@ export function ConsciousnessPage() {
           '@type': 'CollectionPage',
           name: 'Consciousness Lab',
           description: 'Evidence-graded research on consciousness, remote viewing, and the Gateway Process.',
-          url: 'https://pantheonobservatory46-com.lovable.app/consciousness',
+          url: 'https://pantheonobservatory46.com/consciousness',
         }}
       />
       <HeroSection

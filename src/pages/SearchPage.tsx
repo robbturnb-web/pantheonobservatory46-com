@@ -46,7 +46,7 @@ export function SearchPage() {
           '@context': 'https://schema.org',
           '@type': 'SearchResultsPage',
           name: 'Pantheon Observatory Search',
-          url: 'https://pantheonobservatory46-com.lovable.app/search',
+          url: 'https://pantheonobservatory46.com/search',
         }}
       />
 

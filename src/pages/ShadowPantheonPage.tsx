@@ -176,7 +176,7 @@ export function ShadowPantheonPage() {
       title="Shadow Pantheon — The Forgotten & Forbidden Gods | Pantheon"
       description={`${shadowGods.length} suppressed, exiled, or demonized deities — the dark archetypes the official pantheons buried. Holographic dossiers with full lore.`}
       path="/shadow-pantheon"
-      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Shadow Pantheon', url:'https://pantheonobservatory46-com.lovable.app/shadow-pantheon', numberOfItems: shadowGods.length }}
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Shadow Pantheon', url:'https://pantheonobservatory46.com/shadow-pantheon', numberOfItems: shadowGods.length }}
     />
     <div className="min-h-screen relative">
       {/* Holographic atmosphere — scoped to this page only */}

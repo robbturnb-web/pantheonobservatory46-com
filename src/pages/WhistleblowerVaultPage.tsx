@@ -54,7 +54,7 @@ export function WhistleblowerVaultPage() {
           '@type': 'CollectionPage',
           name: 'Whistleblower Vault',
           description: 'Profiles and testimony from UAP, aerospace, and intelligence whistleblowers.',
-          url: 'https://pantheonobservatory46-com.lovable.app/whistleblowers',
+          url: 'https://pantheonobservatory46.com/whistleblowers',
         }}
       />
       <HeroSection

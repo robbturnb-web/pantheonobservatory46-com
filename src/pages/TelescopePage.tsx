@@ -32,7 +32,7 @@ export function TelescopePage() {
       schema={{
         '@context':'https://schema.org','@type':'CollectionPage',
         name:'The Pantheon Observatory',
-        url:'https://pantheonobservatory46-com.lovable.app/telescopes',
+        url:'https://pantheonobservatory46.com/telescopes',
         numberOfItems: telescopes.length,
         hasPart: telescopes.slice(0, 8).map(t => ({ '@type':'Observatory', name: t.name }))
       }}

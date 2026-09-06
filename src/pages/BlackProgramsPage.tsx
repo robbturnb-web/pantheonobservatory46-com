@@ -25,7 +25,7 @@ export function BlackProgramsPage() {
           '@type': 'CollectionPage',
           name: 'Black Programs Vault',
           description: 'Catalog of alleged UAP Special Access Programs with sourcing and evidence grading.',
-          url: 'https://pantheonobservatory46-com.lovable.app/black-programs',
+          url: 'https://pantheonobservatory46.com/black-programs',
         }}
       />
       <DossierPageLayout

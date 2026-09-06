@@ -10,7 +10,7 @@ export function GlyphsPage() {
         title="Glyphs Codex — Cuneiform to Crop Circles | Pantheon"
         description="Twelve scripts, sigils, and geoglyphs humanity deciphered, half-decoded, or stared at for a century. Academic reading vs. ancient-astronaut interpretation, side by side."
         path="/glyphs"
-        schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Glyphs Codex', url:'https://pantheonobservatory46-com.lovable.app/glyphs', numberOfItems: glyphsEntries.length }}
+        schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Glyphs Codex', url:'https://pantheonobservatory46.com/glyphs', numberOfItems: glyphsEntries.length }}
       />
       <DossierPageLayout
         theme={pageThemes.glyphs}

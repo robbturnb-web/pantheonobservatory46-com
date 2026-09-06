@@ -131,7 +131,7 @@ export function OrbReportPage() {
           '@type': 'WebPage',
           name: 'Orb Sightings Log',
           description: 'Citizen reporting channel for UAP and orb sightings.',
-          url: 'https://pantheonobservatory46-com.lovable.app/orb-report',
+          url: 'https://pantheonobservatory46.com/orb-report',
           potentialAction: {
             '@type': 'CommunicateAction',
             name: 'Submit sighting report',

@@ -60,7 +60,7 @@ export function SignalsPage() {
           '@type': 'CollectionPage',
           name: 'Signal Watch',
           description: 'Credibility ratings for UAP and consciousness researchers.',
-          url: 'https://pantheonobservatory46-com.lovable.app/signals',
+          url: 'https://pantheonobservatory46.com/signals',
           numberOfItems: counts.total,
         }}
       />

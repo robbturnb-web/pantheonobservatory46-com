@@ -10,7 +10,7 @@ export function CernPage() {
       title="CERN Watch-Deck — Higgs, Mandela Effect, FCC | Pantheon"
       description="The Large Hadron Collider's verified physics — Higgs, antimatter asymmetry, AMS-02 — separated from Mandela Effect folklore. The 91-km FCC is next."
       path="/cern"
-      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'CERN Watch-Deck', url:'https://pantheonobservatory46-com.lovable.app/cern', numberOfItems: cernEntries.length }}
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'CERN Watch-Deck', url:'https://pantheonobservatory46.com/cern', numberOfItems: cernEntries.length }}
     />
     <DossierPageLayout
       theme={pageThemes.cern}

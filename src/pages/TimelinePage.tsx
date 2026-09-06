@@ -33,7 +33,7 @@ export function TimelinePage() {
       title="UAP & Disclosure Timeline — Ancient to Present | Pantheon"
       description={`${timelineEntries.length} pivotal moments from ancient sightings to congressional hearings — the full disclosure arc, filterable by era.`}
       path="/timeline"
-      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Disclosure Timeline', url:'https://pantheonobservatory46-com.lovable.app/timeline', numberOfItems: timelineEntries.length }}
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Disclosure Timeline', url:'https://pantheonobservatory46.com/timeline', numberOfItems: timelineEntries.length }}
     />
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
