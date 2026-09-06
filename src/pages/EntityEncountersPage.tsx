@@ -10,7 +10,7 @@ export function EntityEncountersPage() {
         title="Entity Encounters — Pascagoula to Voronezh | Pantheon"
         description="Ten witness-rich entity encounters across decades. First-person testimony, contemporaneous news of record, and the leading skeptical counter — confidence-graded."
         path="/encounters"
-        schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Entity Encounters Archive', url:'https://pantheonobservatory46-com.lovable.app/encounters', numberOfItems: entityEncounterEntries.length }}
+        schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Entity Encounters Archive', url:'https://pantheonobservatory46.com/encounters', numberOfItems: entityEncounterEntries.length }}
       />
       <DossierPageLayout
         theme={pageThemes.encounters}

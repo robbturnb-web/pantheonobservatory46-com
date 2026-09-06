@@ -3,7 +3,7 @@
 import { writeFileSync } from "fs";
 import { resolve } from "path";
 
-const BASE_URL = "https://pantheonobservatory46-com.lovable.app";
+const BASE_URL = "https://pantheonobservatory46.com";
 
 interface SitemapEntry {
   path: string;

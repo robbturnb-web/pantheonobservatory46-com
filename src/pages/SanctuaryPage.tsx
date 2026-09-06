@@ -33,7 +33,7 @@ export function SanctuaryPage() {
           '@type': 'WebPage',
           name: 'The Sanctuary of 46',
           description: 'The Pantheon Frequency 46 Sanctuary: Manifesto, Codex, and the 46-Oracle.',
-          url: 'https://pantheonobservatory46-com.lovable.app/46',
+          url: 'https://pantheonobservatory46.com/46',
         }}
       />
 

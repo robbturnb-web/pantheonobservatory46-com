@@ -71,7 +71,7 @@ export function EchoPage() {
           applicationCategory: 'AI Assistant',
           operatingSystem: 'Web',
           description: 'Memory-driven AI assistant for cosmic disclosure, UAP research, and consciousness studies.',
-          url: 'https://pantheonobservatory46-com.lovable.app/echo',
+          url: 'https://pantheonobservatory46.com/echo',
         }}
       />
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">

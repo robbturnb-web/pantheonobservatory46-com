@@ -10,7 +10,7 @@ export function UndergroundBasesPage() {
       title="Underground Bases — DUMBs, Dulce, S-4 & Continuity Bunkers | Pantheon"
       description="From Mount Weather and Cheyenne to the alleged DUMBs network and Dulce levels — verified continuity-of-government sites separated from whistleblower-only claims."
       path="/underground"
-      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Underground Bases Archive', url:'https://pantheonobservatory46-com.lovable.app/underground', numberOfItems: undergroundBaseEntries.length }}
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Underground Bases Archive', url:'https://pantheonobservatory46.com/underground', numberOfItems: undergroundBaseEntries.length }}
     />
     <DossierPageLayout
       theme={pageThemes.underground}

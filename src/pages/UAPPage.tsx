@@ -35,7 +35,7 @@ export function UAPPage() {
           '@type': 'CollectionPage',
           name: 'UAP Case Files',
           description: `${uapCases.length} documented UAP encounters with evidence grading.`,
-          url: 'https://pantheonobservatory46-com.lovable.app/uap',
+          url: 'https://pantheonobservatory46.com/uap',
           numberOfItems: uapCases.length,
         }}
       />

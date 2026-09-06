@@ -14,16 +14,16 @@ export function HomePage() {
   return (
     <>
       <SEO
-        title="Pantheon Frequency 46 — Cosmic Observatory & Disclosure Archive"
-        description="A cinematic cosmic operating system. UAP cases, mythology, consciousness, live solar weather, and Echo AI — all in one observatory."
-        canonical={SITE_URL}
+        title="Pantheon Frequency 46 — Evidence-Led Cosmic Observatory & Archive"
+        description="Evidence-led research into UAP cases, mythology, consciousness, and live solar weather — facts, theories, beliefs, and the unexplained, clearly separated."
+        canonical={`${SITE_URL}/`}
         schema={[
           {
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: 'Pantheon Observatory',
             url: SITE_URL,
-            description: 'A cinematic cosmic operating system for UAP, mythology, consciousness, and disclosure.',
+            description: 'Evidence-led research into UAP, mythology, consciousness, and disclosure — facts, theories, beliefs, and open questions kept separate.',
           },
           {
             '@context': 'https://schema.org',

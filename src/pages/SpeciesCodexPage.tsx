@@ -74,7 +74,7 @@ export function SpeciesCodexPage() {
       title="Species Codex — Cataloging the Non-Human | Pantheon"
       description={`${allSpecies.length} reported non-human species — biological, interdimensional, synthetic. Threat-graded, evidence-graded, witness-cross-referenced.`}
       path="/species"
-      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Species Codex', url:'https://pantheonobservatory46-com.lovable.app/species', numberOfItems: allSpecies.length }}
+      schema={{ '@context':'https://schema.org','@type':'CollectionPage', name:'Species Codex', url:'https://pantheonobservatory46.com/species', numberOfItems: allSpecies.length }}
     />
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       {/* Hero */}

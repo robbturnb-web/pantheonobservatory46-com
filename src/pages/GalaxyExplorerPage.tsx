@@ -91,7 +91,7 @@ export function GalaxyExplorerPage() {
           '@type': 'WebPage',
           name: 'Galaxy Explorer',
           description: 'Interactive 3D tour of the solar system with narrated planet and moon profiles.',
-          url: 'https://pantheonobservatory46-com.lovable.app/galaxy',
+          url: 'https://pantheonobservatory46.com/galaxy',
           isPartOf: { '@type': 'WebSite', name: 'Pantheon Observatory' },
         }}
       />

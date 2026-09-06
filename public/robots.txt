@@ -22,4 +22,4 @@ Disallow: /auth
 Disallow: /reset-password
 Disallow: /profile
 
-Sitemap: https://pantheonobservatory46-com.lovable.app/sitemap.xml
+Sitemap: https://pantheonobservatory46.com/sitemap.xml
