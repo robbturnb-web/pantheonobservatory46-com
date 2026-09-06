@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { AlertTriangle, RefreshCw, X, ExternalLink } from 'lucide-react';
 import { useBackendHealth } from '@/hooks/use-backend-health';
+import { Button } from '@/components/ui/button';
 
 /**
  * Global banner shown when the Lovable Cloud backend is paused or unreachable.
@@ -16,25 +17,28 @@ export function BackendStatusBanner() {
   const paused = state === 'paused';
 
   return (
-    <div className="fixed top-0 inset-x-0 z-[60] px-3 pt-3 pointer-events-none">
+    <div className="fixed inset-x-0 top-0 z-[60] px-2 pt-[max(0.5rem,env(safe-area-inset-top))] pointer-events-none sm:px-4 sm:pt-3">
       <div
         role="status"
         aria-live="polite"
-        className="pointer-events-auto mx-auto max-w-5xl rounded-xl border border-destructive/50 bg-background/90 backdrop-blur-xl shadow-[0_0_40px_-12px_hsl(var(--destructive)/0.5)]"
+        className="pointer-events-auto mx-auto w-full max-w-5xl overflow-hidden rounded-lg border border-destructive/40 bg-background/95 shadow-lg backdrop-blur-xl"
       >
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 px-4 py-3">
-          <div className="flex items-start gap-3 flex-1">
-            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0 text-destructive" />
+        <div className="flex min-h-14 items-center gap-2 px-3 py-2 sm:gap-3 sm:px-4">
+          <div className="flex min-w-0 flex-1 items-center gap-2.5 sm:items-start">
+            <AlertTriangle className="h-4 w-4 shrink-0 text-destructive sm:mt-0.5" />
             <div className="min-w-0">
-              <p className="text-[10px] uppercase tracking-[2.5px] font-semibold text-destructive">
+              <p className="truncate text-[10px] font-semibold uppercase tracking-[2px] text-destructive sm:tracking-[2.5px]">
                 {paused ? 'Backend paused' : 'Backend unreachable'}
               </p>
-              <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+              <p className="mt-0.5 truncate text-[11px] leading-snug text-muted-foreground sm:hidden">
+                {paused ? 'Live services are temporarily offline.' : 'Live services cannot connect.'}
+              </p>
+              <p className="mt-1 hidden text-xs leading-relaxed text-muted-foreground sm:block">
                 {paused
                   ? 'Your Lovable Cloud backend is hibernating — live feeds, Echo AI and sign-in are offline until it resumes. Open the backend panel and hit Resume (an upgrade prompt there means the pause is plan-related).'
                   : 'The Lovable Cloud backend is not responding. It may be paused, restarting, or blocked by your network. Retry, or open the backend panel to check its status.'}
                 {lastChecked && (
-                  <span className="block mt-1 font-mono text-[10px] text-muted-foreground/70">
+                  <span className="mt-1 block font-mono text-[10px] text-muted-foreground/70">
                     last checked {lastChecked.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                   </span>
                 )}
@@ -42,33 +46,43 @@ export function BackendStatusBanner() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0 pl-7 sm:pl-0">
-            <button
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+            <Button
               type="button"
               onClick={() => void recheck()}
               disabled={checking}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-primary/40 bg-primary/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[1.5px] text-foreground hover:bg-primary/20 transition-colors disabled:opacity-60"
+              variant="outline"
+              size="icon"
+              className="h-9 w-9 border-primary/40 bg-primary/10 text-foreground hover:bg-primary/20 sm:w-auto sm:px-3"
+              title={checking ? 'Checking backend' : 'Retry connection'}
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${checking ? 'animate-spin' : ''}`} />
-              {checking ? 'Checking' : 'Retry'}
-            </button>
-            <a
-              href="https://lovable.dev/projects"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[1.5px] text-muted-foreground hover:text-foreground transition-colors"
+              <RefreshCw className={checking ? 'animate-spin' : ''} />
+              <span className="sr-only sm:not-sr-only sm:text-[11px] sm:font-semibold sm:uppercase sm:tracking-[1.5px]">
+                {checking ? 'Checking' : 'Retry'}
+              </span>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="icon"
+              className="h-9 w-9 text-muted-foreground sm:w-auto sm:px-3 sm:text-[11px] sm:font-semibold sm:uppercase sm:tracking-[1.5px]"
             >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Backend
-            </a>
-            <button
+              <a href="https://lovable.dev/projects" target="_blank" rel="noopener noreferrer" title="Open backend settings">
+                <ExternalLink />
+                <span className="sr-only sm:not-sr-only">Backend</span>
+              </a>
+            </Button>
+            <Button
               type="button"
               onClick={() => setDismissed(true)}
               aria-label="Dismiss backend status banner"
-              className="rounded-lg p-1.5 text-muted-foreground hover:text-foreground transition-colors"
+              title="Dismiss"
+              variant="ghost"
+              size="icon"
+              className="h-9 w-9 text-muted-foreground hover:text-foreground"
             >
-              <X className="w-4 h-4" />
-            </button>
+              <X />
+            </Button>
           </div>
         </div>
       </div>
