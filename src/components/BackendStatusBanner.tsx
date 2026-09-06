@@ -64,12 +64,12 @@ export function BackendStatusBanner() {
             <Button
               asChild
               variant="outline"
-              size="sm"
-              className="hidden text-[11px] font-semibold uppercase tracking-[1.5px] text-muted-foreground sm:inline-flex"
+              size="icon"
+              className="h-9 w-9 text-muted-foreground sm:w-auto sm:px-3 sm:text-[11px] sm:font-semibold sm:uppercase sm:tracking-[1.5px]"
             >
-              <a href="https://lovable.dev/projects" target="_blank" rel="noopener noreferrer">
+              <a href="https://lovable.dev/projects" target="_blank" rel="noopener noreferrer" title="Open backend settings">
                 <ExternalLink />
-                Backend
+                <span className="sr-only sm:not-sr-only">Backend</span>
               </a>
             </Button>
             <Button
