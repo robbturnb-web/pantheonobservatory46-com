@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-const SITE = 'https://pantheonobservatory46-com.lovable.app';
+const SITE = 'https://pantheonobservatory46.com';
 
 type SEOProps = {
   title: string;
