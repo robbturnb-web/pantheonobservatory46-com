@@ -13,7 +13,6 @@ export interface NavItem {
 export const PRIMARY_NAV: NavItem[] = [
   { to: '/', label: 'Home', group: 'core' },
   { to: '/live-feeds', label: 'Live Feeds', group: 'live' },
-  { to: '/the-46', label: 'The 46', group: 'archive' },
   { to: '/gods', label: 'Mythology', group: 'core' },
   { to: '/uap', label: 'Disclosure', group: 'core' },
   { to: '/documentaries', label: 'Documentaries', group: 'archive' },
