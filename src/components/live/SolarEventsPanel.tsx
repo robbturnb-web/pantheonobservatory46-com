@@ -19,18 +19,31 @@ import {
 import { timeAgo } from '@/lib/live-data';
 import { LiveDataFooter } from './LiveDataFooter';
 
+/** Clean up raw upstream errors (especially NASA DEMO_KEY HTML rate-limit pages). */
+function cleanDonkiError(err?: string | null): string | undefined {
+  if (!err) return undefined;
+  if (err.includes('Unexpected token') || err.includes('<!DOCTYPE') || err.includes('HTML')) {
+    return 'NASA DONKI temporarily unavailable (DEMO_KEY rate limit). Using last verified reading if available.';
+  }
+  return err;
+}
+
 export function SolarEventsPanel() {
   const cmes = useCMEs();
   const flares = useFlareEvents();
   const gsts = useGSTs();
   const alerts = useSwpcAlerts();
 
+  const cmeError = cleanDonkiError(cmes.data?.error);
+  const flareError = cleanDonkiError(flares.data?.error);
+  const gstError = cleanDonkiError(gsts.data?.error);
+
   return (
     <section className="relative px-4 sm:px-8 pb-8">
       <div className="max-w-6xl mx-auto">
         <header className="mb-4 flex items-baseline justify-between gap-3 flex-wrap">
           <h2 className="text-[10px] sm:text-xs uppercase tracking-[3px] text-amber-300/90 font-bold">
-            Solar &amp; Geomagnetic Events · NASA DONKI + NOAA SWPC
+            Solar & Geomagnetic Events · NASA DONKI + NOAA SWPC
           </h2>
           <span className="text-[9px] uppercase tracking-[2px] text-white/40">
             Rolling 7-day window
@@ -81,7 +94,7 @@ export function SolarEventsPanel() {
                 ))
               ) : (
                 <li className="text-[10px] uppercase tracking-[2px] text-white/35">
-                  {cmes.loading ? 'Connecting to DONKI…' : 'No CME events in window'}
+                  {cmes.loading ? 'Connecting to DONKI…' : (cmeError ? 'Source temporarily unavailable' : 'No CME events in window')}
                 </li>
               )}
             </ul>
@@ -94,7 +107,7 @@ export function SolarEventsPanel() {
               lastSuccessAt={cmes.data?.lastSuccessAt}
               degraded={cmes.data?.degraded}
               ok={cmes.data?.ok ?? false}
-              error={cmes.data?.error}
+              error={cmeError}
               loading={cmes.loading}
               onRefresh={cmes.refresh}
             />
@@ -149,7 +162,7 @@ export function SolarEventsPanel() {
                 ))
               ) : (
                 <li className="text-[10px] uppercase tracking-[2px] text-white/35">
-                  {flares.loading ? 'Connecting to DONKI…' : 'No flare events in window'}
+                  {flares.loading ? 'Connecting to DONKI…' : (flareError ? 'Source temporarily unavailable' : 'No flare events in window')}
                 </li>
               )}
             </ul>
@@ -162,7 +175,7 @@ export function SolarEventsPanel() {
               lastSuccessAt={flares.data?.lastSuccessAt}
               degraded={flares.data?.degraded}
               ok={flares.data?.ok ?? false}
-              error={flares.data?.error}
+              error={flareError}
               loading={flares.loading}
               onRefresh={flares.refresh}
             />
@@ -210,7 +223,7 @@ export function SolarEventsPanel() {
                 ))
               ) : (
                 <li className="text-[10px] uppercase tracking-[2px] text-white/35">
-                  {gsts.loading ? 'Connecting to DONKI…' : 'No geomagnetic storms in window'}
+                  {gsts.loading ? 'Connecting to DONKI…' : (gstError ? 'Source temporarily unavailable' : 'No geomagnetic storms in window')}
                 </li>
               )}
             </ul>
@@ -223,7 +236,7 @@ export function SolarEventsPanel() {
               lastSuccessAt={gsts.data?.lastSuccessAt}
               degraded={gsts.data?.degraded}
               ok={gsts.data?.ok ?? false}
-              error={gsts.data?.error}
+              error={gstError}
               loading={gsts.loading}
               onRefresh={gsts.refresh}
             />
