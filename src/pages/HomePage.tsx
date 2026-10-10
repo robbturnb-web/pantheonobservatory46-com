@@ -1,5 +1,4 @@
 import { SEO } from '@/components/SEO';
-import { Walkthrough } from '@/components/Walkthrough';
 import { TempleObservatoryPage } from './home/TempleObservatoryPage';
 import { PantheonDailyBrief } from '@/components/home/PantheonDailyBrief';
 import { MysteryOfTheDay } from '@/components/home/MysteryOfTheDay';
@@ -39,7 +38,6 @@ export function HomePage() {
         ]}
       />
 
-      <Walkthrough />
       <TempleObservatoryPage />
       <PantheonDailyBrief />
       <MysteryOfTheDay />
