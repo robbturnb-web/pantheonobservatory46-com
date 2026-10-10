@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { Send, LogIn } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Input } from '@/components/ui/input';
 import { useEchoXp } from '@/hooks/use-echo-xp';
@@ -96,7 +96,23 @@ export function MessageFeed({ channelId, channelName, userId, onAuthRequired }: 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
         {messages.length === 0 && (
-          <p className="text-sm text-muted-foreground text-center mt-8">No messages yet. Be the first to speak.</p>
+          <div className="text-center mt-12 max-w-sm mx-auto">
+            {userId ? (
+              <p className="text-sm text-muted-foreground">No messages yet. Be the first to speak.</p>
+            ) : (
+              <>
+                <p className="text-sm text-muted-foreground mb-4">
+                  The Echoverse is open. Sign in to read the channels and drop a message.
+                </p>
+                <button
+                  onClick={onAuthRequired}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+                >
+                  <LogIn className="w-4 h-4" /> Sign in to join
+                </button>
+              </>
+            )}
+          </div>
         )}
         {messages.map((msg, i) => (
           <motion.div
