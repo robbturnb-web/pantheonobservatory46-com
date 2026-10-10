@@ -64,6 +64,11 @@ interface LoadResult {
   error?: string;
 }
 
+function looksLikeHtml(text: string): boolean {
+  const t = text.trimStart();
+  return t.startsWith('<') || t.includes('<!DOCTYPE') || t.includes('<html');
+}
+
 async function loadSource(
   source: string,
   params: URLSearchParams,
@@ -114,7 +119,11 @@ async function loadSource(
       clearTimeout(timeout);
     }
     const text = await r.text();
-    if (!r.ok) return staleOr(String(r.status));
+    // NASA DONKI DEMO_KEY often returns an HTML rate-limit / error page.
+    // Never cache or return HTML as if it were JSON.
+    if (!r.ok || looksLikeHtml(text)) {
+      return staleOr(String(r.status), looksLikeHtml(text) ? 'upstream returned HTML (rate limit or error page)' : undefined);
+    }
     cache.set(cacheKey, { body: text, fetchedAt: now, upstreamStatus: r.status });
     return { body: text, cacheState: 'MISS', cacheAge: null, upstreamStatus: String(r.status) };
   } catch (e) {
