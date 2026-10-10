@@ -198,7 +198,7 @@ export function LiveFeedsPage() {
         {/* ANOMALY */}
         <LiveChamber
           title="Anomaly Detection Network"
-          subtitle="UAP disclosure · classified signal review"
+          subtitle="UAP disclosure · curated signal review"
           Icon={ScanEye}
           theme="anomaly"
           heroImage={anomalyHero}
@@ -215,7 +215,7 @@ export function LiveFeedsPage() {
               sourceLabel="AARO · Official"
             >
               <p className="text-xs text-muted-foreground italic">
-                Manual update mode — curator reviews and posts verified document drops.
+                Curated — reviewed and posted when official sources drop new documents.
               </p>
             </LivePanel>
 
