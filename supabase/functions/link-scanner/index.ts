@@ -22,6 +22,49 @@ function classify(url: string): string {
   return 'external';
 }
 
+function isPrivateHost(host: string): boolean {
+  const h = host.toLowerCase().replace(/^\[|\]$/g, '');
+  if (h === 'localhost' || h.endsWith('.localhost') || h.endsWith('.local') || h.endsWith('.internal')) return true;
+  if (h === '::1' || h === '::' || h.startsWith('fc') || h.startsWith('fd') || h.startsWith('fe80') || h.startsWith('::ffff:')) return h.includes(':');
+  const m = h.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+  if (!m) return false;
+  const [a, b] = [Number(m[1]), Number(m[2])];
+  return a === 0 || a === 10 || a === 127 || (a === 169 && b === 254) ||
+    (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) ||
+    (a === 100 && b >= 64 && b <= 127) || a >= 224;
+}
+
+async function isSafePublicUrl(raw: string): Promise<boolean> {
+  let u: URL;
+  try { u = new URL(raw); } catch { return false; }
+  if (u.protocol !== 'http:' && u.protocol !== 'https:') return false;
+  if (isPrivateHost(u.hostname)) return false;
+  if (/^[\d.]+$/.test(u.hostname) || u.hostname.includes(':')) return true;
+  try {
+    const records = [
+      ...(await Deno.resolveDns(u.hostname, 'A').catch(() => [] as string[])),
+      ...(await Deno.resolveDns(u.hostname, 'AAAA').catch(() => [] as string[])),
+    ];
+    return records.length > 0 && !records.some(isPrivateHost);
+  } catch { return false; }
+}
+
+async function safeFetch(url: string, init: RequestInit): Promise<Response> {
+  let current = url;
+  for (let i = 0; i < 5; i++) {
+    if (!(await isSafePublicUrl(current))) throw new Error('blocked destination');
+    const r = await fetch(current, { ...init, redirect: 'manual' });
+    const loc = r.headers.get('location');
+    if (r.status >= 300 && r.status < 400 && loc) {
+      try { await r.body?.cancel(); } catch {}
+      current = new URL(loc, current).toString();
+      continue;
+    }
+    return r;
+  }
+  throw new Error('too many redirects');
+}
+
 async function probe(url: string, sourcePage?: string): Promise<ProbeResult> {
   const link_type = classify(url);
   const start = Date.now();
@@ -30,9 +73,8 @@ async function probe(url: string, sourcePage?: string): Promise<ProbeResult> {
   try {
     // YouTube blocks HEAD; use GET with no-body shortcut isn't possible — use GET
     const method = link_type === 'youtube' || link_type === 'pdf' ? 'GET' : 'HEAD';
-    const r = await fetch(url, {
+    const r = await safeFetch(url, {
       method,
-      redirect: 'follow',
       signal: ctrl.signal,
       headers: { 'User-Agent': 'Pantheon-LinkScanner/1.0 (+https://pantheonobservatory46.com)' },
     });
@@ -40,7 +82,7 @@ async function probe(url: string, sourcePage?: string): Promise<ProbeResult> {
     // Some servers (NWS, Cloudflare-protected) return 405 on HEAD; retry GET once
     let status = r.status;
     if (status === 405 && method === 'HEAD') {
-      const r2 = await fetch(url, { method: 'GET', redirect: 'follow', signal: ctrl.signal });
+      const r2 = await safeFetch(url, { method: 'GET', signal: ctrl.signal });
       status = r2.status;
       try { await r2.body?.cancel(); } catch {}
     }
