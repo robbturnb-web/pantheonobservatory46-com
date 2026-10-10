@@ -13,17 +13,16 @@ export interface NavItem {
 export const PRIMARY_NAV: NavItem[] = [
   { to: '/', label: 'Home', group: 'core' },
   { to: '/live-feeds', label: 'Live Feeds', group: 'live' },
-  { to: '/the-46', label: 'Archives', group: 'archive' },
-  { to: '/archive', label: 'My Archive', group: 'archive' },
-  { to: '/star-seed', label: 'Starseed', group: 'core' },
-  { to: '/gods', label: 'Pantheon / Gods', group: 'core' },
-  { to: '/uap', label: 'UAP Disclosure', group: 'core' },
-  { to: '/antarctica', label: 'Antarctica & Atlantis', group: 'archive' },
-  { to: '/codex', label: 'Lore', group: 'archive' },
+  { to: '/the-46', label: 'The 46', group: 'archive' },
+  { to: '/gods', label: 'Mythology', group: 'core' },
+  { to: '/uap', label: 'Disclosure', group: 'core' },
+  { to: '/documentaries', label: 'Documentaries', group: 'archive' },
+  { to: '/whistleblowers', label: 'Whistleblowers', group: 'archive' },
+  { to: '/crash-retrieval', label: 'Crash Retrieval', group: 'archive' },
+  { to: '/consciousness', label: 'Consciousness', group: 'core' },
+  { to: '/echo', label: 'Echo AI', group: 'core' },
   { to: '/pyramids', label: 'Pyramids', group: 'archive' },
   { to: '/profile', label: 'Profile', group: 'community' },
-  { to: '/missions', label: 'Missions', group: 'community' },
-  { to: '/sources', label: 'Sources', group: 'community' },
 ];
 
 export const SECONDARY_NAV: NavItem[] = [
