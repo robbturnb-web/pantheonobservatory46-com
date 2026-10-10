@@ -79,7 +79,7 @@ export function PantheonDailyBrief() {
         </h2>
         <p className="text-sm text-muted-foreground mb-6 max-w-2xl">
           Your daily cosmic intelligence summary — live solar weather, planetary pulse,
-          orbital state, and the day's mythology &amp; mystery spotlight.
+          orbital state, and the day's mythology & mystery spotlight.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
@@ -93,7 +93,7 @@ export function PantheonDailyBrief() {
               ? `Kp index ${kpVal.toFixed(1)} — ${kpVal < 4 ? 'quiet geomagnetic field' : kpVal < 5 ? 'unsettled' : 'storm conditions'}.`
               : 'Establishing uplink to NOAA SWPC…'}
             source="NOAA SWPC"
-            to="/earth-pulse"
+            to="/live-feeds"
           />
           <BriefCard
             icon={Activity}
@@ -105,7 +105,7 @@ export function PantheonDailyBrief() {
               ? `${quakeCount} M4.5+ seismic events in the last 7 days.`
               : 'Loading USGS earthquake feed…'}
             source="USGS Earthquake Catalog"
-            to="/observatory"
+            to="/live-feeds"
           />
           <BriefCard
             icon={Satellite}
@@ -117,7 +117,7 @@ export function PantheonDailyBrief() {
               ? `ISS over ${issLat.toFixed(1)}°, ${issLon.toFixed(1)}° — 7.66 km/s orbital velocity.`
               : 'Locating International Space Station…'}
             source="wheretheiss.at"
-            to="/observatory"
+            to="/live-feeds"
           />
           <BriefCard
             icon={Sparkles}
