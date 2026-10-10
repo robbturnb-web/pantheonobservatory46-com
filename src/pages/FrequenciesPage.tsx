@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Radio, ExternalLink, ChevronDown, ChevronUp, Youtube, Sparkles, Lock, ArrowRight } from 'lucide-react';
+import { Radio, ExternalLink, ChevronDown, ChevronUp, Youtube } from 'lucide-react';
 import { creators, allTopics, type Topic, type Rating } from '@/data/frequencies';
 import { VideoEmbed } from '@/components/VideoEmbed';
 import { SEO } from '@/components/SEO';
@@ -36,28 +36,6 @@ export function FrequenciesPage() {
           <h1 className="text-5xl sm:text-6xl font-bold mb-4 text-foreground">FREQUENCIES</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">Hand-curated channels we monitor for signal vs. noise. Each creator is graded on sourcing and consistency.</p>
         </motion.div>
-
-        <section className="glass-cosmic rounded-3xl p-6 sm:p-8 mb-10 border border-primary/25 bg-primary/5">
-          <div className="grid md:grid-cols-[1.3fr_1fr] gap-7 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[3px] text-primary mb-3"><Sparkles className="w-3.5 h-3.5" /> Frequency 46 Member Signal</div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">Don't just follow voices. Build your investigation.</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">The public Frequencies directory helps you find signal. The next layer is designed for researchers who want deeper Echo sessions, saved research trails, and a private archive.</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {['Advanced Echo research','Private investigation archive','Member-only signal drops','Early access to new chambers'].map((item) => (
-                <div key={item} className="rounded-xl border border-border bg-background/40 p-3 flex items-start gap-2">
-                  <Lock className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" /><span className="text-xs text-foreground/85">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-3 justify-center sm:justify-start">
-            <a href="/echo" className="inline-flex items-center gap-2 rounded-xl bg-primary text-primary-foreground px-5 py-3 text-sm font-semibold hover:bg-primary/90 transition-colors">Ask Echo <ArrowRight className="w-4 h-4" /></a>
-            <a href="/the-46" className="inline-flex items-center gap-2 rounded-xl border border-border px-5 py-3 text-sm font-semibold text-foreground hover:border-primary/50 transition-colors">Explore The 46 <Radio className="w-4 h-4" /></a>
-          </div>
-          <p className="mt-3 text-[10px] text-muted-foreground">Membership billing is not connected yet. This preview does not charge you.</p>
-        </section>
 
         <div className="glass-cosmic rounded-2xl p-5 mb-8 space-y-4">
           <div><p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">Topic</p><div className="flex flex-wrap gap-2">{(['ALL', ...allTopics] as const).map((t) => <button key={t} onClick={() => setTopicFilter(t)} className={`px-3 py-1.5 rounded-full text-xs font-medium uppercase tracking-wider transition-colors ${topicFilter === t ? 'bg-primary text-primary-foreground' : 'bg-accent text-muted-foreground hover:text-foreground'}`}>{t}</button>)}</div></div>
