@@ -126,7 +126,7 @@ export default function App() {
               <Route path="/pyramids" element={<PyramidExplorerPage />} />
               <Route path="/earth-pulse" element={<EarthPulsePage />} />
               <Route path="/orb-report" element={<OrbReportPage />} />
-              <Route path="/the-46" element={<The46Page />} />
+              <Route path="/the-46" element={<Navigate to="/uap" replace />} />
               <Route path="/codex" element={<CodexPage />} />
               
               <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
@@ -151,8 +151,8 @@ export default function App() {
               <Route path="/glyphs" element={<GlyphsPage />} />
               <Route path="/stone-faces" element={<StoneFacesPage />} />
               <Route path="/elements" element={<ElementsLabPage />} />
-              <Route path="/experts" element={<ExpertsIndexPage />} />
-              <Route path="/experts/:slug" element={<ExpertProfilePage />} />
+              <Route path="/experts" element={<Navigate to="/frequencies" replace />} />
+              <Route path="/experts/:slug" element={<Navigate to="/frequencies" replace />} />
               {/* style-guide moved to admin gate below */}
               <Route path="/documentaries" element={<DocumentariesPage />} />
               
