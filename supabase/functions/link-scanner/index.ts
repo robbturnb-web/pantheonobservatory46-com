@@ -73,9 +73,8 @@ async function probe(url: string, sourcePage?: string): Promise<ProbeResult> {
   try {
     // YouTube blocks HEAD; use GET with no-body shortcut isn't possible — use GET
     const method = link_type === 'youtube' || link_type === 'pdf' ? 'GET' : 'HEAD';
-    const r = await fetch(url, {
+    const r = await safeFetch(url, {
       method,
-      redirect: 'follow',
       signal: ctrl.signal,
       headers: { 'User-Agent': 'Pantheon-LinkScanner/1.0 (+https://pantheonobservatory46.com)' },
     });
@@ -83,7 +82,7 @@ async function probe(url: string, sourcePage?: string): Promise<ProbeResult> {
     // Some servers (NWS, Cloudflare-protected) return 405 on HEAD; retry GET once
     let status = r.status;
     if (status === 405 && method === 'HEAD') {
-      const r2 = await fetch(url, { method: 'GET', redirect: 'follow', signal: ctrl.signal });
+      const r2 = await safeFetch(url, { method: 'GET', signal: ctrl.signal });
       status = r2.status;
       try { await r2.body?.cancel(); } catch {}
     }
