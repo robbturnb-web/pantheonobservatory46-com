@@ -137,14 +137,11 @@ function TopNav({ kp }: { kp: number | null }) {
 interface SideItem { to: string; label: string; icon: typeof Home; tone: string; glow: string }
 const SIDE_ITEMS: SideItem[] = [
   { to: '/',                label: 'Home',          icon: Home,         tone: 'text-white',         glow: 'shadow-[0_0_16px_-2px_rgba(255,255,255,0.5)]' },
-  { to: '/the-46',          label: 'The 46',        icon: Folder,       tone: 'text-amber-300',     glow: 'shadow-[0_0_16px_-2px_rgba(251,191,36,0.7)]' },
   { to: '/uap',             label: 'Disclosure',    icon: Eye,          tone: 'text-emerald-300',   glow: 'shadow-[0_0_16px_-2px_rgba(16,185,129,0.7)]' },
   { to: '/documentaries',   label: 'Docs',          icon: Film,         tone: 'text-emerald-300',   glow: '' },
-  { to: '/uap',             label: 'UAP Cases',     icon: Plane,        tone: 'text-cyan-300',      glow: '' },
   { to: '/whistleblowers',  label: 'Whistleblw',    icon: Shield,       tone: 'text-emerald-300',   glow: '' },
   { to: '/crash-retrieval', label: 'Crash Retr',    icon: AlertTriangle,tone: 'text-red-400',       glow: '' },
   { to: '/missing',         label: 'Missing',       icon: Users,        tone: 'text-amber-300',     glow: '' },
-  { to: '/whistleblowers',  label: 'Deaths',        icon: Skull,        tone: 'text-red-400',       glow: '' },
   { to: '/underground',     label: 'Bases',         icon: MountainIcon, tone: 'text-stone-300',     glow: '' },
   { to: '/gods',            label: 'Mythology',     icon: Mountain,     tone: 'text-[#ffd700]',     glow: 'shadow-[0_0_16px_-2px_rgba(255,215,0,0.7)]' },
   { to: '/consciousness',   label: 'Conscious',     icon: Brain,        tone: 'text-indigo-300',    glow: '' },
@@ -283,8 +280,8 @@ function PantheonCompass() {
 
       {/* Center sigil */}
       <Link
-        to="/the-46"
-        aria-label="Enter the Pantheon · 46"
+        to="/gods"
+        aria-label="Enter the Pantheon"
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-square rounded-full overflow-hidden group focus-visible:outline-none"
       >
         <div className="absolute inset-0 rounded-full bg-black/70 shadow-[0_0_80px_-10px_rgba(255,215,0,0.55),0_0_120px_-20px_rgba(160,32,240,0.6)] group-hover:shadow-[0_0_120px_-10px_rgba(255,215,0,0.9),0_0_180px_-20px_rgba(160,32,240,0.9)] transition-shadow duration-500" />
@@ -423,7 +420,7 @@ function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
 
         {/* Right flank — quick CTAs */}
         <div className="order-3 flex flex-col gap-2 items-stretch lg:items-end">
-          <Link to="/the-46" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#ffd700]/50 bg-[#ffd700]/10 hover:bg-[#ffd700]/20 transition-colors">
+          <Link to="/gods" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#ffd700]/50 bg-[#ffd700]/10 hover:bg-[#ffd700]/20 transition-colors">
             <span className="text-[10px] uppercase tracking-[3px] text-[#fde68a]">The 46 Codex</span>
             <ChevronRight className="w-3.5 h-3.5 text-[#fde68a] group-hover:translate-x-0.5 transition-transform" />
           </Link>
