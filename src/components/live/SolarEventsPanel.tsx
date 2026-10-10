@@ -9,7 +9,8 @@
  * Every card carries its own LiveDataFooter (source · timestamp · refresh ·
  * verified badge), per Phase 1 sourcing rules.
  */
-import { Sun, Zap, Activity, Radio, ExternalLink, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Sun, Zap, Activity, Radio, ExternalLink, ChevronRight, Radio as RadioIcon } from 'lucide-react';
 import {
   useCMEs,
   useFlareEvents,
@@ -326,6 +327,18 @@ export function SolarEventsPanel() {
             onRefresh={alerts.refresh}
           />
         </article>
+
+        {/* CTA to full Live Feeds chambers */}
+        <div className="mt-6 flex justify-center">
+          <Link
+            to="/live-feeds"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-cyan-400/40 bg-cyan-400/10 text-cyan-100 hover:bg-cyan-400/20 hover:border-cyan-300 transition-colors text-xs uppercase tracking-[2px] font-semibold"
+          >
+            <RadioIcon className="w-4 h-4" />
+            Open Full Live Feeds
+            <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );
