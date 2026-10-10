@@ -33,13 +33,15 @@ export function OracleConsole() {
       const url = `https://${projectRef}.supabase.co/functions/v1/oracle-46`;
       const { data: sessionData } = await supabase.auth.getSession();
       const token = sessionData.session?.access_token;
+      if (!token) throw new Error('Please sign in to consult the Oracle.');
 
       const resp = await fetch(url, {
         method: 'POST',
         signal: abortRef.current.signal,
         headers: {
           'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          Authorization: `Bearer ${token}`,
+          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
         },
         body: JSON.stringify({ question: q }),
       });
