@@ -111,10 +111,25 @@ serve(async (req) => {
       );
     }
 
-    const { messages } = await req.json();
-    if (!messages || !Array.isArray(messages)) {
+    const body = await req.json().catch(() => ({}));
+    const rawMessages = (body as { messages?: unknown }).messages;
+    if (!Array.isArray(rawMessages) || rawMessages.length === 0) {
       return new Response(
         JSON.stringify({ error: "messages array is required" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    // Only allow user/assistant turns with string content; system role is server-owned.
+    const messages = rawMessages
+      .slice(-40)
+      .filter((m): m is { role: string; content: string } =>
+        !!m && typeof m === "object" &&
+        ((m as any).role === "user" || (m as any).role === "assistant") &&
+        typeof (m as any).content === "string")
+      .map((m) => ({ role: m.role as "user" | "assistant", content: m.content.slice(0, 8000) }));
+    if (messages.length === 0) {
+      return new Response(
+        JSON.stringify({ error: "Invalid messages" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
