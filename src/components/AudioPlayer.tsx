@@ -9,6 +9,9 @@ import { PLAYLISTS, PLAYLIST_LABELS } from '@/lib/audio/playlists';
 const HIDDEN_ROUTES = new Set(['/auth', '/reset-password']);
 
 export function AudioPlayer() {
+  // Soundtrack files are not yet in public/audio — hide the player until they land.
+  return null;
+
   const location = useLocation();
   const routeTrack = useRouteTrack();
   const { playing, volume, currentTrack, toggle, next, prev, setVolume, setPlaylist } =
