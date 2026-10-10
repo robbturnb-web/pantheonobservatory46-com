@@ -16,7 +16,7 @@ import {
   useKp, useFlare, useISS, useEarthquakes, useNwsAlerts,
 } from '@/hooks/use-live-data';
 import {
-  Sun, Wind, Satellite, Eye, Activity, Telescope, Radio,
+  Sun, Wind, Satellite, Eye, Activity, Radio,
   Flame, Globe2, CloudLightning, ScanEye, BookOpenCheck,
 } from 'lucide-react';
 
@@ -133,48 +133,32 @@ export function LiveFeedsPage() {
         {/* ORBITAL */}
         <LiveChamber
           title="Orbital Command Deck"
-          subtitle="ISS ground-track · interstellar object watch"
+          subtitle="ISS ground-track"
           Icon={Satellite}
           theme="orbital"
           heroImage={orbitalHero}
           status={statusOf(iss)}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <LivePanel
-              title="ISS / Orbital Tracking"
-              description="International Space Station, ~15s refresh."
-              Icon={Satellite}
-              accent="text-cyan-300"
-              status={statusOf(iss)}
-              sourceUrl="https://spotthestation.nasa.gov/"
-              sourceLabel="NASA · Spot the Station"
-              onRefresh={iss.refresh}
-              refreshing={iss.loading}
-            >
-              <div className="font-mono text-sm text-foreground/90 space-y-0.5">
-                <div>lat {iss.data?.value?.latitude?.toFixed(2) ?? '—'}</div>
-                <div>lon {iss.data?.value?.longitude?.toFixed(2) ?? '—'}</div>
-              </div>
-              <IssTrackStrip
-                latitude={iss.data?.value?.latitude}
-                longitude={iss.data?.value?.longitude}
-              />
-            </LivePanel>
-
-            <LivePanel
-              title="Interstellar Objects"
-              description="3I/ATLAS and other ISO tracking via JPL Horizons."
-              Icon={Telescope}
-              accent="text-cyan-200"
-              status="external"
-              sourceUrl="https://ssd.jpl.nasa.gov/horizons/"
-              sourceLabel="JPL Horizons"
-            >
-              <p className="text-xs text-foreground/80">
-                Track current ISO candidates via JPL — live feed pending integration.
-              </p>
-            </LivePanel>
-          </div>
+          <LivePanel
+            title="ISS / Orbital Tracking"
+            description="International Space Station, ~15s refresh."
+            Icon={Satellite}
+            accent="text-cyan-300"
+            status={statusOf(iss)}
+            sourceUrl="https://spotthestation.nasa.gov/"
+            sourceLabel="NASA · Spot the Station"
+            onRefresh={iss.refresh}
+            refreshing={iss.loading}
+          >
+            <div className="font-mono text-sm text-foreground/90 space-y-0.5">
+              <div>lat {iss.data?.value?.latitude?.toFixed(2) ?? '—'}</div>
+              <div>lon {iss.data?.value?.longitude?.toFixed(2) ?? '—'}</div>
+            </div>
+            <IssTrackStrip
+              latitude={iss.data?.value?.latitude}
+              longitude={iss.data?.value?.longitude}
+            />
+          </LivePanel>
         </LiveChamber>
 
         {/* ATMOSPHERE */}
