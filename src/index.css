@@ -604,3 +604,16 @@ body::after {
 /* Hide scrollbars on horizontal scroll containers (tab strips, chip rows). */
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Force high-contrast text on all form inputs so typing is always visible */
+input, textarea, select {
+  color: #ffffff !important;
+  caret-color: #ff6b00;
+}
+input::placeholder, textarea::placeholder {
+  color: #9ca3af !important;
+  opacity: 1;
+}
+input:focus, textarea:focus, select:focus {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
