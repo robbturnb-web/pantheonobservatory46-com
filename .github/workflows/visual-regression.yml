@@ -40,7 +40,7 @@ jobs:
           restore-keys: pw-${{ runner.os }}-
 
       - name: Install Playwright (browsers + OS deps)
-        run: bunx playwright install --with-deps chromium
+        run: bunx playwright install --with-deps
 
       - name: Run visual regression
         run: bunx playwright test
