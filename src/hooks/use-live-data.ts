@@ -64,22 +64,57 @@ function writeLastGood<T>(key: string, result: LiveResult<T>) {
   }
 }
 
+/** Exponential backoff with jitter: 2s, 4s, 8s, 16s, 32s (capped at 60s). */
+const MAX_RETRIES = 5;
+function backoffDelay(attempt: number) {
+  const base = Math.min(60_000, 2_000 * 2 ** attempt);
+  return Math.round(base * (0.75 + Math.random() * 0.5));
+}
+
 function useLive<T>(fetcher: () => Promise<LiveResult<T>>, refreshMs: number, key: string) {
   const [state, setState] = useState<State<T>>({ data: null, loading: true });
+  const [retry, setRetry] = useState<{ attempt: number; nextAt: number | null }>({ attempt: 0, nextAt: null });
   const alive = useRef(true);
+  const inFlight = useRef(false);
+  const attemptRef = useRef(0);
+  const retryTimer = useRef<number | null>(null);
   const lastGood = useRef<LiveResult<T> | null>(null);
 
-  const run = useCallback(async () => {
+  const clearRetry = () => {
+    if (retryTimer.current != null) window.clearTimeout(retryTimer.current);
+    retryTimer.current = null;
+  };
+
+  const run = useCallback(async (manual = false) => {
+    if (inFlight.current) return;
+    inFlight.current = true;
+    if (manual) attemptRef.current = 0;
+    clearRetry();
     setState((s) => ({ ...s, loading: true }));
     const result = await fetcher();
+    inFlight.current = false;
     if (!alive.current) return;
+
     if (result.ok && result.value != null) {
+      attemptRef.current = 0;
+      setRetry({ attempt: 0, nextAt: null });
       const verified = { ...result, lastSuccessAt: result.lastSuccessAt ?? result.fetchedAt };
       lastGood.current = verified;
       writeLastGood(key, verified);
       setState({ data: verified, loading: false });
       return;
     }
+
+    // Schedule a backoff retry
+    if (attemptRef.current < MAX_RETRIES) {
+      const delay = backoffDelay(attemptRef.current);
+      attemptRef.current += 1;
+      setRetry({ attempt: attemptRef.current, nextAt: Date.now() + delay });
+      retryTimer.current = window.setTimeout(() => void runRef.current(false), delay);
+    } else {
+      setRetry({ attempt: attemptRef.current, nextAt: null });
+    }
+
     const fallback = lastGood.current ?? readLastGood<T>(key);
     if (fallback?.value != null) {
       lastGood.current = fallback;
@@ -98,19 +133,26 @@ function useLive<T>(fetcher: () => Promise<LiveResult<T>>, refreshMs: number, ke
       return;
     }
     setState({ data: result, loading: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetcher, key]);
+
+  const runRef = useRef(run);
+  runRef.current = run;
 
   useEffect(() => {
     alive.current = true;
     void run();
-    const id = window.setInterval(run, refreshMs);
+    const id = window.setInterval(() => void runRef.current(false), refreshMs);
     return () => {
       alive.current = false;
       window.clearInterval(id);
+      clearRetry();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [run, refreshMs]);
 
-  return { ...state, refresh: run };
+  const refresh = useCallback(() => void runRef.current(true), []);
+  return { ...state, refresh, retryAttempt: retry.attempt, nextRetryAt: retry.nextAt, maxRetries: MAX_RETRIES };
 }
 
 // 5 min for fast-moving feeds, 15 min for slower ones

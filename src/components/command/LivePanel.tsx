@@ -19,6 +19,41 @@ const STATUS: Record<LiveStatus, { label: string; cls: string }> = {
   external: { label: 'External Source',            cls: 'border-white/20 bg-white/5 text-foreground/80' },
 };
 
+export interface LiveNotice {
+  tone: 'degraded' | 'error';
+  message: string;
+  detail?: string;
+}
+
+/** Build outage messaging + status from a use-live-data hook result. */
+export function liveFeedState(r: {
+  data: { ok: boolean; stale?: boolean; degraded?: boolean; error?: string; lastSuccessAt?: string | null } | null;
+  loading: boolean;
+  retryAttempt?: number;
+  nextRetryAt?: number | null;
+  maxRetries?: number;
+}): { status: LiveStatus; notice?: LiveNotice } {
+  const d = r.data;
+  const retryTxt = r.nextRetryAt
+    ? `Auto-retry ${r.retryAttempt}/${r.maxRetries} in ~${Math.max(1, Math.round((r.nextRetryAt - Date.now()) / 1000))}s`
+    : r.retryAttempt && r.retryAttempt >= (r.maxRetries ?? 5)
+      ? 'Auto-retry paused — use Refresh'
+      : undefined;
+  if (!d) return { status: 'pending' };
+  if (d.ok && d.degraded) {
+    const t = d.lastSuccessAt ? new Date(d.lastSuccessAt).toLocaleTimeString() : 'earlier';
+    return {
+      status: 'cached',
+      notice: { tone: 'degraded', message: `Showing last verified reading from ${t}`, detail: [d.error, retryTxt].filter(Boolean).join(' · ') },
+    };
+  }
+  if (d.ok) return { status: d.stale ? 'cached' : 'live' };
+  return {
+    status: 'pending',
+    notice: { tone: 'error', message: 'Source unavailable — no cached reading yet', detail: [d.error, retryTxt].filter(Boolean).join(' · ') },
+  };
+}
+
 export interface LivePanelProps {
   title: string;
   description: string;
@@ -30,11 +65,12 @@ export interface LivePanelProps {
   refreshing?: boolean;
   children?: ReactNode;
   accent?: string;
+  notice?: LiveNotice;
 }
 
 export function LivePanel({
   title, description, Icon, status, sourceUrl, sourceLabel,
-  onRefresh, refreshing, children, accent = 'text-primary',
+  onRefresh, refreshing, children, accent = 'text-primary', notice,
 }: LivePanelProps) {
   const s = STATUS[status];
   return (
@@ -74,6 +110,21 @@ export function LivePanel({
           </p>
         )}
       </div>
+
+      {notice && (
+        <div
+          role="status"
+          className={cn(
+            'mt-2 rounded-md border px-2.5 py-1.5 text-[11px] leading-snug',
+            notice.tone === 'degraded'
+              ? 'border-amber-400/40 bg-amber-400/10 text-amber-200'
+              : 'border-rose-400/40 bg-rose-400/10 text-rose-200',
+          )}
+        >
+          <p className="font-semibold">{notice.message}</p>
+          {notice.detail && <p className="font-mono text-[10px] opacity-80 mt-0.5 break-words">{notice.detail}</p>}
+        </div>
+      )}
 
       <footer className="mt-3 flex flex-wrap items-center justify-between gap-2">
         {sourceUrl ? (

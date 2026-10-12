@@ -177,10 +177,23 @@ const SW_MEMO_MS = 30_000;
 function fetchSpaceWeather(): Promise<SpaceWeatherPayload> {
   if (swCache && Date.now() - swCache.at < SW_MEMO_MS) return swCache.promise;
   const promise = (async () => {
-    const res = await fetch(`${PROXY_BASE}?source=space-weather`, {
-      headers: { apikey: PROXY_KEY, Authorization: `Bearer ${PROXY_KEY}` },
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    let res: Response;
+    try {
+      res = await fetch(`${PROXY_BASE}?source=space-weather`, {
+        headers: { apikey: PROXY_KEY, Authorization: `Bearer ${PROXY_KEY}` },
+        signal: AbortSignal.timeout(20_000),
+      });
+    } catch (e: any) {
+      throw new Error(
+        e?.name === 'TimeoutError'
+          ? 'Data gateway timed out after 20s'
+          : 'Data gateway unreachable — backend may be paused or offline',
+      );
+    }
+    if (!res.ok) {
+      const paused = [402, 503, 504, 540, 544].includes(res.status);
+      throw new Error(paused ? `Backend paused or unavailable (HTTP ${res.status})` : `Data gateway error (HTTP ${res.status})`);
+    }
     return (await res.json()) as SpaceWeatherPayload;
   })();
   swCache = { at: Date.now(), promise };
