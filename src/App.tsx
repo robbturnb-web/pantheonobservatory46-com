@@ -127,6 +127,9 @@ export default function App() {
               <Route path="/earth-pulse" element={<EarthPulsePage />} />
               <Route path="/orb-report" element={<OrbReportPage />} />
               <Route path="/the-46" element={<Navigate to="/uap" replace />} />
+              <Route path="/mythology" element={<Navigate to="/gods" replace />} />
+              <Route path="/live" element={<Navigate to="/live-feeds" replace />} />
+              <Route path="/feeds" element={<Navigate to="/live-feeds" replace />} />
               <Route path="/codex" element={<CodexPage />} />
               
               <Route path="/shadow-pantheon" element={<ShadowPantheonPage />} />
