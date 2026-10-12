@@ -1,21 +1,21 @@
 # Security Policy
 
-## Supported Versions
-
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
-
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+Please report suspected vulnerabilities privately to the repository owner rather than opening a public issue. Include the affected page or component, reproduction steps, and potential impact. Do not include real credentials, personal data, or exploit payloads that could harm users.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Reports will be reviewed as time and availability permit. Please allow a reasonable opportunity to investigate and remediate before publicly disclosing a vulnerability.
+
+## Secrets and Environment Configuration
+
+- Never commit `.env`, `.env.local`, `.env.development`, or `.env.production` files.
+- Use `.env.example` only for variable names and safe placeholder values.
+- Configure deployment variables in the hosting provider's environment settings.
+- Treat any credential committed to a public repository as exposed. Rotate it with its provider; deleting the file in a later commit does not remove it from Git history.
+- Values prefixed with `VITE_` are bundled into client-side code and must never contain server-side secrets.
+- Supabase publishable keys are intended for client use, but database access must be protected by appropriate Row Level Security policies.
+- Keep privileged service-role keys, payment secret keys, and other server credentials in trusted server-side environments only.
+
+## Supported Versions
+
+Security fixes target the current default branch. Older commits may not receive security updates.
