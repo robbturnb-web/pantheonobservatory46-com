@@ -1,4 +1,4 @@
-name: Visual Regression
+name: Codex UI Regression
 
 on:
   push:
@@ -6,15 +6,10 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      routes:
-        description: "Comma-separated routes to test (e.g. /,/profile). Leave blank for all."
-        required: false
-        default: ""
 
 jobs:
   playwright:
-    name: Playwright (Codex active state)
+    name: Playwright (Codex UI)
     timeout-minutes: 20
     runs-on: ubuntu-latest
     steps:
@@ -42,11 +37,10 @@ jobs:
       - name: Install Playwright (browsers + OS deps)
         run: bunx playwright install --with-deps
 
-      - name: Run visual regression
+      - name: Run Codex UI regression checks
         run: bunx playwright test
         env:
           CI: "true"
-          VISUAL_ROUTES: ${{ github.event.inputs.routes }}
 
       - name: Upload Playwright report
         if: always()
@@ -56,7 +50,7 @@ jobs:
           path: playwright-report
           retention-days: 14
 
-      - name: Upload diff artifacts on failure
+      - name: Upload failure artifacts
         if: failure()
         uses: actions/upload-artifact@v4
         with:
