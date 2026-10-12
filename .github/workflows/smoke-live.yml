@@ -45,7 +45,7 @@ jobs:
           restore-keys: pw-${{ runner.os }}-
 
       - name: Install Playwright Chromium
-        run: bunx playwright install --with-deps chromium
+        run: bunx playwright install --with-deps
 
       - name: Wait for deploy to settle
         if: github.event_name == 'push'
