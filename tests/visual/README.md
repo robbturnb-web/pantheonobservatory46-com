@@ -1,58 +1,33 @@
-# Visual regression — Codex active state
+# Codex UI regression checks
 
-Screenshot-based regression that locks the gold active-state styling of the
-Codex button grid across all five routes (`/`, `/the-46`, `/profile`,
-`/echoverse`, `/pyramids`) and three viewports (`mobile`, `tablet`, `desktop`).
+This Playwright suite checks that the Codex page renders its core interface across
+mobile, tablet, and desktop browser projects.
 
-## Run
+## Run locally
 
 ```bash
-# First time / after intentional design change → refresh baselines
-bunx playwright test --update-snapshots
-
-# Normal run → fail on any pixel drift > 1%
 bunx playwright test
 ```
 
-Baselines are committed under
-`tests/visual/__screenshots__/codex-active-state.spec.ts/`.
+## What is checked
 
-## How it works
+- The `/codex` route renders the “THE 46 CODEX” heading.
+- The Codex hero image is visible.
+- The navigation grid renders all six links.
 
-- `playwright.config.ts` boots `vite preview` on port 4173 as the web server.
-- The spec loads `/codex`, then uses `history.replaceState` + a `popstate`
-  event to spoof each target pathname so `useLocation()` inside `CodexPage`
-  returns the route under test. The grid screenshot then captures whichever
-  button is in the gold active state for that route.
-- Animations are disabled by Playwright (`animations: "disabled"`) and a
-  1.2s settle window covers the framer-motion entrance.
-- Tolerance is `maxDiffPixelRatio: 0.01` — any styling drift larger than
-  1% of pixels fails the test.
+## Why this is not yet pixel-based visual regression
 
-## CI / workflow_dispatch
+The previous test attempted to render `CodexPage` at unrelated URLs by changing
+browser history after navigation. React Router unmounts `CodexPage` on those
+routes, so the test timed out before reaching its screenshot assertions.
 
-The GitHub Actions workflow (`.github/workflows/visual-regression.yml`) runs on every PR and `main` branch push. You can also trigger it manually from the **Actions** tab.
+The repository also has no committed Playwright screenshot baselines. Until
+trusted baselines can be generated and reviewed, this suite uses deterministic
+UI assertions instead of pretending to detect pixel-level visual changes.
+Once approved baseline screenshots are committed under
+`tests/visual/__screenshots__/`, screenshot comparisons can be restored.
 
-### Manual run with the `routes` input
+## CI
 
-When triggering via `workflow_dispatch`, you can limit which routes are tested by setting the **routes** input to a comma-separated list:
-
-| Scenario | `routes` value |
-|---|---|
-| Test only Home and Profile | `/,/profile` |
-| Test only The 46 and Pyramids | `/the-46,/pyramids` |
-| Run all routes (default) | leave blank |
-
-**Example:** Trigger a manual run for just `/` and `/echoverse`:
-
-1. Go to **Actions → Visual Regression → Run workflow**
-2. Enter `/,/echoverse` in the **routes** field
-3. Click **Run workflow**
-
-The workflow passes the input to `VISUAL_ROUTES`, and the Playwright spec filters `ALL_ROUTES` to only the matched paths. If the input is blank or omitted, the full matrix of all five routes across three viewports runs as normal.
-
-## Note
-
-This sandbox does not have the system libraries Chromium requires
-(`libglib`, `libnss`, etc.), so baselines must be generated in a normal
-Linux/macOS environment or in CI.
+The GitHub Actions workflow runs on pushes and pull requests to `main`, and can
+also be triggered manually from the Actions tab.
