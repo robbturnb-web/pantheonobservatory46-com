@@ -111,7 +111,7 @@ export function EchoPage() {
           <select
             value={voice.voiceName}
             onChange={(e) => voice.pickVoice(e.target.value)}
-            className="text-[11px] bg-secondary/50 border border-border rounded-full px-3 py-1.5 text-foreground focus:outline-none focus:border-primary/40 max-w-[180px]"
+            className="text-[11px] bg-black/60 border border-orange-500/30 rounded-full px-3 py-1.5 text-white focus:outline-none focus:border-orange-400 max-w-[180px]"
           >
             {voice.voices
               .filter((v) => v.lang.startsWith('en'))
@@ -212,7 +212,7 @@ export function EchoPage() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask Echo — or type /disclosure, /46, /gods…"
-              className="flex-1 bg-secondary/50 rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 border border-border"
+              className="flex-1 bg-black/70 text-white rounded-xl px-4 py-3 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 border border-orange-500/30"
               disabled={loading}
               autoFocus
             />
