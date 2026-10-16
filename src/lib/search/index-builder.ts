@@ -39,6 +39,36 @@ export interface SearchDoc {
   meta?: string;
 }
 
+interface SearchDatasetRecord {
+  id?: string | number;
+  title?: string;
+  subtitle?: string;
+  summary?: string;
+  officialExplanation?: string;
+  alternativeExplanation?: string;
+  date?: string;
+  grade?: string;
+  sources?: SearchSource[];
+  name?: string;
+  role?: string;
+  keyClaims?: string[];
+  slug?: string;
+  tagline?: string;
+  bio?: string;
+  specialties?: string[];
+  specialty?: string;
+  pantheon?: string;
+  domain?: string;
+  category?: string;
+  instrument?: string;
+  era?: string;
+  target?: { name?: string };
+  codename?: string;
+  classification?: string;
+  area?: string;
+  platform?: string;
+}
+
 let _instance: { mini: MiniSearch<SearchDoc>; docs: Map<string, SearchDoc> } | null = null;
 let _loading: Promise<typeof _instance> | null = null;
 
@@ -148,7 +178,8 @@ async function pushExtras(docs: SearchDoc[]) {
   // JWST findings
   try {
     const m = await import('@/data/jwst-findings');
-    const arr: any[] = (m as any).jwstFindings ?? (m as any).default ?? [];
+    const data = m as unknown as Record<string, unknown>;
+    const arr = (data.jwstFindings ?? data.default ?? []) as SearchDatasetRecord[];
     for (const f of arr) {
       if (!f?.id) continue;
       docs.push({
@@ -167,7 +198,8 @@ async function pushExtras(docs: SearchDoc[]) {
   // UAP cases
   try {
     const m = await import('@/data/uap-cases');
-    const arr: any[] = (m as any).uapCases ?? [];
+    const data = m as unknown as Record<string, unknown>;
+    const arr = (data.uapCases ?? []) as SearchDatasetRecord[];
     for (const c of arr) {
       if (!c?.id) continue;
       docs.push({
@@ -179,7 +211,7 @@ async function pushExtras(docs: SearchDoc[]) {
         route: `/uap#${c.id}`,
         type: 'case',
         evidence: c.grade,
-        sources: c.sources,
+        sources: c.sources as SearchSource[],
         meta: c.date,
       });
     }
@@ -188,12 +220,13 @@ async function pushExtras(docs: SearchDoc[]) {
   // Whistleblowers
   try {
     const m = await import('@/data/whistleblowers');
-    const arr: any[] = (m as any).whistleblowers ?? (m as any).WHISTLEBLOWERS ?? [];
+    const data = m as unknown as Record<string, unknown>;
+    const arr = (data.whistleblowers ?? data.WHISTLEBLOWERS ?? []) as SearchDatasetRecord[];
     for (const w of arr) {
       if (!w?.id) continue;
       docs.push({
         id: `wb:${w.id}`,
-        title: w.name,
+        title: w.name ?? 'Unknown whistleblower',
         summary: w.summary ?? w.role ?? '',
         body: `${w.name} ${w.role ?? ''} ${w.summary ?? ''} ${(w.keyClaims ?? []).join(' ')}`,
         realm: 'disclosure',
@@ -209,7 +242,8 @@ async function pushExtras(docs: SearchDoc[]) {
   // Experts
   try {
     const m = await import('@/data/experts');
-    const arr: any[] = (m as any).EXPERTS ?? (m as any).experts ?? [];
+    const data = m as unknown as Record<string, unknown>;
+    const arr = (data.EXPERTS ?? data.experts ?? []) as SearchDatasetRecord[];
     for (const e of arr) {
       const slug = e?.slug;
       if (!slug) continue;
@@ -229,7 +263,8 @@ async function pushExtras(docs: SearchDoc[]) {
   // Gods
   try {
     const m = await import('@/data/gods');
-    const arr: any[] = (m as any).gods ?? (m as any).GODS ?? [];
+    const data = m as unknown as Record<string, unknown>;
+    const arr = (data.gods ?? data.GODS ?? []) as SearchDatasetRecord[];
     for (const g of arr) {
       if (!g?.id) continue;
       docs.push({
@@ -248,7 +283,8 @@ async function pushExtras(docs: SearchDoc[]) {
   // The 46 vault slots
   try {
     const m = await import('@/data/the-46');
-    const arr: any[] = (m as any).publicSlots ?? (m as any).vaultSlots ?? [];
+    const data = m as unknown as Record<string, unknown>;
+    const arr = (data.publicSlots ?? data.vaultSlots ?? []) as SearchDatasetRecord[];
     for (const v of arr) {
       const id = String(v?.id ?? '');
       if (!id) continue;
