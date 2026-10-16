@@ -14,7 +14,7 @@ const raw = (key: string, fallback = ''): string => {
 /** Normalize build-time URL values before handing them to fetch or the Supabase SDK. */
 export function normalizeBaseUrl(value: string): string {
   const compact = value.trim().replace(/\s+/g, '');
-  return compact.replace(/^(https?:)\/+?/i, '$1//').replace(/\/+$/, '');
+  return compact.replace(/^(https?:)\/+/i, '$1//').replace(/\/+$/, '');
 }
 
 export const env = {
