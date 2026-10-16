@@ -50,8 +50,8 @@ export function ResetPasswordPage() {
       toast({ title: 'Password updated', description: 'You can now sign in with your new password.' });
       await supabase.auth.signOut();
       navigate('/auth?mode=signin', { replace: true });
-    } catch (err: any) {
-      toast({ title: 'Error', description: err.message, variant: 'destructive' });
+    } catch (err: unknown) {
+      toast({ title: 'Error', description: err instanceof Error ? err.message : 'Unknown error', variant: 'destructive' });
     } finally {
       setLoading(false);
     }
