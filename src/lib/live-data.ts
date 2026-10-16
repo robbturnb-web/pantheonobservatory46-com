@@ -76,7 +76,7 @@ export interface LiveResult<T> {
  * Raw gateway read for non-hook consumers (3D globe layers).
  * Always goes through the Pantheon Data Gateway — never the upstream directly.
  */
-export async function fetchGatewayJson<T = any>(
+export async function fetchGatewayJson<T = unknown>(
   source: string,
   params: Record<string, string> = {},
 ): Promise<T | null> {
@@ -136,8 +136,8 @@ export async function fetchEarthquakes(): Promise<LiveResult<QuakeSummary>> {
       fetchedAt,
       value: { count24h: features.length, highest, latest: features.slice(0, 8) },
     };
-  } catch (e: any) {
-    return { ok: false, source: USGS_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  } catch (e: unknown) {
+    return { ok: false, source: USGS_SOURCE, fetchedAt, value: null, error: (e instanceof Error ? e.message : 'fetch failed') };
   }
 }
 
@@ -183,7 +183,7 @@ function fetchSpaceWeather(): Promise<SpaceWeatherPayload> {
         headers: { apikey: PROXY_KEY, Authorization: `Bearer ${PROXY_KEY}` },
         signal: AbortSignal.timeout(20_000),
       });
-    } catch (e: any) {
+    } catch (e: unknown) {
       throw new Error(
         e?.name === 'TimeoutError'
           ? 'Data gateway timed out after 20s'
@@ -233,8 +233,8 @@ async function spaceWeatherFeed<T>(
   try {
     const payload = await fetchSpaceWeather();
     return envelopeToResult<T>(payload[key] as FeedEnvelope<T>, source, fetchedAt);
-  } catch (e: any) {
-    return { ok: false, source, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  } catch (e: unknown) {
+    return { ok: false, source, fetchedAt, value: null, error: (e instanceof Error ? e.message : 'fetch failed') };
   }
 }
 
@@ -306,8 +306,8 @@ export async function fetchMarine(
         observedAt: c.time ?? fetchedAt,
       },
     };
-  } catch (e: any) {
-    return { ok: false, source: MARINE_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  } catch (e: unknown) {
+    return { ok: false, source: MARINE_SOURCE, fetchedAt, value: null, error: (e instanceof Error ? e.message : 'fetch failed') };
   }
 }
 
@@ -397,8 +397,8 @@ export async function fetchCMEs(): Promise<LiveResult<CmeSummary>> {
       .filter((e) => Number.isFinite(e.speedKmS as number))
       .sort((a, b) => (b.speedKmS ?? 0) - (a.speedKmS ?? 0))[0] ?? null;
     return { ok: true, ...__m, source: CME_SOURCE, fetchedAt, value: { count7d: events.length, latest: events.slice(0, 6), fastest } };
-  } catch (e: any) {
-    return { ok: false, source: CME_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  } catch (e: unknown) {
+    return { ok: false, source: CME_SOURCE, fetchedAt, value: null, error: (e instanceof Error ? e.message : 'fetch failed') };
   }
 }
 
@@ -441,8 +441,8 @@ export async function fetchFlareEvents(): Promise<LiveResult<FlareEventSummary>>
     events.sort((a, b) => new Date(b.beginTime).getTime() - new Date(a.beginTime).getTime());
     const strongest = events.slice().sort((a, b) => flareClassRank(b.class) - flareClassRank(a.class))[0] ?? null;
     return { ok: true, ...__m, source: FLR_SOURCE, fetchedAt, value: { count7d: events.length, strongest, latest: events.slice(0, 6) } };
-  } catch (e: any) {
-    return { ok: false, source: FLR_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  } catch (e: unknown) {
+    return { ok: false, source: FLR_SOURCE, fetchedAt, value: null, error: (e instanceof Error ? e.message : 'fetch failed') };
   }
 }
 
@@ -478,8 +478,8 @@ export async function fetchGSTs(): Promise<LiveResult<GstSummary>> {
     events.sort((a, b) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime());
     const strongest = events.slice().sort((a, b) => (b.maxKp ?? 0) - (a.maxKp ?? 0))[0] ?? null;
     return { ok: true, ...__m, source: GST_SOURCE, fetchedAt, value: { count7d: events.length, latest: events.slice(0, 6), strongest } };
-  } catch (e: any) {
-    return { ok: false, source: GST_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  } catch (e: unknown) {
+    return { ok: false, source: GST_SOURCE, fetchedAt, value: null, error: (e instanceof Error ? e.message : 'fetch failed') };
   }
 }
 
@@ -532,8 +532,8 @@ export async function fetchISS(): Promise<LiveResult<IssReading>> {
         observedAt: new Date((Number(json.timestamp) || Date.now() / 1000) * 1000).toISOString(),
       },
     };
-  } catch (e: any) {
-    return { ok: false, source: ISS_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  } catch (e: unknown) {
+    return { ok: false, source: ISS_SOURCE, fetchedAt, value: null, error: (e instanceof Error ? e.message : 'fetch failed') };
   }
 }
 
@@ -699,8 +699,8 @@ export async function fetchNwsAlerts(): Promise<LiveResult<NwsSummary>> {
       fetchedAt,
       value: { total: alerts.length, byCategory, latest: alerts.slice(0, 10) },
     };
-  } catch (e: any) {
-    return { ok: false, source: NWS_SOURCE, fetchedAt, value: null, error: e?.message ?? 'fetch failed' };
+  } catch (e: unknown) {
+    return { ok: false, source: NWS_SOURCE, fetchedAt, value: null, error: (e instanceof Error ? e.message : 'fetch failed') };
   }
 }
 
