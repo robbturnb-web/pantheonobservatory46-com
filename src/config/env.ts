@@ -11,12 +11,18 @@ const raw = (key: string, fallback = ''): string => {
   return typeof v === 'string' && v.length > 0 ? v : fallback;
 };
 
+/** Normalize build-time URL values before handing them to fetch or the Supabase SDK. */
+export function normalizeBaseUrl(value: string): string {
+  const compact = value.trim().replace(/\\s+/g, '');
+  return compact.replace(/^(https?:)\\/+?/i, '$1//').replace(/\\/+$/, '');
+}
+
 export const env = {
   appEnv: raw('VITE_APP_ENV', import.meta.env.MODE),
   nasaApiKey: raw('VITE_NASA_API_KEY'),
   youtubeApiKey: raw('VITE_YOUTUBE_API_KEY'),
   noaaBaseUrl: raw('VITE_NOAA_BASE_URL', 'https://services.swpc.noaa.gov'),
-  supabaseUrl: raw('VITE_SUPABASE_URL'),
+  supabaseUrl: normalizeBaseUrl(raw('VITE_SUPABASE_URL')),
   supabasePublishableKey: raw('VITE_SUPABASE_PUBLISHABLE_KEY'),
 } as const;
 
