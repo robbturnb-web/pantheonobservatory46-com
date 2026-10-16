@@ -504,7 +504,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'AARO Annual Reports.',
     ],
     skepticalView:
-      "AARO's own conclusion is that all examined UAP cases trace to mundane explanations or remain unresolved due to data quality. Disclosure-side view: AARO lacks SAP read-in and is structurally incapable of finding what it\'s tasked to find.",
+      "AARO's own conclusion is that all examined UAP cases trace to mundane explanations or remain unresolved due to data quality. Disclosure-side view: AARO lacks SAP read-in and is structurally incapable of finding what it's tasked to find.",
     videos: [
       { id: 'KQ7Dw-739hY', title: 'House Oversight UAP Hearing — November 2024', channel: 'Forbes Breaking News' },
     ],
