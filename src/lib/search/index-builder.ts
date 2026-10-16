@@ -162,7 +162,7 @@ async function pushExtras(docs: SearchDoc[]) {
         meta: [f.category, f.instrument, f.era].filter(Boolean).join(' · '),
       });
     }
-  } catch {}
+  } catch { /* Optional content datasets should not block the core search index. */ }
 
   // UAP cases
   try {
@@ -183,7 +183,7 @@ async function pushExtras(docs: SearchDoc[]) {
         meta: c.date,
       });
     }
-  } catch {}
+  } catch { /* Optional content datasets should not block the core search index. */ }
 
   // Whistleblowers
   try {
@@ -204,7 +204,7 @@ async function pushExtras(docs: SearchDoc[]) {
         meta: w.role,
       });
     }
-  } catch {}
+  } catch { /* Optional content datasets should not block the core search index. */ }
 
   // Experts
   try {
@@ -224,7 +224,7 @@ async function pushExtras(docs: SearchDoc[]) {
         meta: e.role ?? e.specialty,
       });
     }
-  } catch {}
+  } catch { /* Optional content datasets should not block the core search index. */ }
 
   // Gods
   try {
@@ -243,7 +243,7 @@ async function pushExtras(docs: SearchDoc[]) {
         meta: g.pantheon,
       });
     }
-  } catch {}
+  } catch { /* Optional content datasets should not block the core search index. */ }
 
   // The 46 vault slots
   try {
@@ -263,7 +263,7 @@ async function pushExtras(docs: SearchDoc[]) {
         meta: [v.date, v.classification].filter(Boolean).join(' · '),
       });
     }
-  } catch {}
+  } catch { /* Optional content datasets should not block the core search index. */ }
 }
 
 export async function getSearchIndex() {
