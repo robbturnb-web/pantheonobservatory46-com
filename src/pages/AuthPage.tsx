@@ -52,8 +52,8 @@ export function AuthPage() {
       if (result.error) {
         toast({ title: `${provider === 'google' ? 'Google' : 'Apple'} sign-in failed`, description: String(result.error), variant: 'destructive' });
       }
-    } catch (e: any) {
-      toast({ title: `${provider === 'google' ? 'Google' : 'Apple'} sign-in failed`, description: e?.message ?? 'Unknown error', variant: 'destructive' });
+    } catch (e: unknown) {
+      toast({ title: `${provider === 'google' ? 'Google' : 'Apple'} sign-in failed`, description: e instanceof Error ? e.message : 'Unknown error', variant: 'destructive' });
     } finally {
       setOauthLoading(false);
     }
@@ -107,8 +107,8 @@ export function AuthPage() {
         });
         setMode('signin');
       }
-    } catch (err: any) {
-      toast({ title: 'Error', description: err.message, variant: 'destructive' });
+    } catch (err: unknown) {
+      toast({ title: 'Error', description: err instanceof Error ? err.message : 'Unknown error', variant: 'destructive' });
     } finally {
       setLoading(false);
     }
