@@ -1,3 +1,4 @@
+import { env } from '@/config/env';
 /**
  * live-data.ts — Real-time public-API fetchers for the Pantheon dashboard.
  *
@@ -13,8 +14,8 @@
  * labelled "Source unavailable" state when an upstream fails.
  */
 
-const PROXY_BASE = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/live-data-proxy`;
-const PROXY_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
+const PROXY_BASE = `${env.supabaseUrl}/functions/v1/live-data-proxy`;
+const PROXY_KEY = env.supabasePublishableKey;
 
 /**
  * Fetch a whitelisted upstream source via the Pantheon edge proxy.
