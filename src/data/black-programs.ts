@@ -54,10 +54,10 @@ export const blackProgramEntries: DossierEntry[] = [
       'Adjacent corroboration from David Grusch (2023 hearings) and Tim Gallaudet (NOAA).',
     ],
     skepticalView:
-      'The Pentagon\'s AARO has publicly stated no verified evidence of a non-human craft retrieval program exists. Skeptics including Mick West and Steven Greenstreet argue the imagery shown lacks chain-of-custody, the "psionic summoning" claim is unfalsifiable, and the program name conveniently surfaces only via paid interview circuits. Until physical material or a corroborating SAP code-name appears in IG / Senate Intelligence records, the claim remains REPORTED, not verified.',
+      'The Pentagon's AARO has publicly stated no verified evidence of a non-human craft retrieval program exists. Skeptics including Mick West and Steven Greenstreet argue the imagery shown lacks chain-of-custody, the "psionic summoning" claim is unfalsifiable, and the program name conveniently surfaces only via paid interview circuits. Until physical material or a corroborating SAP code-name appears in IG / Senate Intelligence records, the claim remains REPORTED, not verified.',
     videos: [
       { id: 'qHnvuGph7Hg', title: 'Jake Barber — Shawn Ryan Show (Full Interview)', channel: 'Shawn Ryan Show' },
-      { id: '5_bI3HfkbCY', title: 'Ross Coulthart on the Rubik\'s Cube Disclosure', channel: 'NewsNation' },
+      { id: '5_bI3HfkbCY', title: 'Ross Coulthart on the Rubik's Cube Disclosure', channel: 'NewsNation' },
     ],
     sources: [
       { label: 'NewsNation — Reality Check', url: 'https://www.newsnationnow.com/space/ufo/' },
@@ -81,17 +81,17 @@ export const blackProgramEntries: DossierEntry[] = [
       "On 7 November 2024, journalist Michael Shellenberger published the Immaculate Constellation report on his Public substack — a 12-page document by Matthew Brown describing what Brown calls an \"unacknowledged SAP\" tasked with consolidating UAP data outside any chartered oversight body. The report names no specific facilities, contractors or operators but lists categories of recovered material and describes the program as the de-facto inheritor of decades of legacy retrieval activity.\n\nThe document was submitted to the House Oversight Committee, the Senate Intelligence Committee, and ICIG. AARO Director Jon Kosloski testified in late 2024 that AARO has \"not found evidence\" of such a program, while Brown maintains the report is sourced from people still inside the compartment.",
     keyEvents: [
       'Nov 7 2024: Public.news publishes the report.',
-      'Nov 13 2024: House Oversight UAP hearing — Brown\'s report cited live.',
+      'Nov 13 2024: House Oversight UAP hearing — Brown's report cited live.',
       'Late 2024: Kosloski (AARO) testifies no evidence found.',
       '2025: Continued congressional referrals; report remains uncorroborated by AARO.',
     ],
     evidence: [
       'Immaculate Constellation report (Brown, 2024) — 12 pages, on Public.news.',
       'House Oversight UAP hearing transcript (Nov 2024).',
-      'Brown\'s sworn submissions to Senate Intel and ICIG.',
+      'Brown's sworn submissions to Senate Intel and ICIG.',
     ],
     skepticalView:
-      "AARO\'s public position is that no verifiable evidence of Immaculate Constellation has surfaced in classified or unclassified review. Critics note Brown's report contains no code-words, contractor names, or program element numbers that could be independently cross-checked.",
+      "AARO's public position is that no verifiable evidence of Immaculate Constellation has surfaced in classified or unclassified review. Critics note Brown's report contains no code-words, contractor names, or program element numbers that could be independently cross-checked.",
     videos: [
       { id: 'KQ7Dw-739hY', title: 'House Oversight UAP Hearing — November 2024', channel: 'Forbes Breaking News' },
     ],
@@ -126,7 +126,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'Senate Intelligence Committee referenced briefings.',
     ],
     skepticalView:
-      'AARO\'s official position: Kona Blue was a proposal that was never approved, never funded, and never executed. No SAP record exists.',
+      'AARO's official position: Kona Blue was a proposal that was never approved, never funded, and never executed. No SAP record exists.',
     videos: [
       { id: '7P8aK0O1-P8', title: 'Full UAP Hearing — Grusch, Fravor, Graves (07/26/2023)', channel: 'UAP Coalition' },
     ],
@@ -161,7 +161,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'Elizondo memoir Imminent (2024).',
     ],
     skepticalView:
-      "AARO\'s historical report frames AAWSAP as a counterintelligence-adjacent effort that produced no verified UAP material. AARO has also publicly stated AATIP, as Elizondo described it, was not a chartered DoD program.",
+      "AARO's historical report frames AAWSAP as a counterintelligence-adjacent effort that produced no verified UAP material. AARO has also publicly stated AATIP, as Elizondo described it, was not a chartered DoD program.",
     videos: [
       { id: '7P8aK0O1-P8', title: 'Full UAP Hearing — Grusch, Fravor, Graves (07/26/2023)', channel: 'UAP Coalition' },
     ],
@@ -174,7 +174,7 @@ export const blackProgramEntries: DossierEntry[] = [
     id: 'legacy-program',
     heroImage: legacyImg,
     title: 'The Legacy Program',
-    subtitle: "Grusch\'s term for the multi-decade retrieval & reverse-engineering enterprise",
+    subtitle: "Grusch's term for the multi-decade retrieval & reverse-engineering enterprise",
     category: 'Umbrella',
     era: '~1947 → present (alleged)',
     location: 'Multi-agency · contractor-hosted',
@@ -196,7 +196,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'Kean / Blumenthal Debrief article (June 2023).',
     ],
     skepticalView:
-      'AARO and DoD have publicly stated no verifiable evidence has been provided supporting Grusch\'s specific retrieval claims. Skeptics argue Grusch testifies to second-hand information.',
+      'AARO and DoD have publicly stated no verifiable evidence has been provided supporting Grusch's specific retrieval claims. Skeptics argue Grusch testifies to second-hand information.',
     videos: [
       { id: '7P8aK0O1-P8', title: 'David Grusch — House Oversight Hearing (Full)', channel: 'UAP Coalition' },
     ],
@@ -261,7 +261,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'Condon Committee final report (1968).',
     ],
     skepticalView:
-      "Skeptics consider Blue Book\'s closure appropriate — the Condon Committee concluded UFO study had no scientific value. Believers consider Blue Book a deliberate front for the real classified work.",
+      "Skeptics consider Blue Book's closure appropriate — the Condon Committee concluded UFO study had no scientific value. Believers consider Blue Book a deliberate front for the real classified work.",
     sources: [
       { label: 'National Archives — Project Blue Book', url: 'https://www.archives.gov/research/military/air-force/ufos' },
     ],
@@ -323,7 +323,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'Monroe Institute Gateway Experience analysis (1983).',
     ],
     skepticalView:
-      "Mainstream science considers remote viewing unverified. The AIR review concluded that even the program\'s best results lacked actionable utility.",
+      "Mainstream science considers remote viewing unverified. The AIR review concluded that even the program's best results lacked actionable utility.",
     sources: [
       { label: 'CIA STAR GATE collection', url: 'https://www.cia.gov/readingroom/collection/stargate' },
       { label: 'CIA Gateway Experience analysis (1983)', url: 'https://www.cia.gov/readingroom/document/cia-rdp96-00788r001700210016-5' },
@@ -400,7 +400,7 @@ export const blackProgramEntries: DossierEntry[] = [
     confidence: 'ALLEGED',
     symbol: '🛰️',
     summary:
-      'An alleged covert space fleet of triangular and rectangular craft, named in Gary McKinnon\'s 2002 NASA / DoD intrusion, said to be operated jointly by the U.S. Navy and NRO. Has no acknowledged document trail.',
+      'An alleged covert space fleet of triangular and rectangular craft, named in Gary McKinnon's 2002 NASA / DoD intrusion, said to be operated jointly by the U.S. Navy and NRO. Has no acknowledged document trail.',
     origin:
       "Gary McKinnon — facing extradition to the U.S. for the largest military computer hack ever conducted — claimed during his defense that he found a list of \"non-terrestrial officers,\" ship-to-ship transfer logs, and a fleet named Solar Warden in U.S. Space Command systems. McKinnon's claims are testimony, not documentation; the U.S. government has neither confirmed nor produced the underlying records.\n\nThe name was later picked up by Richard Dolan, Michael Salla, and the broader Secret Space Program literature. No primary documentation has surfaced. Among the most popularly cited and least evidenced of all alleged programs.",
     keyEvents: [
@@ -443,7 +443,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'USAF internal directives following AARO finding (referenced, not yet released).',
     ],
     skepticalView:
-      "AARO\'s position is that Yankee Blue explains a large share of whistleblower narratives as misattributed memories from unsanctioned hazing. Disclosure-side critics call this a structural cover-up tool.",
+      "AARO's position is that Yankee Blue explains a large share of whistleblower narratives as misattributed memories from unsanctioned hazing. Disclosure-side critics call this a structural cover-up tool.",
     sources: [
       { label: 'AARO Historical Record Volume I (2024)', url: 'https://media.defense.gov/2024/Mar/08/2003409233/-1/-1/0/DOPSR-CLEARED-508-COMPLIANT-HRRV1-08-MAR-2024-FINAL.PDF' },
     ],
@@ -459,7 +459,7 @@ export const blackProgramEntries: DossierEntry[] = [
     confidence: 'REPORTED',
     symbol: '♓︎',
     summary:
-      'The Schumer-Rounds UAP Disclosure Act (UAPDA, 2023) implicitly references multiple compartmented programs holding UAP-related material — collectively referred to in disclosure-side reporting as the Zodiac compartments. The legislation\'s controlled-disclosure section was largely stripped from the FY24 NDAA.',
+      'The Schumer-Rounds UAP Disclosure Act (UAPDA, 2023) implicitly references multiple compartmented programs holding UAP-related material — collectively referred to in disclosure-side reporting as the Zodiac compartments. The legislation's controlled-disclosure section was largely stripped from the FY24 NDAA.',
     origin:
       "Sen. Chuck Schumer and Sen. Mike Rounds — building on Grusch testimony and Senate Intelligence Committee briefings — introduced the UAPDA in summer 2023 with a Review Board, eminent-domain authority over recovered material, and a 25-year declassification clock. Disclosure-side reporting (Marik von Rennenkampff, Christopher Sharp) refers to the implied constellation of programs as \"Zodiac\" code-words. The eminent-domain provisions were stripped in conference; a reduced version of the records-collection mandate became law.\n\nNo NRO program code-named Zodiac has been formally confirmed. The name functions as a community-side placeholder for the implied SAP constellation referenced in legislative briefings.",
     keyEvents: [
@@ -504,7 +504,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'AARO Annual Reports.',
     ],
     skepticalView:
-      "AARO\'s own conclusion is that all examined UAP cases trace to mundane explanations or remain unresolved due to data quality. Disclosure-side view: AARO lacks SAP read-in and is structurally incapable of finding what it\'s tasked to find.",
+      "AARO's own conclusion is that all examined UAP cases trace to mundane explanations or remain unresolved due to data quality. Disclosure-side view: AARO lacks SAP read-in and is structurally incapable of finding what it's tasked to find.",
     videos: [
       { id: 'KQ7Dw-739hY', title: 'House Oversight UAP Hearing — November 2024', channel: 'Forbes Breaking News' },
     ],
