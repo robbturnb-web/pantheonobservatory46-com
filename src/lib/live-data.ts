@@ -119,8 +119,8 @@ export async function fetchEarthquakes(): Promise<LiveResult<QuakeSummary>> {
     const __m = r.proxyMeta;
     const json = await r.json();
     const features: QuakeFeature[] = (json.features ?? [])
-      .filter((f: any) => typeof f?.properties?.mag === 'number')
-      .map((f: any) => ({
+      .filter((f: { properties?: { mag?: unknown } }) => typeof f?.properties?.mag === 'number')
+      .map((f: { id: string; properties: { mag: number; place?: string; time: number; url: string }; geometry: { coordinates: number[] } }) => ({
         id: f.id,
         mag: f.properties.mag,
         place: f.properties.place ?? 'Unknown region',
@@ -381,7 +381,7 @@ export async function fetchCMEs(): Promise<LiveResult<CmeSummary>> {
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const __m = r.proxyMeta;
     const arr = await r.json();
-    const events: CmeEvent[] = (arr ?? []).map((e: any) => {
+    const events: CmeEvent[] = (arr ?? []).map((e: { cmeAnalyses?: Array<{ speed?: number; type?: string }>; activityID: string; startTime: string; note?: string; link?: string }) => {
       const analysis = Array.isArray(e.cmeAnalyses) && e.cmeAnalyses.length ? e.cmeAnalyses[0] : null;
       return {
         id: e.activityID,
@@ -429,7 +429,7 @@ export async function fetchFlareEvents(): Promise<LiveResult<FlareEventSummary>>
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const __m = r.proxyMeta;
     const arr = await r.json();
-    const events: FlareEvent[] = (arr ?? []).map((e: any) => ({
+    const events: FlareEvent[] = (arr ?? []).map((e: { flrID: string; classType?: string; beginTime: string; peakTime?: string | null; sourceLocation?: string | null; activeRegionNum?: number; link?: string }) => ({
       id: e.flrID,
       class: e.classType ?? '—',
       beginTime: e.beginTime,
@@ -464,9 +464,9 @@ export async function fetchGSTs(): Promise<LiveResult<GstSummary>> {
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const __m = r.proxyMeta;
     const arr = await r.json();
-    const events: GstEvent[] = (arr ?? []).map((e: any) => {
+    const events: GstEvent[] = (arr ?? []).map((e: { allKpIndex?: Array<{ kpIndex?: number | string }>; gstID: string; startTime: string; link?: string }) => {
       const maxKp = Array.isArray(e.allKpIndex) && e.allKpIndex.length
-        ? Math.max(...e.allKpIndex.map((k: any) => Number(k.kpIndex) || 0))
+        ? Math.max(...e.allKpIndex.map((k) => Number(k.kpIndex) || 0))
         : null;
       return {
         id: e.gstID,
@@ -673,7 +673,7 @@ export async function fetchNwsAlerts(): Promise<LiveResult<NwsSummary>> {
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const __m = r.proxyMeta;
     const json = await r.json();
-    const features = (json?.features ?? []) as any[];
+    const features = (json?.features ?? []) as Array<{ id?: string; properties?: Record<string, unknown> }>;
     const alerts: NwsAlert[] = features
       .map((f) => {
         const p = f?.properties ?? {};
