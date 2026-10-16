@@ -27,13 +27,13 @@ async function fetchWebb(): Promise<WebbItem[]> {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`NASA API ${res.status}`);
   const json = await res.json();
-  const items = (json?.collection?.items ?? []) as any[];
+  const items = (json?.collection?.items ?? []) as Array<{ data?: Array<{ nasa_id: string; title?: string; description?: string; date_created?: string; secondary_creator?: string; center?: string }>; links?: Array<{ render?: string; href?: string }> }>;
 
   const mapped: WebbItem[] = [];
   for (const item of items) {
     const data = item?.data?.[0];
     const links = item?.links ?? [];
-    const thumb = links.find((l: any) => l.render === 'image')?.href;
+    const thumb = links.find((l) => l.render === 'image')?.href;
     if (!data || !thumb) continue;
     mapped.push({
       id: data.nasa_id,
