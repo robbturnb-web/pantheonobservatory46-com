@@ -39,7 +39,7 @@ export function useSiteSearch(query: string, filters: SearchFilters = {}, limit 
     getSearchIndex().then(({ mini, docs }) => {
       if (cancelled || token !== tokenRef.current) return;
       const raw = mini.search(q);
-      let mapped: SearchHit[] = [];
+      const mapped: SearchHit[] = [];
       for (const r of raw) {
         const doc = docs.get(String(r.id));
         if (!doc) continue;
@@ -69,7 +69,7 @@ export function useRecentSearches() {
     if (!trimmed) return;
     setItems((prev) => {
       const next = [trimmed, ...prev.filter((x) => x !== trimmed)].slice(0, 8);
-      try { localStorage.setItem(RECENT_KEY, JSON.stringify(next)); } catch {}
+      try { localStorage.setItem(RECENT_KEY, JSON.stringify(next)); } catch { /* Storage may be disabled; recent searches are optional. */ }
       return next;
     });
   };
