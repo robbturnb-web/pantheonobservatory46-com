@@ -1,6 +1,7 @@
 import { supabase } from '@/integrations/supabase/client';
+import { env } from '@/config/env';
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/echo-chat`;
+const CHAT_URL = `${env.supabaseUrl}/functions/v1/echo-chat`;
 
 export type Msg = { role: 'user' | 'assistant'; content: string };
 
@@ -27,7 +28,7 @@ export async function streamChat({
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${session.access_token}`,
-      apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+      apikey: env.supabasePublishableKey,
     },
     body: JSON.stringify({ messages }),
   });
