@@ -26,13 +26,14 @@ const EMAIL_SUBJECTS: Record<string, string> = {
 }
 
 // Template mapping
-const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
-  signup: SignupEmail,
-  invite: InviteEmail,
-  magiclink: MagicLinkEmail,
-  recovery: RecoveryEmail,
-  email_change: EmailChangeEmail,
-  reauthentication: ReauthenticationEmail,
+type EmailTemplateComponent = React.ComponentType<never>;
+const EMAIL_TEMPLATES: Record<string, EmailTemplateComponent> = {
+  signup: SignupEmail as EmailTemplateComponent,
+  invite: InviteEmail as EmailTemplateComponent,
+  magiclink: MagicLinkEmail as EmailTemplateComponent,
+  recovery: RecoveryEmail as EmailTemplateComponent,
+  email_change: EmailChangeEmail as EmailTemplateComponent,
+  reauthentication: ReauthenticationEmail as EmailTemplateComponent,
 }
 
 // Configuration
@@ -121,7 +122,7 @@ async function handlePreview(req: Request): Promise<Response> {
   }
 
   const sampleData = SAMPLE_DATA[type] || {}
-  const html = await renderAsync(React.createElement(EmailTemplate, sampleData))
+  const html = await renderAsync(React.createElement(EmailTemplate as unknown as React.ComponentType<object>, sampleData))
 
   return new Response(html, {
     status: 200,
@@ -229,7 +230,7 @@ async function handleWebhook(req: Request): Promise<Response> {
   }
 
   // Render React Email to HTML and plain text
-  const html = await renderAsync(React.createElement(EmailTemplate, templateProps))
+  const html = await renderAsync(React.createElement(EmailTemplate as unknown as React.ComponentType<object>, templateProps))
   const text = await renderAsync(React.createElement(EmailTemplate, templateProps), {
     plainText: true,
   })
