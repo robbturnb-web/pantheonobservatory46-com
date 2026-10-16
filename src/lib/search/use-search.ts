@@ -75,7 +75,7 @@ export function useRecentSearches() {
   };
   const clear = () => {
     setItems([]);
-    try { localStorage.removeItem(RECENT_KEY); } catch {}
+    try { localStorage.removeItem(RECENT_KEY); } catch { /* Browsing history is optional when storage is unavailable. */ }
   };
   return { items, push, clear };
 }
