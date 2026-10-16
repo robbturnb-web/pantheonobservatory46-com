@@ -235,7 +235,7 @@ function normalizeAlerts(load: LoadResult) {
   if (!Array.isArray(arr)) return envelope(load, null, 'no alert feed');
   const cutoff = Date.now() - 24 * 3600_000;
   const items = arr
-    .filter((a: any) => {
+    .filter((a) => {
       const t = Date.parse(String(a?.issue_datetime ?? '').replace(' ', 'T') + 'Z');
       return Number.isFinite(t) && t >= cutoff;
     })
