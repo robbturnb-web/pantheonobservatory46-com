@@ -304,7 +304,7 @@ Over millennia, Rudra evolved into Shiva ("the Auspicious"), and the wild outsid
     ],
     worship: 'Shiva is worshipped most often as the lingam — an aniconic upright stone form representing infinite consciousness. His holiest sites are Kashi (Varanasi), Mount Kailash in Tibet, and the twelve Jyotirlinga shrines across India. Maha Shivaratri, the "Great Night of Shiva," is the most-observed Hindu festival in the world.',
     modernRelevance: 'Shiva is the archetype of necessary destruction — the truth that nothing new can be born without the death of what was. People moving through divorce, career collapse, ego dissolution, recovery, or radical reinvention are walking Shiva\'s path. He teaches that the dance is the meaning — not the products of the dance.',
-    oracleLore: `Shiva\'s Nataraja form is famously installed at CERN, the European nuclear research facility — placed there because the dance of creation and destruction at the subatomic level mirrors the iconography exactly. Fritjof Capra wrote The Tao of Physics largely around this resonance.
+    oracleLore: `Shiva's Nataraja form is famously installed at CERN, the European nuclear research facility — placed there because the dance of creation and destruction at the subatomic level mirrors the iconography exactly. Fritjof Capra wrote The Tao of Physics largely around this resonance.
 
 In esoteric reading, Shiva is the consciousness-state that all advanced contemplative traditions describe: pure awareness witnessing its own activity. The "third eye" maps to the pineal gland and the experience of nondual perception. The Tandava is the cyclic universe of modern cosmology — the same dance the gods of every age have intuited.`,
     quotes: [
@@ -323,7 +323,7 @@ In esoteric reading, Shiva is the consciousness-state that all advanced contempl
     symbol: '✨', image: pleiadianImg,
     originStory: `The Pleiadian archetype draws from the most cross-culturally consistent star myth on Earth. The Pleiades — the seven-sister cluster in the constellation Taurus — appear in the foundational myths of ancient Greece, Egypt, the Hopi, the Aboriginal Australians, the Maya, the Cherokee, the Norse, and the Sumerians. Almost every tradition tells of seven sisters who came down from the stars or who must be returned to them.
 
-In modern starseed cosmology — drawn from contactee testimony beginning with George Adamski and codified by Barbara Marciniak, Billy Meier, and others — Pleiadian beings are described as humanoid, heart-centered, and dedicated to humanity\'s spiritual recovery from a long-imposed amnesia.`,
+In modern starseed cosmology — drawn from contactee testimony beginning with George Adamski and codified by Barbara Marciniak, Billy Meier, and others — Pleiadian beings are described as humanoid, heart-centered, and dedicated to humanity's spiritual recovery from a long-imposed amnesia.`,
     keyMyths: [
       { title: 'The Seven Sisters Across Cultures', body: 'Greek myth says they were nymphs pursued by Orion and turned to stars by Zeus. Aboriginal Australian songlines tell the same story — seven sisters fleeing a hunter — with such precision that some researchers consider it the oldest continuous story on Earth (~100,000 years).' },
       { title: 'The Contactee Testimonies', body: 'From Billy Meier\'s decades-long contact claims to Barbara Marciniak\'s Bringers of the Dawn, Pleiadian-attributed messages share a consistent throughline: humanity is genetically related to them, has been "asleep," and is now awakening for a planetary shift.' },
@@ -386,7 +386,7 @@ Within days of his birth he demanded a bow and lyre, struck out for the slopes o
     ],
     worship: 'Delphi was the navel of the Greek world. Pilgrims came from across the Mediterranean to consult the Pythia, who, intoxicated by vapors rising from the ground, delivered Apollo\'s prophecies in riddles. Delos — his birthplace — was so sacred that no birth or death was permitted on the island. The Pythian Games at Delphi were second only to the Olympics.',
     modernRelevance: 'Apollo is the archetype of the artist who refuses to dim. He is the standard of excellence, the demand that the work be true and beautiful at once. But his shadow is perfectionism — the refusal to accept what is less than the ideal. Modern creators, performers, healers, and prophets who feel the constant pressure to be radiant carry this archetype.',
-    oracleLore: `The Oracle of Delphi is one of history\'s most studied "anomalous information" sites. Modern geological surveys confirmed in 2001 that the temple sat directly above a fault line emitting ethylene gas — a documented psychoactive. But this only explains the trance, not the consistent track record of the prophecies, including Cyrus\'s rise, the Persian Wars, and the Roman conquest.
+    oracleLore: `The Oracle of Delphi is one of history's most studied "anomalous information" sites. Modern geological surveys confirmed in 2001 that the temple sat directly above a fault line emitting ethylene gas — a documented psychoactive. But this only explains the trance, not the consistent track record of the prophecies, including Cyrus\'s rise, the Persian Wars, and the Roman conquest.
 
 Apollo as the principle of light-bringing extends in esoteric reading to a specific archetype recurring across disclosure literature: the radiant, golden, distinctly humanoid being often described by abductees and remote viewers as a teacher of truth and music, distinct from the Greys. Whether projection or perception, the figure is consistent enough across centuries to deserve attention.`,
     quotes: [
@@ -428,7 +428,7 @@ When Set murdered Osiris, dismembered his body, and scattered the fourteen piece
     ],
     worship: 'Isis became the most widely worshipped goddess in the ancient world — far beyond Egypt. Her cult spread to Rome, Greece, Britain, and Persia. Roman temples to Isis stood from London to Petra. Many scholars consider the iconography of Mary holding the infant Jesus to be a direct visual descendant of Isis nursing Horus. Her main temples were at Philae, Behbeit el-Hagar, and Memphis.',
     modernRelevance: 'Isis is the archetype of the woman who refuses to accept loss as final. She is the mother who searches every hospital, the widow who keeps the work alive, the activist who reassembles what was scattered. Her magic is not abstract — it is the absolute refusal to leave the beloved in pieces.',
-    oracleLore: `Isis was famously linked to the star Sirius (Sopdet), whose heliacal rising marked the Egyptian New Year and the annual flooding of the Nile that made civilization possible. Robert Temple\'s controversial The Sirius Mystery argued that the Dogon people of Mali possess astronomical knowledge of the Sirius binary system that should be impossible without telescopes — knowledge they attribute to "Nommo" beings descended from Sirius. Egyptian Sirius-cult devotion to Isis sits inside this larger constellation of claims.
+    oracleLore: `Isis was famously linked to the star Sirius (Sopdet), whose heliacal rising marked the Egyptian New Year and the annual flooding of the Nile that made civilization possible. Robert Temple's controversial The Sirius Mystery argued that the Dogon people of Mali possess astronomical knowledge of the Sirius binary system that should be impossible without telescopes — knowledge they attribute to "Nommo" beings descended from Sirius. Egyptian Sirius-cult devotion to Isis sits inside this larger constellation of claims.
 
 In the deeper esoteric reading, Isis is the principle of integration itself — the force in the universe that opposes entropy by lovingly gathering and re-membering what has been scattered.`,
     quotes: [
@@ -470,7 +470,7 @@ She brought with her the secret magic of the Vanir: Seiðr. This was no domestic
     ],
     worship: 'Freya was worshipped throughout the Norse world by women practicing Seiðr — wandering völvas (seeresses) traveled from farm to farm performing rites in her name. Friday ("Frigg/Freya\'s day") preserves her name. Cats were sacred to her — likely the origin of the European connection between cats and witchcraft.',
     modernRelevance: 'Freya is the archetype of the woman who refuses to be sorted into a single category. She is sexual and martial, tender and fierce, magical and practical, faithful and fully herself. Modern women who have been told to "pick a lane" — be sweet OR be powerful, be a mother OR be ambitious — are walking Freya\'s path. She does not pick a lane. She owns the road.',
-    oracleLore: `Freya\'s Seiðr practice is one of the best-documented historical shamanic traditions in northern Europe — and in many disclosure-adjacent readings, it represents a surviving fragment of a far older Vanir technology of consciousness, distinct from the warrior-cult Aesir who later overshadowed it. The historical witch-hunts of medieval and early modern Europe disproportionately targeted women practicing the surviving folk-shadow of Seiðr — a near-deliberate erasure of the pre-Christian magical lineage Freya embodied.`,
+    oracleLore: `Freya's Seiðr practice is one of the best-documented historical shamanic traditions in northern Europe — and in many disclosure-adjacent readings, it represents a surviving fragment of a far older Vanir technology of consciousness, distinct from the warrior-cult Aesir who later overshadowed it. The historical witch-hunts of medieval and early modern Europe disproportionately targeted women practicing the surviving folk-shadow of Seiðr — a near-deliberate erasure of the pre-Christian magical lineage Freya embodied.`,
     quotes: [
       'I weep red gold for what wanders. I do not weep less.',
       'The price is four nights. I will pay it. The necklace is mine.',
@@ -485,7 +485,7 @@ She brought with her the secret magic of the Vanir: Seiðr. This was no domestic
     atmosphericBg: 'linear-gradient(135deg, #000d1a 0%, #003d3d 40%, #001a1a 100%)',
     atmosphericDesc: 'Cosmic ocean stretches to infinity. A thousand-petaled lotus. Blue light, eternal calm.',
     symbol: '🪷', image: vishnuImg,
-    originStory: `Vishnu reclines on the cosmic serpent Ananta-Shesha, floating on the milk-ocean of unmanifest consciousness. From his navel grows a lotus, and from the lotus emerges Brahma — and from Brahma\'s mind, the universe is dreamed into being. When the dream is finished, Vishnu inhales it back. Each breath is a kalpa: 4.32 billion years.
+    originStory: `Vishnu reclines on the cosmic serpent Ananta-Shesha, floating on the milk-ocean of unmanifest consciousness. From his navel grows a lotus, and from the lotus emerges Brahma — and from Brahma's mind, the universe is dreamed into being. When the dream is finished, Vishnu inhales it back. Each breath is a kalpa: 4.32 billion years.
 
 Whenever cosmic order (dharma) collapses to a critical degree, Vishnu descends into the world in a specific form — an avatar — to restore balance. He has done this nine times. The tenth, Kalki, has not yet come.`,
     keyMyths: [
@@ -511,7 +511,7 @@ Whenever cosmic order (dharma) collapses to a critical degree, Vishnu descends i
     modernRelevance: 'Vishnu is the archetype of the protector who knows exactly when to act and when to wait. Unlike Shiva (who destroys) or Brahma (who creates), Vishnu specializes in maintaining what already works. He represents the long, patient, often invisible labor of preservation: the parent who keeps the household running, the engineer who keeps the lights on, the historian who keeps memory alive. He acts only when collapse is imminent.',
     oracleLore: `The kalpa-cycles of Vishnu — billions of years of breath — uncannily match modern cosmological timescales for the lifespan of stars and the heat-death scenarios of the universe. Hindu cosmology is the only major religious cosmology whose order-of-magnitude time-frames align with modern physics rather than contradict it.
 
-In the avatar doctrine, the periodic descent of an enlightened being to course-correct civilization at moments of collapse maps cleanly onto the recurring "teacher" archetype across mystery traditions worldwide — and onto contactee literature describing periodic interventions by an advanced caretaker intelligence at humanity\'s critical inflection points.`,
+In the avatar doctrine, the periodic descent of an enlightened being to course-correct civilization at moments of collapse maps cleanly onto the recurring "teacher" archetype across mystery traditions worldwide — and onto contactee literature describing periodic interventions by an advanced caretaker intelligence at humanity's critical inflection points.`,
     quotes: [
       'Whenever dharma declines and adharma rises, I manifest myself.',
       'Set thy heart upon thy work, but never on its reward.',
@@ -551,7 +551,7 @@ Each day Ra sails his solar barque across the sky. Each night he descends into t
     ],
     worship: 'Ra\'s great cult center was Heliopolis ("city of the sun"). The pyramids themselves are widely understood as solar ascension architecture — funerary devices to launch the pharaoh\'s ka into Ra\'s eternal cycle. Karnak\'s vast temple complex was dedicated to Amun-Ra at the height of Egyptian power.',
     modernRelevance: 'Ra is the archetype of the daily resurrection — the truth that each day requires a small death and a small rebirth, and that the rising of the light is never automatic. People in burnout, depression, or recovery walk Ra\'s nighttime journey. The teaching: Apophis must be defeated nightly, not once. The sun rises because someone fights for it.',
-    oracleLore: `The pyramids\' alignment to true north and to specific stellar phenomena, and the still-unexplained engineering of structures like the Great Pyramid, sit at the center of alternative-history research. From Sitchin to Robert Bauval (the Orion Correlation Theory) to Graham Hancock, the underlying hypothesis is consistent: the solar cult of Ra encoded astronomical, mathematical, and possibly off-world technological knowledge that orthodox Egyptology systematically deflects.
+    oracleLore: `The pyramids' alignment to true north and to specific stellar phenomena, and the still-unexplained engineering of structures like the Great Pyramid, sit at the center of alternative-history research. From Sitchin to Robert Bauval (the Orion Correlation Theory) to Graham Hancock, the underlying hypothesis is consistent: the solar cult of Ra encoded astronomical, mathematical, and possibly off-world technological knowledge that orthodox Egyptology systematically deflects.
 
 Read in this frame, Ra is not metaphor for the sun but a specific being or being-class associated with solar/stellar knowledge transmission — and the pharaonic state was the institutional infrastructure for maintaining contact.`,
     quotes: [
@@ -568,9 +568,9 @@ Read in this frame, Ra is not metaphor for the sun but a specific being or being
     atmosphericBg: 'linear-gradient(135deg, #1a0000 0%, #4d0000 40%, #2a0000 100%)',
     atmosphericDesc: 'Fire dances at the edge of the world. The Bifrost flickers. Something is about to change.',
     symbol: '🔥', image: lokiImg,
-    originStory: `Loki was not born of the Aesir. His parents were the giant Fárbauti ("cruel striker") and Laufey ("leafy isle"), placing him among the Jötnar — the giants who are the eternal antagonists of the gods. Yet Odin made him a blood brother. Why? No text fully explains. Some readings suggest Odin recognized in Loki a necessary destabilizing force without which the gods\' order would calcify and die.
+    originStory: `Loki was not born of the Aesir. His parents were the giant Fárbauti ("cruel striker") and Laufey ("leafy isle"), placing him among the Jötnar — the giants who are the eternal antagonists of the gods. Yet Odin made him a blood brother. Why? No text fully explains. Some readings suggest Odin recognized in Loki a necessary destabilizing force without which the gods' order would calcify and die.
 
-For centuries Loki operates as the divine problem-solver — getting the gods into impossible situations and then getting them out by even more impossible means. His tricks build the walls of Asgard, win Thor his hammer, recover Idun\'s apples. But over time the tricks darken.`,
+For centuries Loki operates as the divine problem-solver — getting the gods into impossible situations and then getting them out by even more impossible means. His tricks build the walls of Asgard, win Thor his hammer, recover Idun's apples. But over time the tricks darken.`,
     keyMyths: [
       { title: 'The Birth of the Monsters', body: 'With the giantess Angrboða, Loki fathered Fenrir the wolf, Jörmungandr the world-serpent, and Hel, queen of the dead. All three are prophesied to play decisive roles in Ragnarök. With the stallion Svaðilfari (while Loki was a mare) he gave birth to Sleipnir, Odin\'s eight-legged horse.' },
       { title: 'The Death of Baldr', body: 'When everyone in creation swore not to harm the beloved Baldr, Loki discovered the one exception — the mistletoe — and crafted a dart. He guided the blind god Höðr to throw it. Baldr fell. The gods bound Loki in a cave with venom dripping on his face until Ragnarök.' },
@@ -608,9 +608,9 @@ For centuries Loki operates as the divine problem-solver — getting the gods in
     atmosphericBg: 'linear-gradient(135deg, #0a000a 0%, #1a001a 50%, #0d000d 100%)',
     atmosphericDesc: 'Absolute darkness broken by flashes of violet lightning. The silence before creation.',
     symbol: '💀', image: kaliImg,
-    originStory: `Kali emerged on a battlefield. The demon Raktabija could not be killed — every drop of his blood that touched the ground spawned another demon identical to him. The gods were losing. Then the goddess Durga, in her rage, leapt forward — and from Durga\'s forehead burst Kali, black as the void, four-armed, tongue extended.
+    originStory: `Kali emerged on a battlefield. The demon Raktabija could not be killed — every drop of his blood that touched the ground spawned another demon identical to him. The gods were losing. Then the goddess Durga, in her rage, leapt forward — and from Durga's forehead burst Kali, black as the void, four-armed, tongue extended.
 
-Kali drank Raktabija\'s blood before it could touch the ground, and devoured every duplicate as fast as he produced them. When the demon was dead, she did not stop. Drunk on victory, she danced across the battlefield, and her dance grew so wild that the world began to crack. Shiva — her husband — lay down beneath her feet to absorb the impact. When she realized she was dancing on her own beloved, she stopped, tongue out in shock. That is the iconic image: Kali stopped mid-dance by love.`,
+Kali drank Raktabija's blood before it could touch the ground, and devoured every duplicate as fast as he produced them. When the demon was dead, she did not stop. Drunk on victory, she danced across the battlefield, and her dance grew so wild that the world began to crack. Shiva — her husband — lay down beneath her feet to absorb the impact. When she realized she was dancing on her own beloved, she stopped, tongue out in shock. That is the iconic image: Kali stopped mid-dance by love.`,
     keyMyths: [
       { title: 'The Drinking of Raktabija\'s Blood', body: 'The only way to kill the unkillable demon was to consume his blood before it touched earth. Kali was created for this single function. The myth teaches that some enemies cannot be defeated except by an aspect of yourself ruthless enough to swallow the source.' },
       { title: 'The Dance on Shiva', body: 'Her victory-dance threatened to shatter the world. Shiva sacrificed his body as her ground. The dance is consciousness; the body is what it dances upon. The image is a complete cosmology in one frame.' },
@@ -650,7 +650,7 @@ Her cult is one of the few in any tradition that does not hide death — that wo
     atmosphericBg: 'linear-gradient(135deg, #0d0800 0%, #2a1a00 50%, #1a0f00 100%)',
     atmosphericDesc: 'Ancient Babylon under a star-map sky. Ziggurats reach upward. The tablet of destinies glows.',
     symbol: '⚔️', image: mardukImg,
-    originStory: `Marduk was the son of Enki (Ea), born late in the Anunnaki succession. He inherited his father\'s wisdom but had a warrior\'s appetite the older gods lacked. When the primordial sea-mother Tiamat — enraged by the killing of her consort — created an army of monsters to destroy the younger gods, no one would face her. The older gods were terrified.
+    originStory: `Marduk was the son of Enki (Ea), born late in the Anunnaki succession. He inherited his father's wisdom but had a warrior\'s appetite the older gods lacked. When the primordial sea-mother Tiamat — enraged by the killing of her consort — created an army of monsters to destroy the younger gods, no one would face her. The older gods were terrified.
 
 Marduk volunteered, but on one condition: if he defeated Tiamat, he would be made king of all the gods, with absolute authority. They agreed. He took the bow, the net, the four winds, and the lightning. He met Tiamat in single combat, caught her in his net, and when she opened her mouth to swallow him, he sent the winds inside to inflate her. He shot an arrow down her throat, killing her. Then he split her body in two — making the sky from her upper half and the earth from her lower half — and built the cosmos from the corpse of chaos.`,
     keyMyths: [
@@ -675,7 +675,7 @@ Marduk volunteered, but on one condition: if he defeated Tiamat, he would be mad
     ],
     worship: 'Marduk\'s temple, the Esagila in Babylon, included the great ziggurat Etemenanki — almost certainly the historical seed of the Tower of Babel narrative. The Akitu festival each spring re-enacted his victory over Tiamat with the king ritually slapped, dethroned, and reinstated to demonstrate that his rule continued at the god\'s pleasure.',
     modernRelevance: 'Marduk is the archetype of the volunteer who takes on what no one else will. The young leader who steps up to a crisis the elders have refused to face. The teacher who takes the impossible class. The founder who does the dirty work. He demands the throne up front because he knows what it will cost — and he is right to demand it.',
-    oracleLore: `Marduk\'s rise is the clearest mythic record of a generational power transfer within the Anunnaki succession — Enki\'s line eclipsing the older Anu/Enlil order through Marduk\'s force of will. Sitchin and others read this as a literal political event in deep history: a younger faction of off-world rulers taking direct control of the human enterprise via the Babylonian theocracy.
+    oracleLore: `Marduk's rise is the clearest mythic record of a generational power transfer within the Anunnaki succession — Enki\'s line eclipsing the older Anu/Enlil order through Marduk\'s force of will. Sitchin and others read this as a literal political event in deep history: a younger faction of off-world rulers taking direct control of the human enterprise via the Babylonian theocracy.
 
 His "fifty names" recital that closes the Enuma Elish reads remarkably like an inventory of consolidated functions — almost a corporate restructuring of the divine administration under one executive.`,
     quotes: [
@@ -717,9 +717,9 @@ Enlil was not a kind god. He was the bureaucrat of the divine council — the on
     ],
     worship: 'Enlil\'s primary temple was the E-kur ("House of the Mountain") at Nippur — the religious capital of Sumer, more sacred than any political center. The kingship of any Sumerian city was considered legitimate only if confirmed at the E-kur. He was worshipped with awe rather than affection.',
     modernRelevance: 'Enlil is the archetype of the executive who must make decisions that some will not survive. The wartime general. The ICU triage doctor. The CEO restructuring a failing company. The judge sentencing a defendant. He is the god of decisions that will be hated by the people they affect — and who must be made anyway. His shadow is the bureaucrat who has stopped feeling the weight of the lives in his ledger.',
-    oracleLore: `In the Sitchin reading and its descendants, Enlil is the chief operating officer of the Anunnaki Earth mission — the one whose actual votes and decrees shaped human destiny. The Great Flood, in this frame, is not metaphor but a deliberate planetary decision made by a council of off-world administrators who concluded humanity was a failed experiment. Enki\'s rebellion to save us is the central moral act of the disclosure narrative.
+    oracleLore: `In the Sitchin reading and its descendants, Enlil is the chief operating officer of the Anunnaki Earth mission — the one whose actual votes and decrees shaped human destiny. The Great Flood, in this frame, is not metaphor but a deliberate planetary decision made by a council of off-world administrators who concluded humanity was a failed experiment. Enki's rebellion to save us is the central moral act of the disclosure narrative.
 
-Enlil\'s archetype recurs as the cold administrator in nearly every modern conspiracy framing — the figure who is not the puppet master but the project manager: the one who actually signs off on what gets done to us. Whether literal or symbolic, the archetype is consistent enough that his ancient name still applies.`,
+Enlil's archetype recurs as the cold administrator in nearly every modern conspiracy framing — the figure who is not the puppet master but the project manager: the one who actually signs off on what gets done to us. Whether literal or symbolic, the archetype is consistent enough that his ancient name still applies.`,
     quotes: [
       'Their noise has become unbearable. By my decree, the waters shall rise.',
       'I do not need to be loved. I need to be obeyed.',
@@ -775,7 +775,7 @@ Where Athena represented the strategic, intellectual, victorious face of war, Ar
     atmosphericBg: 'linear-gradient(135deg, #000000 0%, #0a0a00 40%, #1a1a00 100%)',
     atmosphericDesc: 'The Hall of Two Truths. Candles flicker. A golden scale waits. The jackal-headed god watches.',
     symbol: '⚖️', image: anubisImg,
-    originStory: `Anubis was the son of Nephthys, born of her secret union with Osiris (her sister Isis\'s husband). Fearing Set\'s wrath, Nephthys abandoned the infant. Isis — finding the child and recognizing his lineage — adopted him without resentment. Anubis grew up knowing he was both wanted and not-wanted, both legitimate and illegitimate.
+    originStory: `Anubis was the son of Nephthys, born of her secret union with Osiris (her sister Isis's husband). Fearing Set\'s wrath, Nephthys abandoned the infant. Isis — finding the child and recognizing his lineage — adopted him without resentment. Anubis grew up knowing he was both wanted and not-wanted, both legitimate and illegitimate.
 
 When Set murdered Osiris, Anubis assisted Isis in gathering the pieces and inventing the rite of mummification — the first preservation of a body for the afterlife. He held that office forever after: the god who prepares the dead.`,
     keyMyths: [
@@ -801,7 +801,7 @@ When Set murdered Osiris, Anubis assisted Isis in gathering the pieces and inven
     ],
     worship: 'Anubis was worshipped throughout Egypt but especially at Cynopolis ("city of dogs"), where mummified jackals and dogs have been excavated by the millions. Embalmers wore his mask during their work. Every funerary text in Egypt invokes him as protector and guide.',
     modernRelevance: 'Anubis is the archetype of the honest witness — the one who weighs without bias, who sees what is actually there. Therapists, hospice workers, judges, undertakers, and anyone whose work involves bearing accurate witness to what is real about a life walk this lineage. He teaches that judgment without compassion is cruelty, but compassion without judgment is denial. The scale needs both pans.',
-    oracleLore: `The weighing of the heart against the feather of Ma\'at is one of the most precise and self-similar near-death-experience reports in human literature — modern NDE accounts of "life review" describe an almost identical phenomenon: every act witnessed, weighed, and felt without distortion or denial. Egyptian funerary cosmology may have been the most advanced civilizational engagement with the death-process ever attempted.
+    oracleLore: `The weighing of the heart against the feather of Ma'at is one of the most precise and self-similar near-death-experience reports in human literature — modern NDE accounts of "life review" describe an almost identical phenomenon: every act witnessed, weighed, and felt without distortion or denial. Egyptian funerary cosmology may have been the most advanced civilizational engagement with the death-process ever attempted.
 
 In the disclosure-adjacent reading, Anubis represents the principle that consciousness is reviewed and the review is precise. This implication is taken seriously by both the ancient Egyptians and by modern researchers like Pim van Lommel and Bruce Greyson — the data converges from opposite directions.`,
     quotes: [
@@ -820,7 +820,7 @@ In the disclosure-adjacent reading, Anubis represents the principle that conscio
     symbol: '🪄', image: hermesImg,
     originStory: `Born to Zeus and the nymph Maia in a cave on Mount Cyllene, Hermes was the most precocious infant in all mythology. On his first day of life he climbed out of his cradle, stole a herd of fifty cattle from his half-brother Apollo, walked them backward to disguise their tracks, invented sandals to confuse pursuit, killed two of them, used their guts to invent the lyre, and was back in his cradle before sunset.
 
-When Apollo accused him, the infant denied everything with such charm that even Apollo was disarmed. When the lyre was discovered, Hermes gave it to Apollo as a gift — earning forever his favor and the role of the gods\' messenger and trickster.`,
+When Apollo accused him, the infant denied everything with such charm that even Apollo was disarmed. When the lyre was discovered, Hermes gave it to Apollo as a gift — earning forever his favor and the role of the gods' messenger and trickster.`,
     keyMyths: [
       { title: 'The Theft of Apollo\'s Cattle', body: 'The defining act of his birth — a literal first-day demonstration of every aspect of his nature: theft, ingenuity, music, charm, and reconciliation through the gift of beauty.' },
       { title: 'Guide of Souls (Psychopomp)', body: 'Hermes was the only Olympian permitted to enter the underworld at will. He guided the souls of the dead to the river Styx — a function he performed for both heroes and ordinary mortals.' },
@@ -861,7 +861,7 @@ In the disclosure frame, Hermes is the principle of inter-realm communication �
     atmosphericBg: 'linear-gradient(135deg, #2a0a1f 0%, #4d0033 50%, #2a001a 100%)',
     atmosphericDesc: 'Rose-gold sea foam at dawn. Doves circle a marble figure rising from the waves.',
     symbol: '🌹', image: aphroditeImg,
-    originStory: `Aphrodite\'s birth is the most violent in Greek myth, and almost no modern retelling preserves the horror of it. When Cronus castrated his father Uranus and threw the genitals into the sea, the foam (aphros) that gathered around them gave birth to Aphrodite. She rose from the water fully grown, fully beautiful, and stepped ashore at Cyprus — where flowers sprang under her feet.
+    originStory: `Aphrodite's birth is the most violent in Greek myth, and almost no modern retelling preserves the horror of it. When Cronus castrated his father Uranus and threw the genitals into the sea, the foam (aphros) that gathered around them gave birth to Aphrodite. She rose from the water fully grown, fully beautiful, and stepped ashore at Cyprus — where flowers sprang under her feet.
 
 She was, from her first breath, the embodiment of a paradox: the most beautiful thing that ever existed, born from an act of paternal mutilation. The implication that ancient mythographers were quietly making: love and beauty are not gentle things. They emerge from cosmic violence.`,
     keyMyths: [
@@ -886,7 +886,7 @@ She was, from her first breath, the embodiment of a paradox: the most beautiful 
     ],
     worship: 'Aphrodite was worshipped throughout the Greek world but especially at Paphos on Cyprus, where her temple stood for over a thousand years. Sacred prostitution was practiced in some of her temples — a fact later moralists strained to suppress. Her Roman incarnation, Venus, became the divine mother of the Julian line that produced Caesar and Augustus.',
     modernRelevance: 'Aphrodite is the archetype of the force that will not be talked out of itself. She is the desire that breaks careers, marriages, dynasties, and remakes them in its own image. Modern cultures that try to dismiss desire as "shallow" repeatedly discover that Aphrodite simply does not care what they think — and the consequences of pretending she does not exist are exactly as catastrophic as Troy.',
-    oracleLore: `Aphrodite\'s birth from the severed genitals of Uranus encodes a profound and uncomfortable cosmological teaching: that beauty and desire emerge from primordial trauma and are not separable from it. The romantic tradition that tries to make her gentle and pink is sanitizing a force that the Greeks knew was as dangerous as it was sweet.
+    oracleLore: `Aphrodite's birth from the severed genitals of Uranus encodes a profound and uncomfortable cosmological teaching: that beauty and desire emerge from primordial trauma and are not separable from it. The romantic tradition that tries to make her gentle and pink is sanitizing a force that the Greeks knew was as dangerous as it was sweet.
 
 In the deeper esoteric reading, Aphrodite is the principle by which separated beings are pulled back into union — the magnetic counterforce to entropy. Without her, no atoms bond, no cells join, no consciousness reaches toward another consciousness. She is not optional. She is the reason anything is anything other than scattered dust.`,
     quotes: [
@@ -949,7 +949,7 @@ The eternal punishment of Prometheus is then not metaphor but a structural warni
     atmosphericBg: 'linear-gradient(135deg, #001a14 0%, #003329 50%, #001f19 100%)',
     atmosphericDesc: 'Crumbling Greek temple ruins. Living serpent hair. Eyes that stop time itself.',
     symbol: '🐍', image: medusaImg,
-    originStory: `Medusa was originally a beautiful mortal woman, a priestess sworn to chastity in the temple of Athena. Poseidon, struck by her beauty, raped her on the floor of Athena\'s sanctuary. Athena — the virgin warrior goddess — flew into a rage. But she did not punish Poseidon. She punished Medusa. Medusa\'s glorious hair was turned to writhing serpents. Her face was made so terrible that any man who looked upon her would turn to stone.
+    originStory: `Medusa was originally a beautiful mortal woman, a priestess sworn to chastity in the temple of Athena. Poseidon, struck by her beauty, raped her on the floor of Athena's sanctuary. Athena — the virgin warrior goddess — flew into a rage. But she did not punish Poseidon. She punished Medusa. Medusa\'s glorious hair was turned to writhing serpents. Her face was made so terrible that any man who looked upon her would turn to stone.
 
 She fled to a cave at the edge of the world, where she lived alone with her two immortal Gorgon sisters, Stheno and Euryale. She was the only mortal of the three. Heroes came to kill her. None ever asked why she was there.`,
     keyMyths: [
@@ -973,7 +973,7 @@ She fled to a cave at the edge of the world, where she lived alone with her two 
     ],
     worship: 'Medusa\'s face — the gorgoneion — was the most widely used apotropaic symbol in the ancient Mediterranean, placed on shields, doors, coins, and graves to ward off evil. Even her killers honored what she had become. There is a strange ambivalence in this: the culture that murdered her wore her face for protection.',
     modernRelevance: 'Medusa is the archetype of the woman who was hurt, then blamed for being hurt, then made into a monster for the convenience of the people who could not face what had actually happened. Modern survivors of assault, of family violence, of institutional gaslighting — they are her. Modern feminist readings of Medusa as a symbol of righteous, weaponized survivor-rage have restored to her something the classical canon stole: her dignity.',
-    oracleLore: `The Medusa myth is one of the most precise mythological records of the cultural pattern of victim-blame in the Western tradition. The texts themselves — Ovid in particular — preserve the truth of what happened. The popular tradition has consistently smoothed it over to focus on Perseus\'s heroism. Recovering Medusa is not modern revisionism. It is reading what the original texts already say.
+    oracleLore: `The Medusa myth is one of the most precise mythological records of the cultural pattern of victim-blame in the Western tradition. The texts themselves — Ovid in particular — preserve the truth of what happened. The popular tradition has consistently smoothed it over to focus on Perseus's heroism. Recovering Medusa is not modern revisionism. It is reading what the original texts already say.
 
 Her snakes have a deeper esoteric meaning as well: in many ancient traditions, serpent-hair is the iconography of awakened kundalini consciousness. Medusa was not merely cursed. She was, by the act of the curse, accidentally initiated into a power level that no man could survive looking at directly. The "monster" was, in part, the goddess inside her finally activated — by force, against her will, but real.`,
     quotes: [
@@ -991,7 +991,7 @@ Her snakes have a deeper esoteric meaning as well: in many ancient traditions, s
     atmosphericBg: 'linear-gradient(135deg, #1a1000 0%, #3d2a00 50%, #2a1c00 100%)',
     atmosphericDesc: 'A young hero on a sunset cliff. Winged sandals. A bronze shield reflecting horror.',
     symbol: '⚔️', image: perseusImg,
-    originStory: `King Acrisius of Argos was warned by an oracle that his daughter\'s son would kill him. He locked his daughter Danae in a bronze chamber. Zeus came to her as a shower of golden rain through the roof. She bore Perseus.
+    originStory: `King Acrisius of Argos was warned by an oracle that his daughter's son would kill him. He locked his daughter Danae in a bronze chamber. Zeus came to her as a shower of golden rain through the roof. She bore Perseus.
 
 Acrisius set mother and infant adrift in a wooden chest at sea. They washed ashore on the island of Seriphos and were taken in by a fisherman. When Perseus came of age, the king of Seriphos — wanting Danae for himself — sent the young man on what was supposed to be an impossible suicide mission: bring back the head of Medusa.`,
     keyMyths: [
@@ -1061,7 +1061,7 @@ Pegasus rose immediately into the air and flew to Mount Helicon, where his hoove
     modernRelevance: 'Pegasus is the archetype of the gift that emerged from your trauma — the writing voice you found in grief, the empathy that grew out of betrayal, the courage forged in fear. He teaches that nothing valuable is wasted, even what was given to us by force. He also warns: the gift will carry you only as long as you ride it with humility. The moment you try to ride it to Olympus, you fall.',
     oracleLore: `Pegasus is, in many esoteric traditions, the symbol of the soul itself — the part of us that can fly, that was born from the wound, that opens springs of inspiration wherever it lands. Carl Jung wrote about Pegasus as the archetype of the creative breakthrough that emerges precisely from the integration of shadow material — Medusa, in this reading, being the un-confronted shadow whose acknowledgment releases the winged form.
 
-Bellerophon\'s fall is the cautionary half of the myth: the same creative gift that lifts you, if you take credit for it instead of riding it with respect, will throw you. Many artists, writers, and founders eventually meet this lesson personally.`,
+Bellerophon's fall is the cautionary half of the myth: the same creative gift that lifts you, if you take credit for it instead of riding it with respect, will throw you. Many artists, writers, and founders eventually meet this lesson personally.`,
     quotes: [
       'I was born from her death. The first thing I did was rise.',
       'Ride me with respect, and I will carry you anywhere. Ride me with pride, and I will throw you.',
@@ -1077,9 +1077,9 @@ Bellerophon\'s fall is the cautionary half of the myth: the same creative gift t
     atmosphericBg: 'linear-gradient(135deg, #1a0000 0%, #3d0000 50%, #1f0000 100%)',
     atmosphericDesc: 'A figure of cracked stone laced with molten light. The temple shakes when he steps.',
     symbol: '💪', image: kratosImg,
-    originStory: `Kratos ("Strength") was the son of the Titan Pallas and the river-goddess Styx. He had three siblings — Bia (Force), Nike (Victory), and Zelus (Zeal). When the Titanomachy began, Styx was the first divine being to bring her children to Zeus\'s side. As reward, Zeus made the four of them his constant attendants. They never left his throne.
+    originStory: `Kratos ("Strength") was the son of the Titan Pallas and the river-goddess Styx. He had three siblings — Bia (Force), Nike (Victory), and Zelus (Zeal). When the Titanomachy began, Styx was the first divine being to bring her children to Zeus's side. As reward, Zeus made the four of them his constant attendants. They never left his throne.
 
-Kratos became the executive arm of Zeus\'s authority — the god dispatched whenever the king of Olympus needed something done that required raw, unflinching force. The most famous instance: when Zeus sentenced Prometheus, it was Kratos who marched the Titan to the Caucasus and held him while Hephaestus drove the chains into his flesh. Hephaestus wept doing it. Kratos felt nothing.`,
+Kratos became the executive arm of Zeus's authority — the god dispatched whenever the king of Olympus needed something done that required raw, unflinching force. The most famous instance: when Zeus sentenced Prometheus, it was Kratos who marched the Titan to the Caucasus and held him while Hephaestus drove the chains into his flesh. Hephaestus wept doing it. Kratos felt nothing.`,
     keyMyths: [
       { title: 'The Chaining of Prometheus', body: 'In Aeschylus\'s Prometheus Bound, Kratos has the opening scene. He oversees the chaining and mocks Hephaestus for hesitating. He is the only character in the play who shows no compassion for Prometheus. He is, explicitly, the embodiment of unfeeling state power.' },
       { title: 'Permanent Attendance on Zeus', body: 'Kratos and his siblings were the only beings who never left Zeus\'s side — not even briefly. They were the visible proof that the king of the gods always had force at hand, always available, always loyal.' },
@@ -1101,7 +1101,7 @@ Kratos became the executive arm of Zeus\'s authority — the god dispatched when
     ],
     worship: 'Kratos had no significant cult. He was acknowledged as a divine principle but rarely worshipped — perhaps because the Greeks recognized that a deity whose entire function is unfeeling enforcement is dangerous to invoke. He was respected the way modern cultures respect law enforcement: necessary, occasionally feared, rarely loved.',
     modernRelevance: 'Kratos is the archetype of the enforcer — the soldier following orders, the cop, the bouncer, the corporate compliance officer, the bureaucrat executing an unjust policy. He raises the most uncomfortable question in moral philosophy: what is the responsibility of the one who carries out the order? The Greeks named the principle without resolving the question, because the question is unresolvable. The strongest never escape the moral weight of being instruments.',
-    oracleLore: `Kratos is one of the few Greek divine beings explicitly named to embody what later philosophy would call "the banality of evil" — Hannah Arendt\'s phrase for the moral hollowness of the obedient functionary. Aeschylus wrote his opening scene with Prometheus more than two thousand years before Eichmann, and the diagnosis was already clean: the strong who refuse to feel are not neutral. They are the active enabling condition of every tyranny.
+    oracleLore: `Kratos is one of the few Greek divine beings explicitly named to embody what later philosophy would call "the banality of evil" — Hannah Arendt's phrase for the moral hollowness of the obedient functionary. Aeschylus wrote his opening scene with Prometheus more than two thousand years before Eichmann, and the diagnosis was already clean: the strong who refuse to feel are not neutral. They are the active enabling condition of every tyranny.
 
 The modern video game franchise has, ironically, turned this archetype into a tragic anti-hero who eventually rebels against the gods who used him — a recovery arc the original Greek Kratos was never permitted.`,
     quotes: [
@@ -1163,7 +1163,7 @@ Whether read as literal history, as cultural memory of a deep-past contact event
     atmosphericBg: 'linear-gradient(135deg, #0a0800 0%, #1f1500 50%, #0d0a00 100%)',
     atmosphericDesc: 'A horned-crowned king before a ziggurat. Gold light climbs to a star-flooded sky.',
     symbol: '👑', image: anuImg,
-    originStory: `Anu (in Sumerian: An, "sky") was the supreme deity of the Sumerian-Akkadian pantheon — the ultimate sovereign of the Anunnaki. The very name "Anunnaki" derives from him: it means "those who from Anu came down." He was the original king. Every other god\'s authority was traceable to a delegation from him.
+    originStory: `Anu (in Sumerian: An, "sky") was the supreme deity of the Sumerian-Akkadian pantheon — the ultimate sovereign of the Anunnaki. The very name "Anunnaki" derives from him: it means "those who from Anu came down." He was the original king. Every other god's authority was traceable to a delegation from him.
 
 He dwelt in the highest heaven and rarely intervened directly in earthly affairs. The administration of Earth was delegated to his sons — Enlil received executive authority over wind, sky, and humanity; Enki received the Abzu and the engineering of life. Anu remained above, distant, the final court of appeal but almost never the active hand.`,
     keyMyths: [
@@ -1187,7 +1187,7 @@ He dwelt in the highest heaven and rarely intervened directly in earthly affairs
     ],
     worship: 'Anu\'s primary temple was the E-anna ("House of Heaven") at Uruk, also dedicated to Inanna. By the Babylonian period, Anu had been largely supplanted in popular worship by Marduk — but his name remained as the ultimate authority backing all royal claims. Mesopotamian kings continued to invoke him millennia after his active worship had faded.',
     modernRelevance: 'Anu is the archetype of the absent father — the founder, the chairman, the patriarch who set the rules and then withdrew. Modern people raised by emotionally distant fathers, or who work in institutions whose founders are now mythological rather than present, are constantly negotiating with the Anu archetype: trying to please someone who is not in the room, who delegated authority and left, whose approval can never quite be earned because he is not available to give it.',
-    oracleLore: `Anu sits at the absolute apex of the Anunnaki disclosure thesis. In Sitchin\'s reading, he is the literal sovereign of the home planet from which the Anunnaki mission to Earth was dispatched. His extreme remoteness from earthly affairs maps onto a chain-of-command structure familiar to any modern organization: the CEO does not personally manage warehouse operations.
+    oracleLore: `Anu sits at the absolute apex of the Anunnaki disclosure thesis. In Sitchin's reading, he is the literal sovereign of the home planet from which the Anunnaki mission to Earth was dispatched. His extreme remoteness from earthly affairs maps onto a chain-of-command structure familiar to any modern organization: the CEO does not personally manage warehouse operations.
 
 The horned crown that defines Anu in iconography appears with striking consistency across cultures — Mesoamerican, Egyptian, Indo-European, and even some North American depictions of "sky beings" share this specific feature. Whether read as cultural diffusion or as memory of a literal shared encounter, the iconographic consistency is real and largely unexplained by mainstream art history.
 
