@@ -94,7 +94,7 @@ export function BirthdayInput({ value, onChange, accentColor = '#22d3ee', error 
 
   const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
     const text = e.clipboardData.getData('text').trim();
-    const slash = text.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+    const slash = text.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
     const iso = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
     if (slash || iso) {
       e.preventDefault();
