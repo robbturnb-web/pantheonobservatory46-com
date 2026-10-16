@@ -128,7 +128,7 @@ export function MessageFeed({ channelId, channelName, userId, onAuthRequired }: 
             <div className="flex-1 min-w-0">
               <div className="flex items-baseline gap-2">
                 <span className="text-sm font-semibold text-foreground">
-                  {(msg.profiles as any)?.username || 'Starseed'}
+                  {msg.profiles?.username || 'Starseed'}
                 </span>
                 <span className="text-[10px] text-muted-foreground">{formatTime(msg.created_at)}</span>
               </div>
