@@ -122,10 +122,12 @@ serve(async (req) => {
     // Only allow user/assistant turns with string content; system role is server-owned.
     const messages = rawMessages
       .slice(-40)
-      .filter((m): m is { role: string; content: string } =>
-        !!m && typeof m === "object" &&
-        ((m as any).role === "user" || (m as any).role === "assistant") &&
-        typeof (m as any).content === "string")
+      .filter((m): m is { role: "user" | "assistant"; content: string } => {
+        if (!m || typeof m !== "object") return false;
+        const message = m as Record<string, unknown>;
+        return (message.role === "user" || message.role === "assistant") &&
+          typeof message.content === "string";
+      })
       .map((m) => ({ role: m.role as "user" | "assistant", content: m.content.slice(0, 8000) }));
     if (messages.length === 0) {
       return new Response(
