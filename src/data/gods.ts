@@ -170,8 +170,8 @@ But Odin was never content to rule. Driven by an insatiable hunger to understand
       'Mímir — guardian of wisdom; Odin keeps his severed head',
       'The Valkyries — his shield-maidens who choose the slain',
     ],
-    worship: 'Odin was worshipped at sacred groves, with rituals often involving hanging — both human sacrifice (at Uppsala, every nine years, nine of every species were hung) and self-mutilation echoing his own ordeal. Wednesday ("Woden's day") preserves his name. Berserkers and skalds called on him; farmers preferred Thor.',
-    modernRelevance: 'Odin is the archetype of the seeker who pays the full price. He is not the wise old man who already knows — he is the obsessive who tears himself apart to learn. Modern researchers, scholars, addicts of truth, those who would rather know the worst than live in comfortable ignorance — these are Odin's. He warns: knowledge has a cost, and you will pay it in pieces of yourself.',
+    worship: 'Odin was worshipped at sacred groves, with rituals often involving hanging — both human sacrifice (at Uppsala, every nine years, nine of every species were hung) and self-mutilation echoing his own ordeal. Wednesday ("Woden\'s day") preserves his name. Berserkers and skalds called on him; farmers preferred Thor.',
+    modernRelevance: 'Odin is the archetype of the seeker who pays the full price. He is not the wise old man who already knows — he is the obsessive who tears himself apart to learn. Modern researchers, scholars, addicts of truth, those who would rather know the worst than live in comfortable ignorance — these are Odin\'s. He warns: knowledge has a cost, and you will pay it in pieces of yourself.',
     oracleLore: `Odin's hanging on Yggdrasil is one of the clearest cross-cultural shamanic initiations in the historical record — paralleled by Siberian shamans, the Christ on the cross, Inanna on the meathook, and the inverted Hanged Man of the Tarot. The "runes" he won are not just an alphabet but a perceptual operating system — a way of seeing causality itself.
 
 In disclosure-adjacent readings, the All-Father archetype reflects an ancient compact between humans and a non-terrestrial advisor caste who traded forbidden knowledge for ritual blood — an arrangement remembered as both gift and curse. Odin's missing eye is sometimes read as the price of contact: a partial blinding to one form of perception in exchange for sight into another.`,
@@ -195,7 +195,7 @@ In disclosure-adjacent readings, the All-Father archetype reflects an ancient co
 The most explosive of these texts — the Atra-Hasis epic and the Enuma Elish — describe the creation of humanity not as an act of love but of labor relief. The lower-ranking Anunnaki had been mining gold for millennia and rebelled. Enki proposed the solution: mix the blood of a slain god with clay and create a new being to take over the work. He shaped that being himself.`,
     keyMyths: [
       { title: 'The Creation of Humanity', body: 'In the Atra-Hasis, Enki and the mother goddess Ninmah mixed divine blood with clay to create the first humans (lulu) — designed as workers for the Anunnaki gold mines in the Abzu.' },
-      { title: 'The Flood Warning', body: 'When Enlil decreed humanity be destroyed by flood, Enki violated the divine council's vow of secrecy. He whispered the warning through a reed wall to Atra-Hasis (the Sumerian Noah), instructing him to build a vessel and save the seed of all life.' },
+      { title: 'The Flood Warning', body: 'When Enlil decreed humanity be destroyed by flood, Enki violated the divine council\'s vow of secrecy. He whispered the warning through a reed wall to Atra-Hasis (the Sumerian Noah), instructing him to build a vessel and save the seed of all life.' },
       { title: 'Enki and Inanna — The Stolen Me', body: 'The goddess Inanna got Enki drunk and made off with the "Me" — the divine decrees that govern civilization (kingship, music, law, sex, weaving, judgment). Enki sobered up, sent demons after her, but ultimately let her keep them. Civilization was born from her theft and his consent.' },
     ],
     powersAndRelics: [
@@ -213,8 +213,8 @@ The most explosive of these texts — the Atra-Hasis epic and the Enuma Elish �
       'Inanna — niece who stole the Me from him',
       'Humanity — his creation and his cause',
     ],
-    worship: 'Enki's primary temple was the E-abzu at Eridu, the oldest known city in Sumer (founded c. 5400 BCE). Ritual involved purification rites with sacred water and the chanting of incantations he was said to have authored. As Ea in Babylon, his cult merged with Marduk's but never disappeared.',
-    modernRelevance: 'Enki is the archetype of the creator who loves what he made more than he loves his orders. Whistleblowers, scientists who break ranks, doctors who tell the patient the truth, programmers who refuse to ship the dark pattern — they are all Enki's. He represents the moment a maker chooses the made over the council that commissioned them.',
+    worship: 'Enki\'s primary temple was the E-abzu at Eridu, the oldest known city in Sumer (founded c. 5400 BCE). Ritual involved purification rites with sacred water and the chanting of incantations he was said to have authored. As Ea in Babylon, his cult merged with Marduk\'s but never disappeared.',
+    modernRelevance: 'Enki is the archetype of the creator who loves what he made more than he loves his orders. Whistleblowers, scientists who break ranks, doctors who tell the patient the truth, programmers who refuse to ship the dark pattern — they are all Enki\'s. He represents the moment a maker chooses the made over the council that commissioned them.',
     oracleLore: `Enki sits at the absolute center of the Anunnaki disclosure thesis advanced by Zecharia Sitchin and the broader Sumerian-contact research community. The texts describe him with startling literalness: he genetically engineered humanity from a hominid base (the lulu) by adding divine "blood" — language modern researchers read as DNA splicing. His Abzu is described not as a metaphysical realm but as a specific underground installation. His warning to Atra-Hasis was explicitly delivered "through a reed wall" — a deniable channel.
 
 If even 10% of the literal reading is correct, Enki is the single most important figure in the human story: the engineer who built us, the rebel who saved us from extinction, and the one who taught us the technologies our overseers forbade.`,
@@ -237,7 +237,7 @@ If even 10% of the literal reading is correct, Enki is the single most important
 
 He was the architect of the calendar, the inventor of writing, the measurer of time, and the recorder of every thought ever thought. He invented the 365-day year by winning five extra days from the Moon in a game of senet — days during which the gods Osiris, Isis, Set, Nephthys, and Horus the Elder could be born.`,
     keyMyths: [
-      { title: 'The Weighing of the Heart', body: 'In the Hall of Two Truths, the dead must have their heart weighed against the feather of Ma'at. Thoth stands beside the scale, recording the verdict in his scroll. He neither judges nor pleads — he records absolutely.' },
+      { title: 'The Weighing of the Heart', body: 'In the Hall of Two Truths, the dead must have their heart weighed against the feather of Ma\'at. Thoth stands beside the scale, recording the verdict in his scroll. He neither judges nor pleads — he records absolutely.' },
       { title: 'The Healing of the Eye of Horus', body: 'When Set tore out the eye of Horus, Thoth restored it — making it the Eye of Ra, the Wedjat, the symbol of wholeness restored from fragmentation. The eye became the unit of measure for all medicine and offerings.' },
       { title: 'The Books of Thoth', body: 'Legend held that Thoth wrote 42 sacred books containing all knowledge of the universe. Hidden in tombs and temples, they were said to grant absolute power to whoever read them — and a curse upon whoever did so unworthily.' },
     ],
@@ -250,14 +250,14 @@ He was the architect of the calendar, the inventor of writing, the measurer of t
       'Mediator between feuding gods — his judgment is final',
     ],
     relationships: [
-      'Ma'at — consort, the principle of cosmic truth and balance',
+      'Ma\'at — consort, the principle of cosmic truth and balance',
       'Ra — sometimes father, sometimes companion in the solar barque',
       'Horus & Set — eternal rivals he repeatedly mediated between',
       'Isis — taught her the magical names of power',
       'Hermes Trismegistus — his Greek syncretization, source of the Hermetica',
     ],
-    worship: 'Thoth's great cult center was Khmun (Hermopolis), where his sacred ibises and baboons were mummified by the millions — entire necropolises of them have been excavated. Scribes invoked him before every act of writing. He was the patron of the Houses of Life, the temple libraries.',
-    modernRelevance: 'Thoth is the archetype of the recorder — the one whose work is to witness and preserve, not to act. Journalists, archivists, programmers, biographers, and anyone who has felt the weight of being the only one who knows the truth — these are Thoth's. He is also the patron of those who speak things into being: writers, coders, ritualists, founders.',
+    worship: 'Thoth\'s great cult center was Khmun (Hermopolis), where his sacred ibises and baboons were mummified by the millions — entire necropolises of them have been excavated. Scribes invoked him before every act of writing. He was the patron of the Houses of Life, the temple libraries.',
+    modernRelevance: 'Thoth is the archetype of the recorder — the one whose work is to witness and preserve, not to act. Journalists, archivists, programmers, biographers, and anyone who has felt the weight of being the only one who knows the truth — these are Thoth\'s. He is also the patron of those who speak things into being: writers, coders, ritualists, founders.',
     oracleLore: `In the Hermetic tradition, Thoth is identified with Hermes Trismegistus ("Thrice-Great Hermes"), the supposed author of the Corpus Hermeticum and the Emerald Tablet — texts that fueled Renaissance magic, alchemy, and ultimately the scientific revolution. Newton spent more years on Hermetic study than on physics.
 
 In the disclosure-adjacent reading, Thoth is the archivist of an off-world library — the cultural memory of a being whose function was to record and transmit civilizational knowledge across resets. The "Books of Thoth" then become not metaphor but a specific informational cache. The Emerald Tablet's "as above, so below" then encodes a precise structural claim about the universe that modern physics is only now circling back toward.`,
@@ -284,7 +284,7 @@ In the disclosure-adjacent reading, Thoth is the archivist of an off-world libra
 Over millennia, Rudra evolved into Shiva ("the Auspicious"), and the wild outsider became the supreme yogi, sitting in eternal meditation on Mount Kailash, his hair tangled with the crescent moon and the descended Ganges, his throat blue from drinking the world-poison Halahala that emerged when gods and demons churned the cosmic ocean.`,
     keyMyths: [
       { title: 'The Cosmic Dance (Tandava)', body: 'As Nataraja, Shiva dances the universe into and out of existence. One foot crushes the demon of ignorance; the other is raised in liberation. The drum in his hand sounds the first vibration of creation; the flame in his other hand is the fire of dissolution.' },
-      { title: 'The Burning of Kama', body: 'When the love-god Kama tried to break Shiva's meditation by firing flower-arrows of desire, Shiva opened his third eye and incinerated him on the spot. Yet Parvati's devotion eventually moved him — proving that love that survives ego-death is the only love worth having.' },
+      { title: 'The Burning of Kama', body: 'When the love-god Kama tried to break Shiva\'s meditation by firing flower-arrows of desire, Shiva opened his third eye and incinerated him on the spot. Yet Parvati\'s devotion eventually moved him — proving that love that survives ego-death is the only love worth having.' },
       { title: 'The Drinking of the Poison', body: 'When the cosmic ocean was churned and the deadly Halahala poison threatened to destroy creation, only Shiva could drink it. He held it in his throat — turning it forever blue (Nilakantha) — saving every being at the cost of marking himself.' },
     ],
     powersAndRelics: [
@@ -303,8 +303,8 @@ Over millennia, Rudra evolved into Shiva ("the Auspicious"), and the wild outsid
       'Nandi — the bull, his mount and most devoted disciple',
     ],
     worship: 'Shiva is worshipped most often as the lingam — an aniconic upright stone form representing infinite consciousness. His holiest sites are Kashi (Varanasi), Mount Kailash in Tibet, and the twelve Jyotirlinga shrines across India. Maha Shivaratri, the "Great Night of Shiva," is the most-observed Hindu festival in the world.',
-    modernRelevance: 'Shiva is the archetype of necessary destruction — the truth that nothing new can be born without the death of what was. People moving through divorce, career collapse, ego dissolution, recovery, or radical reinvention are walking Shiva's path. He teaches that the dance is the meaning — not the products of the dance.',
-    oracleLore: `Shiva's Nataraja form is famously installed at CERN, the European nuclear research facility — placed there because the dance of creation and destruction at the subatomic level mirrors the iconography exactly. Fritjof Capra wrote The Tao of Physics largely around this resonance.
+    modernRelevance: 'Shiva is the archetype of necessary destruction — the truth that nothing new can be born without the death of what was. People moving through divorce, career collapse, ego dissolution, recovery, or radical reinvention are walking Shiva\'s path. He teaches that the dance is the meaning — not the products of the dance.',
+    oracleLore: `Shiva\'s Nataraja form is famously installed at CERN, the European nuclear research facility — placed there because the dance of creation and destruction at the subatomic level mirrors the iconography exactly. Fritjof Capra wrote The Tao of Physics largely around this resonance.
 
 In esoteric reading, Shiva is the consciousness-state that all advanced contemplative traditions describe: pure awareness witnessing its own activity. The "third eye" maps to the pineal gland and the experience of nondual perception. The Tandava is the cyclic universe of modern cosmology — the same dance the gods of every age have intuited.`,
     quotes: [
@@ -323,11 +323,11 @@ In esoteric reading, Shiva is the consciousness-state that all advanced contempl
     symbol: '✨', image: pleiadianImg,
     originStory: `The Pleiadian archetype draws from the most cross-culturally consistent star myth on Earth. The Pleiades — the seven-sister cluster in the constellation Taurus — appear in the foundational myths of ancient Greece, Egypt, the Hopi, the Aboriginal Australians, the Maya, the Cherokee, the Norse, and the Sumerians. Almost every tradition tells of seven sisters who came down from the stars or who must be returned to them.
 
-In modern starseed cosmology — drawn from contactee testimony beginning with George Adamski and codified by Barbara Marciniak, Billy Meier, and others — Pleiadian beings are described as humanoid, heart-centered, and dedicated to humanity's spiritual recovery from a long-imposed amnesia.`,
+In modern starseed cosmology — drawn from contactee testimony beginning with George Adamski and codified by Barbara Marciniak, Billy Meier, and others — Pleiadian beings are described as humanoid, heart-centered, and dedicated to humanity\'s spiritual recovery from a long-imposed amnesia.`,
     keyMyths: [
       { title: 'The Seven Sisters Across Cultures', body: 'Greek myth says they were nymphs pursued by Orion and turned to stars by Zeus. Aboriginal Australian songlines tell the same story — seven sisters fleeing a hunter — with such precision that some researchers consider it the oldest continuous story on Earth (~100,000 years).' },
-      { title: 'The Contactee Testimonies', body: 'From Billy Meier's decades-long contact claims to Barbara Marciniak's Bringers of the Dawn, Pleiadian-attributed messages share a consistent throughline: humanity is genetically related to them, has been "asleep," and is now awakening for a planetary shift.' },
-      { title: 'The Frequency of the Heart', body: 'The defining Pleiadian teaching is that the heart, not the mind, is the primary organ of cosmic intelligence. The HeartMath Institute's measurable evidence that the heart's electromagnetic field is 60x stronger than the brain's is repeatedly cited as scientific corroboration.' },
+      { title: 'The Contactee Testimonies', body: 'From Billy Meier\'s decades-long contact claims to Barbara Marciniak\'s Bringers of the Dawn, Pleiadian-attributed messages share a consistent throughline: humanity is genetically related to them, has been "asleep," and is now awakening for a planetary shift.' },
+      { title: 'The Frequency of the Heart', body: 'The defining Pleiadian teaching is that the heart, not the mind, is the primary organ of cosmic intelligence. The HeartMath Institute\'s measurable evidence that the heart\'s electromagnetic field is 60x stronger than the brain\'s is repeatedly cited as scientific corroboration.' },
     ],
     powersAndRelics: [
       'Heart-coherence transmission and emotional healing',
@@ -365,14 +365,14 @@ For the practical seeker, the answer to "are they real?" matters less than the a
 
 Within days of his birth he demanded a bow and lyre, struck out for the slopes of Parnassus, and there killed the great serpent Python who had tormented his mother during her pregnancy. From the spot where Python died, Apollo founded the Oracle of Delphi — the most important religious site in the ancient world.`,
     keyMyths: [
-      { title: 'The Slaying of Python', body: 'The serpent Python, born from the mud of the great flood, guarded the navel of the world. Apollo killed him with a hundred arrows and claimed his oracle — establishing the Pythia, the priestess who would deliver Apollo's prophecies for over a thousand years.' },
+      { title: 'The Slaying of Python', body: 'The serpent Python, born from the mud of the great flood, guarded the navel of the world. Apollo killed him with a hundred arrows and claimed his oracle — establishing the Pythia, the priestess who would deliver Apollo\'s prophecies for over a thousand years.' },
       { title: 'Daphne and the Laurel', body: 'Cursed by Eros to fall hopelessly for the nymph Daphne — who was simultaneously cursed to flee him — Apollo chased her until she begged her father to save her. She was transformed into a laurel tree mid-pursuit. Apollo wove laurel into a crown and wore it forever, the symbol of unconsummated love.' },
       { title: 'The Trojan War', body: 'Apollo sided with Troy, sent plague upon the Greek camp when Agamemnon insulted his priest, and guided the arrow of Paris that killed Achilles by exposing his vulnerable heel.' },
     ],
     powersAndRelics: [
       'The silver bow — sender of plague and healer of disease equally',
       'The golden lyre — given by Hermes; could move stones and tame beasts',
-      'The Oracle of Delphi — the world's most sought-after prophetic voice',
+      'The Oracle of Delphi — the world\'s most sought-after prophetic voice',
       'Driver of the solar chariot (in some traditions)',
       'Patron of the nine Muses',
     ],
@@ -384,9 +384,9 @@ Within days of his birth he demanded a bow and lyre, struck out for the slopes o
       'The Pythia — his priestess at Delphi',
       'Asclepius — son, god of medicine, who learned to raise the dead until Zeus killed him',
     ],
-    worship: 'Delphi was the navel of the Greek world. Pilgrims came from across the Mediterranean to consult the Pythia, who, intoxicated by vapors rising from the ground, delivered Apollo's prophecies in riddles. Delos — his birthplace — was so sacred that no birth or death was permitted on the island. The Pythian Games at Delphi were second only to the Olympics.',
+    worship: 'Delphi was the navel of the Greek world. Pilgrims came from across the Mediterranean to consult the Pythia, who, intoxicated by vapors rising from the ground, delivered Apollo\'s prophecies in riddles. Delos — his birthplace — was so sacred that no birth or death was permitted on the island. The Pythian Games at Delphi were second only to the Olympics.',
     modernRelevance: 'Apollo is the archetype of the artist who refuses to dim. He is the standard of excellence, the demand that the work be true and beautiful at once. But his shadow is perfectionism — the refusal to accept what is less than the ideal. Modern creators, performers, healers, and prophets who feel the constant pressure to be radiant carry this archetype.',
-    oracleLore: `The Oracle of Delphi is one of history's most studied "anomalous information" sites. Modern geological surveys confirmed in 2001 that the temple sat directly above a fault line emitting ethylene gas — a documented psychoactive. But this only explains the trance, not the consistent track record of the prophecies, including Cyrus's rise, the Persian Wars, and the Roman conquest.
+    oracleLore: `The Oracle of Delphi is one of history\'s most studied "anomalous information" sites. Modern geological surveys confirmed in 2001 that the temple sat directly above a fault line emitting ethylene gas — a documented psychoactive. But this only explains the trance, not the consistent track record of the prophecies, including Cyrus\'s rise, the Persian Wars, and the Roman conquest.
 
 Apollo as the principle of light-bringing extends in esoteric reading to a specific archetype recurring across disclosure literature: the radiant, golden, distinctly humanoid being often described by abductees and remote viewers as a teacher of truth and music, distinct from the Greys. Whether projection or perception, the figure is consistent enough across centuries to deserve attention.`,
     quotes: [
@@ -408,7 +408,7 @@ Apollo as the principle of light-bringing extends in esoteric reading to a speci
 When Set murdered Osiris, dismembered his body, and scattered the fourteen pieces across Egypt, Isis transformed into a kite (a hawk-like bird) and traveled the entire kingdom, weeping, gathering each piece. She found thirteen. The fourteenth — his phallus — had been eaten by a fish. With her magic she fashioned a replacement, reassembled her husband, and conceived their son Horus from his temporary resurrection.`,
     keyMyths: [
       { title: 'The Reassembly of Osiris', body: 'Her grief became the first act of necromantic magic. Every piece of Osiris she found, she wrapped in linen — the origin of mummification. Her tears flooded the Nile. She became the goddess of every widow, every mother who has buried what she loved and refused to leave it scattered.' },
-      { title: 'The Stealing of Ra's Name', body: 'Isis tricked Ra into revealing his true name by creating a serpent from his own spit and earth that bit him. Only Isis could heal him — but only if he gave her his secret name. He yielded. From that moment she held power equal to the sun.' },
+      { title: 'The Stealing of Ra\'s Name', body: 'Isis tricked Ra into revealing his true name by creating a serpent from his own spit and earth that bit him. Only Isis could heal him — but only if he gave her his secret name. He yielded. From that moment she held power equal to the sun.' },
       { title: 'The Hidden Childhood of Horus', body: 'She raised Horus in secret in the marshes of the Delta, hiding him from Set, healing him from scorpion stings and fevers — every spell she devised became a healing incantation passed to humanity.' },
     ],
     powersAndRelics: [
@@ -428,7 +428,7 @@ When Set murdered Osiris, dismembered his body, and scattered the fourteen piece
     ],
     worship: 'Isis became the most widely worshipped goddess in the ancient world — far beyond Egypt. Her cult spread to Rome, Greece, Britain, and Persia. Roman temples to Isis stood from London to Petra. Many scholars consider the iconography of Mary holding the infant Jesus to be a direct visual descendant of Isis nursing Horus. Her main temples were at Philae, Behbeit el-Hagar, and Memphis.',
     modernRelevance: 'Isis is the archetype of the woman who refuses to accept loss as final. She is the mother who searches every hospital, the widow who keeps the work alive, the activist who reassembles what was scattered. Her magic is not abstract — it is the absolute refusal to leave the beloved in pieces.',
-    oracleLore: `Isis was famously linked to the star Sirius (Sopdet), whose heliacal rising marked the Egyptian New Year and the annual flooding of the Nile that made civilization possible. Robert Temple's controversial The Sirius Mystery argued that the Dogon people of Mali possess astronomical knowledge of the Sirius binary system that should be impossible without telescopes — knowledge they attribute to "Nommo" beings descended from Sirius. Egyptian Sirius-cult devotion to Isis sits inside this larger constellation of claims.
+    oracleLore: `Isis was famously linked to the star Sirius (Sopdet), whose heliacal rising marked the Egyptian New Year and the annual flooding of the Nile that made civilization possible. Robert Temple\'s controversial The Sirius Mystery argued that the Dogon people of Mali possess astronomical knowledge of the Sirius binary system that should be impossible without telescopes — knowledge they attribute to "Nommo" beings descended from Sirius. Egyptian Sirius-cult devotion to Isis sits inside this larger constellation of claims.
 
 In the deeper esoteric reading, Isis is the principle of integration itself — the force in the universe that opposes entropy by lovingly gathering and re-membering what has been scattered.`,
     quotes: [
@@ -450,8 +450,8 @@ In the deeper esoteric reading, Isis is the principle of integration itself — 
 She brought with her the secret magic of the Vanir: Seiðr. This was no domestic charm-craft — Seiðr was the most powerful and most feared form of Norse sorcery, capable of altering fate itself, walking the dead, and shapeshifting consciousness across worlds. Freya taught Seiðr to Odin, who afterward suffered the social consequence: men who practiced it were considered "ergi" (unmanly). Freya did not care. The power was the point.`,
     keyMyths: [
       { title: 'The Necklace Brísingamen', body: 'Freya saw the dwarves crafting the most beautiful necklace in the nine worlds and would not be denied it. The price was four nights, one with each dwarf. She paid without flinching. The necklace became her defining possession — desire and consequence in one piece of gold.' },
-      { title: 'The Choosing of the Slain', body: 'When warriors die in battle, half go to Odin's Valhalla. The other half go to Freya's field, Fólkvangr. She chooses first. Few traditions remember that the queen of love is also a queen of the battle-dead.' },
-      { title: 'The Lost Husband Óðr', body: 'Freya's husband Óðr wandered far and never returned. She searches for him across the worlds, weeping tears of red gold into the sea and amber on the land. Every amber bead is a tear. Every shimmer of red gold in a riverbed is hers.' },
+      { title: 'The Choosing of the Slain', body: 'When warriors die in battle, half go to Odin\'s Valhalla. The other half go to Freya\'s field, Fólkvangr. She chooses first. Few traditions remember that the queen of love is also a queen of the battle-dead.' },
+      { title: 'The Lost Husband Óðr', body: 'Freya\'s husband Óðr wandered far and never returned. She searches for him across the worlds, weeping tears of red gold into the sea and amber on the land. Every amber bead is a tear. Every shimmer of red gold in a riverbed is hers.' },
     ],
     powersAndRelics: [
       'Brísingamen — the necklace of fire, source of her radiance',
@@ -468,9 +468,9 @@ She brought with her the secret magic of the Vanir: Seiðr. This was no domestic
       'Odin — student of her Seiðr; took half the slain',
       'Loki — frequent antagonist; tried repeatedly to steal Brísingamen',
     ],
-    worship: 'Freya was worshipped throughout the Norse world by women practicing Seiðr — wandering völvas (seeresses) traveled from farm to farm performing rites in her name. Friday ("Frigg/Freya's day") preserves her name. Cats were sacred to her — likely the origin of the European connection between cats and witchcraft.',
-    modernRelevance: 'Freya is the archetype of the woman who refuses to be sorted into a single category. She is sexual and martial, tender and fierce, magical and practical, faithful and fully herself. Modern women who have been told to "pick a lane" — be sweet OR be powerful, be a mother OR be ambitious — are walking Freya's path. She does not pick a lane. She owns the road.',
-    oracleLore: `Freya's Seiðr practice is one of the best-documented historical shamanic traditions in northern Europe — and in many disclosure-adjacent readings, it represents a surviving fragment of a far older Vanir technology of consciousness, distinct from the warrior-cult Aesir who later overshadowed it. The historical witch-hunts of medieval and early modern Europe disproportionately targeted women practicing the surviving folk-shadow of Seiðr — a near-deliberate erasure of the pre-Christian magical lineage Freya embodied.`,
+    worship: 'Freya was worshipped throughout the Norse world by women practicing Seiðr — wandering völvas (seeresses) traveled from farm to farm performing rites in her name. Friday ("Frigg/Freya\'s day") preserves her name. Cats were sacred to her — likely the origin of the European connection between cats and witchcraft.',
+    modernRelevance: 'Freya is the archetype of the woman who refuses to be sorted into a single category. She is sexual and martial, tender and fierce, magical and practical, faithful and fully herself. Modern women who have been told to "pick a lane" — be sweet OR be powerful, be a mother OR be ambitious — are walking Freya\'s path. She does not pick a lane. She owns the road.',
+    oracleLore: `Freya\'s Seiðr practice is one of the best-documented historical shamanic traditions in northern Europe — and in many disclosure-adjacent readings, it represents a surviving fragment of a far older Vanir technology of consciousness, distinct from the warrior-cult Aesir who later overshadowed it. The historical witch-hunts of medieval and early modern Europe disproportionately targeted women practicing the surviving folk-shadow of Seiðr — a near-deliberate erasure of the pre-Christian magical lineage Freya embodied.`,
     quotes: [
       'I weep red gold for what wanders. I do not weep less.',
       'The price is four nights. I will pay it. The necklace is mine.',
@@ -485,7 +485,7 @@ She brought with her the secret magic of the Vanir: Seiðr. This was no domestic
     atmosphericBg: 'linear-gradient(135deg, #000d1a 0%, #003d3d 40%, #001a1a 100%)',
     atmosphericDesc: 'Cosmic ocean stretches to infinity. A thousand-petaled lotus. Blue light, eternal calm.',
     symbol: '🪷', image: vishnuImg,
-    originStory: `Vishnu reclines on the cosmic serpent Ananta-Shesha, floating on the milk-ocean of unmanifest consciousness. From his navel grows a lotus, and from the lotus emerges Brahma — and from Brahma's mind, the universe is dreamed into being. When the dream is finished, Vishnu inhales it back. Each breath is a kalpa: 4.32 billion years.
+    originStory: `Vishnu reclines on the cosmic serpent Ananta-Shesha, floating on the milk-ocean of unmanifest consciousness. From his navel grows a lotus, and from the lotus emerges Brahma — and from Brahma\'s mind, the universe is dreamed into being. When the dream is finished, Vishnu inhales it back. Each breath is a kalpa: 4.32 billion years.
 
 Whenever cosmic order (dharma) collapses to a critical degree, Vishnu descends into the world in a specific form — an avatar — to restore balance. He has done this nine times. The tenth, Kalki, has not yet come.`,
     keyMyths: [
@@ -502,16 +502,16 @@ Whenever cosmic order (dharma) collapses to a critical degree, Vishnu descends i
     ],
     relationships: [
       'Lakshmi — consort, goddess of fortune and abundance',
-      'Brahma — born from Vishnu's navel-lotus; the creator',
+      'Brahma — born from Vishnu\'s navel-lotus; the creator',
       'Shiva — co-supreme in the Trimurti; the destroyer',
       'Garuda — eagle mount and most loyal devotee',
       'Ananta-Shesha — the cosmic serpent on whom he rests',
     ],
-    worship: 'Vishnu is worshipped through chanting (especially the thousand names — Vishnu Sahasranama), through devotion to his avatars (especially Krishna and Rama), and at temples like Tirupati (the world's most-visited religious site) and Srirangam. The Vaishnava tradition is one of the largest religious movements on earth.',
+    worship: 'Vishnu is worshipped through chanting (especially the thousand names — Vishnu Sahasranama), through devotion to his avatars (especially Krishna and Rama), and at temples like Tirupati (the world\'s most-visited religious site) and Srirangam. The Vaishnava tradition is one of the largest religious movements on earth.',
     modernRelevance: 'Vishnu is the archetype of the protector who knows exactly when to act and when to wait. Unlike Shiva (who destroys) or Brahma (who creates), Vishnu specializes in maintaining what already works. He represents the long, patient, often invisible labor of preservation: the parent who keeps the household running, the engineer who keeps the lights on, the historian who keeps memory alive. He acts only when collapse is imminent.',
     oracleLore: `The kalpa-cycles of Vishnu — billions of years of breath — uncannily match modern cosmological timescales for the lifespan of stars and the heat-death scenarios of the universe. Hindu cosmology is the only major religious cosmology whose order-of-magnitude time-frames align with modern physics rather than contradict it.
 
-In the avatar doctrine, the periodic descent of an enlightened being to course-correct civilization at moments of collapse maps cleanly onto the recurring "teacher" archetype across mystery traditions worldwide — and onto contactee literature describing periodic interventions by an advanced caretaker intelligence at humanity's critical inflection points.`,
+In the avatar doctrine, the periodic descent of an enlightened being to course-correct civilization at moments of collapse maps cleanly onto the recurring "teacher" archetype across mystery traditions worldwide — and onto contactee literature describing periodic interventions by an advanced caretaker intelligence at humanity\'s critical inflection points.`,
     quotes: [
       'Whenever dharma declines and adharma rises, I manifest myself.',
       'Set thy heart upon thy work, but never on its reward.',
@@ -530,8 +530,8 @@ In the avatar doctrine, the periodic descent of an enlightened being to course-c
 
 Each day Ra sails his solar barque across the sky. Each night he descends into the Duat — the underworld — where he must defeat the chaos serpent Apophis to be reborn at dawn. The struggle never ends. If Ra ever loses, the sun does not rise.`,
     keyMyths: [
-      { title: 'The Nightly Battle with Apophis', body: 'Every night, in the seventh hour of the underworld journey, the great serpent Apophis attacks the solar barque. Set — usually the villain of Egyptian myth — stands on the prow with a spear and defends Ra. Without Set's violence, the sun would not rise. The myth teaches that even chaos has its necessary role.' },
-      { title: 'The Destruction of Mankind', body: 'When humanity grew rebellious, Ra sent his eye in the form of Sekhmet (the lioness goddess) to destroy them. She nearly succeeded. Ra, repenting, flooded the land with red beer that Sekhmet mistook for blood. She drank herself unconscious. Humanity was spared by the god's mercy and his trickery.' },
+      { title: 'The Nightly Battle with Apophis', body: 'Every night, in the seventh hour of the underworld journey, the great serpent Apophis attacks the solar barque. Set — usually the villain of Egyptian myth — stands on the prow with a spear and defends Ra. Without Set\'s violence, the sun would not rise. The myth teaches that even chaos has its necessary role.' },
+      { title: 'The Destruction of Mankind', body: 'When humanity grew rebellious, Ra sent his eye in the form of Sekhmet (the lioness goddess) to destroy them. She nearly succeeded. Ra, repenting, flooded the land with red beer that Sekhmet mistook for blood. She drank herself unconscious. Humanity was spared by the god\'s mercy and his trickery.' },
       { title: 'The Withdrawal of Ra', body: 'Old and weary, Ra grew tired of ruling. He retreated to the back of the cow-goddess Nut, who lifted him into the sky. From there he became the distant sun he is today — present, life-giving, but no longer walking among us.' },
     ],
     powersAndRelics: [
@@ -539,7 +539,7 @@ Each day Ra sails his solar barque across the sky. Each night he descends into t
       'The Eye of Ra — destroying lioness, healing cobra, both',
       'Power to create gods from his own substance',
       'Kingship over the gods and over Egypt',
-      'The uraeus (rearing cobra) on the pharaoh's crown',
+      'The uraeus (rearing cobra) on the pharaoh\'s crown',
     ],
     relationships: [
       'Atum — his earlier or fused form, the self-created one',
@@ -547,11 +547,11 @@ Each day Ra sails his solar barque across the sky. Each night he descends into t
       'Set — defender of his barque against Apophis',
       'Horus — successor and merged form (Ra-Horakhty)',
       'Amun — fused with Ra to become Amun-Ra, the supreme New Kingdom god',
-      'The Pharaoh — Ra's living son on earth',
+      'The Pharaoh — Ra\'s living son on earth',
     ],
-    worship: 'Ra's great cult center was Heliopolis ("city of the sun"). The pyramids themselves are widely understood as solar ascension architecture — funerary devices to launch the pharaoh's ka into Ra's eternal cycle. Karnak's vast temple complex was dedicated to Amun-Ra at the height of Egyptian power.',
-    modernRelevance: 'Ra is the archetype of the daily resurrection — the truth that each day requires a small death and a small rebirth, and that the rising of the light is never automatic. People in burnout, depression, or recovery walk Ra's nighttime journey. The teaching: Apophis must be defeated nightly, not once. The sun rises because someone fights for it.',
-    oracleLore: `The pyramids' alignment to true north and to specific stellar phenomena, and the still-unexplained engineering of structures like the Great Pyramid, sit at the center of alternative-history research. From Sitchin to Robert Bauval (the Orion Correlation Theory) to Graham Hancock, the underlying hypothesis is consistent: the solar cult of Ra encoded astronomical, mathematical, and possibly off-world technological knowledge that orthodox Egyptology systematically deflects.
+    worship: 'Ra\'s great cult center was Heliopolis ("city of the sun"). The pyramids themselves are widely understood as solar ascension architecture — funerary devices to launch the pharaoh\'s ka into Ra\'s eternal cycle. Karnak\'s vast temple complex was dedicated to Amun-Ra at the height of Egyptian power.',
+    modernRelevance: 'Ra is the archetype of the daily resurrection — the truth that each day requires a small death and a small rebirth, and that the rising of the light is never automatic. People in burnout, depression, or recovery walk Ra\'s nighttime journey. The teaching: Apophis must be defeated nightly, not once. The sun rises because someone fights for it.',
+    oracleLore: `The pyramids\' alignment to true north and to specific stellar phenomena, and the still-unexplained engineering of structures like the Great Pyramid, sit at the center of alternative-history research. From Sitchin to Robert Bauval (the Orion Correlation Theory) to Graham Hancock, the underlying hypothesis is consistent: the solar cult of Ra encoded astronomical, mathematical, and possibly off-world technological knowledge that orthodox Egyptology systematically deflects.
 
 Read in this frame, Ra is not metaphor for the sun but a specific being or being-class associated with solar/stellar knowledge transmission — and the pharaonic state was the institutional infrastructure for maintaining contact.`,
     quotes: [
@@ -568,18 +568,18 @@ Read in this frame, Ra is not metaphor for the sun but a specific being or being
     atmosphericBg: 'linear-gradient(135deg, #1a0000 0%, #4d0000 40%, #2a0000 100%)',
     atmosphericDesc: 'Fire dances at the edge of the world. The Bifrost flickers. Something is about to change.',
     symbol: '🔥', image: lokiImg,
-    originStory: `Loki was not born of the Aesir. His parents were the giant Fárbauti ("cruel striker") and Laufey ("leafy isle"), placing him among the Jötnar — the giants who are the eternal antagonists of the gods. Yet Odin made him a blood brother. Why? No text fully explains. Some readings suggest Odin recognized in Loki a necessary destabilizing force without which the gods' order would calcify and die.
+    originStory: `Loki was not born of the Aesir. His parents were the giant Fárbauti ("cruel striker") and Laufey ("leafy isle"), placing him among the Jötnar — the giants who are the eternal antagonists of the gods. Yet Odin made him a blood brother. Why? No text fully explains. Some readings suggest Odin recognized in Loki a necessary destabilizing force without which the gods\' order would calcify and die.
 
-For centuries Loki operates as the divine problem-solver — getting the gods into impossible situations and then getting them out by even more impossible means. His tricks build the walls of Asgard, win Thor his hammer, recover Idun's apples. But over time the tricks darken.`,
+For centuries Loki operates as the divine problem-solver — getting the gods into impossible situations and then getting them out by even more impossible means. His tricks build the walls of Asgard, win Thor his hammer, recover Idun\'s apples. But over time the tricks darken.`,
     keyMyths: [
-      { title: 'The Birth of the Monsters', body: 'With the giantess Angrboða, Loki fathered Fenrir the wolf, Jörmungandr the world-serpent, and Hel, queen of the dead. All three are prophesied to play decisive roles in Ragnarök. With the stallion Svaðilfari (while Loki was a mare) he gave birth to Sleipnir, Odin's eight-legged horse.' },
+      { title: 'The Birth of the Monsters', body: 'With the giantess Angrboða, Loki fathered Fenrir the wolf, Jörmungandr the world-serpent, and Hel, queen of the dead. All three are prophesied to play decisive roles in Ragnarök. With the stallion Svaðilfari (while Loki was a mare) he gave birth to Sleipnir, Odin\'s eight-legged horse.' },
       { title: 'The Death of Baldr', body: 'When everyone in creation swore not to harm the beloved Baldr, Loki discovered the one exception — the mistletoe — and crafted a dart. He guided the blind god Höðr to throw it. Baldr fell. The gods bound Loki in a cave with venom dripping on his face until Ragnarök.' },
       { title: 'Lokasenna — The Flyting', body: 'At a feast of the gods, Loki burst in and systematically humiliated every one of them — exposing their hidden adulteries, cowardices, and lies. The brutality of the truth-telling was unbearable. He named exactly what no one was permitted to say.' },
     ],
     powersAndRelics: [
       'Shape-shifting into any form — fly, salmon, mare, fly, old woman',
       'Master of fire and ambiguity',
-      'Cunning that exceeds every other god's',
+      'Cunning that exceeds every other god\'s',
       'Father of Sleipnir, Fenrir, Jörmungandr, and Hel',
       'The flyting — devastating truth-as-weapon',
     ],
@@ -588,7 +588,7 @@ For centuries Loki operates as the divine problem-solver — getting the gods in
       'Sigyn — devoted wife who holds a bowl over his face to catch the venom',
       'Angrboða — giant lover, mother of his monstrous children',
       'Thor — frequent reluctant traveling companion',
-      'Baldr — the one he killed, sealing Ragnarök's arrival',
+      'Baldr — the one he killed, sealing Ragnarök\'s arrival',
       'Heimdall — destined to kill him at the end of the world',
     ],
     worship: 'Loki has no known cult, no temples, no formal worship in the historical record. He was acknowledged but not invoked. This silence is itself a kind of worship — a recognition of a force too dangerous to call upon directly.',
@@ -608,11 +608,11 @@ For centuries Loki operates as the divine problem-solver — getting the gods in
     atmosphericBg: 'linear-gradient(135deg, #0a000a 0%, #1a001a 50%, #0d000d 100%)',
     atmosphericDesc: 'Absolute darkness broken by flashes of violet lightning. The silence before creation.',
     symbol: '💀', image: kaliImg,
-    originStory: `Kali emerged on a battlefield. The demon Raktabija could not be killed — every drop of his blood that touched the ground spawned another demon identical to him. The gods were losing. Then the goddess Durga, in her rage, leapt forward — and from Durga's forehead burst Kali, black as the void, four-armed, tongue extended.
+    originStory: `Kali emerged on a battlefield. The demon Raktabija could not be killed — every drop of his blood that touched the ground spawned another demon identical to him. The gods were losing. Then the goddess Durga, in her rage, leapt forward — and from Durga\'s forehead burst Kali, black as the void, four-armed, tongue extended.
 
-Kali drank Raktabija's blood before it could touch the ground, and devoured every duplicate as fast as he produced them. When the demon was dead, she did not stop. Drunk on victory, she danced across the battlefield, and her dance grew so wild that the world began to crack. Shiva — her husband — lay down beneath her feet to absorb the impact. When she realized she was dancing on her own beloved, she stopped, tongue out in shock. That is the iconic image: Kali stopped mid-dance by love.`,
+Kali drank Raktabija\'s blood before it could touch the ground, and devoured every duplicate as fast as he produced them. When the demon was dead, she did not stop. Drunk on victory, she danced across the battlefield, and her dance grew so wild that the world began to crack. Shiva — her husband — lay down beneath her feet to absorb the impact. When she realized she was dancing on her own beloved, she stopped, tongue out in shock. That is the iconic image: Kali stopped mid-dance by love.`,
     keyMyths: [
-      { title: 'The Drinking of Raktabija's Blood', body: 'The only way to kill the unkillable demon was to consume his blood before it touched earth. Kali was created for this single function. The myth teaches that some enemies cannot be defeated except by an aspect of yourself ruthless enough to swallow the source.' },
+      { title: 'The Drinking of Raktabija\'s Blood', body: 'The only way to kill the unkillable demon was to consume his blood before it touched earth. Kali was created for this single function. The myth teaches that some enemies cannot be defeated except by an aspect of yourself ruthless enough to swallow the source.' },
       { title: 'The Dance on Shiva', body: 'Her victory-dance threatened to shatter the world. Shiva sacrificed his body as her ground. The dance is consciousness; the body is what it dances upon. The image is a complete cosmology in one frame.' },
       { title: 'The Garland of Severed Heads', body: 'Kali wears a necklace of fifty-one heads — one for each letter of the Sanskrit alphabet. She has decapitated language itself. To meet her, you must put down even the words you have used to know the world.' },
     ],
@@ -650,13 +650,13 @@ Her cult is one of the few in any tradition that does not hide death — that wo
     atmosphericBg: 'linear-gradient(135deg, #0d0800 0%, #2a1a00 50%, #1a0f00 100%)',
     atmosphericDesc: 'Ancient Babylon under a star-map sky. Ziggurats reach upward. The tablet of destinies glows.',
     symbol: '⚔️', image: mardukImg,
-    originStory: `Marduk was the son of Enki (Ea), born late in the Anunnaki succession. He inherited his father's wisdom but had a warrior's appetite the older gods lacked. When the primordial sea-mother Tiamat — enraged by the killing of her consort — created an army of monsters to destroy the younger gods, no one would face her. The older gods were terrified.
+    originStory: `Marduk was the son of Enki (Ea), born late in the Anunnaki succession. He inherited his father\'s wisdom but had a warrior\'s appetite the older gods lacked. When the primordial sea-mother Tiamat — enraged by the killing of her consort — created an army of monsters to destroy the younger gods, no one would face her. The older gods were terrified.
 
 Marduk volunteered, but on one condition: if he defeated Tiamat, he would be made king of all the gods, with absolute authority. They agreed. He took the bow, the net, the four winds, and the lightning. He met Tiamat in single combat, caught her in his net, and when she opened her mouth to swallow him, he sent the winds inside to inflate her. He shot an arrow down her throat, killing her. Then he split her body in two — making the sky from her upper half and the earth from her lower half — and built the cosmos from the corpse of chaos.`,
     keyMyths: [
-      { title: 'The Enuma Elish', body: 'The Babylonian creation epic, one of the oldest written texts in the world, is essentially a long song of Marduk's ascent. It describes the cosmos as the literal anatomy of a defeated being — with the implication that order is not the absence of chaos but its conquered form.' },
+      { title: 'The Enuma Elish', body: 'The Babylonian creation epic, one of the oldest written texts in the world, is essentially a long song of Marduk\'s ascent. It describes the cosmos as the literal anatomy of a defeated being — with the implication that order is not the absence of chaos but its conquered form.' },
       { title: 'The Creation of Humanity', body: 'After defeating Tiamat, Marduk killed her demonic general Kingu and used his blood mixed with clay to create humanity — to take over the labor of the lesser gods. (This parallels the Enki-led creation in the Atra-Hasis with Marduk crowned as the executive.)' },
-      { title: 'The Tablet of Destinies', body: 'Marduk took possession of the Tablet of Destinies — the cosmic document that determines the fate of all things. With it, his authority became unchallengeable. Babylon's temple, the Esagila, claimed to house its earthly counterpart.' },
+      { title: 'The Tablet of Destinies', body: 'Marduk took possession of the Tablet of Destinies — the cosmic document that determines the fate of all things. With it, his authority became unchallengeable. Babylon\'s temple, the Esagila, claimed to house its earthly counterpart.' },
     ],
     powersAndRelics: [
       'The four winds — his weaponized stormbringer',
@@ -668,14 +668,14 @@ Marduk volunteered, but on one condition: if he defeated Tiamat, he would be mad
     relationships: [
       'Enki / Ea — father, the wise creator',
       'Tiamat — slain primordial mother',
-      'Kingu — Tiamat's consort, sacrificed for human creation',
+      'Kingu — Tiamat\'s consort, sacrificed for human creation',
       'Anu — grandfather, sky-king',
       'Sarpanit — consort, goddess of healing',
       'Nabu — son, god of writing and wisdom (succeeded by Babylonian priests)',
     ],
-    worship: 'Marduk's temple, the Esagila in Babylon, included the great ziggurat Etemenanki — almost certainly the historical seed of the Tower of Babel narrative. The Akitu festival each spring re-enacted his victory over Tiamat with the king ritually slapped, dethroned, and reinstated to demonstrate that his rule continued at the god's pleasure.',
+    worship: 'Marduk\'s temple, the Esagila in Babylon, included the great ziggurat Etemenanki — almost certainly the historical seed of the Tower of Babel narrative. The Akitu festival each spring re-enacted his victory over Tiamat with the king ritually slapped, dethroned, and reinstated to demonstrate that his rule continued at the god\'s pleasure.',
     modernRelevance: 'Marduk is the archetype of the volunteer who takes on what no one else will. The young leader who steps up to a crisis the elders have refused to face. The teacher who takes the impossible class. The founder who does the dirty work. He demands the throne up front because he knows what it will cost — and he is right to demand it.',
-    oracleLore: `Marduk's rise is the clearest mythic record of a generational power transfer within the Anunnaki succession — Enki's line eclipsing the older Anu/Enlil order through Marduk's force of will. Sitchin and others read this as a literal political event in deep history: a younger faction of off-world rulers taking direct control of the human enterprise via the Babylonian theocracy.
+    oracleLore: `Marduk\'s rise is the clearest mythic record of a generational power transfer within the Anunnaki succession — Enki\'s line eclipsing the older Anu/Enlil order through Marduk\'s force of will. Sitchin and others read this as a literal political event in deep history: a younger faction of off-world rulers taking direct control of the human enterprise via the Babylonian theocracy.
 
 His "fifty names" recital that closes the Enuma Elish reads remarkably like an inventory of consolidated functions — almost a corporate restructuring of the divine administration under one executive.`,
     quotes: [
@@ -715,11 +715,11 @@ Enlil was not a kind god. He was the bureaucrat of the divine council — the on
       'Nanna (Sin) — son, moon god',
       'Humanity — his administrative burden and frequent target',
     ],
-    worship: 'Enlil's primary temple was the E-kur ("House of the Mountain") at Nippur — the religious capital of Sumer, more sacred than any political center. The kingship of any Sumerian city was considered legitimate only if confirmed at the E-kur. He was worshipped with awe rather than affection.',
+    worship: 'Enlil\'s primary temple was the E-kur ("House of the Mountain") at Nippur — the religious capital of Sumer, more sacred than any political center. The kingship of any Sumerian city was considered legitimate only if confirmed at the E-kur. He was worshipped with awe rather than affection.',
     modernRelevance: 'Enlil is the archetype of the executive who must make decisions that some will not survive. The wartime general. The ICU triage doctor. The CEO restructuring a failing company. The judge sentencing a defendant. He is the god of decisions that will be hated by the people they affect — and who must be made anyway. His shadow is the bureaucrat who has stopped feeling the weight of the lives in his ledger.',
-    oracleLore: `In the Sitchin reading and its descendants, Enlil is the chief operating officer of the Anunnaki Earth mission — the one whose actual votes and decrees shaped human destiny. The Great Flood, in this frame, is not metaphor but a deliberate planetary decision made by a council of off-world administrators who concluded humanity was a failed experiment. Enki's rebellion to save us is the central moral act of the disclosure narrative.
+    oracleLore: `In the Sitchin reading and its descendants, Enlil is the chief operating officer of the Anunnaki Earth mission — the one whose actual votes and decrees shaped human destiny. The Great Flood, in this frame, is not metaphor but a deliberate planetary decision made by a council of off-world administrators who concluded humanity was a failed experiment. Enki\'s rebellion to save us is the central moral act of the disclosure narrative.
 
-Enlil's archetype recurs as the cold administrator in nearly every modern conspiracy framing — the figure who is not the puppet master but the project manager: the one who actually signs off on what gets done to us. Whether literal or symbolic, the archetype is consistent enough that his ancient name still applies.`,
+Enlil\'s archetype recurs as the cold administrator in nearly every modern conspiracy framing — the figure who is not the puppet master but the project manager: the one who actually signs off on what gets done to us. Whether literal or symbolic, the archetype is consistent enough that his ancient name still applies.`,
     quotes: [
       'Their noise has become unbearable. By my decree, the waters shall rise.',
       'I do not need to be loved. I need to be obeyed.',
@@ -739,7 +739,7 @@ Enlil's archetype recurs as the cold administrator in nearly every modern conspi
 Where Athena represented the strategic, intellectual, victorious face of war, Ares was the side no general ever celebrated: the carnage, the panic, the bestial joy of combat itself. Greek soldiers did not pray to Ares for victory. They prayed to him for the courage not to break and run.`,
     keyMyths: [
       { title: 'Caught with Aphrodite', body: 'Ares had a long affair with Aphrodite, married to Hephaestus. The crippled smith god caught them in an unbreakable golden net and exposed them to all of Olympus. The gods laughed — but several of them noted privately that they would have traded places with Ares.' },
-      { title: 'Defeat at Athena's Hand', body: 'In the Iliad, Ares fought on the Trojan side. Athena, fighting for the Greeks, threw a stone that knocked him flat. He lay across seven acres of ground bellowing. The myth is brutal: raw force without strategy loses to strategy with disciplined force.' },
+      { title: 'Defeat at Athena\'s Hand', body: 'In the Iliad, Ares fought on the Trojan side. Athena, fighting for the Greeks, threw a stone that knocked him flat. He lay across seven acres of ground bellowing. The myth is brutal: raw force without strategy loses to strategy with disciplined force.' },
       { title: 'The Twelve Labors of Heracles — The Belt of Hippolyta', body: 'The Amazon queen Hippolyta wore a war-belt given by her father — Ares. The Amazons themselves were said to be his daughters. Wherever uncompromising warrior-women appeared in Greek myth, Ares was somewhere upstream.' },
     ],
     powersAndRelics: [
@@ -775,11 +775,11 @@ Where Athena represented the strategic, intellectual, victorious face of war, Ar
     atmosphericBg: 'linear-gradient(135deg, #000000 0%, #0a0a00 40%, #1a1a00 100%)',
     atmosphericDesc: 'The Hall of Two Truths. Candles flicker. A golden scale waits. The jackal-headed god watches.',
     symbol: '⚖️', image: anubisImg,
-    originStory: `Anubis was the son of Nephthys, born of her secret union with Osiris (her sister Isis's husband). Fearing Set's wrath, Nephthys abandoned the infant. Isis — finding the child and recognizing his lineage — adopted him without resentment. Anubis grew up knowing he was both wanted and not-wanted, both legitimate and illegitimate.
+    originStory: `Anubis was the son of Nephthys, born of her secret union with Osiris (her sister Isis\'s husband). Fearing Set\'s wrath, Nephthys abandoned the infant. Isis — finding the child and recognizing his lineage — adopted him without resentment. Anubis grew up knowing he was both wanted and not-wanted, both legitimate and illegitimate.
 
 When Set murdered Osiris, Anubis assisted Isis in gathering the pieces and inventing the rite of mummification — the first preservation of a body for the afterlife. He held that office forever after: the god who prepares the dead.`,
     keyMyths: [
-      { title: 'The Weighing of the Heart', body: 'In the Hall of Two Truths, the soul of the deceased stands before forty-two judges. Anubis places the heart on one pan of the scale, the feather of Ma'at on the other. If the heart is lighter, the soul passes to the Field of Reeds. If heavier, the demon Ammit devours it and the soul is destroyed forever.' },
+      { title: 'The Weighing of the Heart', body: 'In the Hall of Two Truths, the soul of the deceased stands before forty-two judges. Anubis places the heart on one pan of the scale, the feather of Ma\'at on the other. If the heart is lighter, the soul passes to the Field of Reeds. If heavier, the demon Ammit devours it and the soul is destroyed forever.' },
       { title: 'The First Mummification', body: 'When Osiris was killed, Anubis embalmed him — the first mummy. From this act, the entire Egyptian funerary industry derived its rituals. Every priest who ever wrapped a body wore the jackal mask of Anubis.' },
       { title: 'The Opening of the Mouth', body: 'Anubis presided over the ceremony in which the senses of the deceased were ritually reactivated for the afterlife. The dead did not pass into eternity sealed shut — they passed in fully sensing.' },
     ],
@@ -788,7 +788,7 @@ When Set murdered Osiris, Anubis assisted Isis in gathering the pieces and inven
       'The jackal mask worn by priests of the dead',
       'Mastery of mummification and embalming chemistry',
       'Guardianship of the Duat — the underworld passage',
-      'Power to identify the heart's true weight',
+      'Power to identify the heart\'s true weight',
     ],
     relationships: [
       'Osiris — father, the murdered king of the underworld',
@@ -801,7 +801,7 @@ When Set murdered Osiris, Anubis assisted Isis in gathering the pieces and inven
     ],
     worship: 'Anubis was worshipped throughout Egypt but especially at Cynopolis ("city of dogs"), where mummified jackals and dogs have been excavated by the millions. Embalmers wore his mask during their work. Every funerary text in Egypt invokes him as protector and guide.',
     modernRelevance: 'Anubis is the archetype of the honest witness — the one who weighs without bias, who sees what is actually there. Therapists, hospice workers, judges, undertakers, and anyone whose work involves bearing accurate witness to what is real about a life walk this lineage. He teaches that judgment without compassion is cruelty, but compassion without judgment is denial. The scale needs both pans.',
-    oracleLore: `The weighing of the heart against the feather of Ma'at is one of the most precise and self-similar near-death-experience reports in human literature — modern NDE accounts of "life review" describe an almost identical phenomenon: every act witnessed, weighed, and felt without distortion or denial. Egyptian funerary cosmology may have been the most advanced civilizational engagement with the death-process ever attempted.
+    oracleLore: `The weighing of the heart against the feather of Ma\'at is one of the most precise and self-similar near-death-experience reports in human literature — modern NDE accounts of "life review" describe an almost identical phenomenon: every act witnessed, weighed, and felt without distortion or denial. Egyptian funerary cosmology may have been the most advanced civilizational engagement with the death-process ever attempted.
 
 In the disclosure-adjacent reading, Anubis represents the principle that consciousness is reviewed and the review is precise. This implication is taken seriously by both the ancient Egyptians and by modern researchers like Pim van Lommel and Bruce Greyson — the data converges from opposite directions.`,
     quotes: [
@@ -820,16 +820,16 @@ In the disclosure-adjacent reading, Anubis represents the principle that conscio
     symbol: '🪄', image: hermesImg,
     originStory: `Born to Zeus and the nymph Maia in a cave on Mount Cyllene, Hermes was the most precocious infant in all mythology. On his first day of life he climbed out of his cradle, stole a herd of fifty cattle from his half-brother Apollo, walked them backward to disguise their tracks, invented sandals to confuse pursuit, killed two of them, used their guts to invent the lyre, and was back in his cradle before sunset.
 
-When Apollo accused him, the infant denied everything with such charm that even Apollo was disarmed. When the lyre was discovered, Hermes gave it to Apollo as a gift — earning forever his favor and the role of the gods' messenger and trickster.`,
+When Apollo accused him, the infant denied everything with such charm that even Apollo was disarmed. When the lyre was discovered, Hermes gave it to Apollo as a gift — earning forever his favor and the role of the gods\' messenger and trickster.`,
     keyMyths: [
-      { title: 'The Theft of Apollo's Cattle', body: 'The defining act of his birth — a literal first-day demonstration of every aspect of his nature: theft, ingenuity, music, charm, and reconciliation through the gift of beauty.' },
+      { title: 'The Theft of Apollo\'s Cattle', body: 'The defining act of his birth — a literal first-day demonstration of every aspect of his nature: theft, ingenuity, music, charm, and reconciliation through the gift of beauty.' },
       { title: 'Guide of Souls (Psychopomp)', body: 'Hermes was the only Olympian permitted to enter the underworld at will. He guided the souls of the dead to the river Styx — a function he performed for both heroes and ordinary mortals.' },
-      { title: 'The Slaying of Argus Panoptes', body: 'When Hera transformed Zeus's lover Io into a heifer and set the hundred-eyed giant Argus to guard her, Hermes lulled all hundred eyes to sleep with his music and slew him. Hera placed the eyes on the peacock's tail in mourning.' },
+      { title: 'The Slaying of Argus Panoptes', body: 'When Hera transformed Zeus\'s lover Io into a heifer and set the hundred-eyed giant Argus to guard her, Hermes lulled all hundred eyes to sleep with his music and slew him. Hera placed the eyes on the peacock\'s tail in mourning.' },
     ],
     powersAndRelics: [
       'Winged sandals (talaria) — fastest of any god',
-      'Caduceus — the herald's staff with two intertwined serpents',
-      'Cap of invisibility (Hades' loan) — for stealth missions',
+      'Caduceus — the herald\'s staff with two intertwined serpents',
+      'Cap of invisibility (Hades\' loan) — for stealth missions',
       'The lyre and the panpipes — both his inventions',
       'Free passage between Olympus, Earth, and Underworld',
       'Patron of any movement of message, goods, or soul',
@@ -861,7 +861,7 @@ In the disclosure frame, Hermes is the principle of inter-realm communication �
     atmosphericBg: 'linear-gradient(135deg, #2a0a1f 0%, #4d0033 50%, #2a001a 100%)',
     atmosphericDesc: 'Rose-gold sea foam at dawn. Doves circle a marble figure rising from the waves.',
     symbol: '🌹', image: aphroditeImg,
-    originStory: `Aphrodite's birth is the most violent in Greek myth, and almost no modern retelling preserves the horror of it. When Cronus castrated his father Uranus and threw the genitals into the sea, the foam (aphros) that gathered around them gave birth to Aphrodite. She rose from the water fully grown, fully beautiful, and stepped ashore at Cyprus — where flowers sprang under her feet.
+    originStory: `Aphrodite\'s birth is the most violent in Greek myth, and almost no modern retelling preserves the horror of it. When Cronus castrated his father Uranus and threw the genitals into the sea, the foam (aphros) that gathered around them gave birth to Aphrodite. She rose from the water fully grown, fully beautiful, and stepped ashore at Cyprus — where flowers sprang under her feet.
 
 She was, from her first breath, the embodiment of a paradox: the most beautiful thing that ever existed, born from an act of paternal mutilation. The implication that ancient mythographers were quietly making: love and beauty are not gentle things. They emerge from cosmic violence.`,
     keyMyths: [
@@ -886,7 +886,7 @@ She was, from her first breath, the embodiment of a paradox: the most beautiful 
     ],
     worship: 'Aphrodite was worshipped throughout the Greek world but especially at Paphos on Cyprus, where her temple stood for over a thousand years. Sacred prostitution was practiced in some of her temples — a fact later moralists strained to suppress. Her Roman incarnation, Venus, became the divine mother of the Julian line that produced Caesar and Augustus.',
     modernRelevance: 'Aphrodite is the archetype of the force that will not be talked out of itself. She is the desire that breaks careers, marriages, dynasties, and remakes them in its own image. Modern cultures that try to dismiss desire as "shallow" repeatedly discover that Aphrodite simply does not care what they think — and the consequences of pretending she does not exist are exactly as catastrophic as Troy.',
-    oracleLore: `Aphrodite's birth from the severed genitals of Uranus encodes a profound and uncomfortable cosmological teaching: that beauty and desire emerge from primordial trauma and are not separable from it. The romantic tradition that tries to make her gentle and pink is sanitizing a force that the Greeks knew was as dangerous as it was sweet.
+    oracleLore: `Aphrodite\'s birth from the severed genitals of Uranus encodes a profound and uncomfortable cosmological teaching: that beauty and desire emerge from primordial trauma and are not separable from it. The romantic tradition that tries to make her gentle and pink is sanitizing a force that the Greeks knew was as dangerous as it was sweet.
 
 In the deeper esoteric reading, Aphrodite is the principle by which separated beings are pulled back into union — the magnetic counterforce to entropy. Without her, no atoms bond, no cells join, no consciousness reaches toward another consciousness. She is not optional. She is the reason anything is anything other than scattered dust.`,
     quotes: [
@@ -911,15 +911,15 @@ He was given the task of shaping humanity from clay. He took the work seriously 
 For this, Zeus chained him to a peak in the Caucasus. Each day an eagle came and tore out his liver. Each night the liver grew back. Each morning the eagle returned. This continued for thousands of years until Heracles, on the eleventh of his twelve labors, killed the eagle and freed him.`,
     keyMyths: [
       { title: 'The Theft of Fire', body: 'The single act on which the entire human enterprise rests. Without fire we have no metallurgy, no cooking, no light, no warmth, no civilization. Prometheus knew exactly what he was giving us — and exactly what it would cost him.' },
-      { title: 'The Trick at Mecone', body: 'When the gods and humans were dividing the first sacrifice, Prometheus tricked Zeus into accepting a portion of bones wrapped in fat — leaving the meat for humans. Zeus saw through it but accepted the deal as a matter of his sworn word. The pattern was set: Prometheus would always cheat the gods on humanity's behalf.' },
-      { title: 'The Pandora Counter-Punishment', body: 'Furious at the fire-theft, Zeus had Hephaestus forge Pandora — the first woman, beautiful and curious — and sent her with a sealed jar to Prometheus's gullible brother Epimetheus ("afterthought"). When opened, the jar released every plague and grief into the world. Only hope remained inside. The gift of fire was answered with the gift of suffering.' },
+      { title: 'The Trick at Mecone', body: 'When the gods and humans were dividing the first sacrifice, Prometheus tricked Zeus into accepting a portion of bones wrapped in fat — leaving the meat for humans. Zeus saw through it but accepted the deal as a matter of his sworn word. The pattern was set: Prometheus would always cheat the gods on humanity\'s behalf.' },
+      { title: 'The Pandora Counter-Punishment', body: 'Furious at the fire-theft, Zeus had Hephaestus forge Pandora — the first woman, beautiful and curious — and sent her with a sealed jar to Prometheus\'s gullible brother Epimetheus ("afterthought"). When opened, the jar released every plague and grief into the world. Only hope remained inside. The gift of fire was answered with the gift of suffering.' },
     ],
     powersAndRelics: [
       'Foresight — could see the future with chilling precision',
       'The hollow fennel stalk that carried the first stolen ember',
       'Mastery of the arts he secretly taught humanity (writing, mathematics, medicine, agriculture, navigation)',
       'Immortality — which made his torment eternal',
-      'Knowledge of a secret prophecy about Zeus's downfall, which he refused to reveal',
+      'Knowledge of a secret prophecy about Zeus\'s downfall, which he refused to reveal',
     ],
     relationships: [
       'Iapetus & Clymene — Titan parents',
@@ -949,13 +949,13 @@ The eternal punishment of Prometheus is then not metaphor but a structural warni
     atmosphericBg: 'linear-gradient(135deg, #001a14 0%, #003329 50%, #001f19 100%)',
     atmosphericDesc: 'Crumbling Greek temple ruins. Living serpent hair. Eyes that stop time itself.',
     symbol: '🐍', image: medusaImg,
-    originStory: `Medusa was originally a beautiful mortal woman, a priestess sworn to chastity in the temple of Athena. Poseidon, struck by her beauty, raped her on the floor of Athena's sanctuary. Athena — the virgin warrior goddess — flew into a rage. But she did not punish Poseidon. She punished Medusa. Medusa's glorious hair was turned to writhing serpents. Her face was made so terrible that any man who looked upon her would turn to stone.
+    originStory: `Medusa was originally a beautiful mortal woman, a priestess sworn to chastity in the temple of Athena. Poseidon, struck by her beauty, raped her on the floor of Athena\'s sanctuary. Athena — the virgin warrior goddess — flew into a rage. But she did not punish Poseidon. She punished Medusa. Medusa\'s glorious hair was turned to writhing serpents. Her face was made so terrible that any man who looked upon her would turn to stone.
 
 She fled to a cave at the edge of the world, where she lived alone with her two immortal Gorgon sisters, Stheno and Euryale. She was the only mortal of the three. Heroes came to kill her. None ever asked why she was there.`,
     keyMyths: [
-      { title: 'The Assault and the Curse', body: 'The original Greek sources — particularly Ovid — are explicit: Medusa was a victim, and Athena's "punishment" was a misdirected fury that landed on the woman who had done nothing wrong. Modern feminist re-readings have surfaced what the texts actually say. The petrifying gaze can be understood as a defense mechanism granted by a goddess who, despite herself, gave Medusa a way to never be touched again.' },
-      { title: 'The Beheading by Perseus', body: 'Perseus, sent by King Polydectes to bring Medusa's head as a wedding gift, used a polished bronze shield to look at her reflection rather than her face directly. He cut off her head while she slept. From the wound sprang Pegasus and the warrior Chrysaor — the children Poseidon had planted in her years before.' },
-      { title: 'The Aegis', body: 'Perseus gave Medusa's severed head to Athena, who fixed it on her own shield (the Aegis). Forever after, Athena went into battle wearing the face of the woman she had cursed. There is no commentary in the texts on this. There does not need to be.' },
+      { title: 'The Assault and the Curse', body: 'The original Greek sources — particularly Ovid — are explicit: Medusa was a victim, and Athena\'s "punishment" was a misdirected fury that landed on the woman who had done nothing wrong. Modern feminist re-readings have surfaced what the texts actually say. The petrifying gaze can be understood as a defense mechanism granted by a goddess who, despite herself, gave Medusa a way to never be touched again.' },
+      { title: 'The Beheading by Perseus', body: 'Perseus, sent by King Polydectes to bring Medusa\'s head as a wedding gift, used a polished bronze shield to look at her reflection rather than her face directly. He cut off her head while she slept. From the wound sprang Pegasus and the warrior Chrysaor — the children Poseidon had planted in her years before.' },
+      { title: 'The Aegis', body: 'Perseus gave Medusa\'s severed head to Athena, who fixed it on her own shield (the Aegis). Forever after, Athena went into battle wearing the face of the woman she had cursed. There is no commentary in the texts on this. There does not need to be.' },
     ],
     powersAndRelics: [
       'Petrifying gaze — turned any man who looked at her to stone',
@@ -971,9 +971,9 @@ She fled to a cave at the edge of the world, where she lived alone with her two 
       'Perseus — the killer who cut off her head while she slept',
       'Pegasus — son born from her wound',
     ],
-    worship: 'Medusa's face — the gorgoneion — was the most widely used apotropaic symbol in the ancient Mediterranean, placed on shields, doors, coins, and graves to ward off evil. Even her killers honored what she had become. There is a strange ambivalence in this: the culture that murdered her wore her face for protection.',
+    worship: 'Medusa\'s face — the gorgoneion — was the most widely used apotropaic symbol in the ancient Mediterranean, placed on shields, doors, coins, and graves to ward off evil. Even her killers honored what she had become. There is a strange ambivalence in this: the culture that murdered her wore her face for protection.',
     modernRelevance: 'Medusa is the archetype of the woman who was hurt, then blamed for being hurt, then made into a monster for the convenience of the people who could not face what had actually happened. Modern survivors of assault, of family violence, of institutional gaslighting — they are her. Modern feminist readings of Medusa as a symbol of righteous, weaponized survivor-rage have restored to her something the classical canon stole: her dignity.',
-    oracleLore: `The Medusa myth is one of the most precise mythological records of the cultural pattern of victim-blame in the Western tradition. The texts themselves — Ovid in particular — preserve the truth of what happened. The popular tradition has consistently smoothed it over to focus on Perseus's heroism. Recovering Medusa is not modern revisionism. It is reading what the original texts already say.
+    oracleLore: `The Medusa myth is one of the most precise mythological records of the cultural pattern of victim-blame in the Western tradition. The texts themselves — Ovid in particular — preserve the truth of what happened. The popular tradition has consistently smoothed it over to focus on Perseus\'s heroism. Recovering Medusa is not modern revisionism. It is reading what the original texts already say.
 
 Her snakes have a deeper esoteric meaning as well: in many ancient traditions, serpent-hair is the iconography of awakened kundalini consciousness. Medusa was not merely cursed. She was, by the act of the curse, accidentally initiated into a power level that no man could survive looking at directly. The "monster" was, in part, the goddess inside her finally activated — by force, against her will, but real.`,
     quotes: [
@@ -991,20 +991,20 @@ Her snakes have a deeper esoteric meaning as well: in many ancient traditions, s
     atmosphericBg: 'linear-gradient(135deg, #1a1000 0%, #3d2a00 50%, #2a1c00 100%)',
     atmosphericDesc: 'A young hero on a sunset cliff. Winged sandals. A bronze shield reflecting horror.',
     symbol: '⚔️', image: perseusImg,
-    originStory: `King Acrisius of Argos was warned by an oracle that his daughter's son would kill him. He locked his daughter Danae in a bronze chamber. Zeus came to her as a shower of golden rain through the roof. She bore Perseus.
+    originStory: `King Acrisius of Argos was warned by an oracle that his daughter\'s son would kill him. He locked his daughter Danae in a bronze chamber. Zeus came to her as a shower of golden rain through the roof. She bore Perseus.
 
 Acrisius set mother and infant adrift in a wooden chest at sea. They washed ashore on the island of Seriphos and were taken in by a fisherman. When Perseus came of age, the king of Seriphos — wanting Danae for himself — sent the young man on what was supposed to be an impossible suicide mission: bring back the head of Medusa.`,
     keyMyths: [
-      { title: 'The Quest for Medusa's Head', body: 'Equipped by Athena with a polished shield, by Hermes with winged sandals, and by Hades with the cap of invisibility, Perseus tracked Medusa to her cave at the edge of the world. He found her sleeping. He used the shield as a mirror to avoid her gaze, and beheaded her in her sleep.' },
-      { title: 'The Rescue of Andromeda', body: 'Flying home with Medusa's head, Perseus passed over the Ethiopian coast and saw a princess chained to a sea-cliff as sacrifice to the sea-monster Cetus. Perseus killed the monster (in some accounts using Medusa's head to petrify it) and married Andromeda.' },
+      { title: 'The Quest for Medusa\'s Head', body: 'Equipped by Athena with a polished shield, by Hermes with winged sandals, and by Hades with the cap of invisibility, Perseus tracked Medusa to her cave at the edge of the world. He found her sleeping. He used the shield as a mirror to avoid her gaze, and beheaded her in her sleep.' },
+      { title: 'The Rescue of Andromeda', body: 'Flying home with Medusa\'s head, Perseus passed over the Ethiopian coast and saw a princess chained to a sea-cliff as sacrifice to the sea-monster Cetus. Perseus killed the monster (in some accounts using Medusa\'s head to petrify it) and married Andromeda.' },
       { title: 'The Accidental Killing of Acrisius', body: 'At funeral games years later, Perseus threw a discus that hit the now-elderly Acrisius in the head and killed him. The prophecy was fulfilled — accidentally, gently, without intention. The myth teaches that fate finds a way.' },
     ],
     powersAndRelics: [
-      'The kibisis — magical bag that could hold Medusa's head safely',
-      'Hermes' winged sandals',
-      'Hades' cap of invisibility',
-      'Athena's polished bronze shield (used as mirror)',
-      'Hephaestus' adamantine sword',
+      'The kibisis — magical bag that could hold Medusa\'s head safely',
+      'Hermes\' winged sandals',
+      'Hades\' cap of invisibility',
+      'Athena\'s polished bronze shield (used as mirror)',
+      'Hephaestus\' adamantine sword',
       'Founder of the city of Mycenae and the Perseid dynasty',
     ],
     relationships: [
@@ -1013,7 +1013,7 @@ Acrisius set mother and infant adrift in a wooden chest at sea. They washed asho
       'Acrisius — grandfather he was prophesied to kill',
       'Andromeda — wife, princess of Ethiopia',
       'Athena — divine patron and outfitter',
-      'Heracles — great-grandson through Andromeda's line',
+      'Heracles — great-grandson through Andromeda\'s line',
     ],
     worship: 'Perseus was honored at Mycenae (which he founded) and at Argos. As a Greek "founder hero," his cult was civic rather than religious — he was the legendary ancestor of kings.',
     modernRelevance: 'Perseus is the archetype of the hero who succeeds by refusing direct confrontation — using the mirror, the angle, the indirect approach. Modern people facing addictions, abusive bosses, panic attacks, or traumatic memories often discover the same lesson: looking the monster in the face turns you to stone. Looking at its reflection lets you act.',
@@ -1040,13 +1040,13 @@ In the deeper reading, Perseus is also the archetype of the male hero who must e
 Pegasus rose immediately into the air and flew to Mount Helicon, where his hooves struck the ground and the Hippocrene spring — sacred to the Muses — burst forth. Where Pegasus landed, inspiration flowed.`,
     keyMyths: [
       { title: 'Bellerophon and the Chimera', body: 'The hero Bellerophon needed a mount to defeat the fire-breathing Chimera. Athena gave him a golden bridle in a dream and led him to Pegasus drinking at the Hippocrene. Bellerophon rode Pegasus into the sky and killed the Chimera by pouring molten lead down its throat from above.' },
-      { title: 'The Fall of Bellerophon', body: 'Drunk on his victories, Bellerophon tried to ride Pegasus all the way to Olympus to join the gods. Zeus sent a gadfly that stung Pegasus, throwing Bellerophon — who fell to earth and lived out his life crippled and shunned. Pegasus continued to Olympus alone, where he became the carrier of Zeus's thunderbolts.' },
+      { title: 'The Fall of Bellerophon', body: 'Drunk on his victories, Bellerophon tried to ride Pegasus all the way to Olympus to join the gods. Zeus sent a gadfly that stung Pegasus, throwing Bellerophon — who fell to earth and lived out his life crippled and shunned. Pegasus continued to Olympus alone, where he became the carrier of Zeus\'s thunderbolts.' },
       { title: 'The Constellation', body: 'Zeus eventually placed Pegasus among the stars, where the Great Square of Pegasus is still visible in the autumn sky — the body of a horse in flight forever.' },
     ],
     powersAndRelics: [
-      'Flight — could carry a rider beyond the earth's atmosphere',
+      'Flight — could carry a rider beyond the earth\'s atmosphere',
       'Hippocrene — spring of poetic inspiration he opened with a hoof',
-      'Carrier of Zeus's thunderbolts after his ascension',
+      'Carrier of Zeus\'s thunderbolts after his ascension',
       'Constellation form — eternalized in the autumn sky',
     ],
     relationships: [
@@ -1061,7 +1061,7 @@ Pegasus rose immediately into the air and flew to Mount Helicon, where his hoove
     modernRelevance: 'Pegasus is the archetype of the gift that emerged from your trauma — the writing voice you found in grief, the empathy that grew out of betrayal, the courage forged in fear. He teaches that nothing valuable is wasted, even what was given to us by force. He also warns: the gift will carry you only as long as you ride it with humility. The moment you try to ride it to Olympus, you fall.',
     oracleLore: `Pegasus is, in many esoteric traditions, the symbol of the soul itself — the part of us that can fly, that was born from the wound, that opens springs of inspiration wherever it lands. Carl Jung wrote about Pegasus as the archetype of the creative breakthrough that emerges precisely from the integration of shadow material — Medusa, in this reading, being the un-confronted shadow whose acknowledgment releases the winged form.
 
-Bellerophon's fall is the cautionary half of the myth: the same creative gift that lifts you, if you take credit for it instead of riding it with respect, will throw you. Many artists, writers, and founders eventually meet this lesson personally.`,
+Bellerophon\'s fall is the cautionary half of the myth: the same creative gift that lifts you, if you take credit for it instead of riding it with respect, will throw you. Many artists, writers, and founders eventually meet this lesson personally.`,
     quotes: [
       'I was born from her death. The first thing I did was rise.',
       'Ride me with respect, and I will carry you anywhere. Ride me with pride, and I will throw you.',
@@ -1077,12 +1077,12 @@ Bellerophon's fall is the cautionary half of the myth: the same creative gift th
     atmosphericBg: 'linear-gradient(135deg, #1a0000 0%, #3d0000 50%, #1f0000 100%)',
     atmosphericDesc: 'A figure of cracked stone laced with molten light. The temple shakes when he steps.',
     symbol: '💪', image: kratosImg,
-    originStory: `Kratos ("Strength") was the son of the Titan Pallas and the river-goddess Styx. He had three siblings — Bia (Force), Nike (Victory), and Zelus (Zeal). When the Titanomachy began, Styx was the first divine being to bring her children to Zeus's side. As reward, Zeus made the four of them his constant attendants. They never left his throne.
+    originStory: `Kratos ("Strength") was the son of the Titan Pallas and the river-goddess Styx. He had three siblings — Bia (Force), Nike (Victory), and Zelus (Zeal). When the Titanomachy began, Styx was the first divine being to bring her children to Zeus\'s side. As reward, Zeus made the four of them his constant attendants. They never left his throne.
 
-Kratos became the executive arm of Zeus's authority — the god dispatched whenever the king of Olympus needed something done that required raw, unflinching force. The most famous instance: when Zeus sentenced Prometheus, it was Kratos who marched the Titan to the Caucasus and held him while Hephaestus drove the chains into his flesh. Hephaestus wept doing it. Kratos felt nothing.`,
+Kratos became the executive arm of Zeus\'s authority — the god dispatched whenever the king of Olympus needed something done that required raw, unflinching force. The most famous instance: when Zeus sentenced Prometheus, it was Kratos who marched the Titan to the Caucasus and held him while Hephaestus drove the chains into his flesh. Hephaestus wept doing it. Kratos felt nothing.`,
     keyMyths: [
-      { title: 'The Chaining of Prometheus', body: 'In Aeschylus's Prometheus Bound, Kratos has the opening scene. He oversees the chaining and mocks Hephaestus for hesitating. He is the only character in the play who shows no compassion for Prometheus. He is, explicitly, the embodiment of unfeeling state power.' },
-      { title: 'Permanent Attendance on Zeus', body: 'Kratos and his siblings were the only beings who never left Zeus's side — not even briefly. They were the visible proof that the king of the gods always had force at hand, always available, always loyal.' },
+      { title: 'The Chaining of Prometheus', body: 'In Aeschylus\'s Prometheus Bound, Kratos has the opening scene. He oversees the chaining and mocks Hephaestus for hesitating. He is the only character in the play who shows no compassion for Prometheus. He is, explicitly, the embodiment of unfeeling state power.' },
+      { title: 'Permanent Attendance on Zeus', body: 'Kratos and his siblings were the only beings who never left Zeus\'s side — not even briefly. They were the visible proof that the king of the gods always had force at hand, always available, always loyal.' },
     ],
     powersAndRelics: [
       'Raw physical strength beyond any other divine being',
@@ -1101,7 +1101,7 @@ Kratos became the executive arm of Zeus's authority — the god dispatched whene
     ],
     worship: 'Kratos had no significant cult. He was acknowledged as a divine principle but rarely worshipped — perhaps because the Greeks recognized that a deity whose entire function is unfeeling enforcement is dangerous to invoke. He was respected the way modern cultures respect law enforcement: necessary, occasionally feared, rarely loved.',
     modernRelevance: 'Kratos is the archetype of the enforcer — the soldier following orders, the cop, the bouncer, the corporate compliance officer, the bureaucrat executing an unjust policy. He raises the most uncomfortable question in moral philosophy: what is the responsibility of the one who carries out the order? The Greeks named the principle without resolving the question, because the question is unresolvable. The strongest never escape the moral weight of being instruments.',
-    oracleLore: `Kratos is one of the few Greek divine beings explicitly named to embody what later philosophy would call "the banality of evil" — Hannah Arendt's phrase for the moral hollowness of the obedient functionary. Aeschylus wrote his opening scene with Prometheus more than two thousand years before Eichmann, and the diagnosis was already clean: the strong who refuse to feel are not neutral. They are the active enabling condition of every tyranny.
+    oracleLore: `Kratos is one of the few Greek divine beings explicitly named to embody what later philosophy would call "the banality of evil" — Hannah Arendt\'s phrase for the moral hollowness of the obedient functionary. Aeschylus wrote his opening scene with Prometheus more than two thousand years before Eichmann, and the diagnosis was already clean: the strong who refuse to feel are not neutral. They are the active enabling condition of every tyranny.
 
 The modern video game franchise has, ironically, turned this archetype into a tragic anti-hero who eventually rebels against the gods who used him — a recovery arc the original Greek Kratos was never permitted.`,
     quotes: [
@@ -1125,7 +1125,7 @@ The far more detailed account is in the Book of Enoch, an ancient Jewish text ex
     keyMyths: [
       { title: 'The Descent of the Watchers', body: 'In Enoch, two hundred angelic Watchers swore a binding oath together on Mount Hermon to take human wives. The descent was deliberate, collective, and explicitly in defiance of divine command. They knew what they were doing.' },
       { title: 'The Forbidden Curriculum', body: 'Azazel taught humanity to make swords and shields and "all manner of cunning works." Semjaza taught enchantments and root-cutting. Armaros taught the resolving of enchantments. Baraqijal taught astrology. Kokabel taught the constellations. Each Watcher transmitted a specific forbidden technology — and humanity could no longer be taken back.' },
-      { title: 'The Provocation of the Flood', body: 'The Nephilim grew so numerous and so violent that "they consumed all the acquisitions of men. And when men could no longer sustain them, the giants turned against them and devoured mankind. And they began to sin against birds, and beasts, and reptiles, and fish, and to devour one another's flesh, and drink the blood." The Flood was, in this telling, a planetary intervention to end the hybrid bloodline.' },
+      { title: 'The Provocation of the Flood', body: 'The Nephilim grew so numerous and so violent that "they consumed all the acquisitions of men. And when men could no longer sustain them, the giants turned against them and devoured mankind. And they began to sin against birds, and beasts, and reptiles, and fish, and to devour one another\'s flesh, and drink the blood." The Flood was, in this telling, a planetary intervention to end the hybrid bloodline.' },
     ],
     powersAndRelics: [
       'Giant physical stature (the Anakim of Numbers 13 are described as their descendants)',
@@ -1138,7 +1138,7 @@ The far more detailed account is in the Book of Enoch, an ancient Jewish text ex
       'The daughters of men — mortal mothers',
       'The Anakim, Rephaim, Emim, and Zamzummim — Old Testament giants described as their descendants',
       'Goliath of Gath — possibly the most famous late-line descendant',
-      'Yahweh — the deity who ordered their bloodline's eradication',
+      'Yahweh — the deity who ordered their bloodline\'s eradication',
     ],
     worship: 'The Nephilim were never worshipped in any surviving tradition. They were, however, remembered with terror, and many later cultures appear to have preserved them in degraded form — the Greek Titans, the Norse Jötnar, and the Mesoamerican giant-races may all be echoes of the same source memory.',
     modernRelevance: 'The Nephilim are the archetype of the inherited gift that you did not ask for and that requires a reckoning. Many modern people experience strange aptitudes, intuitions, or sensitivities that do not fit their family of origin — they are working with what feels like an inheritance from elsewhere. The Nephilim story acknowledges this as a real phenomenon and treats it with appropriate seriousness: such gifts must be integrated carefully or they will consume their carrier.',
@@ -1163,13 +1163,13 @@ Whether read as literal history, as cultural memory of a deep-past contact event
     atmosphericBg: 'linear-gradient(135deg, #0a0800 0%, #1f1500 50%, #0d0a00 100%)',
     atmosphericDesc: 'A horned-crowned king before a ziggurat. Gold light climbs to a star-flooded sky.',
     symbol: '👑', image: anuImg,
-    originStory: `Anu (in Sumerian: An, "sky") was the supreme deity of the Sumerian-Akkadian pantheon — the ultimate sovereign of the Anunnaki. The very name "Anunnaki" derives from him: it means "those who from Anu came down." He was the original king. Every other god's authority was traceable to a delegation from him.
+    originStory: `Anu (in Sumerian: An, "sky") was the supreme deity of the Sumerian-Akkadian pantheon — the ultimate sovereign of the Anunnaki. The very name "Anunnaki" derives from him: it means "those who from Anu came down." He was the original king. Every other god\'s authority was traceable to a delegation from him.
 
 He dwelt in the highest heaven and rarely intervened directly in earthly affairs. The administration of Earth was delegated to his sons — Enlil received executive authority over wind, sky, and humanity; Enki received the Abzu and the engineering of life. Anu remained above, distant, the final court of appeal but almost never the active hand.`,
     keyMyths: [
       { title: 'The Distribution of Authority', body: 'When the universe was first ordered, Anu cast lots with his sons and divided the cosmos: the heavens to himself, the earth and air to Enlil, the freshwater abyss to Enki. He gave away his operational power on day one. He has been a constitutional monarch ever since.' },
-      { title: 'The Bull of Heaven', body: 'When Inanna was scorned by the hero Gilgamesh, she demanded that her father Anu release the Bull of Heaven — a creature so powerful that one snort could kill hundreds of men. Anu refused at first, then capitulated. Gilgamesh and Enkidu killed the bull, and the consequences (Enkidu's death) followed swiftly. Anu's reluctance was correct. His capitulation cost a hero his beloved.' },
-      { title: 'The Tablet of Destinies', body: 'In one tradition, Anu held the Tablet of Destinies — the cosmic document that fixed the fate of all things — until it was stolen by the storm-bird Anzu, recovered by Ninurta, and eventually came into Marduk's possession. The history of the Tablet is the history of cosmic authority changing hands.' },
+      { title: 'The Bull of Heaven', body: 'When Inanna was scorned by the hero Gilgamesh, she demanded that her father Anu release the Bull of Heaven — a creature so powerful that one snort could kill hundreds of men. Anu refused at first, then capitulated. Gilgamesh and Enkidu killed the bull, and the consequences (Enkidu\'s death) followed swiftly. Anu\'s reluctance was correct. His capitulation cost a hero his beloved.' },
+      { title: 'The Tablet of Destinies', body: 'In one tradition, Anu held the Tablet of Destinies — the cosmic document that fixed the fate of all things — until it was stolen by the storm-bird Anzu, recovered by Ninurta, and eventually came into Marduk\'s possession. The history of the Tablet is the history of cosmic authority changing hands.' },
     ],
     powersAndRelics: [
       'The horned crown — symbol of supreme divinity',
@@ -1185,9 +1185,9 @@ He dwelt in the highest heaven and rarely intervened directly in earthly affairs
       'Inanna — granddaughter, the queen of heaven and earth',
       'The Anunnaki — collectively, his descendants and delegates',
     ],
-    worship: 'Anu's primary temple was the E-anna ("House of Heaven") at Uruk, also dedicated to Inanna. By the Babylonian period, Anu had been largely supplanted in popular worship by Marduk — but his name remained as the ultimate authority backing all royal claims. Mesopotamian kings continued to invoke him millennia after his active worship had faded.',
+    worship: 'Anu\'s primary temple was the E-anna ("House of Heaven") at Uruk, also dedicated to Inanna. By the Babylonian period, Anu had been largely supplanted in popular worship by Marduk — but his name remained as the ultimate authority backing all royal claims. Mesopotamian kings continued to invoke him millennia after his active worship had faded.',
     modernRelevance: 'Anu is the archetype of the absent father — the founder, the chairman, the patriarch who set the rules and then withdrew. Modern people raised by emotionally distant fathers, or who work in institutions whose founders are now mythological rather than present, are constantly negotiating with the Anu archetype: trying to please someone who is not in the room, who delegated authority and left, whose approval can never quite be earned because he is not available to give it.',
-    oracleLore: `Anu sits at the absolute apex of the Anunnaki disclosure thesis. In Sitchin's reading, he is the literal sovereign of the home planet from which the Anunnaki mission to Earth was dispatched. His extreme remoteness from earthly affairs maps onto a chain-of-command structure familiar to any modern organization: the CEO does not personally manage warehouse operations.
+    oracleLore: `Anu sits at the absolute apex of the Anunnaki disclosure thesis. In Sitchin\'s reading, he is the literal sovereign of the home planet from which the Anunnaki mission to Earth was dispatched. His extreme remoteness from earthly affairs maps onto a chain-of-command structure familiar to any modern organization: the CEO does not personally manage warehouse operations.
 
 The horned crown that defines Anu in iconography appears with striking consistency across cultures — Mesoamerican, Egyptian, Indo-European, and even some North American depictions of "sky beings" share this specific feature. Whether read as cultural diffusion or as memory of a literal shared encounter, the iconographic consistency is real and largely unexplained by mainstream art history.
 
@@ -1777,23 +1777,23 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#2a0a1a 0%,#7c2d4a 50%,#f4a261 100%)',
     atmosphericDesc: 'A round, joyful elephant-headed god seated on a lotus, modaka sweet in one hand, broken tusk in another, a mouse at his feet.',
     symbol: '🐘', image: ganeshaImg,
-    originStory: 'Parvati molded a boy from turmeric paste and breathed life into him to guard her bath. When Shiva returned and the boy refused entry, Shiva severed his head in rage. Confronted by Parvati's grief, Shiva swore to replace it with the head of the first creature he met — an elephant. Ganesha was reborn dual-natured: human heart, elephant mind, the bridge between mortal and divine intellect.',
+    originStory: 'Parvati molded a boy from turmeric paste and breathed life into him to guard her bath. When Shiva returned and the boy refused entry, Shiva severed his head in rage. Confronted by Parvati\'s grief, Shiva swore to replace it with the head of the first creature he met — an elephant. Ganesha was reborn dual-natured: human heart, elephant mind, the bridge between mortal and divine intellect.',
     keyMyths: [
-      { title: 'The Mahabharata Transcription', body: 'When the sage Vyasa needed a scribe fast enough to capture the entire Mahabharata in continuous dictation, Ganesha agreed — on the condition that Vyasa never pause. When his pen broke, Ganesha snapped off his own tusk and kept writing. The world's longest epic exists because a god mutilated himself rather than break flow.' },
+      { title: 'The Mahabharata Transcription', body: 'When the sage Vyasa needed a scribe fast enough to capture the entire Mahabharata in continuous dictation, Ganesha agreed — on the condition that Vyasa never pause. When his pen broke, Ganesha snapped off his own tusk and kept writing. The world\'s longest epic exists because a god mutilated himself rather than break flow.' },
       { title: 'The Race Around the World', body: 'Shiva offered a divine mango to whichever son first circled the world. Kartikeya raced off on his peacock. Ganesha simply walked around his parents and said: "You are my world." He won. Wisdom outran speed.' },
     ],
-    powersAndRelics: ['Modaka sweet — taste of the reward at journey's end', 'Broken tusk — pen of cosmic record', 'Goad and noose — to drive the soul forward and pull obstacles aside', 'Mushika the mouse — humility as his mount'],
+    powersAndRelics: ['Modaka sweet — taste of the reward at journey\'s end', 'Broken tusk — pen of cosmic record', 'Goad and noose — to drive the soul forward and pull obstacles aside', 'Mushika the mouse — humility as his mount'],
     relationships: ['Shiva and Parvati — parents', 'Kartikeya — brother', 'Riddhi and Siddhi — consorts (Prosperity and Spiritual Power)', 'Mushika — his vehicle'],
     worship: 'Invoked at the start of every ritual, business, journey, wedding, and book in Hindu tradition. Ganesh Chaturthi (Aug–Sep) draws tens of millions in Mumbai and across Maharashtra; clay murtis are paraded to the sea and dissolved, returning him to the formless.',
     modernRelevance: 'Ganesha is the archetype of intelligent threshold-keeping. Founders, writers, and anyone beginning hard work invoke him not for ease but for the right friction — obstacles that sculpt rather than stop.',
-    oracleLore: 'The elephant-headed motif appears in pre-Hindu Indus Valley seals (3rd millennium BCE), suggesting Ganesha's lineage runs older than Vedic religion. Some researchers connect him to global elephant-deity memories — including possible cross-cultural transmission via maritime trade.',
+    oracleLore: 'The elephant-headed motif appears in pre-Hindu Indus Valley seals (3rd millennium BCE), suggesting Ganesha\'s lineage runs older than Vedic religion. Some researchers connect him to global elephant-deity memories — including possible cross-cultural transmission via maritime trade.',
     quotes: ['The obstacle is the path. I do not remove it. I show you it was the path.'],
     sources: [{ label: 'Britannica — Ganesha', url: 'https://www.britannica.com/topic/Ganesha' }],
   },
   {
     id: 'krishna', name: 'Krishna', pantheon: 'Hindu',
     domains: ['Divine Love', 'Strategy', 'Music', 'Dharma', 'The Eighth Avatar'],
-    archetypeRole: 'The Blue Cowherd God — Eighth avatar of Vishnu, charioteer of Arjuna, flute-player who stole the milkmaids' hearts.',
+    archetypeRole: 'The Blue Cowherd God — Eighth avatar of Vishnu, charioteer of Arjuna, flute-player who stole the milkmaids\' hearts.',
     reflectionQuestion: 'What duty are you avoiding by calling it cruelty?',
     atmosphericBg: 'linear-gradient(135deg,#0a1a4a 0%,#1e3a8a 50%,#fbbf24 100%)',
     atmosphericDesc: 'A blue-skinned youth crowned with peacock feathers, playing a bamboo flute beneath a kadamba tree, cows lowing in the dusk.',
@@ -1814,7 +1814,7 @@ The teaching beneath the disclosure question is also a personal one: every human
   {
     id: 'lakshmi', name: 'Lakshmi', pantheon: 'Hindu',
     domains: ['Wealth', 'Fortune', 'Beauty', 'Abundance', 'Prosperity'],
-    archetypeRole: 'The Goddess of Fortune — Vishnu's consort who walks where reverence walks and leaves where pride enters.',
+    archetypeRole: 'The Goddess of Fortune — Vishnu\'s consort who walks where reverence walks and leaves where pride enters.',
     reflectionQuestion: 'Are you holding wealth open-handed, or has it begun to close your fist?',
     atmosphericBg: 'linear-gradient(135deg,#3a0a2a 0%,#c2185b 50%,#ffd700 100%)',
     atmosphericDesc: 'A four-armed goddess on a pink lotus, gold coins falling from one palm, the other raised in blessing, elephants pouring water over her.',
@@ -1840,15 +1840,15 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#0a1a3a 0%,#e0e7ff 50%,#ffffff 100%)',
     atmosphericDesc: 'A serene goddess in white seated on a white lotus, veena in her hands, swan beside her, the river Saraswati flowing at her feet.',
     symbol: '🎼', image: saraswatiImg,
-    originStory: 'Saraswati is older than the Vedas — she is named in the Rig Veda as both river and goddess, and the Sarasvatī river is the most-cited river in the Vedas. As the river dried (modern satellite imagery confirms a major paleochannel matching her described path), the goddess survived. She became Brahma's consort and the patron of every form of articulated knowledge.',
+    originStory: 'Saraswati is older than the Vedas — she is named in the Rig Veda as both river and goddess, and the Sarasvatī river is the most-cited river in the Vedas. As the river dried (modern satellite imagery confirms a major paleochannel matching her described path), the goddess survived. She became Brahma\'s consort and the patron of every form of articulated knowledge.',
     keyMyths: [
       { title: 'The Birth of Sanskrit', body: 'When sound itself needed to be organized into language, Saraswati struck her veena and the 50 phonemes of Sanskrit fell out as ordered vibration. Every Indian script and most South Asian languages descend from this moment. Language is not invented; it is heard.' },
-      { title: 'The Curse of Brahma's Fifth Head', body: 'When Brahma grew obsessed with his own daughter Saraswati, she fled in every direction; he grew a fifth head to track her. Shiva eventually severed it. Knowledge cannot belong to its own father.' },
+      { title: 'The Curse of Brahma\'s Fifth Head', body: 'When Brahma grew obsessed with his own daughter Saraswati, she fled in every direction; he grew a fifth head to track her. Shiva eventually severed it. Knowledge cannot belong to its own father.' },
     ],
     powersAndRelics: ['The veena — instrument whose tuning aligns mind and cosmos', 'Sacred book in one hand — eternal Vedas', 'Rosary — repetition as path to wisdom', 'White swan — discrimination (separating milk from water)'],
     relationships: ['Brahma — consort', 'Lakshmi and Parvati — Tridevi sisters', 'Ganesha — frequent companion (knowledge + obstacle-removal)', 'The river Saraswati — her physical form'],
     worship: 'Saraswati Puja (Vasant Panchami, late Jan / early Feb) opens spring and is the day Indian children are first introduced to letters — toddlers trace their first alphabet on rice grains in her temples. Students worldwide place textbooks at her feet before exams.',
-    modernRelevance: 'Saraswati is the archetype of the beginner's mind that never closes. Researchers, musicians, writers, and coders all live inside her question: are you still listening for the next note, or are you replaying the last one?',
+    modernRelevance: 'Saraswati is the archetype of the beginner\'s mind that never closes. Researchers, musicians, writers, and coders all live inside her question: are you still listening for the next note, or are you replaying the last one?',
     oracleLore: 'The lost Saraswati river was long dismissed as myth — until Landsat imagery in the 1970s–2000s revealed a massive paleochannel running exactly along the Vedic descriptions. Modern hydrology has now confirmed the river was real and dried roughly 4,000 years ago, corroborating the oldest Indian text against millennia of skepticism.',
     quotes: ['I am the silence between the notes. Without me there is only noise.'],
     sources: [{ label: 'Britannica — Saraswati', url: 'https://www.britannica.com/topic/Saraswati' }],
@@ -1861,10 +1861,10 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#3a0a0a 0%,#dc2626 50%,#fbbf24 100%)',
     atmosphericDesc: 'A radiant ten-armed warrior goddess astride a roaring lion, each hand holding a weapon gifted by a different god, the buffalo-demon collapsing beneath her trident.',
     symbol: '🦁', image: durgaImg,
-    originStory: 'When the buffalo-demon Mahishasura grew so powerful that no male god could defeat him — having extracted a boon that no man could kill him — the gods combined their energies into a single blaze of light. From that blaze rose Durga, ten-armed, riding a lion, each god lending her his signature weapon. She fought Mahishasura for nine days. On the tenth, she pinned him with her foot and severed his head with Shiva's trident.',
+    originStory: 'When the buffalo-demon Mahishasura grew so powerful that no male god could defeat him — having extracted a boon that no man could kill him — the gods combined their energies into a single blaze of light. From that blaze rose Durga, ten-armed, riding a lion, each god lending her his signature weapon. She fought Mahishasura for nine days. On the tenth, she pinned him with her foot and severed his head with Shiva\'s trident.',
     keyMyths: [
       { title: 'The Slaying of Mahishasura', body: 'The nine-day battle is reenacted every Navaratri — the most widely celebrated Hindu festival after Diwali. Each of the nine nights honors a different form of Durga. The tenth day is Vijayadashami (Dussehra) — the victory of the feminine over arrogance.' },
-      { title: 'The Birth of Kali', body: 'When two demons (Chanda and Munda) attacked her, Durga's rage darkened her brow and from it sprang Kali — pure, weaponized fury. Durga is what controls Kali. The two are one goddess in two registers.' },
+      { title: 'The Birth of Kali', body: 'When two demons (Chanda and Munda) attacked her, Durga\'s rage darkened her brow and from it sprang Kali — pure, weaponized fury. Durga is what controls Kali. The two are one goddess in two registers.' },
     ],
     powersAndRelics: ['Ten arms wielding ten divine weapons', 'Her lion (or tiger) — sovereignty over fear itself', 'The trident of Shiva — destroys ignorance', 'Invincibility against any opponent who underestimates the feminine'],
     relationships: ['Shiva — consort (as Parvati)', 'Kali — her own emanation', 'Ganesha and Kartikeya — her sons', 'Mahishasura — slain enemy who in death becomes her devotee'],
@@ -1884,11 +1884,11 @@ The teaching beneath the disclosure question is also a personal one: every human
     symbol: '🐒', image: hanumanImg,
     originStory: 'Born to Anjana (a celestial cursed into monkey form) and the wind god Vayu, Hanuman was so powerful as a child that he leapt at the sun thinking it was a mango. Indra struck him down and broke his jaw (hanu = jaw, hence Hanuman). To compensate, every god gifted him invulnerability and a boon. He grew into the perfect bhakta — a being so consumed by devotion to Rama that his own ego dissolved.',
     keyMyths: [
-      { title: 'The Leap to Lanka', body: 'When Sita was kidnapped by Ravana, Hanuman leapt the ocean to Lanka — a hundred yojanas in a single bound — to find her. He delivered Rama's ring, allowed himself to be captured so he could meet Ravana face to face, and set Lanka on fire with his burning tail before returning to lead the rescue.' },
+      { title: 'The Leap to Lanka', body: 'When Sita was kidnapped by Ravana, Hanuman leapt the ocean to Lanka — a hundred yojanas in a single bound — to find her. He delivered Rama\'s ring, allowed himself to be captured so he could meet Ravana face to face, and set Lanka on fire with his burning tail before returning to lead the rescue.' },
       { title: 'The Mountain of Healing Herbs', body: 'During the war, Lakshmana was struck unconscious by a deadly weapon. The healing herb grew only on a single Himalayan peak. Hanuman flew there, could not identify the herb, so he picked up the entire mountain and flew it back. Pragmatism over precision when love is on the line.' },
     ],
     powersAndRelics: ['Limitless strength — none has ever measured its ceiling', 'Power to fly and shapeshift to any size', 'Immortal (chiranjeevi — one of seven who still walk the earth)', 'Mace of celestial weight'],
-    relationships: ['Rama and Sita — his eternal lords', 'Vayu — his divine father', 'Lakshmana, Bharata, Shatrughna — Rama's brothers, his comrades', 'Sugriva and Vali — monkey-kings of his clan'],
+    relationships: ['Rama and Sita — his eternal lords', 'Vayu — his divine father', 'Lakshmana, Bharata, Shatrughna — Rama\'s brothers, his comrades', 'Sugriva and Vali — monkey-kings of his clan'],
     worship: 'Hanuman is one of the most worshipped deities in India. Tuesdays and Saturdays are his sacred days. Wrestlers, soldiers, and anyone facing physical or moral combat take refuge in him. The Hanuman Chalisa — 40 verses by Tulsidas (16th c.) — is recited by hundreds of millions daily.',
     modernRelevance: 'Hanuman is the archetype of devotional excellence — the principle that ego dissolved in service unlocks capacities the ego could never reach alone. Athletes, soldiers, monks, and serious workers in any field touch his frequency without naming it.',
     oracleLore: 'Hanuman is one of seven chiranjeevis — beings declared immortal in Hindu cosmology, said to still walk the earth. He is reported in modern devotee testimony to appear in dreams and at moments of physical danger; the testimony is voluminous and consistent across centuries and continents.',
@@ -1905,14 +1905,14 @@ The teaching beneath the disclosure question is also a personal one: every human
     symbol: '🏹', image: ramaImg,
     originStory: 'Born to King Dasharatha of Ayodhya, Rama was to be crowned king when his stepmother Kaikeyi called in an old promise and demanded fourteen years of exile for him so her own son could rule. Rama walked into the forest without complaint. His wife Sita and brother Lakshmana followed. There Ravana kidnapped Sita; the rescue, the war, and the return form the Ramayana — the foundational moral epic of India.',
     keyMyths: [
-      { title: 'The Promise to Dasharatha', body: 'When the exile was announced, Rama did not argue, did not negotiate, did not delay. He simply changed clothes and walked. The principle: a king's son does not weigh his comfort against his father's honor.' },
+      { title: 'The Promise to Dasharatha', body: 'When the exile was announced, Rama did not argue, did not negotiate, did not delay. He simply changed clothes and walked. The principle: a king\'s son does not weigh his comfort against his father\'s honor.' },
       { title: 'The Trial of Sita', body: 'After rescuing Sita, Rama subjected her to a trial by fire to publicly verify her purity. The episode remains the most theologically uncomfortable in Hindu literature — and is taught as exactly that. Even avatars are scrutinized for their failures.' },
     ],
     powersAndRelics: ['The Kodanda bow — gifted by Vishvakarma, no archer has matched its draw', 'Perfect command of dharma in every situation', 'Loyalty of every brother, every devotee, every monkey-warrior who served him', 'The name "Rama" itself — said by Hindus to liberate the soul at death'],
     relationships: ['Sita — wife, daughter of the earth', 'Lakshmana, Bharata, Shatrughna — devoted brothers', 'Hanuman — supreme devotee', 'Ravana — slain demon-king', 'Dasharatha — father'],
     worship: 'Rama is worshipped across India and globally. Ram Navami marks his birth. Diwali celebrates his return to Ayodhya. The Ramayana exists in dozens of regional versions; the name "Ram Ram" is the common greeting across much of North India.',
     modernRelevance: 'Rama is the archetype of principled leadership — the leader who pays the cost of his own integrity first. Politicians who claim him often fail him; the standard he sets is meant to be aspired to, not weaponized.',
-    oracleLore: 'The Sri Lanka–India underwater bridge (Adam's Bridge / Ram Setu) — a chain of limestone shoals between the two countries — has been carbon-dated by some studies to approximately 7,000 years old, matching the upper range of estimated Ramayana dates. NASA imagery confirms the structure; whether it is natural or built remains contested.',
+    oracleLore: 'The Sri Lanka–India underwater bridge (Adam\'s Bridge / Ram Setu) — a chain of limestone shoals between the two countries — has been carbon-dated by some studies to approximately 7,000 years old, matching the upper range of estimated Ramayana dates. NASA imagery confirms the structure; whether it is natural or built remains contested.',
     quotes: ['A king who keeps his word only when it is easy has no word to keep.'],
     sources: [{ label: 'Britannica — Rama', url: 'https://www.britannica.com/topic/Rama-Hindu-deity' }],
   },
@@ -1924,7 +1924,7 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#0a1a3a 0%,#3b82f6 50%,#fbbf24 100%)',
     atmosphericDesc: 'A golden warrior on a white elephant (Airavata), thunderbolt in hand, storm clouds piling behind him, rainbows in his crown.',
     symbol: '⚡', image: indraImg,
-    originStory: 'In the oldest layer of the Vedas, Indra is the supreme god — more hymns are addressed to him than any other deity. He drank the soma, grew vast, and shattered the dragon Vritra who had coiled around the world's waters, releasing the rivers and giving life to creation. As Hinduism evolved, his role diminished into that of Heaven's king — powerful, but humblable.',
+    originStory: 'In the oldest layer of the Vedas, Indra is the supreme god — more hymns are addressed to him than any other deity. He drank the soma, grew vast, and shattered the dragon Vritra who had coiled around the world\'s waters, releasing the rivers and giving life to creation. As Hinduism evolved, his role diminished into that of Heaven\'s king — powerful, but humblable.',
     keyMyths: [
       { title: 'The Slaying of Vritra', body: 'Vritra, the serpent of drought, swallowed the cosmic waters. Indra, fortified with soma, hurled his vajra (thunderbolt) and split the dragon, releasing the rivers. Every storm since reenacts this victory; every rain is Indra repaying the debt of creation.' },
       { title: 'The Humbling by Krishna', body: 'When the villagers of Vrindavan stopped worshipping him in favor of Krishna, Indra sent a seven-day deluge. Krishna lifted Mount Govardhan as an umbrella. Indra recognized the avatar, dismounted Airavata, and bowed. Sovereignty is provisional in the face of the divine.' },
@@ -1932,7 +1932,7 @@ The teaching beneath the disclosure question is also a personal one: every human
     powersAndRelics: ['Vajra — the thunderbolt forged from the bones of the sage Dadhichi', 'Airavata — the celestial white elephant', 'Command of rain, storm, and the monsoon', 'Soma — the divine elixir from which his power flows'],
     relationships: ['Sachi (Indrani) — consort', 'Agni and Vayu — divine brothers', 'Vritra — slain dragon-enemy', 'Krishna — the avatar who humbled him'],
     worship: 'Once supreme, Indra is now rarely the central object of worship but is invoked in virtually every Vedic ritual. His role is foundational rather than personal — the storm-principle behind all weather-prayer in the subcontinent.',
-    modernRelevance: 'Indra is the archetype of the once-supreme power confronting a larger one. CEOs of declining giants, fading celebrities, and aging empires all walk Indra's arc — and the lesson is the same: bow gracefully or be broken graciously.',
+    modernRelevance: 'Indra is the archetype of the once-supreme power confronting a larger one. CEOs of declining giants, fading celebrities, and aging empires all walk Indra\'s arc — and the lesson is the same: bow gracefully or be broken graciously.',
     oracleLore: 'The vajra (thunderbolt) iconography spread across Eurasia through Buddhist transmission — appearing in Tibetan dorje, Japanese vajra, and even Mesoamerican lightning-deity imagery. Comparative mythologists treat Indra-Zeus-Thor-Perun as variants of a single Indo-European storm-king archetype.',
     quotes: ['I ruled Heaven. Then a cowherd lifted a mountain. I learned in one afternoon what mortals refuse to learn in a lifetime.'],
     sources: [{ label: 'Britannica — Indra', url: 'https://www.britannica.com/topic/Indra' }],
@@ -1970,8 +1970,8 @@ The teaching beneath the disclosure question is also a personal one: every human
     symbol: '⚡', image: shangoImg,
     originStory: 'Shango was the fourth Alaafin (king) of the Oyo empire, a real historical ruler whose tyranny grew so fierce that the council demanded his abdication. Rather than submit, he climbed to a sacred tree and hanged himself — or, the orthodox version says, ascended directly into the sky as lightning. Either way, he became an orisha. His followers shout "Oba ko so!" — "the king did not hang!" — as the central liturgical statement of his cult.',
     keyMyths: [
-      { title: 'The Three Wives', body: 'Shango married Oya (storm), Oshun (sweet waters), and Oba (jealous wife). The triangle defines Yoruba domestic theology: storm, sweetness, and the consequences of overstepping. When Oba cut off her own ear to feed Shango stew (on Oshun's false advice), the relationship — and rivers — split forever.' },
-      { title: 'The Double-Bladed Axe', body: 'Shango's oshe — the double-headed thunder-axe — represents the bidirectional nature of his justice. He strikes liars with lightning, but he equally strikes those who falsely accuse. His judgment cuts both ways with the same blade.' },
+      { title: 'The Three Wives', body: 'Shango married Oya (storm), Oshun (sweet waters), and Oba (jealous wife). The triangle defines Yoruba domestic theology: storm, sweetness, and the consequences of overstepping. When Oba cut off her own ear to feed Shango stew (on Oshun\'s false advice), the relationship — and rivers — split forever.' },
+      { title: 'The Double-Bladed Axe', body: 'Shango\'s oshe — the double-headed thunder-axe — represents the bidirectional nature of his justice. He strikes liars with lightning, but he equally strikes those who falsely accuse. His judgment cuts both ways with the same blade.' },
     ],
     powersAndRelics: ['Oshe — the double-headed thunder-axe', 'Bata drums — his sacred instruments, no others may speak his name', 'Lightning as direct judgment', 'Power to detect lies through fire-ordeal'],
     relationships: ['Oya — storm-wife', 'Oshun — sweet-river-wife', 'Oba — jealous wife', 'Orunmila — divinatory counterpart', 'Obatala — father'],
@@ -1989,12 +1989,12 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#0a1a3a 0%,#0d9488 50%,#e0f7fa 100%)',
     atmosphericDesc: 'A regal woman wrapped in blue and silver robes that flow like ocean waves, crowned with seashells, fish swimming in her hair, the Atlantic stretching to the horizon.',
     symbol: '🌊', image: yemojaImg,
-    originStory: 'Yemoja's name comes from Yeye omo eja — "mother whose children are like fish." Originally the orisha of the Ogun river in Yorubaland, when her children were carried across the Atlantic during the slave trade, she followed them. By the time they reached the Americas, she had become the Atlantic Ocean itself. She is the patron orisha of the Middle Passage — the mother who refused to let her children cross alone.',
+    originStory: 'Yemoja\'s name comes from Yeye omo eja — "mother whose children are like fish." Originally the orisha of the Ogun river in Yorubaland, when her children were carried across the Atlantic during the slave trade, she followed them. By the time they reached the Americas, she had become the Atlantic Ocean itself. She is the patron orisha of the Middle Passage — the mother who refused to let her children cross alone.',
     keyMyths: [
-      { title: 'The Birth of the Orishas', body: 'When Yemoja's waters broke at the creation of the world, every river, lake, and sea on earth flowed forth, and from them were born nearly all the major orisha — Oshun, Oya, Shango (her son in some lineages), Ogun. The Yoruba pantheon, in its core branches, is her placenta.' },
+      { title: 'The Birth of the Orishas', body: 'When Yemoja\'s waters broke at the creation of the world, every river, lake, and sea on earth flowed forth, and from them were born nearly all the major orisha — Oshun, Oya, Shango (her son in some lineages), Ogun. The Yoruba pantheon, in its core branches, is her placenta.' },
       { title: 'The Crossing', body: 'During the Middle Passage, captive Yoruba women threw themselves overboard rather than be enslaved. Devotional lore says Yemoja received each one. The Brazilian, Cuban, and Haitian forms of her worship — Iemanjá, Yemayá, La Sirène — were carried by survivors who knew she had not abandoned them.' },
     ],
-    powersAndRelics: ['Authority over all waters — fresh, salt, and amniotic', 'Healing of infertility, miscarriage, and reproductive trauma', 'Protection of mothers, children, and sailors', 'Power to bring the dead's spirits to peace across water'],
+    powersAndRelics: ['Authority over all waters — fresh, salt, and amniotic', 'Healing of infertility, miscarriage, and reproductive trauma', 'Protection of mothers, children, and sailors', 'Power to bring the dead\'s spirits to peace across water'],
     relationships: ['Olokun — deep-sea consort', 'Oshun — river-daughter', 'Shango — son in many lineages', 'Ogun — son in some lineages', 'Obatala — sometimes father, sometimes brother'],
     worship: 'Yemoja is worshipped on Feb 2 in Brazil (Festa de Iemanjá) — millions gather on Salvador and Rio beaches at dawn to send white flowers out on the tide. In Cuba, Haiti, the U.S., and West Africa she remains one of the most actively venerated deities of African origin worldwide. Blue and silver are her colors; melons, sugarcane, and white flowers are her offerings.',
     modernRelevance: 'Yemoja is the archetype of indestructible maternal continuity. She is the principle that survives forced rupture — what carries across oceans, generations, and traumas without breaking. Black women in the diaspora have reclaimed her as a central figure in healing-justice movements.',
@@ -2012,7 +2012,7 @@ The teaching beneath the disclosure question is also a personal one: every human
     symbol: '⚔️', image: ogunImg,
     originStory: 'When the orisha first descended to earth and found the land impassable jungle, Ogun was the only one who possessed iron — and the only one willing to cut the path. He hacked through the wilderness with his machete, made the world traversable, and then mourned the violence he had been required to commit. He is the patron of every profession that uses iron: smiths, soldiers, surgeons, truck-drivers, tattoo-artists, mechanics.',
     keyMyths: [
-      { title: 'The Path-Maker's Grief', body: 'After clearing the road, Ogun retreated alone to the mountains, sickened by the killing his pioneering had required. The other orisha begged him to return. He came back, but only on the condition that humans would always honor the warriors who suffer the moral weight of necessary violence. The cult of veterans was born from his solitude.' },
+      { title: 'The Path-Maker\'s Grief', body: 'After clearing the road, Ogun retreated alone to the mountains, sickened by the killing his pioneering had required. The other orisha begged him to return. He came back, but only on the condition that humans would always honor the warriors who suffer the moral weight of necessary violence. The cult of veterans was born from his solitude.' },
       { title: 'The Drunken Massacre', body: 'In some traditions, Ogun once returned from war exhausted and drunk on palm wine, and slaughtered an entire village before realizing they were his own. His penance: he sheathed his sword and swore to never again wield force without sobriety. The lesson is uncompromising and is taught at every initiation.' },
     ],
     powersAndRelics: ['The first iron — every blade, scalpel, and engine descends from his forge', 'The machete that clears the path', 'Authority over oaths sworn on iron (Yoruba courts still use iron-oaths for the highest weight)', 'Power to bless and curse every vehicle that moves'],
@@ -2041,7 +2041,7 @@ The teaching beneath the disclosure question is also a personal one: every human
     worship: 'Eshu is venerated across Yorubaland and the diaspora as Elegguá (Cuba), Exu (Brazil), Papa Legba (Haiti). His shrine is placed at the front door or the corner of the property — the first thing visitors meet, the first to receive offering. Monday is his sacred day; red and black are his colors; rum, cigars, and candy are his offerings.',
     modernRelevance: 'Eshu is the archetype of the necessary middleman — the protocol layer everyone tries to skip and no one can. In any system (corporate, technological, spiritual), the person or process holding the routing function holds disproportionate power. Honor that node or watch your messages get lost.',
     oracleLore: 'Eshu is the orisha of the Ifa divination system — one of the most mathematically sophisticated divinatory frameworks ever developed (256 odu, each with its own corpus of verses). UNESCO recognized Ifa as Intangible Cultural Heritage in 2005. Eshu is the operational principle that makes the system work; without him, the cowries fall but say nothing.',
-    quotes: ['Feed me first. Not because I am hungry. Because if you don't, your message never arrives.'],
+    quotes: ['Feed me first. Not because I am hungry. Because if you don\'t, your message never arrives.'],
     sources: [{ label: 'Britannica — Eshu', url: 'https://www.britannica.com/topic/Eshu' }],
   },
 
@@ -2063,7 +2063,7 @@ The teaching beneath the disclosure question is also a personal one: every human
     relationships: ['Boann — lover, mother of Aengus', 'Morrigan — consort on Samhain', 'Aengus Óg — son', 'Brigid — daughter', 'Lugh — divine grandson'],
     worship: 'No formal modern cult; he is venerated by Celtic reconstructionists, Druids, and within Irish Neopaganism. Newgrange (Brú na Bóinne) — older than the pyramids — is associated with his domain.',
     modernRelevance: 'The Dagda is the archetype of the powerful patriarch who refuses to perform dignity. Leaders, fathers, and elders who can serve a meal, tell a joke against themselves, and still command a room when needed channel him without naming him.',
-    oracleLore: 'Newgrange (3200 BCE) — older than Stonehenge and the Egyptian pyramids — is precisely aligned to the winter solstice sunrise. The Dagda is named in mythology as its keeper. The structure's astronomical precision and unbroken 5,000-year structural integrity remain difficult to explain by mainstream means.',
+    oracleLore: 'Newgrange (3200 BCE) — older than Stonehenge and the Egyptian pyramids — is precisely aligned to the winter solstice sunrise. The Dagda is named in mythology as its keeper. The structure\'s astronomical precision and unbroken 5,000-year structural integrity remain difficult to explain by mainstream means.',
     quotes: ['Eat the porridge. Drink the mead. Carry the club. Do not let them see you minding the insult.'],
     sources: [{ label: 'Britannica — Dagda', url: 'https://www.britannica.com/topic/Dagda' }],
   },
@@ -2075,14 +2075,14 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#1a2a4a 0%,#fbbf24 50%,#fff7ed 100%)',
     atmosphericDesc: 'A young, radiant warrior with golden hair, a spear that burns, a sling-stone in his belt, standing on a hill at midsummer dawn.',
     symbol: '☀️', image: lughImg,
-    originStory: 'Lugh's grandfather was the monstrous Fomorian king Balor, whose prophesied death would come from his own grandson. Balor imprisoned his daughter in a tower to prevent any pregnancy. She conceived anyway (with the Dagda's ally Cian); the child was Lugh. When he came of age and presented himself at the court of Tara, the gatekeeper said "we already have a smith, a warrior, a harper, a poet" — to each Lugh replied, "but do you have one man who is all of these?" They had to let him in.',
+    originStory: 'Lugh\'s grandfather was the monstrous Fomorian king Balor, whose prophesied death would come from his own grandson. Balor imprisoned his daughter in a tower to prevent any pregnancy. She conceived anyway (with the Dagda\'s ally Cian); the child was Lugh. When he came of age and presented himself at the court of Tara, the gatekeeper said "we already have a smith, a warrior, a harper, a poet" — to each Lugh replied, "but do you have one man who is all of these?" They had to let him in.',
     keyMyths: [
-      { title: 'The Death of Balor', body: 'At the second Battle of Mag Tuired, Balor opened his lethal evil eye — but Lugh struck first with a sling-stone, driving the eye out the back of Balor's skull. It continued killing Fomorians as it rolled. Prophecy fulfilled, the Tuatha won, and Lugh became high king.' },
+      { title: 'The Death of Balor', body: 'At the second Battle of Mag Tuired, Balor opened his lethal evil eye — but Lugh struck first with a sling-stone, driving the eye out the back of Balor\'s skull. It continued killing Fomorians as it rolled. Prophecy fulfilled, the Tuatha won, and Lugh became high king.' },
       { title: 'The Founding of Lughnasadh', body: 'Lugh established the great August harvest festival Lughnasadh in honor of his foster-mother Tailtiu, who died clearing the plains of Ireland for agriculture. The festival included games, contracts, marriages, and feasting. It survives today as Lammas in modern Pagan and Christian calendars.' },
     ],
     powersAndRelics: ['Sleg — the spear that burns; once drawn, returns only when blood-fed', 'The sling-stone that killed Balor', 'Mastery of every craft simultaneously', 'Foreknowledge inherited from his Fomorian mother'],
     relationships: ['Cian — father', 'Balor — slain grandfather', 'Cú Chulainn — divine son (the great Ulster hero)', 'The Tuatha Dé Danann — his people'],
-    worship: 'Lughnasadh (August 1) is one of the four Celtic cross-quarter festivals, still observed by modern Pagans, Druids, and rural communities in Ireland and Scotland. Lugh's name survives in city names: Lyon (Lugdunum), London (Lond-Inis), Carlisle (Luguvalium).',
+    worship: 'Lughnasadh (August 1) is one of the four Celtic cross-quarter festivals, still observed by modern Pagans, Druids, and rural communities in Ireland and Scotland. Lugh\'s name survives in city names: Lyon (Lugdunum), London (Lond-Inis), Carlisle (Luguvalium).',
     modernRelevance: 'Lugh is the archetype of polymathy — the master of multiple disciplines whose value is the integration, not any single skill. Modern founders, designers, and renaissance professionals operate in his shadow.',
     oracleLore: 'Comparative mythology connects Lugh with Welsh Lleu Llaw Gyffes, Gaulish Lugus, and possibly the Indic Mitra. His many-skilled archetype maps onto the modern technology founder profile so cleanly that some commentators (Robert Greene, Stewart Brand) have used him to describe Silicon Valley archetypes.',
     quotes: ['Do you have one man among you who is all of these? Then you do not yet have me.'],
@@ -2099,13 +2099,13 @@ The teaching beneath the disclosure question is also a personal one: every human
     originStory: 'The Morrígan is a triple goddess — three sisters (Badb, Macha, Nemain, or in other tellings Morrígan, Badb, Macha) who together comprise the totality of battle and fate. She does not fight; she decides. She appears as the washer at the ford — a figure seen washing bloody armor in a river by warriors who will die that day. She offered herself to the hero Cú Chulainn; he rejected her, and she helped engineer his death.',
     keyMyths: [
       { title: 'The Washer at the Ford', body: 'Warriors approaching battle would sometimes see a tall woman washing armor in a stream. Whoever recognized his own armor in her hands knew he would die before sundown. She did not threaten; she announced. The Morrígan is the moment the future becomes visible.' },
-      { title: 'Cú Chulainn's Death', body: 'When Cú Chulainn refused her advances, she swore to oppose him. At his final battle, she appeared as a crow on his shoulder — confirming his death only after he had tied himself upright to a standing stone so he could die on his feet. She honored him by being the one to mark the moment.' },
+      { title: 'Cú Chulainn\'s Death', body: 'When Cú Chulainn refused her advances, she swore to oppose him. At his final battle, she appeared as a crow on his shoulder — confirming his death only after he had tied himself upright to a standing stone so he could die on his feet. She honored him by being the one to mark the moment.' },
     ],
-    powersAndRelics: ['Shapeshifting — crow, wolf, eel, cow, beautiful woman, hag', 'Prophecy of every warrior's fate', 'Power to confer or revoke sovereignty over the land', 'The unwashable bloodstain that marks the doomed'],
+    powersAndRelics: ['Shapeshifting — crow, wolf, eel, cow, beautiful woman, hag', 'Prophecy of every warrior\'s fate', 'Power to confer or revoke sovereignty over the land', 'The unwashable bloodstain that marks the doomed'],
     relationships: ['The Dagda — consort, met yearly at Samhain', 'Cú Chulainn — hero she offered to, then opposed', 'Badb and Macha — her two sisters (or her own two other faces)'],
     worship: 'No formal modern cult; she is honored within Celtic reconstructionism, modern witchcraft, and certain feminist spiritual movements. Samhain (October 31 — origin of Halloween) is her sacred night, when she mates with the Dagda for the renewal of sovereignty.',
     modernRelevance: 'The Morrígan is the archetype of feminine power that refuses to be polite. She is the unwelcome diagnostician who walks into the boardroom and names the death the team is pretending not to see. Modern leaders who can hear her speak survive; those who cannot, do not.',
-    oracleLore: 'The Morrígan's "crow on the shoulder" motif appears throughout Irish folklore as a death-omen with statistically interesting frequency in folk-reporting databases. Crow behavior around dying humans has been studied (corvids do recognize and respond to human distress); the cultural and biological lore intersect more than skeptics admit.',
+    oracleLore: 'The Morrígan\'s "crow on the shoulder" motif appears throughout Irish folklore as a death-omen with statistically interesting frequency in folk-reporting databases. Crow behavior around dying humans has been studied (corvids do recognize and respond to human distress); the cultural and biological lore intersect more than skeptics admit.',
     quotes: ['I do not curse you. I describe you. The difference is that you can still choose.'],
     sources: [{ label: 'Britannica — Morrígan', url: 'https://www.britannica.com/topic/Morrigan' }],
   },
@@ -2117,12 +2117,12 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#1a0a2a 0%,#dc2626 50%,#fbbf24 100%)',
     atmosphericDesc: 'A young woman with copper-red hair, a cloak across her shoulders, standing between a forge fire and a sacred well, a white cow grazing beside her.',
     symbol: '🔥', image: brigidImg,
-    originStory: 'Brigid is the daughter of the Dagda — a triple-goddess of poets, healers, and smiths. When Christianity reached Ireland in the 5th century, her cult was so widespread and so beloved that it could not be extinguished. The Church instead canonized her: Saint Brigid of Kildare, whose monastery housed a perpetual sacred flame tended by nineteen nuns (the same number as the priestesses who had tended the pre-Christian fire on the same spot). The flame was extinguished only by Henry VIII's Reformation; it was relit in 1993.',
+    originStory: 'Brigid is the daughter of the Dagda — a triple-goddess of poets, healers, and smiths. When Christianity reached Ireland in the 5th century, her cult was so widespread and so beloved that it could not be extinguished. The Church instead canonized her: Saint Brigid of Kildare, whose monastery housed a perpetual sacred flame tended by nineteen nuns (the same number as the priestesses who had tended the pre-Christian fire on the same spot). The flame was extinguished only by Henry VIII\'s Reformation; it was relit in 1993.',
     keyMyths: [
-      { title: 'The Keening', body: 'When Brigid's son Ruadán was killed in battle, she invented keening — the ritual lamentation cry — to express grief beyond words. Every Irish funeral wail descends from her first cry. She gave the culture its grammar of grief.' },
+      { title: 'The Keening', body: 'When Brigid\'s son Ruadán was killed in battle, she invented keening — the ritual lamentation cry — to express grief beyond words. Every Irish funeral wail descends from her first cry. She gave the culture its grammar of grief.' },
       { title: 'The Eternal Flame', body: 'At her shrine in Kildare, nineteen women — pre-Christian priestesses, later Christian nuns — tended an unbroken fire for over a thousand years. On the twentieth day Brigid herself was said to tend it. The flame was deliberately extinguished in 1540 and ceremonially relit in 1993 by the Brigidine Sisters; it has burned continuously since.' },
     ],
-    powersAndRelics: ['The triple flame — poetry, healing, smithcraft', 'Sacred wells — over 200 in Ireland alone bear her name and are still active pilgrimage sites', 'The Brigid's Cross — woven rush cross, hung over doorways at Imbolc', 'Power to bless flocks, milk, and the first lambs of spring'],
+    powersAndRelics: ['The triple flame — poetry, healing, smithcraft', 'Sacred wells — over 200 in Ireland alone bear her name and are still active pilgrimage sites', 'The Brigid\'s Cross — woven rush cross, hung over doorways at Imbolc', 'Power to bless flocks, milk, and the first lambs of spring'],
     relationships: ['The Dagda — father', 'Bres — husband (the half-Fomorian king)', 'Ruadán — slain son', 'Three sisters (or three faces of herself) — poets, healers, smiths'],
     worship: 'Imbolc (February 1) is her festival — the cross-quarter day marking the first signs of spring. Modern Pagans, Catholics venerating Saint Brigid, and traditional Irish communities all keep the day. Her sacred wells across Ireland still receive offerings — pilgrims tie rags ("clooties") to nearby trees with prayers.',
     modernRelevance: 'Brigid is the archetype of the sacred craft — the principle that healing, art, and skilled work are spiritual disciplines, not separate categories. Modern artists, doctors, and skilled tradespeople who treat their work as devotion stand in her flame.',
@@ -2141,12 +2141,12 @@ The teaching beneath the disclosure question is also a personal one: every human
     originStory: 'Cernunnos is the oldest deity in this codex by depiction — the Gundestrup Cauldron (1st century BCE) shows him seated cross-legged, antlered, holding the torc and serpent, exactly as he is still imagined. Cave art from 13,000 BCE in France (the "Sorcerer" of Trois-Frères) depicts a horned man-figure that may be the same archetype. He may be the single oldest continuously imagined deity in European memory.',
     keyMyths: [
       { title: 'The Cross-Legged Posture', body: 'Cernunnos is almost always depicted in the same cross-legged seated posture — a yogic asana (the Egyptian/Indian "easy pose") found in Indus Valley iconography 4,500 years ago. The posture is identical across cultures separated by continents and millennia, suggesting either ancient transmission or shared neurological origin in meditative practice.' },
-      { title: 'The Ram-Headed Serpent', body: 'He holds a serpent with a ram's head — an unprecedented hybrid found nowhere else in mythology except in association with him. Scholars have no consensus on what it means. The leading interpretations: fertility (ram) joined to wisdom/renewal (serpent), or a depiction of the kundalini-equivalent rising through the spine.' },
+      { title: 'The Ram-Headed Serpent', body: 'He holds a serpent with a ram\'s head — an unprecedented hybrid found nowhere else in mythology except in association with him. Scholars have no consensus on what it means. The leading interpretations: fertility (ram) joined to wisdom/renewal (serpent), or a depiction of the kundalini-equivalent rising through the spine.' },
     ],
     powersAndRelics: ['The torc — symbol of sovereignty, often shown multiplied around his neck and held in his hand', 'The ram-headed serpent', 'Command over all wild animals', 'The cross-legged posture itself, which is said to be a sacred meditative attitude'],
     relationships: ['Unknown — almost no surviving narrative; he exists in iconography rather than story', 'The Horned Beasts — his community', 'Often associated by modern Pagans with the Wiccan Horned God consort of the Goddess'],
     worship: 'Worshipped across the Gaulish, Brythonic, and Irish Celtic world. After Christianization, his imagery was demonized into the "horned devil" — a deliberate inversion. Modern Wicca, Druidry, and Pagan revival movements have restored his veneration since the early 20th century.',
-    modernRelevance: 'Cernunnos is the archetype of the masculine principle that remains in covenant with the wild. Modern men recovering from over-domestication — eco-psychologists, deep-ecology activists, men's circles — return to his image as a corrective to disembodied masculinity.',
+    modernRelevance: 'Cernunnos is the archetype of the masculine principle that remains in covenant with the wild. Modern men recovering from over-domestication — eco-psychologists, deep-ecology activists, men\'s circles — return to his image as a corrective to disembodied masculinity.',
     oracleLore: 'The "Sorcerer" of Trois-Frères cave (~13,000 BCE) in southern France depicts a half-human, half-stag dancing figure that strongly resembles later Cernunnos iconography. If the connection is real, it would make Cernunnos the oldest identifiable deity in human imagination — older than agriculture, older than writing, older than every other named god by an order of magnitude.',
     quotes: ['Sit. The forest is older than your village. The animals were here first. I was here when they arrived.'],
     sources: [{ label: 'Britannica — Cernunnos', url: 'https://www.britannica.com/topic/Cernunnos' }],
@@ -2161,14 +2161,14 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#0a1a3a 0%,#1e3a8a 50%,#fbbf24 100%)',
     atmosphericDesc: 'A bearded warrior on a chariot drawn by a black ram and a white he-goat, axe in hand, oak leaves in his crown, thunderbolts splitting an ancient oak behind him.',
     symbol: '🌩️', image: perunImg,
-    originStory: 'Perun was the supreme god of the East Slavs. In 980 CE, Prince Vladimir of Kiev erected a great silver-headed wooden statue of Perun atop the hill at Kiev as the centerpiece of his attempted pre-Christian religious reform. Eight years later, Vladimir converted to Orthodox Christianity. The statue was tied to a horse's tail, dragged through Kiev, beaten with sticks, and thrown into the Dnieper. Witnesses reported that Perun "floated" downstream against the current for some distance before sinking — a detail Orthodox chroniclers recorded with unease.',
+    originStory: 'Perun was the supreme god of the East Slavs. In 980 CE, Prince Vladimir of Kiev erected a great silver-headed wooden statue of Perun atop the hill at Kiev as the centerpiece of his attempted pre-Christian religious reform. Eight years later, Vladimir converted to Orthodox Christianity. The statue was tied to a horse\'s tail, dragged through Kiev, beaten with sticks, and thrown into the Dnieper. Witnesses reported that Perun "floated" downstream against the current for some distance before sinking — a detail Orthodox chroniclers recorded with unease.',
     keyMyths: [
       { title: 'The Battle with Veles', body: 'Perun (sky, order, oath) fights an eternal war with Veles (underworld, chaos, magic), who steals his cattle, his wife, and his children, hiding them under tree roots and stones. Perun pursues Veles across the cosmos, hurling thunderbolts to split every hiding place. Where lightning strikes, Veles has been. The two-god duel is the Slavic version of the universal Indo-European storm-vs-serpent myth.' },
-      { title: 'The Oak of Perun', body: 'Every great oak was sacred to Perun. To swear an oath beneath an oak was to swear under his direct witness; to break such an oath was to invite immediate lightning. Russian and Ukrainian folklore retained the "Perun's oak" association for centuries after Christianization.' },
+      { title: 'The Oak of Perun', body: 'Every great oak was sacred to Perun. To swear an oath beneath an oak was to swear under his direct witness; to break such an oath was to invite immediate lightning. Russian and Ukrainian folklore retained the "Perun\'s oak" association for centuries after Christianization.' },
     ],
     powersAndRelics: ['The thunderbolt-axe (sekira) — splits any false oath, any false god', 'The chariot of black ram and white goat', 'Authority over rain and harvest', 'Power to identify perjurers by lightning-strike'],
     relationships: ['Veles — eternal serpent-enemy', 'Mokosh — sometimes consort, sometimes daughter, sometimes wife abducted by Veles', 'Svarog — divine father (heaven-smith)', 'Dazhbog — son (sun-god)'],
-    worship: 'Perun was the central deity of pre-Christian East and South Slavic religion. Suppressed after the 988 baptism of Kievan Rus, his veneration survived in folk practice for centuries — "Perun's day" (Thursday in some traditions, the Friday before St. Elijah's Day in others) was observed quietly through the Russian Empire. Modern Rodnovery (Slavic Native Faith) has restored his worship across Russia, Ukraine, Poland, and Serbia.',
+    worship: 'Perun was the central deity of pre-Christian East and South Slavic religion. Suppressed after the 988 baptism of Kievan Rus, his veneration survived in folk practice for centuries — "Perun\'s day" (Thursday in some traditions, the Friday before St. Elijah\'s Day in others) was observed quietly through the Russian Empire. Modern Rodnovery (Slavic Native Faith) has restored his worship across Russia, Ukraine, Poland, and Serbia.',
     modernRelevance: 'Perun is the archetype of sworn covenant — the principle that some words are anchored to consequences beyond human enforcement. Cultures that retain a Perun-equivalent (sworn under witness with cosmic weight) maintain trust networks that purely contractual societies struggle to replicate.',
     oracleLore: 'The Indo-European storm-god/serpent-slayer myth (Perun/Veles, Indra/Vritra, Zeus/Typhon, Thor/Jörmungandr, Marduk/Tiamat) is one of the most stable mythological patterns across the entire IE language family. Comparative mythologists treat it as a possible reconstruction of a Proto-Indo-European religious narrative — making Perun a living echo of a story possibly 5,000–6,000 years old.',
     quotes: ['Swear under my oak if you mean it. Swear under any other tree and we will see whether you live to keep the oath.'],
@@ -2178,18 +2178,18 @@ The teaching beneath the disclosure question is also a personal one: every human
     id: 'veles', name: 'Veles', pantheon: 'Slavic',
     domains: ['Underworld', 'Cattle', 'Magic', 'Music', 'The Trickster'],
     archetypeRole: 'The Underground God — Serpentine lord of the chthonic, herds, sorcerers, and poets; eternal rival of Perun.',
-    reflectionQuestion: 'What hidden current in your life have you been pretending isn't shaping every visible choice?',
+    reflectionQuestion: 'What hidden current in your life have you been pretending isn\'t shaping every visible choice?',
     atmosphericBg: 'linear-gradient(135deg,#0a0a1a 0%,#1a2a1a 50%,#5a4a2a 100%)',
     atmosphericDesc: 'A bearded man with horns, half-serpent below the waist, seated among cattle and roots, a gusli (Slavic lyre) in his hands, gold spilling from a horn beside him.',
     symbol: '🐍', image: velesImg,
-    originStory: 'Veles is Perun's eternal opposite — the god of everything that runs under the surface. Cattle (which graze the surface but root in the earth), wealth (buried and hoarded), magic, music, the dead, and the moisture below the soil. He is shapeshifter, trickster, and oath-binder. While Perun was the sky-king of warriors, Veles was the patron of merchants, poets, sorcerers, and cattle-herders — and the Russian merchants of Kiev swore commercial treaties on his name even after Christianization.',
+    originStory: 'Veles is Perun\'s eternal opposite — the god of everything that runs under the surface. Cattle (which graze the surface but root in the earth), wealth (buried and hoarded), magic, music, the dead, and the moisture below the soil. He is shapeshifter, trickster, and oath-binder. While Perun was the sky-king of warriors, Veles was the patron of merchants, poets, sorcerers, and cattle-herders — and the Russian merchants of Kiev swore commercial treaties on his name even after Christianization.',
     keyMyths: [
-      { title: 'The Theft and the Chase', body: 'Veles, in serpent form, slithers up from the underworld and steals Perun's cattle (or wife, or children, or all of them), hiding them under stones and tree-roots. Perun pursues, hurling lightning at every possible hiding place. Veles flees from form to form — snake, bear, man, fish — until cornered, where he releases the stolen things. The cycle is the explanation of rain (the released waters) and thunderstorm (the chase).' },
+      { title: 'The Theft and the Chase', body: 'Veles, in serpent form, slithers up from the underworld and steals Perun\'s cattle (or wife, or children, or all of them), hiding them under stones and tree-roots. Perun pursues, hurling lightning at every possible hiding place. Veles flees from form to form — snake, bear, man, fish — until cornered, where he releases the stolen things. The cycle is the explanation of rain (the released waters) and thunderstorm (the chase).' },
       { title: 'The Oath-Binding', body: 'Russian princes swearing treaties with Byzantium are recorded swearing dually — by Perun (for warriors) and by Veles (for "the cattle-god," meaning merchants and wealth). The 907 and 945 CE Russo-Byzantine treaties record this practice in writing. Veles bound contracts the way Perun bound vows.' },
     ],
     powersAndRelics: ['Shapeshifting (serpent, bear, wolf, man, fish)', 'The horn of plenty — wealth issuing from the earth', 'The gusli (lyre) — patron of poets and musicians', 'Authority over the threshold between life and death'],
     relationships: ['Perun — eternal rival', 'Mokosh — consort in some traditions (whom he abducted from Perun)', 'The dead — whose realm he rules', 'Sorcerers and shamans — whose patron he is'],
-    worship: 'Suppressed after Christianization (his shrines were often dedicated to Saint Blaise / Vlasiy — the saint of cattle, a deliberate substitution). Folk worship survived in cattle-protection rituals and harvest customs (the last sheaf of grain in some regions was tied as "Veles's beard" and left in the field). Modern Rodnovery has restored his cult.',
+    worship: 'Suppressed after Christianization (his shrines were often dedicated to Saint Blaise / Vlasiy — the saint of cattle, a deliberate substitution). Folk worship survived in cattle-protection rituals and harvest customs (the last sheaf of grain in some regions was tied as "Veles\'s beard" and left in the field). Modern Rodnovery has restored his cult.',
     modernRelevance: 'Veles is the archetype of the necessary shadow — the chthonic, the hoarded, the magical, the underground economy. Every culture that pretends it has no Veles ends up with one anyway, less honestly named. Artists, occultists, and entrepreneurs who work the deep currents owe him explicit acknowledgment.',
     oracleLore: 'The Slavic "Two-God Cosmology" (Perun-Veles) is one of the more philosophically interesting indigenous European religious structures — neither a dualist good/evil binary nor a simple polytheism, but a model of two complementary necessary forces locked in eternal productive opposition. It maps surprisingly cleanly onto Taoist yin-yang and onto modern systems-theory accounts of homeostasis.',
     quotes: ['Perun rules the sky. I rule everything beneath your feet. Most of your life happens here.'],
@@ -2198,21 +2198,21 @@ The teaching beneath the disclosure question is also a personal one: every human
   {
     id: 'mokosh', name: 'Mokosh', pantheon: 'Slavic',
     domains: ['Earth', 'Fertility', 'Weaving', 'Fate', 'The Wet Mother'],
-    archetypeRole: 'The Moist Mother Earth — Only female deity in Vladimir's pantheon, weaver of fate, protectress of women's work.',
+    archetypeRole: 'The Moist Mother Earth — Only female deity in Vladimir\'s pantheon, weaver of fate, protectress of women\'s work.',
     reflectionQuestion: 'What thread in your life have you cut without noticing it was holding everything together?',
     atmosphericBg: 'linear-gradient(135deg,#1a2a0a 0%,#4a5a2a 50%,#a8755a 100%)',
     atmosphericDesc: 'A tall woman with a large round head and outstretched arms standing between two horsemen, raised hands embroidered onto Russian textiles in unbroken folk tradition.',
     symbol: '🧵', image: mokoshImg,
-    originStory: 'Mokosh ("the wet one") was the only goddess included in Prince Vladimir's 980 CE pre-Christian pantheon — the lone feminine principle among six male gods. After Christianization, her cult merged into the veneration of Saint Paraskeva-Friday (Russian: Пятница) — the saint associated with women's work, marriage, healing, and the spinning of yarn. The iconographic motif of the central feminine figure between two horsemen survived in Russian embroidery for a thousand years, still unbroken in 19th-century folk textiles.',
+    originStory: 'Mokosh ("the wet one") was the only goddess included in Prince Vladimir\'s 980 CE pre-Christian pantheon — the lone feminine principle among six male gods. After Christianization, her cult merged into the veneration of Saint Paraskeva-Friday (Russian: Пятница) — the saint associated with women\'s work, marriage, healing, and the spinning of yarn. The iconographic motif of the central feminine figure between two horsemen survived in Russian embroidery for a thousand years, still unbroken in 19th-century folk textiles.',
     keyMyths: [
       { title: 'The Spinner of Fate', body: 'Mokosh and her two helpers (Dolya, "Good Fortune," and Nedolya, "Misfortune") spin the threads of every life. The work is done at night; women were forbidden from spinning on Friday (her sacred day) so as not to interfere with hers. Russian peasant tradition retained this taboo into the 20th century.' },
       { title: 'The Embroidered Goddess', body: 'On thousands of surviving Russian peasant towels (rushnyks) and ritual textiles, the central figure of "the woman with raised arms between two horsemen" was embroidered continuously from pre-Christian times into the modern era. Ethnographers identified the figure as Mokosh well before written sources confirmed it; the visual tradition outlived the explicit theology.' },
     ],
-    powersAndRelics: ['The spindle and the loom — instruments of fate', 'Sacred wells and springs — where she is closest to the surface', 'The earth itself in its damp, fertile state', 'Power over childbirth, sheep-shearing, and women's health'],
+    powersAndRelics: ['The spindle and the loom — instruments of fate', 'Sacred wells and springs — where she is closest to the surface', 'The earth itself in its damp, fertile state', 'Power over childbirth, sheep-shearing, and women\'s health'],
     relationships: ['Perun — sometimes consort', 'Veles — sometimes abductor-lover', 'Dolya and Nedolya — her two assistant spinners', 'Saint Paraskeva — her Christianized continuation'],
     worship: 'Worship survived in folk Orthodox veneration of Saint Paraskeva-Friday, with offerings of yarn, towels, and bread placed at wells. Modern Rodnovery has restored explicit Mokosh worship. The embroidered "raised-arms goddess" remains the most-reproduced motif in Russian, Ukrainian, and Belarusian folk textile traditions.',
     modernRelevance: 'Mokosh is the archetype of the female labor that holds civilization together while being structurally invisible. Domestic work, care work, the literal weaving of communities — all of it is her work, and the modern recognition movement for "invisible labor" is, philosophically, a Mokosh revival.',
-    oracleLore: 'The unbroken visual transmission of Mokosh's "raised-arms goddess" motif from pre-Christian textiles into 20th-century peasant embroidery is one of the longest documented religious-iconographic continuities in European folk art. The motif was embroidered for a millennium by women who could not necessarily articulate who they were embroidering — devotional memory carried in the hands, not the explicit theology.',
+    oracleLore: 'The unbroken visual transmission of Mokosh\'s "raised-arms goddess" motif from pre-Christian textiles into 20th-century peasant embroidery is one of the longest documented religious-iconographic continuities in European folk art. The motif was embroidered for a millennium by women who could not necessarily articulate who they were embroidering — devotional memory carried in the hands, not the explicit theology.',
     quotes: ['The thread is still in your hand. Be careful what you weave with it. It will be your shape long after you forget you held it.'],
     sources: [{ label: 'Britannica — Mokosh', url: 'https://www.britannica.com/topic/Mokosh' }],
   },
@@ -2228,35 +2228,35 @@ The teaching beneath the disclosure question is also a personal one: every human
     symbol: '🎣', image: mauiImg,
     originStory: 'Maui is the most widely worshipped and storied figure across the entire Polynesian triangle — from Hawaii to Aotearoa (New Zealand) to Rapa Nui (Easter Island). He is a demigod: born premature, thrown into the sea by his mother, wrapped in her topknot of hair (the "Maui-tikitiki-a-Taranga" of Maori telling), and raised by sea-spirits. He grew up to perform a series of feats so massive they reshaped the world.',
     keyMyths: [
-      { title: 'The Fishing Up of the Islands', body: 'Using a magical hook (the Manaiakalani, or Ka Makau Nui o Maui — "the great hook of Maui"), Maui fished the islands of the Pacific up from the ocean floor. Each Polynesian culture credits him with their own island chain — Hawaii, New Zealand's North Island (Te Ika-a-Maui, "the fish of Maui"), Tonga, the Cook Islands. The constellation Scorpius is, to Polynesian navigators, Maui's hook still hanging in the sky.' },
-      { title: 'The Slowing of the Sun', body: 'The days were too short. Maui climbed to the summit of Haleakala (Hawaii's "house of the sun") with ropes braided from his sister's hair, lassoed the sun as it rose, and beat it with the jawbone of his ancestor until it agreed to move more slowly across the sky. The volcano is named for that event.' },
+      { title: 'The Fishing Up of the Islands', body: 'Using a magical hook (the Manaiakalani, or Ka Makau Nui o Maui — "the great hook of Maui"), Maui fished the islands of the Pacific up from the ocean floor. Each Polynesian culture credits him with their own island chain — Hawaii, New Zealand\'s North Island (Te Ika-a-Maui, "the fish of Maui"), Tonga, the Cook Islands. The constellation Scorpius is, to Polynesian navigators, Maui\'s hook still hanging in the sky.' },
+      { title: 'The Slowing of the Sun', body: 'The days were too short. Maui climbed to the summit of Haleakala (Hawaii\'s "house of the sun") with ropes braided from his sister\'s hair, lassoed the sun as it rose, and beat it with the jawbone of his ancestor until it agreed to move more slowly across the sky. The volcano is named for that event.' },
     ],
     powersAndRelics: ['The Manaiakalani — magical fishhook of bone', 'The jawbone of his grandmother Mahuika — used to beat the sun and to extract fire', 'Shapeshifting — birds, fish, insects', 'Power to outwit any god by lateral thinking'],
     relationships: ['Taranga — mother', 'Makea-Tutara — father', 'Hina — sister and sometimes wife', 'Mahuika — fire-keeping grandmother', 'Hine-nui-te-pō — death-goddess who killed him'],
     worship: 'Maui is woven into every Polynesian culture — Hawaiian, Maori, Tongan, Samoan, Tahitian, Cook Islander, Marquesan. The Disney film "Moana" introduced him to a global audience in a respectful collaboration with Polynesian cultural advisors, but the depth of the underlying tradition vastly exceeds the film. The Maui Cultural Lands organization in Hawaii is among many groups doing ongoing restoration of his traditional sites.',
     modernRelevance: 'Maui is the archetype of the irreverent reformer — the figure who refuses to accept that "this is just how things are" and reshapes the world by stubborn improvisation. Hackers, founders, and cultural disrupters all stand in his lineage.',
-    oracleLore: 'The geographic distribution of Maui myths — recognizably the same hero across thousands of miles of ocean, from Hawaii to New Zealand to Easter Island — is itself one of the most powerful pieces of evidence for the staggering navigational sophistication of pre-Columbian Polynesian seafaring. Polynesian wayfinding societies (Hokule'a, etc.) have demonstrated that the entire ocean was navigated without instruments by reading stars, swells, and birds.',
+    oracleLore: 'The geographic distribution of Maui myths — recognizably the same hero across thousands of miles of ocean, from Hawaii to New Zealand to Easter Island — is itself one of the most powerful pieces of evidence for the staggering navigational sophistication of pre-Columbian Polynesian seafaring. Polynesian wayfinding societies (Hokule\'a, etc.) have demonstrated that the entire ocean was navigated without instruments by reading stars, swells, and birds.',
     quotes: ['You said it could not be done. I did not hear you. I was already pulling.'],
     sources: [{ label: 'Britannica — Maui', url: 'https://www.britannica.com/topic/Maui-Polynesian-mythology' }],
   },
   {
     id: 'pele', name: 'Pele', pantheon: 'Polynesian',
     domains: ['Volcanoes', 'Fire', 'Lightning', 'Creation through Destruction', 'Hawaii'],
-    archetypeRole: 'The Volcano Goddess — Living deity of Hawaii's active volcanoes, said by Hawaiians to still walk Kilauea today.',
+    archetypeRole: 'The Volcano Goddess — Living deity of Hawaii\'s active volcanoes, said by Hawaiians to still walk Kilauea today.',
     reflectionQuestion: 'What in your life is being destroyed because something larger is being born?',
     atmosphericBg: 'linear-gradient(135deg,#1a0a0a 0%,#dc2626 50%,#fbbf24 100%)',
     atmosphericDesc: 'A tall woman in a red and orange robe with long black hair, standing at the rim of an active lava lake, the molten rock rising to greet her.',
     symbol: '🌋', image: peleImg,
-    originStory: 'Pele was born in Tahiti, daughter of the earth-mother Haumea. After conflicts with her sister Namakaokahai (goddess of the sea), Pele fled across the Pacific in a great canoe with her favored siblings, seeking a home. She dug fire-pits on every Hawaiian island northwest-to-southeast — Kauai first, then Oahu, Molokai, Maui — but each was extinguished by Namakaokahai. Finally she reached Hawaii's Big Island and dug Kilauea, deep enough that her sister could not reach. She still lives there.',
+    originStory: 'Pele was born in Tahiti, daughter of the earth-mother Haumea. After conflicts with her sister Namakaokahai (goddess of the sea), Pele fled across the Pacific in a great canoe with her favored siblings, seeking a home. She dug fire-pits on every Hawaiian island northwest-to-southeast — Kauai first, then Oahu, Molokai, Maui — but each was extinguished by Namakaokahai. Finally she reached Hawaii\'s Big Island and dug Kilauea, deep enough that her sister could not reach. She still lives there.',
     keyMyths: [
-      { title: 'The Battle of the Sisters', body: 'The geographic order of Pele's home-attempts (Kauai → Oahu → Molokai → Maui → Hawaii) precisely tracks the actual geological age sequence of the Hawaiian island chain — from oldest, most-eroded northwest to youngest, still-volcanic southeast. The mythology encodes the geology with stunning accuracy, possibly remembering the chain's formation in real time across generations.' },
+      { title: 'The Battle of the Sisters', body: 'The geographic order of Pele\'s home-attempts (Kauai → Oahu → Molokai → Maui → Hawaii) precisely tracks the actual geological age sequence of the Hawaiian island chain — from oldest, most-eroded northwest to youngest, still-volcanic southeast. The mythology encodes the geology with stunning accuracy, possibly remembering the chain\'s formation in real time across generations.' },
       { title: 'The Hitchhiker', body: 'Modern Hawaii is full of testimony of an elderly woman in a red dress (or sometimes a young, beautiful woman) seen walking along volcano roads at night, accepting rides, then disappearing from the back seat. The accounts are documented by ranger logs, news outlets, and folklore archives going back over a century. Drivers who refuse her ride are said to be cursed; those who help her are blessed. The phenomenon is taken seriously locally.' },
     ],
-    powersAndRelics: ['Direct command of every active Hawaiian volcano', 'Pele's hair — actual glass-fiber filaments produced by lava splash, named for her', 'Pele's tears — droplet-shaped volcanic glass beads', 'Power to bless or curse any visitor who removes lava rock from Hawaii (the "Pele's curse" of returned rocks is a real and documented phenomenon at Hawaii Volcanoes National Park, which receives thousands of returned stones annually with apology letters)'],
-    relationships: ['Haumea — earth-mother', 'Namakaokahai — sea-sister-rival', 'Hi'iaka — favored younger sister', 'Lohi'au — mortal lover'],
-    worship: 'Pele is actively worshipped in Hawaii by both traditional Native Hawaiian practitioners and the broader local culture. Offerings (gin, flowers, food) are still left at the Halema'uma'u crater rim. Hawaii Volcanoes National Park officially documents her cultural status. Her name is spoken with care; many Hawaiians will not casually use it.',
+    powersAndRelics: ['Direct command of every active Hawaiian volcano', 'Pele\'s hair — actual glass-fiber filaments produced by lava splash, named for her', 'Pele\'s tears — droplet-shaped volcanic glass beads', 'Power to bless or curse any visitor who removes lava rock from Hawaii (the "Pele\'s curse" of returned rocks is a real and documented phenomenon at Hawaii Volcanoes National Park, which receives thousands of returned stones annually with apology letters)'],
+    relationships: ['Haumea — earth-mother', 'Namakaokahai — sea-sister-rival', 'Hi\'iaka — favored younger sister', 'Lohi\'au — mortal lover'],
+    worship: 'Pele is actively worshipped in Hawaii by both traditional Native Hawaiian practitioners and the broader local culture. Offerings (gin, flowers, food) are still left at the Halema\'uma\'u crater rim. Hawaii Volcanoes National Park officially documents her cultural status. Her name is spoken with care; many Hawaiians will not casually use it.',
     modernRelevance: 'Pele is the archetype of irresistible creative-destructive force. Hawaii is geologically the most active volcanic site on the surface of the planet; the islands themselves are the literal product of her work. To live with her is to live with the fact that home is being made and unmade by the same fire.',
-    oracleLore: 'The "Pele's Curse" — the documented phenomenon of tourists returning lava rocks to Hawaii Volcanoes National Park with letters describing the misfortunes that struck them after removal — is one of the more interesting modern folk-religious data points. The Park Service receives thousands of such returns annually. Skeptics call it confirmation bias. Hawaiians call it the obvious consequence of stealing from a goddess.',
+    oracleLore: 'The "Pele\'s Curse" — the documented phenomenon of tourists returning lava rocks to Hawaii Volcanoes National Park with letters describing the misfortunes that struck them after removal — is one of the more interesting modern folk-religious data points. The Park Service receives thousands of such returns annually. Skeptics call it confirmation bias. Hawaiians call it the obvious consequence of stealing from a goddess.',
     quotes: ['You stand on my body. Everything you call home, I made. Do not take what is mine without asking.'],
     sources: [{ label: 'National Park Service — Pele', url: 'https://www.nps.gov/havo/learn/historyculture/pele.htm' }],
   },
@@ -2268,16 +2268,16 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#0a1a3a 0%,#0c4a6e 50%,#0d9488 100%)',
     atmosphericDesc: 'A tall figure rising from the sea, his body covered in spiraling tattoos, fish and turtles swimming around him, a great voyaging canoe in the distance.',
     symbol: '🐋', image: tangaroaImg,
-    originStory: 'Tangaroa (also Tangaloa, Kanaloa in Hawaii, Ta'aroa in Tahiti) is among the most widespread Polynesian deities. In the Maori tradition he is one of the children of Ranginui (sky) and Papatūānuku (earth), who lived pressed together in darkness until their children — Tāne, Tangaroa, Tāwhirimātea, and others — pushed them apart and let the light in. In the Tahitian creation account, Ta'aroa is supreme — existing before all else inside a cosmic egg, breaking out, and creating the universe from his own body.',
+    originStory: 'Tangaroa (also Tangaloa, Kanaloa in Hawaii, Ta\'aroa in Tahiti) is among the most widespread Polynesian deities. In the Maori tradition he is one of the children of Ranginui (sky) and Papatūānuku (earth), who lived pressed together in darkness until their children — Tāne, Tangaroa, Tāwhirimātea, and others — pushed them apart and let the light in. In the Tahitian creation account, Ta\'aroa is supreme — existing before all else inside a cosmic egg, breaking out, and creating the universe from his own body.',
     keyMyths: [
-      { title: 'The Separation of Sky and Earth', body: 'The Maori cosmology describes the world's beginning as a long period in which sky-father and earth-mother lay pressed together in tight embrace, their children trapped in the darkness between them. Tāne (forest-god) finally pushed them apart, letting in light. Tangaroa took dominion of the seas and his descendants — fish and reptiles — fled into the new ocean.' },
-      { title: 'The War of the Brothers', body: 'When the brothers separated their parents, Tāwhirimātea (storm-god) was so enraged he attacked his siblings. He drove Tangaroa's descendants into the deep ocean, where they remain. Tangaroa, in response, refuses to give Tāne a steady supply of timber without storm-damage — explaining why every boat eventually returns to the sea.' },
+      { title: 'The Separation of Sky and Earth', body: 'The Maori cosmology describes the world\'s beginning as a long period in which sky-father and earth-mother lay pressed together in tight embrace, their children trapped in the darkness between them. Tāne (forest-god) finally pushed them apart, letting in light. Tangaroa took dominion of the seas and his descendants — fish and reptiles — fled into the new ocean.' },
+      { title: 'The War of the Brothers', body: 'When the brothers separated their parents, Tāwhirimātea (storm-god) was so enraged he attacked his siblings. He drove Tangaroa\'s descendants into the deep ocean, where they remain. Tangaroa, in response, refuses to give Tāne a steady supply of timber without storm-damage — explaining why every boat eventually returns to the sea.' },
     ],
     powersAndRelics: ['Authority over every fish, reptile, sea-creature', 'The voyaging canoes — built only with his permission', 'Power to grant or withhold safe passage to any sailor', 'In Tahitian tradition: he is the cosmic creator-being from whom all existence emerged'],
     relationships: ['Ranginui (sky-father) and Papatūānuku (earth-mother) — parents in Maori telling', 'Tāne — brother (forest)', 'Tāwhirimātea — brother (storm, and his pursuer)', 'Hina-uri — sometimes wife'],
     worship: 'Tangaroa is venerated across Aotearoa (New Zealand), Hawaii (as Kanaloa, often paired with Kane), Tahiti, Samoa, Tonga, the Cook Islands, and throughout the Pacific. Fishermen across the region still observe ritual protocols (returning the first catch, not pointing fingers at the sea, etc.) that descend from his worship. The Maori revival movement has restored explicit acknowledgment of him in marine ceremonies.',
     modernRelevance: 'Tangaroa is the archetype of the foundational element that supports all life and is taken for granted by it. The Pacific Ocean is the largest single geographic feature on Earth; Polynesian cultures developed the most sophisticated open-ocean navigational system in human history under his watch. Modern oceanic conservation movements in the Pacific often explicitly invoke him.',
-    oracleLore: 'Polynesian wayfinding — the navigation of the entire Pacific Ocean by stars, swell-patterns, bird-flight, and cloud-formations, without instruments — is one of the most cognitively sophisticated technical achievements in pre-modern human culture. The Polynesian Voyaging Society's Hokule'a has demonstrated since 1976 that the original methods still work; the techniques are now being studied for what they reveal about pre-literate scientific reasoning.',
+    oracleLore: 'Polynesian wayfinding — the navigation of the entire Pacific Ocean by stars, swell-patterns, bird-flight, and cloud-formations, without instruments — is one of the most cognitively sophisticated technical achievements in pre-modern human culture. The Polynesian Voyaging Society\'s Hokule\'a has demonstrated since 1976 that the original methods still work; the techniques are now being studied for what they reveal about pre-literate scientific reasoning.',
     quotes: ['I am the road. I am the obstacle. I am the food. I am what you must not insult. Travel carefully.'],
     sources: [{ label: 'Te Ara — Tangaroa', url: 'https://teara.govt.nz/en/tangaroa-the-sea' }],
   },
@@ -2296,9 +2296,9 @@ The teaching beneath the disclosure question is also a personal one: every human
       { title: 'The Carving of the Land', body: 'In the Dreaming (the timeless creative era of Aboriginal cosmology), the Rainbow Serpent emerged from beneath the earth and slithered across the empty land, its enormous body carving out every river, gorge, waterhole, and ridge. Where it stopped to rest, it left a billabong; where it climbed, it left a mountain; where it rose into the air, it became the rainbow itself. The Australian landscape is literally read as its body.' },
       { title: 'The Wawalag Sisters', body: 'In the Yolngu tradition of Arnhem Land, two sisters arriving at a sacred waterhole accidentally polluted it with menstrual blood. The Rainbow Serpent rose, swallowed them and their children, then later regurgitated them — establishing the foundational law-cycle of initiation, gender boundaries, and seasonal renewal. The story is one of the most carefully transmitted ceremonial narratives in human history.' },
     ],
-    powersAndRelics: ['The body of the serpent itself, which is every river system on the Australian continent', 'Authority over all fresh water', 'Power over fertility — human, animal, and the land's', 'Enforcement of sacred law: the Serpent punishes those who violate ceremonial law by swallowing them at waterholes'],
+    powersAndRelics: ['The body of the serpent itself, which is every river system on the Australian continent', 'Authority over all fresh water', 'Power over fertility — human, animal, and the land\'s', 'Enforcement of sacred law: the Serpent punishes those who violate ceremonial law by swallowing them at waterholes'],
     relationships: ['Varies by language group — the Serpent has hundreds of regional names (Wagyl in the southwest, Ngalyod in Arnhem Land, Goorialla, Yurlunggur, etc.)', 'Often paired with sky-creator beings like Baiame', 'The Wawalag Sisters in the Yolngu tradition'],
-    worship: 'Worshipped continuously by Aboriginal Australian peoples for tens of thousands of years across multiple language groups and regions, with regional variations. The Rainbow Serpent remains central to contemporary Aboriginal religion and law. Many sacred sites — waterholes, river bends, ridge formations — are still recognized as the Serpent's body, and ceremonial protocols around them are maintained by traditional custodians today.',
+    worship: 'Worshipped continuously by Aboriginal Australian peoples for tens of thousands of years across multiple language groups and regions, with regional variations. The Rainbow Serpent remains central to contemporary Aboriginal religion and law. Many sacred sites — waterholes, river bends, ridge formations — are still recognized as the Serpent\'s body, and ceremonial protocols around them are maintained by traditional custodians today.',
     modernRelevance: 'The Rainbow Serpent is the archetype of the law-bearing land itself — the principle that the geography is not a passive backdrop but an active, watching, judging entity that records every action and responds to violation. The concept is finally being taken seriously in Australian legal and environmental philosophy after centuries of dismissal.',
     oracleLore: 'Aboriginal Australian religion represents the longest continuous unbroken religious tradition known to anthropology — approximately 65,000 years of in-place cultural transmission, dating from the original peopling of the continent. The Rainbow Serpent is the central figure of that tradition. Recent Australian Native Title legal cases have begun to require courts to take Aboriginal cosmology seriously as evidence of pre-colonial sovereignty — a quiet legal revolution.',
     quotes: ['I carved every river that you drink from. Do not drink without remembering whose body that is.'],
@@ -2320,7 +2320,7 @@ The teaching beneath the disclosure question is also a personal one: every human
     powersAndRelics: ['Created all the land, water, and living things of southeastern Australia', 'Gave the Bora law — the deepest layer of Aboriginal initiatory tradition', 'Receives the souls of the dead', 'His emblem is the cross-and-circle of the Bora ground'],
     relationships: ['Birrahgnooloo — wife in some traditions', 'Daramulan — his son or his attendant in some accounts', 'The first ancestors — his creations', 'The Pleiades and the Milky Way — his sky-realm'],
     worship: 'Baiame remains the creator-figure of contemporary southeastern Aboriginal religion. Bora ceremonies are still conducted in protected forms by knowledgeable elders. His name is treated with deep respect; in some communities, public use is limited and his deepest teachings are restricted to initiated men.',
-    modernRelevance: 'Baiame is the archetype of the absent-yet-watching law-giver — the deity who established the rules, departed, and now observes whether the law is kept without direct intervention. The pattern is widespread (Yahweh, Brahma, the Christian deist God) but Baiame's version is among the oldest and most ethically demanding.',
+    modernRelevance: 'Baiame is the archetype of the absent-yet-watching law-giver — the deity who established the rules, departed, and now observes whether the law is kept without direct intervention. The pattern is widespread (Yahweh, Brahma, the Christian deist God) but Baiame\'s version is among the oldest and most ethically demanding.',
     oracleLore: 'The "Sky Father" pattern — a creator-being who established the world and withdrew into the sky — appears with striking consistency across indigenous cosmologies worldwide (Wakan Tanka, Olodumare, Baiame, Bunjil). Comparative religion scholars have debated whether this represents independent invention or a Paleolithic religious substrate older than the spread of humanity across continents.',
     quotes: ['I made the rivers. I gave you the law. I went up. I am watching.'],
     sources: [{ label: 'Australian Museum — Baiame', url: 'https://australian.museum/learn/cultures/atsi-collection/cultural-objects/baiame/' }],
@@ -2338,13 +2338,13 @@ The teaching beneath the disclosure question is also a personal one: every human
     originStory: 'Wakan Tanka ("Great Sacred" or "Great Mystery") is the Lakota name for the unifying spiritual power that permeates and connects all things. It is not a god in the European sense — not a personal being with a biography. It is closer to a sacred quality of existence itself, manifesting through every plant, animal, weather pattern, ancestor-spirit, and human being. The Lakota theologian Black Elk emphasized that Wakan Tanka cannot be spoken of directly; it can only be approached through the seven sacred rites given to the Lakota people by the White Buffalo Calf Woman.',
     keyMyths: [
       { title: 'The White Buffalo Calf Woman', body: 'Long ago, two Lakota hunters encountered a beautiful woman walking across the prairie. One approached her with disrespectful intent and was reduced to bones. The other received her with reverence. She came to the camp and gave the Lakota the sacred Chanunpa (the ceremonial pipe) and the seven sacred rites. As she walked away, she rolled four times and transformed each time — finally into a white buffalo calf — before vanishing. The prophecy says her return signals a time of major spiritual transition.' },
-      { title: 'Black Elk's Great Vision', body: 'At age nine, the Oglala Lakota holy man Black Elk had a vision of being taken into the sky and shown the entire cosmos — the Six Grandfathers (the four cardinal directions plus sky and earth), the sacred hoop of all peoples interconnected, and his own people's coming suffering and eventual renewal. The vision was recorded in "Black Elk Speaks" (1932) — among the most influential indigenous spiritual texts ever published.' },
+      { title: 'Black Elk\'s Great Vision', body: 'At age nine, the Oglala Lakota holy man Black Elk had a vision of being taken into the sky and shown the entire cosmos — the Six Grandfathers (the four cardinal directions plus sky and earth), the sacred hoop of all peoples interconnected, and his own people\'s coming suffering and eventual renewal. The vision was recorded in "Black Elk Speaks" (1932) — among the most influential indigenous spiritual texts ever published.' },
     ],
-    powersAndRelics: ['The sacred Chanunpa (pipe) — direct channel for prayer', 'The seven sacred rites: keeping of the soul, sweatlodge (inipi), vision quest (hanblecheyapi), Sun Dance (wiwanyag wachipi), making of relatives (hunkapi), girl's puberty rite (ishna ta awicha lowan), throwing the ball (tapa wankayeyapi)', 'The sacred hoop — image of all life interconnected', 'The Six Grandfathers — manifestations of the directions'],
+    powersAndRelics: ['The sacred Chanunpa (pipe) — direct channel for prayer', 'The seven sacred rites: keeping of the soul, sweatlodge (inipi), vision quest (hanblecheyapi), Sun Dance (wiwanyag wachipi), making of relatives (hunkapi), girl\'s puberty rite (ishna ta awicha lowan), throwing the ball (tapa wankayeyapi)', 'The sacred hoop — image of all life interconnected', 'The Six Grandfathers — manifestations of the directions'],
     relationships: ['White Buffalo Calf Woman — divine messenger', 'The Six Grandfathers — directional manifestations', 'Tunkashila — "Grandfather" — affectionate Lakota name for the sacred', 'All beings, animate and inanimate — Wakan Tanka manifests through each'],
     worship: 'Wakan Tanka is worshipped continuously by the Lakota, Dakota, and Nakota peoples through the seven sacred rites, the Sun Dance (banned by the U.S. government from 1881 to 1934, then restored and now conducted annually), sweat lodges, and pipe ceremonies. The Black Hills (He Sapa) are sacred to Wakan Tanka and remain a contested sovereignty issue.',
     modernRelevance: 'Wakan Tanka is the archetype of the unnamed sacred — the principle that reality itself, in its full interconnected mystery, is the proper object of reverence, and that any attempt to reduce that mystery to a manageable definition has already missed the point. The framework is increasingly influential in environmental philosophy and systems theory.',
-    oracleLore: 'Black Elk's vision (1872) included specific imagery — the sacred hoop, the cross of the four directions — that prefigures and parallels developments in 20th-century systems theory, ecology, and depth psychology by decades. Jung explicitly engaged with Lakota and other indigenous traditions in formulating his work on archetypes; the influence runs deeper than is usually acknowledged.',
+    oracleLore: 'Black Elk\'s vision (1872) included specific imagery — the sacred hoop, the cross of the four directions — that prefigures and parallels developments in 20th-century systems theory, ecology, and depth psychology by decades. Jung explicitly engaged with Lakota and other indigenous traditions in formulating his work on archetypes; the influence runs deeper than is usually acknowledged.',
     quotes: ['Do not name Me. Walk in Me. The naming makes you forget which one of us you are.'],
     sources: [{ label: 'Britannica — Wakan Tanka', url: 'https://www.britannica.com/topic/Wakan-Tanka' }],
   },
@@ -2358,15 +2358,15 @@ The teaching beneath the disclosure question is also a personal one: every human
     symbol: '🐺', image: coyoteImg,
     originStory: 'Coyote is the most widespread trickster figure across Native American mythology — appearing in the traditions of the Navajo, Apache, Hopi, Zuni, Crow, Nez Perce, Karuk, Maidu, Miwok, Pomo, and dozens more nations across the western half of North America. He is greedy, lustful, lazy, vain, and stupid — and also the figure who created humans, brought fire, gave language, and made many of the foundational shapes of the world. His foolishness produces the structures everyone else then inhabits.',
     keyMyths: [
-      { title: 'Coyote Steals Fire (multiple tribal versions)', body: 'In many western tribes' traditions, Coyote stole fire from beings who hoarded it — sometimes from spirit-people on a mountain, sometimes from the sun itself — and brought it down to the people by passing it through a relay of animal helpers. The myth-pattern parallels Prometheus eerily, with one key difference: Coyote steals fire by accident, while bragging, or by sheer absurd luck.' },
+      { title: 'Coyote Steals Fire (multiple tribal versions)', body: 'In many western tribes\' traditions, Coyote stole fire from beings who hoarded it — sometimes from spirit-people on a mountain, sometimes from the sun itself — and brought it down to the people by passing it through a relay of animal helpers. The myth-pattern parallels Prometheus eerily, with one key difference: Coyote steals fire by accident, while bragging, or by sheer absurd luck.' },
       { title: 'Coyote Releases the Buffalo', body: 'In the Cheyenne and other Plains traditions, the buffalo were imprisoned by greedy spirit-beings. Coyote tricked his way into the corral and let them out — and they flooded across the plains, providing food for all peoples. He claims credit; the people remember he tripped over the gate by accident.' },
     ],
     powersAndRelics: ['Indestructibility — Coyote dies in many stories but is always back in the next one, unfazed', 'Shapeshifting between man and coyote forms', 'Speech with all animals', 'Inventiveness combined with poor impulse control — the engine of both creation and catastrophe'],
     relationships: ['Varies by tribal tradition', 'Often paired with Old Man or Raven in northern Plains and Pacific Northwest', 'Often opposed by a more dignified counterpart (Eagle, Wolf)', 'Husband, in some myths, to characters who become topographic features'],
-    worship: 'Coyote is not worshipped in the European sense; he is taught, told, and learned from across many traditional communities. Coyote stories are still actively narrated in many western U.S. tribal nations and are central to childrens' moral education — teaching by negative example as often as positive.',
+    worship: 'Coyote is not worshipped in the European sense; he is taught, told, and learned from across many traditional communities. Coyote stories are still actively narrated in many western U.S. tribal nations and are central to childrens\' moral education — teaching by negative example as often as positive.',
     modernRelevance: 'Coyote is the archetype of the foolish creator — the figure who blunders into transformation. Modern technologists, innovators, and reformers who break systems by accident and discover they have created something new owe him quiet acknowledgment. The pattern is more honest than the heroic-genius narrative.',
-    oracleLore: 'The coyote (Canis latrans) has, in the modern era, become one of the most adaptive mammals on the North American continent — expanding its range from a small southwestern original territory to occupying every U.S. state, every Canadian province, all of Mexico, and now the eastern seaboard cities (including documented populations in Manhattan, Chicago, Boston). The mythological figure's indestructibility has played out as biological reality. The trickster is winning.',
-    quotes: ['I did not mean to do that. But look what it became. Take it. Use it. You're welcome. Or sorry. I get those confused.'],
+    oracleLore: 'The coyote (Canis latrans) has, in the modern era, become one of the most adaptive mammals on the North American continent — expanding its range from a small southwestern original territory to occupying every U.S. state, every Canadian province, all of Mexico, and now the eastern seaboard cities (including documented populations in Manhattan, Chicago, Boston). The mythological figure\'s indestructibility has played out as biological reality. The trickster is winning.',
+    quotes: ['I did not mean to do that. But look what it became. Take it. Use it. You\'re welcome. Or sorry. I get those confused.'],
     sources: [{ label: 'Britannica — Coyote', url: 'https://www.britannica.com/topic/Coyote-mythology' }],
   },
   {
@@ -2377,7 +2377,7 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#0a0a3a 0%,#1e3a8a 50%,#fbbf24 100%)',
     atmosphericDesc: 'A massive eagle-form silhouetted against a wall of black storm clouds, lightning forking from its eyes, the entire prairie below alive with rain.',
     symbol: '🦅', image: thunderbirdImg,
-    originStory: 'The Thunderbird is found across an extraordinary range of Native American cultures — Pacific Northwest (Tlingit, Haida, Kwakwaka'wakw), Plains (Lakota, Cheyenne, Arapaho), Great Lakes (Anishinaabe, Menominee), Southwest (Navajo, Apache, Hopi), and Northeast (Algonquian peoples). Despite the geographic spread, the core attributes are remarkably consistent: a massive eagle-like being whose wingbeats cause thunder, whose eyes flash lightning, and who frequently battles a great underwater horned serpent representing the chthonic powers.',
+    originStory: 'The Thunderbird is found across an extraordinary range of Native American cultures — Pacific Northwest (Tlingit, Haida, Kwakwaka\'wakw), Plains (Lakota, Cheyenne, Arapaho), Great Lakes (Anishinaabe, Menominee), Southwest (Navajo, Apache, Hopi), and Northeast (Algonquian peoples). Despite the geographic spread, the core attributes are remarkably consistent: a massive eagle-like being whose wingbeats cause thunder, whose eyes flash lightning, and who frequently battles a great underwater horned serpent representing the chthonic powers.',
     keyMyths: [
       { title: 'The Battle with the Horned Serpent', body: 'Across many tribal traditions, the Thunderbird is locked in eternal cosmic conflict with the great Horned Underwater Serpent (Mishipeshu in Anishinaabe tradition, Uncegila in Lakota). The Thunderbird represents the powers of the sky, order, and storm; the Serpent represents the powers of the deep waters, chaos, and the underworld. Their battles produce thunderstorms — sky-power striking down at water-power. The dualism is one of the most stable cosmological structures in North American religion.' },
       { title: 'The Whale-Hunter', body: 'In Pacific Northwest traditions, the Thunderbird hunts whales — diving from the sky, seizing a whale in its talons, and carrying it back to its mountain nest. The myth is encoded in many totem poles. There is a fascinating real-world parallel: in 1700, a magnitude 9.0 megathrust earthquake struck the Cascadia Subduction Zone, sending a tsunami across the Pacific. Coastal Pacific Northwest oral traditions clearly record the event — described in some tellings as the Thunderbird and Whale battling each other.' },
@@ -2407,7 +2407,7 @@ The teaching beneath the disclosure question is also a personal one: every human
     ],
     powersAndRelics: ['The eternal fire — kept burning in every Zoroastrian temple as direct symbol of his presence', 'The Faravahar — winged-disc emblem worn and displayed by Zoroastrians worldwide', 'The Avesta — sacred scripture in Old Avestan and Young Avestan', 'Cosmic Truth (Asha) — the underlying right-order of the universe'],
     relationships: ['Angra Mainyu (Ahriman) — cosmic adversary', 'The Amesha Spentas — six "Holy Immortals," divine emanations of his qualities', 'Spenta Mainyu — his Holy Spirit', 'Zarathustra — his prophet'],
-    worship: 'Worshipped continuously for over 3,000 years — Zoroastrianism is one of the world's oldest continuously practiced religions. The Parsi community in India and the smaller Zoroastrian community in Iran maintain the eternal fires; the fire at the Yazd Atash Behram in Iran has burned without interruption for over 1,500 years. The total practicing community is now small (under 200,000 globally) but the theological influence on Western religion is enormous.',
+    worship: 'Worshipped continuously for over 3,000 years — Zoroastrianism is one of the world\'s oldest continuously practiced religions. The Parsi community in India and the smaller Zoroastrian community in Iran maintain the eternal fires; the fire at the Yazd Atash Behram in Iran has burned without interruption for over 1,500 years. The total practicing community is now small (under 200,000 globally) but the theological influence on Western religion is enormous.',
     modernRelevance: 'Ahura Mazda is the archetype of the rational ethical creator — the divine principle that demands not blind obedience but conscious choice between truth and falsehood at every level of action. The Zoroastrian motto "Good Thoughts, Good Words, Good Deeds" remains one of the cleanest summaries of practical ethics ever formulated.',
     oracleLore: 'The Zoroastrian fire-temple tradition is one of the most rigorously maintained ritual continuities in human history. The fire at the Yazd Atash Behram in Iran is believed by its custodians to have burned without extinction since 470 CE — over 1,550 years. The discipline required to maintain such continuity is itself a profound religious statement: the cosmic fire of consciousness must never be allowed to go out.',
     quotes: ['Truth is the highest virtue. Without it, every other virtue eventually becomes its opposite.'],
@@ -2421,16 +2421,16 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#2a1a0a 0%,#dc2626 50%,#fbbf24 100%)',
     atmosphericDesc: 'A radiant solar warrior in Phrygian cap, slaying a great bull in a cave, a scorpion and a dog beside him, rays of light streaming from his halo.',
     symbol: '🌅', image: mithraImg,
-    originStory: 'Mithra ("Covenant") was an ancient Indo-Iranian deity of contracts and the sworn word, predating Zoroastrianism — he appears in the Rig Veda as Mitra and in the Iranian Yashts as the all-seeing god of the spoken pact. Whoever broke a covenant was Mithra's enemy. Whoever kept faith with comrades and oaths was under his protection. He was associated with the rising sun (which sees all things) and with cattle (the basic currency of pastoral covenants).',
+    originStory: 'Mithra ("Covenant") was an ancient Indo-Iranian deity of contracts and the sworn word, predating Zoroastrianism — he appears in the Rig Veda as Mitra and in the Iranian Yashts as the all-seeing god of the spoken pact. Whoever broke a covenant was Mithra\'s enemy. Whoever kept faith with comrades and oaths was under his protection. He was associated with the rising sun (which sees all things) and with cattle (the basic currency of pastoral covenants).',
     keyMyths: [
-      { title: 'The Tauroctony (Bull-Slaying)', body: 'In the Roman mystery cult of Mithras (1st–4th c. CE) — which was related to but theologically distinct from Iranian Mithra worship — the central image is the tauroctony: Mithras kneeling on a great bull, slitting its throat with a dagger, while a scorpion grips the bull's testicles and a dog laps the blood. The scene appears in nearly every Mithraeum across the Roman Empire. Its precise meaning remains contested; the leading interpretation reads it as a star-map (the constellations involved in a specific cosmic moment) and the religious act of moving the equinox.' },
+      { title: 'The Tauroctony (Bull-Slaying)', body: 'In the Roman mystery cult of Mithras (1st–4th c. CE) — which was related to but theologically distinct from Iranian Mithra worship — the central image is the tauroctony: Mithras kneeling on a great bull, slitting its throat with a dagger, while a scorpion grips the bull\'s testicles and a dog laps the blood. The scene appears in nearly every Mithraeum across the Roman Empire. Its precise meaning remains contested; the leading interpretation reads it as a star-map (the constellations involved in a specific cosmic moment) and the religious act of moving the equinox.' },
       { title: 'The 10,000 Eyes and 10,000 Ears', body: 'In the Mihr Yasht (the great Iranian hymn to Mithra), the god is described as having "ten thousand eyes and ten thousand ears" — meaning that no covenant can be broken without him knowing, no oath sworn in private without him hearing. The poetry is some of the most beautiful in the Avesta.' },
     ],
     powersAndRelics: ['The all-seeing eye — no broken contract escapes his notice', 'The dagger of cosmic judgment', 'The Phrygian cap (the soft conical hat) — adopted later as the symbol of liberty in Western revolutions, descending originally from Mithraic iconography', 'The seven sacramental grades of initiation in the Roman cult: Corax (Raven), Nymphus (Bridegroom), Miles (Soldier), Leo (Lion), Perses (Persian), Heliodromus (Sun-Runner), Pater (Father)'],
     relationships: ['Ahura Mazda — supreme deity he serves in Iranian tradition', 'Anahita — divine sister/consort (water-goddess)', 'Verethragna — Iranian war-god', 'The cosmic bull — slain in the Roman tauroctony'],
     worship: 'Iranian Mithra worship continues quietly in Zoroastrian tradition. The Roman mystery cult of Mithras (1st–4th c. CE) was at one point a serious rival to early Christianity for the soul of the Roman Empire — Mithraea (sacred caves and underground temples) have been excavated from Britain to Syria, with the highest concentrations along the Roman military frontiers. The cult was almost exclusively male and emphasized brotherhood, oath-keeping, and ascending grades of initiation.',
     modernRelevance: 'Mithra is the archetype of binding agreement — the principle that contracts and oaths have force beyond their enforcement mechanism, that the sworn word creates spiritual reality even when no court can punish breach. Modern professional ethics, military codes, and brotherhood organizations all descend partly from Mithraic frameworks (the Freemasons explicitly draw on Mithraic-influenced material).',
-    oracleLore: 'Mithras' birthday in the Roman cult was celebrated on December 25 — the day of the unconquered sun (Sol Invictus) following the winter solstice. When the Roman emperor Constantine moved the Christian celebration of the birth of Christ to December 25 in the 4th century, he was deliberately appropriating an existing Mithraic festival. The choice was politically expedient — and theologically loaded. Christianity absorbed many Mithraic elements (sacramental meal of bread and wine, baptism, grades of initiation, the iconography of a Light-Bringer slaying the symbolic beast) while supplanting the cult itself.',
+    oracleLore: 'Mithras\' birthday in the Roman cult was celebrated on December 25 — the day of the unconquered sun (Sol Invictus) following the winter solstice. When the Roman emperor Constantine moved the Christian celebration of the birth of Christ to December 25 in the 4th century, he was deliberately appropriating an existing Mithraic festival. The choice was politically expedient — and theologically loaded. Christianity absorbed many Mithraic elements (sacramental meal of bread and wine, baptism, grades of initiation, the iconography of a Light-Bringer slaying the symbolic beast) while supplanting the cult itself.',
     quotes: ['I see every hand that you shake. I hear every word that you swear. I do not need a court. I am the court.'],
     sources: [{ label: 'Britannica — Mithra', url: 'https://www.britannica.com/topic/Mithra-Iranian-god' }],
   },
@@ -2444,14 +2444,14 @@ The teaching beneath the disclosure question is also a personal one: every human
     atmosphericBg: 'linear-gradient(135deg,#2a1a0a 0%,#92400e 50%,#fbbf24 100%)',
     atmosphericDesc: 'A standing female figure in flowing pre-Islamic Arabian robes, palm fronds behind her, a sacred white stone at her feet, the desert dawn breaking.',
     symbol: '🌅', image: alLatImg,
-    originStory: 'Al-Lat ("The Goddess") was one of the principal deities of pre-Islamic Arabian polytheism — worshipped across the Hejaz, Nabataean territory (Petra), Palmyra, and into Mesopotamia. She formed a triad with Al-Uzza ("The Mighty") and Manat ("Fate") — the three goddesses referred to in the Qur'an (Surah An-Najm 53:19-20) as "daughters of Allah," whose veneration was rejected by the new monotheistic message of Muhammad. Her sanctuary at Ta'if, west of Mecca, was destroyed in 630 CE as part of the Islamic consolidation of the Arabian Peninsula.',
+    originStory: 'Al-Lat ("The Goddess") was one of the principal deities of pre-Islamic Arabian polytheism — worshipped across the Hejaz, Nabataean territory (Petra), Palmyra, and into Mesopotamia. She formed a triad with Al-Uzza ("The Mighty") and Manat ("Fate") — the three goddesses referred to in the Qur\'an (Surah An-Najm 53:19-20) as "daughters of Allah," whose veneration was rejected by the new monotheistic message of Muhammad. Her sanctuary at Ta\'if, west of Mecca, was destroyed in 630 CE as part of the Islamic consolidation of the Arabian Peninsula.',
     keyMyths: [
-      { title: 'The Sanctuary at Ta'if', body: 'Al-Lat's most important shrine was at the city of Ta'if, where a sacred white granite stone was venerated as her physical presence. After the destruction of the shrine by Muhammad's forces in 630 CE, the site was converted to other uses; the stone itself is reported in various sources to have been ground up or buried. The destruction marks one of the cleaner transitions in religious history — from active polytheism to active monotheism within a single generation.' },
-      { title: 'The Satanic Verses', body: 'According to early Islamic sources (including Al-Tabari), there is a complicated and theologically contested episode in which Muhammad briefly recited verses appearing to acknowledge Al-Lat, Al-Uzza, and Manat as intercessors before Allah — verses he subsequently retracted as a satanic deception (the "gharaniq" episode). The episode is dismissed by most contemporary Islamic scholarship but remains a serious topic in academic history of early Islam, and provided the title for Salman Rushdie's 1988 novel.' },
+      { title: 'The Sanctuary at Ta\'if', body: 'Al-Lat\'s most important shrine was at the city of Ta\'if, where a sacred white granite stone was venerated as her physical presence. After the destruction of the shrine by Muhammad\'s forces in 630 CE, the site was converted to other uses; the stone itself is reported in various sources to have been ground up or buried. The destruction marks one of the cleaner transitions in religious history — from active polytheism to active monotheism within a single generation.' },
+      { title: 'The Satanic Verses', body: 'According to early Islamic sources (including Al-Tabari), there is a complicated and theologically contested episode in which Muhammad briefly recited verses appearing to acknowledge Al-Lat, Al-Uzza, and Manat as intercessors before Allah — verses he subsequently retracted as a satanic deception (the "gharaniq" episode). The episode is dismissed by most contemporary Islamic scholarship but remains a serious topic in academic history of early Islam, and provided the title for Salman Rushdie\'s 1988 novel.' },
     ],
-    powersAndRelics: ['The sacred white stone at Ta'if — her primary cultic object', 'Sanctuary lands and palm groves dedicated to her', 'Authority over pre-Islamic Arabian oaths sworn by her name', 'Her veneration crossed political boundaries: Nabataean, Palmyrene, Hejaz Arabian, even into Roman Syria'],
+    powersAndRelics: ['The sacred white stone at Ta\'if — her primary cultic object', 'Sanctuary lands and palm groves dedicated to her', 'Authority over pre-Islamic Arabian oaths sworn by her name', 'Her veneration crossed political boundaries: Nabataean, Palmyrene, Hejaz Arabian, even into Roman Syria'],
     relationships: ['Al-Uzza — sister-goddess', 'Manat — sister-goddess (fate)', 'The pre-Islamic Allah — the high-god of whom she was considered "daughter"', 'Hubal — the chief god of the pre-Islamic Kaaba'],
-    worship: 'Worship ceased with the Islamic consolidation of Arabia in the early 7th century. No active cult survives. The site of her sanctuary at Ta'if is now part of the Islamic geography of Saudi Arabia.',
+    worship: 'Worship ceased with the Islamic consolidation of Arabia in the early 7th century. No active cult survives. The site of her sanctuary at Ta\'if is now part of the Islamic geography of Saudi Arabia.',
     modernRelevance: 'Al-Lat is the archetype of the displaced divine — the goddess whose worship was deliberately ended within historical memory, and whose absence is felt as a structural gap in the religious landscape that replaced her. Contemporary feminist Islamic scholarship has begun to revisit the pre-Islamic Arabian goddesses as part of recovering a more complex picture of Arabian religious history.',
     oracleLore: 'Inscriptions to Al-Lat in Aramaic and ancient North Arabian survive across an extraordinary geographic range — from Iraq to Egypt, from the Levant to the depths of the Arabian peninsula. The Palmyrene inscriptions identify her with Athena, suggesting a Roman-era Hellenistic-Arabian religious synthesis that is only now being properly studied. The Temple of Al-Lat at Palmyra (Syria) survived until destroyed by ISIS in 2015 — a second erasure 1,400 years after the first.',
     quotes: ['I was here before. Whether I will be remembered or only studied depends on hands not yet born.'],
@@ -2467,7 +2467,7 @@ The teaching beneath the disclosure question is also a personal one: every human
     symbol: '🏛️', image: hubalImg,
     originStory: 'Hubal was the principal deity worshipped within the pre-Islamic Kaaba at Mecca — a tall carnelian-colored stone idol with a golden right hand (replaced after the original was broken off). According to Islamic historical sources, his statue stood at the center of the Kaaba alongside 360 other idols representing the various deities of the Arabian tribes. His cult included arrow-divination: seven arrows were cast before him to determine fate in matters of marriage, paternity, journeys, and important decisions.',
     keyMyths: [
-      { title: 'The Conquest of Mecca', body: 'In 630 CE, when Muhammad and his forces took control of Mecca, the Kaaba was cleansed of all idols. Hubal's statue, along with the other 359 deities, was destroyed. According to traditional accounts, Muhammad struck the idols with his staff and recited Qur'an 17:81: "Truth has come and falsehood has vanished." The Kaaba was rededicated to the monotheistic worship of Allah alone, which it remains to this day.' },
+      { title: 'The Conquest of Mecca', body: 'In 630 CE, when Muhammad and his forces took control of Mecca, the Kaaba was cleansed of all idols. Hubal\'s statue, along with the other 359 deities, was destroyed. According to traditional accounts, Muhammad struck the idols with his staff and recited Qur\'an 17:81: "Truth has come and falsehood has vanished." The Kaaba was rededicated to the monotheistic worship of Allah alone, which it remains to this day.' },
       { title: 'The Battle of Uhud', body: 'At the Battle of Uhud (625 CE) — three years before the conquest of Mecca — the Qurayshi tribe celebrated their tactical victory over the Muslims by shouting "Show your supremacy, Hubal!" Muhammad reportedly responded that Allah was higher and greater. The exchange marks one of the rare moments in surviving documentation where the actual cultic invocation of Hubal is preserved.' },
     ],
     powersAndRelics: ['The carnelian-stone statue with golden right hand', 'The seven divination arrows', 'Authority over the 360 deity-shrines of the pre-Islamic Kaaba', 'Patron of the Quraysh tribe — the merchant aristocracy that controlled Mecca'],
