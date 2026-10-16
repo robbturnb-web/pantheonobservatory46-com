@@ -18,14 +18,14 @@ const ROUTES = [
   "/",
   "/orb-report",
   "/gods",
-  "/cosmos",
+  "/galaxy",
   "/uap",
   "/consciousness",
   "/echo",
   "/the-46",
   "/jwst",
   "/timeline",
-  "/sanctuary",
+  "/observatory",
 ];
 
 // Known noise we don't want to fail the build on (third-party widgets, ad blockers, etc.).
@@ -89,15 +89,17 @@ for (const route of ROUTES) {
   });
 }
 
-test("orb report form is interactive", async ({ page }) => {
+test("orb report page offers sign-in or an interactive report form", async ({ page }) => {
   const { consoleErrors, pageErrors } = attachListeners(page);
 
   await page.goto("/orb-report", { waitUntil: "networkidle" });
   await expect(page.locator("#root")).not.toBeEmpty();
 
-  // The page should expose at least one form control for submitting a sighting.
+  // Submissions are intentionally gated behind authentication. Signed-out
+  // visitors should see the sign-in prompt; signed-in visitors should see form controls.
+  const signInPrompt = page.getByRole("heading", { name: /sign in to log a sighting/i });
   const formControls = page.locator("form input, form textarea, form button");
-  await expect(formControls.first()).toBeVisible({ timeout: 15_000 });
+  await expect(signInPrompt.or(formControls.first())).toBeVisible({ timeout: 15_000 });
 
   expect(pageErrors).toEqual([]);
   expect(consoleErrors).toEqual([]);
