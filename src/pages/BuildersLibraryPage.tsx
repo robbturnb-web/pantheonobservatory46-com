@@ -2,6 +2,7 @@ import { SEO } from '@/components/SEO';
 import { buildersLibrary, type LibraryEntry } from '@/data/builders-library';
 import { Book, Video, FileText, ExternalLink, Bookmark } from 'lucide-react';
 import { toast } from 'sonner';
+import { isArchived, saveToArchive } from '@/lib/archive';
 
 const formatIcon: Record<LibraryEntry['format'], typeof Book> = {
   Book, Source: FileText, Video, Paper: FileText,
@@ -19,16 +20,19 @@ const categoryColor: Record<string, string> = {
 };
 
 export function BuildersLibraryPage() {
-  const save = (id: string, title: string) => {
-    try {
-      const saved = JSON.parse(localStorage.getItem('pantheon:saved-library') ?? '[]') as string[];
-      if (saved.includes(id)) { toast('Already saved'); return; }
-      saved.push(id);
-      localStorage.setItem('pantheon:saved-library', JSON.stringify(saved));
-      toast.success(`Saved · ${title}`);
-    } catch {
-      toast.error('Could not save');
-    }
+  const save = (entry: LibraryEntry) => {
+    const id = `library-${entry.id}`;
+    if (isArchived(id)) { toast('Already saved to My Archive'); return; }
+    saveToArchive({
+      id,
+      type: 'source',
+      title: entry.title,
+      description: [entry.author, entry.category, entry.whyItMatters].filter(Boolean).join(' · '),
+      href: '/library',
+      externalUrl: entry.link || undefined,
+      tags: [entry.category, entry.format, entry.readingLevel],
+    });
+    toast.success(`Saved · ${entry.title}`);
   };
 
   return (
@@ -73,7 +77,7 @@ export function BuildersLibraryPage() {
                 <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">{b.whyItMatters}</p>
                 <div className="flex items-center justify-between pt-3 border-t border-border/40">
                   <button
-                    onClick={() => save(b.id, b.title)}
+                    onClick={() => save(b)}
                     className="inline-flex items-center gap-1 text-[10px] uppercase tracking-[1.5px] font-mono text-muted-foreground hover:text-foreground"
                   >
                     <Bookmark className="w-3 h-3" /> Save
