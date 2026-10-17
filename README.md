@@ -17,15 +17,15 @@
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | React 18 + Vite 5 + TypeScript 5 |
+| Framework | React 18 + Vite 8 + TypeScript 5 |
 | Styling | Tailwind CSS 3 + shadcn/ui |
 | 3D / Visuals | Three.js + React Three Fiber + Postprocessing |
 | Animation | Framer Motion |
 | Backend | Lovable Cloud (Supabase: PostgreSQL, Auth, Edge Functions) |
 | AI | Lovable AI Gateway (Claude Sonnet, Gemini) |
 | State | TanStack Query, React hooks, localStorage |
-| Routing | React Router DOM 6 |
-| Testing | Vitest + Playwright |
+| Routing | React Router DOM 7 |
+| Testing | Vitest + Playwright (desktop + mobile CI coverage) |
 
 ## Quick Start
 
@@ -51,6 +51,7 @@ bun run dev        # opens http://localhost:8080
 | `bun run preview` | Serve the production build locally |
 | `bun run lint` | ESLint across the codebase |
 | `bun run smoke` | Playwright smoke tests |
+| `bunx playwright test --config=playwright.ci.config.ts` | Desktop and mobile route/accessibility regression tests |
 | `bunx vitest run` | Run unit tests |
 
 ## Deploy
