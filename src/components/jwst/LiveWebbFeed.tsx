@@ -22,19 +22,57 @@ export function LiveWebbFeed() {
     let cancelled = false;
     (async () => {
       try {
-        const { data, error } = await supabase.functions.invoke('nasa-webb-feed');
+        const primary = await supabase.functions.invoke('nasa-webb-feed');
         if (cancelled) return;
-        if (error) throw error;
-        const list = (data?.items ?? []) as WebbItem[];
-        if (list.length === 0) {
+
+        if (!primary.error) {
+          const list = (primary.data?.items ?? []) as WebbItem[];
+          if (list.length > 0) {
+            setItems(list);
+            return;
+          }
+        }
+
+        // The NASA image proxy can be temporarily unreachable or not yet deployed.
+        // Try the independently cached STScI/ESA daily findings feed before showing an error.
+        const fallback = await supabase.functions.invoke('jwst-daily-findings');
+        if (cancelled) return;
+        if (fallback.error) throw fallback.error;
+
+        const fallbackItems = (fallback.data?.items ?? []).map((item: {
+          id?: string;
+          title?: string;
+          description?: string;
+          summary?: string;
+          date?: string;
+          thumb?: string;
+          full?: string;
+          credit?: string;
+          source?: string;
+          href?: string;
+        }) => ({
+          id: item.id ?? item.href ?? item.title ?? crypto.randomUUID(),
+          title: item.title ?? 'Webb finding',
+          description: item.description ?? item.summary ?? '',
+          date: item.date ?? '',
+          thumb: item.thumb ?? '',
+          full: item.full ?? item.thumb ?? '',
+          credit: item.credit ?? item.source ?? 'NASA / ESA / STScI',
+          href: item.href ?? 'https://webbtelescope.org/news',
+        })).filter((item: WebbItem) => item.thumb && item.href);
+
+        if (fallbackItems.length > 0) {
+          setError('Showing the backup Webb research feed; the live image feed is temporarily unavailable.');
+          setItems(fallbackItems as WebbItem[]);
+        } else {
           setError('Live feed currently empty.');
           setItems([]);
-        } else {
-          setItems(list);
         }
       } catch (e) {
         if (cancelled) return;
-        console.error('Live Webb feed error', e);
+        // This is a recoverable external-feed outage; the component renders a visible
+        // unavailable state instead of turning it into an uncaught console error.
+        console.warn('Webb feeds temporarily unavailable', e);
         setError('Live feed temporarily unavailable.');
         setItems([]);
       }
