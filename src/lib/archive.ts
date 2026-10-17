@@ -8,6 +8,7 @@ export interface ArchiveItem {
   href?: string;
   createdAt: string;
   tags?: string[];
+  externalUrl?: string;
 }
 
 export const ARCHIVE_STORAGE_KEY = 'pantheon:archive:v1';
