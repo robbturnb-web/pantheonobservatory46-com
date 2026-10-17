@@ -12,11 +12,8 @@ test.describe("Welcome walkthrough accessibility", () => {
     await expect(dialog).toBeVisible({ timeout: 8_000 });
     await expect(dialog).toHaveAttribute("aria-modal", "true");
 
-    // Wait for the dialog's keyboard-dismissal effect to attach after it becomes visible.
-    await page.waitForFunction(() => {
-      const dialogElement = document.querySelector('[role="dialog"][aria-labelledby="walkthrough-title"]');
-      return Boolean(dialogElement);
-    });
+    // The modal becomes visible before React's effect attaches the window key listener.
+    await page.waitForTimeout(100);
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
   });
