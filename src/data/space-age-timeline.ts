@@ -1,0 +1,61 @@
+import type { TimelineEntry } from './timeline';
+
+// Primary-source milestones for the Space Age lens.
+// Dates and descriptions are intentionally concise; each entry links to NASA history.
+export const spaceAgeEntries: TimelineEntry[] = [
+  {
+    id: '33',
+    era: '1957',
+    year: '1957',
+    title: 'Sputnik 1: The Space Age Begins',
+    description: 'The Soviet Union launches Sputnik 1, the first artificial satellite to orbit Earth, opening the era of spaceflight.',
+    category: 'modern',
+    significance: 'high',
+    sourceLabel: 'NASA — Sputnik and the Dawn of the Space Age',
+    sourceUrl: 'https://www.nasa.gov/history/sputnik/',
+  },
+  {
+    id: '34',
+    era: '1969',
+    year: '1969',
+    title: 'Apollo 11: Humans Walk on the Moon',
+    description: 'Neil Armstrong and Buzz Aldrin become the first humans to walk on the Moon while Michael Collins remains in lunar orbit.',
+    category: 'modern',
+    significance: 'high',
+    sourceLabel: 'NASA — Apollo 11',
+    sourceUrl: 'https://www.nasa.gov/mission/apollo-11/',
+  },
+  {
+    id: '35',
+    era: '1990',
+    year: '1990',
+    title: 'Hubble Space Telescope Deployed',
+    description: 'The Hubble Space Telescope is deployed into Earth orbit, giving astronomers a long-running observatory above atmospheric distortion.',
+    category: 'modern',
+    significance: 'high',
+    sourceLabel: 'NASA — Hubble Space Telescope',
+    sourceUrl: 'https://science.nasa.gov/mission/hubble/',
+  },
+  {
+    id: '36',
+    era: '1998',
+    year: '1998',
+    title: 'International Space Station Assembly Begins',
+    description: 'The first ISS module launches, beginning the assembly of a permanently crewed orbital laboratory built through international cooperation.',
+    category: 'modern',
+    significance: 'high',
+    sourceLabel: 'NASA — International Space Station',
+    sourceUrl: 'https://www.nasa.gov/international-space-station/',
+  },
+  {
+    id: '37',
+    era: '2021–2022',
+    year: '2021',
+    title: 'James Webb Space Telescope Launches',
+    description: 'Webb launches in December 2021 and begins science operations in 2022, observing the universe in infrared light to study early galaxies, stars, and planetary systems.',
+    category: 'recent',
+    significance: 'high',
+    sourceLabel: 'NASA — James Webb Space Telescope',
+    sourceUrl: 'https://science.nasa.gov/mission/webb/',
+  },
+];
