@@ -3,8 +3,13 @@ import { expect, test } from "@playwright/test";
 test("homepage Mystery of the Day persists a saved investigation into My Archive", async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem("pantheon_walkthrough_seen", "true");
-    localStorage.removeItem("pantheon:archive:v1");
-    localStorage.removeItem("pantheon:saved-mysteries");
+    // addInitScript runs after every navigation. Clear stale test data only once,
+    // otherwise navigating to /archive erases the item the test just saved.
+    if (!sessionStorage.getItem("archive-save-test-initialized")) {
+      localStorage.removeItem("pantheon:archive:v1");
+      localStorage.removeItem("pantheon:saved-mysteries");
+      sessionStorage.setItem("archive-save-test-initialized", "true");
+    }
   });
 
   await page.goto("/", { waitUntil: "domcontentloaded" });
