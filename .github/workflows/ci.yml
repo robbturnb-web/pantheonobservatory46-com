@@ -16,9 +16,9 @@ concurrency:
 
 jobs:
   validate:
-    name: Build and lint
+    name: Build, lint, and browser checks
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -37,3 +37,9 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Test Galaxy Explorer on desktop and mobile
+        run: npx playwright test --config=playwright.ci.config.ts
