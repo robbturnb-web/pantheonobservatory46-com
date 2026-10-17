@@ -1,6 +1,13 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("Galaxy Explorer route", () => {
+  test.beforeEach(async ({ page }) => {
+    // Keep the first-visit walkthrough from covering controls under test.
+    await page.addInitScript(() => {
+      localStorage.setItem("pantheon_walkthrough_seen", "true");
+    });
+  });
+
   test("renders the explorer and its guided-tour control", async ({ page }) => {
     await page.goto("/galaxy", { waitUntil: "domcontentloaded" });
 
