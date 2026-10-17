@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 
 const SITE = 'https://pantheonobservatory46.com';
 
@@ -35,7 +36,9 @@ function absoluteUrl(value: string, base = SITE): string {
  * index.html provides safe defaults for crawlers that do not execute client JavaScript.
  */
 export function SEO({ title, description, path, canonical, schema, noindex, image }: SEOProps) {
-  const url = absoluteUrl(canonical ?? path ?? '/');
+  const location = useLocation();
+  // Many route pages rely on this fallback; without it they all canonicalize to the homepage.
+  const url = absoluteUrl(canonical ?? path ?? location.pathname ?? '/');
   const socialImage = image ? absoluteUrl(image) : undefined;
   const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
