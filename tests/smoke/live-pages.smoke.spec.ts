@@ -35,9 +35,9 @@ const IGNORED_ERROR_PATTERNS: RegExp[] = [
   /\b(?:gtag|fbq|hotjar|posthog)\b/i,
   // Lovable preview badge / dev-only beacons
   /lovable\.dev\/.+(badge|beacon)/i,
-  // The production host may temporarily serve an older HTML build; source index.html
-  // already omits frame-ancestors from the meta CSP (it is only valid as an HTTP header).
-  /Content Security Policy directive ['"]?frame-ancestors['"]? is ignored when delivered via (?:an? )?<meta> element/i,
+  // Some published HTML still includes frame-ancestors in a meta CSP. It is only
+  // valid as an HTTP response header, so Chromium reports this warning on page load.
+  /Content Security Policy directive ['"]?frame-ancestors['"]? is ignored when delivered via an HTML meta element/i,
 ];
 
 function shouldIgnore(text: string) {
