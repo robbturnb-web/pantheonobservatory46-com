@@ -36,7 +36,7 @@ const categories: NavCategory[] = [
   {
     id: 'cosmos',
     label: 'Cosmos',
-    color: '#22D3EE',
+    color: '#C0C0C8',
     icon: Telescope,
     links: [
       { to: '/jwst', label: '★ James Webb · JWST' },
@@ -50,7 +50,7 @@ const categories: NavCategory[] = [
   {
     id: 'disclosure',
     label: 'Disclosure',
-    color: '#10b981',
+    color: '#9B1C31',
     icon: FileSearch,
     links: [
       { to: '/uap', label: 'UAP Catalog' },
@@ -99,7 +99,7 @@ const categories: NavCategory[] = [
   {
     id: 'forge',
     label: 'Federation & Forge',
-    color: '#22d3ee',
+    color: '#C0C0C8',
     icon: Sparkles,
     links: [
       { to: '/academy', label: '★ Pantheon Academy' },
@@ -165,7 +165,7 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2 font-bold text-xl group shrink-0" style={{ color: '#a78bfa' }}>
+          <Link to="/" className="flex items-center gap-2 font-bold text-xl group shrink-0" style={{ color: '#D4AF5A' }}>
             <Eye className="w-6 h-6 group-hover:scale-110 transition-transform" />
             <span className="hidden sm:inline">
               <PantheonWordmark size="sm" short />
@@ -299,7 +299,7 @@ export function Navbar() {
             {/* Animated nebula glow behind menu */}
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
               <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full blur-[80px] opacity-30 animate-pulse" style={{ background: '#7C3AED', animationDuration: '6s' }} />
-              <div className="absolute top-1/2 -right-20 w-64 h-64 rounded-full blur-[90px] opacity-20 animate-pulse" style={{ background: '#22D3EE', animationDuration: '9s' }} />
+              <div className="absolute top-1/2 -right-20 w-64 h-64 rounded-full blur-[90px] opacity-20 animate-pulse" style={{ background: '#C0C0C8', animationDuration: '9s' }} />
               <div className="absolute bottom-0 left-1/3 w-56 h-56 rounded-full blur-[100px] opacity-20 animate-pulse" style={{ background: '#D6B35A', animationDuration: '11s' }} />
             </div>
 
