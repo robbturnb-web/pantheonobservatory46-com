@@ -101,11 +101,15 @@ export function ArchivePage() {
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <span>{item.type} · {new Date(item.createdAt).toLocaleDateString()}</span>
                     <div className="flex items-center gap-2">
-                      {item.href && (
+                      {item.externalUrl ? (
+                        <Button variant="outline" size="sm" asChild>
+                          <a href={item.externalUrl} target="_blank" rel="noopener noreferrer"><ExternalLink className="mr-1 h-3.5 w-3.5" /> Open source</a>
+                        </Button>
+                      ) : item.href ? (
                         <Button variant="outline" size="sm" asChild>
                           <Link to={item.href}><ExternalLink className="mr-1 h-3.5 w-3.5" /> Open</Link>
                         </Button>
-                      )}
+                      ) : null}
                       <Button variant="ghost" size="sm" onClick={() => handleRemove(item.id)} aria-label={`Remove ${item.title} from archive`}>
                         <Trash2 className="h-4 w-4" />
                       </Button>
