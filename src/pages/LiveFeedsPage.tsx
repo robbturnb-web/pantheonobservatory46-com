@@ -1,6 +1,6 @@
 import { SEO } from '@/components/SEO';
 import { MotionConfig } from 'framer-motion';
-import { LivePanel } from '@/components/command/LivePanel';
+import { LivePanel, liveFeedState } from '@/components/command/LivePanel';
 
 import { LiveChamber } from '@/components/command/LiveChamber';
 import { LiveImageInset } from '@/components/command/LiveImageInset';
@@ -13,11 +13,11 @@ import atmosphereHero from '@/assets/chambers/atmosphere.jpg';
 import anomalyHero from '@/assets/chambers/anomaly.jpg';
 import codexHero from '@/assets/chambers/codex.jpg';
 import {
-  useKp, useFlare, useISS, useEarthquakes, useNwsAlerts,
+  useKp, useFlare, useISS, useEarthquakes, useNwsAlerts, useSolarWind, useSwpcAlerts,
 } from '@/hooks/use-live-data';
 import {
   Sun, Wind, Satellite, Eye, Activity, Radio,
-  Flame, Globe2, CloudLightning, ScanEye, BookOpenCheck,
+  Flame, Globe2, Gauge, Siren, CloudLightning, ScanEye, BookOpenCheck,
 } from 'lucide-react';
 
 export function LiveFeedsPage() {
@@ -26,9 +26,11 @@ export function LiveFeedsPage() {
   const iss = useISS();
   const quakes = useEarthquakes();
   const nws = useNwsAlerts();
+  const wind = useSolarWind();
+  const swAlerts = useSwpcAlerts();
 
-  const statusOf = <T,>(r: { data: { ok: boolean; stale?: boolean } | null }) =>
-    r.data?.ok ? (r.data.stale ? ('cached' as const) : ('live' as const)) : ('pending' as const);
+  const statusOf = (r: Parameters<typeof liveFeedState>[0]) => liveFeedState(r).status;
+  const noticeOf = (r: Parameters<typeof liveFeedState>[0]) => liveFeedState(r).notice;
 
   return (
     <>
@@ -74,6 +76,7 @@ export function LiveFeedsPage() {
               Icon={Sun}
               accent="text-amber-300"
               status={statusOf(flare)}
+              notice={noticeOf(flare)}
               sourceUrl="https://www.swpc.noaa.gov/products/goes-x-ray-flux"
               sourceLabel="NOAA SWPC · GOES"
               onRefresh={flare.refresh}
@@ -89,6 +92,7 @@ export function LiveFeedsPage() {
               Icon={Wind}
               accent="text-amber-200"
               status={statusOf(kp)}
+              notice={noticeOf(kp)}
               sourceUrl="https://www.swpc.noaa.gov/products/planetary-k-index"
               sourceLabel="NOAA SWPC · Kp"
               onRefresh={kp.refresh}
@@ -98,6 +102,51 @@ export function LiveFeedsPage() {
               <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">
                 {kp.data?.value?.stormLevel ?? 'no data'}
               </p>
+            </LivePanel>
+            <LivePanel
+              title="Solar Wind"
+              description="Real-time solar wind speed at L1."
+              Icon={Gauge}
+              accent="text-amber-300"
+              status={statusOf(wind)}
+              notice={noticeOf(wind)}
+              sourceUrl="https://www.swpc.noaa.gov/products/real-time-solar-wind"
+              sourceLabel="NOAA SWPC · RTSW"
+              onRefresh={wind.refresh}
+              refreshing={wind.loading}
+            >
+              <p className="text-3xl font-black text-foreground">{wind.data?.value?.speedKmS != null ? Math.round(wind.data.value.speedKmS) : '—'}</p>
+              <p className="text-[10px] uppercase tracking-[1.5px] text-muted-foreground mt-1">km/s</p>
+            </LivePanel>
+
+            <LivePanel
+              title="Space Weather Alerts"
+              description="Active NOAA SWPC watches, warnings and alerts."
+              Icon={Siren}
+              accent="text-amber-200"
+              status={statusOf(swAlerts)}
+              notice={noticeOf(swAlerts)}
+              sourceUrl="https://www.swpc.noaa.gov/products/alerts-watches-and-warnings"
+              sourceLabel="NOAA SWPC · Alerts"
+              onRefresh={swAlerts.refresh}
+              refreshing={swAlerts.loading}
+            >
+              {swAlerts.data?.value ? (
+                swAlerts.data.value.length === 0 ? (
+                  <p className="text-sm text-foreground/80">No active alerts — conditions quiet.</p>
+                ) : (
+                  <ul className="space-y-1.5 max-h-40 overflow-y-auto">
+                    {swAlerts.data.value.slice(0, 4).map((a) => (
+                      <li key={a.serial + a.issued} className="text-[11px] leading-snug">
+                        <span className="font-mono text-amber-300/80">{a.productId}</span>{' '}
+                        <span className="text-foreground/80">{a.message.replace(/\s+/g, ' ').slice(0, 110)}…</span>
+                      </li>
+                    ))}
+                  </ul>
+                )
+              ) : (
+                <p className="text-3xl font-black text-foreground">—</p>
+              )}
             </LivePanel>
           </div>
         </LiveChamber>
@@ -117,6 +166,7 @@ export function LiveFeedsPage() {
             Icon={Activity}
             accent="text-rose-300"
             status={statusOf(quakes)}
+            notice={noticeOf(quakes)}
             sourceUrl="https://earthquake.usgs.gov/earthquakes/map/"
             sourceLabel="USGS"
             onRefresh={quakes.refresh}
@@ -145,6 +195,7 @@ export function LiveFeedsPage() {
             Icon={Satellite}
             accent="text-cyan-300"
             status={statusOf(iss)}
+            notice={noticeOf(iss)}
             sourceUrl="https://spotthestation.nasa.gov/"
             sourceLabel="NASA · Spot the Station"
             onRefresh={iss.refresh}
@@ -185,6 +236,7 @@ export function LiveFeedsPage() {
             Icon={Activity}
             accent="text-sky-300"
             status={statusOf(nws)}
+            notice={noticeOf(nws)}
             sourceUrl="https://www.weather.gov/"
             sourceLabel="weather.gov"
             onRefresh={nws.refresh}
