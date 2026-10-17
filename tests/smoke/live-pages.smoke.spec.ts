@@ -107,3 +107,20 @@ test("orb report page offers sign-in or an interactive report form", async ({ pa
   expect(pageErrors).toEqual([]);
   expect(consoleErrors).toEqual([]);
 });
+
+test("production homepage uses the Pantheon crimson-and-gold design", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await expect(page.locator("#root")).not.toBeEmpty();
+
+  const palette = await page.evaluate(() => {
+    const styles = getComputedStyle(document.documentElement);
+    return {
+      primary: styles.getPropertyValue("--primary").trim().toLowerCase(),
+      ring: styles.getPropertyValue("--ring").trim().toLowerCase(),
+    };
+  });
+
+  expect(palette.primary, "homepage primary brand color").toBe("#9b1c31");
+  expect(palette.ring, "homepage focus and highlight color").toBe("#d4af5a");
+  await expect(page.locator("h1").first()).toContainText(/THE UNKNOWN IS NOT THE END OF THE SEARCH/i);
+});
