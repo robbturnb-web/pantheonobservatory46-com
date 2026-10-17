@@ -32,7 +32,6 @@ const entries: SitemapEntry[] = [
   { path: "/missing", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/encounters", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/underground", changefreq: "weekly", priority: "0.7", lastmod: today },
-  { path: "/corbell", changefreq: "weekly", priority: "0.6", lastmod: today },
   { path: "/legislation", changefreq: "weekly", priority: "0.8", lastmod: today },
   { path: "/jeremy-corbell", changefreq: "weekly", priority: "0.6", lastmod: today },
   { path: "/brazil", changefreq: "weekly", priority: "0.6", lastmod: today },
@@ -66,7 +65,6 @@ const entries: SitemapEntry[] = [
   // Community & people
   { path: "/builders", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/experts", changefreq: "weekly", priority: "0.7", lastmod: today },
-  { path: "/experts/stefan-burns", changefreq: "monthly", priority: "0.5", lastmod: today },
   // Public topic hubs and reference pages
   { path: "/observatory", changefreq: "weekly", priority: "0.8", lastmod: today },
   { path: "/disclosure", changefreq: "weekly", priority: "0.8", lastmod: today },
@@ -80,6 +78,7 @@ const entries: SitemapEntry[] = [
   { path: "/health", changefreq: "daily", priority: "0.7", lastmod: today },
   { path: "/missions", changefreq: "weekly", priority: "0.6", lastmod: today },
   { path: "/sources", changefreq: "weekly", priority: "0.7", lastmod: today },
+  { path: "/library", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/about", changefreq: "monthly", priority: "0.5", lastmod: today },
   { path: "/contact", changefreq: "monthly", priority: "0.4", lastmod: today },
   { path: "/privacy", changefreq: "yearly", priority: "0.3", lastmod: today },
@@ -88,7 +87,6 @@ const entries: SitemapEntry[] = [
   { path: "/roadmap", changefreq: "monthly", priority: "0.5", lastmod: today },
   { path: "/changelog", changefreq: "weekly", priority: "0.5", lastmod: today },
   { path: "/system-status", changefreq: "daily", priority: "0.5", lastmod: today },
-  { path: "/video-vault", changefreq: "weekly", priority: "0.6", lastmod: today },
   // Search results and admin-only routes are intentionally excluded from the sitemap.
 
 ];
