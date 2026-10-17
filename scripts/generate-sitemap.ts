@@ -67,10 +67,29 @@ const entries: SitemapEntry[] = [
   { path: "/builders", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/experts", changefreq: "weekly", priority: "0.7", lastmod: today },
   { path: "/experts/stefan-burns", changefreq: "monthly", priority: "0.5", lastmod: today },
-  // Search & other
-  { path: "/search", changefreq: "weekly", priority: "0.5", lastmod: today },
+  // Public topic hubs and reference pages
+  { path: "/observatory", changefreq: "weekly", priority: "0.8", lastmod: today },
+  { path: "/disclosure", changefreq: "weekly", priority: "0.8", lastmod: today },
+  { path: "/briefing", changefreq: "daily", priority: "0.8", lastmod: today },
+  { path: "/ancient-tech", changefreq: "weekly", priority: "0.7", lastmod: today },
+  { path: "/lost-places", changefreq: "weekly", priority: "0.6", lastmod: today },
+  { path: "/restricted", changefreq: "weekly", priority: "0.6", lastmod: today },
+  { path: "/academy", changefreq: "weekly", priority: "0.7", lastmod: today },
+  { path: "/human-potential", changefreq: "weekly", priority: "0.7", lastmod: today },
+  { path: "/live-feeds", changefreq: "daily", priority: "0.8", lastmod: today },
+  { path: "/health", changefreq: "daily", priority: "0.7", lastmod: today },
+  { path: "/missions", changefreq: "weekly", priority: "0.6", lastmod: today },
+  { path: "/sources", changefreq: "weekly", priority: "0.7", lastmod: today },
+  { path: "/about", changefreq: "monthly", priority: "0.5", lastmod: today },
+  { path: "/contact", changefreq: "monthly", priority: "0.4", lastmod: today },
+  { path: "/privacy", changefreq: "yearly", priority: "0.3", lastmod: today },
+  { path: "/terms", changefreq: "yearly", priority: "0.3", lastmod: today },
+  { path: "/disclaimer", changefreq: "yearly", priority: "0.3", lastmod: today },
+  { path: "/roadmap", changefreq: "monthly", priority: "0.5", lastmod: today },
+  { path: "/changelog", changefreq: "weekly", priority: "0.5", lastmod: today },
+  { path: "/system-status", changefreq: "daily", priority: "0.5", lastmod: today },
   { path: "/video-vault", changefreq: "weekly", priority: "0.6", lastmod: today },
-  { path: "/style-guide", changefreq: "monthly", priority: "0.3", lastmod: today },
+  // Search results and admin-only routes are intentionally excluded from the sitemap.
 
 ];
 
