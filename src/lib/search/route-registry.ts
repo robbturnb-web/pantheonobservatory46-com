@@ -117,4 +117,16 @@ export const ROUTES: RouteRecord[] = [
   { route: '/star-seed', title: 'Star-Seed Terminal', summary: 'Birth-chart starseed classifier.', realm: 'consciousness' },
   { route: '/experts', title: 'Voices · Experts', summary: 'Indexed expert profiles and primary sources.', realm: 'archive' },
   { route: '/gods', title: 'Pantheon of Gods', summary: 'Zeus, Odin, Enki, Thoth, Shiva, Apollo, Isis and more.', realm: 'gods' },
+
+  // Topic hubs and utility pages that are useful discovery entry points
+  { route: '/observatory', title: 'Observatory Map', summary: 'Explore the Observatory and navigate between research realms.', realm: 'observatory', keywords: 'map navigation hub topics' },
+  { route: '/disclosure', title: 'Disclosure Command', summary: 'A central hub for disclosure research, official records, and UAP investigations.', realm: 'disclosure', keywords: 'hub congressional official documents' },
+  { route: '/academy', title: 'Research Academy', summary: 'Structured learning paths, lessons, and quizzes for exploring the archive.', realm: 'archive', keywords: 'learn course lesson quiz study' },
+  { route: '/briefing', title: 'Daily Briefing', summary: 'A briefing hub for notable updates and research signals.', realm: 'observatory', keywords: 'daily report updates digest' },
+  { route: '/live-feeds', title: 'Live Feeds Dashboard', summary: 'Live and cached data from attributed public science and space-weather sources.', realm: 'cosmos', keywords: 'NOAA NASA solar wind space weather live data' },
+  { route: '/missions', title: 'Missions & Progress', summary: 'Explore guided missions, learning paths, and progress through the Observatory.', realm: 'archive', keywords: 'quests tasks XP progress' },
+  { route: '/sources', title: 'Sources & Evidence Labels', summary: 'Understand source tiers and how documented evidence is separated from lore and speculation.', realm: 'archive', keywords: 'trust credibility evidence methodology' },
+  { route: '/library', title: 'Builder Library', summary: 'A curated library of saved research resources and investigations.', realm: 'archive', keywords: 'resources collection reading' },
+  { route: '/health', title: 'Space Weather & Health Dashboard', summary: 'A source-attributed dashboard for current solar and environmental data.', realm: 'cosmos', keywords: 'solar activity alerts Kp index' },
+  { route: '/archive', title: 'My Archive', summary: 'Return to saved investigations, sources, notes, and Echo discoveries on this device.', realm: 'archive', keywords: 'saved bookmarks personal collection' },
 ];
