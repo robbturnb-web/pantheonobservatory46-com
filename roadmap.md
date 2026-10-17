@@ -1,4 +1,4 @@
 # Current tasks
 
-- [ ] Add `/health` with four feed statuses and shared retries.
-- [ ] Verify live readings, outage fallbacks, and retry behavior.
+- [x] Add `/health` with four feed statuses and shared retries.
+- [x] Verify live readings, outage fallbacks, and retry behavior.
