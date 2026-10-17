@@ -29,6 +29,9 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Set up Bun for the sitemap build script
+        uses: oven-sh/setup-bun@v2
+
       - name: Install locked dependencies
         run: npm ci
 
