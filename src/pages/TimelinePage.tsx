@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { timelineEntries } from '../data/timeline';
+import { spaceAgeEntries } from '../data/space-age-timeline';
 import { ExternalLink, Telescope } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 
@@ -15,6 +16,9 @@ const themes = [
 ] as const;
 
 type TimelineTheme = Exclude<(typeof themes)[number]['key'], 'all'>;
+
+// Merge the focused Space Age milestones into the main record and keep the full timeline chronological.
+const allTimelineEntries = [...timelineEntries, ...spaceAgeEntries].sort((a, b) => Number(a.year) - Number(b.year));
 
 // Curated thematic tags keep the timeline useful without changing the source data model.
 // Entries can appear in more than one lens; the original chronology remains intact.
@@ -51,6 +55,11 @@ const eventThemes: Record<string, TimelineTheme[]> = {
   '30': ['modern-disclosure'],
   '31': ['modern-disclosure'],
   '32': ['modern-disclosure'],
+  '33': ['space-age'],
+  '34': ['space-age'],
+  '35': ['space-age'],
+  '36': ['space-age'],
+  '37': ['space-age'],
 };
 
 const significanceStyles: Record<string, string> = {
@@ -63,25 +72,25 @@ export function TimelinePage() {
   const [filter, setFilter] = useState<string>('all');
 
   const filtered = filter === 'all'
-    ? timelineEntries
+    ? allTimelineEntries
     : filter === 'future-watch'
       ? []
-      : timelineEntries.filter((event) => eventThemes[event.id]?.includes(filter as TimelineTheme));
+      : allTimelineEntries.filter((event) => eventThemes[event.id]?.includes(filter as TimelineTheme));
 
   return (
     <>
       <SEO
         title="Cosmic Timeline — Ancient World to Future Watch | Pantheon"
-        description={`Explore ${timelineEntries.length} timeline entries through six thematic lenses: ancient history, mythology, lost civilizations, disclosure, space, and future watch.`}
+        description={`Explore ${allTimelineEntries.length} timeline entries through six thematic lenses: ancient history, mythology, lost civilizations, disclosure, space, and future watch.`}
         path="/timeline"
-        schema={{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Cosmic Timeline', url: 'https://pantheonobservatory46.com/timeline', numberOfItems: timelineEntries.length }}
+        schema={{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Cosmic Timeline', url: 'https://pantheonobservatory46.com/timeline', numberOfItems: allTimelineEntries.length }}
       />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <p className="text-xs uppercase tracking-[0.3em] text-primary mb-3">Pantheon Observatory · Field Record</p>
           <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Cosmic Timeline</h1>
           <p className="text-muted-foreground text-lg max-w-3xl">
-            {timelineEntries.length} entries spanning deep human history to present-day reports. Choose a lens to explore the record from a different angle.
+            {allTimelineEntries.length} entries spanning deep human history to present-day reports. Choose a lens to explore the record from a different angle.
           </p>
         </motion.div>
 
