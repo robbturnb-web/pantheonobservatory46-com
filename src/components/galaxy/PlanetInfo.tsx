@@ -20,22 +20,22 @@ export function PlanetInfo({ planet, moon, onClose }: PlanetInfoProps) {
           animate={{ opacity: 1, x: 0, scale: 1 }}
           exit={{ opacity: 0, x: 40, scale: 0.95 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="absolute right-4 top-4 bottom-4 w-[340px] glass-cosmic rounded-2xl overflow-hidden z-10 flex flex-col"
+          className="absolute right-2 top-20 bottom-24 w-[calc(100vw-1rem)] max-w-[340px] glass-cosmic rounded-2xl overflow-hidden z-30 flex flex-col sm:right-4 sm:top-4 sm:bottom-4 sm:w-[340px]"
         >
-          <div className="p-5 pb-3 border-b border-border/30">
+          <div className="p-4 sm:p-5 pb-3 border-b border-border/30">
             <div className="flex items-start justify-between">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 min-w-0">
                 <div
-                  className="w-10 h-10 rounded-full shadow-lg"
+                  className="w-10 h-10 rounded-full shadow-lg shrink-0"
                   style={{
                     background: `radial-gradient(circle at 35% 35%, ${item.color}dd, ${item.color}44)`,
                     boxShadow: `0 0 20px ${item.color}44`,
                   }}
                 />
-                <div>
+                <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <h2 className="text-lg font-bold text-foreground">{item.name}</h2>
-                    {isMoon && <MoonIcon className="w-3.5 h-3.5 text-muted-foreground" />}
+                    <h2 className="text-lg font-bold text-foreground truncate">{item.name}</h2>
+                    {isMoon && <MoonIcon className="w-3.5 h-3.5 text-muted-foreground shrink-0" />}
                   </div>
                   <p className="text-[10px] text-muted-foreground uppercase tracking-widest">
                     {isMoon ? `Moon of ${planets.find(p => p.id === moon.parentId)?.name}` : `Distance: ${(item as Planet).distance > 0 ? `${(item as Planet).distance} AU (scaled)` : 'Center'}`}
@@ -44,14 +44,15 @@ export function PlanetInfo({ planet, moon, onClose }: PlanetInfoProps) {
               </div>
               <button
                 onClick={onClose}
-                className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted/30 transition-colors"
+                aria-label={`Close ${item.name} information`}
+                className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted/30 transition-colors shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-5 space-y-5">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5 overscroll-contain">
             <section>
               <h3 className="text-xs font-bold text-neon uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
                 <Info className="w-3.5 h-3.5" /> Scientific Facts
