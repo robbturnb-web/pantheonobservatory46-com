@@ -781,19 +781,20 @@ interface Portal {
   img: string; tone: string; ring: string; glow: string;
 }
 const PORTALS: Portal[] = [
-  { to: '/uap',           title: 'Disclosure',    desc: 'UAP cases, whistleblowers, government archives, declassified files.', icon: Eye,       img: portalDisclosure,    tone: 'text-amber-300', ring: 'border-amber-400/40', glow: 'shadow-[0_0_40px_-10px_rgba(16,185,129,0.7)]' },
-  { to: '/gods',          title: 'Mythology',     desc: 'Gods, ancient civilizations, symbols, global lore, comparative mythology.', icon: Mountain,  img: portalMythology,     tone: 'text-[#D4AF5A]',   ring: 'border-[#D4AF5A]/40',   glow: 'shadow-[0_0_40px_-10px_rgba(212,175,90,0.7)]' },
-  { to: '/consciousness', title: 'Consciousness', desc: 'Frequencies, meditation, NDEs, altered states, psychology, philosophy.',  icon: Brain,     img: portalConsciousness, tone: 'text-amber-300', ring: 'border-amber-400/40', glow: 'shadow-[0_0_40px_-10px_rgba(52,211,153,0.7)]' },
-  { to: '/galaxy',        title: 'Observatory',   desc: 'Live solar activity, space weather, celestial events, cosmos.',           icon: Satellite, img: portalObservatory,   tone: 'text-[#D4AF5A]',   ring: 'border-[#9B1C31]/50',   glow: 'shadow-[0_0_40px_-10px_rgba(155,28,49,0.8)]' },
-  { to: '/echo',          title: 'Echo AI',       desc: 'Your AI guide, researcher, summarizer, and cosmic intelligence system.',  icon: Bot,       img: portalEcho,          tone: 'text-stone-300',    ring: 'border-stone-400/40',    glow: 'shadow-[0_0_40px_-10px_rgba(192,192,200,0.7)]' },
-];
+  { to: '/ancient-tech', title: 'Ancient Civilizations', desc: 'Archaeology, ancient engineering, lost places, and historical mysteries.', icon: Mountain, img: portalMythology, tone: 'text-[#D4AF5A]', ring: 'border-[#D4AF5A]/40', glow: 'shadow-[0_0_36px_-14px_rgba(212,175,90,0.28)]' },
+  { to: '/gods', title: 'Mythology & the Gods', desc: 'Sacred traditions, divine figures, symbols, and comparative mythology.', icon: Mountain, img: portalMythology, tone: 'text-[#D4AF5A]', ring: 'border-[#D4AF5A]/40', glow: 'shadow-[0_0_36px_-14px_rgba(212,175,90,0.28)]' },
+  { to: '/uap', title: 'Unexplained Phenomena', desc: 'Unusual observations, unresolved reports, and cases that merit investigation.', icon: Eye, img: portalDisclosure, tone: 'text-[#C0C0C8]', ring: 'border-[#C0C0C8]/30', glow: 'shadow-[0_0_36px_-14px_rgba(192,192,200,0.2)]' },
+  { to: '/species', title: 'Nonhuman Intelligence', desc: 'Explore the evidence and open questions around life beyond Earth and UAP.', icon: Users, img: portalEcho, tone: 'text-[#C0C0C8]', ring: 'border-[#C0C0C8]/30', glow: 'shadow-[0_0_36px_-14px_rgba(192,192,200,0.2)]' },
+  { to: '/whistleblowers', title: 'Disclosure & Hidden History', desc: 'Declassified records, public disclosures, historical claims, and source documents.', icon: Eye, img: portalDisclosure, tone: 'text-[#9B1C31]', ring: 'border-[#9B1C31]/40', glow: 'shadow-[0_0_36px_-14px_rgba(155,28,49,0.32)]' },
+  { to: '/jwst', title: 'Science & the Unknown', desc: 'Space science, frontier research, unanswered questions, and new discoveries.', icon: Satellite, img: portalObservatory, tone: 'text-[#C0C0C8]', ring: 'border-[#C0C0C8]/30', glow: 'shadow-[0_0_36px_-14px_rgba(192,192,200,0.2)]' },
+];;
 
 function CorePortals() {
   return (
     <section className="relative px-4 sm:px-8 pb-8">
       <div className="max-w-6xl mx-auto">
-        <SectionHeading icon={Flame} label="Core Portals" sub="Five chambers. Each pulls you deeper into the codex." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+        <SectionHeading icon={Flame} label="Explore Research Domains" sub="Six domains. One standard: follow the evidence." />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {PORTALS.map((p, i) => (
             <motion.div
               key={p.to}
