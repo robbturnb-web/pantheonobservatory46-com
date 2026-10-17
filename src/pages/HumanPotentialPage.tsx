@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import { SEO } from '@/components/SEO';
 import { humanPotential } from '@/data/human-potential';
-import { Brain, Heart, Wind, Activity, Moon, Sparkles, BookOpen, Compass, Zap, Target, Play } from 'lucide-react';
+import { Brain, Heart, Wind, Activity, Moon, Sparkles, BookOpen, Compass, Zap, Target, Play, Check } from 'lucide-react';
+import { toast } from 'sonner';
 
 const iconFor: Record<string, typeof Brain> = {
   meditation: Brain, focus: Target, memory: BookOpen, sleep: Moon,
@@ -8,7 +10,49 @@ const iconFor: Record<string, typeof Brain> = {
   philosophy: BookOpen, discipline: Compass,
 };
 
+function todayKey() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function readCompletions(day: string): string[] {
+  try {
+    const parsed: unknown = JSON.parse(localStorage.getItem(`pantheon:human-potential:${day}`) ?? '[]');
+    return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === 'string') : [];
+  } catch {
+    return [];
+  }
+}
+
 export function HumanPotentialPage() {
+  const [day, setDay] = useState(todayKey);
+  const [completed, setCompleted] = useState<string[]>([]);
+
+  useEffect(() => {
+    setCompleted(readCompletions(day));
+  }, [day]);
+
+  useEffect(() => {
+    const refreshDay = () => {
+      const nextDay = todayKey();
+      if (nextDay !== day) setDay(nextDay);
+    };
+    const timer = window.setInterval(refreshDay, 60_000);
+    return () => window.clearInterval(timer);
+  }, [day]);
+
+  const togglePractice = (id: string, topic: string) => {
+    const next = completed.includes(id)
+      ? completed.filter((item) => item !== id)
+      : [...completed, id];
+    setCompleted(next);
+    try {
+      localStorage.setItem(`pantheon:human-potential:${day}`, JSON.stringify(next));
+      toast.success(next.includes(id) ? `Practice complete · ${topic}` : `Completion undone · ${topic}`);
+    } catch {
+      toast.error('Could not save this practice on this device.');
+    }
+  };
+
   return (
     <>
       <SEO
@@ -25,18 +69,28 @@ export function HumanPotentialPage() {
           Human <span className="text-realm-echo">Potential</span>
         </h1>
         <p className="text-muted-foreground max-w-2xl mb-3">
-          Pantheon isn't just about what's out there — it's about what you can become.
+          Pantheon isn't just about what's out there. It's about what you can practice, one day at a time.
           Educational practices, not medical advice.
         </p>
-        <p className="text-[10px] uppercase tracking-[1.5px] font-mono text-muted-foreground mb-8">
+        <p className="text-[10px] uppercase tracking-[1.5px] font-mono text-muted-foreground mb-6">
           ⚕ Educational wellness content · not a substitute for professional medical care
         </p>
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-realm-echo/25 bg-realm-echo/5 p-4 mb-8">
+          <div>
+            <p className="text-sm font-medium text-foreground">Today's practice log</p>
+            <p className="text-xs text-muted-foreground mt-1">Completions save on this device and reset each day.</p>
+          </div>
+          <p className="text-sm font-mono text-realm-echo">{completed.length} / {humanPotential.length} complete</p>
+        </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {humanPotential.map((p) => {
             const Icon = iconFor[p.id] ?? Sparkles;
+            const isComplete = completed.includes(p.id);
             return (
-              <article key={p.id} className="rounded-xl border border-realm-echo/25 bg-card/50 backdrop-blur p-5 flex flex-col hover:border-realm-echo/60 transition">
+              <article key={p.id} className={`rounded-xl border bg-card/50 backdrop-blur p-5 flex flex-col transition ${
+                isComplete ? 'border-signal-online/50' : 'border-realm-echo/25 hover:border-realm-echo/60'
+              }`}>
                 <div className="flex items-start justify-between mb-3">
                   <div className="w-10 h-10 rounded-lg border border-realm-echo/40 bg-realm-echo/10 flex items-center justify-center">
                     <Icon className="w-5 h-5 text-realm-echo" />
@@ -51,12 +105,22 @@ export function HumanPotentialPage() {
                   <p className="text-[10px] uppercase tracking-[1.5px] font-mono text-realm-echo mb-1">Today's practice</p>
                   <p className="text-xs text-foreground/90 leading-relaxed">{p.dailyPractice}</p>
                 </div>
-                <div className="flex items-center justify-between pt-3 border-t border-border/40 mt-auto">
+                <div className="flex items-center justify-between gap-3 pt-3 border-t border-border/40 mt-auto">
                   <span className="inline-flex items-center gap-1 text-[10px] font-mono text-realm-gods">
-                    <Zap className="w-3 h-3" /> {p.xpReward} XP
+                    <Zap className="w-3 h-3" /> {p.xpReward} XP potential
                   </span>
-                  <button className="inline-flex items-center gap-1 text-[10px] uppercase tracking-[1.5px] font-mono text-realm-echo hover:text-realm-echo/80">
-                    <Play className="w-3 h-3" /> Start
+                  <button
+                    type="button"
+                    aria-pressed={isComplete}
+                    onClick={() => togglePractice(p.id, p.topic)}
+                    className={`inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-[10px] uppercase tracking-[1px] font-mono transition ${
+                      isComplete
+                        ? 'border-signal-online/50 bg-signal-online/10 text-signal-online'
+                        : 'border-realm-echo/40 text-realm-echo hover:bg-realm-echo/10'
+                    }`}
+                  >
+                    {isComplete ? <Check className="w-3 h-3" /> : <Play className="w-3 h-3" />}
+                    {isComplete ? 'Done today' : 'Mark complete'}
                   </button>
                 </div>
               </article>
