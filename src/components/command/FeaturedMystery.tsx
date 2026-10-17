@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Bookmark, Compass, Pyramid } from 'lucide-react';
 import { ClaimBadge } from './ClaimBadge';
 import { useToast } from '@/hooks/use-toast';
+import { isArchived, saveToArchive } from '@/lib/archive';
 
 export function FeaturedMystery() {
   const { toast } = useToast();
@@ -49,7 +50,22 @@ export function FeaturedMystery() {
               </Link>
               <button
                 type="button"
-                onClick={() => toast({ title: 'Saved to Archive', description: 'Featured Mystery added to your saved discoveries.' })}
+                onClick={() => {
+                  const id = 'mystery-lost-knowledge-pyramids';
+                  if (isArchived(id)) {
+                    toast({ title: 'Already saved', description: 'This investigation is already in My Archive.' });
+                    return;
+                  }
+                  saveToArchive({
+                    id,
+                    type: 'investigation',
+                    title: 'The Lost Knowledge of the Pyramids',
+                    description: 'Acoustic engineering, stellar alignment, and quarrying: explore what the evidence supports and what remains an open question.',
+                    href: '/pyramids',
+                    tags: ['ancient engineering', 'pyramids', 'featured mystery'],
+                  });
+                  toast({ title: 'Saved to Archive', description: 'Featured Mystery added to My Archive on this device.' });
+                }}
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-foreground hover:border-amber-400/60 transition-colors min-h-[44px]"
               >
                 <Bookmark className="w-4 h-4" /> Save
