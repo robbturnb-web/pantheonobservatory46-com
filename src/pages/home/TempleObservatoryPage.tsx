@@ -1030,6 +1030,65 @@ function SectionHeading({ icon: Icon, label, sub }: { icon: typeof Sun; label: s
   );
 }
 
+/* ───────────── QUICK START RAIL ───────────── */
+function QuickStartRail() {
+  const paths = [
+    {
+      to: '/uap',
+      label: 'Disclosure Files',
+      detail: 'Cases, records, and open questions',
+      icon: Eye,
+      tone: 'border-red-400/30 from-red-950/45 hover:border-red-300/70',
+      iconTone: 'text-red-300 bg-red-400/10',
+    },
+    {
+      to: '/pyramids',
+      label: 'Ancient Engineering',
+      detail: 'Test the evidence behind the legends',
+      icon: Mountain,
+      tone: 'border-amber-300/30 from-amber-950/40 hover:border-amber-200/70',
+      iconTone: 'text-amber-200 bg-amber-300/10',
+    },
+    {
+      to: '/earth-pulse',
+      label: 'Live Earth Pulse',
+      detail: 'Explore planetary activity and signals',
+      icon: Activity,
+      tone: 'border-cyan-300/30 from-cyan-950/40 hover:border-cyan-200/70',
+      iconTone: 'text-cyan-200 bg-cyan-300/10',
+    },
+  ];
+
+  return (
+    <section aria-label="Start exploring" className="px-4 sm:px-8 pb-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-3">
+          <span className="text-[10px] uppercase tracking-[3px] text-white/55">Choose your first signal</span>
+          <span className="h-px flex-1 bg-gradient-to-r from-[#ffd700]/35 to-transparent" />
+        </div>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {paths.map((path, index) => (
+            <Link
+              key={path.to}
+              to={path.to}
+              className={`group flex min-w-0 items-center gap-3 rounded-xl border bg-gradient-to-br ${path.tone} to-black/65 p-4 backdrop-blur-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_35px_-20px_rgba(255,215,0,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#fde68a]`}
+            >
+              <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 ${path.iconTone}`}>
+                <path.icon className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[11px] font-bold uppercase tracking-[1.5px] text-white/90">{path.label}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-white/55">{path.detail}</span>
+              </span>
+              <ChevronRight className="h-4 w-4 shrink-0 text-white/35 transition-transform group-hover:translate-x-1 group-hover:text-[#fde68a]" aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ───────────── PAGE ───────────── */
 export function TempleObservatoryPage() {
   const utc = useUtcClock();
@@ -1090,6 +1149,7 @@ export function TempleObservatoryPage() {
           <Sidebar />
           <main className="flex-1 min-w-0">
             <Hero kp={kp} kpOk={kpOk} flareClass={flareClass} flareOk={flareOk} utc={utc} />
+            <QuickStartRail />
             <ActivityPanels />
             <LiveCosmicFeed utc={utc} />
             <SolarEventsPanel />
