@@ -35,8 +35,8 @@ jobs:
       - name: Run ESLint
         run: bun run lint
 
-      - name: Install Chromium for Playwright
-        run: bunx playwright install --with-deps chromium
+      - name: Install Chromium and WebKit for Playwright
+        run: bunx playwright install --with-deps chromium webkit
 
       - name: Test Galaxy Explorer on desktop and mobile
         run: bunx playwright test --config=playwright.ci.config.ts
