@@ -88,6 +88,7 @@ const RestrictedLocationsPage = lazy(() => import('./pages/RestrictedLocationsPa
 const AcademyPage = lazy(() => import('./pages/AcademyPage').then(m => ({ default: m.AcademyPage })));
 const BuildersLibraryPage = lazy(() => import('./pages/BuildersLibraryPage').then(m => ({ default: m.BuildersLibraryPage })));
 const HumanPotentialPage = lazy(() => import('./pages/HumanPotentialPage').then(m => ({ default: m.HumanPotentialPage })));
+const HealthPage = lazy(() => import('./pages/HealthPage').then(m => ({ default: m.HealthPage })));
 
 
 
@@ -190,6 +191,7 @@ export default function App() {
               <Route path="/diagnostics" element={<AdminRoute><DiagnosticsPage /></AdminRoute>} />
               <Route path="/style-guide" element={<AdminRoute><StyleGuidePage /></AdminRoute>} />
               <Route path="/live-feeds" element={<LiveFeedsPage />} />
+              <Route path="/health" element={<HealthPage />} />
               <Route path="/missions" element={<MissionsPage />} />
               <Route path="/sources" element={<SourcesPage />} />
               <Route path="/about" element={<AboutPage />} />

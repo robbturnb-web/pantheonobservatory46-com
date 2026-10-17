@@ -186,7 +186,7 @@ function fetchSpaceWeather(): Promise<SpaceWeatherPayload> {
       });
     } catch (e: unknown) {
       throw new Error(
-        e?.name === 'TimeoutError'
+        e instanceof Error && e.name === 'TimeoutError'
           ? 'Data gateway timed out after 20s'
           : 'Data gateway unreachable — backend may be paused or offline',
       );

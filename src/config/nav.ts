@@ -25,6 +25,7 @@ export const PRIMARY_NAV: NavItem[] = [
 ];
 
 export const SECONDARY_NAV: NavItem[] = [
+  { to: '/health', label: 'Feed Health', group: 'live' },
   { to: '/about', label: 'About', group: 'legal' },
   { to: '/contact', label: 'Contact', group: 'legal' },
   { to: '/privacy', label: 'Privacy', group: 'legal' },
