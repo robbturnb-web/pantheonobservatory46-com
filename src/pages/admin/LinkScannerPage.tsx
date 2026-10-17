@@ -47,8 +47,8 @@ export default function LinkScannerPage() {
       if (error) throw error;
       toast.success(`Scanned ${data.checked} links · ${data.ok} ok · ${data.broken} broken`);
       await load();
-    } catch (e: any) {
-      toast.error(e.message ?? 'Scan failed');
+    } catch (e: unknown) {
+      toast.error(e instanceof Error ? e.message : 'Scan failed');
     } finally {
       setScanning(false);
     }

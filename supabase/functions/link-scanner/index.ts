@@ -56,7 +56,7 @@ async function safeFetch(url: string, init: RequestInit): Promise<Response> {
     const r = await fetch(current, { ...init, redirect: 'manual' });
     const loc = r.headers.get('location');
     if (r.status >= 300 && r.status < 400 && loc) {
-      try { await r.body?.cancel(); } catch {}
+      try { await r.body?.cancel(); } catch { /* Malformed or unavailable URL metadata is handled by the caller. */ }
       current = new URL(loc, current).toString();
       continue;
     }
@@ -84,9 +84,9 @@ async function probe(url: string, sourcePage?: string): Promise<ProbeResult> {
     if (status === 405 && method === 'HEAD') {
       const r2 = await safeFetch(url, { method: 'GET', signal: ctrl.signal });
       status = r2.status;
-      try { await r2.body?.cancel(); } catch {}
+      try { await r2.body?.cancel(); } catch { /* Malformed or unavailable URL metadata is handled by the caller. */ }
     }
-    try { await r.body?.cancel(); } catch {}
+    try { await r.body?.cancel(); } catch { /* Malformed or unavailable URL metadata is handled by the caller. */ }
     return {
       url, link_type, source_page: sourcePage,
       http_status: status, ok: status >= 200 && status < 400,

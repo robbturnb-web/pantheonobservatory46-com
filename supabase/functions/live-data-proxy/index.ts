@@ -131,9 +131,17 @@ async function loadSource(
   }
 }
 
-function parse(body: string): any {
+type JsonRecord = Record<string, unknown>;
+
+function parse(body: string): JsonRecord | JsonRecord[] | null {
   try {
-    return JSON.parse(body);
+    const value: unknown = JSON.parse(body);
+    if (Array.isArray(value)) {
+      return value.filter((item): item is JsonRecord =>
+        item !== null && typeof item === 'object' && !Array.isArray(item)
+      );
+    }
+    return value !== null && typeof value === 'object' ? value as JsonRecord : null;
   } catch {
     return null;
   }
@@ -195,7 +203,7 @@ function normalizeKp(load: LoadResult) {
 
 function normalizeFlare(load: LoadResult) {
   const arr = parse(load.body);
-  const shortWave = Array.isArray(arr) ? arr.filter((d: any) => d?.energy === '0.05-0.4nm') : [];
+  const shortWave = Array.isArray(arr) ? arr.filter((d) => d?.energy === '0.05-0.4nm') : [];
   const last = shortWave[shortWave.length - 1];
   const flux = Number(last?.flux);
   if (!last || !Number.isFinite(flux)) return envelope(load, null, 'no flare data');
@@ -213,10 +221,10 @@ function normalizeWind(load: LoadResult) {
   if (Array.isArray(json) && json.length > 0) {
     const last = json[json.length - 1];
     speed = Number(last?.proton_speed ?? last?.WindSpeed ?? last?.speed);
-    observedAt = last?.time_tag ?? last?.TimeStamp ?? observedAt;
-  } else if (json && typeof json === 'object') {
+    observedAt = String(last?.time_tag ?? last?.TimeStamp ?? observedAt);
+  } else if (json && !Array.isArray(json)) {
     speed = Number(json.WindSpeed ?? json.proton_speed ?? json.speed);
-    observedAt = json.TimeStamp ?? json.time_tag ?? observedAt;
+    observedAt = String(json.TimeStamp ?? json.time_tag ?? observedAt);
   }
   if (!Number.isFinite(speed)) return envelope(load, null, 'no wind speed');
   return envelope(load, { speedKmS: speed, observedAt });
@@ -227,11 +235,11 @@ function normalizeAlerts(load: LoadResult) {
   if (!Array.isArray(arr)) return envelope(load, null, 'no alert feed');
   const cutoff = Date.now() - 24 * 3600_000;
   const items = arr
-    .filter((a: any) => {
+    .filter((a) => {
       const t = Date.parse(String(a?.issue_datetime ?? '').replace(' ', 'T') + 'Z');
       return Number.isFinite(t) && t >= cutoff;
     })
-    .map((a: any) => ({
+    .map((a) => ({
       serial: a.serial_number ?? String(a.product_id ?? ''),
       issued: String(a.issue_datetime ?? '').replace(' ', 'T') + 'Z',
       message: String(a.message ?? '').slice(0, 600),

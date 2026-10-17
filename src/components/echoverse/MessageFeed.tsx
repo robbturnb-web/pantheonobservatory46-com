@@ -37,7 +37,7 @@ export function MessageFeed({ channelId, channelName, userId, onAuthRequired }: 
         .eq('channel_id', channelId)
         .order('created_at', { ascending: true })
         .limit(100);
-      if (data) setMessages(data as any);
+      if (data) setMessages(data as unknown as Message[]);
     };
     fetchMessages();
 
@@ -53,7 +53,7 @@ export function MessageFeed({ channelId, channelName, userId, onAuthRequired }: 
             .select('username')
             .eq('user_id', payload.new.user_id)
             .single();
-          setMessages(prev => [...prev, { ...payload.new as any, profiles: profile }]);
+          setMessages(prev => [...prev, { ...(payload.new as unknown as Message), profiles: profile }]);
         }
       )
       .subscribe();
@@ -123,12 +123,12 @@ export function MessageFeed({ channelId, channelName, userId, onAuthRequired }: 
             className="flex gap-3 group"
           >
             <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-bold text-primary shrink-0 mt-0.5">
-              {((msg.profiles as any)?.username || 'S')[0].toUpperCase()}
+              {(msg.profiles?.username || 'S')[0].toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-baseline gap-2">
                 <span className="text-sm font-semibold text-foreground">
-                  {(msg.profiles as any)?.username || 'Starseed'}
+                  {msg.profiles?.username || 'Starseed'}
                 </span>
                 <span className="text-[10px] text-muted-foreground">{formatTime(msg.created_at)}</span>
               </div>

@@ -75,7 +75,7 @@ export function DailyFindingsFeed() {
                 transition={{ delay: Math.min(i * 0.04, 0.4) }}
                 className="relative"
               >
-                <span className="absolute -left-[34px] top-3 w-3 h-3 rounded-full ring-4" style={{ background: '#fcd34d', boxShadow: '0 0 12px #fcd34d', ['--tw-ring-color' as any]: 'rgba(15,8,40,1)' }} />
+                <span className="absolute -left-[34px] top-3 w-3 h-3 rounded-full ring-4 ring-[#0f0828]" style={{ background: '#fcd34d', boxShadow: '0 0 12px #fcd34d' }} />
                 <a
                   href={it.href}
                   target="_blank"

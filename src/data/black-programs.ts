@@ -91,7 +91,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'Brown\'s sworn submissions to Senate Intel and ICIG.',
     ],
     skepticalView:
-      "AARO\'s public position is that no verifiable evidence of Immaculate Constellation has surfaced in classified or unclassified review. Critics note Brown's report contains no code-words, contractor names, or program element numbers that could be independently cross-checked.",
+      "AARO's public position is that no verifiable evidence of Immaculate Constellation has surfaced in classified or unclassified review. Critics note Brown's report contains no code-words, contractor names, or program element numbers that could be independently cross-checked.",
     videos: [
       { id: 'KQ7Dw-739hY', title: 'House Oversight UAP Hearing — November 2024', channel: 'Forbes Breaking News' },
     ],
@@ -161,7 +161,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'Elizondo memoir Imminent (2024).',
     ],
     skepticalView:
-      "AARO\'s historical report frames AAWSAP as a counterintelligence-adjacent effort that produced no verified UAP material. AARO has also publicly stated AATIP, as Elizondo described it, was not a chartered DoD program.",
+      "AARO's historical report frames AAWSAP as a counterintelligence-adjacent effort that produced no verified UAP material. AARO has also publicly stated AATIP, as Elizondo described it, was not a chartered DoD program.",
     videos: [
       { id: '7P8aK0O1-P8', title: 'Full UAP Hearing — Grusch, Fravor, Graves (07/26/2023)', channel: 'UAP Coalition' },
     ],
@@ -174,7 +174,7 @@ export const blackProgramEntries: DossierEntry[] = [
     id: 'legacy-program',
     heroImage: legacyImg,
     title: 'The Legacy Program',
-    subtitle: "Grusch\'s term for the multi-decade retrieval & reverse-engineering enterprise",
+    subtitle: "Grusch's term for the multi-decade retrieval & reverse-engineering enterprise",
     category: 'Umbrella',
     era: '~1947 → present (alleged)',
     location: 'Multi-agency · contractor-hosted',
@@ -261,7 +261,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'Condon Committee final report (1968).',
     ],
     skepticalView:
-      "Skeptics consider Blue Book\'s closure appropriate — the Condon Committee concluded UFO study had no scientific value. Believers consider Blue Book a deliberate front for the real classified work.",
+      "Skeptics consider Blue Book's closure appropriate — the Condon Committee concluded UFO study had no scientific value. Believers consider Blue Book a deliberate front for the real classified work.",
     sources: [
       { label: 'National Archives — Project Blue Book', url: 'https://www.archives.gov/research/military/air-force/ufos' },
     ],
@@ -323,7 +323,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'Monroe Institute Gateway Experience analysis (1983).',
     ],
     skepticalView:
-      "Mainstream science considers remote viewing unverified. The AIR review concluded that even the program\'s best results lacked actionable utility.",
+      "Mainstream science considers remote viewing unverified. The AIR review concluded that even the program's best results lacked actionable utility.",
     sources: [
       { label: 'CIA STAR GATE collection', url: 'https://www.cia.gov/readingroom/collection/stargate' },
       { label: 'CIA Gateway Experience analysis (1983)', url: 'https://www.cia.gov/readingroom/document/cia-rdp96-00788r001700210016-5' },
@@ -443,7 +443,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'USAF internal directives following AARO finding (referenced, not yet released).',
     ],
     skepticalView:
-      "AARO\'s position is that Yankee Blue explains a large share of whistleblower narratives as misattributed memories from unsanctioned hazing. Disclosure-side critics call this a structural cover-up tool.",
+      "AARO's position is that Yankee Blue explains a large share of whistleblower narratives as misattributed memories from unsanctioned hazing. Disclosure-side critics call this a structural cover-up tool.",
     sources: [
       { label: 'AARO Historical Record Volume I (2024)', url: 'https://media.defense.gov/2024/Mar/08/2003409233/-1/-1/0/DOPSR-CLEARED-508-COMPLIANT-HRRV1-08-MAR-2024-FINAL.PDF' },
     ],
@@ -504,7 +504,7 @@ export const blackProgramEntries: DossierEntry[] = [
       'AARO Annual Reports.',
     ],
     skepticalView:
-      "AARO\'s own conclusion is that all examined UAP cases trace to mundane explanations or remain unresolved due to data quality. Disclosure-side view: AARO lacks SAP read-in and is structurally incapable of finding what it\'s tasked to find.",
+      "AARO's own conclusion is that all examined UAP cases trace to mundane explanations or remain unresolved due to data quality. Disclosure-side view: AARO lacks SAP read-in and is structurally incapable of finding what it's tasked to find.",
     videos: [
       { id: 'KQ7Dw-739hY', title: 'House Oversight UAP Hearing — November 2024', channel: 'Forbes Breaking News' },
     ],

@@ -37,11 +37,11 @@ function severityColor(sev: string): string {
   return '#F59E0B';
 }
 
-function centroid(coords: any): [number, number] | null {
+function centroid(coords: unknown): [number, number] | null {
   // Handles Polygon / MultiPolygon / Point
   try {
     const flat: [number, number][] = [];
-    const walk = (arr: any) => {
+    const walk = (arr: unknown) => {
       if (!Array.isArray(arr)) return;
       if (typeof arr[0] === 'number' && typeof arr[1] === 'number') {
         flat.push([arr[0], arr[1]]);
@@ -65,9 +65,9 @@ export function NwsStormLayer({ radius = 1.006, refreshMs = 5 * 60_000, onCount 
     let alive = true;
     const load = async () => {
       try {
-        const json = await fetchGatewayJson<any>('nws');
+        const json = await fetchGatewayJson<{ features?: Array<{ id?: string; properties?: Record<string, unknown>; geometry?: { coordinates?: unknown } }> }>('nws');
         if (!json) throw new Error('gateway unavailable');
-        const features = (json?.features ?? []) as any[];
+        const features = json?.features ?? [];
         const list: StormMarker[] = [];
         for (const f of features) {
           const p = f?.properties ?? {};

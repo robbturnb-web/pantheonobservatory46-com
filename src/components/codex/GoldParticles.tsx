@@ -20,7 +20,8 @@ export function GoldParticles({ className, density = 60 }: Props) {
 
     let raf = 0;
     let running = true;
-    let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0, h = 0;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     type P = { x: number; y: number; r: number; vx: number; vy: number; a: number; tw: number };
     let particles: P[] = [];

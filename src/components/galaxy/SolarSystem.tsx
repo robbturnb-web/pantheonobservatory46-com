@@ -657,7 +657,7 @@ function CameraController({ targetPlanetId, tourActive }: { targetPlanetId: stri
   return null;
 }
 
-export interface SolarSystemHandle {}
+export type SolarSystemHandle = object;
 
 interface SolarSystemProps {
   selectedPlanet: Planet | null;

@@ -59,11 +59,11 @@ export function EarthquakeLayer({ radius = 1.005, refreshMs = 5 * 60_000, onCoun
     let alive = true;
     const load = async () => {
       try {
-        const json = await fetchGatewayJson<any>('earthquakes_week');
+        const json = await fetchGatewayJson<{ features?: Array<{ id: string; properties: { mag: number; place?: string; time: number; url: string }; geometry: { coordinates: number[] } }> }>('earthquakes_week');
         if (!json) throw new Error('gateway unavailable');
         const list: Quake[] = (json.features ?? [])
-          .filter((f: any) => typeof f?.properties?.mag === 'number')
-          .map((f: any) => ({
+          .filter((f) => typeof f?.properties?.mag === 'number')
+          .map((f) => ({
             id: f.id,
             mag: f.properties.mag,
             place: f.properties.place ?? 'Unknown region',
