@@ -68,19 +68,19 @@ const TABS: { to: string; label: string }[] = [
 function TopNav({ kp }: { kp: number | null }) {
   const { pathname } = useLocation();
   return (
-    <header className="sticky top-0 z-40 border-b border-[#a020f0]/30 bg-[#0a0a1f]/85 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-[#9B1C31]/30 bg-[#09090B]/85 backdrop-blur-xl">
       {/* Subtle purple top glow */}
-      <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-[#a020f0]/80 to-transparent" />
+      <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-[#9B1C31]/80 to-transparent" />
       <div className="relative flex items-center gap-3 px-3 sm:px-5 h-14">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
-          <div className="relative w-9 h-9 rounded-md border border-[#ffd700]/60 bg-gradient-to-br from-[#ffd700]/25 to-[#a020f0]/20 flex items-center justify-center shadow-[0_0_18px_-2px_rgba(255,215,0,0.55)] group-hover:shadow-[0_0_28px_-2px_rgba(255,215,0,0.9)] transition-shadow">
-            <span className="font-bagel text-[#ffd700] text-base leading-none">P</span>
-            <span className="absolute -bottom-1 -right-1 text-[8px] font-bold text-[#ffd700] bg-[#0a0a1f] border border-[#ffd700]/60 rounded-sm px-0.5 leading-none py-px">46</span>
+          <div className="relative w-9 h-9 rounded-md border border-[#D4AF5A]/60 bg-gradient-to-br from-[#D4AF5A]/25 to-[#9B1C31]/20 flex items-center justify-center shadow-[0_0_18px_-2px_rgba(212,175,90,0.55)] group-hover:shadow-[0_0_28px_-2px_rgba(212,175,90,0.9)] transition-shadow">
+            <span className="font-bagel text-[#D4AF5A] text-base leading-none">P</span>
+            <span className="absolute -bottom-1 -right-1 text-[8px] font-bold text-[#D4AF5A] bg-[#09090B] border border-[#D4AF5A]/60 rounded-sm px-0.5 leading-none py-px">46</span>
           </div>
           <div className="hidden sm:flex flex-col leading-none">
             <span className="text-[10px] uppercase tracking-[4px] text-white/60">Pantheon</span>
-            <span className="text-[10px] uppercase tracking-[4px] text-[#ffd700]/80">Frequency 46</span>
+            <span className="text-[10px] uppercase tracking-[4px] text-[#D4AF5A]/80">Frequency 46</span>
           </div>
         </Link>
 
@@ -98,7 +98,7 @@ function TopNav({ kp }: { kp: number | null }) {
               >
                 {t.label}
                 {isActive && (
-                  <span className="absolute inset-x-2 -bottom-0.5 h-px bg-gradient-to-r from-transparent via-[#a020f0] to-transparent" />
+                  <span className="absolute inset-x-2 -bottom-0.5 h-px bg-gradient-to-r from-transparent via-[#9B1C31] to-transparent" />
                 )}
               </Link>
             );
@@ -107,14 +107,14 @@ function TopNav({ kp }: { kp: number | null }) {
 
         {/* Right cluster */}
         <div className="ml-auto md:ml-0 flex items-center gap-2">
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-400/40 bg-emerald-400/10">
-            <Sun className="w-3 h-3 text-[#ffd700]" />
+          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-amber-400/40 bg-amber-400/10">
+            <Sun className="w-3 h-3 text-[#D4AF5A]" />
             <span className="text-[9px] uppercase tracking-[2px] text-white/60">Solar</span>
-            <span className="text-[10px] font-bold text-emerald-300 tracking-[1px]">ACTIVE</span>
+            <span className="text-[10px] font-bold text-amber-300 tracking-[1px]">ACTIVE</span>
           </div>
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#a020f0]/40 bg-[#a020f0]/10">
+          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#9B1C31]/40 bg-[#9B1C31]/10">
             <span className="text-[9px] uppercase tracking-[2px] text-white/60">Kp</span>
-            <span className="text-[11px] font-bold text-[#c77dff] font-mono">
+            <span className="text-[11px] font-bold text-[#D4AF5A] font-mono">
               {kp == null ? '—' : kp.toFixed(1)}
             </span>
           </div>
@@ -124,7 +124,7 @@ function TopNav({ kp }: { kp: number | null }) {
           <button className="w-8 h-8 flex items-center justify-center rounded-md border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-colors">
             <Volume2 className="w-3.5 h-3.5" />
           </button>
-          <Link to="/profile" className="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-[#a020f0] to-[#7209b7] text-white text-xs font-bold border border-[#c77dff]/50 shadow-[0_0_12px_-2px_rgba(199,125,255,0.7)]">
+          <Link to="/profile" className="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-[#9B1C31] to-[#7209b7] text-white text-xs font-bold border border-[#D4AF5A]/50 shadow-[0_0_12px_-2px_rgba(212,175,90,0.7)]">
             R
           </Link>
         </div>
@@ -137,18 +137,18 @@ function TopNav({ kp }: { kp: number | null }) {
 interface SideItem { to: string; label: string; icon: typeof Home; tone: string; glow: string }
 const SIDE_ITEMS: SideItem[] = [
   { to: '/',                label: 'Home',          icon: Home,         tone: 'text-white',         glow: 'shadow-[0_0_16px_-2px_rgba(255,255,255,0.5)]' },
-  { to: '/uap',             label: 'Disclosure',    icon: Eye,          tone: 'text-emerald-300',   glow: 'shadow-[0_0_16px_-2px_rgba(16,185,129,0.7)]' },
-  { to: '/documentaries',   label: 'Docs',          icon: Film,         tone: 'text-emerald-300',   glow: '' },
-  { to: '/whistleblowers',  label: 'Whistleblw',    icon: Shield,       tone: 'text-emerald-300',   glow: '' },
+  { to: '/uap',             label: 'Disclosure',    icon: Eye,          tone: 'text-amber-300',   glow: 'shadow-[0_0_16px_-2px_rgba(16,185,129,0.7)]' },
+  { to: '/documentaries',   label: 'Docs',          icon: Film,         tone: 'text-amber-300',   glow: '' },
+  { to: '/whistleblowers',  label: 'Whistleblw',    icon: Shield,       tone: 'text-amber-300',   glow: '' },
   { to: '/crash-retrieval', label: 'Crash Retr',    icon: AlertTriangle,tone: 'text-red-400',       glow: '' },
   { to: '/missing',         label: 'Missing',       icon: Users,        tone: 'text-amber-300',     glow: '' },
   { to: '/underground',     label: 'Bases',         icon: MountainIcon, tone: 'text-stone-300',     glow: '' },
-  { to: '/gods',            label: 'Mythology',     icon: Mountain,     tone: 'text-[#ffd700]',     glow: 'shadow-[0_0_16px_-2px_rgba(255,215,0,0.7)]' },
-  { to: '/consciousness',   label: 'Conscious',     icon: Brain,        tone: 'text-indigo-300',    glow: '' },
-  { to: '/frequencies',     label: 'Frequency',     icon: RadioIcon,    tone: 'text-cyan-300',      glow: '' },
-  { to: '/galaxy',          label: 'Observatory',   icon: Satellite,    tone: 'text-[#c77dff]',     glow: 'shadow-[0_0_16px_-2px_rgba(160,32,240,0.7)]' },
-  { to: '/earth-pulse',     label: 'Earth Pulse',   icon: Globe,        tone: 'text-cyan-300',      glow: '' },
-  { to: '/echo',            label: 'Echo AI',       icon: Bot,          tone: 'text-cyan-300',      glow: 'shadow-[0_0_16px_-2px_rgba(34,211,238,0.7)]' },
+  { to: '/gods',            label: 'Mythology',     icon: Mountain,     tone: 'text-[#D4AF5A]',     glow: 'shadow-[0_0_16px_-2px_rgba(212,175,90,0.7)]' },
+  { to: '/consciousness',   label: 'Conscious',     icon: Brain,        tone: 'text-stone-300',    glow: '' },
+  { to: '/frequencies',     label: 'Frequency',     icon: RadioIcon,    tone: 'text-stone-300',      glow: '' },
+  { to: '/galaxy',          label: 'Observatory',   icon: Satellite,    tone: 'text-[#D4AF5A]',     glow: 'shadow-[0_0_16px_-2px_rgba(155,28,49,0.7)]' },
+  { to: '/earth-pulse',     label: 'Earth Pulse',   icon: Globe,        tone: 'text-stone-300',      glow: '' },
+  { to: '/echo',            label: 'Echo AI',       icon: Bot,          tone: 'text-stone-300',      glow: 'shadow-[0_0_16px_-2px_rgba(192,192,200,0.7)]' },
   { to: '/profile',         label: 'Settings',      icon: Settings,     tone: 'text-white/70',      glow: '' },
 ];
 
@@ -156,7 +156,7 @@ const SIDE_ITEMS: SideItem[] = [
 function Sidebar() {
   const { pathname } = useLocation();
   return (
-    <aside className="hidden lg:flex shrink-0 w-[84px] flex-col items-center py-4 gap-0.5 border-r border-[#a020f0]/20 bg-[#0a0a1f]/85 backdrop-blur-xl max-h-screen sticky top-14 overflow-y-auto scrollbar-thin">
+    <aside className="hidden lg:flex shrink-0 w-[84px] flex-col items-center py-4 gap-0.5 border-r border-[#9B1C31]/20 bg-[#09090B]/85 backdrop-blur-xl max-h-screen sticky top-14 overflow-y-auto scrollbar-thin">
       {SIDE_ITEMS.map((item) => {
         const isActive = item.to === '/' ? pathname === '/' : pathname.startsWith(item.to);
         return (
@@ -168,7 +168,7 @@ function Sidebar() {
             }`}
           >
             {isActive && (
-              <span className="absolute left-0 top-3 bottom-3 w-[2px] bg-gradient-to-b from-transparent via-[#a020f0] to-transparent rounded-full" />
+              <span className="absolute left-0 top-3 bottom-3 w-[2px] bg-gradient-to-b from-transparent via-[#9B1C31] to-transparent rounded-full" />
             )}
             <item.icon
               className={`w-5 h-5 ${item.tone} ${isActive ? item.glow : ''} group-hover:scale-110 transition-transform`}
@@ -197,10 +197,10 @@ function KpGauge({ kp }: { kp: number | null }) {
       <svg viewBox="0 0 280 180" className="w-full h-full overflow-visible">
         <defs>
           <linearGradient id="kpArc" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%"  stopColor="#a020f0" />
-            <stop offset="55%" stopColor="#c77dff" />
+            <stop offset="0%"  stopColor="#9B1C31" />
+            <stop offset="55%" stopColor="#D4AF5A" />
             <stop offset="80%" stopColor="#fbbf24" />
-            <stop offset="100%" stopColor="#fde68a" />
+            <stop offset="100%" stopColor="#E5C77D" />
           </linearGradient>
           <filter id="kpGlow">
             <feGaussianBlur stdDeviation="3" />
@@ -243,7 +243,7 @@ function KpGauge({ kp }: { kp: number | null }) {
         <div className="text-[9px] uppercase tracking-[3px] text-white/50">
           {kp == null ? 'Geomagnetic Index · Connecting…' : 'Geomagnetic Index · NOAA SWPC'}
         </div>
-        <div className="text-5xl font-black bg-gradient-to-r from-[#c77dff] to-[#fde68a] bg-clip-text text-transparent leading-none mt-1">
+        <div className="text-5xl font-black bg-gradient-to-r from-[#D4AF5A] to-[#E5C77D] bg-clip-text text-transparent leading-none mt-1">
           {kp == null ? 'Kp —' : `Kp ${kp.toFixed(1)}`}
         </div>
       </div>
@@ -270,13 +270,13 @@ function PantheonCompass() {
   return (
     <div className="relative mx-auto aspect-square w-[min(92vw,560px)]">
       {/* Outer rotating constellation ring */}
-      <div className="absolute inset-0 rounded-full border border-[#ffd700]/15 animate-[spin_120s_linear_infinite]">
-        <div className="absolute inset-3 rounded-full border border-dashed border-[#a020f0]/25" />
-        <div className="absolute inset-8 rounded-full border border-[#22d3ee]/10" />
+      <div className="absolute inset-0 rounded-full border border-[#D4AF5A]/15 animate-[spin_120s_linear_infinite]">
+        <div className="absolute inset-3 rounded-full border border-dashed border-[#9B1C31]/25" />
+        <div className="absolute inset-8 rounded-full border border-[#C0C0C8]/10" />
       </div>
 
       {/* Glow halo */}
-      <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle,rgba(255,215,0,0.35),rgba(160,32,240,0.18)_45%,transparent_70%)] blur-2xl animate-[cosmic-pulse_6s_ease-in-out_infinite] pointer-events-none" />
+      <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle,rgba(212,175,90,0.35),rgba(155,28,49,0.18)_45%,transparent_70%)] blur-2xl animate-[cosmic-pulse_6s_ease-in-out_infinite] pointer-events-none" />
 
       {/* Center sigil */}
       <Link
@@ -284,7 +284,7 @@ function PantheonCompass() {
         aria-label="Enter the Pantheon"
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-square rounded-full overflow-hidden group focus-visible:outline-none"
       >
-        <div className="absolute inset-0 rounded-full bg-black/70 shadow-[0_0_80px_-10px_rgba(255,215,0,0.55),0_0_120px_-20px_rgba(160,32,240,0.6)] group-hover:shadow-[0_0_120px_-10px_rgba(255,215,0,0.9),0_0_180px_-20px_rgba(160,32,240,0.9)] transition-shadow duration-500" />
+        <div className="absolute inset-0 rounded-full bg-black/70 shadow-[0_0_80px_-10px_rgba(212,175,90,0.55),0_0_120px_-20px_rgba(155,28,49,0.6)] group-hover:shadow-[0_0_120px_-10px_rgba(212,175,90,0.9),0_0_180px_-20px_rgba(155,28,49,0.9)] transition-shadow duration-500" />
         <img
           src={sigil46}
           alt="Pantheon 46 sigil"
@@ -293,7 +293,7 @@ function PantheonCompass() {
           loading="eager"
           className="relative w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-700"
         />
-        <span className="absolute inset-x-0 -bottom-1 text-center text-[9px] uppercase tracking-[5px] text-[#ffd700]/0 group-hover:text-[#ffd700]/90 transition-colors">
+        <span className="absolute inset-x-0 -bottom-1 text-center text-[9px] uppercase tracking-[5px] text-[#D4AF5A]/0 group-hover:text-[#D4AF5A]/90 transition-colors">
           Enter Pantheon
         </span>
       </Link>
@@ -313,13 +313,13 @@ function PantheonCompass() {
             style={{ left: `${left}%`, top: `${top}%` }}
           >
             <div className="relative w-[10.5%] aspect-square min-w-[44px]">
-              <div className="absolute inset-0 rounded-full border border-[#ffd700]/40 bg-black/70 overflow-hidden shadow-[0_0_18px_-2px_rgba(255,215,0,0.5)] group-hover:shadow-[0_0_28px_-2px_rgba(255,215,0,0.95)] group-hover:border-[#ffd700] group-hover:scale-110 transition-all duration-300">
+              <div className="absolute inset-0 rounded-full border border-[#D4AF5A]/40 bg-black/70 overflow-hidden shadow-[0_0_18px_-2px_rgba(212,175,90,0.5)] group-hover:shadow-[0_0_28px_-2px_rgba(212,175,90,0.95)] group-hover:border-[#D4AF5A] group-hover:scale-110 transition-all duration-300">
                 {g.image && (
                   <img src={g.image} alt={g.name} loading="lazy" className="w-full h-full object-cover object-top" />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
-              <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1 text-[8.5px] uppercase tracking-[2px] font-bold text-[#fde68a] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_8px_rgba(0,0,0,0.9)]">
+              <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1 text-[8.5px] uppercase tracking-[2px] font-bold text-[#E5C77D] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_8px_rgba(0,0,0,0.9)]">
                 {g.name}
               </div>
             </div>
@@ -343,7 +343,7 @@ function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
   const okCount = (kpOk ? 1 : 0) + (flareOk ? 1 : 0);
   const connecting = kp == null && flareClass == null;
   const status = connecting
-    ? { label: 'Establishing Uplink', tone: 'text-cyan-300', dot: 'bg-cyan-400' }
+    ? { label: 'Establishing Uplink', tone: 'text-stone-300', dot: 'bg-stone-400' }
     : okCount === 2
       ? { label: 'All Sources Verified', tone: 'text-signal-online', dot: 'bg-signal-online' }
       : okCount === 1
@@ -361,7 +361,7 @@ function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
           {status.label}
         </span>
         <span className="hidden sm:inline">·</span>
-        <span>Realm: <span className="text-[#c77dff]">The Observatory</span></span>
+        <span>Realm: <span className="text-[#D4AF5A]">The Observatory</span></span>
         <span className="hidden sm:inline">·</span>
         <span className="font-mono text-white/70">Live Sync {utc.toISOString().slice(11, 19)} UTC</span>
       </div>
@@ -369,20 +369,20 @@ function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
 
       {/* Title */}
       <h1 className="text-center font-black tracking-[1px] leading-none">
-        <span className="block text-4xl sm:text-6xl lg:text-7xl" style={{ fontFamily: '"Cinzel", "Space Grotesk", serif' }}>
-          <span className="bg-gradient-to-b from-white via-[#fde68a] to-[#ffd700] bg-clip-text text-transparent" style={{ WebkitTextFillColor: 'transparent', textShadow: '0 0 40px rgba(255,215,0,0.25)' }}>
-            TEMPLE OBSERVATORY
+        <span className="block text-3xl sm:text-5xl lg:text-6xl" style={{ fontFamily: '"Cinzel", "Space Grotesk", serif' }}>
+          <span className="bg-gradient-to-b from-white via-[#E5C77D] to-[#D4AF5A] bg-clip-text text-transparent" style={{ WebkitTextFillColor: 'transparent', textShadow: '0 0 40px rgba(212,175,90,0.25)' }}>
+            THE UNKNOWN IS NOT THE END OF THE SEARCH.
           </span>
         </span>
       </h1>
       <div className="text-center mt-2 text-[10px] uppercase tracking-[6px] text-white/45">
-        Pantheon · Frequency 46 · The Twelve Return
+        PANTHEON OBSERVATORY 46 · EVIDENCE-LED INQUIRY
       </div>
       <p className="mx-auto mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-white/70">
-        Evidence-led research into the cosmos and the unexplained — every entry labelled
-        <span className="text-[#fde68a]"> fact</span>,
-        <span className="text-[#c77dff]"> theory</span>,
-        <span className="text-[#22d3ee]"> belief</span>, or
+        An evolving center for knowledge, discovery, ancient records, unexplained phenomena, and the examination of extraordinary claims. Explore the evidence, question established narratives, and investigate what remains unresolved. Every entry is labelled
+        <span className="text-[#E5C77D]"> fact</span>,
+        <span className="text-[#D4AF5A]"> theory</span>,
+        <span className="text-[#C0C0C8]"> belief</span>, or
         <span className="text-white/85"> unexplained</span>, with sources you can check.
       </p>
 
@@ -391,15 +391,15 @@ function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
       <div className="relative mt-8 grid lg:grid-cols-[260px_1fr_220px] gap-8 items-center max-w-6xl mx-auto">
         {/* Left flank — KP gauge + flare bar */}
         <div className="order-2 lg:order-1 flex flex-col gap-3">
-          <div className="rounded-xl border border-[#a020f0]/30 bg-black/45 backdrop-blur-md p-3">
+          <div className="rounded-xl border border-[#9B1C31]/30 bg-black/45 backdrop-blur-md p-3">
             <KpGauge kp={kp} />
             <div className="mt-2 flex items-center justify-center gap-2">
-              <Flame className="w-3 h-3 text-[#ffd700]" />
+              <Flame className="w-3 h-3 text-[#D4AF5A]" />
               <span className="text-[10px] uppercase tracking-[3px] text-white/60">Flare</span>
-              <span className="text-sm font-bold text-[#ffd700]">
+              <span className="text-sm font-bold text-[#D4AF5A]">
                 {flareOk && flareClass ? flareClass : flareClass === null ? '—' : 'N/A'}
               </span>
-              <span className="text-[9px] uppercase tracking-[2px] text-emerald-300 ml-1">
+              <span className="text-[9px] uppercase tracking-[2px] text-amber-300 ml-1">
                 {flareOk ? 'Live' : 'Connecting…'}
               </span>
             </div>
@@ -414,27 +414,27 @@ function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
 
         {/* Center — Pantheon compass */}
         <div className="order-1 lg:order-2 relative">
-          <div className="absolute -inset-12 rounded-full bg-[#a020f0]/10 blur-3xl pointer-events-none" />
+          <div className="absolute -inset-12 rounded-full bg-[#9B1C31]/10 blur-3xl pointer-events-none" />
           <PantheonCompass />
         </div>
 
         {/* Right flank — quick CTAs */}
         <div className="order-3 flex flex-col gap-2 items-stretch lg:items-end">
-          <Link to="/gods" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#ffd700]/50 bg-[#ffd700]/10 hover:bg-[#ffd700]/20 transition-colors">
-            <span className="text-[10px] uppercase tracking-[3px] text-[#fde68a]">The 46 Codex</span>
-            <ChevronRight className="w-3.5 h-3.5 text-[#fde68a] group-hover:translate-x-0.5 transition-transform" />
+          <Link to="/gods" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#D4AF5A]/50 bg-[#D4AF5A]/10 hover:bg-[#D4AF5A]/20 transition-colors">
+            <span className="text-[10px] uppercase tracking-[3px] text-[#E5C77D]">The 46 Codex</span>
+            <ChevronRight className="w-3.5 h-3.5 text-[#E5C77D] group-hover:translate-x-0.5 transition-transform" />
           </Link>
-          <Link to="/gods" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#a020f0]/40 bg-[#a020f0]/10 hover:bg-[#a020f0]/20 transition-colors">
-            <span className="text-[10px] uppercase tracking-[3px] text-[#c77dff]">Enter Mythology</span>
-            <ChevronRight className="w-3.5 h-3.5 text-[#c77dff] group-hover:translate-x-0.5 transition-transform" />
+          <Link to="/gods" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#9B1C31]/40 bg-[#9B1C31]/10 hover:bg-[#9B1C31]/20 transition-colors">
+            <span className="text-[10px] uppercase tracking-[3px] text-[#D4AF5A]">Enter Mythology</span>
+            <ChevronRight className="w-3.5 h-3.5 text-[#D4AF5A] group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <Link to="/earth-pulse" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-red-400/40 bg-red-500/10 hover:bg-red-500/20 transition-colors">
             <span className="text-[10px] uppercase tracking-[3px] text-red-300">Earth Pulse Live</span>
             <ChevronRight className="w-3.5 h-3.5 text-red-300 group-hover:translate-x-0.5 transition-transform" />
           </Link>
-          <Link to="/echo" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-cyan-400/40 bg-cyan-400/10 hover:bg-cyan-400/20 transition-colors">
-            <span className="text-[10px] uppercase tracking-[3px] text-cyan-300">Open Echo AI</span>
-            <ChevronRight className="w-3.5 h-3.5 text-cyan-300 group-hover:translate-x-0.5 transition-transform" />
+          <Link to="/echo" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-stone-400/40 bg-stone-400/10 hover:bg-stone-400/20 transition-colors">
+            <span className="text-[10px] uppercase tracking-[3px] text-stone-300">Open Echo AI</span>
+            <ChevronRight className="w-3.5 h-3.5 text-stone-300 group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
       </div>
@@ -454,23 +454,23 @@ function FlareClassBar({ current }: { current: string }) {
           return (
             <div key={c} className="flex-1 flex flex-col items-center gap-1">
               <div
-                className={`w-full rounded-sm transition-all ${isActive ? 'ring-1 ring-[#ffd700]' : ''}`}
+                className={`w-full rounded-sm transition-all ${isActive ? 'ring-1 ring-[#D4AF5A]' : ''}`}
                 style={{
                   height: `${intensity * 100}%`,
                   background: isActive
-                    ? 'linear-gradient(to top, #ffd700, #fde68a)'
-                    : `linear-gradient(to top, rgba(160,32,240,${0.15 + intensity * 0.4}), rgba(160,32,240,${0.05 + intensity * 0.2}))`,
-                  boxShadow: isActive ? '0 0 12px rgba(255,215,0,0.6)' : 'none',
+                    ? 'linear-gradient(to top, #D4AF5A, #E5C77D)'
+                    : `linear-gradient(to top, rgba(155,28,49,${0.15 + intensity * 0.4}), rgba(155,28,49,${0.05 + intensity * 0.2}))`,
+                  boxShadow: isActive ? '0 0 12px rgba(212,175,90,0.6)' : 'none',
                 }}
               />
-              <span className={`text-[9px] font-bold ${isActive ? 'text-[#ffd700]' : 'text-white/40'}`}>{c}</span>
+              <span className={`text-[9px] font-bold ${isActive ? 'text-[#D4AF5A]' : 'text-white/40'}`}>{c}</span>
             </div>
           );
         })}
       </div>
       <div className="mt-2 flex items-center justify-between text-[9px] uppercase tracking-[2px] text-white/40">
         <span>Quiet</span>
-        <span className="text-[#ffd700]">{current}</span>
+        <span className="text-[#D4AF5A]">{current}</span>
         <span>Extreme</span>
       </div>
     </div>
@@ -572,13 +572,13 @@ function ActivityPanels() {
         </div>
 
         {/* Anomalous Activity — community-sourced, no fake metrics */}
-        <div className="relative rounded-xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950/40 to-black/70 backdrop-blur-xl p-5 overflow-hidden">
+        <div className="relative rounded-xl border border-amber-500/30 bg-gradient-to-br from-amber-950/40 to-black/70 backdrop-blur-xl p-5 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.18),transparent_60%)] pointer-events-none" />
           <div className="relative flex items-start justify-between mb-3">
-            <div className="text-[10px] uppercase tracking-[3px] text-emerald-300/80">
+            <div className="text-[10px] uppercase tracking-[3px] text-amber-300/80">
               Anomalous Reports · Community Submissions
             </div>
-            <Sparkles className="w-5 h-5 text-emerald-400" />
+            <Sparkles className="w-5 h-5 text-amber-400" />
           </div>
           <p className="relative text-[11px] text-white/65 leading-snug mb-3">
             Pantheon does not publish a fake UAP counter. Sightings are
@@ -588,7 +588,7 @@ function ActivityPanels() {
           <div className="relative flex flex-wrap gap-2">
             <Link
               to="/orb-report"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-emerald-400/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-200 text-[10px] uppercase tracking-[2px] font-bold transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-amber-400/40 bg-amber-500/10 hover:bg-amber-500/20 text-amber-200 text-[10px] uppercase tracking-[2px] font-bold transition-colors"
             >
               Submit a sighting <ChevronRight className="w-3 h-3" />
             </Link>
@@ -645,7 +645,7 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
       key: 'solar',
       img: feedSolar,
       kind: 'Solar X-ray Flux',
-      tone: 'text-[#ffd700]',
+      tone: 'text-[#D4AF5A]',
       value: flare.data?.value?.class ?? (flare.loading ? '…' : 'N/A'),
       title: flare.data?.ok
         ? `Current GOES short-channel class · ${flare.data.value!.class}`
@@ -661,7 +661,7 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
       key: 'wind',
       img: feedSolar,
       kind: 'Solar Wind',
-      tone: 'text-[#c77dff]',
+      tone: 'text-[#D4AF5A]',
       value: wind.data?.ok ? `${Math.round(wind.data.value!.speedKmS)} km/s` : (wind.loading ? '…' : 'N/A'),
       title: wind.data?.ok
         ? `Speed at L1 · observed ${timeAgo(wind.data.value!.observedAt)}`
@@ -693,7 +693,7 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
       key: 'moon',
       img: portalEcho,
       kind: 'Moon Phase',
-      tone: 'text-cyan-300',
+      tone: 'text-stone-300',
       value: moon.data?.value
         ? `${Math.round(moon.data.value.illumination * 100)}%`
         : '…',
@@ -718,7 +718,7 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.1 + i * 0.08 }}
-              className="group relative rounded-xl overflow-hidden border border-white/10 bg-black/60 backdrop-blur-xl hover:border-[#a020f0]/50 transition-colors"
+              className="group relative rounded-xl overflow-hidden border border-white/10 bg-black/60 backdrop-blur-xl hover:border-[#9B1C31]/50 transition-colors"
             >
               <div className="relative h-36 overflow-hidden">
                 <img src={c.img} alt={c.kind} loading="lazy" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[1.4s]" />
@@ -751,23 +751,23 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
         </div>
 
         {/* Status panel */}
-        <div className="mt-4 rounded-xl border border-[#a020f0]/30 bg-gradient-to-r from-[#0a0a1f] via-[#1a1038]/70 to-[#0a0a1f] backdrop-blur-xl px-4 py-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] uppercase tracking-[2px]">
+        <div className="mt-4 rounded-xl border border-[#9B1C31]/30 bg-gradient-to-r from-[#09090B] via-[#141418]/70 to-[#09090B] backdrop-blur-xl px-4 py-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] uppercase tracking-[2px]">
           <div className="flex items-center gap-1.5">
             <span className="relative flex w-1.5 h-1.5">
-              <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
-              <span className="relative rounded-full w-1.5 h-1.5 bg-emerald-400" />
+              <span className="absolute inset-0 rounded-full bg-amber-400 animate-ping opacity-75" />
+              <span className="relative rounded-full w-1.5 h-1.5 bg-amber-400" />
             </span>
-            <span className="text-emerald-300 font-bold">Online</span>
+            <span className="text-amber-300 font-bold">Online</span>
           </div>
           <div className="flex items-center gap-1.5 text-white/55">
-            <span className="text-[#ffd700] font-bold">Codex 46</span>
+            <span className="text-[#D4AF5A] font-bold">Codex 46</span>
           </div>
           <div className="flex items-center gap-1.5 text-white/55 font-mono">
             <span>{utc.toISOString().slice(0, 10)} · {utc.toISOString().slice(11, 19)} UTC</span>
           </div>
           <div className="flex items-center gap-1.5 ml-auto">
-            <Lock className="w-3 h-3 text-emerald-300" />
-            <span className="text-emerald-300 font-bold">Access · Authorized</span>
+            <Lock className="w-3 h-3 text-amber-300" />
+            <span className="text-amber-300 font-bold">Access · Authorized</span>
           </div>
         </div>
       </div>
@@ -781,11 +781,11 @@ interface Portal {
   img: string; tone: string; ring: string; glow: string;
 }
 const PORTALS: Portal[] = [
-  { to: '/uap',           title: 'Disclosure',    desc: 'UAP cases, whistleblowers, government archives, declassified files.', icon: Eye,       img: portalDisclosure,    tone: 'text-emerald-300', ring: 'border-emerald-400/40', glow: 'shadow-[0_0_40px_-10px_rgba(16,185,129,0.7)]' },
-  { to: '/gods',          title: 'Mythology',     desc: 'Gods, ancient civilizations, symbols, global lore, comparative mythology.', icon: Mountain,  img: portalMythology,     tone: 'text-[#ffd700]',   ring: 'border-[#ffd700]/40',   glow: 'shadow-[0_0_40px_-10px_rgba(255,215,0,0.7)]' },
-  { to: '/consciousness', title: 'Consciousness', desc: 'Frequencies, meditation, NDEs, altered states, psychology, philosophy.',  icon: Brain,     img: portalConsciousness, tone: 'text-emerald-300', ring: 'border-emerald-400/40', glow: 'shadow-[0_0_40px_-10px_rgba(52,211,153,0.7)]' },
-  { to: '/galaxy',        title: 'Observatory',   desc: 'Live solar activity, space weather, celestial events, cosmos.',           icon: Satellite, img: portalObservatory,   tone: 'text-[#c77dff]',   ring: 'border-[#a020f0]/50',   glow: 'shadow-[0_0_40px_-10px_rgba(160,32,240,0.8)]' },
-  { to: '/echo',          title: 'Echo AI',       desc: 'Your AI guide, researcher, summarizer, and cosmic intelligence system.',  icon: Bot,       img: portalEcho,          tone: 'text-cyan-300',    ring: 'border-cyan-400/40',    glow: 'shadow-[0_0_40px_-10px_rgba(34,211,238,0.7)]' },
+  { to: '/uap',           title: 'Disclosure',    desc: 'UAP cases, whistleblowers, government archives, declassified files.', icon: Eye,       img: portalDisclosure,    tone: 'text-amber-300', ring: 'border-amber-400/40', glow: 'shadow-[0_0_40px_-10px_rgba(16,185,129,0.7)]' },
+  { to: '/gods',          title: 'Mythology',     desc: 'Gods, ancient civilizations, symbols, global lore, comparative mythology.', icon: Mountain,  img: portalMythology,     tone: 'text-[#D4AF5A]',   ring: 'border-[#D4AF5A]/40',   glow: 'shadow-[0_0_40px_-10px_rgba(212,175,90,0.7)]' },
+  { to: '/consciousness', title: 'Consciousness', desc: 'Frequencies, meditation, NDEs, altered states, psychology, philosophy.',  icon: Brain,     img: portalConsciousness, tone: 'text-amber-300', ring: 'border-amber-400/40', glow: 'shadow-[0_0_40px_-10px_rgba(52,211,153,0.7)]' },
+  { to: '/galaxy',        title: 'Observatory',   desc: 'Live solar activity, space weather, celestial events, cosmos.',           icon: Satellite, img: portalObservatory,   tone: 'text-[#D4AF5A]',   ring: 'border-[#9B1C31]/50',   glow: 'shadow-[0_0_40px_-10px_rgba(155,28,49,0.8)]' },
+  { to: '/echo',          title: 'Echo AI',       desc: 'Your AI guide, researcher, summarizer, and cosmic intelligence system.',  icon: Bot,       img: portalEcho,          tone: 'text-stone-300',    ring: 'border-stone-400/40',    glow: 'shadow-[0_0_40px_-10px_rgba(192,192,200,0.7)]' },
 ];
 
 function CorePortals() {
@@ -846,9 +846,9 @@ function TheGodsReturn() {
     <section className="relative px-4 sm:px-8 pb-10">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-6">
-          <div className="text-[10px] uppercase tracking-[6px] text-[#ffd700]/70">Mythology · Pantheon</div>
+          <div className="text-[10px] uppercase tracking-[6px] text-[#D4AF5A]/70">Mythology · Pantheon</div>
           <h2 className="text-3xl sm:text-5xl font-black mt-2 tracking-[1px]" style={{ fontFamily: '"Cinzel", serif' }}>
-            <span className="bg-gradient-to-b from-white via-[#fde68a] to-[#d4a574] bg-clip-text text-transparent" style={{ WebkitTextFillColor: 'transparent', textShadow: '0 0 40px rgba(255,215,0,0.25)' }}>
+            <span className="bg-gradient-to-b from-white via-[#E5C77D] to-[#d4a574] bg-clip-text text-transparent" style={{ WebkitTextFillColor: 'transparent', textShadow: '0 0 40px rgba(212,175,90,0.25)' }}>
               THE GODS RETURN
             </span>
           </h2>
@@ -868,7 +868,7 @@ function TheGodsReturn() {
             >
               <Link
                 to={`/gods/${g.id}`}
-                className="group block relative rounded-xl overflow-hidden border border-[#a020f0]/25 bg-black/70 hover:border-[#ffd700]/50 transition-colors"
+                className="group block relative rounded-xl overflow-hidden border border-[#9B1C31]/25 bg-black/70 hover:border-[#D4AF5A]/50 transition-colors"
               >
                 <div className="relative aspect-[3/4] overflow-hidden">
                   {g.image && (
@@ -876,7 +876,7 @@ function TheGodsReturn() {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-60 transition-opacity" style={{ background: g.atmosphericBg }} />
-                  <div className="absolute top-2 left-2 text-[9px] uppercase tracking-[2px] px-1.5 py-0.5 rounded-sm bg-black/70 border border-[#ffd700]/30 text-[#fde68a]">
+                  <div className="absolute top-2 left-2 text-[9px] uppercase tracking-[2px] px-1.5 py-0.5 rounded-sm bg-black/70 border border-[#D4AF5A]/30 text-[#E5C77D]">
                     {g.pantheon}
                   </div>
                 </div>
@@ -888,7 +888,7 @@ function TheGodsReturn() {
                     </h3>
                   </div>
                   <p className="text-[10px] text-white/55 mt-1 line-clamp-2 leading-snug">{g.archetypeRole}</p>
-                  <div className="mt-2 inline-flex items-center gap-1 text-[9px] uppercase tracking-[2px] font-bold text-[#ffd700] group-hover:gap-1.5 transition-all">
+                  <div className="mt-2 inline-flex items-center gap-1 text-[9px] uppercase tracking-[2px] font-bold text-[#D4AF5A] group-hover:gap-1.5 transition-all">
                     Open Dossier <ChevronRight className="w-2.5 h-2.5" />
                   </div>
                 </div>
@@ -898,7 +898,7 @@ function TheGodsReturn() {
         </div>
 
         <div className="mt-5 text-center">
-          <Link to="/gods" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-[#ffd700]/50 bg-[#ffd700]/10 text-[#fde68a] text-[11px] uppercase tracking-[3px] font-bold hover:bg-[#ffd700]/20 transition-colors">
+          <Link to="/gods" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-[#D4AF5A]/50 bg-[#D4AF5A]/10 text-[#E5C77D] text-[11px] uppercase tracking-[3px] font-bold hover:bg-[#D4AF5A]/20 transition-colors">
             Enter The Full Pantheon <ChevronRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -928,7 +928,7 @@ function SdoLiveImagery({ utc }: { utc: Date }) {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="group relative rounded-xl overflow-hidden border border-[#ffd700]/25 bg-black"
+              className="group relative rounded-xl overflow-hidden border border-[#D4AF5A]/25 bg-black"
             >
               <div className="aspect-square relative overflow-hidden">
                 <img src={img.src} alt={img.label} loading="lazy" className="w-full h-full object-cover" />
@@ -937,12 +937,12 @@ function SdoLiveImagery({ utc }: { utc: Date }) {
                   <div className="absolute top-1/2 left-0 right-0 h-px bg-white/40" />
                   <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/40" />
                 </div>
-                <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-sm bg-black/80 text-[8.5px] uppercase tracking-[1.5px] text-[#fde68a] border border-[#ffd700]/40 font-bold">
+                <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-sm bg-black/80 text-[8.5px] uppercase tracking-[1.5px] text-[#E5C77D] border border-[#D4AF5A]/40 font-bold">
                   NASA
                 </div>
               </div>
               <div className="p-2.5 bg-black/80 border-t border-white/10">
-                <div className="text-[10px] font-bold text-[#fde68a] tracking-[1px] uppercase">{img.label}</div>
+                <div className="text-[10px] font-bold text-[#E5C77D] tracking-[1px] uppercase">{img.label}</div>
                 <div className="text-[9px] text-white/50 mt-0.5">{img.hint}</div>
               </div>
             </motion.div>
@@ -968,11 +968,11 @@ function TransmissionsTicker() {
 
   const items: TickerItem[] = [];
   if (flare.data?.ok && flare.data.value)
-    items.push({ icon: Flame, color: 'text-[#ffd700]', text: `Flare ${flare.data.value.class} · NOAA SWPC · ${timeAgo(flare.data.value.observedAt)}` });
+    items.push({ icon: Flame, color: 'text-[#D4AF5A]', text: `Flare ${flare.data.value.class} · NOAA SWPC · ${timeAgo(flare.data.value.observedAt)}` });
   if (kp.data?.ok && kp.data.value)
-    items.push({ icon: Activity, color: 'text-[#c77dff]', text: `Kp ${kp.data.value.kp.toFixed(1)} · ${kp.data.value.stormLevel} · NOAA SWPC` });
+    items.push({ icon: Activity, color: 'text-[#D4AF5A]', text: `Kp ${kp.data.value.kp.toFixed(1)} · ${kp.data.value.stormLevel} · NOAA SWPC` });
   if (wind.data?.ok && wind.data.value)
-    items.push({ icon: Waves, color: 'text-cyan-300', text: `Solar wind ${Math.round(wind.data.value.speedKmS)} km/s · L1 · ${timeAgo(wind.data.value.observedAt)}` });
+    items.push({ icon: Waves, color: 'text-stone-300', text: `Solar wind ${Math.round(wind.data.value.speedKmS)} km/s · L1 · ${timeAgo(wind.data.value.observedAt)}` });
   if (quakes.data?.ok && quakes.data.value?.highest) {
     const h = quakes.data.value.highest;
     items.push({ icon: Mountain, color: 'text-red-400', text: `M${h.mag.toFixed(1)} · ${h.place} · USGS · ${timeAgo(new Date(h.time).toISOString())}` });
@@ -980,21 +980,21 @@ function TransmissionsTicker() {
   if (quakes.data?.ok && quakes.data.value)
     items.push({ icon: Mountain, color: 'text-red-300', text: `${quakes.data.value.count24h} earthquakes in last 24h · USGS` });
   if (moon.data?.value)
-    items.push({ icon: Sparkles, color: 'text-cyan-200', text: `Moon · ${moon.data.value.phaseName} · ${Math.round(moon.data.value.illumination * 100)}% illuminated` });
+    items.push({ icon: Sparkles, color: 'text-stone-200', text: `Moon · ${moon.data.value.phaseName} · ${Math.round(moon.data.value.illumination * 100)}% illuminated` });
 
   const display = items.length > 0
     ? items
     : [{ icon: Radio, color: 'text-white/60', text: 'Connecting to live feeds…' } as TickerItem];
 
   return (
-    <section className="relative border-y border-[#a020f0]/30 bg-black/80 backdrop-blur-xl overflow-hidden">
+    <section className="relative border-y border-[#9B1C31]/30 bg-black/80 backdrop-blur-xl overflow-hidden">
       <div className="flex items-center">
-        <div className="shrink-0 px-4 py-2.5 bg-gradient-to-r from-[#a020f0]/40 to-transparent border-r border-[#a020f0]/30 flex items-center gap-2">
+        <div className="shrink-0 px-4 py-2.5 bg-gradient-to-r from-[#9B1C31]/40 to-transparent border-r border-[#9B1C31]/30 flex items-center gap-2">
           <span className="relative flex w-2 h-2">
-            <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
-            <span className="relative rounded-full w-2 h-2 bg-emerald-400" />
+            <span className="absolute inset-0 rounded-full bg-amber-400 animate-ping opacity-75" />
+            <span className="relative rounded-full w-2 h-2 bg-amber-400" />
           </span>
-          <span className="text-[10px] uppercase tracking-[3px] text-emerald-300 font-bold">Live Transmissions</span>
+          <span className="text-[10px] uppercase tracking-[3px] text-amber-300 font-bold">Live Transmissions</span>
         </div>
         <div className="flex-1 overflow-hidden py-2.5">
           <div className="flex gap-10 whitespace-nowrap animate-[ticker_60s_linear_infinite]">
@@ -1016,8 +1016,8 @@ function TransmissionsTicker() {
 function SectionHeading({ icon: Icon, label, sub }: { icon: typeof Sun; label: string; sub: string }) {
   return (
     <div className="flex items-center gap-3 mb-4">
-      <div className="w-9 h-9 rounded-md border border-[#a020f0]/40 bg-[#a020f0]/15 flex items-center justify-center shadow-[0_0_18px_-2px_rgba(160,32,240,0.5)]">
-        <Icon className="w-4 h-4 text-[#c77dff]" />
+      <div className="w-9 h-9 rounded-md border border-[#9B1C31]/40 bg-[#9B1C31]/15 flex items-center justify-center shadow-[0_0_18px_-2px_rgba(155,28,49,0.5)]">
+        <Icon className="w-4 h-4 text-[#D4AF5A]" />
       </div>
       <div>
         <h2 className="text-sm sm:text-base font-black text-white uppercase tracking-[3px]" style={{ fontFamily: '"Cinzel", serif' }}>
@@ -1025,7 +1025,7 @@ function SectionHeading({ icon: Icon, label, sub }: { icon: typeof Sun; label: s
         </h2>
         <div className="text-[10px] uppercase tracking-[2px] text-white/45">{sub}</div>
       </div>
-      <div className="flex-1 h-px bg-gradient-to-r from-[#a020f0]/40 via-[#a020f0]/10 to-transparent" />
+      <div className="flex-1 h-px bg-gradient-to-r from-[#9B1C31]/40 via-[#9B1C31]/10 to-transparent" />
     </div>
   );
 }
@@ -1054,8 +1054,8 @@ function QuickStartRail() {
       label: 'Live Earth Pulse',
       detail: 'Explore planetary activity and signals',
       icon: Activity,
-      tone: 'border-cyan-300/30 from-cyan-950/40 hover:border-cyan-200/70',
-      iconTone: 'text-cyan-200 bg-cyan-300/10',
+      tone: 'border-stone-300/30 from-stone-950/40 hover:border-stone-200/70',
+      iconTone: 'text-stone-200 bg-stone-300/10',
     },
   ];
 
@@ -1064,14 +1064,14 @@ function QuickStartRail() {
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-3">
           <span className="text-[10px] uppercase tracking-[3px] text-white/55">Choose your first signal</span>
-          <span className="h-px flex-1 bg-gradient-to-r from-[#ffd700]/35 to-transparent" />
+          <span className="h-px flex-1 bg-gradient-to-r from-[#D4AF5A]/35 to-transparent" />
         </div>
         <div className="grid gap-3 sm:grid-cols-3">
           {paths.map((path, index) => (
             <Link
               key={path.to}
               to={path.to}
-              className={`group flex min-w-0 items-center gap-3 rounded-xl border bg-gradient-to-br ${path.tone} to-black/65 p-4 backdrop-blur-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_35px_-20px_rgba(255,215,0,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#fde68a]`}
+              className={`group flex min-w-0 items-center gap-3 rounded-xl border bg-gradient-to-br ${path.tone} to-black/65 p-4 backdrop-blur-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_35px_-20px_rgba(212,175,90,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E5C77D]`}
             >
               <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 ${path.iconTone}`}>
                 <path.icon className="h-5 w-5" aria-hidden="true" />
@@ -1080,7 +1080,7 @@ function QuickStartRail() {
                 <span className="block text-[11px] font-bold uppercase tracking-[1.5px] text-white/90">{path.label}</span>
                 <span className="mt-1 block text-xs leading-relaxed text-white/55">{path.detail}</span>
               </span>
-              <ChevronRight className="h-4 w-4 shrink-0 text-white/35 transition-transform group-hover:translate-x-1 group-hover:text-[#fde68a]" aria-hidden="true" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-white/35 transition-transform group-hover:translate-x-1 group-hover:text-[#E5C77D]" aria-hidden="true" />
             </Link>
           ))}
         </div>
@@ -1100,15 +1100,15 @@ export function TempleObservatoryPage() {
   const flareOk = flareLive.data?.ok ?? false;
 
   return (
-    <div className="relative min-h-screen text-white" style={{ background: 'radial-gradient(ellipse at top, #1a1038 0%, #0a0a1f 45%, #05030d 100%)' }}>
+    <div className="relative min-h-screen text-white" style={{ background: 'radial-gradient(ellipse at top, #20191B 0%, #09090B 48%, #050506 100%)' }}>
       {/* Cinematic backdrop — first viewport only */}
       <div className="absolute inset-x-0 top-0 h-[100vh] z-0 pointer-events-none">
         <img src={heroBg} alt="" className="w-full h-full object-cover opacity-35" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_20%,rgba(5,3,13,0.85)_80%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#05030d] to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_20%,rgba(9,9,11,0.85)_80%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#09090B] to-transparent" />
         {/* Drifting nebula tints */}
-        <div className="absolute -top-32 -left-32 w-[60vw] h-[60vw] rounded-full bg-[#a020f0]/20 blur-3xl animate-[cosmic-pulse_8s_ease-in-out_infinite]" />
-        <div className="absolute top-1/3 -right-32 w-[50vw] h-[50vw] rounded-full bg-cyan-500/10 blur-3xl animate-[cosmic-pulse_11s_ease-in-out_infinite]" />
+        <div className="absolute -top-32 -left-32 w-[60vw] h-[60vw] rounded-full bg-[#9B1C31]/20 blur-3xl animate-[cosmic-pulse_8s_ease-in-out_infinite]" />
+        <div className="absolute top-1/3 -right-32 w-[50vw] h-[50vw] rounded-full bg-stone-500/10 blur-3xl animate-[cosmic-pulse_11s_ease-in-out_infinite]" />
       </div>
 
       {/* Particle drift (cheap CSS dots) */}
@@ -1133,12 +1133,12 @@ export function TempleObservatoryPage() {
       <div className="relative z-10">
         <TopNav kp={kp} />
         {/* Mobile realm strip */}
-        <nav className="lg:hidden flex gap-2 overflow-x-auto px-3 py-2 border-b border-[#a020f0]/20 bg-[#0a0a1f]/80 backdrop-blur-xl scrollbar-none">
+        <nav className="lg:hidden flex gap-2 overflow-x-auto px-3 py-2 border-b border-[#9B1C31]/20 bg-[#09090B]/80 backdrop-blur-xl scrollbar-none">
           {SIDE_ITEMS.map((item) => (
             <Link
               key={item.label}
               to={item.to}
-              className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-[2px] text-white/80 hover:border-[#ffd700]/50 hover:text-[#fde68a] transition-colors"
+              className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-[2px] text-white/80 hover:border-[#D4AF5A]/50 hover:text-[#E5C77D] transition-colors"
             >
               <item.icon className={`w-3.5 h-3.5 ${item.tone}`} />
               {item.label}
@@ -1149,6 +1149,18 @@ export function TempleObservatoryPage() {
           <Sidebar />
           <main className="flex-1 min-w-0">
             <Hero kp={kp} kpOk={kpOk} flareClass={flareClass} flareOk={flareOk} utc={utc} />
+            <section aria-labelledby="observatory-principle" className="relative px-4 sm:px-8 py-12 sm:py-16">
+              <div className="max-w-4xl mx-auto rounded-2xl border border-[#D4AF5A]/25 bg-[#141418]/90 px-6 py-9 sm:px-10 sm:py-12 text-center shadow-[0_18px_70px_-42px_rgba(155,28,49,0.45)]">
+                <div className="text-[10px] uppercase tracking-[4px] text-[#D4AF5A] mb-4">The Principle of the Observatory</div>
+                <h2 id="observatory-principle" className="font-semibold text-2xl sm:text-4xl leading-tight text-[#F4F1EB]" style={{ fontFamily: '"Cinzel", "Cormorant Garamond", serif' }}>
+                  No question is off limits by default. No claim is true by default. Follow the evidence.
+                </h2>
+                <div className="w-16 h-px bg-[#D4AF5A] mx-auto my-5" />
+                <p className="max-w-3xl mx-auto text-sm sm:text-base leading-relaxed text-[#AAA6A1]">
+                  Curiosity begins the investigation. Evidence shapes the conclusion. Every extraordinary claim deserves careful examination, and every conclusion remains open to revision when better evidence emerges.
+                </p>
+              </div>
+            </section>
             <QuickStartRail />
             <ActivityPanels />
             <LiveCosmicFeed utc={utc} />
@@ -1156,6 +1168,29 @@ export function TempleObservatoryPage() {
             <SkyTrackerPanel />
             <WeatherStormPanel />
             <CorePortals />
+            <section aria-labelledby="research-standard" className="relative px-4 sm:px-8 py-10 sm:py-14">
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center max-w-2xl mx-auto mb-7">
+                  <div className="text-[10px] uppercase tracking-[4px] text-[#D4AF5A] mb-3">The Research Standard</div>
+                  <h2 id="research-standard" className="text-2xl sm:text-3xl text-[#F4F1EB]">Curiosity without credulity.</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-[#AAA6A1]">A good investigation follows the evidence, including when it challenges our favorite explanation.</p>
+                </div>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {[
+                    { title: 'Source the claim', body: 'Trace claims to original documents, direct observations, primary research, and credible records.' },
+                    { title: 'Separate fact from interpretation', body: 'Distinguish established facts from testimony, disputed information, hypotheses, and speculation.' },
+                    { title: 'Test alternatives', body: 'Consider ordinary explanations, methodological limits, conflicting evidence, and competing interpretations.' },
+                    { title: 'Update the record', body: 'Correct errors transparently and revise conclusions when stronger evidence becomes available.' },
+                  ].map((item) => (
+                    <article key={item.title} className="rounded-xl border border-[#302A2C] bg-[#141418]/85 p-5 hover:border-[#D4AF5A]/40 transition-colors">
+                      <div className="w-8 h-px bg-[#D4AF5A] mb-4" />
+                      <h3 className="text-sm font-bold text-[#F4F1EB] mb-2">{item.title}</h3>
+                      <p className="text-xs leading-relaxed text-[#AAA6A1]">{item.body}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </section>
             <TheGodsReturn />
             <SdoLiveImagery utc={utc} />
             <TransmissionsTicker />
