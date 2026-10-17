@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Search, Bookmark, GitCompare, X } from 'lucide-react';
 import { ContentTrustBadge } from '@/components/ContentTrustBadge';
 import { toast } from 'sonner';
+import { isArchived, saveToArchive } from '@/lib/archive';
 
 const MYSTERY = {
   category: 'Ancient Engineering',
@@ -26,18 +27,20 @@ export function MysteryOfTheDay() {
   const [showSources, setShowSources] = useState(false);
 
   const save = () => {
-    try {
-      const saved = JSON.parse(localStorage.getItem('pantheon:saved-mysteries') ?? '[]') as string[];
-      if (saved.includes(MYSTERY.title)) {
-        toast('Already in your archive');
-        return;
-      }
-      saved.push(MYSTERY.title);
-      localStorage.setItem('pantheon:saved-mysteries', JSON.stringify(saved));
-      toast.success(`Saved · "${MYSTERY.title}"`);
-    } catch {
-      toast.error('Could not save — storage unavailable');
+    const id = 'mystery-lost-knowledge-pyramids';
+    if (isArchived(id)) {
+      toast('Already in your archive');
+      return;
     }
+    saveToArchive({
+      id,
+      type: 'investigation',
+      title: MYSTERY.title,
+      description: MYSTERY.summary,
+      href: MYSTERY.investigateRoute,
+      tags: ['ancient engineering', 'pyramids', 'mystery of the day'],
+    });
+    toast.success(`Saved · "${MYSTERY.title}"`);
   };
 
   return (
