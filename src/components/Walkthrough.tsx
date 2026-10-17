@@ -56,6 +56,20 @@ export function Walkthrough() {
     setOpen(false);
   };
 
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        localStorage.setItem(STORAGE_KEY, 'true');
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [open]);
+
   const next = () => {
     if (step < STEPS.length - 1) setStep(step + 1);
     else close();
@@ -79,6 +93,10 @@ export function Walkthrough() {
             exit={{ y: 30, scale: 0.95, opacity: 0 }}
             transition={{ type: 'spring', bounce: 0.25, duration: 0.6 }}
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="walkthrough-title"
+            aria-describedby="walkthrough-description"
             className="glass-cosmic rounded-3xl p-6 sm:p-8 max-w-md w-full border border-primary/30 relative"
           >
             <button
@@ -98,11 +116,11 @@ export function Walkthrough() {
               >
                 {current.emoji}
               </motion.div>
-              <h2 className="text-2xl font-bold text-foreground mb-3">{current.title}</h2>
-              <p className="text-muted-foreground leading-relaxed">{current.body}</p>
+              <h2 id="walkthrough-title" className="text-2xl font-bold text-foreground mb-3">{current.title}</h2>
+              <p id="walkthrough-description" className="text-muted-foreground leading-relaxed">{current.body}</p>
             </div>
 
-            <div className="flex items-center justify-center gap-1.5 mb-5">
+            <div className="flex items-center justify-center gap-1.5 mb-5" aria-hidden="true">
               {STEPS.map((_, i) => (
                 <div
                   key={i}
