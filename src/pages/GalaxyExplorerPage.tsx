@@ -185,6 +185,41 @@ export function GalaxyExplorerPage() {
         )}
       </AnimatePresence>
 
+      {/* Quick planet selector: large touch targets for mobile and desktop */}
+      <nav
+        aria-label="Choose a planet"
+        className="absolute top-[9.5rem] left-1/2 -translate-x-1/2 z-20 w-[calc(100vw-2rem)] max-w-4xl"
+      >
+        <div className="glass-cosmic rounded-xl border border-white/10 p-2 overflow-x-auto overscroll-x-contain">
+          <div className="flex w-max min-w-full items-center justify-center gap-2 sm:gap-3">
+            {planets.filter((planet) => planet.id !== 'sun').map((planet) => {
+              const isSelected = selectedPlanet?.id === planet.id;
+              return (
+                <button
+                  key={planet.id}
+                  type="button"
+                  aria-label={`Select ${planet.name}`}
+                  aria-pressed={isSelected}
+                  onClick={() => {
+                    stopTour();
+                    handleSelectPlanet(planet);
+                  }}
+                  className={`min-h-10 shrink-0 rounded-lg border px-3 py-2 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 ${
+                    isSelected
+                      ? 'bg-white/15 text-foreground border-cyan-300/70'
+                      : 'bg-black/20 text-muted-foreground border-white/10 hover:text-foreground hover:border-white/30'
+                  }`}
+                  style={isSelected ? { boxShadow: `0 0 16px ${planet.color}35` } : undefined}
+                >
+                  <span className="mr-1.5 inline-block h-2 w-2 rounded-full" style={{ backgroundColor: planet.color }} />
+                  {planet.name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+
       {/* Planet/Moon Info Panel */}
       <PlanetInfo planet={selectedPlanet} moon={selectedMoon} onClose={handleCloseInfo} />
 
