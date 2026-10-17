@@ -15,6 +15,15 @@ export function PrivacyPage() {
           server logs (IP, user agent, request paths).
         </p>
 
+        <h2>Information stored on your device</h2>
+        <p>
+          Features such as My Archive, recent searches, walkthrough dismissal, and selected
+          interface preferences may use your browser's local storage. These items stay in this
+          browser profile unless a feature explicitly sends information to a connected service.
+          They are not automatically synced across devices. Clearing this site's browser storage
+          can remove locally saved items and preferences.
+        </p>
+
         <h2>How we use it</h2>
         <p>
           Data is used solely to operate the platform — authentication, progress tracking,
