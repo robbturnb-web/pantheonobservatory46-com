@@ -23,26 +23,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
       - name: Set up Bun for the sitemap build script
         uses: oven-sh/setup-bun@v2
 
       - name: Install locked dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Build production site
-        run: npm run build
+        run: bun run build
 
       - name: Run ESLint
-        run: npm run lint
+        run: bun run lint
 
       - name: Install Chromium for Playwright
-        run: npx playwright install --with-deps chromium
+        run: bunx playwright install --with-deps chromium
 
       - name: Test Galaxy Explorer on desktop and mobile
-        run: npx playwright test --config=playwright.ci.config.ts
+        run: bunx playwright test --config=playwright.ci.config.ts
