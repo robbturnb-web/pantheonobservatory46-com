@@ -147,7 +147,7 @@ export function LivePanel({
           className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/5 px-2.5 py-1 text-[10px] uppercase tracking-[2px] text-foreground/80 hover:border-primary/50 hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors min-h-[28px]"
         >
           <RefreshCw className={cn('w-3 h-3', refreshing && 'animate-spin')} />
-          {onRefresh ? 'Refresh' : 'Check Source'}
+          {refreshing ? 'Checking…' : onRefresh ? 'Refresh' : 'Check Source'}
         </button>
       </footer>
     </motion.article>
