@@ -27,47 +27,47 @@ export function PantheonWordmark({ size = 'md', className = '', short = false }:
     >
       <span
         style={{
-          backgroundImage: 'linear-gradient(135deg, #34d399 0%, #10b981 100%)',
+          backgroundImage: 'linear-gradient(135deg, #9B1C31 0%, #721426 100%)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           color: 'transparent',
-          textShadow: '0 0 20px rgba(16,185,129,0.25)',
+          textShadow: '0 0 20px rgba(155,28,49,0.25)',
         }}
       >
         Pan
       </span>
       <span
         style={{
-          backgroundImage: 'linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 100%)',
+          backgroundImage: 'linear-gradient(135deg, #D4AF5A 0%, #C0C0C8 100%)',
           WebkitBackgroundClip: 'text',
           backgroundClip: 'text',
           color: 'transparent',
-          textShadow: '0 0 20px rgba(139,92,246,0.25)',
+          textShadow: '0 0 20px rgba(212,175,90,0.22)',
         }}
       >
         theon
       </span>
       {!short && (
         <>
-          <span className="opacity-40 mx-1.5" style={{ color: '#a78bfa' }}>·</span>
+          <span className="opacity-40 mx-1.5" style={{ color: '#D4AF5A' }}>·</span>
           <span
             style={{
-              backgroundImage: 'linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 100%)',
+              backgroundImage: 'linear-gradient(135deg, #D4AF5A 0%, #C0C0C8 100%)',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
               color: 'transparent',
-              textShadow: '0 0 20px rgba(139,92,246,0.25)',
+              textShadow: '0 0 20px rgba(212,175,90,0.22)',
             }}
           >
             Observ
           </span>
           <span
             style={{
-              backgroundImage: 'linear-gradient(135deg, #fde68a 0%, #fbbf24 100%)',
+              backgroundImage: 'linear-gradient(135deg, #E5C77D 0%, #D4AF5A 100%)',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
               color: 'transparent',
-              textShadow: '0 0 20px rgba(251,191,36,0.3)',
+              textShadow: '0 0 20px rgba(212,175,90,0.25)',
             }}
           >
             atory
