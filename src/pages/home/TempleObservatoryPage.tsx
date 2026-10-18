@@ -61,7 +61,7 @@ const TABS: { to: string; label: string }[] = [
   { to: '/uap',           label: 'Disclosure' },
   { to: '/gods',          label: 'Mythology' },
   { to: '/consciousness', label: 'Consciousness' },
-  { to: '/galaxy',        label: 'Observatory' },
+  { to: '/observatory',   label: 'Observatory' },
   { to: '/echo',          label: 'Echo AI' },
 ];
 
@@ -118,9 +118,9 @@ function TopNav({ kp }: { kp: number | null }) {
               {kp == null ? '—' : kp.toFixed(1)}
             </span>
           </div>
-          <button className="hidden md:flex items-center gap-1 px-2 py-1 rounded-md border border-white/10 text-[10px] uppercase tracking-[2px] text-white/70 hover:text-white hover:border-white/30 transition-colors">
+          <Link to="/live-feeds" aria-label="Open live feeds" className="hidden md:flex items-center gap-1 px-2 py-1 rounded-md border border-white/10 text-[10px] uppercase tracking-[2px] text-white/70 hover:text-white hover:border-white/30 transition-colors">
             <Radio className="w-3 h-3" /> Feed
-          </button>
+          </Link>
           <button className="w-8 h-8 flex items-center justify-center rounded-md border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-colors">
             <Volume2 className="w-3.5 h-3.5" />
           </button>
@@ -146,7 +146,7 @@ const SIDE_ITEMS: SideItem[] = [
   { to: '/gods',            label: 'Mythology',     icon: Mountain,     tone: 'text-[#D4AF5A]',     glow: 'shadow-[0_0_16px_-2px_rgba(212,175,90,0.7)]' },
   { to: '/consciousness',   label: 'Conscious',     icon: Brain,        tone: 'text-stone-300',    glow: '' },
   { to: '/frequencies',     label: 'Frequency',     icon: RadioIcon,    tone: 'text-stone-300',      glow: '' },
-  { to: '/galaxy',          label: 'Observatory',   icon: Satellite,    tone: 'text-[#D4AF5A]',     glow: 'shadow-[0_0_16px_-2px_rgba(155,28,49,0.7)]' },
+  { to: '/observatory',     label: 'Observatory',   icon: Satellite,    tone: 'text-[#D4AF5A]',     glow: 'shadow-[0_0_16px_-2px_rgba(155,28,49,0.7)]' },
   { to: '/earth-pulse',     label: 'Earth Pulse',   icon: Globe,        tone: 'text-stone-300',      glow: '' },
   { to: '/echo',            label: 'Echo AI',       icon: Bot,          tone: 'text-stone-300',      glow: 'shadow-[0_0_16px_-2px_rgba(192,192,200,0.7)]' },
   { to: '/profile',         label: 'Settings',      icon: Settings,     tone: 'text-white/70',      glow: '' },
@@ -280,8 +280,8 @@ function PantheonCompass() {
 
       {/* Center sigil */}
       <Link
-        to="/gods"
-        aria-label="Enter the Pantheon"
+        to="/observatory"
+        aria-label="Enter Observatory 46"
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-square rounded-full overflow-hidden group focus-visible:outline-none"
       >
         <div className="absolute inset-0 rounded-full bg-black/70 shadow-[0_0_80px_-10px_rgba(212,175,90,0.55),0_0_120px_-20px_rgba(155,28,49,0.6)] group-hover:shadow-[0_0_120px_-10px_rgba(212,175,90,0.9),0_0_180px_-20px_rgba(155,28,49,0.9)] transition-shadow duration-500" />
@@ -294,7 +294,7 @@ function PantheonCompass() {
           className="relative w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-700"
         />
         <span className="absolute inset-x-0 -bottom-1 text-center text-[9px] uppercase tracking-[5px] text-[#D4AF5A]/0 group-hover:text-[#D4AF5A]/90 transition-colors">
-          Enter Pantheon
+          Enter Observatory 46
         </span>
       </Link>
 
