@@ -1,20 +1,13 @@
 /**
- * sourceHealthService — link-health architecture.
+ * sourceHealthService — user-reported link health and verification status.
  *
- * ⚠️ Browser apps cannot reliably check arbitrary external URLs due to CORS,
- * so this module is split into two halves:
+ * Browser apps cannot reliably check arbitrary external URLs because of CORS.
+ * Actual URL and YouTube availability checks must run server-side (for example
+ * in a Supabase Edge Function or scheduled GitHub Action) and persist results.
  *
- *   1. Frontend (now): track user-reported broken links in localStorage so we
- *      can immediately show a "Needs Review" pill on every offending source.
- *
- *   2. Backend (later): the real scheduled health checker should run on a
- *      Supabase Edge Function, GitHub Action cron, Netlify Function, or
- *      Vercel Cron. From a server you can issue HEAD/GET requests with no
- *      CORS limits, hit the YouTube Data API for video availability, and
- *      write results back to a `source_health` table that the frontend reads.
- *
- * The function signatures below MATCH the future backend so swapping the
- * implementation is a one-file change.
+ * Until that backend is configured, verification functions return an explicit
+ * "unknown / not verified" result. They must never report success without
+ * making a real check.
  */
 
 const STORAGE_KEY = 'pantheon.brokenSources.v1';
@@ -51,7 +44,7 @@ export function markSourceAsBroken(url: string): void {
   writeStore(store);
 }
 
-/** Mark a URL as verified — clears any prior broken report. */
+/** Clear a user report only after an actual verification has succeeded. */
 export function markSourceAsVerified(url: string): void {
   writeStore(readStore().filter((r) => r.url !== url));
 }
@@ -66,28 +59,58 @@ export function listReportedBroken(): BrokenRecord[] {
   return readStore();
 }
 
-// ─────────────────────────────────────────────────────────────────────
-// Backend-shaped stubs. Replace with real fetch when a server is wired.
-// ─────────────────────────────────────────────────────────────────────
+export interface UrlHealthResult {
+  /** null means no real check has been performed; it does not mean healthy. */
+  ok: boolean | null;
+  status?: number;
+  checkedAt: string;
+  verified: boolean;
+  reason?: string;
+}
 
-/**
- * checkSingleUrl — perform a HEAD/GET against a URL and return its status.
- * Must run server-side; the browser cannot bypass CORS reliably.
- */
-export async function checkSingleUrl(_url: string): Promise<{ ok: boolean; status?: number; checkedAt: string }> {
-  return { ok: true, checkedAt: new Date().toISOString() };
+export interface YouTubeHealthResult {
+  /** null means the YouTube Data API has not been queried. */
+  available: boolean | null;
+  /** null means embedding permission has not been queried. */
+  embeddable: boolean | null;
+  checkedAt: string;
+  verified: boolean;
+  reason?: string;
 }
 
 /**
- * checkYouTubeVideo — hit the YouTube Data API (v3) `videos.list` endpoint
- * with the given videoId and confirm it is still available & embeddable.
- * Requires YOUTUBE_API_KEY on the server.
+ * Check a URL's health.
+ *
+ * This frontend module deliberately does not issue a browser fetch: CORS
+ * failures are not evidence that a source is down. Wire this to a server-side
+ * checker before returning a positive or negative health verdict.
  */
-export async function checkYouTubeVideo(_videoId: string): Promise<{ available: boolean; embeddable: boolean }> {
-  return { available: true, embeddable: true };
+export async function checkSingleUrl(_url: string): Promise<UrlHealthResult> {
+  return {
+    ok: null,
+    checkedAt: new Date().toISOString(),
+    verified: false,
+    reason: 'Server-side URL health checker is not configured; status is unknown.',
+  };
+}
+
+/**
+ * Check YouTube availability and embedding permission.
+ *
+ * Requires a server-side YouTube Data API v3 videos.list request using
+ * YOUTUBE_API_KEY. Never infer availability from a syntactically valid ID.
+ */
+export async function checkYouTubeVideo(_videoId: string): Promise<YouTubeHealthResult> {
+  return {
+    available: null,
+    embeddable: null,
+    checkedAt: new Date().toISOString(),
+    verified: false,
+    reason: 'YouTube Data API verification is not configured; status is unknown.',
+  };
 }
 
 /** Convenience wrapper that classifies an "official" source response. */
-export async function checkOfficialSource(url: string) {
+export async function checkOfficialSource(url: string): Promise<UrlHealthResult> {
   return checkSingleUrl(url);
 }
