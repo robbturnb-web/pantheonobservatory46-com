@@ -8,46 +8,46 @@ import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
 import { SEO } from '@/components/SEO';
 import { XP_VALUES } from '@/lib/xp-events';
+import { Button } from '@/components/ui/button';
+import { memberRedirect, requiresEmailConfirmation } from '@/lib/auth-navigation';
 
 type Mode = 'signin' | 'signup' | 'forgot';
 
 export function AuthPage() {
   const [searchParams] = useSearchParams();
-  const initialMode = (searchParams.get('mode') as Mode) || 'signin';
+  const requestedMode = searchParams.get('mode');
+  const initialMode: Mode = requestedMode === 'signup' || requestedMode === 'forgot' ? requestedMode : 'signin';
   const [mode, setMode] = useState<Mode>(initialMode);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
+  const [confirmationPending, setConfirmationPending] = useState(false);
+  const [formError, setFormError] = useState('');
   const [oauthLoading, setOauthLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Validate and resolve post-auth redirect target (in-app paths only)
-  const rawRedirect = searchParams.get('redirect');
-  const redirectTo =
-    rawRedirect && rawRedirect.startsWith('/') && !rawRedirect.startsWith('//')
-      ? rawRedirect
-      : '/echoverse';
+  const redirectTo = memberRedirect(searchParams.get('redirect'));
 
-  // Redirect if already signed in
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) navigate(redirectTo, { replace: true });
-    });
-
+    let active = true;
+    const verifyUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (active && user) navigate(redirectTo, { replace: true });
+    };
     const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) navigate(redirectTo, { replace: true });
+      if (session) setTimeout(() => { if (active) void verifyUser(); }, 0);
     });
-
-    return () => subscription.subscription.unsubscribe();
+    void verifyUser();
+    return () => { active = false; subscription.subscription.unsubscribe(); };
   }, [navigate, redirectTo]);
 
   const handleOAuth = async (provider: 'google' | 'apple') => {
     setOauthLoading(true);
     try {
       const result = await lovable.auth.signInWithOAuth(provider, {
-        redirect_uri: window.location.origin,
+        redirect_uri: `${window.location.origin}/auth?redirect=${encodeURIComponent(redirectTo)}`,
       });
       if (result.error) {
         toast({ title: `${provider === 'google' ? 'Google' : 'Apple'} sign-in failed`, description: String(result.error), variant: 'destructive' });
@@ -64,17 +64,20 @@ export function AuthPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setFormError('');
     try {
       if (mode === 'signup') {
         const { data, error } = await supabase.auth.signUp({
-          email,
+          email: email.trim(),
           password,
           options: {
-            data: { username: username || 'Starseed' },
+            data: { username: username.trim() || 'Starseed' },
             emailRedirectTo: window.location.origin,
           },
         });
         if (error) throw error;
+        setConfirmationPending(requiresEmailConfirmation(data.session));
+        setPassword('');
         // Award sign-up XP via the secured RPC if a session was issued (auto-confirm flow).
         // Direct table writes are no longer allowed; award_xp() is SECURITY DEFINER and
         // performs idempotent, bounded XP grants.
@@ -93,7 +96,7 @@ export function AuthPage() {
             : 'We sent you a verification link. Click it to enter the Echoverse.',
         });
       } else if (mode === 'signin') {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
         if (error) throw error;
         toast({ title: 'Welcome back, Starseed' });
       } else if (mode === 'forgot') {
@@ -108,6 +111,7 @@ export function AuthPage() {
         setMode('signin');
       }
     } catch (err: unknown) {
+      setFormError(err instanceof Error ? err.message : 'Unable to connect. Please try again.');
       toast({ title: 'Error', description: err instanceof Error ? err.message : 'Unknown error', variant: 'destructive' });
     } finally {
       setLoading(false);
@@ -151,21 +155,28 @@ export function AuthPage() {
               <Eye className="w-7 h-7 text-primary" />
             </div>
             <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
-              {mode === 'signin' && 'Welcome back'}
-              {mode === 'signup' && 'Join the Observatory'}
+              {confirmationPending ? 'Check your email' : mode === 'signin' && 'Welcome back'}
+              {!confirmationPending && mode === 'signup' && 'Join the Observatory'}
               {mode === 'forgot' && 'Reset your password'}
             </h1>
             <p className="text-sm text-muted-foreground mt-1.5">
               {mode === 'signin' && 'Sign in to track your XP and join the Echoverse.'}
-              {mode === 'signup' && 'Track your discoveries. Earn ranks. Chat with starseeds.'}
+              {mode === 'signup' && (confirmationPending ? 'Confirm your email to activate your Pantheon account.' : 'Track your discoveries. Earn ranks. Join the community.')}
               {mode === 'forgot' && 'Enter your email and we will send you a reset link.'}
             </p>
           </div>
 
+          {confirmationPending && (
+            <div role="status" className="space-y-4 text-sm text-muted-foreground break-words">
+              <p>A confirmation link was requested for <strong className="text-foreground">{email}</strong>. Check your inbox and spam folder.</p>
+              <Button variant="outline" className="w-full" onClick={() => { setConfirmationPending(false); setMode('signin'); }}>Back to sign in</Button>
+            </div>
+          )}
+          {!confirmationPending && <>
           {/* Tabs */}
           {mode !== 'forgot' && (
             <div className="flex bg-secondary/40 rounded-xl p-1 mb-6">
-              <button
+              <Button
                 type="button"
                 onClick={() => setMode('signin')}
                 className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-colors ${
@@ -173,8 +184,8 @@ export function AuthPage() {
                 }`}
               >
                 Sign In
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
                 onClick={() => setMode('signup')}
                 className={`flex-1 py-2 text-sm font-semibold rounded-lg transition-colors ${
@@ -182,18 +193,18 @@ export function AuthPage() {
                 }`}
               >
                 Sign Up
-              </button>
+              </Button>
             </div>
           )}
 
           {/* Google OAuth */}
           {mode !== 'forgot' && (
             <>
-              <button
+              <Button
                 type="button"
                 onClick={handleGoogle}
                 disabled={oauthLoading || loading}
-                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-white text-black font-semibold hover:bg-white/90 transition-colors disabled:opacity-50 mb-4"
+                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/90 transition-colors disabled:opacity-50 mb-4"
               >
                 <svg className="w-5 h-5" viewBox="0 0 48 48" aria-hidden="true">
                   <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.5 6.1 29.5 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z" />
@@ -202,19 +213,19 @@ export function AuthPage() {
                   <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.2 5.7l6.4 5.4C41.3 36.5 44 31 44 24c0-1.3-.1-2.3-.4-3.5z" />
                 </svg>
                 {oauthLoading ? 'Redirecting…' : 'Continue with Google'}
-              </button>
+              </Button>
 
-              <button
+              <Button
                 type="button"
                 onClick={handleApple}
                 disabled={oauthLoading || loading}
-                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-black text-white font-semibold hover:bg-black/90 transition-colors disabled:opacity-50 mb-4 border border-white/10"
+                className="w-full flex items-center justify-center gap-3 py-3 rounded-xl bg-secondary text-secondary-foreground font-semibold hover:bg-secondary/90 transition-colors disabled:opacity-50 mb-4 border border-border"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M16.365 1.43c0 1.14-.413 2.21-1.24 3.21-1 1.19-2.22 1.88-3.55 1.78-.02-1.12.45-2.27 1.27-3.22.96-1.11 2.36-1.83 3.52-1.77zM20.5 17.27c-.59 1.34-.87 1.94-1.63 3.13-1.06 1.65-2.55 3.71-4.39 3.73-1.64.02-2.06-1.07-4.28-1.06-2.22.01-2.69 1.08-4.33 1.06-1.84-.02-3.25-1.88-4.31-3.53C-1.55 17.06-1.92 11.32 1.74 8.59c1.3-.96 3-1.55 4.5-1.55 1.84 0 3 1.01 4.52 1.01 1.47 0 2.36-1.02 4.49-1.02 1.3 0 2.69.71 3.68 1.93-3.23 1.77-2.71 6.39.57 8.31z" />
                 </svg>
                 {oauthLoading ? 'Redirecting…' : 'Continue with Apple'}
-              </button>
+              </Button>
 
 
               <div className="flex items-center gap-3 mb-4">
@@ -225,10 +236,14 @@ export function AuthPage() {
             </>
           )}
 
+          {formError && <p role="alert" className="text-sm text-destructive mb-4 break-words">{formError}</p>}
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode === 'signup' && (
               <Field icon={User} label="Display name">
                 <Input
+                  id="display-name"
+                  autoComplete="nickname"
+                  maxLength={80}
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Your cosmic name"
@@ -239,6 +254,8 @@ export function AuthPage() {
 
             <Field icon={Mail} label="Email">
               <Input
+                id="email"
+                autoComplete="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -251,6 +268,8 @@ export function AuthPage() {
             {mode !== 'forgot' && (
               <Field icon={Lock} label="Password">
                 <Input
+                  id="password"
+                  autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -263,16 +282,16 @@ export function AuthPage() {
             )}
 
             {mode === 'signin' && (
-              <button
+              <Button
                 type="button"
                 onClick={() => setMode('forgot')}
                 className="text-xs text-primary hover:underline ml-auto block"
               >
                 Forgot password?
-              </button>
+              </Button>
             )}
 
-            <button
+            <Button
               type="submit"
               disabled={loading || oauthLoading}
               className="w-full py-3 bg-primary text-primary-foreground rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors disabled:opacity-50"
@@ -287,18 +306,19 @@ export function AuthPage() {
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
-            </button>
+            </Button>
 
             {mode === 'forgot' && (
-              <button
+              <Button
                 type="button"
                 onClick={() => setMode('signin')}
                 className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 ← Back to sign in
-              </button>
+              </Button>
             )}
           </form>
+          </>}
 
           {mode === 'signup' && (
             <p className="text-[11px] text-muted-foreground text-center mt-5 leading-relaxed">
@@ -322,7 +342,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="text-xs text-muted-foreground mb-1.5 block">{label}</label>
+      <label htmlFor={label === 'Display name' ? 'display-name' : label.toLowerCase()} className="text-xs text-muted-foreground mb-1.5 block">{label}</label>
       <div className="relative">
         <Icon className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
         {children}

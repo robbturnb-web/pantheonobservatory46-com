@@ -4,6 +4,7 @@ import { PantheonDailyBrief } from '@/components/home/PantheonDailyBrief';
 import { MysteryOfTheDay } from '@/components/home/MysteryOfTheDay';
 import { PantheonPathTeaser } from '@/components/home/PantheonPathTeaserHome';
 import { SourceIntegrityPanel } from '@/components/SourceIntegrityPanel';
+import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Radio, Sparkles } from 'lucide-react';
 
@@ -39,6 +40,18 @@ export function HomePage() {
       />
 
       <TempleObservatoryPage />
+      <section className="px-4 sm:px-6 py-8 border-y border-border bg-background/70">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+          <div>
+            <h2 className="font-display text-2xl text-foreground">Join Pantheon Observatory 46</h2>
+            <p className="text-sm text-muted-foreground mt-2">Your discoveries. Your research trail. Your place in the Observatory.</p>
+          </div>
+          <div className="flex flex-wrap gap-3 shrink-0">
+            <Button asChild><Link to="/auth?mode=signup&redirect=/profile">Join Pantheon <ArrowRight /></Link></Button>
+            <Button asChild variant="outline"><Link to="/auth?mode=signin&redirect=/profile">Sign in</Link></Button>
+          </div>
+        </div>
+      </section>
       <PantheonDailyBrief />
       <MysteryOfTheDay />
       <PantheonPathTeaser />
