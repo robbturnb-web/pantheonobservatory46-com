@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 import {
@@ -183,153 +183,6 @@ function Sidebar() {
   );
 }
 
-/* ───────────── KP GAUGE ───────────── */
-function KpGauge({ kp }: { kp: number | null }) {
-  // Semi-circle gauge 0..9 → arc 180deg from -180 to 0
-  const max = 9;
-  const ratio = kp == null ? 0 : Math.min(Math.max(kp / max, 0), 1);
-  const radius = 110;
-  const circumference = Math.PI * radius;
-  const dash = circumference * ratio;
-
-  return (
-    <div className="relative w-[280px] h-[180px] mx-auto">
-      <svg viewBox="0 0 280 180" className="w-full h-full overflow-visible">
-        <defs>
-          <linearGradient id="kpArc" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%"  stopColor="#9B1C31" />
-            <stop offset="55%" stopColor="#D4AF5A" />
-            <stop offset="80%" stopColor="#fbbf24" />
-            <stop offset="100%" stopColor="#E5C77D" />
-          </linearGradient>
-          <filter id="kpGlow">
-            <feGaussianBlur stdDeviation="3" />
-          </filter>
-        </defs>
-        {/* Track */}
-        <path
-          d={`M 30 150 A ${radius} ${radius} 0 0 1 250 150`}
-          stroke="rgba(255,255,255,0.08)"
-          strokeWidth="14"
-          fill="none"
-          strokeLinecap="round"
-        />
-        {/* Active arc */}
-        <path
-          d={`M 30 150 A ${radius} ${radius} 0 0 1 250 150`}
-          stroke="url(#kpArc)"
-          strokeWidth="14"
-          fill="none"
-          strokeLinecap="round"
-          strokeDasharray={`${dash} ${circumference}`}
-          filter="url(#kpGlow)"
-        />
-        {/* Tick marks */}
-        {Array.from({ length: 10 }).map((_, i) => {
-          const angle = -180 + (i / 9) * 180;
-          const a = (angle * Math.PI) / 180;
-          const x1 = 140 + Math.cos(a) * (radius + 12);
-          const y1 = 150 + Math.sin(a) * (radius + 12);
-          const x2 = 140 + Math.cos(a) * (radius + 18);
-          const y2 = 150 + Math.sin(a) * (radius + 18);
-          return (
-            <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
-              stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" />
-          );
-        })}
-      </svg>
-      {/* Center readout */}
-      <div className="absolute inset-x-0 bottom-3 text-center">
-        <div className="text-[9px] uppercase tracking-[3px] text-white/50">
-          {kp == null ? 'Geomagnetic Index · Connecting…' : 'Geomagnetic Index · NOAA SWPC'}
-        </div>
-        <div className="text-5xl font-black bg-gradient-to-r from-[#D4AF5A] to-[#E5C77D] bg-clip-text text-transparent leading-none mt-1">
-          {kp == null ? 'Kp —' : `Kp ${kp.toFixed(1)}`}
-        </div>
-      </div>
-      {/* End labels */}
-      <div className="absolute left-0 bottom-0 text-[9px] text-white/40 font-mono">0</div>
-      <div className="absolute right-0 bottom-0 text-[9px] text-white/40 font-mono">9</div>
-    </div>
-  );
-}
-
-/* ───────────── PANTHEON COMPASS — 46 sigil + 12 gods ───────────── */
-const COMPASS_GOD_IDS = [
-  'zeus', 'ra', 'odin', 'enki', 'thoth', 'shiva',
-  'isis', 'anubis', 'marduk', 'kali', 'freya', 'anu',
-];
-
-function PantheonCompass() {
-  const orbit = useMemo(() => {
-    return COMPASS_GOD_IDS
-      .map((id) => gods.find((g) => g.id === id))
-      .filter((g): g is typeof gods[number] => Boolean(g));
-  }, []);
-
-  return (
-    <div className="relative mx-auto aspect-square w-[min(92vw,560px)]">
-      {/* Outer rotating constellation ring */}
-      <div className="absolute inset-0 rounded-full border border-[#D4AF5A]/15 animate-[spin_120s_linear_infinite]">
-        <div className="absolute inset-3 rounded-full border border-dashed border-[#9B1C31]/25" />
-        <div className="absolute inset-8 rounded-full border border-[#C0C0C8]/10" />
-      </div>
-
-      {/* Glow halo */}
-      <div className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle,rgba(212,175,90,0.35),rgba(155,28,49,0.18)_45%,transparent_70%)] blur-2xl animate-[cosmic-pulse_6s_ease-in-out_infinite] pointer-events-none" />
-
-      {/* Center sigil */}
-      <Link
-        to="/gods"
-        aria-label="Enter the Pantheon"
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-square rounded-full overflow-hidden group focus-visible:outline-none"
-      >
-        <div className="absolute inset-0 rounded-full bg-black/70 shadow-[0_0_80px_-10px_rgba(212,175,90,0.55),0_0_120px_-20px_rgba(155,28,49,0.6)] group-hover:shadow-[0_0_120px_-10px_rgba(212,175,90,0.9),0_0_180px_-20px_rgba(155,28,49,0.9)] transition-shadow duration-500" />
-        <img
-          src={sigil46}
-          alt="Pantheon 46 sigil"
-          width={1024}
-          height={1024}
-          loading="eager"
-          className="relative w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-700"
-        />
-        <span className="absolute inset-x-0 -bottom-1 text-center text-[9px] uppercase tracking-[5px] text-[#D4AF5A]/0 group-hover:text-[#D4AF5A]/90 transition-colors">
-          Enter Pantheon
-        </span>
-      </Link>
-
-      {/* 12 god orbit nodes */}
-      {orbit.map((g, i) => {
-        const angle = (i / orbit.length) * Math.PI * 2 - Math.PI / 2;
-        const radius = 46; // % from center
-        const left = 50 + Math.cos(angle) * radius;
-        const top = 50 + Math.sin(angle) * radius;
-        return (
-          <Link
-            key={g.id}
-            to={`/gods/${g.id}`}
-            title={`${g.name} · ${g.pantheon}`}
-            className="group absolute -translate-x-1/2 -translate-y-1/2"
-            style={{ left: `${left}%`, top: `${top}%` }}
-          >
-            <div className="relative w-[10.5%] aspect-square min-w-[44px]">
-              <div className="absolute inset-0 rounded-full border border-[#D4AF5A]/40 bg-black/70 overflow-hidden shadow-[0_0_18px_-2px_rgba(212,175,90,0.5)] group-hover:shadow-[0_0_28px_-2px_rgba(212,175,90,0.95)] group-hover:border-[#D4AF5A] group-hover:scale-110 transition-all duration-300">
-                {g.image && (
-                  <img src={g.image} alt={g.name} loading="lazy" className="w-full h-full object-cover object-top" />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              </div>
-              <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1 text-[8.5px] uppercase tracking-[2px] font-bold text-[#E5C77D] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-[0_0_8px_rgba(0,0,0,0.9)]">
-                {g.name}
-              </div>
-            </div>
-          </Link>
-        );
-      })}
-    </div>
-  );
-}
-
 /* ───────────── HERO ───────────── */
 interface HeroLiveProps {
   kp: number | null;
@@ -338,105 +191,62 @@ interface HeroLiveProps {
   flareOk: boolean;
   utc: Date;
 }
-function Hero({ kp, kpOk, flareClass, flareOk, utc }: HeroLiveProps) {
-  // Derive a real "uplink" status from live source health — never a fake "nominal".
-  const okCount = (kpOk ? 1 : 0) + (flareOk ? 1 : 0);
-  const connecting = kp == null && flareClass == null;
-  const status = connecting
-    ? { label: 'Establishing Uplink', tone: 'text-stone-300', dot: 'bg-stone-400' }
-    : okCount === 2
-      ? { label: 'All Sources Verified', tone: 'text-signal-online', dot: 'bg-signal-online' }
-      : okCount === 1
-        ? { label: 'Partial Uplink', tone: 'text-amber-300', dot: 'bg-amber-400' }
-        : { label: 'Sources Offline', tone: 'text-red-300', dot: 'bg-red-400' };
+const HOME_PATHWAYS = [
+  { to: '/search', label: 'Investigate', sub: 'Search every archive and source' },
+  { to: '/disclosure', label: 'Disclosure', sub: 'Official UAP records, hearings, PURSUE' },
+  { to: '/encounters', label: 'Entities', sub: 'Witness reports and folklore, labeled' },
+  { to: '/plasma', label: 'Plasma', sub: 'Atmospheric physics vs hypotheses' },
+  { to: '/live-feeds', label: 'Live Observatory', sub: 'NOAA, NASA and USGS data' },
+  { to: '/echo', label: 'Echo', sub: 'Ask a research question' },
+];
+
+function Hero({ kp, kpOk, flareClass, flareOk }: HeroLiveProps) {
+  const navigate = useNavigate();
+  const [q, setQ] = useState('');
   return (
-    <section className="relative px-4 sm:px-8 pt-8 pb-6">
-      {/* Subtitle row */}
-      <div className="flex flex-wrap items-center justify-center gap-3 text-[10px] uppercase tracking-[3px] text-white/55 mb-3">
-        <span className={`flex items-center gap-1.5 ${status.tone}`}>
-          <span className="relative flex w-1.5 h-1.5">
-            <span className={`absolute inset-0 rounded-full ${status.dot} animate-ping opacity-75`} />
-            <span className={`relative rounded-full w-1.5 h-1.5 ${status.dot}`} />
-          </span>
-          {status.label}
-        </span>
-        <span className="hidden sm:inline">·</span>
-        <span>Realm: <span className="text-[#D4AF5A]">The Observatory</span></span>
-        <span className="hidden sm:inline">·</span>
-        <span className="font-mono text-white/70">Live Sync {utc.toISOString().slice(11, 19)} UTC</span>
-      </div>
+    <section className="relative px-4 sm:px-8 pt-10 pb-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-[11px] uppercase tracking-[3px] text-[#D4AF5A] mb-4">Pantheon Observatory 46 · Independent research archive</div>
+        <h1 className="font-semibold leading-tight text-3xl sm:text-5xl text-[#F4F1EB]" style={{ fontFamily: '"Cinzel", "Space Grotesk", serif' }}>
+          An independent archive for examining the unexplained — on the evidence.
+        </h1>
+        <p className="mt-5 max-w-3xl text-base sm:text-lg leading-relaxed text-[#C9C4BE]">
+          Pantheon collects public sources on UAP, government records, space and earth science, history, consciousness and
+          cultural traditions, and labels each one: official record, research, testimony, speculation or folklore.
+        </p>
+        <p className="mt-3 text-sm sm:text-base text-[#E5C77D]">No question off limits. No claim true by default. Follow the evidence.</p>
 
+        <form
+          role="search"
+          className="mt-7 flex gap-2 max-w-2xl"
+          onSubmit={(e) => { e.preventDefault(); navigate(q.trim() ? `/search?q=${encodeURIComponent(q.trim())}` : '/search'); }}
+        >
+          <label htmlFor="home-search" className="sr-only">Search the archive</label>
+          <input
+            id="home-search" value={q} onChange={(e) => setQ(e.target.value)}
+            placeholder="Search cases, records, people, topics…"
+            className="flex-1 min-w-0 rounded-md border border-white/15 bg-black/50 px-4 py-3 text-sm text-[#F4F1EB] placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#D4AF5A]/60"
+          />
+          <button type="submit" className="rounded-md bg-[#9B1C31] px-5 py-3 text-sm font-semibold text-[#F4F1EB] hover:bg-[#B3243B]">Investigate</button>
+        </form>
 
-      {/* Title */}
-      <h1 className="text-center font-black tracking-[1px] leading-none">
-        <span className="block text-3xl sm:text-5xl lg:text-6xl" style={{ fontFamily: '"Cinzel", "Space Grotesk", serif' }}>
-          <span className="bg-gradient-to-b from-white via-[#E5C77D] to-[#D4AF5A] bg-clip-text text-transparent" style={{ WebkitTextFillColor: 'transparent', textShadow: '0 0 40px rgba(212,175,90,0.25)' }}>
-            THE UNKNOWN IS NOT THE END OF THE SEARCH.
-          </span>
-        </span>
-      </h1>
-      <div className="text-center mt-2 text-[10px] uppercase tracking-[6px] text-white/45">
-        PANTHEON OBSERVATORY 46 · EVIDENCE-LED INQUIRY
-      </div>
-      <p className="mx-auto mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed text-white/70">
-        An evolving center for knowledge, discovery, ancient records, unexplained phenomena, and the examination of extraordinary claims. Explore the evidence, question established narratives, and investigate what remains unresolved. Every entry is labelled
-        <span className="text-[#E5C77D]"> fact</span>,
-        <span className="text-[#D4AF5A]"> theory</span>,
-        <span className="text-[#C0C0C8]"> belief</span>, or
-        <span className="text-white/85"> unexplained</span>, with sources you can check.
-      </p>
+        <nav aria-label="Research pathways" className="mt-8 grid grid-cols-2 lg:grid-cols-3 gap-2.5">
+          {HOME_PATHWAYS.map((p) => (
+            <Link key={p.to} to={p.to} className="group rounded-lg border border-white/10 bg-black/40 px-4 py-3 hover:border-[#D4AF5A]/50 transition-colors">
+              <div className="flex items-center justify-between text-sm font-semibold text-[#F4F1EB]">{p.label}<ChevronRight className="w-4 h-4 text-[#D4AF5A] group-hover:translate-x-0.5 transition-transform" /></div>
+              <div className="text-xs text-[#AAA6A1] mt-0.5">{p.sub}</div>
+            </Link>
+          ))}
+        </nav>
 
-
-      {/* Central stage: KP / Compass / CTAs */}
-      <div className="relative mt-8 grid lg:grid-cols-[260px_1fr_220px] gap-8 items-center max-w-6xl mx-auto">
-        {/* Left flank — KP gauge + flare bar */}
-        <div className="order-2 lg:order-1 flex flex-col gap-3">
-          <div className="rounded-xl border border-[#9B1C31]/30 bg-black/45 backdrop-blur-md p-3">
-            <KpGauge kp={kp} />
-            <div className="mt-2 flex items-center justify-center gap-2">
-              <Flame className="w-3 h-3 text-[#D4AF5A]" />
-              <span className="text-[10px] uppercase tracking-[3px] text-white/60">Flare</span>
-              <span className="text-sm font-bold text-[#D4AF5A]">
-                {flareOk && flareClass ? flareClass : flareClass === null ? '—' : 'N/A'}
-              </span>
-              <span className="text-[9px] uppercase tracking-[2px] text-amber-300 ml-1">
-                {flareOk ? 'Live' : 'Connecting…'}
-              </span>
-            </div>
+        {(kpOk || flareOk) && (
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-[#AAA6A1]">
+            <span className="inline-flex items-center gap-1.5 text-signal-online"><span className="w-1.5 h-1.5 rounded-full bg-signal-online" />Live · NOAA SWPC</span>
+            {kpOk && kp != null && <span>Kp index <strong className="text-[#F4F1EB]">{kp.toFixed(1)}</strong></span>}
+            {flareOk && flareClass && <span>X-ray flux class <strong className="text-[#F4F1EB]">{flareClass}</strong></span>}
+            <Link to="/health" className="underline hover:text-[#F4F1EB]">Source status</Link>
           </div>
-          <div className="hidden lg:block">
-            <div className="text-[10px] uppercase tracking-[3px] text-white/50 mb-2">
-              {flareOk ? 'Flare Class · NOAA SWPC' : 'Flare Class · Connecting…'}
-            </div>
-            <FlareClassBar current={flareClass ?? ''} />
-          </div>
-        </div>
-
-        {/* Center — Pantheon compass */}
-        <div className="order-1 lg:order-2 relative">
-          <div className="absolute -inset-12 rounded-full bg-[#9B1C31]/10 blur-3xl pointer-events-none" />
-          <PantheonCompass />
-        </div>
-
-        {/* Right flank — quick CTAs */}
-        <div className="order-3 flex flex-col gap-2 items-stretch lg:items-end">
-          <Link to="/gods" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#D4AF5A]/50 bg-[#D4AF5A]/10 hover:bg-[#D4AF5A]/20 transition-colors">
-            <span className="text-[10px] uppercase tracking-[3px] text-[#E5C77D]">The 46 Codex</span>
-            <ChevronRight className="w-3.5 h-3.5 text-[#E5C77D] group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-          <Link to="/gods" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-[#9B1C31]/40 bg-[#9B1C31]/10 hover:bg-[#9B1C31]/20 transition-colors">
-            <span className="text-[10px] uppercase tracking-[3px] text-[#D4AF5A]">Enter Mythology</span>
-            <ChevronRight className="w-3.5 h-3.5 text-[#D4AF5A] group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-          <Link to="/earth-pulse" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-red-400/40 bg-red-500/10 hover:bg-red-500/20 transition-colors">
-            <span className="text-[10px] uppercase tracking-[3px] text-red-300">Earth Pulse Live</span>
-            <ChevronRight className="w-3.5 h-3.5 text-red-300 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-          <Link to="/echo" className="group inline-flex items-center justify-between gap-2 px-4 py-2.5 rounded-md border border-stone-400/40 bg-stone-400/10 hover:bg-stone-400/20 transition-colors">
-            <span className="text-[10px] uppercase tracking-[3px] text-stone-300">Open Echo AI</span>
-            <ChevronRight className="w-3.5 h-3.5 text-stone-300 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-        </div>
+        )}
       </div>
     </section>
   );
@@ -1103,32 +913,13 @@ export function TempleObservatoryPage() {
   return (
     <div className="relative min-h-screen text-white" style={{ background: 'radial-gradient(ellipse at top, #20191B 0%, #09090B 48%, #050506 100%)' }}>
       {/* Cinematic backdrop — first viewport only */}
-      <div className="absolute inset-x-0 top-0 h-[100vh] z-0 pointer-events-none">
+      <div className="absolute inset-x-0 top-0 h-[100vh] z-0 pointer-events-none overflow-hidden">
         <img src={heroBg} alt="" className="w-full h-full object-cover opacity-35" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_20%,rgba(9,9,11,0.85)_80%)]" />
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#09090B] to-transparent" />
         {/* Drifting nebula tints */}
-        <div className="absolute -top-32 -left-32 w-[60vw] h-[60vw] rounded-full bg-[#9B1C31]/20 blur-3xl animate-[cosmic-pulse_8s_ease-in-out_infinite]" />
-        <div className="absolute top-1/3 -right-32 w-[50vw] h-[50vw] rounded-full bg-stone-500/10 blur-3xl animate-[cosmic-pulse_11s_ease-in-out_infinite]" />
-      </div>
-
-      {/* Particle drift (cheap CSS dots) */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {Array.from({ length: 30 }).map((_, i) => (
-          <span
-            key={i}
-            className="absolute rounded-full bg-white/40"
-            style={{
-              top: `${(i * 53) % 100}%`,
-              left: `${(i * 37) % 100}%`,
-              width: `${1 + (i % 3)}px`,
-              height: `${1 + (i % 3)}px`,
-              opacity: 0.15 + ((i % 5) * 0.1),
-              animation: `cosmic-pulse ${6 + (i % 7)}s ease-in-out infinite`,
-              animationDelay: `${i * 0.2}s`,
-            }}
-          />
-        ))}
+        <div className="absolute -top-32 -left-32 w-[60vw] h-[60vw] rounded-full bg-[#9B1C31]/20 blur-3xl" />
+        <div className="absolute top-1/3 -right-32 w-[50vw] h-[50vw] rounded-full bg-stone-500/10 blur-3xl" />
       </div>
 
       <div className="relative z-10">
@@ -1150,18 +941,6 @@ export function TempleObservatoryPage() {
           <Sidebar />
           <main className="flex-1 min-w-0">
             <Hero kp={kp} kpOk={kpOk} flareClass={flareClass} flareOk={flareOk} utc={utc} />
-            <section aria-labelledby="observatory-principle" className="relative px-4 sm:px-8 py-12 sm:py-16">
-              <div className="max-w-4xl mx-auto rounded-2xl border border-[#D4AF5A]/25 bg-[#141418]/90 px-6 py-9 sm:px-10 sm:py-12 text-center shadow-[0_18px_70px_-42px_rgba(155,28,49,0.45)]">
-                <div className="text-[10px] uppercase tracking-[4px] text-[#D4AF5A] mb-4">The Principle of the Observatory</div>
-                <h2 id="observatory-principle" className="font-semibold text-2xl sm:text-4xl leading-tight text-[#F4F1EB]" style={{ fontFamily: '"Cinzel", "Cormorant Garamond", serif' }}>
-                  No question is off limits by default. No claim is true by default. Follow the evidence.
-                </h2>
-                <div className="w-16 h-px bg-[#D4AF5A] mx-auto my-5" />
-                <p className="max-w-3xl mx-auto text-sm sm:text-base leading-relaxed text-[#AAA6A1]">
-                  Curiosity begins the investigation. Evidence shapes the conclusion. Every extraordinary claim deserves careful examination, and every conclusion remains open to revision when better evidence emerges.
-                </p>
-              </div>
-            </section>
             <QuickStartRail />
             <ActivityPanels />
             <LiveCosmicFeed utc={utc} />

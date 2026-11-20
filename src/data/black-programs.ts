@@ -37,32 +37,29 @@ export const blackProgramEntries: DossierEntry[] = [
     confidence: 'REPORTED',
     symbol: '🧊',
     summary:
-      "Surfaced publicly in 2024-2025 through Jake Barber, Ross Coulthart and the Shawn Ryan Show — Rubik's Cube is described as a compartmented retrieval / reverse-engineering program named for recovered NHI craft components that reportedly reconfigure their internal geometry like a Rubik's cube. The program allegedly used psionic operators to lure and recover \"egg-shaped\" craft.",
+      "\"Rubik's Cube\" is a name that circulates in online UAP commentary for an alleged compartmented retrieval and material-analysis program. No official record confirms a program by this name. The closest documented public claims come from Jake Barber, who alleged in January 2025 interviews that he flew helicopter retrievals of anomalous objects, including a white egg-shaped object. Those statements are testimony, not verified fact.",
     origin:
-      "In late 2024, former USAF Lt. Col. Jake Barber went on-record with NewsNation's Reality Check and the Shawn Ryan Show describing a compartmented program — referred to internally as \"Rubik's Cube\" — that recovered an intact egg-shaped craft using a team of trained \"psionic\" operators who mentally summoned it. The name reportedly comes from how recovered material samples physically rearrange their internal lattice when handled, like a cube being turned.\n\nThe disclosure is the most concrete first-hand SAP testimony since David Grusch's 2023 congressional appearance. It alleges the program operates outside congressional oversight, is contracted through aerospace primes, and has produced multiple retrievals — with material that allegedly responds to operator consciousness. Coulthart and Matt Ford have followed it with weekly NewsNation segments and the Liberation Times has run corroborating sourcing.",
+      "In January 2025, Jake Barber, an Air Force veteran, told NewsNation's Ross Coulthart that he had contracted as a helicopter pilot recovering downed craft, some of which he believes were of non-human origin, and described seeing \"a white egg\". NewsNation reported that it confirmed his Air Force service as an aerospace mechanic and combat-control recruit; it did not authenticate the retrieval account. The Department of Defense told NewsNation it had not discovered verifiable information substantiating retrieval-program claims.\n\nDescriptions of material that \"rearranges like a Rubik's cube\", psionic operators, and contractor arrangements come from interviews and commentary. They are unverified allegations. See the Jake Barber entry in the Whistleblower Vault for dated sources and limitations.",
     keyEvents: [
-      'Dec 2024: Jake Barber goes on-record with NewsNation Reality Check.',
-      "Jan 2025: 4+ hour Shawn Ryan Show interview drops — Barber + Matt Adams describe the \"egg\" retrieval and psionic team.",
-      'Jan-Mar 2025: Coulthart publishes follow-up segments; Liberation Times runs corroborating sourcing.',
-      "2025: \"Skywatcher\" / Merlin private retrieval team referenced as Barber's current civilian effort.",
+      'Jan 15, 2025: NewsNation publishes Barber interview preview (testimony).',
+      'Jan 18, 2025: NewsNation special "Hunting UFOs: The Crash Retrieval Whistleblower" airs (testimony).',
+      'Jan 2025: Barber appears on long-form podcasts repeating the egg-shaped object account (testimony).',
+      '2025: Barber publicly associated with Skywatcher, a private UAP-detection effort (self-reported).',
     ],
     evidence: [
-      'On-record video testimony — Barber + Adams, Shawn Ryan Show, January 2025.',
-      'NewsNation Reality Check broadcast segments (Coulthart / Ford).',
-      'Liberation Times investigative articles (Christopher Sharp).',
-      'Photo of alleged "egg" craft presented during the interview (provenance contested).',
-      'Adjacent corroboration from David Grusch (2023 hearings) and Tim Gallaudet (NOAA).',
+      'On-record video testimony from Barber (NewsNation, January 2025) — establishes what he alleges, not that it happened.',
+      'Short aerial video shown by NewsNation — provenance and location not independently authenticated.',
+      'No publicly authenticated chain of custody, physical material, or official record of a program by this name.',
     ],
     skepticalView:
-      'The Pentagon\'s AARO has publicly stated no verified evidence of a non-human craft retrieval program exists. Skeptics including Mick West and Steven Greenstreet argue the imagery shown lacks chain-of-custody, the "psionic summoning" claim is unfalsifiable, and the program name conveniently surfaces only via paid interview circuits. Until physical material or a corroborating SAP code-name appears in IG / Senate Intelligence records, the claim remains REPORTED, not verified.',
+      'The Pentagon\'s AARO has publicly stated no verified evidence of a non-human craft retrieval program exists. Skeptics including Mick West and Steven Greenstreet argue the imagery shown lacks chain-of-custody, the "psionic summoning" claim is unfalsifiable, and the program name conveniently surfaces only via paid interview circuits. Until physical material or a corroborating SAP code-name appears in IG / Senate Intelligence records, the claim remains testimony, not verified fact.',
     videos: [
       { id: 'qHnvuGph7Hg', title: 'Jake Barber — Shawn Ryan Show (Full Interview)', channel: 'Shawn Ryan Show' },
       { id: '5_bI3HfkbCY', title: 'Ross Coulthart on the Rubik\'s Cube Disclosure', channel: 'NewsNation' },
     ],
     sources: [
-      { label: 'NewsNation — Reality Check', url: 'https://www.newsnationnow.com/space/ufo/' },
-      { label: 'Liberation Times — UAP investigations', url: 'https://www.liberationtimes.com/' },
-      { label: 'Shawn Ryan Show — Barber interview', url: 'https://www.youtube.com/@ShawnRyanShow' },
+      { label: 'NewsNation (Jan 15, 2025) — UAP whistleblower says UFO retrieval program exists', url: 'https://www.newsnationnow.com/space/ufo/uap-whistleblower-ufo-retrieval-program/' },
+      { label: 'NewsNation (Jan 19, 2025) — UAP recovery video shows egg-shaped object', url: 'https://www.newsnationnow.com/space/ufo/hfr-uap-recovery-video-egg-shaped-object-exclusive/' },
     ],
   },
   {

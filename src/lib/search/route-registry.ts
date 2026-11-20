@@ -120,7 +120,8 @@ export const ROUTES: RouteRecord[] = [
 
   // Topic hubs and utility pages that are useful discovery entry points
   { route: '/observatory', title: 'Observatory Map', summary: 'Explore the Observatory and navigate between research realms.', realm: 'observatory', keywords: 'map navigation hub topics' },
-  { route: '/disclosure', title: 'Disclosure Command', summary: 'A central hub for disclosure research, official records, and UAP investigations.', realm: 'disclosure', keywords: 'hub congressional official documents' },
+  { route: '/disclosure', title: 'Disclosure Command', summary: 'Central hub: PURSUE official records, AARO and NASA sources, hearings, legislation and testimony.', realm: 'disclosure', keywords: 'hub congressional official documents pursue war.gov release aaro nasa video jake barber' },
+  { route: '/plasma', title: 'Plasma & Atmospheric Phenomena', summary: 'Ball lightning, sprites, plasmoids, dusty plasma, propulsion — physics vs intelligent-plasma hypotheses.', realm: 'cosmos', keywords: 'plasma ball lightning sprites jets plasmoid hessdalen orbs sts-75' },
   { route: '/academy', title: 'Research Academy', summary: 'Structured learning paths, lessons, and quizzes for exploring the archive.', realm: 'archive', keywords: 'learn course lesson quiz study' },
   { route: '/briefing', title: 'Daily Briefing', summary: 'A briefing hub for notable updates and research signals.', realm: 'observatory', keywords: 'daily report updates digest' },
   { route: '/live-feeds', title: 'Live Feeds Dashboard', summary: 'Live and cached data from attributed public science and space-weather sources.', realm: 'cosmos', keywords: 'NOAA NASA solar wind space weather live data' },

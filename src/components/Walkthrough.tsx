@@ -13,8 +13,8 @@ interface Step {
 const STEPS: Step[] = [
   {
     emoji: '👁️',
-    title: 'Welcome, Starseed',
-    body: "You've found Pantheon Observatory — a living archive of UAP cases, ancient gods, alien species, and the questions humanity was told to stop asking.",
+    title: 'Welcome to Pantheon Observatory',
+    body: "An independent research archive on UAP, government records, science, history and cultural traditions. Every entry is labeled by source and evidence type.",
   },
   {
     emoji: '⚡',
@@ -23,8 +23,8 @@ const STEPS: Step[] = [
   },
   {
     emoji: '🪐',
-    title: 'Six chambers of knowledge',
-    body: 'Greek pantheon, alien codex, whistleblower vault, frequency lab, the 46 sealed videos, and Echo AI. Every entry is sourced.',
+    title: 'Research divisions',
+    body: 'Disclosure records, live science data, entity reports, plasma research, mythology and Echo AI. Testimony and speculation are labeled as such.',
   },
   {
     emoji: '🔓',
@@ -33,8 +33,8 @@ const STEPS: Step[] = [
   },
   {
     emoji: '🚀',
-    title: 'Begin the descent',
-    body: 'Start anywhere — the timeline, the codex, or just ask Echo. The Observatory rewards curiosity.',
+    title: 'Start investigating',
+    body: 'Search the archive, open the Disclosure center, or ask Echo a question.',
   },
 ];
 

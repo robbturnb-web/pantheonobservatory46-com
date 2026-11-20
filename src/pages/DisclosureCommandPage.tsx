@@ -13,12 +13,13 @@ import { Link } from 'react-router-dom';
 import { lazy, Suspense, useMemo, useState } from 'react';
 import {
   Shield, FileText, Gavel, Users, Radar, FlaskConical,
-  ArrowRight, ScrollText, Building2, AlertTriangle,
+  ArrowRight, ScrollText, Building2, AlertTriangle, Zap, Eye, Mountain,
 } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { legislation, STATUS_LABEL, STATUS_TONE, LEGISLATION_LAST_UPDATED, type LegislationItem } from '@/data/legislation';
 import { aaroEntries } from '@/data/aaro';
 import { whistleblowers } from '@/data/whistleblowers';
+import { PursueTracker, OfficialMediaLibrary } from '@/components/research/DisclosureResearchSections';
 
 // ── Unified timeline event model ──────────────────────────────────────
 type EventKind = 'law' | 'hearing' | 'report' | 'office' | 'testimony';
@@ -119,14 +120,15 @@ export function DisclosureCommandPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
-        title="Disclosure Command Center — Pantheon Frequency 46"
-        description="Unified live posture for UAP disclosure: AARO lineage, congressional hearings, enacted and stalled laws, whistleblower record. One command surface, sourced and dated."
+        title="Research & Disclosure Center — Pantheon Observatory"
+        description="Official UAP records, PURSUE releases, AARO and NASA sources, hearings, legislation and witness testimony — dated, sourced and labeled by evidence type."
+        path="/disclosure"
       />
 
       <section className="container mx-auto px-4 pt-24 pb-8">
         <div className="flex items-center gap-3 mb-3">
           <span className="text-[10px] uppercase tracking-[0.3em] text-realm-disclosure font-mono">
-            Phase 2 · Disclosure Command
+            Research &amp; Disclosure Center
           </span>
           <span className="h-px flex-1 bg-realm-disclosure/30" />
           <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-mono">
@@ -134,12 +136,12 @@ export function DisclosureCommandPage() {
           </span>
         </div>
         <h1 className="font-display text-4xl md:text-6xl text-foreground mb-3">
-          UAP <span className="text-realm-disclosure">Disclosure</span> Command
+          Research &amp; <span className="text-realm-disclosure">Disclosure</span> Center
         </h1>
         <p className="text-muted-foreground max-w-2xl mb-8">
-          The live posture of U.S. UAP disclosure — every enacted law, every public hearing,
-          every AARO milestone, every credible whistleblower — collapsed into one
-          chronological intelligence picture.
+          Official records, scientific reports, hearings, legislation and witness testimony in one
+          place. Each item shows its source and what kind of claim it is. An unresolved case is not
+          evidence of extraterrestrial origin; testimony is not verified fact.
         </p>
 
         {/* Stat grid */}
@@ -148,7 +150,7 @@ export function DisclosureCommandPage() {
             { v: enactedCount,     l: 'Laws enacted',       t: KIND_VISUAL.law },
             { v: stalledCount,     l: 'Stalled bills',      t: { ...KIND_VISUAL.law, text: 'text-amber-300', bg: 'bg-amber-500/10', border: 'border-amber-500/40' } },
             { v: hearingsCount,    l: 'Public hearings',    t: KIND_VISUAL.hearing },
-            { v: livingWitnesses,  l: 'Living witnesses',   t: KIND_VISUAL.testimony },
+            { v: livingWitnesses,  l: 'Witness profiles',   t: KIND_VISUAL.testimony },
           ].map((s) => (
             <div key={s.l} className={`p-4 rounded-xl border ${s.t.border} ${s.t.bg} backdrop-blur`}>
               <div className={`font-display text-3xl ${s.t.text}`}>{s.v}</div>
@@ -165,7 +167,10 @@ export function DisclosureCommandPage() {
             { to: '/whistleblowers',  label: 'Whistleblower Vault',   sub: `${whistleblowers.length} witnesses`,    icon: Users,         kind: 'testimony' as EventKind },
             { to: '/uap',             label: 'UAP Case Archive',      sub: 'Tic Tac · GIMBAL · GOFAST · more',      icon: Radar,         kind: 'report' as EventKind },
             { to: '/crash-retrieval', label: 'Crash Retrieval',       sub: 'Recovered material claims',             icon: FlaskConical,  kind: 'report' as EventKind },
-            { to: '/black-programs',  label: 'Black Programs',        sub: 'Unacknowledged SAPs',                   icon: AlertTriangle, kind: 'office' as EventKind },
+            { to: '/black-programs',  label: 'Alleged Programs',      sub: 'Claimed SAPs · testimony',              icon: AlertTriangle, kind: 'office' as EventKind },
+            { to: '/underground',     label: 'Underground Sites',     sub: 'Alleged facilities · labeled',          icon: Mountain,      kind: 'office' as EventKind },
+            { to: '/encounters',      label: 'Entity Reports',        sub: 'Witness reports · folklore',            icon: Eye,           kind: 'testimony' as EventKind },
+            { to: '/plasma',          label: 'Plasma Research',       sub: 'Physics vs hypotheses',                 icon: Zap,           kind: 'report' as EventKind },
           ].map((tile) => {
             const v = KIND_VISUAL[tile.kind];
             const Icon = tile.icon;
@@ -186,13 +191,16 @@ export function DisclosureCommandPage() {
           })}
         </div>
 
+        <PursueTracker />
+        <OfficialMediaLibrary />
+
         {/* Active Watch (stalled) */}
         {stalledCount > 0 && (
           <div className="mb-10 p-4 rounded-xl border border-amber-500/40 bg-amber-500/5 backdrop-blur">
             <div className="flex items-center gap-2 mb-3">
               <AlertTriangle className="w-4 h-4 text-amber-300" />
               <span className="text-[10px] uppercase tracking-[0.25em] text-amber-300 font-mono">
-                Active Watch · Stalled Disclosure Mechanisms
+                Stalled legislation
               </span>
             </div>
             <ul className="space-y-2">

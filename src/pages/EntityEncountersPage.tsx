@@ -23,11 +23,12 @@ export function EntityEncountersPage() {
               Each dossier weights the strongest first-person testimony, contemporaneous
               news of record, and the leading skeptical counter-explanation.
             </p>
-            <p className="text-sm opacity-70">
-              Confidence grade reflects external corroboration density, not editorial
-              preference. <strong>VERIFIED</strong> = multi-source contemporaneous record.{' '}
-              <strong>REPORTED</strong> = serious investigator-confirmed witness statements.{' '}
-              <strong>ALLEGED</strong> = single-source or post-hoc claim.
+            <p className="text-sm opacity-80">
+              <strong>Every case here is a report, not a confirmed encounter.</strong> The grade describes how well the
+              <em> report itself</em> is documented — not whether a non-human being was present.{' '}
+              <strong>VERIFIED</strong> = the report is recorded in multiple contemporaneous sources.{' '}
+              <strong>REPORTED</strong> = investigator-documented witness statements.{' '}
+              <strong>ALLEGED</strong> = single-source or later claim. Folklore and speculative material is labeled in each entry.
             </p>
           </div>
         }

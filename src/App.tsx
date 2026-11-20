@@ -61,6 +61,7 @@ const CodexPage = lazy(() => import('./pages/CodexPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage').then(m => ({ default: m.SearchPage })));
 const LegislationPage = lazy(() => import('./pages/LegislationPage').then(m => ({ default: m.LegislationPage })));
 const ObservatoryMapPage = lazy(() => import('./pages/ObservatoryMapPage').then(m => ({ default: m.ObservatoryMapPage })));
+const PlasmaPage = lazy(() => import('./pages/PlasmaPage').then(m => ({ default: m.PlasmaPage })));
 const DisclosureCommandPage = lazy(() => import('./pages/DisclosureCommandPage').then(m => ({ default: m.DisclosureCommandPage })));
 const DailyBriefingPage = lazy(() => import('./pages/DailyBriefingPage').then(m => ({ default: m.DailyBriefingPage })));
 const DiagnosticsPage = lazy(() => import('./pages/DiagnosticsPage'));
@@ -155,6 +156,7 @@ export default function App() {
               <Route path="/glyphs" element={<GlyphsPage />} />
               <Route path="/stone-faces" element={<StoneFacesPage />} />
               <Route path="/elements" element={<ElementsLabPage />} />
+              <Route path="/plasma" element={<PlasmaPage />} />
               <Route path="/experts" element={<Navigate to="/frequencies" replace />} />
               <Route path="/experts/:slug" element={<Navigate to="/frequencies" replace />} />
               {/* style-guide moved to admin gate below */}
