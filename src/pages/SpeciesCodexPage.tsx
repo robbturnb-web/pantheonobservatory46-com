@@ -86,11 +86,16 @@ export function SpeciesCodexPage() {
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-cosmic text-xs uppercase tracking-widest text-primary mb-4">
           <Users className="w-3 h-3" /> The Codex
         </div>
-        <h1 className="text-4xl sm:text-6xl font-bold text-foreground mb-4">Alien Species</h1>
+        <h1 className="text-4xl sm:text-6xl font-bold text-foreground mb-4">Reported Beings</h1>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          {allSpecies.length} documented and reported non-human intelligences. Sourced.
-          Cross-linked. No editorial. Threat level reflects the weight of public testimony — not opinion.
+          {allSpecies.length} beings described in witness reports, contactee literature and folklore. These are
+          descriptions people have given — not a confirmed taxonomy.
         </p>
+        <div role="note" className="mt-5 mx-auto max-w-2xl rounded-lg border border-realm-gods/40 bg-realm-gods/5 px-4 py-3 text-left text-sm text-muted-foreground">
+          <strong className="text-foreground">How to read this archive:</strong> no non-human species has been scientifically
+          confirmed. Each entry is <em>reported</em> (witness testimony), <em>folklore / tradition</em>, or{' '}
+          <em>speculative</em> (contactee or community claims). "Threat level" and other ratings describe the stories told, not established facts.
+        </div>
       </motion.div>
 
       {/* Filters */}

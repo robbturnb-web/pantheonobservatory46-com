@@ -275,4 +275,36 @@ export const whistleblowers: Whistleblower[] = [
     videos: [],
     accentColor: '#14b8a6',
   },
+  {
+    id: 'jake-barber',
+    name: 'Jake Barber',
+    role: 'Public claimant — Air Force veteran, contract helicopter pilot (self-described)',
+    status: 'alive',
+    grade: 'UNVERIFIED',
+    photo: '🚁',
+    summary: 'Testimony subject. In January 2025 interviews with NewsNation, Barber alleged that he flew helicopter retrievals of anomalous objects for a covert program, including a white egg-shaped object he believes was not human-made. NewsNation reported confirming his Air Force service as an aerospace mechanic; it did not authenticate the retrieval account. Limitations: no publicly authenticated chain of custody, physical material, or official record of the alleged program has been released. The Department of Defense told NewsNation it had not discovered verifiable information substantiating retrieval-program claims.',
+    keyClaims: [
+      'ALLEGED: flew a helicopter sling-load retrieval of a white, egg-shaped object (NewsNation, Jan 15, 2025)',
+      'ALLEGED: was told by unnamed UAP task-force members that the object was non-human intelligence (NewsNation, Jan 15, 2025)',
+      'ALLEGED: retrieved multiple objects, including one he called an "eightgon" (NewsNation video, Jan 19, 2025)',
+      'SELF-REPORTED: works with Skywatcher, a private effort to detect and record UAP (NewsNation Reality Check, 2025)',
+      'REPORTED BY NEWSNATION: Air Force service as aerospace mechanic in the late 1990s, later combat-control recruit',
+    ],
+    timeline: [
+      { year: 'Jan 15, 2025', event: 'NewsNation publishes interview preview with Ross Coulthart' },
+      { year: 'Jan 18, 2025', event: 'NewsNation special "Hunting UFOs: The Crash Retrieval Whistleblower" airs' },
+      { year: 'Jan 19, 2025', event: 'NewsNation publishes aerial video it describes as showing an egg-shaped object (provenance not independently authenticated)' },
+      { year: '2025', event: 'Appears publicly as part of Skywatcher' },
+    ],
+    sources: [
+      { label: 'NewsNation · Jan 15, 2025 · Established journalism — "UFO retrieval program is real: New UAP whistleblower"', url: 'https://www.newsnationnow.com/space/ufo/uap-whistleblower-ufo-retrieval-program/' },
+      { label: 'NewsNation · Jan 19, 2025 · Established journalism — "UAP recovery video shows egg-shaped object"', url: 'https://www.newsnationnow.com/space/ufo/hfr-uap-recovery-video-egg-shaped-object-exclusive/' },
+      { label: 'NewsNation video · Jan 19, 2025 · Testimony — "Whistleblower says he recovered egg-shaped craft, other UAPs"', url: 'https://www.newsnationnow.com/video/whistleblower-says-he-recovered-egg-shaped-craft-other-uaps-newsnation/10382541/' },
+      { label: "NewsNation Reality Check (YouTube) · Testimony — \"Jake Barber: Skywatcher is 'finding things that are not known objects'\"", url: 'https://www.youtube.com/watch?v=t5e5z1bcBgQ' },
+    ],
+    videos: [
+      { platform: 'youtube', id: '3dtA9w5ldHw', title: 'NewsNation — Whistleblower reveals UAP retrieval program (testimony, Jan 2025)' },
+    ],
+    accentColor: '#9B1C31',
+  },
 ];
