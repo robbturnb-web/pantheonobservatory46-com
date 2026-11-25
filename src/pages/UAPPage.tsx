@@ -10,6 +10,7 @@ import { ChevronDown, ChevronUp, Clock } from 'lucide-react';
 import { VideoStrip } from '../components/VideoStrip';
 import { useEchoXp } from '../hooks/use-echo-xp';
 import { SEO } from '@/components/SEO';
+import { CitationCard, StatusChip } from '@/components/research/CitationCard';
 
 export function UAPPage() {
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -130,7 +131,7 @@ export function UAPPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="bg-secondary/30 rounded-xl p-4">
                           <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
-                            Official Explanation
+                            Official position
                           </h3>
                           <p className="text-sm text-foreground">{c.officialExplanation}</p>
                         </div>
@@ -167,7 +168,30 @@ export function UAPPage() {
                         </div>
                       )}
 
-                      <SourceList sources={c.sources} />
+                      {c.claims && c.claims.length > 0 && (
+                        <div>
+                          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">What is established vs. claimed</h3>
+                          <ul className="space-y-2">
+                            {c.claims.map((cl, ci) => (
+                              <li key={ci} className="flex flex-col gap-1 sm:flex-row sm:items-start sm:gap-3 text-sm text-foreground">
+                                <span className="shrink-0"><StatusChip status={cl.status} /></span>
+                                <span>{cl.text}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {c.citations && c.citations.length > 0 ? (
+                        <div>
+                          <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Sources</h3>
+                          <div className="grid gap-3">
+                            {c.citations.map(({ c: cit, status }) => <CitationCard key={cit.url} c={cit} status={status} />)}
+                          </div>
+                        </div>
+                      ) : (
+                        <SourceList sources={c.sources} />
+                      )}
 
                       {c.videos && c.videos.length > 0 && (
                         <VideoList videos={c.videos} title="Declassified Footage & Interviews" />

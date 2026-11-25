@@ -165,7 +165,7 @@ export function DisclosureCommandPage() {
             { to: '/aaro',            label: 'AARO Watch',            sub: 'Office · lineage · leadership',         icon: Shield,        kind: 'office' as EventKind },
             { to: '/legislation',     label: 'Legislation Tracker',   sub: `${legislation.length} bills · sourced`, icon: Gavel,         kind: 'law' as EventKind },
             { to: '/whistleblowers',  label: 'Whistleblower Vault',   sub: `${whistleblowers.length} witnesses`,    icon: Users,         kind: 'testimony' as EventKind },
-            { to: '/uap',             label: 'UAP Case Archive',      sub: 'Tic Tac · GIMBAL · GOFAST · more',      icon: Radar,         kind: 'report' as EventKind },
+            { to: '/uap',             label: 'UAP Case Files',      sub: 'Tic Tac · GIMBAL · GOFAST · more',      icon: Radar,         kind: 'report' as EventKind },
             { to: '/crash-retrieval', label: 'Crash Retrieval',       sub: 'Recovered material claims',             icon: FlaskConical,  kind: 'report' as EventKind },
             { to: '/black-programs',  label: 'Alleged Programs',      sub: 'Claimed SAPs · testimony',              icon: AlertTriangle, kind: 'office' as EventKind },
             { to: '/underground',     label: 'Underground Sites',     sub: 'Alleged facilities · labeled',          icon: Mountain,      kind: 'office' as EventKind },

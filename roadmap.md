@@ -19,3 +19,4 @@
 - [x] Lint, tests, build, links, responsive checks; report (no publish)
 - [x] Pre-release verification pass: build, tests, smoke (home, disclosure, plasma, search, mobile nav, anonymous auth); fix regressions; no publish
 - [x] Homepage institution redesign + shared research-page styles
+- [x] Disclosure → UAP Case Files path + Nimitz case evidence labels

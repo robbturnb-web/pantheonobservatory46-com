@@ -344,7 +344,7 @@ export function Archive46() {
   return (
     <section aria-labelledby="archive46" className="px-4 sm:px-8 py-14">
       <div className="mx-auto max-w-6xl">
-        <InstSectionHeader id="archive46" eyebrow="The 46 Archive" title="The wider collection" action={{ to: '/the-46', label: 'About the 46' }} />
+        <InstSectionHeader id="archive46" eyebrow="The 46 Archive" title="The wider collection" action={{ to: '/codex', label: 'Open Codex 46' }} />
         <ul className="grid grid-cols-2 gap-3 lg:grid-cols-3">
           {ARCHIVE.map((a) => (
             <li key={a.to}>

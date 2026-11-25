@@ -56,7 +56,7 @@ const categories: NavCategory[] = [
     icon: FileSearch,
     links: [
       { to: '/disclosure', label: 'Research & Disclosure Center' },
-      { to: '/uap', label: 'UAP Catalog' },
+      { to: '/uap', label: 'UAP Case Files' },
       { to: '/aaro', label: 'AARO Watch' },
       { to: '/crash-retrieval', label: 'Crash Retrieval' },
       { to: '/legislation', label: 'Legislation Tracker' },

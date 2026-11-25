@@ -71,7 +71,7 @@ export const ROUTES: RouteRecord[] = [
   { route: '/rubiks-cube', title: "Rubik's Cube", summary: 'Cosmic puzzle interface.', realm: 'cosmos' },
 
   // Disclosure
-  { route: '/uap', title: 'UAP Catalog', summary: 'Documented UAP cases: Nimitz, Phoenix, Roswell, Rendlesham, Tehran.', realm: 'disclosure' },
+  { route: '/uap', title: 'UAP Case Files', summary: 'Documented UAP cases: Nimitz, Phoenix, Roswell, Rendlesham, Tehran.', realm: 'disclosure' },
   { route: '/aaro', title: 'AARO Watch', summary: 'Pentagon UAP office lineage: AATIP, UAPTF, AOIMSG, AARO.', realm: 'disclosure' },
   { route: '/crash-retrieval', title: 'Crash Retrieval Files', summary: 'Recovered fragments, witness affidavits, SAP leaks.', realm: 'disclosure' },
   { route: '/black-programs', title: 'Black Programs', summary: 'Special Access Programs and unacknowledged compartments.', realm: 'disclosure' },

@@ -15,7 +15,7 @@ export const PRIMARY_NAV: NavItem[] = [
   { to: '/live-feeds', label: 'Live Feeds', group: 'live' },
   { to: '/gods', label: 'Mythology', group: 'core' },
   { to: '/disclosure', label: 'Disclosure', group: 'core' },
-  { to: '/uap', label: 'UAP Catalog', group: 'archive' },
+  { to: '/uap', label: 'UAP Case Files', group: 'archive' },
   { to: '/plasma', label: 'Plasma', group: 'archive' },
   { to: '/documentaries', label: 'Documentaries', group: 'archive' },
   { to: '/whistleblowers', label: 'Whistleblowers', group: 'archive' },

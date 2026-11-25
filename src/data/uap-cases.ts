@@ -1,6 +1,7 @@
 import type { UAPCase } from '../types';
 import type { Source } from '../components/SourceList';
 import type { VideoData } from '../components/VideoEmbed';
+import type { Citation, ClaimStatus } from '@/lib/evidence';
 import nimitzImg from '@/assets/uap-nimitz.jpg';
 import gruschImg from '@/assets/uap-grusch.jpg';
 import phoenixImg from '@/assets/uap-phoenix.jpg';
@@ -12,6 +13,10 @@ export interface UAPCaseEnhanced extends Omit<UAPCase, 'sources'> {
   sources: Source[];
   videos: VideoData[];
   heroImage?: string;
+  /** Statements about the case, each labeled by claim status. */
+  claims?: { status: ClaimStatus; text: string }[];
+  /** Structured sources shown with tier, date and scope. Replaces the plain source list when present. */
+  citations?: { c: Citation; status: ClaimStatus }[];
 }
 
 export const uapCases: UAPCaseEnhanced[] = [
@@ -21,25 +26,38 @@ export const uapCases: UAPCaseEnhanced[] = [
     title: 'USS Nimitz Tic Tac Incident',
     date: 'November 14, 2004',
     grade: 'DOCUMENTED',
-    summary: 'Multiple US Navy F/A-18 pilots encountered a white, oblong "Tic Tac" shaped craft off the coast of San Diego. The object demonstrated flight characteristics impossible by known physics — no wings, no exhaust, instant acceleration to hypersonic speeds.',
-    officialExplanation: 'The U.S. Navy confirmed the encounters as unexplained. No official explanation for the craft has been offered. The footage was declassified and released by the Pentagon in 2020.',
-    alternativeExplanation: 'Advanced non-human technology. The craft appeared to descend from 80,000 feet to near sea level in under a second. It seemed to anticipate the CAP coordinates of the jets — suggesting awareness of classified military communications.',
+    summary: 'In November 2004, U.S. Navy F/A-18 aircrew from the USS Nimitz strike group reported a white, oblong "Tic Tac" shaped object off the coast of Southern California. The Department of Defense later released infrared footage (FLIR1) from the event and described the objects in it as unidentified. The extreme flight characteristics come from aircrew testimony and have not been confirmed by released sensor data.',
+    officialExplanation: 'In April 2020 the Department of Defense formally released three Navy videos, including FLIR1, stating the phenomena in them remain "unidentified". No official determination of what the object was has been published.',
+    alternativeExplanation: 'Some witnesses and researchers argue the reported performance — rapid descent, no visible propulsion, sudden acceleration — exceeds known aircraft. This is an interpretation of testimony, not an established finding; sensor artifacts, misjudged distance and unknown conventional systems have not been ruled out in public records.',
+    claims: [
+      { status: 'official-statement', text: 'The DoD released the FLIR1 video in April 2020 and characterized the observed phenomena as unidentified.' },
+      { status: 'testimony', text: 'CDR David Fravor and other aircrew describe a wingless object with no visible exhaust that accelerated away abruptly.' },
+      { status: 'testimony', text: 'Accounts of radar tracks descending from very high altitude in seconds come from crew interviews; the underlying radar data have not been publicly released.' },
+      { status: 'unresolved', text: 'What the object was. No released record establishes a conventional or non-human origin.' },
+      { status: 'speculation', text: 'That the object reflects non-human technology. No public evidence establishes this.' },
+    ],
+    citations: [
+      { status: 'official-statement', c: { title: 'Statement by the Department of Defense on the release of historical Navy videos', publisher: 'U.S. Department of Defense', date: '2020-04-27', url: 'https://www.defense.gov/News/Releases/Release/Article/2165713/', tier: 'official', establishes: 'DoD authorized public release of FLIR1, GIMBAL and GOFAST and called the phenomena unidentified.', doesNotEstablish: 'What the objects were or how they moved.' } },
+      { status: 'historical', c: { title: "Glowing Auras and 'Black Money': The Pentagon's Mysterious U.F.O. Program", publisher: 'The New York Times', date: '2017-12-16', url: 'https://www.nytimes.com/2017/12/16/us/politics/pentagon-program-ufo-harry-reid.html', tier: 'journalism', establishes: 'The existence of the Pentagon AATIP program and first major public reporting of the Nimitz encounter.', doesNotEstablish: 'The object’s nature or origin.' } },
+      { status: 'testimony', c: { title: 'David Fravor interview — Lex Fridman Podcast #122', publisher: 'Lex Fridman (YouTube)', date: 'Date needs verification', url: 'https://www.youtube.com/watch?v=aB8zcAttP1E', tier: 'testimony', establishes: 'Fravor’s own first-hand account.', doesNotEstablish: 'Independent confirmation of the performance he describes. This is a podcast interview, not sworn testimony.' } },
+      { status: 'speculation', c: { title: 'Nimitz Strike Group 2004 analysis', publisher: 'Scientific Coalition for UAP Studies (SCU)', date: 'Date needs verification', url: 'https://www.explorescu.org/post/nimitz_strike_group_2004', tier: 'community', establishes: 'An independent group’s reconstruction and performance estimates.', doesNotEstablish: 'Official or peer-reviewed findings; estimates rely on testimony.' } },
+    ],
     sources: [
-      { label: 'Pentagon FOIA Release (April 2020)', url: 'https://www.defense.gov/News/Releases/Release/Article/2165713/' },
-      { label: 'New York Times (Dec 2017)', url: 'https://www.nytimes.com/2017/12/16/us/politics/pentagon-program-ufo-harry-reid.html' },
-      { label: 'CDR David Fravor Testimony', url: 'https://www.youtube.com/watch?v=aB8zcAttP1E' },
+      { label: 'DoD statement on release of historical Navy videos (Apr 27, 2020)', url: 'https://www.defense.gov/News/Releases/Release/Article/2165713/' },
+      { label: 'New York Times (Dec 16, 2017)', url: 'https://www.nytimes.com/2017/12/16/us/politics/pentagon-program-ufo-harry-reid.html' },
+      { label: 'CDR David Fravor interview (Lex Fridman Podcast #122)', url: 'https://www.youtube.com/watch?v=aB8zcAttP1E' },
       { label: 'SCU Nimitz Analysis Report', url: 'https://www.explorescu.org/post/nimitz_strike_group_2004' },
     ],
     videos: [
-      { platform: 'youtube', id: '6rWOtrke0HY', title: 'Official Pentagon FLIR1 "Tic Tac" Footage' },
-      { platform: 'youtube', id: 'aB8zcAttP1E', title: 'CDR Fravor on Lex Fridman — Full Account' },
+      { platform: 'youtube', id: '6rWOtrke0HY', title: 'FLIR1 footage — uploaded by To The Stars Academy (same video DoD released in 2020)' },
+      { platform: 'youtube', id: 'aB8zcAttP1E', title: 'CDR Fravor interview — Lex Fridman Podcast (testimony)' },
     ],
     timeline: [
-      { year: 'Nov 10–14, 2004', description: 'USS Princeton detects anomalous objects on radar over multiple days' },
-      { year: 'Nov 14, 2004', description: 'CDR Fravor and LCDR Dietrich visually confirm object; Fravor descends to engage' },
-      { year: 'Nov 14, 2004', description: 'Object instantly accelerates and disappears; reappears 60 miles away in seconds' },
+      { year: 'Nov 10–14, 2004', description: 'USS Princeton radar operators report anomalous tracks over several days (testimony)' },
+      { year: 'Nov 14, 2004', description: 'CDR Fravor and LCDR Dietrich report seeing the object; Fravor descends toward it (testimony)' },
+      { year: 'Nov 14, 2004', description: 'Aircrew report the object accelerated away and was later tracked about 60 miles away (testimony; radar data not public)' },
       { year: '2017', description: 'New York Times publishes first public account; FLIR video released' },
-      { year: 'April 2020', description: 'Pentagon officially declassifies and releases three UAP videos' },
+      { year: 'April 27, 2020', description: 'DoD formally releases FLIR1, GIMBAL and GOFAST videos' },
     ],
   },
   {
