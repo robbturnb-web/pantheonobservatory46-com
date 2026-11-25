@@ -22,6 +22,16 @@ export default {
         bagel: ['Bagel Fat One', 'cursive'],
       },
       colors: {
+        inst: {
+          ink: "hsl(var(--inst-ink) / <alpha-value>)",
+          charcoal: "hsl(var(--inst-charcoal) / <alpha-value>)",
+          line: "hsl(var(--inst-line) / <alpha-value>)",
+          crimson: "hsl(var(--inst-crimson) / <alpha-value>)",
+          gold: "hsl(var(--inst-gold) / <alpha-value>)",
+          silver: "hsl(var(--inst-silver) / <alpha-value>)",
+          bone: "hsl(var(--inst-bone) / <alpha-value>)",
+          muted: "hsl(var(--inst-muted) / <alpha-value>)",
+        },
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",

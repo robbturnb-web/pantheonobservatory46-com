@@ -31,7 +31,6 @@ const pageTransition = {
 export function Layout() {
   const location = useLocation();
   const { trackPageVisit } = useEchoXp();
-  const isHome = location.pathname === '/';
   const isArchive = location.pathname === '/archive';
 
   useEffect(() => {
@@ -49,11 +48,11 @@ export function Layout() {
         <CosmicCursorTrail />
         <CometTrails />
         <SpaceshipFlyby />
-        {!isHome && <Navbar />}
+        <Navbar />
         <XPBar />
         <AudioPlayer />
         <Walkthrough />
-        <main className={`${isHome ? '' : 'pt-16'} min-h-screen`}>
+        <main className="pt-16 min-h-screen">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -69,7 +68,7 @@ export function Layout() {
             </motion.div>
           </AnimatePresence>
         </main>
-        {!isHome && <PantheonFooter />}
+        <PantheonFooter />
       </div>
     </SearchProvider>
   );

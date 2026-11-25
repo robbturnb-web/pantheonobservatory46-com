@@ -9,6 +9,16 @@
 :root {
   --font-size: 16px;
 
+  /* Institution palette (HSL channels) — research-institution surfaces */
+  --inst-ink: 240 8% 4%;
+  --inst-charcoal: 240 5% 9%;
+  --inst-line: 345 8% 18%;
+  --inst-crimson: 350 70% 36%;
+  --inst-gold: 42 58% 59%;
+  --inst-silver: 240 6% 78%;
+  --inst-bone: 40 27% 94%;
+  --inst-muted: 30 4% 66%;
+
   /* Pantheon Observatory 46: official obsidian, crimson, antique-gold palette */
   --background: #09090B;
   --foreground: #F4F1EB;
@@ -571,4 +581,16 @@ input::placeholder, textarea::placeholder {
 }
 input:focus, textarea:focus, select:focus {
   background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ── Institution design system: reusable research-page surfaces ── */
+@layer components {
+  .inst-eyebrow { @apply text-[11px] uppercase tracking-[0.28em] text-inst-gold font-medium; }
+  .inst-title { @apply text-inst-bone leading-tight; font-family: "Cinzel", "Space Grotesk", serif; }
+  .inst-lede { @apply text-inst-muted leading-relaxed; }
+  .inst-panel { @apply rounded-xl border border-inst-line bg-inst-charcoal/85 transition-colors; }
+  .inst-panel-hover { @apply hover:border-inst-gold/45; }
+  .inst-rule { @apply h-px w-10 bg-inst-gold; }
+  .inst-link { @apply text-inst-gold underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inst-gold/60 rounded-sm; }
+  .inst-focus { @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inst-gold/70 focus-visible:ring-offset-2 focus-visible:ring-offset-inst-ink; }
 }

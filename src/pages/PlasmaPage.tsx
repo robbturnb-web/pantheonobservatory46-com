@@ -5,7 +5,7 @@ import { establishedPlasma, plasmaHypotheses, PLASMA_LAST_REVIEWED, type PlasmaT
 
 function Topic({ t }: { t: PlasmaTopic }) {
   return (
-    <article className="rounded-xl border border-border bg-card/40 p-5">
+    <article className="inst-panel p-5">
       <div className="flex flex-wrap items-center gap-2 mb-2">
         <h3 className="font-display text-xl text-foreground">{t.title}</h3>
         <StatusChip status={t.status} />
@@ -29,8 +29,8 @@ export function PlasmaPage() {
         path="/plasma"
       />
       <section className="container mx-auto max-w-4xl px-4 pt-24 pb-16">
-        <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-3">Research division · Reviewed {PLASMA_LAST_REVIEWED}</p>
-        <h1 className="font-display text-4xl md:text-5xl mb-4">Plasma &amp; Atmospheric Phenomena</h1>
+        <p className="inst-eyebrow mb-3">Research division · Reviewed {PLASMA_LAST_REVIEWED}</p>
+        <h1 className="inst-title text-4xl md:text-5xl mb-4">Plasma &amp; Atmospheric Phenomena</h1>
         <p className="text-lg text-muted-foreground leading-relaxed">
           Plasma — electrically charged gas — produces some of the strangest lights in the sky. This page separates what
           physics has measured from what people have proposed. For the periodic table and element mixer, see the{' '}
@@ -45,14 +45,14 @@ export function PlasmaPage() {
           </p>
         </div>
 
-        <h2 className="font-display text-2xl mt-12 mb-4">Established physics</h2>
+        <h2 className="inst-title text-2xl mt-12 mb-4">Established physics</h2>
         <div className="grid gap-5">{establishedPlasma.map((t) => <Topic key={t.id} t={t} />)}</div>
 
-        <h2 className="font-display text-2xl mt-14 mb-2">Hypotheses and claims</h2>
+        <h2 className="inst-title text-2xl mt-14 mb-2">Hypotheses and claims</h2>
         <p className="text-muted-foreground mb-4">Labeled as speculation or disputed. Included so you can examine them, not because they are supported.</p>
         <div className="grid gap-5">{plasmaHypotheses.map((t) => <Topic key={t.id} t={t} />)}</div>
 
-        <h2 className="font-display text-2xl mt-14 mb-4">How to test a plasma claim</h2>
+        <h2 className="inst-title text-2xl mt-14 mb-4">How to test a plasma claim</h2>
         <ol className="list-decimal pl-5 space-y-2 text-muted-foreground">
           <li><strong className="text-foreground">Calibrated sensors:</strong> spectra, radar, magnetometer and radio data recorded at the same time — not just phone video.</li>
           <li><strong className="text-foreground">Multiple angles:</strong> two or more cameras to measure distance, size and speed.</li>

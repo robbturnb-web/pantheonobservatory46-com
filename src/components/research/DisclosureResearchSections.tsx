@@ -61,7 +61,7 @@ export function OfficialMediaLibrary() {
       <p className="text-muted-foreground max-w-3xl mb-5">Each item opens the original publisher's page. Videos are embedded only when hosted on the publisher's own channel.</p>
       <div className="grid gap-4 md:grid-cols-2">
         {officialMedia.map((m) => (
-          <article key={m.url} className="rounded-xl border border-border bg-card/40 overflow-hidden flex flex-col">
+          <article key={m.url} className="inst-panel overflow-hidden flex flex-col">
             {m.youtubeId && (
               <div className="aspect-video bg-muted">
                 <iframe

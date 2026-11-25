@@ -127,7 +127,7 @@ export function DisclosureCommandPage() {
 
       <section className="container mx-auto px-4 pt-24 pb-8">
         <div className="flex items-center gap-3 mb-3">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-realm-disclosure font-mono">
+          <span className="inst-eyebrow">
             Research &amp; Disclosure Center
           </span>
           <span className="h-px flex-1 bg-realm-disclosure/30" />
@@ -135,7 +135,7 @@ export function DisclosureCommandPage() {
             Updated {LEGISLATION_LAST_UPDATED}
           </span>
         </div>
-        <h1 className="font-display text-4xl md:text-6xl text-foreground mb-3">
+        <h1 className="inst-title text-4xl md:text-6xl text-foreground mb-3">
           Research &amp; <span className="text-realm-disclosure">Disclosure</span> Center
         </h1>
         <p className="text-muted-foreground max-w-2xl mb-8">
@@ -148,7 +148,7 @@ export function DisclosureCommandPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
           {[
             { v: enactedCount,     l: 'Laws enacted',       t: KIND_VISUAL.law },
-            { v: stalledCount,     l: 'Stalled bills',      t: { ...KIND_VISUAL.law, text: 'text-amber-300', bg: 'bg-amber-500/10', border: 'border-amber-500/40' } },
+            { v: stalledCount,     l: 'Stalled bills',      t: { ...KIND_VISUAL.law, text: 'text-inst-gold', bg: 'bg-amber-500/10', border: 'border-amber-500/40' } },
             { v: hearingsCount,    l: 'Public hearings',    t: KIND_VISUAL.hearing },
             { v: livingWitnesses,  l: 'Witness profiles',   t: KIND_VISUAL.testimony },
           ].map((s) => (
@@ -198,8 +198,8 @@ export function DisclosureCommandPage() {
         {stalledCount > 0 && (
           <div className="mb-10 p-4 rounded-xl border border-amber-500/40 bg-amber-500/5 backdrop-blur">
             <div className="flex items-center gap-2 mb-3">
-              <AlertTriangle className="w-4 h-4 text-amber-300" />
-              <span className="text-[10px] uppercase tracking-[0.25em] text-amber-300 font-mono">
+              <AlertTriangle className="w-4 h-4 text-inst-gold" />
+              <span className="text-[10px] uppercase tracking-[0.25em] text-inst-gold font-mono">
                 Stalled legislation
               </span>
             </div>
@@ -223,7 +223,7 @@ export function DisclosureCommandPage() {
 
         {/* Unified Timeline */}
         <div className="flex items-center justify-between mb-4 gap-3 flex-wrap">
-          <h2 className="font-display text-2xl text-foreground">Unified Disclosure Timeline</h2>
+          <h2 className="inst-title text-2xl text-foreground">Unified Disclosure Timeline</h2>
           <div className="flex flex-wrap gap-2">
             {(['all', 'law', 'hearing', 'report', 'office'] as const).map((f) => {
               const active = filter === f;

@@ -1,27 +1,17 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 import {
-  Home, Eye, Mountain, Brain, Satellite, Folder, Bot, Settings,
-  Sun, Volume2, Radio, Flame, Activity, AlertTriangle, ChevronRight,
-  Lock, Telescope, Sparkles, Zap, Waves, Film,
-  Shield, Skull, Plane, Mountain as MountainIcon, Users, Radio as RadioIcon, Globe,
+  Mountain, Sun, Radio, Flame, Activity, AlertTriangle, ChevronRight, Lock, Sparkles, Waves,
 } from 'lucide-react';
 
-import heroBg from '@/assets/dashboard-hero.jpg';
 import feedSolar from '@/assets/temple/feed-solar.jpg';
-import feedUap from '@/assets/temple/feed-uap.jpg';
 import feedQuake from '@/assets/temple/feed-quake.jpg';
 import sdo193 from '@/assets/temple/sdo-193.jpg';
 import sdo304 from '@/assets/temple/sdo-304.jpg';
 import sdo171 from '@/assets/temple/sdo-171.jpg';
 import sdoHmi from '@/assets/temple/sdo-hmi.jpg';
-import portalDisclosure from '@/assets/temple/portal-disclosure.jpg';
-import portalMythology from '@/assets/temple/portal-mythology.jpg';
-import portalConsciousness from '@/assets/temple/portal-consciousness.jpg';
-import portalObservatory from '@/assets/temple/portal-observatory.jpg';
 import portalEcho from '@/assets/temple/portal-echo.jpg';
-import sigil46 from '@/assets/temple/sigil-46.png';
 
 import { gods } from '@/data/gods';
 import {
@@ -36,14 +26,14 @@ import { SolarEventsPanel } from '@/components/live/SolarEventsPanel';
 import { SkyTrackerPanel } from '@/components/live/SkyTrackerPanel';
 import { WeatherStormPanel } from '@/components/live/WeatherStormPanel';
 import { timeAgo } from '@/lib/live-data';
+import {
+  InstitutionHero, ResearchDivisions, EvidenceRoom, FeaturedInvestigation, DocumentaryLibrary,
+  ObservatoryResources, Archive46, InstSectionHeader,
+} from '@/components/home/InstitutionSections';
 
-/* ─────────────────────────────────────────────────────────────────
- * PANTHEON FREQUENCY 46 — Temple Observatory home.
- * Top navigation · persistent left sidebar · cinematic hero with
- * live Kp gauge & flare class bar · Earth / Anomalous activity
- * panels · 2×2 live cosmic feed · five core portals · The Gods
- * Return preview · SDO live imagery · transmissions ticker.
- * ───────────────────────────────────────────────────────────────── */
+/* Pantheon Observatory 46 home — institution hero, research divisions,
+ * Evidence Room, featured investigation, live observatory panels (real
+ * NOAA/NASA/USGS/NWS hooks only), documentary library, resources, archive. */
 
 /* ───────────── live clock ───────────── */
 function useUtcClock() {
@@ -56,202 +46,6 @@ function useUtcClock() {
 }
 
 /* ───────────── TOP NAV ───────────── */
-const TABS: { to: string; label: string }[] = [
-  { to: '/',              label: 'Home' },
-  { to: '/uap',           label: 'Disclosure' },
-  { to: '/gods',          label: 'Mythology' },
-  { to: '/consciousness', label: 'Consciousness' },
-  { to: '/galaxy',        label: 'Observatory' },
-  { to: '/echo',          label: 'Echo AI' },
-];
-
-function TopNav({ kp }: { kp: number | null }) {
-  const { pathname } = useLocation();
-  return (
-    <header className="sticky top-0 z-40 border-b border-[#9B1C31]/30 bg-[#09090B]/85 backdrop-blur-xl">
-      {/* Subtle purple top glow */}
-      <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-[#9B1C31]/80 to-transparent" />
-      <div className="relative flex items-center gap-3 px-3 sm:px-5 h-14">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
-          <div className="relative w-9 h-9 rounded-md border border-[#D4AF5A]/60 bg-gradient-to-br from-[#D4AF5A]/25 to-[#9B1C31]/20 flex items-center justify-center shadow-[0_0_18px_-2px_rgba(212,175,90,0.55)] group-hover:shadow-[0_0_28px_-2px_rgba(212,175,90,0.9)] transition-shadow">
-            <span className="font-bagel text-[#D4AF5A] text-base leading-none">P</span>
-            <span className="absolute -bottom-1 -right-1 text-[8px] font-bold text-[#D4AF5A] bg-[#09090B] border border-[#D4AF5A]/60 rounded-sm px-0.5 leading-none py-px">46</span>
-          </div>
-          <div className="hidden sm:flex flex-col leading-none">
-            <span className="text-[10px] uppercase tracking-[4px] text-white/60">Pantheon</span>
-            <span className="text-[10px] uppercase tracking-[4px] text-[#D4AF5A]/80">Frequency 46</span>
-          </div>
-        </Link>
-
-        {/* Tabs */}
-        <nav className="hidden md:flex items-center gap-0.5 mx-auto">
-          {TABS.map((t) => {
-            const isActive = t.to === '/' ? pathname === '/' : pathname.startsWith(t.to);
-            return (
-              <Link
-                key={t.to}
-                to={t.to}
-                className={`relative px-3 py-1.5 rounded-md text-[11px] uppercase tracking-[2.5px] font-semibold transition-colors ${
-                  isActive ? 'text-white bg-white/5' : 'text-white/60 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                {t.label}
-                {isActive && (
-                  <span className="absolute inset-x-2 -bottom-0.5 h-px bg-gradient-to-r from-transparent via-[#9B1C31] to-transparent" />
-                )}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Right cluster */}
-        <div className="ml-auto md:ml-0 flex items-center gap-2">
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-amber-400/40 bg-amber-400/10">
-            <Sun className="w-3 h-3 text-[#D4AF5A]" />
-            <span className="text-[9px] uppercase tracking-[2px] text-white/60">Solar</span>
-            <span className="text-[10px] font-bold text-amber-300 tracking-[1px]">ACTIVE</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-[#9B1C31]/40 bg-[#9B1C31]/10">
-            <span className="text-[9px] uppercase tracking-[2px] text-white/60">Kp</span>
-            <span className="text-[11px] font-bold text-[#D4AF5A] font-mono">
-              {kp == null ? '—' : kp.toFixed(1)}
-            </span>
-          </div>
-          <button className="hidden md:flex items-center gap-1 px-2 py-1 rounded-md border border-white/10 text-[10px] uppercase tracking-[2px] text-white/70 hover:text-white hover:border-white/30 transition-colors">
-            <Radio className="w-3 h-3" /> Feed
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center rounded-md border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-colors">
-            <Volume2 className="w-3.5 h-3.5" />
-          </button>
-          <Link to="/profile" className="w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-[#9B1C31] to-[#7209b7] text-white text-xs font-bold border border-[#D4AF5A]/50 shadow-[0_0_12px_-2px_rgba(212,175,90,0.7)]">
-            R
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-/* ───────────── SIDEBAR ───────────── */
-interface SideItem { to: string; label: string; icon: typeof Home; tone: string; glow: string }
-const SIDE_ITEMS: SideItem[] = [
-  { to: '/',                label: 'Home',          icon: Home,         tone: 'text-white',         glow: 'shadow-[0_0_16px_-2px_rgba(255,255,255,0.5)]' },
-  { to: '/uap',             label: 'Disclosure',    icon: Eye,          tone: 'text-amber-300',   glow: 'shadow-[0_0_16px_-2px_rgba(16,185,129,0.7)]' },
-  { to: '/documentaries',   label: 'Docs',          icon: Film,         tone: 'text-amber-300',   glow: '' },
-  { to: '/whistleblowers',  label: 'Whistleblw',    icon: Shield,       tone: 'text-amber-300',   glow: '' },
-  { to: '/crash-retrieval', label: 'Crash Retr',    icon: AlertTriangle,tone: 'text-red-400',       glow: '' },
-  { to: '/missing',         label: 'Missing',       icon: Users,        tone: 'text-amber-300',     glow: '' },
-  { to: '/underground',     label: 'Bases',         icon: MountainIcon, tone: 'text-stone-300',     glow: '' },
-  { to: '/gods',            label: 'Mythology',     icon: Mountain,     tone: 'text-[#D4AF5A]',     glow: 'shadow-[0_0_16px_-2px_rgba(212,175,90,0.7)]' },
-  { to: '/consciousness',   label: 'Conscious',     icon: Brain,        tone: 'text-stone-300',    glow: '' },
-  { to: '/frequencies',     label: 'Frequency',     icon: RadioIcon,    tone: 'text-stone-300',      glow: '' },
-  { to: '/galaxy',          label: 'Observatory',   icon: Satellite,    tone: 'text-[#D4AF5A]',     glow: 'shadow-[0_0_16px_-2px_rgba(155,28,49,0.7)]' },
-  { to: '/earth-pulse',     label: 'Earth Pulse',   icon: Globe,        tone: 'text-stone-300',      glow: '' },
-  { to: '/echo',            label: 'Echo AI',       icon: Bot,          tone: 'text-stone-300',      glow: 'shadow-[0_0_16px_-2px_rgba(192,192,200,0.7)]' },
-  { to: '/profile',         label: 'Settings',      icon: Settings,     tone: 'text-white/70',      glow: '' },
-];
-
-
-function Sidebar() {
-  const { pathname } = useLocation();
-  return (
-    <aside className="hidden lg:flex shrink-0 w-[84px] flex-col items-center py-4 gap-0.5 border-r border-[#9B1C31]/20 bg-[#09090B]/85 backdrop-blur-xl max-h-screen sticky top-14 overflow-y-auto scrollbar-thin">
-      {SIDE_ITEMS.map((item) => {
-        const isActive = item.to === '/' ? pathname === '/' : pathname.startsWith(item.to);
-        return (
-          <Link
-            key={item.label}
-            to={item.to}
-            className={`group relative w-16 py-2 flex flex-col items-center gap-1 rounded-lg transition-colors ${
-              isActive ? 'bg-white/5' : 'hover:bg-white/5'
-            }`}
-          >
-            {isActive && (
-              <span className="absolute left-0 top-3 bottom-3 w-[2px] bg-gradient-to-b from-transparent via-[#9B1C31] to-transparent rounded-full" />
-            )}
-            <item.icon
-              className={`w-5 h-5 ${item.tone} ${isActive ? item.glow : ''} group-hover:scale-110 transition-transform`}
-            />
-            <span className="text-[8.5px] uppercase tracking-[1.2px] text-white/55 group-hover:text-white/90 text-center leading-tight">
-              {item.label}
-            </span>
-          </Link>
-        );
-      })}
-    </aside>
-  );
-}
-
-/* ───────────── HERO ───────────── */
-interface HeroLiveProps {
-  kp: number | null;
-  kpOk: boolean;
-  flareClass: string | null;
-  flareOk: boolean;
-  utc: Date;
-}
-const HOME_PATHWAYS = [
-  { to: '/search', label: 'Investigate', sub: 'Search every archive and source' },
-  { to: '/disclosure', label: 'Disclosure', sub: 'Official UAP records, hearings, PURSUE' },
-  { to: '/encounters', label: 'Entities', sub: 'Witness reports and folklore, labeled' },
-  { to: '/plasma', label: 'Plasma', sub: 'Atmospheric physics vs hypotheses' },
-  { to: '/live-feeds', label: 'Live Observatory', sub: 'NOAA, NASA and USGS data' },
-  { to: '/echo', label: 'Echo', sub: 'Ask a research question' },
-];
-
-function Hero({ kp, kpOk, flareClass, flareOk }: HeroLiveProps) {
-  const navigate = useNavigate();
-  const [q, setQ] = useState('');
-  return (
-    <section className="relative px-4 sm:px-8 pt-10 pb-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-[11px] uppercase tracking-[3px] text-[#D4AF5A] mb-4">Pantheon Observatory 46 · Independent research archive</div>
-        <h1 className="font-semibold leading-tight text-3xl sm:text-5xl text-[#F4F1EB]" style={{ fontFamily: '"Cinzel", "Space Grotesk", serif' }}>
-          An independent archive for examining the unexplained — on the evidence.
-        </h1>
-        <p className="mt-5 max-w-3xl text-base sm:text-lg leading-relaxed text-[#C9C4BE]">
-          Pantheon collects public sources on UAP, government records, space and earth science, history, consciousness and
-          cultural traditions, and labels each one: official record, research, testimony, speculation or folklore.
-        </p>
-        <p className="mt-3 text-sm sm:text-base text-[#E5C77D]">No question off limits. No claim true by default. Follow the evidence.</p>
-
-        <form
-          role="search"
-          className="mt-7 flex gap-2 max-w-2xl"
-          onSubmit={(e) => { e.preventDefault(); navigate(q.trim() ? `/search?q=${encodeURIComponent(q.trim())}` : '/search'); }}
-        >
-          <label htmlFor="home-search" className="sr-only">Search the archive</label>
-          <input
-            id="home-search" value={q} onChange={(e) => setQ(e.target.value)}
-            placeholder="Search cases, records, people, topics…"
-            className="flex-1 min-w-0 rounded-md border border-white/15 bg-black/50 px-4 py-3 text-sm text-[#F4F1EB] placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#D4AF5A]/60"
-          />
-          <button type="submit" className="rounded-md bg-[#9B1C31] px-5 py-3 text-sm font-semibold text-[#F4F1EB] hover:bg-[#B3243B]">Investigate</button>
-        </form>
-
-        <nav aria-label="Research pathways" className="mt-8 grid grid-cols-2 lg:grid-cols-3 gap-2.5">
-          {HOME_PATHWAYS.map((p) => (
-            <Link key={p.to} to={p.to} className="group rounded-lg border border-white/10 bg-black/40 px-4 py-3 hover:border-[#D4AF5A]/50 transition-colors">
-              <div className="flex items-center justify-between text-sm font-semibold text-[#F4F1EB]">{p.label}<ChevronRight className="w-4 h-4 text-[#D4AF5A] group-hover:translate-x-0.5 transition-transform" /></div>
-              <div className="text-xs text-[#AAA6A1] mt-0.5">{p.sub}</div>
-            </Link>
-          ))}
-        </nav>
-
-        {(kpOk || flareOk) && (
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-[#AAA6A1]">
-            <span className="inline-flex items-center gap-1.5 text-signal-online"><span className="w-1.5 h-1.5 rounded-full bg-signal-online" />Live · NOAA SWPC</span>
-            {kpOk && kp != null && <span>Kp index <strong className="text-[#F4F1EB]">{kp.toFixed(1)}</strong></span>}
-            {flareOk && flareClass && <span>X-ray flux class <strong className="text-[#F4F1EB]">{flareClass}</strong></span>}
-            <Link to="/health" className="underline hover:text-[#F4F1EB]">Source status</Link>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-}
-
 function FlareClassBar({ current }: { current: string }) {
   const classes = ['A', 'B', 'C', 'M', 'X'];
   const activeIdx = classes.indexOf(current[0]);
@@ -586,63 +380,6 @@ function LiveCosmicFeed({ utc }: { utc: Date }) {
 }
 
 /* ───────────── CORE PORTALS ───────────── */
-interface Portal {
-  to: string; title: string; desc: string; icon: typeof Eye;
-  img: string; tone: string; ring: string; glow: string;
-}
-const PORTALS: Portal[] = [
-  { to: '/ancient-tech', title: 'Ancient Civilizations', desc: 'Archaeology, ancient engineering, lost places, and historical mysteries.', icon: Mountain, img: portalMythology, tone: 'text-[#D4AF5A]', ring: 'border-[#D4AF5A]/40', glow: 'shadow-[0_0_36px_-14px_rgba(212,175,90,0.28)]' },
-  { to: '/gods', title: 'Mythology & the Gods', desc: 'Sacred traditions, divine figures, symbols, and comparative mythology.', icon: Mountain, img: portalMythology, tone: 'text-[#D4AF5A]', ring: 'border-[#D4AF5A]/40', glow: 'shadow-[0_0_36px_-14px_rgba(212,175,90,0.28)]' },
-  { to: '/uap', title: 'Unexplained Phenomena', desc: 'Unusual observations, unresolved reports, and cases that merit investigation.', icon: Eye, img: portalDisclosure, tone: 'text-[#C0C0C8]', ring: 'border-[#C0C0C8]/30', glow: 'shadow-[0_0_36px_-14px_rgba(192,192,200,0.2)]' },
-  { to: '/species', title: 'Nonhuman Intelligence', desc: 'Explore the evidence and open questions around life beyond Earth and UAP.', icon: Users, img: portalEcho, tone: 'text-[#C0C0C8]', ring: 'border-[#C0C0C8]/30', glow: 'shadow-[0_0_36px_-14px_rgba(192,192,200,0.2)]' },
-  { to: '/whistleblowers', title: 'Disclosure & Hidden History', desc: 'Declassified records, public disclosures, historical claims, and source documents.', icon: Eye, img: portalDisclosure, tone: 'text-[#9B1C31]', ring: 'border-[#9B1C31]/40', glow: 'shadow-[0_0_36px_-14px_rgba(155,28,49,0.32)]' },
-  { to: '/jwst', title: 'Science & the Unknown', desc: 'Space science, frontier research, unanswered questions, and new discoveries.', icon: Satellite, img: portalObservatory, tone: 'text-[#C0C0C8]', ring: 'border-[#C0C0C8]/30', glow: 'shadow-[0_0_36px_-14px_rgba(192,192,200,0.2)]' },
-];;
-
-function CorePortals() {
-  return (
-    <section className="relative px-4 sm:px-8 pb-8">
-      <div className="max-w-6xl mx-auto">
-        <SectionHeading icon={Flame} label="Explore Research Domains" sub="Six domains. One standard: follow the evidence." />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {PORTALS.map((p, i) => (
-            <motion.div
-              key={p.to}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 + i * 0.07 }}
-            >
-              <Link
-                to={p.to}
-                className={`group block relative h-full rounded-xl overflow-hidden border ${p.ring} bg-black/70 hover:-translate-y-1 transition-all ${p.glow}`}
-              >
-                <div className="relative h-44 overflow-hidden">
-                  <img src={p.img} alt={p.title} loading="lazy" className="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-[1.6s]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent" />
-                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity ${p.tone}`} style={{
-                    background: 'radial-gradient(circle at 50% 80%, currentColor, transparent 60%)',
-                    mixBlendMode: 'soft-light',
-                  }} />
-                  <p.icon className={`absolute top-3 left-3 w-6 h-6 ${p.tone} drop-shadow-[0_0_10px_currentColor]`} />
-                </div>
-                <div className="relative p-4">
-                  <h3 className={`text-base font-black ${p.tone} tracking-tight`} style={{ fontFamily: '"Cinzel", "Space Grotesk", serif' }}>
-                    {p.title.toUpperCase()}
-                  </h3>
-                  <p className="text-[11px] text-white/65 leading-snug mt-1.5 line-clamp-3">{p.desc}</p>
-                  <div className={`mt-3 inline-flex items-center gap-1 text-[10px] uppercase tracking-[3px] font-bold ${p.tone} group-hover:gap-2 transition-all`}>
-                    Enter Portal <ChevronRight className="w-3 h-3" />
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ───────────── THE GODS RETURN ───────────── */
 function TheGodsReturn() {
   // Pull a curated subset from the existing gods catalog (already imaged)
@@ -841,142 +578,43 @@ function SectionHeading({ icon: Icon, label, sub }: { icon: typeof Sun; label: s
   );
 }
 
-/* ───────────── QUICK START RAIL ───────────── */
-function QuickStartRail() {
-  const paths = [
-    {
-      to: '/uap',
-      label: 'Disclosure Files',
-      detail: 'Cases, records, and open questions',
-      icon: Eye,
-      tone: 'border-red-400/30 from-red-950/45 hover:border-red-300/70',
-      iconTone: 'text-red-300 bg-red-400/10',
-    },
-    {
-      to: '/pyramids',
-      label: 'Ancient Engineering',
-      detail: 'Test the evidence behind the legends',
-      icon: Mountain,
-      tone: 'border-amber-300/30 from-amber-950/40 hover:border-amber-200/70',
-      iconTone: 'text-amber-200 bg-amber-300/10',
-    },
-    {
-      to: '/earth-pulse',
-      label: 'Live Earth Pulse',
-      detail: 'Explore planetary activity and signals',
-      icon: Activity,
-      tone: 'border-stone-300/30 from-stone-950/40 hover:border-stone-200/70',
-      iconTone: 'text-stone-200 bg-stone-300/10',
-    },
-  ];
-
-  return (
-    <section aria-label="Start exploring" className="px-4 sm:px-8 pb-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="text-[10px] uppercase tracking-[3px] text-white/55">Choose your first signal</span>
-          <span className="h-px flex-1 bg-gradient-to-r from-[#D4AF5A]/35 to-transparent" />
-        </div>
-        <div className="grid gap-3 sm:grid-cols-3">
-          {paths.map((path, index) => (
-            <Link
-              key={path.to}
-              to={path.to}
-              className={`group flex min-w-0 items-center gap-3 rounded-xl border bg-gradient-to-br ${path.tone} to-black/65 p-4 backdrop-blur-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_35px_-20px_rgba(212,175,90,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E5C77D]`}
-            >
-              <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 ${path.iconTone}`}>
-                <path.icon className="h-5 w-5" aria-hidden="true" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block text-[11px] font-bold uppercase tracking-[1.5px] text-white/90">{path.label}</span>
-                <span className="mt-1 block text-xs leading-relaxed text-white/55">{path.detail}</span>
-              </span>
-              <ChevronRight className="h-4 w-4 shrink-0 text-white/35 transition-transform group-hover:translate-x-1 group-hover:text-[#E5C77D]" aria-hidden="true" />
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ───────────── PAGE ───────────── */
 export function TempleObservatoryPage() {
   const utc = useUtcClock();
   const kpLive = useKp();
   const flareLive = useFlare();
-  const kp = kpLive.data?.value?.kp ?? null;
   const kpOk = kpLive.data?.ok ?? false;
-  const flareClass = flareLive.data?.value?.class ?? null;
   const flareOk = flareLive.data?.ok ?? false;
 
   return (
-    <div className="relative min-h-screen text-white" style={{ background: 'radial-gradient(ellipse at top, #20191B 0%, #09090B 48%, #050506 100%)' }}>
-      {/* Cinematic backdrop — first viewport only */}
-      <div className="absolute inset-x-0 top-0 h-[100vh] z-0 pointer-events-none overflow-hidden">
-        <img src={heroBg} alt="" className="w-full h-full object-cover opacity-35" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_20%,rgba(9,9,11,0.85)_80%)]" />
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#09090B] to-transparent" />
-        {/* Drifting nebula tints */}
-        <div className="absolute -top-32 -left-32 w-[60vw] h-[60vw] rounded-full bg-[#9B1C31]/20 blur-3xl" />
-        <div className="absolute top-1/3 -right-32 w-[50vw] h-[50vw] rounded-full bg-stone-500/10 blur-3xl" />
-      </div>
+    <div className="relative z-10 min-h-screen bg-inst-ink text-inst-bone">
+      <InstitutionHero
+        kp={kpLive.data?.value?.kp ?? null} kpOk={kpOk} kpAt={kpOk ? kpLive.data?.value?.observedAt : undefined}
+        flareClass={flareLive.data?.value?.class ?? null} flareOk={flareOk} flareAt={flareOk ? flareLive.data?.value?.observedAt : undefined}
+      />
+      <ResearchDivisions />
+      <EvidenceRoom />
+      <FeaturedInvestigation />
 
-      <div className="relative z-10">
-        <TopNav kp={kp} />
-        {/* Mobile realm strip */}
-        <nav className="lg:hidden flex gap-2 overflow-x-auto px-3 py-2 border-b border-[#9B1C31]/20 bg-[#09090B]/80 backdrop-blur-xl scrollbar-none">
-          {SIDE_ITEMS.map((item) => (
-            <Link
-              key={item.label}
-              to={item.to}
-              className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-[10px] uppercase tracking-[2px] text-white/80 hover:border-[#D4AF5A]/50 hover:text-[#E5C77D] transition-colors"
-            >
-              <item.icon className={`w-3.5 h-3.5 ${item.tone}`} />
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex">
-          <Sidebar />
-          <main className="flex-1 min-w-0">
-            <Hero kp={kp} kpOk={kpOk} flareClass={flareClass} flareOk={flareOk} utc={utc} />
-            <QuickStartRail />
-            <ActivityPanels />
-            <LiveCosmicFeed utc={utc} />
-            <SolarEventsPanel />
-            <SkyTrackerPanel />
-            <WeatherStormPanel />
-            <CorePortals />
-            <section aria-labelledby="research-standard" className="relative px-4 sm:px-8 py-10 sm:py-14">
-              <div className="max-w-6xl mx-auto">
-                <div className="text-center max-w-2xl mx-auto mb-7">
-                  <div className="text-[10px] uppercase tracking-[4px] text-[#D4AF5A] mb-3">The Research Standard</div>
-                  <h2 id="research-standard" className="text-2xl sm:text-3xl text-[#F4F1EB]">Curiosity without credulity.</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-[#AAA6A1]">A good investigation follows the evidence, including when it challenges our favorite explanation.</p>
-                </div>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                  {[
-                    { title: 'Source the claim', body: 'Trace claims to original documents, direct observations, primary research, and credible records.' },
-                    { title: 'Separate fact from interpretation', body: 'Distinguish established facts from testimony, disputed information, hypotheses, and speculation.' },
-                    { title: 'Test alternatives', body: 'Consider ordinary explanations, methodological limits, conflicting evidence, and competing interpretations.' },
-                    { title: 'Update the record', body: 'Correct errors transparently and revise conclusions when stronger evidence becomes available.' },
-                  ].map((item) => (
-                    <article key={item.title} className="rounded-xl border border-[#302A2C] bg-[#141418]/85 p-5 hover:border-[#D4AF5A]/40 transition-colors">
-                      <div className="w-8 h-px bg-[#D4AF5A] mb-4" />
-                      <h3 className="text-sm font-bold text-[#F4F1EB] mb-2">{item.title}</h3>
-                      <p className="text-xs leading-relaxed text-[#AAA6A1]">{item.body}</p>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </section>
-            <TheGodsReturn />
-            <SdoLiveImagery utc={utc} />
-            <TransmissionsTicker />
-          </main>
-        </div>
-      </div>
+      <section aria-labelledby="live-obs" className="pt-14">
+        <div className="px-4 sm:px-8"><div className="mx-auto max-w-6xl">
+          <InstSectionHeader id="live-obs" eyebrow="Live observatory" title="Current readings from public science feeds"
+            lede="Data from NOAA, NASA, USGS and NWS. Each panel shows its source and when the reading was taken."
+            action={{ to: '/live-feeds', label: 'Open Live Feed' }} />
+        </div></div>
+        <ActivityPanels />
+        <LiveCosmicFeed utc={utc} />
+        <SolarEventsPanel />
+        <SkyTrackerPanel />
+        <WeatherStormPanel />
+        <SdoLiveImagery utc={utc} />
+      </section>
+
+      <DocumentaryLibrary />
+      <ObservatoryResources />
+      <Archive46 />
+      <TheGodsReturn />
+      <TransmissionsTicker />
     </div>
   );
 }
